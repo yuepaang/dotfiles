@@ -8,6 +8,21 @@ function! PackInit() abort
     call minpac#add('ncm2/ncm2-path')
     call minpac#add('ncm2/ncm2-ultisnips')
     call minpac#add('filipekiss/ncm2-look.vim')
+    call minpac#add('ncm2/ncm2-tagprefix')
+    call minpac#add('ncm2/ncm2-gtags')
+    call minpac#add('ncm2/ncm2-tagprefix')
+    call minpac#add('ncm2/ncm2-github')
+    call minpac#add('ncm2/ncm2-go')
+    call minpac#add('ncm2/ncm2-racer')
+    call minpac#add('ncm2/ncm2-jedi')
+    call minpac#add('ncm2/ncm2-html-subscope')
+    call minpac#add('ncm2/ncm2-markdown-subscope')
+    call minpac#add('ncm2/ncm2-jedi')
+
+    call minpac#add('Shougo/neco-vim')
+    call minpac#add('ncm2/ncm2-vim')
+    call minpac#add('Shougo/neco-syntax')
+    call minpac#add('ncm2/ncm2-syntax')
 
     call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'})
 
@@ -43,6 +58,8 @@ function! PackInit() abort
     call minpac#add('nanotech/jellybeans.vim')
 
     call minpac#add('itchyny/lightline.vim')
+    call minpac#add('itchyny/vim-gitbranch')
+    call minpac#add('macthecadillac/lightline-gitdiff')
 
     call minpac#add('machakann/vim-highlightedyank')
 

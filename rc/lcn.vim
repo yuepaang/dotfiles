@@ -109,5 +109,3 @@ augroup LanguageClient_config
                 \ 'workspace/didChangeConfiguration', {'settings': settings})
 augroup END
 
-" Goto definition in a split
-call LanguageClient#textDocument_definition({'gotoCmd': 'split'})
