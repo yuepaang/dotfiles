@@ -1,0 +1,94 @@
+{
+    "javascript.suggestionActions.enabled": false,
+    "python.jediEnabled": false,
+    "python.venvPath": "~/Env",
+    "python.linting.flake8Path": "/usr/local/bin/flake8",
+    "python.linting.flake8Enabled": true,
+    "python.autoComplete.addBrackets": true,
+    "coc.preferences.formatOnType": true,
+    "list.normalMappings": {
+      "t": "action:tabe",
+      "v": "action:vsplit",
+      "s": "action:split",
+      "d": "expr:GetDeleteAction"
+    },
+    "suggest.triggerAfterInsertEnter": true,
+    "suggest.timeout": 5000,
+    "suggest.noselect": false,
+    "suggest.minTriggerInputLength": 2,
+    "suggest.acceptSuggestionOnCommitCharacter": true,
+	"suggest.preferCompleteThanJumpPlaceholder": true,
+    "suggest.detailField":"abbr",
+    "suggest.snippetIndicator": "🌟",
+    "suggest.triggerCompletionWait": 50,
+	"diagnostic.errorSign": "😡",
+	"diagnostic.warningSign": "🤔",
+    "diagnostic.refreshOnInsertMode": true,
+    "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "args": [],
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+      },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "initializationOptions": {
+         "cache": {
+           "directory": "/tmp/ccls",
+           "format": "json"
+         }
+       }
+    }
+    },
+    "suggest.enablePreview": true,
+    "suggest.maxPreviewWidth": 35,
+    "suggest.detailMaxLength": 100,
+    "diagnostic.level": "hint",
+    "diagnostic.refreshAfterSave": true,
+    "diagnostic.displayByAle": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.infoSign": "ℹ",
+    "diagnostic.hintSign": "➤",
+    "codeLens.enable": true,
+    "codeLens.separator": "‣",
+    "list.indicator": "➣",
+    "list.maxHeight": 15,
+    "list.insertMappings": {
+        "<C-p>": "action:preview"
+    },
+    "suggest.languageSourcePriority": 99,
+    "snippets.shortcut": "S",
+    "snippets.priority": 98,
+    "snippets.extends": {
+        "cpp": ["c"],
+        "javascriptreact": ["javascript"],
+        "typescript": ["javascript"]
+    },
+    "coc.source.file.shortcut": "F",
+    "coc.source.file.priority": 89,
+    "coc.source.file.ignoreHidden": false,
+    "coc.source.around.shortcut": "A",
+    "coc.source.around.priority": 88,
+    "coc.source.buffer.shortcut": "B",
+    "coc.source.buffer.priority": 87,
+    "coc.source.buffer.ignoreGitignore": false,
+    "coc.source.dictionary.shortcut": "D",
+    "coc.source.dictionary.priority": 9,
+    "coc.source.dictionary.filetypes": ["markdown", "text"],
+    "coc.preferences.colorSupport": true,
+    "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"]
+}
