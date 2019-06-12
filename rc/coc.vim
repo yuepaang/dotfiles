@@ -13,7 +13,6 @@ let g:coc_global_extensions  = [
     \ 'coc-vimtex',
     \ 'coc-phpls',
     \ 'coc-pairs',
-    \ 'coc-yank',
     \ 'coc-vimlsp',
     \ 'coc-git',
     \ 'coc-ultisnips',

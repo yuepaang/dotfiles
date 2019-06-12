@@ -4,7 +4,15 @@ function! PackInit() abort
     call minpac#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
 
     call minpac#add('scrooloose/nerdtree')
+    call minpac#add('Xuyuanp/nerdtree-git-plugin')
+    call minpac#add('low-ghost/nerdtree-fugitive')
+    call minpac#add('tiagofumo/vim-nerdtree-syntax-highlight')
+    call minpac#add('ivalkeen/nerdtree-execute')
+
     call minpac#add('scrooloose/nerdcommenter')
+
+    call minpac#add('junegunn/fzf', {'do': './install --all'})
+    call minpac#add('junegunn/fzf.vim')
 
     call minpac#add('sheerun/vim-polyglot')
 
@@ -14,6 +22,8 @@ function! PackInit() abort
 
     call minpac#add('SirVer/ultisnips')
     call minpac#add('honza/vim-snippets')
+    call minpac#add('Shougo/neosnippet')
+    call minpac#add('Shougo/neosnippet-snippets')
 
 
     call minpac#add('tpope/vim-fugitive')
@@ -26,6 +36,8 @@ function! PackInit() abort
     call minpac#add('nanotech/jellybeans.vim')
 
     call minpac#add('itchyny/lightline.vim')
+
+    call minpac#add('machakann/vim-highlightedyank')
 
 endfunction
 
