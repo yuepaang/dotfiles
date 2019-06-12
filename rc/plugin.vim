@@ -1,7 +1,15 @@
 function! PackInit() abort
     packadd minpac
     call minpac#init()
-    call minpac#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
+
+    call minpac#add('ncm2/ncm2')
+    call minpac#add('roxma/nvim-yarp')
+    call minpac#add('ncm2/ncm2-bufword')
+    call minpac#add('ncm2/ncm2-path')
+    call minpac#add('ncm2/ncm2-ultisnips')
+    call minpac#add('filipekiss/ncm2-look.vim')
+
+    call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'})
 
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
@@ -32,7 +40,6 @@ function! PackInit() abort
     call minpac#add('mg979/vim-visual-multi')
     call minpac#add('Yggdroot/indentLine')
 
-    call minpac#add('morhetz/gruvbox')
     call minpac#add('nanotech/jellybeans.vim')
 
     call minpac#add('itchyny/lightline.vim')
