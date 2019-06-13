@@ -1,6 +1,7 @@
 function! PackInit() abort
     packadd minpac
     call minpac#init()
+    call minpac#add('k-takata/minpac', {'type': 'opt'})
 
     call minpac#add('ncm2/ncm2')
     call minpac#add('roxma/nvim-yarp')
@@ -12,9 +13,9 @@ function! PackInit() abort
     call minpac#add('ncm2/ncm2-gtags')
     call minpac#add('ncm2/ncm2-tagprefix')
     call minpac#add('ncm2/ncm2-github')
-    call minpac#add('ncm2/ncm2-go')
     call minpac#add('ncm2/ncm2-racer')
     call minpac#add('ncm2/ncm2-jedi')
+    call minpac#add('ncm2/ncm2-pyclang')
     call minpac#add('ncm2/ncm2-html-subscope')
     call minpac#add('ncm2/ncm2-markdown-subscope')
     call minpac#add('ncm2/ncm2-jedi')
@@ -24,7 +25,7 @@ function! PackInit() abort
     call minpac#add('Shougo/neco-syntax')
     call minpac#add('ncm2/ncm2-syntax')
 
-    call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'})
+    call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': { -> system('bash install.sh')}})
 
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
@@ -34,12 +35,12 @@ function! PackInit() abort
 
     call minpac#add('scrooloose/nerdcommenter')
 
-    call minpac#add('junegunn/fzf', {'do': './install --all'})
+    call minpac#add('junegunn/fzf', {'do': { -> system('./install --all')}})
     call minpac#add('junegunn/fzf.vim')
 
     call minpac#add('sheerun/vim-polyglot')
 
-    call minpac#add('iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install()}})
+    call minpac#add('iamcco/markdown-preview.nvim', {'do': { -> system("cd app & yarn install")}})
 
     call minpac#add('Shougo/echodoc.vim')
 
