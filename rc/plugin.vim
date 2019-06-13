@@ -27,6 +27,8 @@ function! PackInit() abort
 
     call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': { -> system('bash install.sh')}})
 
+    call minpac#add('jiangmiao/auto-pairs')
+
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
     call minpac#add('low-ghost/nerdtree-fugitive')
@@ -53,6 +55,7 @@ function! PackInit() abort
 
 
     call minpac#add('tpope/vim-fugitive')
+    call minpac#add('mhinz/vim-signify')
     call minpac#add('tpope/vim-rhubarb')
 
     call minpac#add('mg979/vim-visual-multi')
@@ -61,11 +64,8 @@ function! PackInit() abort
     call minpac#add('nanotech/jellybeans.vim')
 
     call minpac#add('itchyny/lightline.vim')
-    call minpac#add('itchyny/vim-gitbranch')
-    call minpac#add('macthecadillac/lightline-gitdiff')
     call minpac#add('maximbaz/lightline-ale')
-    call minpac#add('palpatineli/lightline-lsc-nvim')
-    call minpac#add('sainnhe/artify.vim')
+    call minpac#add('ryanoasis/vim-devicons')
 
     call minpac#add('machakann/vim-highlightedyank')
 

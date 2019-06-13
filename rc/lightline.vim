@@ -1,105 +1,127 @@
-augroup Lightline_Au
-    autocmd!
-    autocmd BufWritePost * call lightline_gitdiff#query_git() | call lightline#update()
-augroup END
-let g:lightline = { 'colorscheme': 'jellybeans' }
-let g:lightline.separator = { 'left': "\ue0b8", 'right': "\ue0be" }
-let g:lightline.subseparator = { 'left': "\ue0b9", 'right': "\ue0b9" }
-let g:lightline.tabline_separator = { 'left': "\ue0bc", 'right': "\ue0ba" }
-let g:lightline.tabline_subseparator = { 'left': "\ue0bb", 'right': "\ue0bb" }
-let g:lightline#lsc#indicator_checking = "\uf110"
-let g:lightline#lsc#indicator_notstarted = "\ufbab"
-let g:lightline#lsc#indicator_errors = "\uf00d"
-let g:lightline#lsc#indicator_ok = "\uf00c"
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste'],
+      \             [ 'fugitive', 'filename' ],
+      \             [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+      \           ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ]
+      \            ]
+      \ },
+      \ 'inactive' : {
+      \   'left': [ [ 'mode' ],
+      \             [ 'filename' ]
+      \           ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'filetype' ]
+      \            ]
+      \ },
+      \ 'tabline' : {
+      \   'left'  : [ [ 'tabs' ] ],
+      \   'right' : [ [], [ 'session' ] ]
+      \ },
+      \ 'tab' : {
+      \   'active' : [ 'tabnum', 'filename', 'fticon', 'modified' ],
+      \   'inactive' : [ 'tabnum', 'filename', 'fticon', 'modified' ]
+      \ },
+      \ 'tab_component_function' : {
+      \     'fticon'  : 'LightLineTabFiletypeIcon'
+      \ },
+      \ 'component_function' : {
+      \   'fugitive'         : 'LightLineFugitive',
+      \   'readonly'         : 'LightLineReadonly',
+      \   'modified'         : 'LightLineModified',
+      \   'filename'         : 'LightLineFilename',
+      \   'fileformat'       : 'LightLineFileformat',
+      \   'filetype'         : 'LightLineFiletype',
+      \   'fileencoding'     : 'LightLineFileencoding',
+      \   'mode'             : 'LightLineMode',
+      \   'session'          : 'LightLineSession',
+      \ },
+      \ 'component_expand' : {
+      \   'linter_checking': 'lightline#ale#checking',
+      \   'linter_warnings': 'lightline#ale#warnings',
+      \   'linter_errors': 'lightline#ale#errors',
+      \   'linter_ok': 'lightline#ale#ok',
+      \ },
+      \ 'component_type' : {
+      \   'linter_checking': 'middle',
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error',
+      \   'linter_ok': 'middle',
+      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+      \ }
+
+let g:plugin_filetypes = 'help\|unite\|vimfiler\|gundo'
+
+function! LightLineSession()
+  return fnamemodify(v:this_session, ':t:r')
+endfunction
+
+function! LightLineModified()
+  return &ft =~# g:plugin_filetypes ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+  return &ft !~# g:plugin_filetypes && &readonly ? '' : ''
+endfunction
+
+function! LightLineFugitive()
+  if &ft !~# g:plugin_filetypes && exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? ' '._ : ''
+  endif
+  return ''
+endfunction
+
+function! LightLineFilename()
+  let fname = expand('%:t')
+  return &ft == 'tagbar' ? '' :
+        \ &ft == 'gundo' ? '' :
+        \ fname == '__Gundo_Preview__' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'unite' ? unite#get_status_string() :
+        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 && &ft !~# g:plugin_filetypes ? WebDevIconsGetFileFormatSymbol() : ''
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 && &ft !~# g:plugin_filetypes ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! LightLineTabFiletypeIcon(n)
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let fn = expand('#'.buflist[winnr - 1].':t')
+  return strlen(fn) ? WebDevIconsGetFileTypeSymbol(fn) : ''
+endfunction
+
+function! LightLineFileencoding()
+  return winwidth(0) > 70 && &ft !~# g:plugin_filetypes ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineMode()
+  let fname = expand('%:t')
+  return &ft == 'tagbar' ? 'Tagbar' :
+        \ &ft == 'gundo' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ winwidth(0) > 20 ? lightline#mode() : ''
+endfunction
+
 let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = "\uf529"
-let g:lightline#ale#indicator_errors = "\uf00d"
+let g:lightline#ale#indicator_warnings = "\uf071 "
+let g:lightline#ale#indicator_errors = "\uf05e "
 let g:lightline#ale#indicator_ok = "\uf00c"
-let g:lightline_gitdiff#indicator_added = '+'
-let g:lightline_gitdiff#indicator_deleted = '-'
-let g:lightline_gitdiff#indicator_modified = '*'
-let g:lightline_gitdiff#min_winwidth = '70'
-let g:Lightline_Linter = [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
-let g:lightline.active = {
-            \ 'left': [ [ 'paste' ],
-            \           [ 'readonly', 'filename', 'modified', 'fileformat'] ],
-            \ 'right': [
-            \            g:Lightline_Linter,
-            \           [ 'asyncrun_status' ] ]
-            \ }
-let g:lightline.inactive = {
-            \ 'left': [ [ 'filename' , 'modified', 'fileformat' ]],
-            \ }
-let g:lightline.tabline = {
-            \ 'left': [ [ 'vim_logo', 'tabs' ],
-            \ [ 'gitstatus' ] ],
-            \ }
-let g:lightline.tab = {
-            \ 'active': [ 'modified' ],
-            \ 'inactive': [ 'filename', 'modified' ] }
-let g:lightline.tab_component = {
-            \ }
-let g:lightline.tab_component_function = {
-            \ 'filename': 'lightline#tab#filename',
-            \ 'modified': 'lightline#tab#modified',
-            \ 'readonly': 'lightline#tab#readonly',
-            \ 'tabnum': 'lightline#tab#tabnum'
-            \ }
-let g:lightline.component = {
-            \ 'gitstatus' : '%{lightline_gitdiff#get_status()}',
-            \ 'bufinfo': '%{bufname("%")}:%{bufnr("%")}',
-            \ 'vim_logo': "\ue7c5",
-            \ 'pomodoro': '%{PomodoroStatus()}',
-            \ 'nicewinnumber': '%{NegativeCircledNumber(tabpagewinnr(tabpagenr()))}',
-            \ 'mode': '%{lightline#mode()}',
-            \ 'absolutepath': '%F',
-            \ 'relativepath': '%f',
-            \ 'filename': '%t',
-            \ 'filesize': "%{HumanSize(line2byte('$') + len(getline('$')))}",
-            \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
-            \ 'fileformat': '%{&fenc!=#""?&fenc:&enc}[%{&ff}]',
-            \ 'filetype': '%{&ft!=#""?&ft:"no ft"}',
-            \ 'modified': '%M',
-            \ 'bufnum': '%n',
-            \ 'paste': '%{&paste?"PASTE":""}',
-            \ 'readonly': '%R',
-            \ 'charvalue': '%b',
-            \ 'charvaluehex': '%B',
-            \ 'percent': '%2p%%',
-            \ 'percentwin': '%P',
-            \ 'spell': '%{&spell?&spelllang:""}',
-            \ 'lineinfo': '%2p%% %3l:%-2v',
-            \ 'line': '%l',
-            \ 'column': '%c',
-            \ 'close': '%999X X ',
-            \ 'winnr': '%{winnr()}'
-            \ }
-let g:lightline.component_function = {
-            \ 'gitbranch': 'gitbranch#name',
-            \ 'devicons_filetype': 'Devicons_Filetype',
-            \ 'devicons_fileformat': 'Devicons_Fileformat'
-            \ }
-let g:lightline.component_expand = {
-            \ 'lsc_checking': 'lightline#lsc#checking',
-            \ 'lsc_warnings': 'lightline#lsc#warnings',
-            \ 'lsc_errors': 'lightline#lsc#errors',
-            \ 'lsc_ok': 'lightline#lsc#ok',
-            \ 'linter_checking': 'lightline#ale#checking',
-            \ 'linter_warnings': 'lightline#ale#warnings',
-            \ 'linter_errors': 'lightline#ale#errors',
-            \ 'linter_ok': 'lightline#ale#ok',
-            \ 'asyncrun_status': 'lightline#asyncrun#status'
-            \ }
-let g:lightline.component_type = {
-            \ 'lsc_checking': 'middle',
-            \ 'lsc_warnings': 'warning',
-            \ 'lsc_errors': 'error',
-            \ 'lsc_ok': 'middle',
-            \ 'linter_checking': 'middle',
-            \ 'linter_warnings': 'warning',
-            \ 'linter_errors': 'error',
-            \ 'linter_ok': 'middle'
-            \ }
-let g:lightline.component_visible_condition = {
-            \     'gitstatus': 'lightline_gitdiff#get_status() !=# ""'
-            \   }
+
