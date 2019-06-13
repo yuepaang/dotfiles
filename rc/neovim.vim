@@ -35,6 +35,7 @@ set infercase
 set smartcase
 
 set tabstop=4
+" lcn always draw sign column
 set signcolumn=yes
 set softtabstop=4
 set expandtab

@@ -33,6 +33,8 @@ function! PackInit() abort
     call minpac#add('tiagofumo/vim-nerdtree-syntax-highlight')
     call minpac#add('ivalkeen/nerdtree-execute')
 
+    call minpac#add('w0rp/ale')
+
     call minpac#add('scrooloose/nerdcommenter')
 
     call minpac#add('junegunn/fzf', {'do': { -> system('./install --all')}})
@@ -61,6 +63,9 @@ function! PackInit() abort
     call minpac#add('itchyny/lightline.vim')
     call minpac#add('itchyny/vim-gitbranch')
     call minpac#add('macthecadillac/lightline-gitdiff')
+    call minpac#add('maximbaz/lightline-ale')
+    call minpac#add('palpatineli/lightline-lsc-nvim')
+    call minpac#add('sainnhe/artify.vim')
 
     call minpac#add('machakann/vim-highlightedyank')
 
