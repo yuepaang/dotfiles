@@ -19,11 +19,17 @@ function! PackInit() abort
     call minpac#add('ncm2/ncm2-html-subscope')
     call minpac#add('ncm2/ncm2-markdown-subscope')
     call minpac#add('ncm2/ncm2-jedi')
+    call minpac#add('yuki-ycino/ncm2-dictionary')
+    call minpac#add('fgrsnau/ncm-otherbuf')
+    call minpac#add('ncm2/nvim-typescript', {'do': { -> system('./install.sh')}})
 
     call minpac#add('Shougo/neco-vim')
     call minpac#add('ncm2/ncm2-vim')
     call minpac#add('Shougo/neco-syntax')
     call minpac#add('ncm2/ncm2-syntax')
+    call minpac#add('Shougo/neosnippet.vim')
+    call minpac#add('ncm2/ncm2-neosnippet')
+    call minpac#add('Shougo/neosnippet-snippets')
 
     call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': { -> system('bash install.sh')}})
 

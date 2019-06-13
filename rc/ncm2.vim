@@ -1,4 +1,12 @@
-imap <expr> <C-j> pumvisible() ? "\<Plug>(ncm2_ultisnips_expand_completed)" : "\<C-j>"
+" ncm2_ultisnips
+inoremap <silent> <expr> <C-y> ncm2_ultisnips#expand_or("\<CR>", 'n')
+
+" c-j c-k for moving in snippet
+let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+
+" ncm2_neosnippet
+inoremap <silent> <expr> <CR> ncm2_neosnippet#expand_or("\<CR>", 'n')
 
 " enable ncm2 for all buffer
 augroup ncm2_enable_for_buffer
@@ -35,3 +43,10 @@ inoremap <expr> <left> pumvisible() ? "\<C-y>\<left>" : "\<left>"
 inoremap <expr> <right> pumvisible() ? "\<C-y>\<right>" : "\<right>"
 imap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
 imap <expr> <C-z> pumvisible() ? "\<C-e>" : "\<C-z>"
+
+let g:AutoPairsMapCR=0
+
+inoremap <silent> <Plug>(MyCR) <CR><C-R>=AutoPairsReturn()<CR>
+
+" example
+imap <expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(MyCR)" : "\<Plug>(MyCR)")

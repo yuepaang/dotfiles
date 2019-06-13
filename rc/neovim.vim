@@ -53,7 +53,6 @@ set encoding=utf-8
 set hidden
 set nocursorline
 
-
 " if has('statusline')
 "     set laststatus=2
 "     " Broken down into easily includeable segments
@@ -93,3 +92,6 @@ xnoremap <  <gv
 xnoremap >  >gv
 
 nmap <leader><tab> :FZF<CR>
+
+inoremap <c-c> <ESC>
+

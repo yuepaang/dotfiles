@@ -22,6 +22,9 @@ let g:LanguageClient_serverCommands = {
     \ 'yaml': ['yaml-language-server', '--stdio'],
     \ 'go': ['gopls']
     \ }
+" Run gofmt and goimports on save
+autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
+
 
 augroup LanguageClientAu
     autocmd!
