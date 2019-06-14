@@ -1,6 +1,6 @@
 git clone https://github.com/k-takata/minpac.git ./pack/minpac/opt/minpac
 
-ln -s ~/nvim ~/.config/nvim
+ln -s ~/dotfiles/neovim ~/.config/nvim
 
 # npm language server
 npm i -g bash-language-server
@@ -14,3 +14,7 @@ npm install -g yaml-language-server
 # cd /Library/Developer/CommandLineTools/Packages
 
 cp ./badwolf.vim ~/.config/nvim/pack/minpac/start/lightline.vim/autoload/lightline/colorscheme/
+
+# Rust
+rustup update
+rustup component add rls rust-analysis rust-src
