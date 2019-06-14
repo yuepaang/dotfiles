@@ -41,6 +41,7 @@ let g:LanguageClient_autoStart = 1
 " hoverPreview: Never Auto Always
 let g:LanguageClient_hoverPreview = 'Always'
 
+let g:LanguageClient_hasSnippetSupport = 0
 " Completion
 set omnifunc=LanguageClient#complete
 " Formatting
@@ -82,10 +83,9 @@ let g:LanguageClient_diagnosticsDisplay = {
     \ },
     \ }
 
-imap <expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<CR>")
-imap <expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<CR>")
-let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
-inoremap <silent> <C-U> <C-R>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<CR>
+" imap <expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(expand_or_cr)" : "\<CR>")
+" imap <expr> <Plug>(expand_or_cr) (cm#completed_is_snippet() ? "\<C-U>" : "\<CR>")
+" let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
 
 let settings = json_decode('
             \ {
@@ -111,4 +111,3 @@ augroup LanguageClient_config
     autocmd User LanguageClientStarted call LanguageClient#Notify(
                 \ 'workspace/didChangeConfiguration', {'settings': settings})
 augroup END
-

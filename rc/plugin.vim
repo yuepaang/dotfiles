@@ -27,9 +27,6 @@ function! PackInit() abort
     call minpac#add('ncm2/ncm2-vim')
     call minpac#add('Shougo/neco-syntax')
     call minpac#add('ncm2/ncm2-syntax')
-    call minpac#add('Shougo/neosnippet.vim')
-    call minpac#add('ncm2/ncm2-neosnippet')
-    call minpac#add('Shougo/neosnippet-snippets')
 
     call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': { -> system('bash install.sh')}})
 
@@ -56,8 +53,6 @@ function! PackInit() abort
 
     call minpac#add('SirVer/ultisnips')
     call minpac#add('honza/vim-snippets')
-    call minpac#add('Shougo/neosnippet')
-    call minpac#add('Shougo/neosnippet-snippets')
 
 
     call minpac#add('tpope/vim-fugitive')
