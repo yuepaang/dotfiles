@@ -367,11 +367,12 @@ endif
 " }
 
 " ncm2_ultisnips {
-    imap <expr> <C-j> pumvisible() ? "\<Plug>(ncm2_ultisnips_expand_completed)" : "\<C-j>"
+    inoremap <silent> <expr> <C-j> ncm2_ultisnips#expand_or("\<CR>", 'n')
     " c-j c-k for moving in snippet
-    let g:UltiSnipsJumpForwardTrigger	= "<C-j>"
-    let g:UltiSnipsJumpBackwardTrigger	= "<C-k>"
-    let g:UltiSnipsExpandTrigger            = '<A-z>``l'
+    let g:UltiSnipsExpandTrigger="<c-j>"
+    let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
+    let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+    " let g:UltiSnipsExpandTrigger            = '<A-z>``l'
     let g:UltiSnipsRemoveSelectModeMappings = 0
 " }
 
@@ -411,7 +412,7 @@ endif
 
 
     " Expand snippet when you hit enter on an entry
-    inoremap <silent> <expr> <C-j> ncm2_neosnippet#expand_or("\<CR>", 'n')
+    inoremap <silent> <expr> <CR> ncm2_neosnippet#expand_or("\<CR>", 'n')
 " }
 
 " ncm2-look {
