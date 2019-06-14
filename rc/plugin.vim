@@ -63,6 +63,7 @@ function! PackInit() abort
     call minpac#add('Yggdroot/indentLine')
 
     call minpac#add('nanotech/jellybeans.vim')
+    call minpac#add('sjl/badwolf')
 
     call minpac#add('itchyny/lightline.vim')
     call minpac#add('maximbaz/lightline-ale')

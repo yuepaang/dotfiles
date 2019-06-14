@@ -8,7 +8,7 @@ silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%
 silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
 silent! set cursorline nocursorcolumn colorcolumn=80 concealcursor=nvc conceallevel=0 norelativenumber
 silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
-silent! set nosplitbelow nosplitright startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
+silent! set startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
 silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
 silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=
 
@@ -68,7 +68,7 @@ set t_Co=256
 set termguicolors
 
 set background=dark
-colorscheme jellybeans
+colorscheme badwolf
 
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
@@ -94,4 +94,3 @@ xnoremap >  >gv
 nmap <leader><tab> :FZF<CR>
 
 inoremap <c-c> <ESC>
-

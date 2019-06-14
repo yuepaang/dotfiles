@@ -12,3 +12,5 @@ npm install -g yaml-language-server
 
 # Potential Go Problem in Mac
 # cd /Library/Developer/CommandLineTools/Packages
+
+cp ./badwolf.vim ~/.config/nvim/pack/minpac/start/lightline.vim/autoload/lightline/colorscheme/
