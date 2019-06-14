@@ -70,6 +70,7 @@ function! PackInit() abort
     call minpac#add('mg979/vim-visual-multi')
 
     call minpac#add('sjl/badwolf')
+    call minpac#add('flrnprz/plastic.vim')
     call minpac#add('junegunn/goyo.vim')
     call minpac#add('junegunn/limelight.vim')
 
@@ -227,7 +228,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'badwolf',
+        \ 'colorscheme': 'plastic',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'fugitive', 'filename' ],
@@ -486,7 +487,7 @@ endif
     set nocursorline
 
     " color {
-        colorscheme badwolf
+        colorscheme plastic
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
         set t_Co=256
