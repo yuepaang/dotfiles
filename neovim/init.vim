@@ -93,44 +93,44 @@ else
 endif
 
 " ale {
-	let g:ale_fixers = {
-	\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-	\}
-	" Set this variable to 1 to fix files when you save them.
-	let g:ale_fix_on_save = 1
+    let g:ale_fixers = {
+    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \}
+    " Set this variable to 1 to fix files when you save them.
+    let g:ale_fix_on_save = 1
 
-	let g:ale_linters = {
-		    \       'c': ['cppcheck', 'flawfinder'],
-		    \       'cpp': ['cppcheck', 'flawfinder'],
-		    \       'css': ['stylelint'],
-		    \       'html': ['tidy'],
-		    \       'json': [],
-		    \       'markdown': ['languagetool'],
-		    \       'python': ['autopep8', 'flake8', 'mypy', 'pydocstyle'],
-		    \       'rust': ['cargo'],
-		    \       'sh': ['shellcheck'],
-		    \       'text': ['languagetool'],
-		    \       'vim': ['vint'],
-		    \       'go': ['gopls'],
-		    \}
+    let g:ale_linters = {
+            \       'c': ['cppcheck', 'flawfinder'],
+            \       'cpp': ['cppcheck', 'flawfinder'],
+            \       'css': ['stylelint'],
+            \       'html': ['tidy'],
+            \       'json': [],
+            \       'markdown': ['languagetool'],
+            \       'python': ['autopep8', 'flake8', 'mypy', 'pydocstyle'],
+            \       'rust': ['cargo'],
+            \       'sh': ['shellcheck'],
+            \       'text': ['languagetool'],
+            \       'vim': ['vint'],
+            \       'go': ['gopls'],
+            \}
 
-	"查看上一个错误
-	nnoremap <silent> [a :ALEPrevious<CR>
-	"查看下一个错误
-	nnoremap <silent> ]a :ALENext<CR>
-	"自定义error和warning图标
-	let g:ale_sign_error="\uf05e"
-	let g:ale_sign_warning="\uf071"
-	let g:ale_sign_column_always=1
+    "查看上一个错误
+    nnoremap <silent> [a :ALEPrevious<CR>
+    "查看下一个错误
+    nnoremap <silent> ]a :ALENext<CR>
+    "自定义error和warning图标
+    let g:ale_sign_error="\uf05e"
+    let g:ale_sign_warning="\uf071"
+    let g:ale_sign_column_always=1
 
-	"显示Linter名称,出错或警告等相关信息
-	let g:ale_echo_msg_error_str = 'E'
-	let g:ale_echo_msg_warning_str = 'W'
-	let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-	" 光标移动到错误的地方时立即显示错误
-	let g:ale_echo_delay = 0
+    "显示Linter名称,出错或警告等相关信息
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    " 光标移动到错误的地方时立即显示错误
+    let g:ale_echo_delay = 0
 
-	autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
+    autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
 " }
 
 " auto-pairs
@@ -188,7 +188,7 @@ endif
 " }
 
 " fugitive {
-	nnoremap <leader>d :Gdiff<CR>
+	nmap df :Gdiff<CR>
 " }
 
 " fzf {
@@ -435,15 +435,27 @@ endif
     let g:maplocalleader=","
 
     " Appearance
-    silent! set number relativenumber background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
-    silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
-    silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%y%w\ %3l:%-2c
-    silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
-    silent! set cursorline nocursorcolumn colorcolumn=80 concealcursor=nvc conceallevel=0 norelativenumber
-    silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
-    silent! set startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
-    silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
-    silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=
+    set number
+    set relativenumber
+    set ruler
+    set cursorline
+    set scrolloff=10
+    set updatetime=300
+    set background=dark
+    set noshowmode
+    set laststatus=2
+    set cmdheight=2
+    set shortmess+=I
+    set colorcolumn=79
+    " silent! set number relativenumber background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
+    " silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
+    " silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%y%w\ %3l:%-2c
+    " silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
+    " silent! set cursorline nocursorcolumn colorcolumn=80 concealcursor=nvc conceallevel=0 norelativenumber
+    " silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
+    " silent! set startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
+    " silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
+    " silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=
 
     " Editing
     silent! set iminsert=0 imsearch=0 nopaste pastetoggle= nogdefault comments& commentstring=#\ %s
