@@ -71,6 +71,8 @@ function! PackInit() abort
 
     call minpac#add('sjl/badwolf')
     call minpac#add('flrnprz/plastic.vim')
+    call minpac#add('jacoborus/tender.vim')
+
     call minpac#add('junegunn/goyo.vim')
     call minpac#add('junegunn/limelight.vim')
 
@@ -130,7 +132,9 @@ endif
     " 光标移动到错误的地方时立即显示错误
     let g:ale_echo_delay = 0
 
-    autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
+    " autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
+    highlight ALEErrorSign ctermbg=NONE ctermfg=red
+    highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 " }
 
 " auto-pairs
@@ -228,7 +232,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'plastic',
+        \ 'colorscheme': 'tender',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'fugitive', 'filename' ],
@@ -447,6 +451,11 @@ endif
     set cmdheight=2
     set shortmess+=I
     set colorcolumn=79
+    set title
+
+    " Clear current-search highlighting by hitting <CR> in normal mode.
+    nnoremap <silent> <CR> :nohlsearch<CR><CR>
+
     " silent! set number relativenumber background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
     " silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
     " silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%y%w\ %3l:%-2c
@@ -478,7 +487,7 @@ endif
     silent! set complete& completeopt+=menu,menuone,noinsert,noselect infercase pumheight=10 noshowfulltag shortmess+=c
 
     " Command line
-    silent! set wildchar=9 nowildmenu wildmode=list:longest wildoptions= wildignorecase cedit=<C-k>
+    silent! set wildchar=9 wildmenu wildmode=list:longest wildoptions= wildignorecase cedit=<C-k>
     silent! set wildignore=*.~,*.?~,*.o,*.sw?,*.bak,*.hi,*.pyc,*.out,*.lock suffixes=*.pdf
 
     " Performance
@@ -500,10 +509,11 @@ endif
     set nocursorline
 
     " color {
-        colorscheme plastic
+        " colorscheme plastic
+        colorscheme tender
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-        set t_Co=256
+        " set t_Co=256
         set termguicolors
     " }
 
