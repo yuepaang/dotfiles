@@ -133,8 +133,8 @@ endif
     let g:ale_echo_delay = 0
 
     " autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
-    highlight ALEErrorSign ctermbg=NONE ctermfg=red
-    highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+    " highlight ALEErrorSign ctermbg=NONE ctermfg=red
+    " highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 " }
 
 " auto-pairs
