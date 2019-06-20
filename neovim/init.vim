@@ -207,7 +207,6 @@ endif
 
 	nnoremap <C-p> :Files<CR>
 
-	nmap <leader><tab> :FZF<CR>
 
     let g:fzf_action = {
         \ 'ctrl-t': 'tab split',
@@ -383,7 +382,7 @@ endif
 
 " ncm2 {
     " enable ncm2 for all buffer
-    let g:ncm2#auto_popup=1
+    " let g:ncm2#auto_popup=1
     augroup ncm2_enable_for_buffer
         autocmd!
         autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -614,11 +613,8 @@ endif
 " vim-lsp {
 
     let g:lsp_signs_enabled = 0
-    let g:lsp_diagnostics_enabled = 1
-    let g:lsp_diagnostics_echo_cursor = 1
-    let g:lsp_signs_error = {'text': 'x', 'icon': '~/.config/nvim/icon/error.svg'}
-    let g:lsp_signs_warning = {'text': '!', 'icon': '~/.config/nvim/icon/warning.svg'}
-    let g:lsp_signs_information = {'text': '@', 'icon': '~/.config/nvim/icon/info.svg'}
+    let g:lsp_diagnostics_enabled = 0
+    let g:lsp_diagnostics_echo_cursor = 0
     let g:lsp_signs_hint = {'text': '$'}
 
     function! s:configure_lsp() abort
