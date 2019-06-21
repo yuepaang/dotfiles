@@ -50,9 +50,19 @@ function! PackInit() abort
 
     call minpac#add('scrooloose/nerdcommenter')
 
+    " class module
+    call minpac#add('majutsushi/tagbar')
+
+    " Automatically sort python imports
+    call minpac#add('fisadev/vim-isort')
+
+    " Search results counter
+    call minpac#add('vim-scripts/IndexedSearch')
+
     call minpac#add('junegunn/fzf', {'do': { -> system('./install --all')}})
     call minpac#add('junegunn/fzf.vim')
 
+    " Better language pack
     call minpac#add('sheerun/vim-polyglot')
 
     call minpac#add('iamcco/markdown-preview.nvim', {'do': { -> system("cd app & yarn install")}})
@@ -82,6 +92,9 @@ function! PackInit() abort
 
     call minpac#add('machakann/vim-highlightedyank')
 
+    " Generate html in a simple way
+    call minpac#add('mattn/emmet-vim')
+
 endfunction
 
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
@@ -97,6 +110,7 @@ endif
 " ale {
     let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   'python': ['autopep8']
     \}
     " Set this variable to 1 to fix files when you save them.
     let g:ale_fix_on_save = 1
@@ -108,7 +122,7 @@ endif
             \       'html': ['tidy'],
             \       'json': [],
             \       'markdown': ['languagetool'],
-            \       'python': ['autopep8', 'flake8', 'mypy', 'pydocstyle'],
+            \       'python': ['flake8', 'mypy', 'pydocstyle', 'pylint'],
             \       'rust': ['cargo'],
             \       'sh': ['shellcheck'],
             \       'text': ['languagetool'],
@@ -476,8 +490,7 @@ endif
     silent! set tags+=../../../../../../tags,../../../../../../../tags,~/Documents/scala/tags,~/Documents/*/tags tagstack
 
     " Clipboard
-    silent! set clipboard=unnamed
-    silent! set clipboard+=unnamedplus
+    silent! set clipboard=unnamed,unnamedplus
 
     " Search
     silent! set wrapscan ignorecase smartcase incsearch hlsearch magic
@@ -505,7 +518,7 @@ endif
     set encoding=utf-8
 
     set hidden
-    set nocursorline
+    set cursorline
 
     " color {
         " colorscheme plastic
@@ -680,5 +693,12 @@ endif
             \ 'whitelist': ['rust'],
             \ })
     endif
+
+" }
+
+" Tagbar {
+
+    "" Tagbar
+    nmap <silent> <F4> :TagbarToggle<CR>
 
 " }
