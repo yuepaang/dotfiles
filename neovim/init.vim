@@ -1,3 +1,21 @@
+function! s:install_minpac() abort
+    echo 'Installing minpac...'
+    let cmd =
+                \ "git clone https://github.com/k-takata/minpac.git ./pack/minpac/opt/minpac"
+    let out = system(cmd)
+    if v:shell_error
+        echohl ErrorMsg | echom 'Error!: ' . out | echohl None
+    else
+        echo 'minpac was installed to ~/.config/nvim/pack'
+    endif
+endfunction
+
+let s:minpac_repo_path = expand('~/.config/nvim/pack')
+
+if !isdirectory(s:minpac_repo_path)
+    call s:install_minpac()
+endif
+
 function! PackInit() abort
     packadd minpac
     call minpac#init()
@@ -84,6 +102,7 @@ function! PackInit() abort
     call minpac#add('sjl/badwolf')
     call minpac#add('flrnprz/plastic.vim')
     call minpac#add('jacoborus/tender.vim')
+    call minpac#add('rhysd/vim-color-spring-night')
 
     call minpac#add('junegunn/goyo.vim')
     call minpac#add('junegunn/limelight.vim')
@@ -107,27 +126,35 @@ else
 endif
 
 " ale {
+"  yapf python
     let g:ale_fixers = {
-    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \   'python': ['autopep8']
-    \}
+        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+        \   'python': ['autopep8'],
+        \   'javascript': ['eslint', 'prettier'],
+        \   'typescript': ['tslint', 'prettier'],
+        \   'css': ['prettier'],
+        \   'c': ['clang-format'],
+        \   'cpp': ['clang-format'],
+        \   'rust': ['rustfmt'],
+        \   'json': ['fixjson'],
+        \}
     " Set this variable to 1 to fix files when you save them.
     let g:ale_fix_on_save = 1
 
     let g:ale_linters = {
-            \       'c': ['cppcheck', 'flawfinder'],
-            \       'cpp': ['cppcheck', 'flawfinder'],
-            \       'css': ['stylelint'],
-            \       'html': ['tidy'],
-            \       'json': [],
-            \       'markdown': ['languagetool'],
-            \       'python': ['flake8', 'mypy', 'pydocstyle', 'pylint'],
-            \       'rust': ['cargo'],
-            \       'sh': ['shellcheck'],
-            \       'text': ['languagetool'],
-            \       'vim': ['vint'],
-            \       'go': ['gopls'],
-            \}
+        \       'c': ['cppcheck', 'flawfinder'],
+        \       'cpp': ['cppcheck', 'flawfinder'],
+        \       'css': ['stylelint'],
+        \       'html': ['tidy'],
+        \       'json': [],
+        \       'markdown': ['languagetool'],
+        \       'python': ['flake8', 'mypy', 'pydocstyle', 'pylint'],
+        \       'rust': ['cargo'],
+        \       'sh': ['shellcheck'],
+        \       'text': ['languagetool'],
+        \       'vim': ['vint'],
+        \       'go': ['gopls'],
+        \}
 
     "查看上一个错误
     nnoremap <silent> [a :ALEPrevious<CR>
@@ -521,11 +548,14 @@ endif
 
     " color {
         " colorscheme plastic
-        colorscheme tender
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+        if $TERM_PROGRAM ==# 'iTerm.app'
+            set termguicolors
+            colorscheme spring-night
+        endif
+        " colorscheme tender
 
         " set t_Co=256
-        set termguicolors
     " }
 
 
