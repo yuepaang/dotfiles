@@ -551,11 +551,12 @@ endif
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         if $TERM_PROGRAM ==# 'iTerm.app'
             set termguicolors
-            colorscheme spring-night
+            " colorscheme spring-night
         endif
-        " colorscheme tender
+        colorscheme tender
+        hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
 
-        " set t_Co=256
+        set t_Co=256
     " }
 
 
