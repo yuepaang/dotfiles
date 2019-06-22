@@ -37,7 +37,6 @@ function! PackInit() abort
     call minpac#add('prabirshrestha/vim-lsp')
     call minpac#add('ncm2/ncm2-vim-lsp')
 
-
     call minpac#add('jiangmiao/auto-pairs')
 
     call minpac#add('scrooloose/nerdtree')
@@ -61,6 +60,7 @@ function! PackInit() abort
 
     call minpac#add('junegunn/fzf', {'do': { -> system('./install --all')}})
     call minpac#add('junegunn/fzf.vim')
+    call minpac#add('fszymanski/fzf-quickfix')
 
     " Better language pack
     call minpac#add('sheerun/vim-polyglot')
@@ -73,11 +73,13 @@ function! PackInit() abort
     call minpac#add('SirVer/ultisnips')
     call minpac#add('honza/vim-snippets')
 
-
     call minpac#add('tpope/vim-fugitive')
     call minpac#add('tpope/vim-rhubarb')
+    call minpac#add('rhysd/git-messenger.vim')
 
     call minpac#add('mg979/vim-visual-multi')
+
+    call minpac#add('junegunn/vim-easy-align')
 
     call minpac#add('sjl/badwolf')
     call minpac#add('flrnprz/plastic.vim')
@@ -91,9 +93,6 @@ function! PackInit() abort
     call minpac#add('ryanoasis/vim-devicons')
 
     call minpac#add('machakann/vim-highlightedyank')
-
-    " Generate html in a simple way
-    call minpac#add('mattn/emmet-vim')
 
 endfunction
 
@@ -146,9 +145,9 @@ endif
     " 光标移动到错误的地方时立即显示错误
     let g:ale_echo_delay = 0
 
-    " autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
-    " highlight ALEErrorSign ctermbg=NONE ctermfg=red
-    " highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+    autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
+    highlight ALEErrorSign ctermbg=NONE ctermfg=red
+    highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 " }
 
 " auto-pairs
@@ -701,4 +700,24 @@ endif
     "" Tagbar
     nmap <silent> <F4> :TagbarToggle<CR>
 
+" }
+
+" vim-isort {
+    let g:vim_isort_map = '<C-i>'
+    nmap <silent> pi :Isort<CR>
+" }
+
+" pydocstring {
+    nmap <silent> <C-d> <Plug>(pydocstring)
+" }
+
+" vim-easy-aligh {
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
+
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
+" }
+" git-messager {
+    nmap <Leader>gm <Plug>(git-messenger)
 " }
