@@ -541,7 +541,11 @@ endif
     filetype plugin on
     filetype indent on
 
-    set encoding=utf-8
+    set encoding=utf-8 nobomb
+    set termencoding=utf-8
+    set fileencodings=utf-8,gbk,utf-16le,cp1252,iso-8859-15,ucs-bom
+    set fileformats=unix,dos,mac
+    scriptencoding utf-8
 
     set hidden
     set cursorline
@@ -549,14 +553,12 @@ endif
     " color {
         " colorscheme plastic
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-        if $TERM_PROGRAM ==# 'iTerm.app'
-            set termguicolors
+        set termguicolors
+        set t_Co=256
             " colorscheme spring-night
-        endif
         colorscheme tender
         hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
 
-        set t_Co=256
     " }
 
 
