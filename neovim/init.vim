@@ -103,6 +103,7 @@ function! PackInit() abort
     call minpac#add('flrnprz/plastic.vim')
     call minpac#add('jacoborus/tender.vim')
     call minpac#add('junegunn/seoul256.vim')
+    call minpac#add('ayu-theme/ayu-vim')
 
     call minpac#add('junegunn/goyo.vim')
     call minpac#add('junegunn/limelight.vim')
@@ -558,6 +559,12 @@ endif
         "   Default: 237
         let g:seoul256_background = 235
         colo seoul256
+
+        " colorscheme ayu
+        " let ayucolor="light"
+        " let ayucolor="mirage"
+        " let ayucolor="dark"
+
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
         set t_Co=256
