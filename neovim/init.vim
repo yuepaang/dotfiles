@@ -102,7 +102,7 @@ function! PackInit() abort
     call minpac#add('sjl/badwolf')
     call minpac#add('flrnprz/plastic.vim')
     call minpac#add('jacoborus/tender.vim')
-    call minpac#add('rhysd/vim-color-spring-night')
+    call minpac#add('junegunn/seoul256.vim')
 
     call minpac#add('junegunn/goyo.vim')
     call minpac#add('junegunn/limelight.vim')
@@ -271,7 +271,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'tender',
+        \ 'colorscheme': 'seoul256',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'fugitive', 'filename' ],
@@ -552,11 +552,11 @@ endif
 
     " color {
         " colorscheme plastic
+        " colorscheme tender
+        colo seoul256
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
         set t_Co=256
-            " colorscheme spring-night
-        colorscheme tender
         hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
 
     " }

@@ -1,5 +1,3 @@
-git clone https://github.com/k-takata/minpac.git ./pack/minpac/opt/minpac
-
 ln -s ~/dotfiles/neovim ~/.config/nvim
 
 # npm language server
