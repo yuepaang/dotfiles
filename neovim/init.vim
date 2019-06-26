@@ -70,9 +70,6 @@ function! PackInit() abort
     " class module
     call minpac#add('majutsushi/tagbar')
 
-    " Automatically sort python imports
-    call minpac#add('fisadev/vim-isort')
-
     " Search results counter
     call minpac#add('vim-scripts/IndexedSearch')
     call minpac#add('haya14busa/incsearch.vim')  " Better search highlighting
@@ -739,11 +736,6 @@ endif
     "" Tagbar
     nmap <silent> <F4> :TagbarToggle<CR>
 
-" }
-
-" vim-isort {
-    let g:vim_isort_map = '<C-i>'
-    nmap <silent> pi :Isort<CR>
 " }
 
 " pydocstring {
