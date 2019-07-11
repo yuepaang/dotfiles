@@ -51,6 +51,8 @@ function! PackInit() abort
     call minpac#add('Shougo/neosnippet.vim')
     call minpac#add('ncm2/ncm2-neosnippet')
 
+    call minpac#add('ncm2/float-preview.nvim')
+
     call minpac#add('prabirshrestha/async.vim')
     call minpac#add('prabirshrestha/vim-lsp')
     call minpac#add('ncm2/ncm2-vim-lsp')
@@ -67,19 +69,25 @@ function! PackInit() abort
 
     call minpac#add('scrooloose/nerdcommenter')
 
-    " class module
+    call minpac#add('cinuor/vim-header')
+
+    " tags view
     call minpac#add('majutsushi/tagbar')
 
     " Search results counter
     call minpac#add('vim-scripts/IndexedSearch')
     call minpac#add('haya14busa/incsearch.vim')  " Better search highlighting
 
+    " fzf
     call minpac#add('junegunn/fzf', {'do': { -> system('./install --all')}})
     call minpac#add('junegunn/fzf.vim')
     call minpac#add('fszymanski/fzf-quickfix')
 
     " Better language pack
     call minpac#add('sheerun/vim-polyglot')
+    "May be redundant due to polyglot
+    " call minpac#add('justinmk/vim-syntax-extra')
+
 
     call minpac#add('iamcco/markdown-preview.nvim', {'do': { -> system("cd app & yarn install")}})
 
@@ -92,6 +100,7 @@ function! PackInit() abort
     call minpac#add('tpope/vim-fugitive')
     call minpac#add('tpope/vim-rhubarb')
     call minpac#add('rhysd/git-messenger.vim')
+    call minpac#add('airblade/vim-gitgutter')
 
     call minpac#add('mg979/vim-visual-multi')
 
@@ -176,43 +185,14 @@ endif
 " }
 
 " auto-pairs
-	function! Help_auto_pairs()
-	    echo '插入模式下：'
-	    echo '<A-z>p            toggle auto-pairs'
-	    echo '<A-n>             jump to next closed pair'
-	    echo '<A-Backspace>     delete without pairs'
-	    echo '<A-z>[key]        insert without pairs'
-	endfunction
 
-	let g:AutoPairsShortcutToggle = '<A-z>p'
-	let g:AutoPairsShortcutFastWrap = '<A-z>`sadsfvf'
-	let g:AutoPairsShortcutJump = '<A-n>'
-	let g:AutoPairsWildClosedPair = ''
-	let g:AutoPairsMultilineClose = 0
-	let g:AutoPairsFlyMode = 0
-	let g:AutoPairsMapCh = 0
-	inoremap <A-z>' '
-	inoremap <A-z>" "
-	inoremap <A-z>` `
-	inoremap <A-z>( (
-	inoremap <A-z>[ [
-	inoremap <A-z>{ {
-	inoremap <A-z>) )
-	inoremap <A-z>] ]
-	inoremap <A-z>} }
-	inoremap <A-Backspace> <Space><Esc><left>"_xa<Backspace>
-	" imap <A-Backspace> <A-z>p<Backspace><A-z>p
-	augroup AutoPairsAu
-	    autocmd!
-	    " au Filetype html let b:AutoPairs = {"<": ">"}
-	augroup END
+    " let g:AutoPairsMapCR=0
 
-	let g:AutoPairsMapCR=0
-
-	inoremap <silent> <Plug>(MyCR) <CR><C-R>=AutoPairsReturn()<CR>
+	" inoremap <silent> <Plug>(MyCR) <CR><C-R>=AutoPairsReturn()<CR>
 
 	" example
-	imap <expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(MyCR)" : "\<Plug>(MyCR)")
+	" imap <expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(MyCR)" : "\<Plug>(MyCR)")
+	" imap <expr> <CR> pumvisible() ? \<C-Y>\<CR><C-R>=AutoPairsReturn()<CR> : "\<CR>\<Plug>AutoPairsReturn"
 " }
 
 " vim-devicons {
@@ -226,7 +206,8 @@ endif
 " }
 " echodoc {
 	let g:echodoc#enable_at_startup = 1
-	let g:echodoc#type = 'signature'
+	" let g:echodoc#type = 'signature'
+    let g:echodoc#type = 'virtual'
 " }
 
 " fugitive {
@@ -421,26 +402,22 @@ endif
 " ncm2 {
     " enable ncm2 for all buffer
     " let g:ncm2#auto_popup=1
-    augroup ncm2_enable_for_buffer
-        autocmd!
-        autocmd BufEnter * call ncm2#enable_for_buffer()
-    augroup END
+    autocmd BufEnter * call ncm2#enable_for_buffer()
 
-    augroup NCM2_Config
-        autocmd!
-        autocmd BufEnter * call ncm2#enable_for_buffer()
-        autocmd TextChangedI * call ncm2#auto_trigger()  " enable auto complete for `<backspace>`, `<c-w>` keys
-        autocmd VimEnter * inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
-    augroup END
 
-    set completeopt=noinsert,menuone,noselect
-    imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Plug>(ncm2_manual_trigger)\<C-n>"
-    inoremap <expr> <up> pumvisible() ? "\<C-y>\<up>" : "\<up>"
-    inoremap <expr> <down> pumvisible() ? "\<C-y>\<down>" : "\<down>"
-    inoremap <expr> <left> pumvisible() ? "\<C-y>\<left>" : "\<left>"
-    inoremap <expr> <right> pumvisible() ? "\<C-y>\<right>" : "\<right>"
-    imap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-    imap <expr> <C-z> pumvisible() ? "\<C-e>" : "\<C-z>"
+    " imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Plug>(ncm2_manual_trigger)\<C-n>"
+    " inoremap <expr> <up> pumvisible() ? "\<C-y>\<up>" : "\<up>"
+    " inoremap <expr> <down> pumvisible() ? "\<C-y>\<down>" : "\<down>"
+    " inoremap <expr> <left> pumvisible() ? "\<C-y>\<left>" : "\<left>"
+    " inoremap <expr> <right> pumvisible() ? "\<C-y>\<right>" : "\<right>"
+    " imap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+    " imap <expr> <C-z> pumvisible() ? "\<C-e>" : "\<C-z>"
+
+    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+    inoremap <expr> ( pumvisible() ? "\<C-y>(" : "("
+
 
     let g:ncm2_pyclang#library_path = '/usr/lib'
 
@@ -739,7 +716,7 @@ endif
 " }
 
 " pydocstring {
-    nmap <silent> <C-d> <Plug>(pydocstring)
+    nmap <silent> <leader>pd <Plug>(pydocstring)
 " }
 
 " vim-easy-aligh {
@@ -752,3 +729,11 @@ endif
 " git-messager {
     nmap <Leader>gm <Plug>(git-messenger)
 " }
+
+" vim-header {
+    let g:header_auto_add_header = 0
+    let g:header_field_timestamp_format = '%Y-%m-%d %H:%M:%S'
+    let g:header_field_author = 'Yue Peng'
+    let g:header_field_author_email = 'yuepaang@gmail.com'
+    map <F7> :AddHeader<CR>
+    " }
