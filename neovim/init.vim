@@ -21,104 +21,118 @@ function! PackInit() abort
     call minpac#init()
     call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-    call minpac#add('ncm2/ncm2')
-    call minpac#add('roxma/nvim-yarp')
-    call minpac#add('ncm2/ncm2-bufword')
-    call minpac#add('ncm2/ncm2-path')
-    call minpac#add('ncm2/ncm2-ultisnips')
-    call minpac#add('filipekiss/ncm2-look.vim')
-    call minpac#add('ncm2/ncm2-tagprefix')
-    call minpac#add('ncm2/ncm2-gtags')
-    call minpac#add('ncm2/ncm2-tagprefix')
-    call minpac#add('ncm2/ncm2-github')
-    call minpac#add('ncm2/ncm2-racer')
-    call minpac#add('ncm2/ncm2-jedi')
-    call minpac#add('ncm2/ncm2-pyclang')
-    call minpac#add('ncm2/ncm2-html-subscope')
-    call minpac#add('ncm2/ncm2-markdown-subscope')
-    call minpac#add('ncm2/ncm2-jedi')
-    call minpac#add('yuki-ycino/ncm2-dictionary')
-    call minpac#add('fgrsnau/ncm-otherbuf')
-    call minpac#add('ncm2/nvim-typescript', {'do': { -> system('./install.sh')}})
+    " Auto-completion {
 
-    call minpac#add('Shougo/neco-vim')
-    call minpac#add('ncm2/ncm2-vim')
-    call minpac#add('Shougo/neco-syntax')
-    call minpac#add('ncm2/ncm2-syntax')
-    call minpac#add('Shougo/neoinclude.vim')
-    call minpac#add('ncm2/ncm2-neoinclude')
-    call minpac#add('Shougo/neosnippet-snippets')
-    call minpac#add('Shougo/neosnippet.vim')
-    call minpac#add('ncm2/ncm2-neosnippet')
+                    " \ 'coc-imselect',
+        let g:coc_global_extensions = [
+                    \ 'coc-json',
+                    \ 'coc-html',
+                    \ 'coc-css',
+                    \ 'coc-snippets',
+                    \ 'coc-ultisnips',
+                    \ 'coc-neosnippet',
+                    \ 'coc-prettier',
+                    \ 'coc-eslint',
+                    \ 'coc-emmet',
+                    \ 'coc-tsserver',
+                    \ 'coc-pairs',
+                    \ 'coc-json',
+                    \ 'coc-python',
+                    \ 'coc-highlight',
+                    \ 'coc-git',
+                    \ 'coc-emoji',
+                    \ 'coc-lists',
+                    \ 'coc-post',
+                    \ 'coc-stylelint',
+                    \ 'coc-yaml',
+                    \ 'coc-yank',
+                    \ 'coc-rls',
+                    \ 'coc-java',
+                    \ 'coc-vimlsp',
+                    \ ]
 
-    call minpac#add('ncm2/float-preview.nvim')
+        function! s:coc_plugins(hooktype, name) abort
+            execute 'packadd ' . a:name
+            call coc#util#install()
+            call coc#util#install_extension(g:coc_global_extensions)
+        endfunction
 
-    call minpac#add('prabirshrestha/async.vim')
-    call minpac#add('prabirshrestha/vim-lsp')
-    call minpac#add('ncm2/ncm2-vim-lsp')
+        call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
+        call minpac#add('https://github.com/Shougo/neco-vim')
+        call minpac#add('https://github.com/neoclide/coc-neco')
+    " }
 
-    call minpac#add('jiangmiao/auto-pairs')
+    " Linter {
+        call minpac#add('w0rp/ale')
+    " }
 
-    call minpac#add('scrooloose/nerdtree')
-    call minpac#add('Xuyuanp/nerdtree-git-plugin')
-    call minpac#add('low-ghost/nerdtree-fugitive')
-    call minpac#add('tiagofumo/vim-nerdtree-syntax-highlight')
-    call minpac#add('ivalkeen/nerdtree-execute')
+    " Better Utility {
+        call minpac#add('jiangmiao/auto-pairs')
+        call minpac#add('scrooloose/nerdcommenter')
+        call minpac#add('cinuor/vim-header')
+        call minpac#add('Shougo/echodoc.vim')
+        call minpac#add('heavenshell/vim-pydocstring')
+    " }
 
-    call minpac#add('w0rp/ale')
+    " tags view {
+        call minpac#add('majutsushi/tagbar')
+    " }
 
-    call minpac#add('scrooloose/nerdcommenter')
+    " Search {
+        call minpac#add('vim-scripts/IndexedSearch')
+        call minpac#add('haya14busa/incsearch.vim')  " Better search highlighting
+    " }
 
-    call minpac#add('cinuor/vim-header')
+    " fzf {
+        call minpac#add('junegunn/fzf', {'do': { -> system('./install --all')}})
+        call minpac#add('junegunn/fzf.vim')
+        call minpac#add('fszymanski/fzf-quickfix')
+    " }
 
-    " tags view
-    call minpac#add('majutsushi/tagbar')
+    " Better language pack {
+        call minpac#add('sheerun/vim-polyglot')
+    " }
 
-    " Search results counter
-    call minpac#add('vim-scripts/IndexedSearch')
-    call minpac#add('haya14busa/incsearch.vim')  " Better search highlighting
+    " MarkdownPreview {
+        call minpac#add('iamcco/markdown-preview.nvim', {'do': { -> system("cd app & yarn install")}})
+    " }
 
-    " fzf
-    call minpac#add('junegunn/fzf', {'do': { -> system('./install --all')}})
-    call minpac#add('junegunn/fzf.vim')
-    call minpac#add('fszymanski/fzf-quickfix')
+    " defx {
+        call minpac#add('Shougo/defx.nvim')
+        call minpac#add('kristijanhusak/defx-git')
+        call minpac#add('kristijanhusak/defx-icons')
+    " }
 
-    " Better language pack
-    call minpac#add('sheerun/vim-polyglot')
-    "May be redundant due to polyglot
-    " call minpac#add('justinmk/vim-syntax-extra')
+    " Snippets {
+        call minpac#add('SirVer/ultisnips')
+        call minpac#add('honza/vim-snippets')
+        call minpac#add('Shougo/neosnippet.vim')
+        call minpac#add('Shougo/neosnippet-snippets')
+    " }
 
+    " Git {
+        call minpac#add('tpope/vim-fugitive')
+        call minpac#add('tpope/vim-rhubarb')
+        call minpac#add('rhysd/git-messenger.vim')
+    " }
 
-    call minpac#add('iamcco/markdown-preview.nvim', {'do': { -> system("cd app & yarn install")}})
+    " Coding {
+        call minpac#add('mg979/vim-visual-multi')
+        call minpac#add('junegunn/vim-easy-align')
+        call minpac#add('Yggdroot/indentLine')
+    " }
 
-    call minpac#add('Shougo/echodoc.vim')
-    call minpac#add('heavenshell/vim-pydocstring')
+    " UI {
+        call minpac#add('junegunn/seoul256.vim')
+        call minpac#add('junegunn/goyo.vim')
+        call minpac#add('junegunn/limelight.vim')
+    " }
 
-    call minpac#add('SirVer/ultisnips')
-    call minpac#add('honza/vim-snippets')
-
-    call minpac#add('tpope/vim-fugitive')
-    call minpac#add('tpope/vim-rhubarb')
-    call minpac#add('rhysd/git-messenger.vim')
-    call minpac#add('airblade/vim-gitgutter')
-
-    call minpac#add('mg979/vim-visual-multi')
-
-    call minpac#add('junegunn/vim-easy-align')
-
-    call minpac#add('sjl/badwolf')
-    call minpac#add('flrnprz/plastic.vim')
-    call minpac#add('jacoborus/tender.vim')
-    call minpac#add('junegunn/seoul256.vim')
-
-    call minpac#add('junegunn/goyo.vim')
-    call minpac#add('junegunn/limelight.vim')
-
-    call minpac#add('itchyny/lightline.vim')
-    call minpac#add('maximbaz/lightline-ale')
-    call minpac#add('ryanoasis/vim-devicons')
-
-    call minpac#add('machakann/vim-highlightedyank')
+    " Status Line {
+        call minpac#add('itchyny/lightline.vim')
+        call minpac#add('maximbaz/lightline-ale')
+        call minpac#add('ryanoasis/vim-devicons')
+    " }
 
 endfunction
 
@@ -132,8 +146,7 @@ else
     let g:python3_host_prog='/usr/bin/python3'
 endif
 
-" ale {
-"  yapf python
+" ALE {
     let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'python': ['autopep8'],
@@ -184,17 +197,6 @@ endif
     highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 " }
 
-" auto-pairs
-
-    " let g:AutoPairsMapCR=0
-
-	" inoremap <silent> <Plug>(MyCR) <CR><C-R>=AutoPairsReturn()<CR>
-
-	" example
-	" imap <expr> <CR> (pumvisible() ? "\<C-Y>\<Plug>(MyCR)" : "\<Plug>(MyCR)")
-	" imap <expr> <CR> pumvisible() ? \<C-Y>\<CR><C-R>=AutoPairsReturn()<CR> : "\<CR>\<Plug>AutoPairsReturn"
-" }
-
 " vim-devicons {
 	let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 	let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -204,6 +206,7 @@ endif
 	let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
 	let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 " }
+
 " echodoc {
 	let g:echodoc#enable_at_startup = 1
 	" let g:echodoc#type = 'signature'
@@ -232,19 +235,78 @@ endif
         \ 'ctrl-s': 'split',
         \ 'ctrl-v': 'vsplit' }
     let g:fzf_colors =
-        \ { 'fg':      ['fg', 'Normal'],
-        \ 'bg':      ['bg', 'Normal'],
+        \ {
+        \ 'fg':      ['fg', 'Normal'],
+        \ 'bg':      ['bg', '#5f5f87'],
         \ 'hl':      ['fg', 'Comment'],
         \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
         \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
         \ 'hl+':     ['fg', 'Statement'],
-        \ 'info':    ['fg', 'Type'],
+        \ 'info':    ['fg', 'PreProc'],
         \ 'border':  ['fg', 'Ignore'],
-        \ 'prompt':  ['fg', 'Character'],
+        \ 'prompt':  ['fg', 'Conditional'],
         \ 'pointer': ['fg', 'Exception'],
         \ 'marker':  ['fg', 'Keyword'],
         \ 'spinner': ['fg', 'Label'],
         \ 'header':  ['fg', 'Comment'] }
+
+    " let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+    " function! FloatingFZF()
+    "     let buf = nvim_create_buf(v:false, v:true)
+    "     call setbufvar(buf, 'number', 'no')
+
+    "     let height = float2nr(&lines/2)
+    "     let width = float2nr(&columns - (&columns * 2 / 10))
+    "     "let width = &columns
+    "     let row = float2nr(&lines / 3)
+    "     let col = float2nr((&columns - width) / 3)
+
+    "     let opts = {
+    "             \ 'relative': 'editor',
+    "             \ 'row': row,
+    "             \ 'col': col,
+    "             \ 'width': width,
+    "             \ 'height':height,
+    "             \ }
+    "     let win =  nvim_open_win(buf, v:true, opts)
+    "     call setwinvar(win, '&number', 0)
+    "     call setwinvar(win, '&relativenumber', 0)
+    " endfunction
+
+    " " Files + devicons
+    " function! Fzf_dev()
+    "     let l:fzf_files_options = ' --preview "rougify {2..-1} | head -'.&lines.'"'
+
+    "     function! s:files()
+    "         let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    "         return s:prepend_icon(l:files)
+    "     endfunction
+
+    "     function! s:prepend_icon(candidates)
+    "         let l:result = []
+    "         for l:candidate in a:candidates
+    "         let l:filename = fnamemodify(l:candidate, ':p:t')
+    "         let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+    "         call add(l:result, printf('%s %s', l:icon, l:candidate))
+    "         endfor
+
+    "         return l:result
+    "     endfunction
+
+    "     function! s:edit_file(item)
+    "         let l:pos = stridx(a:item, ' ')
+    "         let l:file_path = a:item[pos+1:-1]
+    "         execute 'silent e' l:file_path
+    "     endfunction
+
+    "     call fzf#run({
+    "             \ 'source': <sid>files(),
+    "             \ 'sink':   function('s:edit_file'),
+    "             \ 'options': '-m ' . l:fzf_files_options,
+    "             \ 'down':    '40%' ,
+    "             \ 'window': 'call FloatingFZF()'})
+    " endfunction
 " }
 
 
@@ -253,7 +315,7 @@ endif
         \ 'colorscheme': 'seoul256',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
-        \             [ 'fugitive', 'filename' ],
+        \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
         \             [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
         \           ],
         \   'right': [ [ 'lineinfo' ],
@@ -282,6 +344,8 @@ endif
         \     'fticon'  : 'LightLineTabFiletypeIcon'
         \ },
         \ 'component_function' : {
+        \   'cocstatus'        : 'coc#status',
+        \   'currentfunction'  : 'CocCurrentFunction',
         \   'fugitive'         : 'LightLineFugitive',
         \   'readonly'         : 'LightLineReadonly',
         \   'modified'         : 'LightLineModified',
@@ -388,69 +452,17 @@ endif
     imap <silent> <F6> <Plug>MarkdownPreviewStop
 " }
 
-" ncm2_ultisnips {
-    inoremap <silent> <expr> <C-j> ncm2_ultisnips#expand_or("\<CR>", 'n')
-    " c-j c-k for moving in snippet
-    let g:UltiSnipsExpandTrigger="<c-j>"
-    let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-    let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-    " let g:UltiSnipsExpandTrigger            = '<A-z>``l'
-    let g:UltiSnipsRemoveSelectModeMappings = 0
-" }
-
-
-" ncm2 {
-    " enable ncm2 for all buffer
-    " let g:ncm2#auto_popup=1
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-
-
-    " imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<Plug>(ncm2_manual_trigger)\<C-n>"
-    " inoremap <expr> <up> pumvisible() ? "\<C-y>\<up>" : "\<up>"
-    " inoremap <expr> <down> pumvisible() ? "\<C-y>\<down>" : "\<down>"
-    " inoremap <expr> <left> pumvisible() ? "\<C-y>\<left>" : "\<left>"
-    " inoremap <expr> <right> pumvisible() ? "\<C-y>\<right>" : "\<right>"
-    " imap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-    " imap <expr> <C-z> pumvisible() ? "\<C-e>" : "\<C-z>"
-
-    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-    inoremap <expr> ( pumvisible() ? "\<C-y>(" : "("
-
-
-    let g:ncm2_pyclang#library_path = '/usr/lib'
-
-    " neosnippets
-    imap <C-k> <Plug>(neosnippet_expand_or_jump)
-    smap <C-k> <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k> <Plug>(neosnippet_expand_target)
-    "smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-                "\ '\<Plug>(neosnippet_expand_or_jump)' : '\<TAB>'
-
-
-    " Expand snippet when you hit enter on an entry
-    inoremap <silent> <expr> <CR> ncm2_neosnippet#expand_or("\<CR>", 'n')
-" }
-
-" ncm2-look {
-    " Enable && Disable Globally
-    let g:ncm2_look_enabled = 0
-    " Enable Command
-    function! Func_ToggleNcm2Look()
-        if g:ncm2_look_enabled == 1
-            let g:ncm2_look_enabled = 0
-        elseif g:ncm2_look_enabled == 0
-            let g:ncm2_look_enabled = 1
-        endif
-    endfunction
-    " Symbol
-    let g:ncm2_look_mark = "\uf02d"
-" }
-
 " neovim {
     let g:mapleader="\<SPACE>"
     let g:maplocalleader=","
+
+    " Clear current-search highlighting by hitting <CR> in normal mode.
+    nnoremap <silent> <CR> :nohlsearch<CR><CR>
+
+    set autowrite
+    set autochdir!
+    set colorcolumn=81
+    set hidden
 
     " Appearance
     set number
@@ -464,11 +476,8 @@ endif
     set laststatus=2
     set cmdheight=2
     set shortmess+=I
-    set colorcolumn=79
     set title
 
-    " Clear current-search highlighting by hitting <CR> in normal mode.
-    nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
     " silent! set number relativenumber background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
     " silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
@@ -497,7 +506,7 @@ endif
     silent! set wrapscan ignorecase smartcase incsearch hlsearch magic
 
     " Insert completion
-    silent! set complete& completeopt+=menu,menuone,noinsert,noselect infercase pumheight=10 noshowfulltag shortmess+=c
+    silent! set complete& completeopt+=menu,menuone,noinsert,noselect infercase pumheight=15 noshowfulltag shortmess+=c
 
     " Command line
     silent! set wildchar=9 wildmenu wildmode=list:longest wildoptions= wildignorecase cedit=<C-k>
@@ -522,8 +531,6 @@ endif
     set fileformats=unix,dos,mac
     scriptencoding utf-8
 
-    set hidden
-    set cursorline
 
     " color {
         " colorscheme plastic
@@ -542,10 +549,10 @@ endif
     " }
 
 
-    highlight WhitespaceEOL ctermbg=red guibg=red
-    match WhitespaceEOL /\s\+$/
+    " highlight WhitespaceEOL ctermbg=red guibg=red
+    " match WhitespaceEOL /\s\+$/
 
-    hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
+    " hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 
     " 打开文件自动定位到最后编辑的位置
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -569,6 +576,7 @@ endif
     nmap <leader>l :Limelight!!<CR>
     xmap <leader>l :Limelight!!<CR>
 
+    nmap <silent><leader>n :Defx<CR>
 " }
 
 " nerdcommenter {
@@ -587,131 +595,38 @@ endif
     let g:NERDDefaultNesting = 1
 " }
 
-" nerdtree {
-    let g:NERDTreeIndicatorMapCustom = {
-        \ 'Modified'  : '✸',
-        \ 'Staged'    : '&',
-        \ 'Untracked' : '✩',
-        \ 'Renamed'   : '➠',
-        \ 'Unmerged'  : '⮴',
-        \ 'Deleted'   : "\uf6bf",
-        \ 'Dirty'     : '✘',
-        \ 'Clean'     : '✔',
-        \ 'Ignored'   : "\ufb12",
-        \ 'Unknown'   : "\uf128"
-        \ }
-
-    " highlight fullname
-    let g:NERDTreeFileExtensionHighlightFullName = 1
-    let g:NERDTreeExactMatchHighlightFullName = 1
-    let g:NERDTreePatternMatchHighlightFullName = 1
-    " highlight folders using exact match
-    let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
-    let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
-    nnoremap <silent> <leader>n :<C-u>NERDTreeToggle<CR>
-
-    function! s:nerdtree_mappings() abort
-        nnoremap <silent><buffer> ~ :<C-u>NERDTreeVCS<CR>
-        nnoremap <silent><buffer> <A-f> :call Nerdtree_Fuzzy_Finder()<CR>
-        nnoremap <silent><buffer> <A-g> :call Nerdtree_Grep()<CR>
-        nnoremap <silent><buffer> h :call Help_nerdtree()<CR>
-        nmap <silent><buffer> <A-e> <C-b>:<C-u>NnnPicker '%:p:h'<CR>
-        nmap <silent><buffer> <A-b> <C-b>:<C-u>BufExplorer<CR>
-    endfunction
-    augroup NERDTreeAu
-        autocmd!
-        autocmd FileType nerdtree setlocal signcolumn=no
-        autocmd StdinReadPre * let s:std_in=1
-        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-        autocmd FileType nerdtree call s:nerdtree_mappings()
-    augroup END
-    let NERDTreeMinimalUI = 1
-    let NERDTreeWinSize = 35
-    let NERDTreeChDirMode = 0
-    let g:NERDTreeDirArrowExpandable = "\u00a0"
-    let g:NERDTreeDirArrowCollapsible = "\u00a0"
-    let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-" }
-
-
-" vim-lsp {
-
-    let g:lsp_signs_enabled = 0
-    let g:lsp_diagnostics_enabled = 0
-    let g:lsp_diagnostics_echo_cursor = 0
-    let g:lsp_signs_hint = {'text': '$'}
-
-    function! s:configure_lsp() abort
-        setlocal omnifunc=lsp#complete
-        nnoremap <buffer> gd :<C-u>LspDefinition<CR>
-        nnoremap <buffer> gh :<C-u>LspHover<CR>
-        nnoremap <buffer> gt :<C-u>LspTypeDefinition<CR>
-        nnoremap <buffer> gr :<C-u>LspReferences<CR>
-        nnoremap <buffer> grn :<C-u>LspRename<CR>
-
-        nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
-        nnoremap <buffer> gws :<C-u>LspWorkspaceSymbol<CR>
-
-        nnoremap <buffer> gf :<C-u>LspDocumentFormat<CR>
-        vnoremap <buffer> grf :LspDocumentRangeFormat<CR>
-        nnoremap <buffer> gi :<C-u>LspImplementation<CR>
-    endfunction
-
-    if executable('gopls')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'gopls',
-            \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-            \ 'whitelist': ['go'],
-            \ })
-        " autocmd FileType go setlocal omnifunc=lsp#complete
-        autocmd FileType go call s:configure_lsp()
-    endif
-
-    if executable('pyls')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'pyls',
-            \ 'cmd': {server_info->['pyls']},
-            \ 'whitelist': ['python'],
-            \ })
-        autocmd FileType python call s:configure_lsp()
-    endif
-
-    if executable('typescript-language-server')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'typescript-language-server',
-            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-            \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-            \ 'whitelist': ['typescript', 'typescript.tsx'],
-            \ })
-        autocmd FileType typescript call s:configure_lsp()
-    endif
-
-    if executable('ccls')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'ccls',
-            \ 'cmd': {server_info->['ccls']},
-            \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-            \ 'initialization_options': {},
-            \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-            \ })
-    endif
-
-    if executable('rls')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'rls',
-            \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-            \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-            \ 'whitelist': ['rust'],
-            \ })
-    endif
-
-" }
-
 " Tagbar {
 
-    "" Tagbar
     nmap <silent> <F4> :TagbarToggle<CR>
+
+    let g:tagbar_width=25
+    let g:tagbar_type_go = {
+        \ 'ctagstype' : 'go',
+        \ 'kinds' : [
+            \ 'p:package',
+            \ 'i:imports:1',
+            \ 'c:constants',
+            \ 'v:variables',
+            \ 't:types',
+            \ 'n:interfaces',
+            \ 'w:fields',
+            \ 'e:embedded',
+            \ 'm:methods',
+            \ 'r:constructor',
+            \ 'f:functions'
+        \ ],
+        \ 'sro' : '.',
+        \ 'kind2scope' : {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+        \ },
+        \ 'scope2kind' : {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+        \ },
+        \ 'ctagsbin' : 'gotags',
+        \ 'ctagsargs' : '-sort -silent'
+        \ }
 
 " }
 
@@ -726,6 +641,7 @@ endif
     " Start interactive EasyAlign for a motion/text object (e.g. gaip)
     nmap ga <Plug>(EasyAlign)
 " }
+
 " git-messager {
     nmap <Leader>gm <Plug>(git-messenger)
 " }
@@ -736,4 +652,287 @@ endif
     let g:header_field_author = 'Yue Peng'
     let g:header_field_author_email = 'yuepaang@gmail.com'
     map <F7> :AddHeader<CR>
-    " }
+" }
+
+" coc.nvim {
+    " Snippets
+    " Use <C-j> for jump to next placeholder, it's default of coc.nvim
+    let g:coc_snippet_next = '<c-j>'
+
+    " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+    let g:coc_snippet_prev = '<c-k>'
+    let g:coc_status_error_sign = '•'
+    let g:coc_status_warning_sign = '•'
+
+    " Use <C-l> for trigger snippet expand.
+    imap <C-l> <Plug>(coc-snippets-expand)
+
+    " Use <C-j> for select text for visual placeholder of snippet.
+    vmap <C-j> <Plug>(coc-snippets-select)
+
+    " use <c-space>for trigger completion
+    inoremap <silent><expr> <c-space> coc#refresh()
+
+    " To make <cr> select the first completion item and confirm completion when no item have selected:
+    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+    " Close preview window when completion is done.
+    autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+    nmap <silent> dp <Plug>(coc-diagnostic-prev)
+    nmap <silent> dn <Plug>(coc-diagnostic-next)
+
+    " Remap keys for gotos
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gt <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+
+    nmap <silent> grn <Plug>(coc-rename)
+
+    " Use K for show documentation in preview window
+    nnoremap <silent> gm :call <SID>show_documentation()<CR>
+
+    function! s:show_documentation()
+        if &filetype == 'vim'
+            execute 'h '.expand('<cword>')
+        else
+            call CocActionAsync('doHover')
+        endif
+    endfunction
+
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    " Remap for format selected region
+    vmap gf  <Plug>(coc-format-selected)
+    nmap gf  <Plug>(coc-format-selected)
+
+    augroup mygroup
+        autocmd!
+            " Setup formatexpr specified filetype(s).
+            autocmd FileType typescript,json setl formatexpr=CocActionAsync('formatSelected')
+            " Update signature help on jump placeholder
+            autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup end
+
+    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+    " vmap <leader>a  <Plug>(coc-codeaction-selected)
+    " nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+    " Remap for do codeAction of current line
+    nmap <leader>ac  <Plug>(coc-codeaction)
+    " Fix autofix problem of current line
+    nmap <leader>qf  <Plug>(coc-fix-current)
+
+    " Use `:Format` for format current buffer
+    command! -nargs=0 Format :call CocAction('format')
+
+    " Use `:Fold` for fold current buffer
+    command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+    " Using CocList
+    " Show all diagnostics
+    nnoremap <silent> <leader>la  :<C-u>CocList diagnostics<cr>
+    " Manage extensions
+    nnoremap <silent> <leader>le  :<C-u>CocList extensions<cr>
+    " Show commands
+    nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
+    " Find symbol of current document
+    nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
+    " Search workspace symbols
+    nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
+    " Do default action for next item.
+    nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
+    " Do default action for previous item.
+    nnoremap <silent> <leader>lk  :<C-u>CocPrev<CR>
+    " Resume latest coc list
+    nnoremap <silent> <leader>lp  :<C-u>CocListResume<CR>
+
+    autocmd FileType json syntax match Comment +\/\/.\+$+
+
+    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
+                                            \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+    nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+
+    function! CocHighlight() abort
+        if &filetype !=# 'markdown'
+            call CocActionAsync('highlight')
+        endif
+    endfunction
+
+    function! CocFloatingLockToggle() abort
+        if g:CocFloatingLock == 0
+            let g:CocFloatingLock = 1
+        elseif g:CocFloatingLock == 1
+            let g:CocFloatingLock = 0
+        endif
+    endfunction
+
+    function! CocHover() abort
+        if !coc#util#has_float() && g:CocHoverEnable == 1
+            call CocActionAsync('doHover')
+            call CocActionAsync('showSignatureHelp')
+        endif
+    endfunction
+
+    augroup CocAu
+        autocmd!
+        autocmd CursorHold * silent call CocHover()
+        autocmd CursorHold * silent call CocHighlight()
+        autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+        autocmd InsertEnter * call coc#util#float_hide()
+        autocmd VimEnter * inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
+    augroup END
+    let g:CocHoverEnable = 0
+
+    highlight CocHighlightText cterm=bold gui=bold
+    highlight CocErrorHighlight ctermfg=Gray guifg=#888888
+    highlight CocCodeLens ctermfg=Gray guifg=#888888
+" }
+
+" Defx {
+
+    augroup vimrc_defx
+        autocmd!
+        autocmd FileType defx call s:defx_mappings()                                  "Defx mappings
+        autocmd VimEnter * call s:setup_defx()
+        autocmd VimEnter * call fugitive#detect(expand('<afile>')) | call lightline#update()
+    augroup END
+
+    nnoremap <silent><Leader>n :call <sid>defx_open({ 'split': v:true })<CR>
+    nnoremap <silent><Leader>hf :call <sid>defx_open({ 'split': v:true, 'find_current_file': v:true })<CR>
+    let s:default_columns = 'indent:git:icons:filename'
+
+    function! s:setup_defx() abort
+        call defx#custom#option('_', {
+                \ 'columns': s:default_columns,
+                \ })
+
+        call defx#custom#column('filename', {
+                \ 'min_width': 80,
+                \ 'max_width': 80,
+                \ })
+
+        call s:defx_open({ 'dir': expand('<afile>') })
+    endfunction
+
+    function s:get_project_root() abort
+        let l:git_root = ''
+        let l:path = expand('%:p:h')
+        let l:cmd = systemlist('cd '.l:path.' && git rev-parse --show-toplevel')
+        if !v:shell_error && !empty(l:cmd)
+            let l:git_root = fnamemodify(l:cmd[0], ':p:h')
+        endif
+
+        if !empty(l:git_root)
+            return l:git_root
+        endif
+
+        return getcwd()
+    endfunction
+
+    function! s:defx_open(...) abort
+        let l:opts = get(a:, 1, {})
+        let l:path = get(l:opts, 'dir', s:get_project_root())
+
+        if !isdirectory(l:path) || &filetype ==? 'defx'
+            return
+        endif
+
+        let l:args = '-winwidth=40 -direction=topleft'
+
+        if has_key(l:opts, 'split')
+            let l:args .= ' -split=vertical'
+        endif
+
+        if has_key(l:opts, 'find_current_file')
+            if &filetype ==? 'defx'
+            return
+            endif
+            call execute(printf('Defx %s -search=%s %s', l:args, expand('%:p'), l:path))
+        else
+            call execute(printf('Defx -toggle %s %s', l:args, l:path))
+            call execute('wincmd p')
+        endif
+
+        return execute("norm!\<C-w>=")
+    endfunction
+
+    function! s:defx_context_menu() abort
+        let l:actions = ['new_multiple_files', 'rename', 'copy', 'move', 'paste', 'remove']
+        let l:selection = confirm('Action?', "&New file/directory\n&Rename\n&Copy\n&Move\n&Paste\n&Delete")
+        silent exe 'redraw'
+
+        return feedkeys(defx#do_action(l:actions[l:selection - 1]))
+    endfunction
+
+    function s:defx_toggle_tree() abort
+        if defx#is_directory()
+            return defx#do_action('open_or_close_tree')
+        endif
+        return defx#do_action('drop')
+    endfunction
+
+    function! s:defx_mappings() abort
+        nnoremap <silent><buffer>m :call <sid>defx_context_menu()<CR>
+        nnoremap <silent><buffer><expr> o <sid>defx_toggle_tree()
+        nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
+        nnoremap <silent><buffer><expr> <CR> <sid>defx_toggle_tree()
+        nnoremap <silent><buffer><expr> <2-LeftMouse> <sid>defx_toggle_tree()
+        nnoremap <silent><buffer><expr> C defx#is_directory() ? defx#do_action('multi', ['open', 'change_vim_cwd']) : 'C'
+        nnoremap <silent><buffer><expr> s defx#do_action('open', 'botright vsplit')
+        nnoremap <silent><buffer><expr> R defx#do_action('redraw')
+        nnoremap <silent><buffer><expr> U defx#do_action('multi', [['cd', '..'], 'change_vim_cwd'])
+        nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
+        nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
+        nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
+        nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
+        nnoremap <silent><buffer> J :call search('')<CR>
+        nnoremap <silent><buffer> K :call search('', 'b')<CR>
+        nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+        nnoremap <silent><buffer><expr> q defx#do_action('quit')
+        silent exe 'nnoremap <silent><buffer><expr> tt defx#do_action("toggle_columns", "'.s:default_columns.':size:time")'
+    endfunction
+
+" }
+
+" indentLine {
+    let g:indentline_enabled = 1
+    let g:indentline_char='┆'
+    let g:indentLine_fileTypeExclude = ['defx', 'tagbar']
+    let g:indentLine_concealcursor = 'niv'
+    let g:indentLine_color_term = 96
+    let g:indentLine_color_gui= '#725972'
+    let g:indentLine_showFirstIndentLevel =1
+" }
+
+" Defx-git {
+    let g:defx_git#indicators = {
+        \ 'Modified'  : '•',
+        \ 'Staged'    : '✚',
+        \ 'Untracked' : 'ᵁ',
+        \ 'Renamed'   : '≫',
+        \ 'Unmerged'  : '≠',
+        \ 'Ignored'   : 'ⁱ',
+        \ 'Deleted'   : '✖',
+        \ 'Unknown'   : '⁇'
+        \ }
+    let g:defx_git#column_length = 1
+    let g:defx_git#show_ignored = 0
+    let g:defx_git#raw_mode = 0
+    " Icons
+    let g:defx_icons_enable_syntax_highlight = 1
+    let g:defx_icons_column_length = 2
+    let g:defx_icons_directory_icon = ''
+    let g:defx_icons_mark_icon = '*'
+    let g:defx_icons_parent_icon = ''
+    let g:defx_icons_default_icon = ''
+    let g:defx_icons_directory_symlink_icon = ''
+    " Options below are applicable only when using "tree" feature
+    let g:defx_icons_root_opened_tree_icon = ''
+    let g:defx_icons_nested_opened_tree_icon = ''
+    let g:defx_icons_nested_closed_tree_icon = ''
+
+" }
