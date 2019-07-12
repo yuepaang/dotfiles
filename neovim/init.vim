@@ -29,33 +29,32 @@ function! PackInit() abort
 
     " Auto-completion {
 
-                    " \ 'coc-imselect',
         let g:coc_global_extensions = [
-                    \ 'coc-json',
-                    \ 'coc-html',
-                    \ 'coc-css',
-                    \ 'coc-snippets',
-                    \ 'coc-ultisnips',
-                    \ 'coc-neosnippet',
-                    \ 'coc-prettier',
-                    \ 'coc-eslint',
-                    \ 'coc-emmet',
-                    \ 'coc-tsserver',
-                    \ 'coc-pairs',
-                    \ 'coc-json',
-                    \ 'coc-python',
-                    \ 'coc-highlight',
-                    \ 'coc-git',
-                    \ 'coc-emoji',
-                    \ 'coc-lists',
-                    \ 'coc-post',
-                    \ 'coc-stylelint',
-                    \ 'coc-yaml',
-                    \ 'coc-yank',
-                    \ 'coc-rls',
-                    \ 'coc-java',
-                    \ 'coc-vimlsp',
-                    \ ]
+            \ 'coc-json',
+            \ 'coc-html',
+            \ 'coc-css',
+            \ 'coc-snippets',
+            \ 'coc-ultisnips',
+            \ 'coc-neosnippet',
+            \ 'coc-prettier',
+            \ 'coc-eslint',
+            \ 'coc-emmet',
+            \ 'coc-tsserver',
+            \ 'coc-pairs',
+            \ 'coc-json',
+            \ 'coc-python',
+            \ 'coc-highlight',
+            \ 'coc-git',
+            \ 'coc-emoji',
+            \ 'coc-lists',
+            \ 'coc-post',
+            \ 'coc-stylelint',
+            \ 'coc-yaml',
+            \ 'coc-yank',
+            \ 'coc-rls',
+            \ 'coc-java',
+            \ 'coc-vimlsp',
+            \ ]
 
         function! s:coc_plugins(hooktype, name) abort
             execute 'packadd ' . a:name
@@ -683,7 +682,9 @@ endif
     inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
     " Close preview window when completion is done.
-    autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+    autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+    autocmd! BufWritePre *.js,*.json,*.ts Prettier
 
     nmap <silent> dp <Plug>(coc-diagnostic-prev)
     nmap <silent> dn <Plug>(coc-diagnostic-next)
