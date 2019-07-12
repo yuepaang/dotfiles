@@ -1,3 +1,9 @@
+# File              : install.sh
+# Author            : Yue Peng <yuepaang@gmail.com>
+# Date              : 2019-07-12 11:14:08
+# Last Modified Date: 2019-07-12 11:14:08
+# Last Modified By  : Yue Peng <yuepaang@gmail.com>
+
 ln -s ~/dotfiles/neovim ~/.config/nvim
 
 # exuberant-ctags
