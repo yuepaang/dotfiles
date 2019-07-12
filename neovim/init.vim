@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-07-12 11:01:48
+" Last Modified Date: 2019-07-12 13:48:49
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -71,12 +71,14 @@ function! PackInit() abort
         call minpac#add('w0rp/ale')
     " }
 
-    " Better Utility {
+    " Utilities {
         call minpac#add('jiangmiao/auto-pairs')
         call minpac#add('scrooloose/nerdcommenter')
         call minpac#add('cinuor/vim-header')
         call minpac#add('Shougo/echodoc.vim')
         call minpac#add('heavenshell/vim-pydocstring')
+        call minpac#add('itchyny/calendar.vim')
+')
     " }
 
     " tags view {
@@ -170,6 +172,8 @@ endif
         \       'c': ['cppcheck', 'flawfinder'],
         \       'cpp': ['cppcheck', 'flawfinder'],
         \       'css': ['stylelint'],
+        \       'javascript': ['eslint', 'stylelint'],
+        \       'jsx': ['eslint', 'stylelint'],
         \       'html': ['tidy'],
         \       'json': [],
         \       'markdown': ['languagetool'],
@@ -195,7 +199,7 @@ endif
     let g:ale_echo_msg_warning_str = 'W'
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
     " 光标移动到错误的地方时立即显示错误
-    let g:ale_echo_delay = 0
+    let g:ale_echo_delay = 1
 
     autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
     highlight ALEErrorSign ctermbg=NONE ctermfg=red
@@ -208,7 +212,6 @@ endif
 	let g:DevIconsEnableFoldersOpenClose = 1
 	let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 	let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols[''] = "\uf15b"
-	let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
 	let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 " }
 
@@ -492,7 +495,7 @@ endif
     " silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
     " silent! set startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
     " silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
-    " silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=
+    silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=
 
     " Editing
     silent! set iminsert=0 imsearch=0 nopaste pastetoggle= nogdefault comments& commentstring=#\ %s
@@ -676,7 +679,7 @@ endif
     vmap <C-j> <Plug>(coc-snippets-select)
 
     " use <c-space>for trigger completion
-    inoremap <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <c-x> coc#refresh()
 
     " To make <cr> select the first completion item and confirm completion when no item have selected:
     inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
@@ -942,4 +945,8 @@ endif
     let g:defx_icons_nested_opened_tree_icon = ''
     let g:defx_icons_nested_closed_tree_icon = ''
 
+" }
+
+" Calender {
+    nmap <silent>tt :Calendar<CR>
 " }
