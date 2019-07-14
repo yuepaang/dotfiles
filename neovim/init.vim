@@ -663,6 +663,32 @@ endif
 " }
 
 " coc.nvim {
+    let g:coc_global_extensions = [
+        \ 'coc-json',
+        \ 'coc-html',
+        \ 'coc-css',
+        \ 'coc-snippets',
+        \ 'coc-ultisnips',
+        \ 'coc-neosnippet',
+        \ 'coc-prettier',
+        \ 'coc-eslint',
+        \ 'coc-emmet',
+        \ 'coc-tsserver',
+        \ 'coc-pairs',
+        \ 'coc-json',
+        \ 'coc-python',
+        \ 'coc-highlight',
+        \ 'coc-git',
+        \ 'coc-emoji',
+        \ 'coc-lists',
+        \ 'coc-post',
+        \ 'coc-stylelint',
+        \ 'coc-yaml',
+        \ 'coc-yank',
+        \ 'coc-rls',
+        \ 'coc-java',
+        \ 'coc-vimlsp',
+        \ ]
     " Snippets
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
     let g:coc_snippet_next = '<c-j>'
