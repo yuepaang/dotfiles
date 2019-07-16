@@ -971,6 +971,20 @@ endif
 
 " }
 
-" Calender {
+" Calendar {
     nmap <silent><leader>rl :Calendar<CR>
+    function! Help_calendar() abort
+        echo 'View:'
+        echo '< left view'
+        echo '>: right view'
+        echo 'E: Open / close event window'
+        echo 'T: open / close the task window'
+        echo 'C: Change events / tasks'
+        echo 'D: Delete event / finish tasks'
+        echo 'L: clear all completed tasks'
+        echo 'U: the task identifier is not completed'
+        echo 'T: jump to the current date'
+        echo ': display help'
+        echo 'Q: exit'
+    endfunction
 " }
