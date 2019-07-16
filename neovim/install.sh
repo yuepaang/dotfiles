@@ -20,3 +20,6 @@ npm install -g typescript typescript-language-server
 # Rust
 rustup update
 rustup component add rls rust-analysis rust-src
+
+# swap ctrl and caps
+setxkbmap -option ctrl:swapcaps

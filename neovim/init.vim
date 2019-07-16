@@ -541,8 +541,6 @@ endif
 
 
     " color {
-        " colorscheme plastic
-        " colorscheme tender
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
         "   Default: 237
@@ -557,10 +555,10 @@ endif
     " }
 
 
-    " highlight WhitespaceEOL ctermbg=red guibg=red
-    " match WhitespaceEOL /\s\+$/
+    highlight WhitespaceEOL ctermbg=red guibg=red
+    match WhitespaceEOL /\s\+$/
 
-    " hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
+    hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 
     " 打开文件自动定位到最后编辑的位置
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -974,5 +972,5 @@ endif
 " }
 
 " Calender {
-    nmap <silent>tt :Calendar<CR>
+    nmap <silent><leader>rl :Calendar<CR>
 " }
