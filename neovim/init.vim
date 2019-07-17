@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-07-12 13:48:49
+" Last Modified Date: 2019-07-17 11:31:36
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -29,37 +29,39 @@ function! PackInit() abort
 
     " Auto-completion {
 
-        let g:coc_global_extensions = [
-            \ 'coc-json',
-            \ 'coc-html',
-            \ 'coc-css',
-            \ 'coc-snippets',
-            \ 'coc-ultisnips',
-            \ 'coc-neosnippet',
-            \ 'coc-prettier',
-            \ 'coc-eslint',
-            \ 'coc-emmet',
-            \ 'coc-tsserver',
-            \ 'coc-pairs',
-            \ 'coc-json',
-            \ 'coc-python',
-            \ 'coc-highlight',
-            \ 'coc-git',
-            \ 'coc-emoji',
-            \ 'coc-lists',
-            \ 'coc-post',
-            \ 'coc-stylelint',
-            \ 'coc-yaml',
-            \ 'coc-yank',
-            \ 'coc-rls',
-            \ 'coc-java',
-            \ 'coc-vimlsp',
-            \ ]
+        " let g:coc_global_extensions = [
+        "     \ 'coc-json',
+        "     \ 'coc-html',
+        "     \ 'coc-css',
+        "     \ 'coc-snippets',
+        "     \ 'coc-ultisnips',
+        "     \ 'coc-neosnippet',
+        "     \ 'coc-prettier',
+        "     \ 'coc-eslint',
+        "     \ 'coc-emmet',
+        "     \ 'coc-tsserver',
+        "     \ 'coc-pairs',
+        "     \ 'coc-json',
+        "     \ 'coc-python',
+        "     \ 'coc-highlight',
+        "     \ 'coc-git',
+        "     \ 'coc-emoji',
+        "     \ 'coc-lists',
+        "     \ 'coc-post',
+        "     \ 'coc-stylelint',
+        "     \ 'coc-yaml',
+        "     \ 'coc-yank',
+        "     \ 'coc-rls',
+        "     \ 'coc-java',
+        "     \ 'coc-vimlsp',
+        "     \ 'coc-tabnine',
+        "     \ 'coc-browser',
+        "     \ ]
 
         function! s:coc_plugins(hooktype, name) abort
             execute 'packadd ' . a:name
             call coc#util#install()
-            call coc#util#install_extension(g:coc_global_extensions)
+            " call coc#util#install_extension(g:coc_global_extensions)
         endfunction
 
         call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
@@ -72,7 +74,6 @@ function! PackInit() abort
     " }
 
     " Utilities {
-        call minpac#add('jiangmiao/auto-pairs')
         call minpac#add('scrooloose/nerdcommenter')
         call minpac#add('cinuor/vim-header')
         call minpac#add('Shougo/echodoc.vim')
@@ -131,8 +132,6 @@ function! PackInit() abort
 
     " UI {
         call minpac#add('junegunn/seoul256.vim')
-        call minpac#add('junegunn/goyo.vim')
-        call minpac#add('junegunn/limelight.vim')
     " }
 
     " Status Line {
@@ -493,7 +492,7 @@ endif
     " silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
     " silent! set cursorline nocursorcolumn colorcolumn=80 concealcursor=nvc conceallevel=0 norelativenumber
     " silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
-    " silent! set startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
+    silent! set startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
     " silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
     silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=
 
@@ -541,8 +540,6 @@ endif
 
 
     " color {
-        " colorscheme plastic
-        " colorscheme tender
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
         "   Default: 237
@@ -557,10 +554,10 @@ endif
     " }
 
 
-    " highlight WhitespaceEOL ctermbg=red guibg=red
-    " match WhitespaceEOL /\s\+$/
+    highlight WhitespaceEOL ctermbg=red guibg=red
+    match WhitespaceEOL /\s\+$/
 
-    " hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
+    hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 
     " 打开文件自动定位到最后编辑的位置
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
@@ -579,10 +576,6 @@ endif
     xnoremap >  >gv
 
     inoremap <c-c> <ESC>
-
-    nmap <leader>g :Goyo<CR>
-    nmap <leader>l :Limelight!!<CR>
-    xmap <leader>l :Limelight!!<CR>
 
     nmap <silent><leader>n :Defx<CR>
 " }
@@ -688,6 +681,8 @@ endif
         \ 'coc-rls',
         \ 'coc-java',
         \ 'coc-vimlsp',
+        \ 'coc-browser',
+        \ 'coc-imselect'
         \ ]
     " Snippets
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
@@ -713,7 +708,7 @@ endif
     " Close preview window when completion is done.
     autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-    autocmd! BufWritePre *.js,*.json,*.ts Prettier
+    " autocmd! BufWritePre *.js,*.json,*.ts Prettier
 
     nmap <silent> dp <Plug>(coc-diagnostic-prev)
     nmap <silent> dn <Plug>(coc-diagnostic-next)
@@ -975,6 +970,20 @@ endif
 
 " }
 
-" Calender {
-    nmap <silent>tt :Calendar<CR>
+" Calendar {
+    nmap <silent><leader>rl :Calendar<CR>
+    function! Help_calendar() abort
+        echo 'View:'
+        echo '< left view'
+        echo '>: right view'
+        echo 'E: Open / close event window'
+        echo 'T: open / close the task window'
+        echo 'C: Change events / tasks'
+        echo 'D: Delete event / finish tasks'
+        echo 'L: clear all completed tasks'
+        echo 'U: the task identifier is not completed'
+        echo 'T: jump to the current date'
+        echo ': display help'
+        echo 'Q: exit'
+    endfunction
 " }
