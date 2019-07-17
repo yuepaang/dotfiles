@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-07-12 13:48:49
+" Last Modified Date: 2019-07-17 11:31:36
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -29,37 +29,39 @@ function! PackInit() abort
 
     " Auto-completion {
 
-        let g:coc_global_extensions = [
-            \ 'coc-json',
-            \ 'coc-html',
-            \ 'coc-css',
-            \ 'coc-snippets',
-            \ 'coc-ultisnips',
-            \ 'coc-neosnippet',
-            \ 'coc-prettier',
-            \ 'coc-eslint',
-            \ 'coc-emmet',
-            \ 'coc-tsserver',
-            \ 'coc-pairs',
-            \ 'coc-json',
-            \ 'coc-python',
-            \ 'coc-highlight',
-            \ 'coc-git',
-            \ 'coc-emoji',
-            \ 'coc-lists',
-            \ 'coc-post',
-            \ 'coc-stylelint',
-            \ 'coc-yaml',
-            \ 'coc-yank',
-            \ 'coc-rls',
-            \ 'coc-java',
-            \ 'coc-vimlsp',
-            \ ]
+        " let g:coc_global_extensions = [
+        "     \ 'coc-json',
+        "     \ 'coc-html',
+        "     \ 'coc-css',
+        "     \ 'coc-snippets',
+        "     \ 'coc-ultisnips',
+        "     \ 'coc-neosnippet',
+        "     \ 'coc-prettier',
+        "     \ 'coc-eslint',
+        "     \ 'coc-emmet',
+        "     \ 'coc-tsserver',
+        "     \ 'coc-pairs',
+        "     \ 'coc-json',
+        "     \ 'coc-python',
+        "     \ 'coc-highlight',
+        "     \ 'coc-git',
+        "     \ 'coc-emoji',
+        "     \ 'coc-lists',
+        "     \ 'coc-post',
+        "     \ 'coc-stylelint',
+        "     \ 'coc-yaml',
+        "     \ 'coc-yank',
+        "     \ 'coc-rls',
+        "     \ 'coc-java',
+        "     \ 'coc-vimlsp',
+        "     \ 'coc-tabnine',
+        "     \ 'coc-browser',
+        "     \ ]
 
         function! s:coc_plugins(hooktype, name) abort
             execute 'packadd ' . a:name
             call coc#util#install()
-            call coc#util#install_extension(g:coc_global_extensions)
+            " call coc#util#install_extension(g:coc_global_extensions)
         endfunction
 
         call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
@@ -686,6 +688,8 @@ endif
         \ 'coc-rls',
         \ 'coc-java',
         \ 'coc-vimlsp',
+        \ 'coc-tabnine',
+        \ 'coc-browser',
         \ ]
     " Snippets
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
@@ -711,7 +715,7 @@ endif
     " Close preview window when completion is done.
     autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-    autocmd! BufWritePre *.js,*.json,*.ts Prettier
+    " autocmd! BufWritePre *.js,*.json,*.ts Prettier
 
     nmap <silent> dp <Plug>(coc-diagnostic-prev)
     nmap <silent> dn <Plug>(coc-diagnostic-next)

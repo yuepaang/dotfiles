@@ -58,7 +58,7 @@
     //Snippet
     "coc.preferences.snippetStatusText": "Ⓢ ",
     //tslint
-    "tslint.autoFixOnSave": true,
+    //"tslint.autoFixOnSave": true,
     //prettier
     "coc.preferences.formatOnSaveFiletypes": ["css","markdown"],
     "prettier.statusItemText": "ⓟ ",
@@ -104,5 +104,10 @@
                 }
             }
         }
-    }
+    },
+
+    "coc.browser.enable": true,
+    "coc.browser.shortcut": "web",
+    "coc.browser.capacity": 5,
+    "coc.browser.priority": 5
 }
