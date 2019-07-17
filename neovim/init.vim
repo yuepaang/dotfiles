@@ -74,7 +74,6 @@ function! PackInit() abort
     " }
 
     " Utilities {
-        call minpac#add('jiangmiao/auto-pairs')
         call minpac#add('scrooloose/nerdcommenter')
         call minpac#add('cinuor/vim-header')
         call minpac#add('Shougo/echodoc.vim')
@@ -133,8 +132,6 @@ function! PackInit() abort
 
     " UI {
         call minpac#add('junegunn/seoul256.vim')
-        call minpac#add('junegunn/goyo.vim')
-        call minpac#add('junegunn/limelight.vim')
     " }
 
     " Status Line {
@@ -495,7 +492,7 @@ endif
     " silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
     " silent! set cursorline nocursorcolumn colorcolumn=80 concealcursor=nvc conceallevel=0 norelativenumber
     " silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
-    " silent! set startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
+    silent! set startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
     " silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
     silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=
 
@@ -579,10 +576,6 @@ endif
     xnoremap >  >gv
 
     inoremap <c-c> <ESC>
-
-    nmap <leader>g :Goyo<CR>
-    nmap <leader>l :Limelight!!<CR>
-    xmap <leader>l :Limelight!!<CR>
 
     nmap <silent><leader>n :Defx<CR>
 " }
