@@ -6,6 +6,9 @@
 
 ln -s ~/dotfiles/neovim ~/.config/nvim
 
+# coc.nvim dependencies
+curl -sL install-node.now.sh/lts | bash
+
 # exuberant-ctags
 # sudo apt install exuberant-ctags
 
@@ -26,3 +29,6 @@ rustup component add rls rust-analysis rust-src
 
 # swap ctrl and caps
 setxkbmap -option ctrl:swapcaps
+
+# Chrome extension name
+# browser-source-provider (by voldikss)
