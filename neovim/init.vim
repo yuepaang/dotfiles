@@ -826,6 +826,8 @@ endif
     highlight CocHighlightText cterm=bold gui=bold
     highlight CocErrorHighlight ctermfg=Gray guifg=#888888
     highlight CocCodeLens ctermfg=Gray guifg=#888888
+
+    autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 " }
 
 " Defx {
