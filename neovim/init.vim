@@ -681,8 +681,8 @@ endif
         \ 'coc-rls',
         \ 'coc-java',
         \ 'coc-vimlsp',
-        \ 'coc-tabnine',
         \ 'coc-browser',
+        \ 'coc-imselect'
         \ ]
     " Snippets
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
