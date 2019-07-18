@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-07-18 14:36:31
+" Last Modified Date: 2019-07-18 23:48:46
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -103,6 +103,8 @@ function! PackInit() abort
         call minpac#add('junegunn/seoul256.vim')
         call minpac#add('cormacrelf/vim-colors-github')
         call minpac#add('nanotech/jellybeans.vim')
+        call minpac#add('NLKNguyen/papercolor-theme')
+        call minpac#add('morhetz/gruvbox')
     " }
 
     " Status Line {
@@ -289,7 +291,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'jellybeans',
+        \ 'colorscheme': 'gruvbox',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
@@ -448,7 +450,6 @@ endif
     set cursorline
     set scrolloff=10
     set updatetime=300
-    set background=dark
     set noshowmode
     set laststatus=2
     set cmdheight=2
@@ -519,13 +520,16 @@ endif
         " colorscheme github
         " let g:github_colors_soft = 1
 
-        colorscheme jellybeans
-        let g:jellybeans_overrides = {
-            \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
-            \              'ctermfg': 'Black', 'ctermbg': 'Yellow',
-            \              'attr': 'bold' },
-            \    'Comment': { 'guifg': 'cccccc' },
-            \}
+        " colorscheme jellybeans
+        " let g:jellybeans_overrides = {
+        "     \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
+        "     \              'ctermfg': 'Black', 'ctermbg': 'Yellow',
+        "     \              'attr': 'bold' },
+        "     \    'Comment': { 'guifg': 'cccccc' },
+        "     \}
+        colorscheme gruvbox
+        set background=light
+        let g:gruvbox_contrast_light='hard'
 
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
