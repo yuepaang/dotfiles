@@ -1,4 +1,5 @@
 {
+    // suggest
     "suggest.triggerAfterInsertEnter": false,
     "suggest.timeout": 500,
     "suggest.noselect": false,
@@ -69,12 +70,15 @@
     "emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact"},
     //python
     "python.autoComplete.addBrackets": true,
+    "python.jediEnabled": false,
+    "python.venvPath": "~/Env",
     // eslint
     "eslint.filetypes": ["javascript", "javascript.jsx", "javascriptreact"],
     "eslint.autoFix": true,
     "eslint.autoFixOnSave": true,
-    "python.jediEnabled": false,
-    "python.venvPath": "~/Env",
+    // pairs
+    "pairs.enableBackspace": false,
+    // ls
     "languageserver": {
         "golang": {
             "command": "gopls",
@@ -105,7 +109,7 @@
             }
         }
     },
-
+    // browser
     "coc.browser.enable": true,
     "coc.browser.shortcut": "web",
     "coc.browser.capacity": 5,

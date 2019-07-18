@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-07-17 23:54:09
+" Last Modified Date: 2019-07-18 14:36:31
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -28,40 +28,9 @@ function! PackInit() abort
     call minpac#add('k-takata/minpac', {'type': 'opt'})
 
     " Auto-completion {
-
-        " let g:coc_global_extensions = [
-        "     \ 'coc-json',
-        "     \ 'coc-html',
-        "     \ 'coc-css',
-        "     \ 'coc-snippets',
-        "     \ 'coc-ultisnips',
-        "     \ 'coc-neosnippet',
-        "     \ 'coc-prettier',
-        "     \ 'coc-eslint',
-        "     \ 'coc-emmet',
-        "     \ 'coc-tsserver',
-        "     \ 'coc-pairs',
-        "     \ 'coc-json',
-        "     \ 'coc-python',
-        "     \ 'coc-highlight',
-        "     \ 'coc-git',
-        "     \ 'coc-emoji',
-        "     \ 'coc-lists',
-        "     \ 'coc-post',
-        "     \ 'coc-stylelint',
-        "     \ 'coc-yaml',
-        "     \ 'coc-yank',
-        "     \ 'coc-rls',
-        "     \ 'coc-java',
-        "     \ 'coc-vimlsp',
-        "     \ 'coc-tabnine',
-        "     \ 'coc-browser',
-        "     \ ]
-
         function! s:coc_plugins(hooktype, name) abort
             execute 'packadd ' . a:name
             call coc#util#install()
-            " call coc#util#install_extension(g:coc_global_extensions)
         endfunction
 
         call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
@@ -132,6 +101,8 @@ function! PackInit() abort
 
     " UI {
         call minpac#add('junegunn/seoul256.vim')
+        call minpac#add('cormacrelf/vim-colors-github')
+        call minpac#add('nanotech/jellybeans.vim')
     " }
 
     " Status Line {
@@ -216,8 +187,7 @@ endif
 
 " echodoc {
 	let g:echodoc#enable_at_startup = 1
-	" let g:echodoc#type = 'signature'
-    let g:echodoc#type = 'virtual'
+    let g:echodoc#type = 'signature'
 " }
 
 " fugitive {
@@ -257,69 +227,69 @@ endif
         \ 'spinner': ['fg', 'Label'],
         \ 'header':  ['fg', 'Comment'] }
 
-    " let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+    let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
-    " function! FloatingFZF()
-    "     let buf = nvim_create_buf(v:false, v:true)
-    "     call setbufvar(buf, 'number', 'no')
+    function! FloatingFZF()
+        let buf = nvim_create_buf(v:false, v:true)
+        call setbufvar(buf, 'number', 'no')
 
-    "     let height = float2nr(&lines/2)
-    "     let width = float2nr(&columns - (&columns * 2 / 10))
-    "     "let width = &columns
-    "     let row = float2nr(&lines / 3)
-    "     let col = float2nr((&columns - width) / 3)
+        let height = float2nr(&lines/2)
+        let width = float2nr(&columns - (&columns * 2 / 10))
+        "let width = &columns
+        let row = float2nr(&lines / 3)
+        let col = float2nr((&columns - width) / 3)
 
-    "     let opts = {
-    "             \ 'relative': 'editor',
-    "             \ 'row': row,
-    "             \ 'col': col,
-    "             \ 'width': width,
-    "             \ 'height':height,
-    "             \ }
-    "     let win =  nvim_open_win(buf, v:true, opts)
-    "     call setwinvar(win, '&number', 0)
-    "     call setwinvar(win, '&relativenumber', 0)
-    " endfunction
+        let opts = {
+                \ 'relative': 'editor',
+                \ 'row': row,
+                \ 'col': col,
+                \ 'width': width,
+                \ 'height':height,
+                \ }
+        let win =  nvim_open_win(buf, v:true, opts)
+        call setwinvar(win, '&number', 0)
+        call setwinvar(win, '&relativenumber', 0)
+    endfunction
 
-    " " Files + devicons
-    " function! Fzf_dev()
-    "     let l:fzf_files_options = ' --preview "rougify {2..-1} | head -'.&lines.'"'
+    " Files + devicons
+    function! Fzf_dev()
+        let l:fzf_files_options = ' --preview "rougify {2..-1} | head -'.&lines.'"'
 
-    "     function! s:files()
-    "         let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    "         return s:prepend_icon(l:files)
-    "     endfunction
+        function! s:files()
+            let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+            return s:prepend_icon(l:files)
+        endfunction
 
-    "     function! s:prepend_icon(candidates)
-    "         let l:result = []
-    "         for l:candidate in a:candidates
-    "         let l:filename = fnamemodify(l:candidate, ':p:t')
-    "         let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-    "         call add(l:result, printf('%s %s', l:icon, l:candidate))
-    "         endfor
+        function! s:prepend_icon(candidates)
+            let l:result = []
+            for l:candidate in a:candidates
+            let l:filename = fnamemodify(l:candidate, ':p:t')
+            let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+            call add(l:result, printf('%s %s', l:icon, l:candidate))
+            endfor
 
-    "         return l:result
-    "     endfunction
+            return l:result
+        endfunction
 
-    "     function! s:edit_file(item)
-    "         let l:pos = stridx(a:item, ' ')
-    "         let l:file_path = a:item[pos+1:-1]
-    "         execute 'silent e' l:file_path
-    "     endfunction
+        function! s:edit_file(item)
+            let l:pos = stridx(a:item, ' ')
+            let l:file_path = a:item[pos+1:-1]
+            execute 'silent e' l:file_path
+        endfunction
 
-    "     call fzf#run({
-    "             \ 'source': <sid>files(),
-    "             \ 'sink':   function('s:edit_file'),
-    "             \ 'options': '-m ' . l:fzf_files_options,
-    "             \ 'down':    '40%' ,
-    "             \ 'window': 'call FloatingFZF()'})
-    " endfunction
+        call fzf#run({
+                \ 'source': <sid>files(),
+                \ 'sink':   function('s:edit_file'),
+                \ 'options': '-m ' . l:fzf_files_options,
+                \ 'down':    '40%' ,
+                \ 'window': 'call FloatingFZF()'})
+    endfunction
 " }
 
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'seoul256',
+        \ 'colorscheme': 'jellybeans',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
@@ -543,8 +513,19 @@ endif
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
         "   Default: 237
-        let g:seoul256_background = 235
-        colo seoul256
+        " let g:seoul256_background = 235
+        " colo seoul256
+
+        " colorscheme github
+        " let g:github_colors_soft = 1
+
+        colorscheme jellybeans
+        let g:jellybeans_overrides = {
+            \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
+            \              'ctermfg': 'Black', 'ctermbg': 'Yellow',
+            \              'attr': 'bold' },
+            \    'Comment': { 'guifg': 'cccccc' },
+            \}
 
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
@@ -576,8 +557,6 @@ endif
     xnoremap >  >gv
 
     inoremap <c-c> <ESC>
-
-    nmap <silent><leader>n :Defx<CR>
 " }
 
 " nerdcommenter {
@@ -682,8 +661,9 @@ endif
         \ 'coc-java',
         \ 'coc-vimlsp',
         \ 'coc-browser',
-        \ 'coc-imselect'
         \ ]
+    " mac iterm2 enhance 'coc-imselect'
+
     " Snippets
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
     let g:coc_snippet_next = '<c-j>'
@@ -834,6 +814,7 @@ endif
         autocmd VimEnter * call fugitive#detect(expand('<afile>')) | call lightline#update()
     augroup END
 
+    " Mapping
     nnoremap <silent><Leader>n :call <sid>defx_open({ 'split': v:true })<CR>
     nnoremap <silent><Leader>hf :call <sid>defx_open({ 'split': v:true, 'find_current_file': v:true })<CR>
     let s:default_columns = 'indent:git:icons:filename'
