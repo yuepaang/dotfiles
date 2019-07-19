@@ -105,6 +105,7 @@ function! PackInit() abort
         call minpac#add('nanotech/jellybeans.vim')
         call minpac#add('NLKNguyen/papercolor-theme')
         call minpac#add('morhetz/gruvbox')
+        call minpac#add('rakr/vim-one')
     " }
 
     " Status Line {
@@ -291,7 +292,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'gruvbox',
+        \ 'colorscheme': 'one',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
@@ -517,9 +518,6 @@ endif
         " let g:seoul256_background = 235
         " colo seoul256
 
-        " colorscheme github
-        " let g:github_colors_soft = 1
-
         " colorscheme jellybeans
         " let g:jellybeans_overrides = {
         "     \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
@@ -527,9 +525,17 @@ endif
         "     \              'attr': 'bold' },
         "     \    'Comment': { 'guifg': 'cccccc' },
         "     \}
-        colorscheme gruvbox
-        set background=light
-        let g:gruvbox_contrast_light='hard'
+        " colorscheme gruvbox
+        " set background=light
+        " let g:gruvbox_contrast_light='hard'
+        if &diff
+            colorscheme github
+            let g:github_colors_soft = 1
+        else
+            colorscheme one
+            set background=light
+            let g:one_allow_italics = 1
+        endif
 
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
