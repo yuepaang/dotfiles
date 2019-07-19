@@ -106,6 +106,7 @@ function! PackInit() abort
         call minpac#add('NLKNguyen/papercolor-theme')
         call minpac#add('morhetz/gruvbox')
         call minpac#add('rakr/vim-one')
+        call minpac#add('ayu-theme/ayu-vim')
     " }
 
     " Status Line {
@@ -150,7 +151,7 @@ endif
         \       'html': ['tidy'],
         \       'json': [],
         \       'markdown': ['languagetool'],
-        \       'python': ['flake8', 'mypy', 'pydocstyle', 'pylint'],
+        \       'python': ['flake8', 'mypy'],
         \       'rust': ['cargo'],
         \       'sh': ['shellcheck'],
         \       'text': ['languagetool'],
@@ -532,9 +533,12 @@ endif
             colorscheme github
             let g:github_colors_soft = 1
         else
-            colorscheme one
+            " colorscheme one
+            " let g:one_allow_italics = 1
+
+            colorscheme ayu
+            let ayucolor="light"
             set background=light
-            let g:one_allow_italics = 1
         endif
 
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
