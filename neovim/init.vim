@@ -424,7 +424,8 @@ endif
 
 
 " MarkdownPreview {
-    let g:mkdp_auto_start=1
+    " Too slow
+    let g:mkdp_auto_start=0
     let g:mkdp_auto_close=1
 
     nmap <silent> <F5> <Plug>MarkdownPreview
