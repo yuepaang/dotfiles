@@ -656,8 +656,6 @@ endif
         \ 'coc-html',
         \ 'coc-css',
         \ 'coc-snippets',
-        \ 'coc-ultisnips',
-        \ 'coc-neosnippet',
         \ 'coc-prettier',
         \ 'coc-eslint',
         \ 'coc-emmet',
