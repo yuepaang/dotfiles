@@ -78,6 +78,7 @@
     "eslint.autoFixOnSave": true,
     // pairs
     "pairs.enableBackspace": false,
+    "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
     // ls
     "languageserver": {
         "golang": {

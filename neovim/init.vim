@@ -36,6 +36,8 @@ function! PackInit() abort
         call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
         call minpac#add('https://github.com/Shougo/neco-vim')
         call minpac#add('https://github.com/neoclide/coc-neco')
+        call minpac#add('Shougo/neoinclude.vim')
+        call minpac#add('jsfaint/coc-neoinclude')
     " }
 
     " Linter {
@@ -81,10 +83,7 @@ function! PackInit() abort
     " }
 
     " Snippets {
-        call minpac#add('SirVer/ultisnips')
         call minpac#add('honza/vim-snippets')
-        call minpac#add('Shougo/neosnippet.vim')
-        call minpac#add('Shougo/neosnippet-snippets')
     " }
 
     " Git {
@@ -231,29 +230,30 @@ endif
         \ 'spinner': ['fg', 'Label'],
         \ 'header':  ['fg', 'Comment'] }
 
-    let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+    " Floating Windows
+    " let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
-    function! FloatingFZF()
-        let buf = nvim_create_buf(v:false, v:true)
-        call setbufvar(buf, 'number', 'no')
+    " function! FloatingFZF()
+    "     let buf = nvim_create_buf(v:false, v:true)
+    "     call setbufvar(buf, 'number', 'no')
 
-        let height = float2nr(&lines/2)
-        let width = float2nr(&columns - (&columns * 2 / 10))
-        "let width = &columns
-        let row = float2nr(&lines / 3)
-        let col = float2nr((&columns - width) / 3)
+    "     let height = float2nr(&lines/2)
+    "     let width = float2nr(&columns - (&columns * 2 / 10))
+    "     "let width = &columns
+    "     let row = float2nr(&lines / 3)
+    "     let col = float2nr((&columns - width) / 3)
 
-        let opts = {
-                \ 'relative': 'editor',
-                \ 'row': row,
-                \ 'col': col,
-                \ 'width': width,
-                \ 'height':height,
-                \ }
-        let win =  nvim_open_win(buf, v:true, opts)
-        call setwinvar(win, '&number', 0)
-        call setwinvar(win, '&relativenumber', 0)
-    endfunction
+    "     let opts = {
+    "             \ 'relative': 'editor',
+    "             \ 'row': row,
+    "             \ 'col': col,
+    "             \ 'width': width,
+    "             \ 'height':height,
+    "             \ }
+    "     let win =  nvim_open_win(buf, v:true, opts)
+    "     call setwinvar(win, '&number', 0)
+    "     call setwinvar(win, '&relativenumber', 0)
+    " endfunction
 
     " Files + devicons
     function! Fzf_dev()
@@ -441,6 +441,7 @@ endif
     " Clear current-search highlighting by hitting <CR> in normal mode.
     nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
+
     set autowrite
     set autochdir!
     set colorcolumn=81
@@ -517,8 +518,8 @@ endif
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
         "   Default: 237
-        " let g:seoul256_background = 235
-        " colo seoul256
+        let g:seoul256_background = 236
+        colo seoul256
 
         " colorscheme jellybeans
         " let g:jellybeans_overrides = {
@@ -530,17 +531,17 @@ endif
         " colorscheme gruvbox
         " set background=light
         " let g:gruvbox_contrast_light='hard'
-        if &diff
-            colorscheme github
-            let g:github_colors_soft = 1
-        else
-            " colorscheme one
-            " let g:one_allow_italics = 1
+        " if &diff
+        "     colorscheme github
+        "     let g:github_colors_soft = 1
+        " else
+        "     " colorscheme one
+        "     " let g:one_allow_italics = 1
 
-            colorscheme ayu
-            let ayucolor="light"
-            set background=light
-        endif
+        "     colorscheme ayu
+        "     let ayucolor="light"
+        "     set background=light
+        " endif
 
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
@@ -676,6 +677,7 @@ endif
         \ 'coc-java',
         \ 'coc-vimlsp',
         \ 'coc-browser',
+        \ 'coc-tabnine',
         \ ]
     " mac iterm2 enhance 'coc-imselect'
 
@@ -818,6 +820,8 @@ endif
     highlight CocCodeLens ctermfg=Gray guifg=#888888
 
     autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
+    autocmd FileType markdown let b:coc_pairs_disabled = ['`']
 " }
 
 " Defx {
