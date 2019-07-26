@@ -1,7 +1,37 @@
 {
+    "snippets.snipmate.author": "Yue Peng",
+    "snippets.snipmate.enable": false,
+    "snippets.shortcut": "S",
+    "snippets.priority": 98,
+    "snippets.extends": {
+        "cpp": ["c"],
+        "javascriptreact": ["javascript"],
+        "typescript": ["javascript"]
+    },
+    "coc.source.file.shortcut": "F",
+    "coc.source.file.priority": 89,
+    "coc.source.file.ignoreHidden": false,
+    "coc.source.around.shortcut": "A",
+    "coc.source.around.priority": 88,
+    "coc.source.buffer.shortcut": "B",
+    "coc.source.buffer.priority": 87,
+    "coc.source.buffer.ignoreGitignore": false,
+    "coc.source.syntax.shortcut": "X",
+    "coc.source.syntax.priority": 79,
+    "coc.source.tag.shortcut": "T",
+    "coc.source.tag.priority": 78,
+    "coc.source.dictionary.shortcut": "D",
+    "coc.source.dictionary.priority": 9,
+    "coc.source.dictionary.filetypes": ["markdown", "text"],
+    "coc.source.emoji.shortcut": "E",
+    "coc.source.emoji.priority": 8,
+    "coc.source.emoji.filetypes": ["markdown", "text"],
+    "highlight.document.enable": true,
+    "highlight.colors.enable": false,
+    "highlight.disableLanguages": [],
     // suggest
     "suggest.triggerAfterInsertEnter": false,
-    "suggest.timeout": 500,
+    "suggest.timeout": 5000,
     "suggest.noselect": false,
     "suggest.detailField":"preview",
     "suggest.snippetIndicator": "🌟",
@@ -71,21 +101,53 @@
     //python
     "python.autoComplete.addBrackets": true,
     "python.jediEnabled": false,
-    "python.venvPath": "~/Env",
+    // "python.venvPath": "~/Env",
     // eslint
     "eslint.filetypes": ["javascript", "javascript.jsx", "javascriptreact"],
     "eslint.autoFix": true,
     "eslint.autoFixOnSave": true,
     // pairs
     "pairs.enableBackspace": false,
+    "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
     // ls
     "languageserver": {
+        "MPLS": {
+            "command": "mspyls",
+            "trace.server": "verbose",
+            "filetypes": ["none"],
+            "filetypes_bak": ["python"],
+            "initializationOptions": {
+                "interpreter": {
+                "properties": {
+                    "InterpreterPath": "/usr/bin/python3",
+                    "UseDefaultDatabase": true
+                }
+                },
+                "displayOptions": {
+                "preferredFormat": "markdown",
+                "trimDocumentationLines": false,
+                "maxDocumentationLineLength": 0,
+                "trimDocumentationText": false,
+                "maxDocumentationTextLength": 0
+                },
+                "searchPaths": ["/usr/bin"],
+                "testEnvironment": false,
+                "analysisUpdates": true,
+                "traceLogging": true,
+                "asyncStartup": true
+            }
+        },
         "golang": {
             "command": "gopls",
             "args": [],
             "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
             "filetypes": ["go"]
         },
+        // "rust": {
+        //     "command": "ra_lsp_server",
+        //     "filetypes": ["rust"],
+        //     "rootPatterns": ["Cargo.toml"]
+        // },
         "bash": {
             "command": "bash-language-server",
             "args": ["start"],
