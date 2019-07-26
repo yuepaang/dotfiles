@@ -28,14 +28,16 @@ function! PackInit() abort
     call minpac#add('k-takata/minpac', {'type': 'opt'})
 
     " Auto-completion {
-        function! s:coc_plugins(hooktype, name) abort
-            execute 'packadd ' . a:name
-            call coc#util#install()
-        endfunction
+        call minpac#add('Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'})
+        call minpac#add('tbodt/deoplete-tabnine', {'do': { -> system('bash install.sh') }})
 
-        call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
+        call minpac#add('autozimu/LanguageClient-neovim', {'branch': 'next', 'do': { -> system('bash install.sh') }})
         call minpac#add('https://github.com/Shougo/neco-vim')
-        call minpac#add('https://github.com/neoclide/coc-neco')
+        call minpac#add('Shougo/neco-syntax')
+        call minpac#add('Shougo/neco-vim')
+        call minpac#add('Shougo/neoinclude.vim')
+        call minpac#add('Shougo/neopairs.vim')
+        call minpac#add('jiangmiao/auto-pairs')
     " }
 
     " Linter {
@@ -126,6 +128,8 @@ if has('mac')
 else
     let g:python3_host_prog='/usr/bin/python3'
 endif
+
+set runtimepath+=~/.config/nvim/pack/minpac/start/deoplete.nvim
 
 " ALE {
     let g:ale_fixers = {
@@ -296,7 +300,7 @@ endif
         \ 'colorscheme': 'one',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
-        \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
+        \             [ 'fugitive', 'filename' ],
         \             [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
         \           ],
         \   'right': [ [ 'lineinfo' ],
@@ -325,8 +329,6 @@ endif
         \     'fticon'  : 'LightLineTabFiletypeIcon'
         \ },
         \ 'component_function' : {
-        \   'cocstatus'        : 'coc#status',
-        \   'currentfunction'  : 'CocCurrentFunction',
         \   'fugitive'         : 'LightLineFugitive',
         \   'readonly'         : 'LightLineReadonly',
         \   'modified'         : 'LightLineModified',
@@ -427,6 +429,7 @@ endif
     " Too slow
     let g:mkdp_auto_start=0
     let g:mkdp_auto_close=1
+    let g:mkdp_refresh_slo=0
 
     nmap <silent> <F5> <Plug>MarkdownPreview
     imap <silent> <F5> <Plug>MarkdownPreview
@@ -517,8 +520,8 @@ endif
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
         "   Default: 237
-        " let g:seoul256_background = 235
-        " colo seoul256
+        let g:seoul256_background = 236
+        colo seoul256
 
         " colorscheme jellybeans
         " let g:jellybeans_overrides = {
@@ -530,17 +533,17 @@ endif
         " colorscheme gruvbox
         " set background=light
         " let g:gruvbox_contrast_light='hard'
-        if &diff
-            colorscheme github
-            let g:github_colors_soft = 1
-        else
-            " colorscheme one
-            " let g:one_allow_italics = 1
+        " if &diff
+        "     colorscheme github
+        "     let g:github_colors_soft = 1
+        " else
+        "     " colorscheme one
+        "     " let g:one_allow_italics = 1
 
-            colorscheme ayu
-            let ayucolor="light"
-            set background=light
-        endif
+        "     colorscheme ayu
+        "     let ayucolor="light"
+        "     set background=light
+        " endif
 
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
@@ -644,180 +647,81 @@ endif
 " vim-header {
     let g:header_auto_add_header = 0
     let g:header_field_timestamp_format = '%Y-%m-%d %H:%M:%S'
-    let g:header_field_author = 'Yue Peng'
     let g:header_field_author_email = 'yuepaang@gmail.com'
     map <F7> :AddHeader<CR>
 " }
 
-" coc.nvim {
-    let g:coc_global_extensions = [
-        \ 'coc-json',
-        \ 'coc-html',
-        \ 'coc-css',
-        \ 'coc-snippets',
-        \ 'coc-ultisnips',
-        \ 'coc-neosnippet',
-        \ 'coc-prettier',
-        \ 'coc-eslint',
-        \ 'coc-emmet',
-        \ 'coc-tsserver',
-        \ 'coc-pairs',
-        \ 'coc-json',
-        \ 'coc-python',
-        \ 'coc-highlight',
-        \ 'coc-git',
-        \ 'coc-emoji',
-        \ 'coc-lists',
-        \ 'coc-post',
-        \ 'coc-stylelint',
-        \ 'coc-yaml',
-        \ 'coc-yank',
-        \ 'coc-rls',
-        \ 'coc-java',
-        \ 'coc-vimlsp',
-        \ 'coc-browser',
-        \ ]
-    " mac iterm2 enhance 'coc-imselect'
+" deoplete.nvim {
 
-    " Snippets
-    " Use <C-j> for jump to next placeholder, it's default of coc.nvim
-    let g:coc_snippet_next = '<c-j>'
+    autocmd InsertEnter * call deoplete#enable()
+    " <TAB>: completion.
+    inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ deoplete#manual_complete()
 
-    " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-    let g:coc_snippet_prev = '<c-k>'
-    let g:coc_status_error_sign = '•'
-    let g:coc_status_warning_sign = '•'
-
-    " Use <C-l> for trigger snippet expand.
-    imap <C-l> <Plug>(coc-snippets-expand)
-
-    " Use <C-j> for select text for visual placeholder of snippet.
-    vmap <C-j> <Plug>(coc-snippets-select)
-
-    " use <c-space>for trigger completion
-    inoremap <silent><expr> <c-x> coc#refresh()
-
-    " To make <cr> select the first completion item and confirm completion when no item have selected:
-    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-
-    " Close preview window when completion is done.
-    autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-    " autocmd! BufWritePre *.js,*.json,*.ts Prettier
-
-    nmap <silent> dp <Plug>(coc-diagnostic-prev)
-    nmap <silent> dn <Plug>(coc-diagnostic-next)
-
-    " Remap keys for gotos
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gt <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-
-    nmap <silent> grn <Plug>(coc-rename)
-
-    " Use K for show documentation in preview window
-    nnoremap <silent> gm :call <SID>show_documentation()<CR>
-
-    function! s:show_documentation()
-        if &filetype == 'vim'
-            execute 'h '.expand('<cword>')
-        else
-            call CocActionAsync('doHover')
-        endif
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~ '\s'
     endfunction
 
-    autocmd CursorHold * silent call CocActionAsync('highlight')
+    imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
 
-    " Remap for format selected region
-    vmap gf  <Plug>(coc-format-selected)
-    nmap gf  <Plug>(coc-format-selected)
+    " <S-TAB>: completion back.
+    inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
 
-    augroup mygroup
-        autocmd!
-            " Setup formatexpr specified filetype(s).
-            autocmd FileType typescript,json setl formatexpr=CocActionAsync('formatSelected')
-            " Update signature help on jump placeholder
-            autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    augroup end
+    inoremap <expr><C-g> deoplete#refresh()
+    inoremap <expr><C-e> deoplete#cancel_popup()
+    inoremap <silent><expr><C-l> deoplete#complete_common_string()
 
-    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-    " vmap <leader>a  <Plug>(coc-codeaction-selected)
-    " nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-    " Remap for do codeAction of current line
-    nmap <leader>ac  <Plug>(coc-codeaction)
-    " Fix autofix problem of current line
-    nmap <leader>qf  <Plug>(coc-fix-current)
-
-    " Use `:Format` for format current buffer
-    command! -nargs=0 Format :call CocAction('format')
-
-    " Use `:Fold` for fold current buffer
-    command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-    " Using CocList
-    " Show all diagnostics
-    nnoremap <silent> <leader>la  :<C-u>CocList diagnostics<cr>
-    " Manage extensions
-    nnoremap <silent> <leader>le  :<C-u>CocList extensions<cr>
-    " Show commands
-    nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
-    " Find symbol of current document
-    nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
-    " Search workspace symbols
-    nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
-    " Do default action for next item.
-    nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
-    " Do default action for previous item.
-    nnoremap <silent> <leader>lk  :<C-u>CocPrev<CR>
-    " Resume latest coc list
-    nnoremap <silent> <leader>lp  :<C-u>CocListResume<CR>
-
-    autocmd FileType json syntax match Comment +\/\/.\+$+
-
-    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
-                                            \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-    nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+    imap <expr><CR> pumvisible() ? deoplete#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
 
 
-    function! CocHighlight() abort
-        if &filetype !=# 'markdown'
-            call CocActionAsync('highlight')
-        endif
-    endfunction
+    call deoplete#custom#source('_', 'matchers',
+        \ ['matcher_fuzzy', 'matcher_length'])
 
-    function! CocFloatingLockToggle() abort
-        if g:CocFloatingLock == 0
-            let g:CocFloatingLock = 1
-        elseif g:CocFloatingLock == 1
-            let g:CocFloatingLock = 0
-        endif
-    endfunction
+    call deoplete#custom#option('ignore_sources', {
+        \ '_': ['around', 'buffer'],
+        \ })
 
-    function! CocHover() abort
-        if !coc#util#has_float() && g:CocHoverEnable == 1
-            call CocActionAsync('doHover')
-            call CocActionAsync('showSignatureHelp')
-        endif
-    endfunction
+    call deoplete#custom#source('tabnine', 'rank', 300)
+    call deoplete#custom#source('tabnine', 'min_pattern_length', 2)
+    call deoplete#custom#var('tabnine', {
+        \ 'line_limit': 500,
+        \ 'max_num_results': 20,
+        \ })
 
-    augroup CocAu
-        autocmd!
-        autocmd CursorHold * silent call CocHover()
-        autocmd CursorHold * silent call CocHighlight()
-        autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-        autocmd InsertEnter * call coc#util#float_hide()
-        autocmd VimEnter * inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
-    augroup END
-    let g:CocHoverEnable = 0
+    call deoplete#custom#source('_', 'converters', [
+                \ 'converter_remove_paren',
+                \ 'converter_remove_overlap',
+                \ 'matcher_length',
+                \ 'converter_truncate_abbr',
+                \ 'converter_truncate_info',
+                \ 'converter_truncate_menu',
+                \ ])
 
-    highlight CocHighlightText cterm=bold gui=bold
-    highlight CocErrorHighlight ctermfg=Gray guifg=#888888
-    highlight CocCodeLens ctermfg=Gray guifg=#888888
+    call deoplete#custom#source('tabnine', 'converters', [
+                \ 'converter_remove_overlap',
+                \ 'converter_truncate_info',
+                \ ])
 
-    autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+    call deoplete#custom#source('LanguageClient',
+                \ 'min_pattern_length',
+                \ 2)
+
+    call deoplete#custom#option('keyword_patterns', {
+                \ '_': '[a-zA-Z_]\k*\(?',
+                \ 'tex': '[^\w|\s][a-zA-Z_]\w*',
+                \ })
+
+
+    call deoplete#custom#option({
+                \ 'auto_refresh_delay': 10,
+                \ 'camel_case': v:true,
+                \ 'skip_multibyte': v:true,
+                \ 'prev_completion_mode': 'length',
+                \ })
+
 " }
 
 " Defx {
@@ -983,3 +887,134 @@ endif
         echo 'Q: exit'
     endfunction
 " }
+
+" LanguageClient-neovim {
+    let g:LanguageClient_serverCommands = {
+                \ 'c': ['ccls'],
+                \ 'cpp': ['ccls'],
+                \ 'objc': ['ccls'],
+                \ 'objcpp': ['ccls'],
+                \ 'css': ['css-languageserver', '--stdio'],
+                \ 'html': ['html-languageserver', '--stdio'],
+                \ 'json': ['json-languageserver', '--stdio'],
+                \ 'javascript': ['javascript-typescript-stdio'],
+                \ 'python': ['pyls'],
+                \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+                \ 'sh': ['bash-language-server', 'start'],
+                \ 'yaml': ['yaml-language-server'],
+                \ 'go': ['gopls']
+                \ }
+
+    autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
+
+    " augroup LanguageClientAu
+    "     autocmd!
+    "     autocmd User LanguageClientStarted setlocal signcolumn=auto
+    "     autocmd User LanguageClientStopped setlocal signcolumn=auto
+    "     " autocmd CursorHold call LanguageClient#textDocument_hover()
+    "     autocmd CursorHold call LanguageClient#textDocument_documentHighlight()
+    "     autocmd CursorMoved call LanguageClient#textDocument_clearDocumentHighlight()
+    " augroup END
+
+    let g:LanguageClient_hasSnippetSupport = 0
+    " let g:neosnippet#enable_complete_done = 1
+    " AutoStart
+    let g:LanguageClient_autoStart = 1
+    " hoverPreview: Never Auto Always
+    " let g:LanguageClient_hoverPreview = 'Always'
+    " Completion
+    set omnifunc=LanguageClient#complete
+    " Formatting
+    set formatexpr=LanguageClient_textDocument_rangeFormatting()
+
+    " Mappings
+    nnoremap <silent> gd :<C-u>call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
+    nnoremap <silent> gt :<C-u>call LanguageClient#textDocument_typeDefinition()<CR>
+    nnoremap <silent> gI :<C-u>call LanguageClient#textDocument_implementation()<CR>
+    nnoremap <silent> gr :<C-u>call LanguageClient#textDocument_references()<CR>
+    nnoremap <silent> grn :<C-u>call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> ga :<C-u>call LanguageClient#textDocument_codeAction()<CR>
+    nnoremap <silent> gf :<C-u>call LanguageClient#textDocument_formatting()<CR>
+    vnoremap <silent> gf :<C-u>call LanguageClient#textDocument_rangeFormatting()<CR>
+
+" }
+
+" vim-visual-multi {
+    "{{{vim-visual-multi-usage
+function! Help_vim_visual_multi()
+    echo '<F1>          help'
+    echo "\n"
+    echo 'word 匹配'
+    echo 'visual mode选中文本，<leader>]  开始匹配'
+    echo ']             匹配下一个'
+    echo '[             匹配上一个'
+    echo '}             跳转到下一个选中'
+    echo '{             跳转到上一个选中'
+    echo '<C-f>         跳转到最后一个选中'
+    echo '<C-b>         跳转到第一个选中'
+    echo 'q             删除当前选中'
+    echo 'Q             删除选中区域'
+    echo '选中完成后，按i或a进入插入模式，也可以返回普通模式'
+    echo '普通模式下h, j, k, l来整体挪移光标'
+    echo '<Space>       切换Extend模式'
+    echo '<Esc>         退出'
+    echo "\n"
+    echo 'position 选中'
+    echo 'normal mode中，<Tab>选中当前位置'
+    echo '普通模式下h, j, k, l来整体挪移光标'
+    echo '<Tab>         extend mode'
+    echo ']             跳转到下一个选中'
+    echo '[             跳转到上一个选中'
+    echo '}             跳转到下一个选中'
+    echo '{             跳转到上一个选中'
+    echo '<C-f>         跳转到最后一个选中'
+    echo '<C-b>         跳转到第一个选中'
+    echo 'q             删除当前选中'
+    echo 'Q             删除选中区域'
+    echo '选中完成后，按i或a进入插入模式，也可以返回普通模式'
+    echo '普通模式下h, j, k, l来整体挪移光标'
+    echo '<Space>       切换Extend模式'
+    echo '<Esc>         退出'
+    echo "\n"
+    echo 'visual mode 选中'
+    echo 'visual mode选中后，<Tab>添加光标'
+    echo '或者在visual mode选中后，按g/搜索，将会匹配所有搜索结果并进入Extend mode'
+    echo '选中完成后，按i或a进入插入模式，也可以返回普通模式'
+    echo '普通模式下h, j, k, l来整体挪移光标'
+    echo '<Space>       切换Extend模式'
+    echo '<Esc>         退出'
+    echo "\n"
+    echo 'Extend 模式'
+    echo '相当于visual模式'
+    echo 'h, j, k, l来选中区域'
+    echo '<Space>       切换Extend模式'
+    echo '<Esc>         退出'
+endfunction
+"}}}
+" https://github.com/mg979/vim-visual-multi/wiki
+function! Init_visual_multi()
+    vmap <leader>] <C-n>
+    let g:VM_maps = {}
+    let g:VM_maps['Switch Mode']                 = '<Space>'
+    let g:VM_maps['Add Cursor At Pos']           = '<Tab>'
+    let g:VM_maps['Visual Cursors']              = '<Tab>'
+    let g:VM_maps['Add Cursor Up']               = '<M-z>``````addup'
+    let g:VM_maps['Add Cursor Down']             = '<M-z>``````adddown'
+    let g:VM_maps['I Arrow ge']                  = '<M-z>``````addup'
+    let g:VM_maps['I Arrow e']                   = '<M-z>``````adddown'
+    let g:VM_maps['Select e']                    = '<M-z>``````addright'
+    let g:VM_maps['Select ge']                   = '<M-z>``````addleft'
+    let g:VM_maps['I Arrow w']                   = '<M-z>``````addright'
+    let g:VM_maps['I Arrow b']                   = '<M-z>``````addleft'
+endfunction
+call Init_visual_multi()
+
+" }
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autopair Completion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:AutoPairsMapCR = 0
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+let g:AutoPairsShortcutJump = 0
