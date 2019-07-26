@@ -662,7 +662,6 @@ endif
         \ 'coc-tsserver',
         \ 'coc-pairs',
         \ 'coc-json',
-        \ 'coc-python',
         \ 'coc-highlight',
         \ 'coc-git',
         \ 'coc-emoji',
@@ -676,6 +675,9 @@ endif
         \ 'coc-vimlsp',
         \ 'coc-browser',
         \ 'coc-tabnine',
+        \ 'coc-syntax',
+        \ 'coc-tag',
+        \ 'coc-python',
         \ ]
     " mac iterm2 enhance 'coc-imselect'
 
