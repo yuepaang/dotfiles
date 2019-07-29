@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-07-18 23:48:46
+" Last Modified Date: 2019-07-29 09:47:22
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -293,7 +293,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'one',
+        \ 'colorscheme': 'seoul256',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
@@ -424,7 +424,6 @@ endif
 
 
 " MarkdownPreview {
-    " Too slow
     let g:mkdp_auto_start=0
     let g:mkdp_auto_close=1
 
@@ -444,7 +443,7 @@ endif
 
     set autowrite
     set autochdir!
-    set colorcolumn=81
+    set colorcolumn=80
     set hidden
 
     " Appearance
