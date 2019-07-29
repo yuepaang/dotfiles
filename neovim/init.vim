@@ -440,6 +440,11 @@ endif
     " Clear current-search highlighting by hitting <CR> in normal mode.
     nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
+    " To disable conceal regardless of conceallevel setting
+    let g:vim_markdown_conceal = 0
+    let g:vim_markdown_conceal_code_blocks = 0
+    let g:tex_conceal = ""
+    let g:vim_markdown_math = 1
 
     set autowrite
     set autochdir!
@@ -447,8 +452,6 @@ endif
     set hidden
 
     " Appearance
-    set number
-    set relativenumber
     set ruler
     set cursorline
     set scrolloff=10
@@ -459,11 +462,7 @@ endif
     set shortmess+=I
     set title
 
-    set wrap
-    set wrapmargin=0
-
-
-    " silent! set number relativenumber background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
+    silent! set number relativenumber background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
     " silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
     " silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%y%w\ %3l:%-2c
     " silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
@@ -649,7 +648,7 @@ endif
     let g:header_field_timestamp_format = '%Y-%m-%d %H:%M:%S'
     let g:header_field_author = 'Yue Peng'
     let g:header_field_author_email = 'yuepaang@gmail.com'
-    map <F7> :AddHeader<CR>
+    map <F2> :AddHeader<CR>
 " }
 
 " coc.nvim {
@@ -709,8 +708,8 @@ endif
 
     " autocmd! BufWritePre *.js,*.json,*.ts Prettier
 
-    nmap <silent> dp <Plug>(coc-diagnostic-prev)
-    nmap <silent> dn <Plug>(coc-diagnostic-next)
+    nmap <silent> [c <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
     " Remap keys for gotos
     nmap <silent> gd <Plug>(coc-definition)
@@ -719,6 +718,10 @@ endif
     nmap <silent> gr <Plug>(coc-references)
 
     nmap <silent> grn <Plug>(coc-rename)
+
+    " Remap for format selected region
+    vmap gf  <Plug>(coc-format-selected)
+    nmap gf  <Plug>(coc-format-selected)
 
     " Use K for show documentation in preview window
     nnoremap <silent> gm :call <SID>show_documentation()<CR>
@@ -733,9 +736,6 @@ endif
 
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
-    " Remap for format selected region
-    vmap gf  <Plug>(coc-format-selected)
-    nmap gf  <Plug>(coc-format-selected)
 
     augroup mygroup
         autocmd!
@@ -791,6 +791,7 @@ endif
             call CocActionAsync('highlight')
         endif
     endfunction
+
 
     function! CocFloatingLockToggle() abort
         if g:CocFloatingLock == 0
