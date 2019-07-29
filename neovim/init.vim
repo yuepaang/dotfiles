@@ -460,6 +460,9 @@ endif
     set shortmess+=I
     set title
 
+    set wrap
+    set wrapmargin=0
+
 
     " silent! set number relativenumber background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
     " silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
