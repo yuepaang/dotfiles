@@ -129,7 +129,7 @@ endif
 " ALE {
     let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'python': ['autopep8'],
+        \   'python': ['black', 'isort'],
         \   'javascript': ['eslint', 'prettier'],
         \   'typescript': ['tslint', 'prettier'],
         \   'css': ['prettier'],
@@ -150,7 +150,7 @@ endif
         \       'html': ['tidy'],
         \       'json': [],
         \       'markdown': ['languagetool'],
-        \       'python': ['flake8', 'mypy'],
+        \       'python': ['pyflakes'],
         \       'rust': ['cargo'],
         \       'sh': ['shellcheck'],
         \       'text': ['languagetool'],
