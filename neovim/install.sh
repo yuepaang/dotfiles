@@ -20,6 +20,10 @@ npm install -g typescript typescript-language-server
 # npm install -g json-language-server
 # npm install -g yaml-language-server
 
+# Python
+pip3 install 'python-language-server[pyflakes]' --upgrade
+pip3 install pyls-black pyls-isort
+
 # Golang
 https_proxy=http://127.0.0.1:8118 go get -u golang.org/x/tools/cmd/gopls
 
