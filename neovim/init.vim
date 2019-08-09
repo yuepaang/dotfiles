@@ -678,8 +678,8 @@ endif
         \ 'coc-tabnine',
         \ 'coc-syntax',
         \ 'coc-tag',
-        \ 'coc-python',
         \ ]
+
     " mac iterm2 enhance 'coc-imselect'
 
     " Snippets

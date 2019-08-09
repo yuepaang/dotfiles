@@ -99,9 +99,8 @@
     //emmet
     "emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact"},
     //python
-    "python.autoComplete.addBrackets": true,
-    "python.jediEnabled": false,
-    // "python.venvPath": "~/Env",
+    //"python.autoComplete.addBrackets": true,
+    //"python.jediEnabled": false,
     // eslint
     "eslint.filetypes": ["javascript", "javascript.jsx", "javascriptreact"],
     "eslint.autoFix": true,
@@ -111,31 +110,36 @@
     "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
     // ls
     "languageserver": {
-        "MPLS": {
-            "command": "mspyls",
-            "trace.server": "verbose",
-            "filetypes": ["none"],
-            "filetypes_bak": ["python"],
-            "initializationOptions": {
-                "interpreter": {
-                "properties": {
-                    "InterpreterPath": "/usr/bin/python3",
-                    "UseDefaultDatabase": true
-                }
-                },
-                "displayOptions": {
-                "preferredFormat": "markdown",
-                "trimDocumentationLines": false,
-                "maxDocumentationLineLength": 0,
-                "trimDocumentationText": false,
-                "maxDocumentationTextLength": 0
-                },
-                "searchPaths": ["/usr/bin"],
-                "testEnvironment": false,
-                "analysisUpdates": true,
-                "traceLogging": true,
-                "asyncStartup": true
-            }
+        // "MPLS": {
+        //     "command": "mspyls",
+        //     "trace.server": "verbose",
+        //     "filetypes": ["none"],
+        //     "filetypes_bak": ["python"],
+        //     "initializationOptions": {
+        //         "interpreter": {
+        //         "properties": {
+        //             "InterpreterPath": "/usr/bin/python3",
+        //             "UseDefaultDatabase": true
+        //         }
+        //         },
+        //         "displayOptions": {
+        //         "preferredFormat": "markdown",
+        //         "trimDocumentationLines": false,
+        //         "maxDocumentationLineLength": 0,
+        //         "trimDocumentationText": false,
+        //         "maxDocumentationTextLength": 0
+        //         },
+        //         "searchPaths": ["/usr/bin"],
+        //         "testEnvironment": false,
+        //         "analysisUpdates": true,
+        //         "traceLogging": true,
+        //         "asyncStartup": true
+        //     }
+        // },
+        "python": {
+            "command": "pyls",
+            "args": [],
+            "filetypes": ["python", "py"]
         },
         "golang": {
             "command": "gopls",
