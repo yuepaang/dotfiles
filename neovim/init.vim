@@ -108,6 +108,7 @@ function! PackInit() abort
         call minpac#add('ayu-theme/ayu-vim')
         call minpac#add('sjl/badwolf')
         call minpac#add('romainl/Apprentice')
+        call minpac#add('jnurmine/Zenburn')
     " }
 
     " Status Line {
@@ -295,7 +296,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'jellybeans',
+        \ 'colorscheme': 'seoul256',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
@@ -547,8 +548,11 @@ endif
         " endif
 
         " colorscheme badwolf
-        colorscheme apprentice
-        set background=dark
+
+        " colorscheme apprentice
+        " set background=dark
+
+        colors zenburn
 
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
