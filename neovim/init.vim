@@ -106,6 +106,8 @@ function! PackInit() abort
         call minpac#add('morhetz/gruvbox')
         call minpac#add('rakr/vim-one')
         call minpac#add('ayu-theme/ayu-vim')
+        call minpac#add('sjl/badwolf')
+        call minpac#add('romainl/Apprentice')
     " }
 
     " Status Line {
@@ -231,29 +233,29 @@ endif
         \ 'header':  ['fg', 'Comment'] }
 
     " Floating Windows
-    " let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+    let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
-    " function! FloatingFZF()
-    "     let buf = nvim_create_buf(v:false, v:true)
-    "     call setbufvar(buf, 'number', 'no')
+    function! FloatingFZF()
+        let buf = nvim_create_buf(v:false, v:true)
+        call setbufvar(buf, 'number', 'no')
 
-    "     let height = float2nr(&lines/2)
-    "     let width = float2nr(&columns - (&columns * 2 / 10))
-    "     "let width = &columns
-    "     let row = float2nr(&lines / 3)
-    "     let col = float2nr((&columns - width) / 3)
+        let height = float2nr(&lines/2)
+        let width = float2nr(&columns - (&columns * 2 / 10))
+        "let width = &columns
+        let row = float2nr(&lines / 3)
+        let col = float2nr((&columns - width) / 3)
 
-    "     let opts = {
-    "             \ 'relative': 'editor',
-    "             \ 'row': row,
-    "             \ 'col': col,
-    "             \ 'width': width,
-    "             \ 'height':height,
-    "             \ }
-    "     let win =  nvim_open_win(buf, v:true, opts)
-    "     call setwinvar(win, '&number', 0)
-    "     call setwinvar(win, '&relativenumber', 0)
-    " endfunction
+        let opts = {
+                \ 'relative': 'editor',
+                \ 'row': row,
+                \ 'col': col,
+                \ 'width': width,
+                \ 'height':height,
+                \ }
+        let win =  nvim_open_win(buf, v:true, opts)
+        call setwinvar(win, '&number', 0)
+        call setwinvar(win, '&relativenumber', 0)
+    endfunction
 
     " Files + devicons
     function! Fzf_dev()
@@ -293,7 +295,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'seoul256',
+        \ 'colorscheme': 'jellybeans',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
@@ -422,7 +424,6 @@ endif
     let g:lightline#ale#indicator_ok = "\uf00c"
 " }
 
-
 " MarkdownPreview {
     let g:mkdp_auto_start=0
     let g:mkdp_auto_close=1
@@ -519,8 +520,8 @@ endif
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
         "   Default: 237
-        let g:seoul256_background = 236
-        colo seoul256
+        " let g:seoul256_background = 236
+        " colo seoul256
 
         " colorscheme jellybeans
         " let g:jellybeans_overrides = {
@@ -532,6 +533,7 @@ endif
         " colorscheme gruvbox
         " set background=light
         " let g:gruvbox_contrast_light='hard'
+
         " if &diff
         "     colorscheme github
         "     let g:github_colors_soft = 1
@@ -543,6 +545,10 @@ endif
         "     let ayucolor="light"
         "     set background=light
         " endif
+
+        " colorscheme badwolf
+        colorscheme apprentice
+        set background=dark
 
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
