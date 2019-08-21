@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-07-29 09:47:22
+" Last Modified Date: 2019-08-21 09:43:41
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -296,7 +296,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'seoul256',
+        \ 'colorscheme': 'gruvbox',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
@@ -531,9 +531,9 @@ endif
         "     \              'attr': 'bold' },
         "     \    'Comment': { 'guifg': 'cccccc' },
         "     \}
-        " colorscheme gruvbox
-        " set background=light
-        " let g:gruvbox_contrast_light='hard'
+        colorscheme gruvbox
+        set background=dark
+        let g:gruvbox_contrast_light='hard'
 
         " if &diff
         "     colorscheme github
@@ -552,7 +552,7 @@ endif
         " colorscheme apprentice
         " set background=dark
 
-        colors zenburn
+        " colors zenburn
 
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
