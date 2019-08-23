@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-08-21 09:43:41
+" Last Modified Date: 2019-08-24 00:06:44
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -104,13 +104,7 @@ function! PackInit() abort
         call minpac#add('nanotech/jellybeans.vim')
         call minpac#add('NLKNguyen/papercolor-theme')
         call minpac#add('morhetz/gruvbox')
-        call minpac#add('rakr/vim-one')
         call minpac#add('ayu-theme/ayu-vim')
-        call minpac#add('sjl/badwolf')
-        call minpac#add('romainl/Apprentice')
-        call minpac#add('jnurmine/Zenburn')
-        call minpac#add('joshdick/onedark.vim')
-        call minpac#add('patstockwell/vim-monokai-tasty')
     " }
 
     " Status Line {
@@ -298,7 +292,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'gruvbox',
+        \ 'colorscheme': 'PaperColor',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
@@ -520,6 +514,9 @@ endif
 
 
     " color {
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+        set termguicolors
+        set t_Co=256
 
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
@@ -527,45 +524,44 @@ endif
         " let g:seoul256_background = 236
         " colo seoul256
 
-
-        colorscheme gruvbox
+        colorscheme PaperColor
         set background=dark
-        let g:gruvbox_contrast_dark = 'hard'
-        let g:gruvbox_italic = 1
-        let g:gruvbox_number_column = 'green'
+
+        let g:PaperColor_Theme_Options = {
+        \   'theme': {
+        \     'default': {
+        \       'transparent_background': 1
+        \     }
+        \   },
+        \   'language': {
+        \     'python': {
+        \       'highlight_builtins' : 1
+        \     },
+        \     'cpp': {
+        \       'highlight_standard_library': 1
+        \     },
+        \     'c': {
+        \       'highlight_builtins' : 1
+        \     }
+        \   }
+        \ }
+
+        " colorscheme gruvbox
+        " set background=dark
+        " let g:gruvbox_contrast_dark = 'hard'
+        " let g:gruvbox_italic = 1
+        " let g:gruvbox_number_column = 'green'
 
         " if &diff
         "     colorscheme github
         "     let g:github_colors_soft = 1
         " else
-        "     " colorscheme one
-        "     " let g:one_allow_italics = 1
 
         "     colorscheme ayu
         "     let ayucolor="light"
         " endif
 
-        " colorscheme badwolf
 
-        " colorscheme apprentice
-        " set background=dark
-
-        " colors zenburn
-
-        " face some problem
-        " colorscheme onedark
-        " colorscheme vim-monokai-tasty
-        " colorscheme jellybeans
-        " let g:jellybeans_overrides = {
-        "     \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
-        "     \              'ctermfg': 'Black', 'ctermbg': 'Yellow',
-        "     \              'attr': 'bold' },
-        "     \    'Comment': { 'guifg': 'cccccc' },
-        "     \}
-
-        let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-        set termguicolors
-        set t_Co=256
         " hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
 
     " }
@@ -667,7 +663,7 @@ endif
     let g:header_field_timestamp_format = '%Y-%m-%d %H:%M:%S'
     let g:header_field_author = 'Yue Peng'
     let g:header_field_author_email = 'yuepaang@gmail.com'
-    map <F2> :AddHeader<CR>
+    map <F7> :AddHeader<CR>
 " }
 
 " coc.nvim {
