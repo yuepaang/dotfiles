@@ -109,6 +109,8 @@ function! PackInit() abort
         call minpac#add('sjl/badwolf')
         call minpac#add('romainl/Apprentice')
         call minpac#add('jnurmine/Zenburn')
+        call minpac#add('joshdick/onedark.vim')
+        call minpac#add('patstockwell/vim-monokai-tasty')
     " }
 
     " Status Line {
@@ -518,22 +520,19 @@ endif
 
 
     " color {
+
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
         "   Default: 237
         " let g:seoul256_background = 236
         " colo seoul256
 
-        " colorscheme jellybeans
-        " let g:jellybeans_overrides = {
-        "     \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
-        "     \              'ctermfg': 'Black', 'ctermbg': 'Yellow',
-        "     \              'attr': 'bold' },
-        "     \    'Comment': { 'guifg': 'cccccc' },
-        "     \}
+
         colorscheme gruvbox
         set background=dark
-        let g:gruvbox_contrast_light='hard'
+        let g:gruvbox_contrast_dark = 'hard'
+        let g:gruvbox_italic = 1
+        let g:gruvbox_number_column = 'green'
 
         " if &diff
         "     colorscheme github
@@ -544,7 +543,6 @@ endif
 
         "     colorscheme ayu
         "     let ayucolor="light"
-        "     set background=light
         " endif
 
         " colorscheme badwolf
@@ -554,10 +552,21 @@ endif
 
         " colors zenburn
 
+        " face some problem
+        " colorscheme onedark
+        " colorscheme vim-monokai-tasty
+        " colorscheme jellybeans
+        " let g:jellybeans_overrides = {
+        "     \    'Todo': { 'guifg': '303030', 'guibg': 'f0f000',
+        "     \              'ctermfg': 'Black', 'ctermbg': 'Yellow',
+        "     \              'attr': 'bold' },
+        "     \    'Comment': { 'guifg': 'cccccc' },
+        "     \}
+
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
         set t_Co=256
-        hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
+        " hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
 
     " }
 
