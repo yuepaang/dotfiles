@@ -449,6 +449,8 @@ endif
     set autochdir!
     set colorcolumn=80
     set hidden
+    set list lcs=tab:\|\ " tab indent guide
+    set nocompatible
 
     " Appearance
     set ruler
@@ -563,13 +565,13 @@ endif
         " endif
 
         " Dark
-        " set background=dark
-        " colorscheme vim-material
-
-        " Palenight
-        let g:material_style='palenight'
         set background=dark
         colorscheme vim-material
+
+        " Palenight
+        " let g:material_style='palenight'
+        " set background=dark
+        " colorscheme vim-material
 
         " Oceanic
         " let g:material_style='oceanic'
