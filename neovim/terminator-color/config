@@ -1,0 +1,45 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, Logger, LaunchpadBugURLHandler
+  homogeneous_tabbar = False
+  scroll_tabbar = True
+  title_font = Fira Mono for Powerline 15
+  title_use_system_font = False
+[keybindings]
+  switch_to_tab_1 = <Primary>1
+  switch_to_tab_2 = <Primary>2
+  switch_to_tab_3 = <Primary>3
+  switch_to_tab_4 = <Primary>4
+  switch_to_tab_5 = <Primary>5
+  switch_to_tab_6 = <Primary>6
+  switch_to_tab_7 = <Primary>7
+  switch_to_tab_8 = <Primary>8
+  switch_to_tab_9 = <Primary>9
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    palette = "#2c2c2c:#c62828:#558b2e:#f9a825:#1565c1:#6a1e9a:#00838f:#ffffff:#969694:#f15250:#86bd47:#f8e63a:#77b2f6:#b963c8:#25c3dc:#ffffff"
+    background_color = "#2e2e2d"
+    background_darkness = 0.86
+    background_type = transparent
+    background_image = None
+    cursor_color = "#25C3DC"
+    foreground_color = "#f2f2f2"
+    font = Fira Mono for Powerline 15
+    scrollback_infinite = True
+    scrollback_lines = 502
+    use_system_font = False
+  [[material-light]]
+    palette = "#f8f8f8:#d7005f:#718c00:#ff8f01:#005f87:#6a1e9a:#3e999f:#2c2c2c:#2c2c2c:#ef5251:#90c94d:#ffa000:#4271ae:#c774c1:#3e999f:#f5f5f5"
+    background_color = "#eeeeee"
+    background_image = None
+    cursor_color = "#25C3DC"
+    foreground_color = "#3c3c3b"
