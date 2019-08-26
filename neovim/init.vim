@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-08-24 21:52:53
+" Last Modified Date: 2019-08-26 22:10:39
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -106,6 +106,7 @@ function! PackInit() abort
         call minpac#add('morhetz/gruvbox')
         call minpac#add('ayu-theme/ayu-vim')
         call minpac#add('hzchirs/vim-material')
+        call minpac#add('nightsense/cosmic_latte')
     " }
 
     " Status Line {
@@ -527,8 +528,14 @@ endif
         " let g:seoul256_background = 236
         " colo seoul256
 
-        colorscheme PaperColor
+        " colorscheme PaperColor
+        colorscheme cosmic_latte
         set background=light
+
+        " sets the cursor to a vertical line for insert mode, underline for replace mode, and block for normal mode
+        let &t_SI = "\<Esc>[6 q"
+        let &t_SR = "\<Esc>[4 q"
+        let &t_EI = "\<Esc>[2 q"
 
         let g:PaperColor_Theme_Options = {
         \   'theme': {
