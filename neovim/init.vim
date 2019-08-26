@@ -527,27 +527,27 @@ endif
         " let g:seoul256_background = 236
         " colo seoul256
 
-        " colorscheme PaperColor
-        " set background=dark
+        colorscheme PaperColor
+        set background=dark
 
-        " let g:PaperColor_Theme_Options = {
-        " \   'theme': {
-        " \     'default': {
-        " \       'transparent_background': 1
-        " \     }
-        " \   },
-        " \   'language': {
-        " \     'python': {
-        " \       'highlight_builtins' : 1
-        " \     },
-        " \     'cpp': {
-        " \       'highlight_standard_library': 1
-        " \     },
-        " \     'c': {
-        " \       'highlight_builtins' : 1
-        " \     }
-        " \   }
-        " \ }
+        let g:PaperColor_Theme_Options = {
+        \   'theme': {
+        \     'default': {
+        \       'transparent_background': 1
+        \     }
+        \   },
+        \   'language': {
+        \     'python': {
+        \       'highlight_builtins' : 1
+        \     },
+        \     'cpp': {
+        \       'highlight_standard_library': 1
+        \     },
+        \     'c': {
+        \       'highlight_builtins' : 1
+        \     }
+        \   }
+        \ }
 
         " colorscheme gruvbox
         " set background=dark
@@ -574,9 +574,9 @@ endif
         " colorscheme vim-material
 
         " Oceanic
-        let g:material_style='oceanic'
-        set background=dark
-        colorscheme vim-material
+        " let g:material_style='oceanic'
+        " set background=dark
+        " colorscheme vim-material
 
         " Light
         " set background=light
