@@ -463,7 +463,7 @@ endif
     set shortmess+=I
     set title
 
-    silent! set number relativenumber background=dark display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
+    silent! set number relativenumber display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
     " silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
     " silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%y%w\ %3l:%-2c
     " silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
@@ -528,7 +528,7 @@ endif
         " colo seoul256
 
         colorscheme PaperColor
-        set background=dark
+        set background=light
 
         let g:PaperColor_Theme_Options = {
         \   'theme': {
