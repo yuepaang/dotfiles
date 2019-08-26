@@ -609,6 +609,10 @@ endif
     xnoremap >  >gv
 
     inoremap <c-c> <ESC>
+
+    " Add datetime
+    :nnoremap <F2> "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
+    :inoremap <F2> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 " }
 
 " nerdcommenter {
