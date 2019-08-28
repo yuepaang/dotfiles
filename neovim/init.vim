@@ -721,10 +721,10 @@ endif
         \ 'coc-java',
         \ 'coc-vimlsp',
         \ 'coc-browser',
-        \ 'coc-tabnine',
         \ 'coc-syntax',
         \ 'coc-tag',
         \ ]
+        " \ 'coc-tabnine',
 
     " mac iterm2 enhance 'coc-imselect'
 
