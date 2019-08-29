@@ -107,6 +107,7 @@ function! PackInit() abort
         call minpac#add('ayu-theme/ayu-vim')
         call minpac#add('hzchirs/vim-material')
         call minpac#add('nightsense/cosmic_latte')
+        call minpac#add("jacoborus/tender.vim")
     " }
 
     " Status Line {
@@ -294,7 +295,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'PaperColor',
+        \ 'colorscheme': 'tender',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
@@ -522,39 +523,41 @@ endif
         set termguicolors
         set t_Co=256
 
+        colorscheme tender
+
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
         "   Default: 237
         " let g:seoul256_background = 236
         " colo seoul256
 
-        " colorscheme PaperColor
-        colorscheme cosmic_latte
-        set background=light
+        " colorscheme cosmic_latte
+        " set background=light
 
         " sets the cursor to a vertical line for insert mode, underline for replace mode, and block for normal mode
         let &t_SI = "\<Esc>[6 q"
         let &t_SR = "\<Esc>[4 q"
         let &t_EI = "\<Esc>[2 q"
 
-        let g:PaperColor_Theme_Options = {
-        \   'theme': {
-        \     'default': {
-        \       'transparent_background': 1
-        \     }
-        \   },
-        \   'language': {
-        \     'python': {
-        \       'highlight_builtins' : 1
-        \     },
-        \     'cpp': {
-        \       'highlight_standard_library': 1
-        \     },
-        \     'c': {
-        \       'highlight_builtins' : 1
-        \     }
-        \   }
-        \ }
+        " colorscheme PaperColor
+        " let g:PaperColor_Theme_Options = {
+        " \   'theme': {
+        " \     'default': {
+        " \       'transparent_background': 1
+        " \     }
+        " \   },
+        " \   'language': {
+        " \     'python': {
+        " \       'highlight_builtins' : 1
+        " \     },
+        " \     'cpp': {
+        " \       'highlight_standard_library': 1
+        " \     },
+        " \     'c': {
+        " \       'highlight_builtins' : 1
+        " \     }
+        " \   }
+        " \ }
 
         " colorscheme gruvbox
         " set background=dark
