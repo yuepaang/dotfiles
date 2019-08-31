@@ -84,6 +84,7 @@ function! PackInit() abort
 
     " Snippets {
         call minpac#add('honza/vim-snippets')
+        call minpac#add('SirVer/ultisnips')
     " }
 
     " Git {
@@ -704,12 +705,8 @@ endif
     let g:coc_global_extensions = [
         \ 'coc-json',
         \ 'coc-html',
-        \ 'coc-css',
         \ 'coc-snippets',
-        \ 'coc-prettier',
-        \ 'coc-eslint',
-        \ 'coc-emmet',
-        \ 'coc-tsserver',
+        \ 'coc-ultisnips',
         \ 'coc-pairs',
         \ 'coc-json',
         \ 'coc-highlight',
@@ -721,7 +718,6 @@ endif
         \ 'coc-yaml',
         \ 'coc-yank',
         \ 'coc-rls',
-        \ 'coc-java',
         \ 'coc-vimlsp',
         \ 'coc-browser',
         \ 'coc-syntax',
