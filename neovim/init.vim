@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-09-02 18:09:43
+" Last Modified Date: 2019-09-02 21:39:14
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -47,7 +47,6 @@ function! PackInit() abort
     " Utilities {
         call minpac#add('scrooloose/nerdcommenter')
         call minpac#add('cinuor/vim-header')
-        call minpac#add('Shougo/echodoc.vim')
         call minpac#add('heavenshell/vim-pydocstring')
         call minpac#add('itchyny/calendar.vim')
 ')
@@ -77,9 +76,9 @@ function! PackInit() abort
     " }
 
     " defx {
-        call minpac#add('Shougo/defx.nvim')
-        call minpac#add('kristijanhusak/defx-git')
-        call minpac#add('kristijanhusak/defx-icons')
+        " call minpac#add('Shougo/defx.nvim')
+        " call minpac#add('kristijanhusak/defx-git')
+        " call minpac#add('kristijanhusak/defx-icons')
     " }
 
     " Snippets {
@@ -88,9 +87,9 @@ function! PackInit() abort
     " }
 
     " Git {
-        call minpac#add('tpope/vim-fugitive')
-        call minpac#add('tpope/vim-rhubarb')
-        call minpac#add('rhysd/git-messenger.vim')
+        " call minpac#add('tpope/vim-fugitive')
+        " call minpac#add('tpope/vim-rhubarb')
+        " call minpac#add('rhysd/git-messenger.vim')
     " }
 
     " Coding {
@@ -123,11 +122,16 @@ command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac
 command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 
-" if has('mac')
-"     let g:python3_host_prog='/usr/local/bin/python3'
-" else
-"     let g:python3_host_prog='/usr/bin/python3'
-" endif
+" Improve Performance
+let g:python_host_skip_check=1
+let g:python3_host_skip_check=1
+if has('mac')
+    let g:python3_host_prog='/usr/local/bin/python3'
+    let g:python_host_prog='/usr/local/bin/python'
+else
+    let g:python3_host_prog='/usr/bin/python3'
+    let g:python_host_prog='/usr/bin/python'
+endif
 
 " ALE {
     let g:ale_fixers = {
@@ -189,11 +193,6 @@ command! PackStatus call PackInit() | call minpac#status()
 	let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 	let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols[''] = "\uf15b"
 	let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
-" }
-
-" echodoc {
-	let g:echodoc#enable_at_startup = 1
-    let g:echodoc#type = 'signature'
 " }
 
 " fugitive {
@@ -296,10 +295,10 @@ command! PackStatus call PackInit() | call minpac#status()
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'tender',
+        \ 'colorscheme': 'ayu',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
-        \             [ 'cocstatus',  'currentfunction', 'fugitive', 'filename' ],
+        \             [ 'cocstatus',  'currentfunction', 'filename' ],
         \             [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
         \           ],
         \   'right': [ [ 'lineinfo' ],
@@ -330,7 +329,6 @@ command! PackStatus call PackInit() | call minpac#status()
         \ 'component_function' : {
         \   'cocstatus'        : 'coc#status',
         \   'currentfunction'  : 'CocCurrentFunction',
-        \   'fugitive'         : 'LightLineFugitive',
         \   'readonly'         : 'LightLineReadonly',
         \   'modified'         : 'LightLineModified',
         \   'filename'         : 'LightLineFilename',
@@ -487,7 +485,7 @@ command! PackStatus call PackInit() | call minpac#status()
     silent! set tags+=../../../../../../tags,../../../../../../../tags,~/Documents/scala/tags,~/Documents/*/tags tagstack
 
     " Clipboard
-    silent! set clipboard=unnamed,unnamedplus
+    " silent! set clipboard=unnamed,unnamedplus
 
     " Search
     silent! set wrapscan ignorecase smartcase incsearch hlsearch magic
@@ -611,17 +609,6 @@ command! PackStatus call PackInit() | call minpac#status()
 " nerdcommenter {
     " Add spaces after comment delimiters by default
     let g:NERDSpaceDelims = 1
-    " Use compact syntax for prettified multi-line comments
-    let g:NERDCompactSexyComs = 1
-
-    let g:NERDDefaultAlign = 'left'
-    let g:NERDCustomDelimiters = {
-            \ 'javascript': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' },
-            \ 'less': { 'left': '/*', 'right': '*/' }
-        \ }
-
-    let g:NERDAltDelims_javascript = 1
-    let g:NERDDefaultNesting = 1
 " }
 
 " Tagbar {
@@ -672,7 +659,7 @@ command! PackStatus call PackInit() | call minpac#status()
 " }
 
 " git-messager {
-    nmap <Leader>gm <Plug>(git-messenger)
+    " nmap <Leader>gm <Plug>(git-messenger)
 " }
 
 " vim-header {
@@ -856,147 +843,147 @@ command! PackStatus call PackInit() | call minpac#status()
 
 " Defx {
 
-    augroup vimrc_defx
-        autocmd!
-        autocmd FileType defx call s:defx_mappings()                                  "Defx mappings
-        autocmd VimEnter * call s:setup_defx()
-        autocmd VimEnter * call fugitive#detect(expand('<afile>')) | call lightline#update()
-    augroup END
+    " augroup vimrc_defx
+    "     autocmd!
+    "     autocmd FileType defx call s:defx_mappings()                                  "Defx mappings
+    "     autocmd VimEnter * call s:setup_defx()
+    "     autocmd VimEnter * call fugitive#detect(expand('<afile>')) | call lightline#update()
+    " augroup END
 
-    " Mapping
-    nnoremap <silent><Leader>n :call <sid>defx_open({ 'split': v:true })<CR>
-    nnoremap <silent><Leader>hf :call <sid>defx_open({ 'split': v:true, 'find_current_file': v:true })<CR>
-    let s:default_columns = 'indent:git:icons:filename'
+    " " Mapping
+    " nnoremap <silent><Leader>n :call <sid>defx_open({ 'split': v:true })<CR>
+    " nnoremap <silent><Leader>hf :call <sid>defx_open({ 'split': v:true, 'find_current_file': v:true })<CR>
+    " let s:default_columns = 'indent:git:icons:filename'
 
-    function! s:setup_defx() abort
-        call defx#custom#option('_', {
-                \ 'columns': s:default_columns,
-                \ })
+    " function! s:setup_defx() abort
+    "     call defx#custom#option('_', {
+    "             \ 'columns': s:default_columns,
+    "             \ })
 
-        call defx#custom#column('filename', {
-                \ 'min_width': 80,
-                \ 'max_width': 80,
-                \ })
+    "     call defx#custom#column('filename', {
+    "             \ 'min_width': 80,
+    "             \ 'max_width': 80,
+    "             \ })
 
-        call s:defx_open({ 'dir': expand('<afile>') })
-    endfunction
+    "     call s:defx_open({ 'dir': expand('<afile>') })
+    " endfunction
 
-    function s:get_project_root() abort
-        let l:git_root = ''
-        let l:path = expand('%:p:h')
-        let l:cmd = systemlist('cd '.l:path.' && git rev-parse --show-toplevel')
-        if !v:shell_error && !empty(l:cmd)
-            let l:git_root = fnamemodify(l:cmd[0], ':p:h')
-        endif
+    " function s:get_project_root() abort
+    "     let l:git_root = ''
+    "     let l:path = expand('%:p:h')
+    "     let l:cmd = systemlist('cd '.l:path.' && git rev-parse --show-toplevel')
+    "     if !v:shell_error && !empty(l:cmd)
+    "         let l:git_root = fnamemodify(l:cmd[0], ':p:h')
+    "     endif
 
-        if !empty(l:git_root)
-            return l:git_root
-        endif
+    "     if !empty(l:git_root)
+    "         return l:git_root
+    "     endif
 
-        return getcwd()
-    endfunction
+    "     return getcwd()
+    " endfunction
 
-    function! s:defx_open(...) abort
-        let l:opts = get(a:, 1, {})
-        let l:path = get(l:opts, 'dir', s:get_project_root())
+    " function! s:defx_open(...) abort
+    "     let l:opts = get(a:, 1, {})
+    "     let l:path = get(l:opts, 'dir', s:get_project_root())
 
-        if !isdirectory(l:path) || &filetype ==? 'defx'
-            return
-        endif
+    "     if !isdirectory(l:path) || &filetype ==? 'defx'
+    "         return
+    "     endif
 
-        let l:args = '-winwidth=40 -direction=topleft'
+    "     let l:args = '-winwidth=40 -direction=topleft'
 
-        if has_key(l:opts, 'split')
-            let l:args .= ' -split=vertical'
-        endif
+    "     if has_key(l:opts, 'split')
+    "         let l:args .= ' -split=vertical'
+    "     endif
 
-        if has_key(l:opts, 'find_current_file')
-            if &filetype ==? 'defx'
-            return
-            endif
-            call execute(printf('Defx %s -search=%s %s', l:args, expand('%:p'), l:path))
-        else
-            call execute(printf('Defx -toggle %s %s', l:args, l:path))
-            call execute('wincmd p')
-        endif
+    "     if has_key(l:opts, 'find_current_file')
+    "         if &filetype ==? 'defx'
+    "         return
+    "         endif
+    "         call execute(printf('Defx %s -search=%s %s', l:args, expand('%:p'), l:path))
+    "     else
+    "         call execute(printf('Defx -toggle %s %s', l:args, l:path))
+    "         call execute('wincmd p')
+    "     endif
 
-        return execute("norm!\<C-w>=")
-    endfunction
+    "     return execute("norm!\<C-w>=")
+    " endfunction
 
-    function! s:defx_context_menu() abort
-        let l:actions = ['new_multiple_files', 'rename', 'copy', 'move', 'paste', 'remove']
-        let l:selection = confirm('Action?', "&New file/directory\n&Rename\n&Copy\n&Move\n&Paste\n&Delete")
-        silent exe 'redraw'
+    " function! s:defx_context_menu() abort
+    "     let l:actions = ['new_multiple_files', 'rename', 'copy', 'move', 'paste', 'remove']
+    "     let l:selection = confirm('Action?', "&New file/directory\n&Rename\n&Copy\n&Move\n&Paste\n&Delete")
+    "     silent exe 'redraw'
 
-        return feedkeys(defx#do_action(l:actions[l:selection - 1]))
-    endfunction
+    "     return feedkeys(defx#do_action(l:actions[l:selection - 1]))
+    " endfunction
 
-    function s:defx_toggle_tree() abort
-        if defx#is_directory()
-            return defx#do_action('open_or_close_tree')
-        endif
-        return defx#do_action('drop')
-    endfunction
+    " function s:defx_toggle_tree() abort
+    "     if defx#is_directory()
+    "         return defx#do_action('open_or_close_tree')
+    "     endif
+    "     return defx#do_action('drop')
+    " endfunction
 
-    function! s:defx_mappings() abort
-        nnoremap <silent><buffer>m :call <sid>defx_context_menu()<CR>
-        nnoremap <silent><buffer><expr> o <sid>defx_toggle_tree()
-        nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
-        nnoremap <silent><buffer><expr> <CR> <sid>defx_toggle_tree()
-        nnoremap <silent><buffer><expr> <2-LeftMouse> <sid>defx_toggle_tree()
-        nnoremap <silent><buffer><expr> C defx#is_directory() ? defx#do_action('multi', ['open', 'change_vim_cwd']) : 'C'
-        nnoremap <silent><buffer><expr> s defx#do_action('open', 'botright vsplit')
-        nnoremap <silent><buffer><expr> R defx#do_action('redraw')
-        nnoremap <silent><buffer><expr> U defx#do_action('multi', [['cd', '..'], 'change_vim_cwd'])
-        nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
-        nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
-        nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
-        nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
-        nnoremap <silent><buffer> J :call search('')<CR>
-        nnoremap <silent><buffer> K :call search('', 'b')<CR>
-        nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
-        nnoremap <silent><buffer><expr> q defx#do_action('quit')
-        silent exe 'nnoremap <silent><buffer><expr> tt defx#do_action("toggle_columns", "'.s:default_columns.':size:time")'
-    endfunction
+    " function! s:defx_mappings() abort
+    "     nnoremap <silent><buffer>m :call <sid>defx_context_menu()<CR>
+    "     nnoremap <silent><buffer><expr> o <sid>defx_toggle_tree()
+    "     nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
+    "     nnoremap <silent><buffer><expr> <CR> <sid>defx_toggle_tree()
+    "     nnoremap <silent><buffer><expr> <2-LeftMouse> <sid>defx_toggle_tree()
+    "     nnoremap <silent><buffer><expr> C defx#is_directory() ? defx#do_action('multi', ['open', 'change_vim_cwd']) : 'C'
+    "     nnoremap <silent><buffer><expr> s defx#do_action('open', 'botright vsplit')
+    "     nnoremap <silent><buffer><expr> R defx#do_action('redraw')
+    "     nnoremap <silent><buffer><expr> U defx#do_action('multi', [['cd', '..'], 'change_vim_cwd'])
+    "     nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
+    "     nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
+    "     nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
+    "     nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
+    "     nnoremap <silent><buffer> J :call search('')<CR>
+    "     nnoremap <silent><buffer> K :call search('', 'b')<CR>
+    "     nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+    "     nnoremap <silent><buffer><expr> q defx#do_action('quit')
+    "     silent exe 'nnoremap <silent><buffer><expr> tt defx#do_action("toggle_columns", "'.s:default_columns.':size:time")'
+    " endfunction
 
 " }
 
 " indentLine {
-    let g:indentline_enabled = 1
-    let g:indentline_char='┆'
-    let g:indentLine_fileTypeExclude = ['defx', 'tagbar']
-    let g:indentLine_concealcursor = 'niv'
-    let g:indentLine_color_term = 96
-    let g:indentLine_color_gui= '#725972'
-    let g:indentLine_showFirstIndentLevel =1
+    " let g:indentline_enabled = 1
+    " let g:indentline_char='┆'
+    " let g:indentLine_fileTypeExclude = ['defx', 'tagbar']
+    " let g:indentLine_concealcursor = 'niv'
+    " let g:indentLine_color_term = 96
+    " let g:indentLine_color_gui= '#725972'
+    " let g:indentLine_showFirstIndentLevel =1
 " }
 
 " Defx-git {
-    let g:defx_git#indicators = {
-        \ 'Modified'  : '•',
-        \ 'Staged'    : '✚',
-        \ 'Untracked' : 'ᵁ',
-        \ 'Renamed'   : '≫',
-        \ 'Unmerged'  : '≠',
-        \ 'Ignored'   : 'ⁱ',
-        \ 'Deleted'   : '✖',
-        \ 'Unknown'   : '⁇'
-        \ }
-    let g:defx_git#column_length = 1
-    let g:defx_git#show_ignored = 0
-    let g:defx_git#raw_mode = 0
-    " Icons
-    let g:defx_icons_enable_syntax_highlight = 1
-    let g:defx_icons_column_length = 2
-    let g:defx_icons_directory_icon = ''
-    let g:defx_icons_mark_icon = '*'
-    let g:defx_icons_parent_icon = ''
-    let g:defx_icons_default_icon = ''
-    let g:defx_icons_directory_symlink_icon = ''
-    " Options below are applicable only when using "tree" feature
-    let g:defx_icons_root_opened_tree_icon = ''
-    let g:defx_icons_nested_opened_tree_icon = ''
-    let g:defx_icons_nested_closed_tree_icon = ''
+    " let g:defx_git#indicators = {
+    "     \ 'Modified'  : '•',
+    "     \ 'Staged'    : '✚',
+    "     \ 'Untracked' : 'ᵁ',
+    "     \ 'Renamed'   : '≫',
+    "     \ 'Unmerged'  : '≠',
+    "     \ 'Ignored'   : 'ⁱ',
+    "     \ 'Deleted'   : '✖',
+    "     \ 'Unknown'   : '⁇'
+    "     \ }
+    " let g:defx_git#column_length = 1
+    " let g:defx_git#show_ignored = 0
+    " let g:defx_git#raw_mode = 0
+    " " Icons
+    " let g:defx_icons_enable_syntax_highlight = 1
+    " let g:defx_icons_column_length = 2
+    " let g:defx_icons_directory_icon = ''
+    " let g:defx_icons_mark_icon = '*'
+    " let g:defx_icons_parent_icon = ''
+    " let g:defx_icons_default_icon = ''
+    " let g:defx_icons_directory_symlink_icon = ''
+    " " Options below are applicable only when using "tree" feature
+    " let g:defx_icons_root_opened_tree_icon = ''
+    " let g:defx_icons_nested_opened_tree_icon = ''
+    " let g:defx_icons_nested_closed_tree_icon = ''
 
 " }
 
