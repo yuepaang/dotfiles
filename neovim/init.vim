@@ -123,11 +123,11 @@ command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac
 command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 
-if has('mac')
-    let g:python3_host_prog='/usr/local/bin/python3'
-else
-    let g:python3_host_prog='/usr/bin/python3'
-endif
+" if has('mac')
+"     let g:python3_host_prog='/usr/local/bin/python3'
+" else
+"     let g:python3_host_prog='/usr/bin/python3'
+" endif
 
 " ALE {
     let g:ale_fixers = {
