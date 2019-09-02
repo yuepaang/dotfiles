@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-08-26 22:10:39
+" Last Modified Date: 2019-09-02 18:09:43
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -524,7 +524,7 @@ endif
         set termguicolors
         set t_Co=256
 
-        colorscheme tender
+        " colorscheme tender
 
         " seoul256 (dark):
         "   Range:   233 (darkest) ~ 239 (lightest)
@@ -566,32 +566,14 @@ endif
         " let g:gruvbox_italic = 1
         " let g:gruvbox_number_column = 'green'
 
-        " if &diff
-        "     colorscheme github
-        "     let g:github_colors_soft = 1
-        " else
+        if &diff
+            colorscheme github
+            let g:github_colors_soft = 1
+        else
 
-        "     colorscheme ayu
-        "     let ayucolor="light"
-        " endif
-
-        " Dark
-        " set background=dark
-        " colorscheme vim-material
-
-        " Palenight
-        " let g:material_style='palenight'
-        " set background=dark
-        " colorscheme vim-material
-
-        " Oceanic
-        " let g:material_style='oceanic'
-        " set background=dark
-        " colorscheme vim-material
-
-        " Light
-        " set background=light
-        " colorscheme vim-material
+            colorscheme ayu
+            let ayucolor="dark"
+        endif
 
         hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
 
