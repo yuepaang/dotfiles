@@ -295,7 +295,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'ayu',
+        \ 'colorscheme': 'tender',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'filename' ],
@@ -570,7 +570,8 @@ endif
         else
 
             colorscheme ayu
-            let ayucolor="dark"
+            " let ayucolor="dark"
+            let ayucolor="migrate"
         endif
 
         hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
