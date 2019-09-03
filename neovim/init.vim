@@ -479,7 +479,7 @@ endif
     silent! set smartindent autoindent shiftround shiftwidth=4 expandtab tabstop=4 smarttab softtabstop=4
     silent! set foldclose=all foldcolumn=0 nofoldenable foldlevel=0 foldmarker& foldmethod=indent
     silent! set textwidth=0 backspace=indent,eol,start nrformats=hex formatoptions=cmMj nojoinspaces
-    silent! set nohidden autoread noautowrite noautowriteall nolinebreak mouse=a mousehide modeline& modelines&
+    " silent! set nohidden autoread noautowrite noautowriteall nolinebreak mouse=a mousehide modeline& modelines&
     silent! set noautochdir write nowriteany writedelay=0 verbose=0 verbosefile= notildeop noinsertmode
     silent! set tags=tags,./tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
     silent! set tags+=../../../../../../tags,../../../../../../../tags,~/Documents/scala/tags,~/Documents/*/tags tagstack
