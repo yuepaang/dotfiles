@@ -133,10 +133,10 @@ else
     let g:python_host_prog='/usr/bin/python'
 endif
 
-" ALE {
+" ALE {'black',
     let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'python': ['black', 'isort', 'yapf'],
+        \   'python': ['isort', 'yapf'],
         \   'javascript': ['eslint', 'prettier'],
         \   'typescript': ['tslint', 'prettier'],
         \   'css': ['prettier'],

@@ -36,3 +36,4 @@ setxkbmap -option ctrl:swapcaps
 
 # Chrome extension name
 # browser-source-provider (by voldikss)
+cp -r ./yapf ~/.config/
