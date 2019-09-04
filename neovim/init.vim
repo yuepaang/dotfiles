@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-09-02 21:39:14
+" Last Modified Date: 2019-09-04 22:29:49
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
