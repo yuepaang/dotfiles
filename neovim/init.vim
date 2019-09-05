@@ -101,8 +101,6 @@ function! PackInit() abort
     " UI {
         call minpac#add('junegunn/seoul256.vim')
         call minpac#add('cormacrelf/vim-colors-github')
-        call minpac#add('nanotech/jellybeans.vim')
-        call minpac#add('NLKNguyen/papercolor-theme')
         call minpac#add('morhetz/gruvbox')
         call minpac#add('ayu-theme/ayu-vim')
         call minpac#add('hzchirs/vim-material')
@@ -296,7 +294,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'tender',
+        \ 'colorscheme': 'seoul256',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'filename' ],
