@@ -101,13 +101,12 @@ function! PackInit() abort
     " UI {
         call minpac#add('junegunn/seoul256.vim')
         call minpac#add('cormacrelf/vim-colors-github')
-        call minpac#add('nanotech/jellybeans.vim')
-        call minpac#add('NLKNguyen/papercolor-theme')
         call minpac#add('morhetz/gruvbox')
         call minpac#add('ayu-theme/ayu-vim')
         call minpac#add('hzchirs/vim-material')
         call minpac#add('nightsense/cosmic_latte')
-        call minpac#add("jacoborus/tender.vim")
+        call minpac#add('jacoborus/tender.vim')
+        call minpac#add('chriskempson/base16-vim')
     " }
 
     " Status Line {
@@ -295,7 +294,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'tender',
+        \ 'colorscheme': 'seoul256',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'filename' ],
@@ -520,7 +519,7 @@ endif
     " color {
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
-        set t_Co=256
+        " set t_Co=256
 
         " colorscheme tender
 
@@ -538,25 +537,6 @@ endif
         let &t_SR = "\<Esc>[4 q"
         let &t_EI = "\<Esc>[2 q"
 
-        " colorscheme PaperColor
-        " let g:PaperColor_Theme_Options = {
-        " \   'theme': {
-        " \     'default': {
-        " \       'transparent_background': 1
-        " \     }
-        " \   },
-        " \   'language': {
-        " \     'python': {
-        " \       'highlight_builtins' : 1
-        " \     },
-        " \     'cpp': {
-        " \       'highlight_standard_library': 1
-        " \     },
-        " \     'c': {
-        " \       'highlight_builtins' : 1
-        " \     }
-        " \   }
-        " \ }
 
         " colorscheme gruvbox
         " set background=dark
@@ -568,10 +548,12 @@ endif
             colorscheme github
             let g:github_colors_soft = 1
         else
+            colorscheme base16-eighties
+            set background=dark
 
-            colorscheme ayu
+            " colorscheme ayu
             " let ayucolor="dark"
-            let ayucolor="migrate"
+            " let ayucolor="migrate"
         endif
 
         hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
