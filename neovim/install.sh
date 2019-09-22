@@ -30,6 +30,9 @@ https_proxy=http://127.0.0.1:8118 go get -u golang.org/x/tools/cmd/gopls
 # Rust
 rustup update
 rustup component add rls rust-analysis rust-src
+git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
+rustup component add rust-src
+cargo install-ra --server
 
 # swap ctrl and caps
 setxkbmap -option ctrl:swapcaps
