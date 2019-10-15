@@ -423,8 +423,12 @@ endif
 " }
 
 " MarkdownPreview {
-    let g:mkdp_auto_start=0
-    let g:mkdp_auto_close=1
+    " let g:mkdp_auto_start=0
+    " let g:mkdp_auto_close=1
+    let g:mkdp_open_to_the_world = 1
+    let g:mkdp_open_ip = '0.0.0.0'
+    let g:mkdp_port = '8214'
+    let g:mkdp_echo_preview_url = 1
 
     nmap <silent> <F5> <Plug>MarkdownPreview
     imap <silent> <F5> <Plug>MarkdownPreview
@@ -711,15 +715,22 @@ endif
     inoremap <silent><expr> <c-x> coc#refresh()
 
     " To make <cr> select the first completion item and confirm completion when no item have selected:
-    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+    " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
     " Close preview window when completion is done.
     autocmd! InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
     " autocmd! BufWritePre *.js,*.json,*.ts Prettier
+    " Define some functions that not in coc.nvim
+    nnoremap <Plug>(coc-hover) :<C-u>call CocAction("doHover")<CR>
+    nmap <silent> gh <Plug>(coc-hover)
 
-    nmap <silent> [c <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]c <Plug>(coc-diagnostic-next)
+    " Remap keys for diagnostic
+    nmap <silent> <leader>nw <Plug>(coc-diagnostic-next)
+    nmap <silent> <leader>pw <Plug>(coc-diagnostic-prev)
+    nmap <silent> <leader>ne <Plug>(coc-diagnostic-next-error)
+    nmap <silent> <leader>pe <Plug>(coc-diagnostic-prev-error)
 
     " Remap keys for gotos
     nmap <silent> gd <Plug>(coc-definition)
