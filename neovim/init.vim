@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-09-04 22:29:49
+" Last Modified Date: 2019-09-22 15:37:10
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -124,6 +124,9 @@ command! PackStatus call PackInit() | call minpac#status()
 " Improve Performance
 let g:python_host_skip_check=1
 let g:python3_host_skip_check=1
+
+let g:node_host_prog='/usr/local/bin/node'
+
 if has('mac')
     let g:python3_host_prog='/usr/local/bin/python3'
     let g:python_host_prog='/usr/local/bin/python'
@@ -135,7 +138,7 @@ endif
 " ALE {'black',
     let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'python': ['isort', 'yapf'],
+        \   'python': ['isort', 'black'],
         \   'javascript': ['eslint', 'prettier'],
         \   'typescript': ['tslint', 'prettier'],
         \   'css': ['prettier'],
@@ -691,6 +694,7 @@ endif
         \ 'coc-browser',
         \ 'coc-syntax',
         \ 'coc-tag',
+        \ 'coc-rust-analyzer',
         \ ]
         " \ 'coc-tabnine',
 
