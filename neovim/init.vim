@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-10-24 09:25:01
+" Last Modified Date: 2019-10-24 15:53:44
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -91,7 +91,7 @@ function! PackInit() abort
     " }
 
     " Git {
-        " call minpac#add('tpope/vim-fugitive')
+        call minpac#add('tpope/vim-fugitive')
         " call minpac#add('tpope/vim-rhubarb')
         " call minpac#add('rhysd/git-messenger.vim')
     " }
@@ -128,9 +128,9 @@ command! PackStatus call PackInit() | call minpac#status()
 " Improve Performance
 let g:python_host_skip_check=1
 let g:python3_host_skip_check=1
-
 let g:node_host_prog='/usr/local/bin/node'
 
+" Define interpreter path
 if has('mac')
     let g:python3_host_prog='/usr/local/bin/python3'
     let g:python_host_prog='/usr/local/bin/python'
@@ -143,7 +143,6 @@ endif
     let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'python': ['isort', 'black'],
-        \   'javascript': ['eslint', 'prettier'],
         \   'typescript': ['tslint', 'prettier'],
         \   'css': ['prettier'],
         \   'c': ['clang-format'],
@@ -239,63 +238,63 @@ endif
         \ 'header':  ['fg', 'Comment'] }
 
     " Floating Windows
-    " let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+    let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
-    " function! FloatingFZF()
-    "     let buf = nvim_create_buf(v:false, v:true)
-    "     call setbufvar(buf, 'number', 'no')
+    function! FloatingFZF()
+        let buf = nvim_create_buf(v:false, v:true)
+        call setbufvar(buf, 'number', 'no')
 
-    "     let height = float2nr(&lines/2)
-    "     let width = float2nr(&columns - (&columns * 2 / 10))
-    "     "let width = &columns
-    "     let row = float2nr(&lines / 3)
-    "     let col = float2nr((&columns - width) / 3)
+        let height = float2nr(&lines/2)
+        let width = float2nr(&columns - (&columns * 2 / 10))
+        "let width = &columns
+        let row = float2nr(&lines / 3)
+        let col = float2nr((&columns - width) / 3)
 
-    "     let opts = {
-    "             \ 'relative': 'editor',
-    "             \ 'row': row,
-    "             \ 'col': col,
-    "             \ 'width': width,
-    "             \ 'height':height,
-    "             \ }
-    "     let win =  nvim_open_win(buf, v:true, opts)
-    "     call setwinvar(win, '&number', 0)
-    "     call setwinvar(win, '&relativenumber', 0)
-    " endfunction
+        let opts = {
+                \ 'relative': 'editor',
+                \ 'row': row,
+                \ 'col': col,
+                \ 'width': width,
+                \ 'height':height,
+                \ }
+        let win =  nvim_open_win(buf, v:true, opts)
+        call setwinvar(win, '&number', 0)
+        call setwinvar(win, '&relativenumber', 0)
+    endfunction
 
-    " " Files + devicons
-    " function! Fzf_dev()
-    "     let l:fzf_files_options = ' --preview "rougify {2..-1} | head -'.&lines.'"'
+    " Files + devicons
+    function! Fzf_dev()
+        let l:fzf_files_options = ' --preview "rougify {2..-1} | head -'.&lines.'"'
 
-    "     function! s:files()
-    "         let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    "         return s:prepend_icon(l:files)
-    "     endfunction
+        function! s:files()
+            let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+            return s:prepend_icon(l:files)
+        endfunction
 
-    "     function! s:prepend_icon(candidates)
-    "         let l:result = []
-    "         for l:candidate in a:candidates
-    "         let l:filename = fnamemodify(l:candidate, ':p:t')
-    "         let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-    "         call add(l:result, printf('%s %s', l:icon, l:candidate))
-    "         endfor
+        function! s:prepend_icon(candidates)
+            let l:result = []
+            for l:candidate in a:candidates
+            let l:filename = fnamemodify(l:candidate, ':p:t')
+            let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+            call add(l:result, printf('%s %s', l:icon, l:candidate))
+            endfor
 
-    "         return l:result
-    "     endfunction
+            return l:result
+        endfunction
 
-    "     function! s:edit_file(item)
-    "         let l:pos = stridx(a:item, ' ')
-    "         let l:file_path = a:item[pos+1:-1]
-    "         execute 'silent e' l:file_path
-    "     endfunction
+        function! s:edit_file(item)
+            let l:pos = stridx(a:item, ' ')
+            let l:file_path = a:item[pos+1:-1]
+            execute 'silent e' l:file_path
+        endfunction
 
-    "     call fzf#run({
-    "             \ 'source': <sid>files(),
-    "             \ 'sink':   function('s:edit_file'),
-    "             \ 'options': '-m ' . l:fzf_files_options,
-    "             \ 'down':    '40%' ,
-    "             \ 'window': 'call FloatingFZF()'})
-    " endfunction
+        call fzf#run({
+                \ 'source': <sid>files(),
+                \ 'sink':   function('s:edit_file'),
+                \ 'options': '-m ' . l:fzf_files_options,
+                \ 'down':    '40%' ,
+                \ 'window': 'call FloatingFZF()'})
+    endfunction
 " }
 
 
