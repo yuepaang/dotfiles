@@ -30,7 +30,7 @@ function! PackInit() abort
     " Auto-completion {
         function! s:coc_plugins(hooktype, name) abort
             execute 'packadd ' . a:name
-            call coc#util#install()
+            " call coc#util#install()
         endfunction
 
         call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
@@ -487,7 +487,7 @@ endif
     silent! set tags+=../../../../../../tags,../../../../../../../tags,~/Documents/scala/tags,~/Documents/*/tags tagstack
 
     " Clipboard
-    " silent! set clipboard=unnamed,unnamedplus
+    silent! set clipboard=unnamed,unnamedplus
 
     " Search
     silent! set wrapscan ignorecase smartcase incsearch hlsearch magic
@@ -684,13 +684,13 @@ endif
         \ 'coc-post',
         \ 'coc-stylelint',
         \ 'coc-yaml',
-        \ 'coc-yank',
         \ 'coc-rls',
         \ 'coc-vimlsp',
         \ 'coc-browser',
         \ 'coc-syntax',
         \ 'coc-tag',
         \ 'coc-rust-analyzer',
+        \ 'coc-java',
         \ ]
         " \ 'coc-tabnine',
 
