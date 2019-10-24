@@ -1003,7 +1003,10 @@ endif
 " }
 
 " NerdTree {
-    nnoremap <silent> <F3> :NERDTree<CR>
+    " nnoremap <silent> <F3> :NERDTree<CR>
+    nmap <F3> :NERDTreeToggle<CR> | wincmd p
+    autocmd VimEnter * NERDTree | wincmd p
+
     autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
     " Close all open buffers on entering a window if the only
