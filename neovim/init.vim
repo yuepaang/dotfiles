@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-10-15 21:39:10
+" Last Modified Date: 2019-10-24 09:25:01
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -54,6 +54,10 @@ function! PackInit() abort
 
     " tags view {
         call minpac#add('majutsushi/tagbar')
+    " }
+
+    " tags view {
+        call minpac#add('scrooloose/nerdtree')
     " }
 
     " Search {
@@ -731,10 +735,10 @@ endif
     nmap <silent> gh <Plug>(coc-hover)
 
     " Remap keys for diagnostic
-    nmap <silent> <leader>nw <Plug>(coc-diagnostic-next)
-    nmap <silent> <leader>pw <Plug>(coc-diagnostic-prev)
-    nmap <silent> <leader>ne <Plug>(coc-diagnostic-next-error)
-    nmap <silent> <leader>pe <Plug>(coc-diagnostic-prev-error)
+    nmap <silent> ]w <Plug>(coc-diagnostic-next)
+    nmap <silent> [w <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
+    nmap <silent> [e <Plug>(coc-diagnostic-prev-error)
 
     " Remap keys for gotos
     nmap <silent> gd <Plug>(coc-definition)
@@ -996,6 +1000,23 @@ endif
     " let g:defx_icons_nested_opened_tree_icon = ''
     " let g:defx_icons_nested_closed_tree_icon = ''
 
+" }
+
+" NerdTree {
+    nnoremap <silent> <F3> :NERDTree<CR>
+    autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+    " Close all open buffers on entering a window if the only
+    " buffer that's left is the NERDTree buffer
+    function! s:CloseIfOnlyNerdTreeLeft()
+        if exists("t:NERDTreeBufName")
+            if bufwinnr(t:NERDTreeBufName) != -1
+                if winnr("$") == 1
+                    q
+                endif
+            endif
+        endif
+    endfunction
 " }
 
 " Calendar {
