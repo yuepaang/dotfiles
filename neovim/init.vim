@@ -691,7 +691,6 @@ endif
         \ 'coc-post',
         \ 'coc-stylelint',
         \ 'coc-yaml',
-        \ 'coc-rls',
         \ 'coc-vimlsp',
         \ 'coc-browser',
         \ 'coc-syntax',
@@ -699,6 +698,7 @@ endif
         \ 'coc-rust-analyzer',
         \ 'coc-java',
         \ ]
+        " \ 'coc-rls',
         " \ 'coc-tabnine',
 
     " mac iterm2 enhance 'coc-imselect'
