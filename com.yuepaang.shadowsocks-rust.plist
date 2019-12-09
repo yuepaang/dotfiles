@@ -1,0 +1,22 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>com.yuepaang.shadowsocks-rust</string><!--这个名字必须和文件名一致-->
+        <key>ProgramArguments</key>
+        <array>
+            <string>/Users/yuepeng/common/shadowsocks-rust/target/release/sslocal</string>
+            <string>-c</string>
+            <string>/Users/yuepeng/common/shadowsocks-rust/examples/config.json</string>
+        </array>
+        <key>KeepAlive</key><!--后台保持运行-->
+        <true/>
+        <key>RunAtLoad</key><!--加载时候运行-->
+        <true/>
+        <key>UserName</key>
+        <string>yuepeng</string>
+        <key>GroupName</key>
+        <string>staff</string>
+    </dict>
+    </plist>
