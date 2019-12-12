@@ -1,4 +1,6 @@
 {
+    "rust-analyzer.raLspServerPath": "ra_lsp_server",
+    "rust-analyzer.enableCargoWatchOnStartup": "enabled",
     "snippets.snipmate.author": "Yue Peng",
     "snippets.snipmate.enable": false,
     "snippets.shortcut": "S",
@@ -90,21 +92,10 @@
     "coc.preferences.snippetStatusText": "Ⓢ ",
     //tslint
     //"tslint.autoFixOnSave": true,
-    //prettier
     "coc.preferences.formatOnSaveFiletypes": ["css","markdown"],
-    "prettier.statusItemText": "ⓟ ",
-    "prettier.eslintIntegration": true,
-    "prettier.tslintIntegration": true,
-    "prettier.stylelintIntegration": true,
-    //emmet
-    "emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact"},
     //python
     //"python.autoComplete.addBrackets": true,
     //"python.jediEnabled": false,
-    // eslint
-    "eslint.filetypes": ["javascript", "javascript.jsx", "javascriptreact"],
-    "eslint.autoFix": true,
-    "eslint.autoFixOnSave": true,
     // pairs
     "pairs.enableBackspace": false,
     "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
@@ -136,11 +127,11 @@
         //         "asyncStartup": true
         //     }
         // },
-        "python": {
-            "command": "pyls",
-            "args": [],
-            "filetypes": ["python", "py"]
-        },
+        // "python": {
+        //     "command": "pyls",
+        //     "args": [],
+        //     "filetypes": ["python", "py"]
+        // },
         "golang": {
             "command": "gopls",
             "args": [],
