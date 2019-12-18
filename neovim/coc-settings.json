@@ -94,8 +94,8 @@
     //"tslint.autoFixOnSave": true,
     "coc.preferences.formatOnSaveFiletypes": ["css","markdown"],
     //python
-    //"python.autoComplete.addBrackets": true,
-    //"python.jediEnabled": false,
+    "python.autoComplete.addBrackets": true,
+    "python.jediEnabled": false,
     // pairs
     "pairs.enableBackspace": false,
     "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
