@@ -11,7 +11,8 @@ env:
   # Note that some xterm terminfo databases don't declare support for italics.
   # You can verify this by checking for the presence of `smso` and `sitm` in
   # `infocmp xterm-256color`.
-  TERM: xterm-256color-italic
+  # TERM: xterm-256color-italic
+  WINIT_HIDPI_FACTOR: '2'
 
 window:
   # Window dimensions (changes require restart)
@@ -71,7 +72,7 @@ scrolling:
 # prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
 #
-tabspaces: 8
+tabspaces: 4
 
 # Font configuration (changes require restart)
 font:
@@ -79,23 +80,26 @@ font:
   # Style can be specified to pick a specific face.
   normal:
     # family: Iosevka
-    family: "SF Mono"
+    # family: "SF Mono"
     # family: "Fira Code"
     # family: "Source Code Pro"
+    family: "Monoid Nerd Font"
     # style: Retina
     style: Regular
 
   # The bold font face
   bold:
-    family: Iosevka
+    # family: Iosevka
     # family: "Fira Code"
     # family: "Source Code Pro"
+    family: "Monoid Nerd Font"
 
   # The italic font face
   italic:
-    family: Iosevka
+    # family: Iosevka
     # family: "Fira Code"
     # family: "Source Code Pro"
+    family: "Monoid Nerd Font"
     # style: "Medium Italic"
 
   # Point size of the font
@@ -214,9 +218,9 @@ colors:
   #   background: '0x000000'
   #   foreground: '0xeaeaea'
   #
-  # cursor:
-  #   text: '0x000000'
-  #   cursor: '0xffffff'
+  cursor:
+    text: '0x000000'
+    cursor: '0xffffff'
   #
   # normal:
   #   black:   '0x000000'
@@ -246,7 +250,7 @@ colors:
   # Example:
   #   `- { index: 16, color: '0xff00ff' }`
   #
-  indexed_colors: []
+  # indexed_colors: []
 
 # Visual Bell
 #
@@ -473,7 +477,7 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: false
+  save_to_clipboard: true
 
 # Mouse bindings
 #
@@ -516,7 +520,7 @@ live_config_reload: true
 # You can set shell.program to the path of your favorite shell, e.g. /bin/fish.
 # Entries in shell.args are passed unmodified as arguments to the shell.
 shell:
-  program: /usr/local/bin/zsh
+  program: /bin/zsh
   # args:
   #   - --command=tmux
 
