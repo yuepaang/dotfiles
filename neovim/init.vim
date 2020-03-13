@@ -1,7 +1,7 @@
-" File              : init.vim
+" File              : dotfiles/neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2019-10-24 15:53:44
+" Last Modified Date: 2020-03-13 10:19:23
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -117,6 +117,9 @@ function! PackInit() abort
         call minpac#add('itchyny/lightline.vim')
         call minpac#add('maximbaz/lightline-ale')
         call minpac#add('ryanoasis/vim-devicons')
+    " }
+    " Terminal {
+        call minpac#add('voldikss/vim-floaterm')
     " }
 
 endfunction
@@ -1037,4 +1040,8 @@ endif
         echo ': display help'
         echo 'Q: exit'
     endfunction
+" }
+
+" floaterm {
+    let g:floaterm_keymap_new = '<Leader>fn'
 " }
