@@ -1,7 +1,7 @@
-" File              : dotfiles/neovim/init.vim
+" File              : neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-03-13 10:19:23
+" Last Modified Date: 2020-06-01 20:55:45
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -570,6 +570,13 @@ endif
         endif
 
         hi Conceal guifg=#666666 ctermfg=255 guibg=#282828 ctermbg=235 gui=NONE cterm=NONE
+
+
+        " neovim highlight yanked region"
+        augroup highlight_yank
+            autocmd!
+            autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)
+        augroup END
 
     " }
 
