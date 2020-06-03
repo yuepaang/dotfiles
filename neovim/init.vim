@@ -707,6 +707,8 @@ endif
         \ 'coc-tag',
         \ 'coc-rust-analyzer',
         \ 'coc-java',
+        \ 'coc-cmake',
+        \ 'coc-clangd',
         \ ]
         " \ 'coc-rls',
         " \ 'coc-tabnine',
