@@ -1,7 +1,7 @@
-" File              : neovim/init.vim
+" File              : dotfiles/neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-06-01 20:55:45
+" Last Modified Date: 2020-06-13 14:33:19
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -111,6 +111,8 @@ function! PackInit() abort
         call minpac#add('nightsense/cosmic_latte')
         call minpac#add('jacoborus/tender.vim')
         call minpac#add('chriskempson/base16-vim')
+        call minpac#add('mhinz/vim-startify')
+        call minpac#add('mhinz/vim-janah')
     " }
 
     " Status Line {
@@ -142,7 +144,7 @@ else
     let g:python_host_prog='/usr/bin/python'
 endif
 
-" ALE {'black',
+" ALE {
     let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
         \   'python': ['isort', 'black'],
@@ -561,8 +563,10 @@ endif
             colorscheme github
             let g:github_colors_soft = 1
         else
-            colorscheme base16-eighties
-            set background=dark
+            " colorscheme base16-eighties
+            " set background=dark
+            autocmd ColorScheme janah highlight Normal ctermbg=235
+colorscheme janah
 
             " colorscheme ayu
             " let ayucolor="dark"

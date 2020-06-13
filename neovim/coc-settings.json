@@ -153,32 +153,33 @@
             "command": "docker-langserver",
             "filetypes": ["dockerfile"],
             "args": ["--stdio"]
-        },
-        "ccls": {
-            "command": "ccls",
-            "filetypes": ["c", "cpp", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls",
-                    "format": "json"
-                },
-                "clang": {
-                // make sure you have installed commandLineTools
-                "resourceDir": "/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1",
-                "extraArgs": [
-                    "-isystem",
-                    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/",
-                    "-I",
-                    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
-          ]
         }
-            }
-        }
+        // "ccls": {
+        //     "command": "ccls",
+        //     "filetypes": ["c", "cpp", "objc", "objcpp"],
+        //     "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+        //     "initializationOptions": {
+        //         "cache": {
+        //             "directory": "/tmp/ccls",
+        //             "format": "json"
+        //         },
+        //         "clang": {
+        //         // make sure you have installed commandLineTools
+        //         "resourceDir": "/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1",
+        //         "extraArgs": [
+        //             "-isystem",
+        //             "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/",
+        //             "-I",
+        //             "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
+        //             ]
+        //         }
+        //     }
+        // }
     },
     // browser
     "coc.browser.enable": true,
     "coc.browser.shortcut": "web",
     "coc.browser.capacity": 5,
-    "coc.browser.priority": 5
+    "coc.browser.priority": 5,
+    "clangd.path": "/Users/yuepeng/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd"
 }
