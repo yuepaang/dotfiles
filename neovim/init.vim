@@ -47,7 +47,7 @@ function! PackInit() abort
     " Utilities {
         call minpac#add('scrooloose/nerdcommenter')
         call minpac#add('cinuor/vim-header')
-        call minpac#add('heavenshell/vim-pydocstring')
+        call minpac#add('heavenshell/vim-pydocstring', {'do': 'make install'})
         call minpac#add('itchyny/calendar.vim')
 ')
     " }
@@ -668,6 +668,7 @@ colorscheme janah
 
 " pydocstring {
     nmap <silent> <leader>pd <Plug>(pydocstring)
+    let g:pydocstring_formatter = 'numpy'
 " }
 
 " vim-easy-aligh {
