@@ -69,6 +69,7 @@ function! PackInit() abort
         call minpac#add('junegunn/fzf', {'do': { -> system('./install --all')}})
         call minpac#add('junegunn/fzf.vim')
         call minpac#add('fszymanski/fzf-quickfix')
+        call minpac#add('antoinemadec/coc-fzf')
     " }
 
     " Better language pack {
@@ -807,15 +808,24 @@ colorscheme janah
 
     " Using CocList
     " Show all diagnostics
-    nnoremap <silent> <leader>la  :<C-u>CocList diagnostics<cr>
+    " nnoremap <silent> <leader>la  :<C-u>CocList diagnostics<cr>
+    nnoremap <silent> <leader>la  :<C-u>CocFzfList diagnostics<CR>
+    nnoremap <silent> <leader>lb  :<C-u>CocFzfList diagnostics --current-buf<CR>
     " Manage extensions
-    nnoremap <silent> <leader>le  :<C-u>CocList extensions<cr>
+    " nnoremap <silent> <leader>le  :<C-u>CocList extensions<cr>
+    nnoremap <silent> <leader>le  :<C-u>CocFzfList extensions<cr>
     " Show commands
-    nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
+    " nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
+    nnoremap <silent> <leader>lc  :<C-u>CocFzfList commands<cr>
     " Find symbol of current document
-    nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
+    " nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
+    nnoremap <silent> <leader>lo  :<C-u>CocFzfList outline<cr>
     " Search workspace symbols
-    nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
+    " nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
+    nnoremap <silent> <leader>ls  :<C-u>CocFzfList symbols<cr>
+
+    nnoremap <silent> <leader>ll  :<C-u>CocFzfList location<cr>
+    nnoremap <silent> <leader>lv  :<C-u>CocFzfList services<cr>
     " Do default action for next item.
     nnoremap <silent> <leader>lj  :<C-u>CocNext<CR>
     " Do default action for previous item.
