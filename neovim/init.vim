@@ -1,7 +1,7 @@
-" File              : dotfiles/neovim/init.vim
+" File              : neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-06-13 14:33:19
+" Last Modified Date: 2020-07-13 12:03:40
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -114,6 +114,7 @@ function! PackInit() abort
         call minpac#add('chriskempson/base16-vim')
         call minpac#add('mhinz/vim-startify')
         call minpac#add('mhinz/vim-janah')
+        call minpac#add('chuling/equinusocio-material.vim')
     " }
 
     " Status Line {
@@ -306,7 +307,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'seoul256',
+        \ 'colorscheme': 'equinusocio_material',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'filename' ],
@@ -566,8 +567,14 @@ endif
         else
             " colorscheme base16-eighties
             " set background=dark
-            autocmd ColorScheme janah highlight Normal ctermbg=235
-colorscheme janah
+            " autocmd ColorScheme janah highlight Normal ctermbg=235
+            " colorscheme janah
+            " pure darker Default
+            let g:equinusocio_material_style = 'darker'
+            let g:equinusocio_material_hide_vertsplit = 1
+            let g:equinusocio_material_bracket_improved = 1
+            set fillchars+=vert:│
+            colorscheme equinusocio_material
 
             " colorscheme ayu
             " let ayucolor="dark"
