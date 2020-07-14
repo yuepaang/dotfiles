@@ -1,6 +1,4 @@
 {
-    "rust-analyzer.raLspServerPath": "ra_lsp_server",
-    "rust-analyzer.enableCargoWatchOnStartup": "enabled",
     "snippets.snipmate.author": "Yue Peng",
     "snippets.snipmate.enable": false,
     "snippets.shortcut": "S",
@@ -68,8 +66,8 @@
     },
     //diagnostic
     "diagnostic.signOffset": 9999999,
-	"diagnostic.errorSign": "●",
-	"diagnostic.warningSign": "●",
+    "diagnostic.errorSign": "✘",
+	"diagnostic.warningSign": "✎",
     "diagnostic.displayByAle": false,
     "diagnostic.refreshOnInsertMode": true,
     //git
@@ -95,7 +93,12 @@
     "coc.preferences.formatOnSaveFiletypes": ["css","markdown"],
     //python
     "python.autoComplete.addBrackets": true,
-    "python.jediEnabled": false,
+    "python.jediEnabled": true,
+    "python.jediPath": "/usr/local/lib/python3.8/site-packages",
+    "python.linting.flake8Enabled": true,
+	"python.linting.flake8Path": "/usr/local/bin/flake8",
+	"python.formatting.provider": "yapf",
+	"python.formatting.yapfPath": "/usr/local/bin/yapf",
     // pairs
     "pairs.enableBackspace": false,
     "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
@@ -135,6 +138,7 @@
         "golang": {
             "command": "gopls",
             "args": [],
+            "disableWorkspaceFolders": true,
             "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
             "filetypes": ["go"]
         },
@@ -177,9 +181,9 @@
         // }
     },
     // browser
-    "coc.browser.enable": true,
-    "coc.browser.shortcut": "web",
-    "coc.browser.capacity": 5,
-    "coc.browser.priority": 5,
+    // "coc.browser.enable": true,
+    // "coc.browser.shortcut": "web",
+    // "coc.browser.capacity": 5,
+    // "coc.browser.priority": 5,
     "clangd.path": "/Users/yuepeng/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd"
 }

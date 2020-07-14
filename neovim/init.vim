@@ -722,6 +722,8 @@ endif
         \ 'coc-java',
         \ 'coc-cmake',
         \ 'coc-clangd',
+        \ 'coc-tabnine',
+        \ 'coc-floaterm'
         \ ]
         " \ 'coc-rls',
         " \ 'coc-tabnine',
@@ -1074,5 +1076,10 @@ endif
 " }
 
 " floaterm {
-    let g:floaterm_keymap_new = '<Leader>fn'
+	hi FloatermNF guibg=#333333
+	let g:floaterm_position		 = 'center'
+    let g:floaterm_keymap_new    = '<Leader>fn'
+	let g:floaterm_keymap_prev	 = '<leader>fp'
+	let g:floaterm_keymap_next	 = '<leader>fn'
+	let g:floaterm_keymap_toggle = '<leader>ff'
 " }
