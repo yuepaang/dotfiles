@@ -114,7 +114,6 @@ function! PackInit() abort
         call minpac#add('chriskempson/base16-vim')
         call minpac#add('mhinz/vim-startify')
         call minpac#add('mhinz/vim-janah')
-        call minpac#add('chuling/equinusocio-material.vim')
     " }
 
     " Status Line {
@@ -307,7 +306,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'equinusocio_material',
+        \ 'colorscheme': 'seoul256',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'filename' ],
@@ -566,15 +565,10 @@ endif
             let g:github_colors_soft = 1
         else
             " colorscheme base16-eighties
-            " set background=dark
-            " autocmd ColorScheme janah highlight Normal ctermbg=235
-            " colorscheme janah
-            " pure darker Default
-            let g:equinusocio_material_style = 'darker'
-            let g:equinusocio_material_hide_vertsplit = 1
-            let g:equinusocio_material_bracket_improved = 1
+            set background=dark
+            autocmd ColorScheme janah highlight Normal ctermbg=235
+            colorscheme janah
             set fillchars+=vert:│
-            colorscheme equinusocio_material
 
             " colorscheme ayu
             " let ayucolor="dark"
@@ -719,7 +713,6 @@ endif
         \ 'coc-syntax',
         \ 'coc-tag',
         \ 'coc-rust-analyzer',
-        \ 'coc-java',
         \ 'coc-cmake',
         \ 'coc-clangd',
         \ 'coc-tabnine',
