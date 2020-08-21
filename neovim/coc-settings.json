@@ -97,8 +97,11 @@
     "python.jediPath": "/usr/local/lib/python3.8/site-packages",
     "python.linting.flake8Enabled": true,
 	"python.linting.flake8Path": "/usr/local/bin/flake8",
-	"python.formatting.provider": "yapf",
+    "python.linting.pydocstyleEnabled": true,
+    "python.linting.pydocstylePath": "/usr/local/bin/pycodestyle",
+	"python.formatting.provider": "black",
 	"python.formatting.yapfPath": "/usr/local/bin/yapf",
+    "python.formatting.blackPath": "/usr/local/bin/black",
     // pairs
     "pairs.enableBackspace": false,
     "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],

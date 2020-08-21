@@ -1,7 +1,7 @@
-" File              : neovim/init.vim
+" File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-07-13 12:03:40
+" Last Modified Date: 2020-08-21 11:47:11
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -149,7 +149,7 @@ endif
 " ALE {
     let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'python': ['isort', 'black'],
+        \   'python': ['isort', 'black', 'flake8'],
         \   'typescript': ['tslint', 'prettier'],
         \   'css': ['prettier'],
         \   'c': ['clang-format'],
@@ -453,6 +453,20 @@ endif
     let g:mapleader="\<SPACE>"
     let g:maplocalleader=","
 
+    let &ls = 2
+    let pumwidth = 40
+    let pumheight = 20
+
+    augroup CustomGroup
+        autocmd!
+        au InsertEnter * set norelativenumber
+        au InsertLeave * set relativenumber
+        au BufEnter * set formatoptions-=cross
+    augroup END
+
+    set selection=exclusive
+    set fdm=marker
+
     " Clear current-search highlighting by hitting <CR> in normal mode.
     nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
@@ -470,15 +484,17 @@ endif
     set nocompatible
 
     " Appearance
-    set ruler
+    set noruler noshowcmd nowrap
     set cursorline
-    set scrolloff=10
+    set scrolloff=5
     set updatetime=300
     set noshowmode
     set laststatus=2
     set cmdheight=2
     set shortmess+=I
     set title
+    set mouse=a
+
 
     silent! set number relativenumber display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
     " silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
@@ -486,16 +502,15 @@ endif
     " silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
     " silent! set cursorline nocursorcolumn colorcolumn=80 concealcursor=nvc conceallevel=0 norelativenumber
     " silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
-    silent! set startofline linespace=0 whichwrap=b,s scrolloff=0 sidescroll=0
+    silent! set startofline linespace=0 whichwrap=b,s sidescroll=0
     " silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
-    silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=
+    silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=block
 
     " Editing
     silent! set iminsert=0 imsearch=0 nopaste pastetoggle= nogdefault comments& commentstring=#\ %s
     silent! set smartindent autoindent shiftround shiftwidth=4 expandtab tabstop=4 smarttab softtabstop=4
     silent! set foldclose=all foldcolumn=0 nofoldenable foldlevel=0 foldmarker& foldmethod=indent
-    silent! set textwidth=0 backspace=indent,eol,start nrformats=hex formatoptions=cmMj nojoinspaces
-    " silent! set nohidden autoread noautowrite noautowriteall nolinebreak mouse=a mousehide modeline& modelines&
+    silent! set textwidth=0 backspace=indent,eol,start nrformats-=octal formatoptions-=cro nojoinspaces
     silent! set noautochdir write nowriteany writedelay=0 verbose=0 verbosefile= notildeop noinsertmode
     silent! set tags=tags,./tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
     silent! set tags+=../../../../../../tags,../../../../../../../tags,~/Documents/scala/tags,~/Documents/*/tags tagstack
@@ -507,7 +522,7 @@ endif
     silent! set wrapscan ignorecase smartcase incsearch hlsearch magic
 
     " Insert completion
-    silent! set complete& completeopt+=menu,menuone,noinsert,noselect infercase pumheight=15 noshowfulltag shortmess+=c
+    silent! set complete& completeopt+=menu,menuone,noinsert,noselect infercase noshowfulltag shortmess+=c
 
     " Command line
     silent! set wildchar=9 wildmenu wildmode=list:longest wildoptions= wildignorecase cedit=<C-k>
@@ -515,8 +530,8 @@ endif
 
     " Performance
     silent! set updatetime=300 timeout timeoutlen=500 ttimeout ttimeoutlen=50 ttyfast lazyredraw
-    silent! set nobackup noswapfile nowritebackup
-
+    set tm=1000 ttm=50
+    silent! set backup swapfile undofile
     " Option
     silent! set signcolumn=yes splitbelow splitright
 
@@ -531,6 +546,21 @@ endif
     set fileencodings=utf-8,gbk,utf-16le,cp1252,iso-8859-15,ucs-bom
     set fileformats=unix,dos,mac
     scriptencoding utf-8
+
+    if &ls == 2 | set nosmd | endif
+    if exists('&pumwidth') | let &pumwidth = pumwidth | endif
+    if exists('&pumheight') | let &pumheight = pumheight | endif
+
+    let vimrcdir   = fnamemodify(expand("$MYVIMRC"), ":h")
+    let &directory = vimrcdir."/.vim/swap//"
+    let &backupdir = vimrcdir."/.vim/backup//"
+    let &undodir = vimrcdir."/.vim/undo//"
+
+    for directory in [&directory, &backupdir, &undodir]
+    if !isdirectory(directory)
+        call mkdir(directory, 'p')
+    endif
+    endfor
 
 
     " color {
