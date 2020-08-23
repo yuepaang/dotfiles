@@ -149,7 +149,7 @@ endif
 " ALE {
     let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'python': ['isort', 'black', 'flake8'],
+        \   'python': ['isort', 'black'],
         \   'typescript': ['tslint', 'prettier'],
         \   'css': ['prettier'],
         \   'c': ['clang-format'],
