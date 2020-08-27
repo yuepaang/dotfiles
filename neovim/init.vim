@@ -1,7 +1,7 @@
 " File              : dotfiles/neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-08-27 11:15:28
+" Last Modified Date: 2020-08-27 13:23:06
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -57,7 +57,7 @@ function! PackInit() abort
     " }
 
     " tags view {
-        call minpac#add('scrooloose/nerdtree')
+        " call minpac#add('scrooloose/nerdtree')
     " }
 
     " Search {
@@ -170,7 +170,7 @@ endif
         \       'html': ['tidy'],
         \       'json': [],
         \       'markdown': ['languagetool'],
-        \       'python': ['pyflakes'],
+        \       'python': ['pyflakes', 'pydocstyle', 'mypy', 'bandit'],
         \       'rust': ['cargo'],
         \       'sh': ['shellcheck'],
         \       'text': ['languagetool'],
@@ -759,12 +759,14 @@ endif
         \ 'coc-cmake',
         \ 'coc-clangd',
         \ 'coc-tabnine',
-        \ 'coc-floaterm'
+        \ 'coc-floaterm',
+        \ 'coc-explorer',
+        \ 'coc-imselect',
         \ ]
         " \ 'coc-rls',
-        " \ 'coc-tabnine',
 
     " mac iterm2 enhance 'coc-imselect'
+    nmap <space>e :CocCommand explorer<CR>
 
     " Snippets
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
@@ -1075,22 +1077,22 @@ endif
 
 " NerdTree {
     " nnoremap <silent> <F3> :NERDTree<CR>
-    nmap <F3> :NERDTreeToggle<CR> | wincmd p
-    autocmd VimEnter * NERDTree | wincmd p
-
-    autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-
-    " Close all open buffers on entering a window if the only
-    " buffer that's left is the NERDTree buffer
-    function! s:CloseIfOnlyNerdTreeLeft()
-        if exists("t:NERDTreeBufName")
-            if bufwinnr(t:NERDTreeBufName) != -1
-                if winnr("$") == 1
-                    q
-                endif
-            endif
-        endif
-    endfunction
+    " nmap <F3> :NERDTreeToggle<CR> | wincmd p
+    " autocmd VimEnter * NERDTree | wincmd p
+    "
+    " autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+    "
+    " " Close all open buffers on entering a window if the only
+    " " buffer that's left is the NERDTree buffer
+    " function! s:CloseIfOnlyNerdTreeLeft()
+    "     if exists("t:NERDTreeBufName")
+    "         if bufwinnr(t:NERDTreeBufName) != -1
+    "             if winnr("$") == 1
+    "                 q
+    "             endif
+    "         endif
+    "     endif
+    " endfunction
 " }
 
 " Calendar {
