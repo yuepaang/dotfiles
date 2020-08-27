@@ -752,7 +752,6 @@ endif
         \ 'coc-stylelint',
         \ 'coc-yaml',
         \ 'coc-vimlsp',
-        \ 'coc-browser',
         \ 'coc-syntax',
         \ 'coc-tag',
         \ 'coc-rust-analyzer',
@@ -762,11 +761,17 @@ endif
         \ 'coc-floaterm',
         \ 'coc-explorer',
         \ 'coc-imselect',
+        \ 'coc-go',
+        \ 'coc-sh',
         \ ]
         " \ 'coc-rls',
 
     " mac iterm2 enhance 'coc-imselect'
     nmap <space>e :CocCommand explorer<CR>
+
+
+    " coc-go
+    autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
     " Snippets
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
@@ -1037,13 +1042,15 @@ endif
 " }
 
 " indentLine {
-    " let g:indentline_enabled = 1
-    " let g:indentline_char='┆'
+    let g:indentline_enabled = 1
+    let g:indentline_char='┆'
+    " for indentLine
+    let g:indentLine_fileTypeExclude = ['coc-explorer']
     " let g:indentLine_fileTypeExclude = ['defx', 'tagbar']
-    " let g:indentLine_concealcursor = 'niv'
-    " let g:indentLine_color_term = 96
-    " let g:indentLine_color_gui= '#725972'
-    " let g:indentLine_showFirstIndentLevel =1
+    let g:indentLine_concealcursor = 'niv'
+    let g:indentLine_color_term = 96
+    let g:indentLine_color_gui= '#725972'
+    let g:indentLine_showFirstIndentLevel =1
 " }
 
 " Defx-git {

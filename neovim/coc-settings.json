@@ -101,60 +101,17 @@
     "python.linting.pydocstylePath": "/usr/local/bin/pycodestyle",
 	"python.formatting.provider": "black",
     "python.formatting.blackPath": "/usr/local/bin/black",
+    // Golang
+    "go.goplsOptions": {
+        "completeUnimported": true
+    },
+    // Bash
+    "sh.enable": true,
     // pairs
     "pairs.enableBackspace": false,
     "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
     // ls
     "languageserver": {
-        // "MPLS": {
-        //     "command": "mspyls",
-        //     "trace.server": "verbose",
-        //     "filetypes": ["none"],
-        //     "filetypes_bak": ["python"],
-        //     "initializationOptions": {
-        //         "interpreter": {
-        //         "properties": {
-        //             "InterpreterPath": "/usr/bin/python3",
-        //             "UseDefaultDatabase": true
-        //         }
-        //         },
-        //         "displayOptions": {
-        //         "preferredFormat": "markdown",
-        //         "trimDocumentationLines": false,
-        //         "maxDocumentationLineLength": 0,
-        //         "trimDocumentationText": false,
-        //         "maxDocumentationTextLength": 0
-        //         },
-        //         "searchPaths": ["/usr/bin"],
-        //         "testEnvironment": false,
-        //         "analysisUpdates": true,
-        //         "traceLogging": true,
-        //         "asyncStartup": true
-        //     }
-        // },
-        // "python": {
-        //     "command": "pyls",
-        //     "args": [],
-        //     "filetypes": ["python", "py"]
-        // },
-        "golang": {
-            "command": "gopls",
-            "args": [],
-            "disableWorkspaceFolders": true,
-            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-            "filetypes": ["go"]
-        },
-        // "rust": {
-        //     "command": "ra_lsp_server",
-        //     "filetypes": ["rust"],
-        //     "rootPatterns": ["Cargo.toml"]
-        // },
-        "bash": {
-            "command": "bash-language-server",
-            "args": ["start"],
-            "filetypes": ["sh"],
-            "ignoredRootPaths": ["~"]
-        },
         "dockerfile": {
             "command": "docker-langserver",
             "filetypes": ["dockerfile"],
@@ -182,10 +139,5 @@
         //     }
         // }
     },
-    // browser
-    // "coc.browser.enable": true,
-    // "coc.browser.shortcut": "web",
-    // "coc.browser.capacity": 5,
-    // "coc.browser.priority": 5,
     "clangd.path": "/Users/yuepeng/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd"
 }
