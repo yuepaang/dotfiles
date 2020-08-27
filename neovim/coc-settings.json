@@ -100,7 +100,6 @@
     "python.linting.pydocstyleEnabled": true,
     "python.linting.pydocstylePath": "/usr/local/bin/pycodestyle",
 	"python.formatting.provider": "black",
-	"python.formatting.yapfPath": "/usr/local/bin/yapf",
     "python.formatting.blackPath": "/usr/local/bin/black",
     // pairs
     "pairs.enableBackspace": false,

@@ -1,7 +1,7 @@
-" File              : init.vim
+" File              : dotfiles/neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-08-21 11:47:11
+" Last Modified Date: 2020-08-27 11:15:28
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -104,6 +104,7 @@ function! PackInit() abort
     " }
 
     " UI {
+        call minpac#add('habamax/vim-polar')
         call minpac#add('junegunn/seoul256.vim')
         call minpac#add('cormacrelf/vim-colors-github')
         call minpac#add('morhetz/gruvbox')
@@ -307,7 +308,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'seoul256',
+        \ 'colorscheme': 'cosmic_latte_light',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'filename' ],
@@ -577,7 +578,7 @@ endif
         " colo seoul256
 
         " colorscheme cosmic_latte
-        " set background=light
+        set background=light
 
         " sets the cursor to a vertical line for insert mode, underline for replace mode, and block for normal mode
         let &t_SI = "\<Esc>[6 q"
@@ -596,9 +597,20 @@ endif
             let g:github_colors_soft = 1
         else
             " colorscheme base16-eighties
-            set background=dark
-            autocmd ColorScheme janah highlight Normal ctermbg=235
-            colorscheme janah
+            " set background=dark
+            " autocmd ColorScheme janah highlight Normal ctermbg=235
+            " colorscheme janah
+            colorscheme polar
+            func! s:polar_setup() abort
+                hi Comment gui=italic cterm=italic
+                hi Statement gui=bold cterm=bold
+                hi VertSplit guibg=NONE ctermbg=NONE
+            endfunc
+
+            augroup colorscheme_change | au!
+                au ColorScheme polar call s:polar_setup()
+            augroup END
+
             set fillchars+=vert:│
 
             " colorscheme ayu
