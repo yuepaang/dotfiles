@@ -20,9 +20,6 @@
     "coc.source.syntax.priority": 79,
     "coc.source.tag.shortcut": "T",
     "coc.source.tag.priority": 78,
-    "coc.source.dictionary.shortcut": "D",
-    "coc.source.dictionary.priority": 9,
-    "coc.source.dictionary.filetypes": ["markdown", "text"],
     "coc.source.emoji.shortcut": "E",
     "coc.source.emoji.priority": 8,
     "coc.source.emoji.filetypes": ["markdown", "text"],
@@ -68,7 +65,7 @@
     "diagnostic.signOffset": 9999999,
     "diagnostic.errorSign": "✘",
 	"diagnostic.warningSign": "✎",
-    "diagnostic.displayByAle": false,
+    "diagnostic.displayByAle": true,
     "diagnostic.refreshOnInsertMode": true,
     //git
     "git.enableGutters": true,
@@ -97,10 +94,10 @@
     "python.jediPath": "/usr/local/lib/python3.8/site-packages",
     "python.linting.flake8Enabled": true,
 	"python.linting.flake8Path": "/usr/local/bin/flake8",
-    "python.linting.pydocstyleEnabled": true,
-    "python.linting.pydocstylePath": "/usr/local/bin/pycodestyle",
-	"python.formatting.provider": "black",
+    "python.linting.flake8Args": ["--select C,E,F,W,B,B950", "--max-line-length 80", "--extend-ignore E203, E501, W503"],
+    "python.formatting.provider": "black",
     "python.formatting.blackPath": "/usr/local/bin/black",
+    "python.formatting.blackArgs": ["--line-length 79"],
     // Golang
     "go.goplsOptions": {
         "completeUnimported": true
@@ -139,5 +136,5 @@
         //     }
         // }
     },
-    "clangd.path": "/Users/yuepeng/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd"
+    // "clangd.path": "/Users/yuepeng/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd"
 }

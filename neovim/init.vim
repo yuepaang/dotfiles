@@ -148,18 +148,24 @@ else
 endif
 
 " ALE {
+    let g:ale_disable_lsp = 1
     let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'python': ['isort', 'black'],
         \   'typescript': ['tslint', 'prettier'],
         \   'css': ['prettier'],
         \   'c': ['clang-format'],
         \   'cpp': ['clang-format'],
         \   'rust': ['rustfmt'],
         \   'json': ['fixjson'],
+        \   'python': ['isort', 'black', 'add_blank_lines_for_python_control_statements'],
         \}
     " Set this variable to 1 to fix files when you save them.
     let g:ale_fix_on_save = 1
+    let g:ale_python_flake8_options = '--select C,E,F,W,B,B950 --extend-ignore E203,E501,W503'
+    let g:ale_python_isort_options = '-m isort'
+    let g:ale_python_black_options = '--line-length 79'
+
+    nmap <silent> <Leader>x <Plug>(ale_fix)
 
     let g:ale_linters = {
         \       'c': ['cppcheck', 'flawfinder'],
@@ -170,12 +176,12 @@ endif
         \       'html': ['tidy'],
         \       'json': [],
         \       'markdown': ['languagetool'],
-        \       'python': ['pyflakes', 'pydocstyle', 'mypy', 'bandit'],
         \       'rust': ['cargo'],
         \       'sh': ['shellcheck'],
         \       'text': ['languagetool'],
         \       'vim': ['vint'],
         \       'go': ['gopls'],
+        \       'python': ['pyflakes', 'pydocstyle'],
         \}
 
     "查看上一个错误
