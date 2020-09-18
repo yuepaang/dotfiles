@@ -182,7 +182,7 @@ endif
         \       'text': ['languagetool'],
         \       'vim': ['vint'],
         \       'go': ['gopls'],
-        \       'python': ['pyflakes', 'pydocstyle'],
+        \       'python': ['pyflakes'],
         \}
 
     "查看上一个错误
@@ -753,7 +753,6 @@ endif
         \ 'coc-json',
         \ 'coc-highlight',
         \ 'coc-git',
-        \ 'coc-emoji',
         \ 'coc-lists',
         \ 'coc-post',
         \ 'coc-stylelint',
@@ -762,7 +761,6 @@ endif
         \ 'coc-syntax',
         \ 'coc-tag',
         \ 'coc-rust-analyzer',
-        \ 'coc-cmake',
         \ 'coc-clangd',
         \ 'coc-tabnine',
         \ 'coc-floaterm',
