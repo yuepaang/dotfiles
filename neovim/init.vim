@@ -1,7 +1,7 @@
 " File              : dotfiles/neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-08-27 13:23:06
+" Last Modified Date: 2020-09-18 12:02:55
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -33,7 +33,8 @@ function! PackInit() abort
             " call coc#util#install()
         endfunction
 
-        call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
+        " call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
+        call minpac#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
         call minpac#add('https://github.com/Shougo/neco-vim')
         call minpac#add('https://github.com/neoclide/coc-neco')
         call minpac#add('Shougo/neoinclude.vim')
@@ -770,7 +771,12 @@ endif
         \ 'coc-go',
         \ 'coc-sh',
         \ ]
-        " \ 'coc-rls',
+    function! CocBuildUpdate()
+        call coc#util#install()
+        " call coc#util#install_extension(g:coc_global_extensions)
+    endfunction
+
+    command! ExtensionUpdate call CocBuildUpdate()
 
     " mac iterm2 enhance 'coc-imselect'
     nmap <space>e :CocCommand explorer<CR>
