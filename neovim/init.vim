@@ -1,7 +1,7 @@
-" File              : dotfiles/neovim/init.vim
+" File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-09-18 12:02:55
+" Last Modified Date: 2020-09-19 16:57:52
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 function! s:install_minpac() abort
@@ -116,6 +116,7 @@ function! PackInit() abort
         call minpac#add('chriskempson/base16-vim')
         call minpac#add('mhinz/vim-startify')
         call minpac#add('mhinz/vim-janah')
+        call minpac#add('kristijanhusak/vim-hybrid-material')
     " }
 
     " Status Line {
@@ -315,7 +316,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'cosmic_latte_light',
+        \ 'colorscheme': 'seoul256',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste'],
         \             [ 'cocstatus',  'currentfunction', 'filename' ],
@@ -574,7 +575,7 @@ endif
     " color {
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         set termguicolors
-        " set t_Co=256
+        set t_Co=256
 
         " colorscheme tender
 
@@ -585,7 +586,13 @@ endif
         " colo seoul256
 
         " colorscheme cosmic_latte
-        set background=light
+        " set background=light
+        set background=dark
+        let g:github_colors_soft = 1
+        let g:github_colors_block_diffmark = 0
+        let g:enable_bold_font = 1
+        let g:enable_italic_font = 1
+
 
         " sets the cursor to a vertical line for insert mode, underline for replace mode, and block for normal mode
         let &t_SI = "\<Esc>[6 q"
@@ -601,22 +608,24 @@ endif
 
         if &diff
             colorscheme github
-            let g:github_colors_soft = 1
         else
             " colorscheme base16-eighties
-            " set background=dark
+            colorscheme hybrid_material
             " autocmd ColorScheme janah highlight Normal ctermbg=235
             " colorscheme janah
-            colorscheme polar
-            func! s:polar_setup() abort
-                hi Comment gui=italic cterm=italic
-                hi Statement gui=bold cterm=bold
-                hi VertSplit guibg=NONE ctermbg=NONE
-            endfunc
 
-            augroup colorscheme_change | au!
-                au ColorScheme polar call s:polar_setup()
-            augroup END
+            " colorscheme polar
+            " func! s:polar_setup() abort
+            "     hi Comment gui=italic cterm=italic
+            "     hi Statement gui=bold cterm=bold
+            "     hi VertSplit guibg=NONE ctermbg=NONE
+            " endfunc
+            "
+            " augroup colorscheme_change | au!
+            "     au ColorScheme polar call s:polar_setup()
+            " augroup END
+
+            " colorscheme github
 
             set fillchars+=vert:│
 
@@ -663,6 +672,7 @@ endif
     " Add datetime
     :nnoremap <F2> "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
     :inoremap <F2> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+
 " }
 
 " nerdcommenter {
@@ -687,7 +697,7 @@ endif
 
     nmap <silent> <F4> :TagbarToggle<CR>
 
-    let g:tagbar_width=25
+    let g:tagbar_width=35
     let g:tagbar_type_go = {
         \ 'ctagstype' : 'go',
         \ 'kinds' : [
@@ -732,7 +742,7 @@ endif
 " }
 
 " git-messager {
-    " nmap <Leader>gm <Plug>(git-messenger)
+    nmap dm <Plug>(git-messenger)
 " }
 
 " vim-header {
