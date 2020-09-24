@@ -473,6 +473,7 @@ endif
         au BufEnter * set formatoptions-=cross
     augroup END
 
+    " select only to the last character of the line
     set selection=exclusive
     set fdm=marker
 
@@ -640,7 +641,8 @@ endif
         " neovim highlight yanked region"
         augroup highlight_yank
             autocmd!
-            autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)
+            " autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)
+            au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
         augroup END
 
     " }
