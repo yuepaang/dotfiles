@@ -1,7 +1,7 @@
-" File              : neovim/init.vim
+" File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-10-07 23:00:38
+" Last Modified Date: 2020-10-07 23:45:21
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 let g:ascii = [
@@ -108,12 +108,18 @@ function! PackInit() abort
         call minpac#add('tpope/vim-fugitive')
         " call minpac#add('tpope/vim-rhubarb')
         call minpac#add('rhysd/git-messenger.vim')
+        call minpac#add('airblade/vim-gitgutter')
+        call minpac#add('junegunn/gv.vim')
+
+        call minpac#add('dhruvasagar/vim-open-url')
     " }
 
     " Coding {
         call minpac#add('mg979/vim-visual-multi')
         call minpac#add('junegunn/vim-easy-align')
         call minpac#add('Yggdroot/indentLine')
+        call minpac#add('easymotion/vim-easymotion')
+
     " }
 
     " UI {
@@ -138,6 +144,8 @@ function! PackInit() abort
         call minpac#add('ryanoasis/vim-devicons')
     " }
     " Terminal {
+        call minpac#add('jlanzarotta/bufexplorer')
+        call minpac#add('mg979/vim-xtabline')
         call minpac#add('voldikss/vim-floaterm')
     " }
 
@@ -324,6 +332,11 @@ endif
                 \ 'down':    '40%' ,
                 \ 'window': 'call FloatingFZF()'})
     endfunction
+
+    nnoremap <silent> <Leader>r :Rg<CR>
+    nnoremap <silent> <Leader>c :Commits<CR>
+    nnoremap <silent> <Leader>p :BLines<CR>
+
 " }
 
 
@@ -693,6 +706,21 @@ endif
     " Add datetime
     :nnoremap <F2> "=strftime("%Y-%m-%d %H:%M:%S")<CR>P
     :inoremap <F2> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+
+    " quit
+    map <C-q> :q<cr>
+    map <leader>q :q<cr>
+
+    noremap <C-t> :tabnew split<CR>
+
+    " save
+    map <leader>w :w<CR>
+    cmap w!! w !sudo tee >/dev/null %
+    inoremap <C-s> <ESC>:w<CR>
+    nnoremap <C-s> :w<CR>
+
+    noremap <Tab> :bn<CR>
+    noremap <S-Tab> :bp<CR>
 
 " }
 
@@ -1393,4 +1421,40 @@ endif
     nnoremap <localleader> :<c-u>WhichKey  ','<CR>
     vnoremap <localleader> :<c-u>WhichKeyVisual  ','<CR>
 
+" }
+
+" Buffer explorer {
+let g:bufExplorerDefaultHelp=0
+let g:bufExplorerShowRelativePath=1
+nmap <leader>n :BufExplorer<CR>
+" }
+
+
+" vim-xtabline {
+
+let g:xtabline_settings = get(g:, 'xtabline_settings', {})
+let g:xtabline_settings.map_prefix = '<leader>x'
+let g:xtabline_settings.tabline_modes = ['buffers', 'tabs']
+autocmd vimenter * XTabTheme slate
+autocmd bufenter * XTabTheme slate
+let g:xtabline_settings.buffers_paths = 0
+let g:xtabline_settings.current_tab_paths = 0
+let g:xtabline_settings.other_tabs_paths = 0
+map <leader>xq :XTabCloseBuffer<cr>
+map <leader>xl :XTabListBuffers<cr>
+" }
+
+" easymotion {
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+map <Leader> <Plug>(easymotion-prefix)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
 " }
