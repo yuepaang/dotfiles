@@ -115,5 +115,8 @@ brew install shadowsocks-libev
 brew install minio/stable/mc
 brew install tmux
 brew install redis
+brew install gpg
+brew install ripgrep
+brew install zsh-completions zsh-syntax-highlighting, zsh-autosuggestions
 # Remove outdated versions from the cellar.
 brew cleanups
