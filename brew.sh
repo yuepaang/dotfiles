@@ -118,5 +118,6 @@ brew install redis
 brew install gpg
 brew install ripgrep
 brew install zsh-completions zsh-syntax-highlighting, zsh-autosuggestions
+brew install jq speedtest-cli
 # Remove outdated versions from the cellar.
 brew cleanups
