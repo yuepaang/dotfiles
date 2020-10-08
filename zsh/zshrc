@@ -1,3 +1,10 @@
+#!/bin/zsh
+# File              : .zshrc
+# Author            : Yue Peng <yuepaang@gmail.com>
+# Date              : 2020-10-08 14:25:05
+# Last Modified Date: 2020-10-08 14:25:05
+# Last Modified By  : Yue Peng <yuepaang@gmail.com>
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -635,3 +642,7 @@ dev="$HOME/Developer"
 com="$dev/com"
 py="$dev/personal"
 as="$HOME/Library/Application Support"
+
+export PATH="/usr/local/opt/python@3.9/bin:$PATH"
+
+alias ls="exa -bh --color=auto"

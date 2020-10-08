@@ -164,6 +164,7 @@ if has('mac')
     let g:python3_host_prog='/usr/local/bin/python3'
     let g:python_host_prog='/usr/local/bin/python'
     let g:node_host_prog='/usr/local/bin/node'
+    let g:ruby_host_prog='/usr/bin/ruby'
 else
     let g:python3_host_prog='/usr/bin/python3'
     let g:python_host_prog='/usr/bin/python'
