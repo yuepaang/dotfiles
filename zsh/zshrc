@@ -207,7 +207,9 @@ alias ln='nocorrect ln'
 alias man='nocorrect man'
 alias mkdir='nocorrect mkdir'
 alias mv='nocorrect mv'
+alias mvim='nocorrect mvim'
 alias rm='nocorrect rm'
+alias tree='nocorrect tree'
 
 # Disable globbing.
 alias bower='noglob bower'
@@ -645,4 +647,11 @@ as="$HOME/Library/Application Support"
 
 export PATH="/usr/local/opt/python@3.9/bin:$PATH"
 
-alias ls="exa -bh --color=auto"
+alias lis="exa -bh --color=auto"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+export https_proxy=http://127.0.0.1:6152
+export http_proxy=http://127.0.0.1:6152
+export all_proxy=socks5://127.0.0.1:6153
+
+alias mm="mvim -v"
