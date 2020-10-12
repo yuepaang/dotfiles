@@ -35,7 +35,9 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export EDITOR="nvim"
+# Use Neovim as "preferred editor"
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 setopt AUTO_CD              # Auto changes to a directory without typing cd.
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
@@ -228,3 +230,14 @@ export PATH="$HOME/.cargo/bin:$PATH"
 source "/usr/local/share/autojump/autojump.zsh"
 source "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+alias vim="nvim"
+
+# Persist normal non-vi behaviour
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^w' backward-kill-word
+bindkey '^r' fzf
+bindkey '^e' end-of-line
+bindkey '^a' beginning-of-line
+bindkey "^?" backward-delete-char
