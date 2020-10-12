@@ -334,7 +334,7 @@ endif
                 \ 'window': 'call FloatingFZF()'})
     endfunction
 
-    nnoremap <silent> <Leader>r :Rg<CR>
+    nnoremap <silent> <C-g> :Rg<CR>
     nnoremap <silent> <Leader>c :Commits<CR>
     nnoremap <silent> <Leader>p :BLines<CR>
 

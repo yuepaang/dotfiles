@@ -1,10 +1,11 @@
 #!/bin/zsh
-# File              : .zshrc
+# File              : zsh/zshrc
 # Author            : Yue Peng <yuepaang@gmail.com>
 # Date              : 2020-10-08 14:25:05
-# Last Modified Date: 2020-10-08 14:25:05
+# Last Modified Date: 2020-10-12 14:12:37
 # Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
+export EDITOR="nvim"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -103,7 +104,8 @@ fi
 # Variables
 #
 
-HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"       # The path to the history file.
+# HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"       # The path to the history file.
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"       # The path to the history file.
 HISTSIZE=10000                   # The maximum number of events to save in the internal history.
 SAVEHIST=10000                   # The maximum number of events to save in the history file.
 
@@ -299,14 +301,14 @@ function diff {
 }
 
 alias vim="nvim"
-source $HOME/Developer/personal/GitHub/powerlevel10k/powerlevel9k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source "$HOME/completion.sh"
-source "$HOME/highlight.sh"
+source "$HOME/dotfiles/zsh/completion.sh"
+source "$HOME/dotfiles/zsh/highlight.sh"
 source "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "/usr/local/share/autojump/autojump.zsh"
 
 autoload -U colors && colors
@@ -403,6 +405,7 @@ alias gch='git checkout'
 alias gbr='git branch'
 alias gbrcl='git checkout --orphan'
 alias gbrd='git branch -D'
+
 function gl() {
   count=$1
   [[ -z "$1" ]] && count=10
@@ -650,8 +653,9 @@ export PATH="/usr/local/opt/python@3.9/bin:$PATH"
 alias lis="exa -bh --color=auto"
 export PATH="$HOME/.cargo/bin:$PATH"
 
-export https_proxy=http://127.0.0.1:6152
-export http_proxy=http://127.0.0.1:6152
-export all_proxy=socks5://127.0.0.1:6153
+# Surge
+# export https_proxy=http://127.0.0.1:6152
+# export http_proxy=http://127.0.0.1:6152
+# export all_proxy=socks5://127.0.0.1:6153
 
 alias mm="mvim -v"
