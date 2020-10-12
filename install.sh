@@ -123,3 +123,4 @@ install_tpm() {
     installed 'TPM'
   fi
 }
+ln -s com.yuepaang.shadowsocks-rust.plist ~/Library/LaunchAgents

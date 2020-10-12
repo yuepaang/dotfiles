@@ -28,6 +28,34 @@ zinit light-mode for \
     zinit-zsh/z-a-bin-gem-node
 
 ### End of Zinit's installer chunk
+autoload -Uz allopt zed zmv zcalc colors
+colors
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+#bindkey -M vicmd v edit-command-line
+
+autoload -Uz select-word-style
+select-word-style shell
+
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
+
+# Fast-syntax-highlighting & autosuggestions
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" \
+    zdharma/fast-syntax-highlighting \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+ blockf \
+    zsh-users/zsh-completions
+
+
+# zsh-autopair
+# fzf-marks, at slot 0, for quick Ctrl-G accessibility
+zinit wait lucid for \
+    hlissner/zsh-autopair \
+    urbainvaes/fzf-marks
 
 # THEME
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -38,6 +66,13 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # Use Neovim as "preferred editor"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
+
+setopt interactive_comments octal_zeroes      no_prompt_cr
+setopt no_hist_no_functions no_always_to_end  append_history list_packed
+setopt complete_in_word     no_auto_menu
+setopt no_glob_complete     no_glob_dots      c_bases
+setopt numeric_glob_sort    no_share_history  promptsubst
 
 setopt AUTO_CD              # Auto changes to a directory without typing cd.
 setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
@@ -95,11 +130,12 @@ elif (( $+commands[wget] )); then
   alias get='wget --continue --progress=bar --timestamping'
 fi
 
-alias l='exa -1a'         # Lists in one column, hidden files.
-alias ll='exa -lh'        # Lists human readable sizes.
+alias l='exa -1a --color=auto'         # Lists in one column, hidden files.
+alias ll='exa -lbh --color=auto'        # Lists human readable sizes.
 alias la='ll -a'         # Lists human readable sizes, hidden files.
-alias ls='exa'            # I often screw this up.
-alias sl='exa'            # I often screw this up.
+alias ls="exa -bh --color=auto"
+alias sl='ls'            # I often screw this up.
+alias newest_ls="ls -lh --sort date -r --color=always | head -25"
 
 # Simple clear command.
 alias cl='clear'
@@ -228,8 +264,8 @@ as="$HOME/Library/Application Support"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 source "/usr/local/share/autojump/autojump.zsh"
-source "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# source "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 alias vim="nvim"
 
@@ -237,7 +273,19 @@ alias vim="nvim"
 bindkey '^P' up-history
 bindkey '^N' down-history
 bindkey '^w' backward-kill-word
-bindkey '^r' fzf
 bindkey '^e' end-of-line
 bindkey '^a' beginning-of-line
 bindkey "^?" backward-delete-char
+
+bindkey "^H"      backward-delete-char
+bindkey "\e[1~"   beginning-of-line
+bindkey "\e[7~"   beginning-of-line     "\e[H"    beginning-of-line
+bindkey "\e[4~"   end-of-line           "\e[8~"   end-of-line
+bindkey "\e[F"    end-of-line           "\e[3~"   delete-char
+bindkey "^J"      accept-line           "^M"      accept-line
+bindkey "^T"      accept-line
+
+# Surge
+export https_proxy=http://127.0.0.1:6152
+export http_proxy=http://127.0.0.1:6152
+export all_proxy=socks5://127.0.0.1:6153
