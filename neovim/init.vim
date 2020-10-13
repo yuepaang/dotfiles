@@ -1,18 +1,18 @@
-" File              : init.vim
+" File              : neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-10-07 23:45:21
+" Last Modified Date: 2020-10-12 22:52:33
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 let g:ascii = [
-\ '|                                                    |',
-\ '|     ####      ######    #     #      ######        |',
-\ '|    #    #     #         ##    #     #              |',
-\ '|    #    #     #         # #   #    #               |',
-\ '|    #  #       ######    #  #  #    #    #####      |',
-\ '|    #          #         #   # #     #       #      |',
-\ '|    #          #         #    ##      #     #       |',
-\ '|    #          ######    #     #       #####        |',
+\ '|                                                     |',
+\ '|       ####     ######    #     #      ######        |',
+\ '|      #    #    #         ##    #     #              |',
+\ '|      #    #    #         # #   #    #               |',
+\ '|      #  #      ######    #  #  #    #    #####      |',
+\ '|      #         #         #   # #     #       #      |',
+\ '|      #         #         #    ##      #     #       |',
+\ '|      #         ######    #     #       #####        |',
 \]
 
 
@@ -162,12 +162,9 @@ let g:python3_host_skip_check=1
 if has('mac')
     let g:python3_host_prog='/usr/local/bin/python3'
     let g:python_host_prog='/usr/local/bin/python'
-    let g:node_host_prog='/usr/local/bin/node'
-    let g:ruby_host_prog='/usr/bin/ruby'
 else
     let g:python3_host_prog='/usr/bin/python3'
     let g:python_host_prog='/usr/bin/python'
-    let g:node_host_prog='/usr/bin/node'
 endif
 
 " ALE {
