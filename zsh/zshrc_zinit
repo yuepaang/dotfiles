@@ -131,9 +131,10 @@ elif (( $+commands[wget] )); then
 fi
 
 alias l='exa -1a --color=auto'         # Lists in one column, hidden files.
-alias ll='exa -lbh --color=auto'        # Lists human readable sizes.
+alias ll='ls -l'        # Lists human readable sizes.
 alias la='ll -a'         # Lists human readable sizes, hidden files.
-alias ls="exa -bh --color=auto"
+# alias ls="exa -bh --color=auto"
+alias ls="nat"
 alias sl='ls'            # I often screw this up.
 alias newest_ls="ls -lh --sort date -r --color=always | head -25"
 

@@ -54,7 +54,7 @@ function! PackInit() abort
     " }
 
     " Linter {
-        call minpac#add('w0rp/ale')
+        " call minpac#add('w0rp/ale')
     " }
 
     " Utilities {
@@ -139,8 +139,8 @@ function! PackInit() abort
 
     " Status Line {
         call minpac#add('itchyny/lightline.vim')
-        call minpac#add('maximbaz/lightline-ale')
-        call minpac#add('ryanoasis/vim-devicons')
+        " call minpac#add('maximbaz/lightline-ale')
+        " call minpac#add('ryanoasis/vim-devicons')
     " }
     " Terminal {
         call minpac#add('jlanzarotta/bufexplorer')
@@ -168,61 +168,61 @@ else
 endif
 
 " ALE {
-    let g:ale_disable_lsp = 1
-    let g:ale_fixers = {
-        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'typescript': ['tslint', 'prettier'],
-        \   'css': ['prettier'],
-        \   'c': ['clang-format'],
-        \   'cpp': ['clang-format'],
-        \   'rust': ['rustfmt'],
-        \   'json': ['fixjson'],
-        \   'python': ['isort', 'black', 'add_blank_lines_for_python_control_statements'],
-        \}
-    " Set this variable to 1 to fix files when you save them.
-    let g:ale_fix_on_save = 1
-    let g:ale_python_flake8_options = '--select C,E,F,W,B,B950 --extend-ignore E203,E501,W503'
-    let g:ale_python_isort_options = '-m isort'
-    let g:ale_python_black_options = '--line-length 79'
-
-    nmap <silent> <Leader>x <Plug>(ale_fix)
-
-    let g:ale_linters = {
-        \       'c': ['cppcheck', 'flawfinder'],
-        \       'cpp': ['cppcheck', 'flawfinder'],
-        \       'css': ['stylelint'],
-        \       'javascript': ['eslint', 'stylelint'],
-        \       'jsx': ['eslint', 'stylelint'],
-        \       'html': ['tidy'],
-        \       'json': [],
-        \       'markdown': ['languagetool'],
-        \       'rust': ['cargo'],
-        \       'sh': ['shellcheck'],
-        \       'text': ['languagetool'],
-        \       'vim': ['vint'],
-        \       'go': ['gopls'],
-        \       'python': ['pyflakes'],
-        \}
-
-    "查看上一个错误
-    nnoremap <silent> [a :ALEPrevious<CR>
-    "查看下一个错误
-    nnoremap <silent> ]a :ALENext<CR>
-    "自定义error和warning图标
-    let g:ale_sign_error="\uf05e"
-    let g:ale_sign_warning="\uf071"
-    let g:ale_sign_column_always=1
-
-    "显示Linter名称,出错或警告等相关信息
-    let g:ale_echo_msg_error_str = 'E'
-    let g:ale_echo_msg_warning_str = 'W'
-    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-    " 光标移动到错误的地方时立即显示错误
-    let g:ale_echo_delay = 1
-
-    autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
-    highlight ALEErrorSign ctermbg=NONE ctermfg=red
-    highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+    " let g:ale_disable_lsp = 1
+    " let g:ale_fixers = {
+    "     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    "     \   'typescript': ['tslint', 'prettier'],
+    "     \   'css': ['prettier'],
+    "     \   'c': ['clang-format'],
+    "     \   'cpp': ['clang-format'],
+    "     \   'rust': ['rustfmt'],
+    "     \   'json': ['fixjson'],
+    "     \   'python': ['isort', 'black', 'add_blank_lines_for_python_control_statements'],
+    "     \}
+    " " Set this variable to 1 to fix files when you save them.
+    " let g:ale_fix_on_save = 1
+    " let g:ale_python_flake8_options = '--select C,E,F,W,B,B950 --extend-ignore E203,E501,W503'
+    " let g:ale_python_isort_options = '-m isort'
+    " let g:ale_python_black_options = '--line-length 79'
+    "
+    " nmap <silent> <Leader>x <Plug>(ale_fix)
+    "
+    " let g:ale_linters = {
+    "     \       'c': ['cppcheck', 'flawfinder'],
+    "     \       'cpp': ['cppcheck', 'flawfinder'],
+    "     \       'css': ['stylelint'],
+    "     \       'javascript': ['eslint', 'stylelint'],
+    "     \       'jsx': ['eslint', 'stylelint'],
+    "     \       'html': ['tidy'],
+    "     \       'json': [],
+    "     \       'markdown': ['languagetool'],
+    "     \       'rust': ['cargo'],
+    "     \       'sh': ['shellcheck'],
+    "     \       'text': ['languagetool'],
+    "     \       'vim': ['vint'],
+    "     \       'go': ['gopls'],
+    "     \       'python': ['pyflakes'],
+    "     \}
+    "
+    " "查看上一个错误
+    " nnoremap <silent> [a :ALEPrevious<CR>
+    " "查看下一个错误
+    " nnoremap <silent> ]a :ALENext<CR>
+    " "自定义error和warning图标
+    " let g:ale_sign_error="\uf05e"
+    " let g:ale_sign_warning="\uf071"
+    " let g:ale_sign_column_always=1
+    "
+    " "显示Linter名称,出错或警告等相关信息
+    " let g:ale_echo_msg_error_str = 'E'
+    " let g:ale_echo_msg_warning_str = 'W'
+    " let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    " " 光标移动到错误的地方时立即显示错误
+    " let g:ale_echo_delay = 1
+    "
+    " autocmd ColorScheme * highlight ALEErrorSign ctermfg=red ctermbg=18
+    " highlight ALEErrorSign ctermbg=NONE ctermfg=red
+    " highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 " }
 
 " vim-devicons {
@@ -235,7 +235,7 @@ endif
 " }
 
 " fugitive {
-	nmap df :Gdiff<CR>
+	nmap tf :Gdiff<CR>
 " }
 
 " fzf {
@@ -331,140 +331,143 @@ endif
     endfunction
 
     nnoremap <silent> <C-g> :Rg<CR>
-    nnoremap <silent> <Leader>c :Commits<CR>
-    nnoremap <silent> <Leader>p :BLines<CR>
+    nnoremap <silent> tc :Commits<CR>
+    nnoremap <silent> tp :BLines<CR>
 
 " }
 
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'seoul256',
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste'],
-        \             [ 'cocstatus',  'currentfunction', 'filename' ],
-        \             [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
-        \           ],
-        \   'right': [ [ 'lineinfo' ],
-        \              [ 'percent' ],
-        \              [ 'fileformat', 'fileencoding', 'filetype' ]
-        \            ]
-        \ },
-        \ 'inactive' : {
-        \   'left': [ [ 'mode' ],
-        \             [ 'filename' ]
-        \           ],
-        \   'right': [ [ 'lineinfo' ],
-        \              [ 'percent' ],
-        \              [ 'filetype' ]
-        \            ]
-        \ },
-        \ 'tabline' : {
-        \   'left'  : [ [ 'tabs' ] ],
-        \   'right' : [ [], [ 'session' ] ]
-        \ },
-        \ 'tab' : {
-        \   'active' : [ 'tabnum', 'filename', 'fticon', 'modified' ],
-        \   'inactive' : [ 'tabnum', 'filename', 'fticon', 'modified' ]
-        \ },
-        \ 'tab_component_function' : {
-        \     'fticon'  : 'LightLineTabFiletypeIcon'
-        \ },
-        \ 'component_function' : {
-        \   'cocstatus'        : 'coc#status',
-        \   'currentfunction'  : 'CocCurrentFunction',
-        \   'readonly'         : 'LightLineReadonly',
-        \   'modified'         : 'LightLineModified',
-        \   'filename'         : 'LightLineFilename',
-        \   'fileformat'       : 'LightLineFileformat',
-        \   'filetype'         : 'LightLineFiletype',
-        \   'fileencoding'     : 'LightLineFileencoding',
-        \   'mode'             : 'LightLineMode',
-        \   'session'          : 'LightLineSession',
-        \ },
-        \ 'component_expand' : {
-        \   'linter_checking': 'lightline#ale#checking',
-        \   'linter_warnings': 'lightline#ale#warnings',
-        \   'linter_errors': 'lightline#ale#errors',
-        \   'linter_ok': 'lightline#ale#ok',
-        \ },
-        \ 'component_type' : {
-        \   'linter_checking': 'middle',
-        \   'linter_warnings': 'warning',
-        \   'linter_errors': 'error',
-        \   'linter_ok': 'middle',
-        \ },
-        \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-        \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-        \ }
-
-    let g:plugin_filetypes = 'help\|unite\|vimfiler\|gundo'
-
-    function! LightLineSession()
-    return fnamemodify(v:this_session, ':t:r')
-    endfunction
-
-    function! LightLineModified()
-    return &ft =~# g:plugin_filetypes ? '' : &modified ? '+' : &modifiable ? '' : '-'
-    endfunction
-
-    function! LightLineReadonly()
-    return &ft !~# g:plugin_filetypes && &readonly ? '' : ''
-    endfunction
-
-    function! LightLineFugitive()
-    if &ft !~# g:plugin_filetypes && exists("*fugitive#head")
-        let _ = fugitive#head()
-        return strlen(_) ? ' '._ : ''
-    endif
-    return ''
-    endfunction
-
-    function! LightLineFilename()
-    let fname = expand('%:t')
-    return &ft == 'tagbar' ? '' :
-            \ &ft == 'gundo' ? '' :
-            \ fname == '__Gundo_Preview__' ? '' :
-            \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-            \ &ft == 'unite' ? unite#get_status_string() :
-            \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-            \ ('' != fname ? fname : '[No Name]') .
-            \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-    endfunction
-
-    function! LightLineFileformat()
-    return winwidth(0) > 70 && &ft !~# g:plugin_filetypes ? WebDevIconsGetFileFormatSymbol() : ''
-    endfunction
-
-    function! LightLineFiletype()
-    return winwidth(0) > 70 && &ft !~# g:plugin_filetypes ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-    endfunction
-
-    function! LightLineTabFiletypeIcon(n)
-    let buflist = tabpagebuflist(a:n)
-    let winnr = tabpagewinnr(a:n)
-    let fn = expand('#'.buflist[winnr - 1].':t')
-    return strlen(fn) ? WebDevIconsGetFileTypeSymbol(fn) : ''
-    endfunction
-
-    function! LightLineFileencoding()
-    return winwidth(0) > 70 && &ft !~# g:plugin_filetypes ? (strlen(&fenc) ? &fenc : &enc) : ''
-    endfunction
-
-    function! LightLineMode()
-    let fname = expand('%:t')
-    return &ft == 'tagbar' ? 'Tagbar' :
-            \ &ft == 'gundo' ? 'Gundo' :
-            \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-            \ &ft == 'unite' ? 'Unite' :
-            \ &ft == 'vimfiler' ? 'VimFiler' :
-            \ winwidth(0) > 20 ? lightline#mode() : ''
-    endfunction
-
-    let g:lightline#ale#indicator_checking = "\uf110"
-    let g:lightline#ale#indicator_warnings = "\uf071 "
-    let g:lightline#ale#indicator_errors = "\uf05e "
-    let g:lightline#ale#indicator_ok = "\uf00c"
+        \ 'colorscheme': 'seoul256'
+      \ }
+    " let g:lightline = {
+    "     \ 'colorscheme': 'seoul256',
+    "     \ 'active': {
+    "     \   'left': [ [ 'mode', 'paste'],
+    "     \             [ 'cocstatus',  'currentfunction', 'filename' ],
+    "     \             [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+    "     \           ],
+    "     \   'right': [ [ 'lineinfo' ],
+    "     \              [ 'percent' ],
+    "     \              [ 'fileformat', 'fileencoding', 'filetype' ]
+    "     \            ]
+    "     \ },
+    "     \ 'inactive' : {
+    "     \   'left': [ [ 'mode' ],
+    "     \             [ 'filename' ]
+    "     \           ],
+    "     \   'right': [ [ 'lineinfo' ],
+    "     \              [ 'percent' ],
+    "     \              [ 'filetype' ]
+    "     \            ]
+    "     \ },
+    "     \ 'tabline' : {
+    "     \   'left'  : [ [ 'tabs' ] ],
+    "     \   'right' : [ [], [ 'session' ] ]
+    "     \ },
+    "     \ 'tab' : {
+    "     \   'active' : [ 'tabnum', 'filename', 'fticon', 'modified' ],
+    "     \   'inactive' : [ 'tabnum', 'filename', 'fticon', 'modified' ]
+    "     \ },
+    "     \ 'tab_component_function' : {
+    "     \     'fticon'  : 'LightLineTabFiletypeIcon'
+    "     \ },
+    "     \ 'component_function' : {
+    "     \   'cocstatus'        : 'coc#status',
+    "     \   'currentfunction'  : 'CocCurrentFunction',
+    "     \   'readonly'         : 'LightLineReadonly',
+    "     \   'modified'         : 'LightLineModified',
+    "     \   'filename'         : 'LightLineFilename',
+    "     \   'fileformat'       : 'LightLineFileformat',
+    "     \   'filetype'         : 'LightLineFiletype',
+    "     \   'fileencoding'     : 'LightLineFileencoding',
+    "     \   'mode'             : 'LightLineMode',
+    "     \   'session'          : 'LightLineSession',
+    "     \ },
+    "     \ 'component_expand' : {
+    "     \   'linter_checking': 'lightline#ale#checking',
+    "     \   'linter_warnings': 'lightline#ale#warnings',
+    "     \   'linter_errors': 'lightline#ale#errors',
+    "     \   'linter_ok': 'lightline#ale#ok',
+    "     \ },
+    "     \ 'component_type' : {
+    "     \   'linter_checking': 'middle',
+    "     \   'linter_warnings': 'warning',
+    "     \   'linter_errors': 'error',
+    "     \   'linter_ok': 'middle',
+    "     \ },
+    "     \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+    "     \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+    "     \ }
+    "
+    " let g:plugin_filetypes = 'help\|unite\|vimfiler\|gundo'
+    "
+    " function! LightLineSession()
+    " return fnamemodify(v:this_session, ':t:r')
+    " endfunction
+    "
+    " function! LightLineModified()
+    " return &ft =~# g:plugin_filetypes ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    " endfunction
+    "
+    " function! LightLineReadonly()
+    " return &ft !~# g:plugin_filetypes && &readonly ? '' : ''
+    " endfunction
+    "
+    " function! LightLineFugitive()
+    " if &ft !~# g:plugin_filetypes && exists("*fugitive#head")
+    "     let _ = fugitive#head()
+    "     return strlen(_) ? ' '._ : ''
+    " endif
+    " return ''
+    " endfunction
+    "
+    " function! LightLineFilename()
+    " let fname = expand('%:t')
+    " return &ft == 'tagbar' ? '' :
+    "         \ &ft == 'gundo' ? '' :
+    "         \ fname == '__Gundo_Preview__' ? '' :
+    "         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+    "         \ &ft == 'unite' ? unite#get_status_string() :
+    "         \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+    "         \ ('' != fname ? fname : '[No Name]') .
+    "         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+    " endfunction
+    "
+    " function! LightLineFileformat()
+    " return winwidth(0) > 70 && &ft !~# g:plugin_filetypes ? WebDevIconsGetFileFormatSymbol() : ''
+    " endfunction
+    "
+    " function! LightLineFiletype()
+    " return winwidth(0) > 70 && &ft !~# g:plugin_filetypes ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+    " endfunction
+    "
+    " function! LightLineTabFiletypeIcon(n)
+    " let buflist = tabpagebuflist(a:n)
+    " let winnr = tabpagewinnr(a:n)
+    " let fn = expand('#'.buflist[winnr - 1].':t')
+    " return strlen(fn) ? WebDevIconsGetFileTypeSymbol(fn) : ''
+    " endfunction
+    "
+    " function! LightLineFileencoding()
+    " return winwidth(0) > 70 && &ft !~# g:plugin_filetypes ? (strlen(&fenc) ? &fenc : &enc) : ''
+    " endfunction
+    "
+    " function! LightLineMode()
+    " let fname = expand('%:t')
+    " return &ft == 'tagbar' ? 'Tagbar' :
+    "         \ &ft == 'gundo' ? 'Gundo' :
+    "         \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+    "         \ &ft == 'unite' ? 'Unite' :
+    "         \ &ft == 'vimfiler' ? 'VimFiler' :
+    "         \ winwidth(0) > 20 ? lightline#mode() : ''
+    " endfunction
+    "
+    " let g:lightline#ale#indicator_checking = "\uf110"
+    " let g:lightline#ale#indicator_warnings = "\uf071 "
+    " let g:lightline#ale#indicator_errors = "\uf05e "
+    " let g:lightline#ale#indicator_ok = "\uf00c"
 " }
 
 " MarkdownPreview {
