@@ -42,11 +42,13 @@ function! PackInit() abort
     " Auto-completion {
         function! s:coc_plugins(hooktype, name) abort
             execute 'packadd ' . a:name
-            " call coc#util#install()
+            call coc#util#build()
+            call coc#util#install()
+            call coc#util#install_extension(g:coc_global_extensions)
         endfunction
 
-        " call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
-        call minpac#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
+        call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'release', 'do': function('s:coc_plugins')})
+        " call minpac#add('neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'})
         call minpac#add('https://github.com/Shougo/neco-vim')
         call minpac#add('https://github.com/neoclide/coc-neco')
         call minpac#add('Shougo/neoinclude.vim')
@@ -135,6 +137,7 @@ function! PackInit() abort
         call minpac#add('mhinz/vim-startify')
         call minpac#add('mhinz/vim-janah')
         call minpac#add('kristijanhusak/vim-hybrid-material')
+        call minpac#add('jsit/toast.vim')
     " }
 
     " Status Line {
