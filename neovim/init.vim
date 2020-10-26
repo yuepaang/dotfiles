@@ -1,7 +1,7 @@
 " File              : neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-10-12 22:52:33
+" Last Modified Date: 2020-10-27 01:24:24
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 let g:ascii = [
@@ -42,7 +42,6 @@ function! PackInit() abort
     " Auto-completion {
         function! s:coc_plugins(hooktype, name) abort
             execute 'packadd ' . a:name
-            call coc#util#build()
             call coc#util#install()
             call coc#util#install_extension(g:coc_global_extensions)
         endfunction
@@ -138,6 +137,7 @@ function! PackInit() abort
         call minpac#add('mhinz/vim-janah')
         call minpac#add('kristijanhusak/vim-hybrid-material')
         call minpac#add('jsit/toast.vim')
+        call minpac#add('joshdick/onedark.vim')
     " }
 
     " Status Line {
@@ -342,7 +342,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'seoul256'
+        \ 'colorscheme': 'onedark'
       \ }
     " let g:lightline = {
     "     \ 'colorscheme': 'seoul256',
@@ -610,7 +610,7 @@ endif
     " color {
         " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
         " Mac Terminal not working
-        " set termguicolors
+        set termguicolors
         set t_Co=256
 
         " colorscheme tender
@@ -646,7 +646,10 @@ endif
             colorscheme github
         else
             " colorscheme base16-eighties
-            colorscheme hybrid_material
+            " colorscheme hybrid_material
+            " colorscheme toast
+            packadd! onedark.vim
+            colorscheme onedark
             " autocmd ColorScheme janah highlight Normal ctermbg=235
             " colorscheme janah
 
