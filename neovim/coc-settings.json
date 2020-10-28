@@ -91,7 +91,7 @@
     //python
     "python.autoComplete.addBrackets": true,
     "python.jediEnabled": true,
-    "python.jediPath": "/usr/local/lib/python3.8/site-packages",
+    "python.jediPath": "/usr/local/lib/python3.9/site-packages",
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "/usr/local/bin/flake8",
     "python.linting.flake8Args": ["--select C,E,F,W,B,B950", "--max-line-length 80", "--extend-ignore E203, E501, W503"],
