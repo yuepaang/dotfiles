@@ -138,6 +138,7 @@ function! PackInit() abort
         call minpac#add('kristijanhusak/vim-hybrid-material')
         call minpac#add('jsit/toast.vim')
         call minpac#add('joshdick/onedark.vim')
+        call minpac#add('adrian5/oceanic-next-vim')
     " }
 
     " Status Line {
@@ -342,7 +343,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'onedark'
+        \ 'colorscheme': 'oceanicnext'
       \ }
     " let g:lightline = {
     "     \ 'colorscheme': 'seoul256',
@@ -648,8 +649,14 @@ endif
             " colorscheme base16-eighties
             " colorscheme hybrid_material
             " colorscheme toast
-            packadd! onedark.vim
-            colorscheme onedark
+
+            " packadd! onedark.vim
+            " colorscheme onedark
+
+            let g:oceanic_bold = 0
+            colorscheme oceanicnext
+            let g:oceanic_for_polyglot = 1
+
             " autocmd ColorScheme janah highlight Normal ctermbg=235
             " colorscheme janah
 

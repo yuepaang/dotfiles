@@ -105,6 +105,7 @@
     "go.goplsOptions": {
         "completeUnimported": true
     },
+    "go.goplsPath": "/Users/yuepeng/go/bin/gopls",
     // RA
     "rust-analyzer.serverPath": "/Users/yuepeng/.cargo/bin/rust-analyzer",
     "rust-analyzer.updates.channel": "stable",
