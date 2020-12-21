@@ -108,7 +108,8 @@
     "go.goplsPath": "/Users/yuepeng/go/bin/gopls",
     // RA
     "rust-analyzer.serverPath": "/Users/yuepeng/.cargo/bin/rust-analyzer",
-    "rust-analyzer.updates.channel": "stable",
+    "rust-analyzer.updates.channel": "nightly",
+    "http.proxy": "127.0.0.1:8888",
     // Bash
     "sh.enable": true,
     // pairs
