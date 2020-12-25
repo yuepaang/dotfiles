@@ -1,7 +1,7 @@
-" File              : neovim/init.vim
+" File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-10-27 01:24:24
+" Last Modified Date: 2020-12-25 22:59:12
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 let g:ascii = [
@@ -839,7 +839,8 @@ endif
         \ 'coc-sh',
         \ 'coc-pyright',
         \ 'coc-highlight',
-        \ 'coc-imselect'
+        \ 'coc-imselect',
+        \ 'coc-floaterm'
         \ ]
     function! CocBuildUpdate()
         call coc#util#install()

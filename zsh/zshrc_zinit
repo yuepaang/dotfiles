@@ -153,7 +153,7 @@ alias ga='git add'
 alias gr='git rm'
 alias gf='git fetch'
 alias gu='git pull'
-alias gs='git status --short'
+alias gst='git status --short'
 alias gd='git diff'
 alias gdisc='git discard'
 
