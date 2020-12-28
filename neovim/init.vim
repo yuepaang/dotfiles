@@ -47,7 +47,7 @@ function! PackInit() abort
         endfunction
 
         " call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'master', 'do': function('s:coc_plugins')})
-        call minpac#add('neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'})
+        call minpac#add('neoclide/coc.nvim', {'branch': 'master', 'do': {-> system('yarn install --frozen-lockfile')}})
         call minpac#add('https://github.com/Shougo/neco-vim')
         call minpac#add('https://github.com/neoclide/coc-neco')
         call minpac#add('Shougo/neoinclude.vim')
