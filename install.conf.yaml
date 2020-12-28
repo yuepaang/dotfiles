@@ -1,0 +1,20 @@
+- defaults:
+  link:
+    relink: true
+    force: true
+
+- clean: ['~']
+
+- create:
+  - ~/.config/kitty
+
+- link:
+  ~/dotfiles:
+    force: true
+    path: ''
+
+- link:
+  ~/.zshrc:
+    path: .zshrc
+  ~/.gitconfig
+    path: git/gitconfig
