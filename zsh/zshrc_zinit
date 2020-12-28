@@ -149,13 +149,13 @@ source "$HOME/dotfiles/zsh/highlight.sh"
 
 # Git short-cuts.
 alias g='git'
-alias ga='git add'
-alias gr='git rm'
-alias gf='git fetch'
-alias gu='git pull'
-alias gst='git status --short'
-alias gd='git diff'
-alias gdisc='git discard'
+# alias ga='git add'
+# alias gr='git rm'
+# alias gf='git fetch'
+# alias gu='git pull'
+# alias gst='git status --short'
+# alias gd='git diff'
+# alias gdisc='git discard'
 
 function gc() {
   args=$@

@@ -816,6 +816,10 @@ endif
 " }
 
 " coc.nvim {
+    let g:markdown_fenced_languages = [
+        \ 'vim',
+        \ 'help'
+        \]
     let g:coc_global_extensions = [
         \ 'coc-json',
         \ 'coc-html',

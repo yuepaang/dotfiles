@@ -15,6 +15,12 @@
 
 - link:
   ~/.zshrc:
-    path: .zshrc
-  ~/.gitconfig
+    path: zshrc
+
+- link
+  ~/.tmux.conf:
+    path: tmux/tmux.conf
+
+- link:
+  ~/.gitconfig:
     path: git/gitconfig
