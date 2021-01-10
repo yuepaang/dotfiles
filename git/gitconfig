@@ -5,7 +5,19 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  side-by-side = true
+  plus-color = "#012800"
+  minus-color = "#340001"
+  line-numbers-left-format = ""
+  line-numbers-right-format = "│ "
+  syntax-theme = Monokai Extended
+
 [credential]
 	helper = store
 

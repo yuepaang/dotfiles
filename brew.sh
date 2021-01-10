@@ -119,5 +119,14 @@ brew install gpg
 brew install ripgrep
 brew install zsh-completions zsh-syntax-highlighting, zsh-autosuggestions
 brew install jq speedtest-cli
+
+# RUST
+brew install alacritty
+brew install git-delta
+brew install zoxide
+brew install spotify-tui
+brew tap clementtsang/bottom
+brew install bottom
 # Remove outdated versions from the cellar.
 brew cleanups
+

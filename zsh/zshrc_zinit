@@ -1,9 +1,10 @@
+eval "$(starship init zsh)"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 
 ### Added by Zinit's installer
@@ -58,10 +59,10 @@ zinit wait lucid for \
     urbainvaes/fzf-marks
 
 # THEME
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Use Neovim as "preferred editor"
 export VISUAL=nvim
@@ -133,10 +134,15 @@ fi
 alias l='exa -1a --color=auto'         # Lists in one column, hidden files.
 alias ll='ls -l'        # Lists human readable sizes.
 alias la='ll -a'         # Lists human readable sizes, hidden files.
-alias ls="exa -bh --color=auto"
+alias ls="exa -G --color=auto --icons -a -s type"
 # alias ls="nat"
 alias sl='ls'            # I often screw this up.
 alias newest_ls="ls -lh --sort date -r --color=always | head -25"
+
+if [ "$(command -v bat)" ]; then
+  unalias -m 'cat'
+  alias cat='bat -pp --theme="Nord"'
+fi
 
 # Simple clear command.
 alias cl='clear'
@@ -149,13 +155,13 @@ source "$HOME/dotfiles/zsh/highlight.sh"
 
 # Git short-cuts.
 alias g='git'
-# alias ga='git add'
-# alias gr='git rm'
-# alias gf='git fetch'
-# alias gu='git pull'
-# alias gst='git status --short'
-# alias gd='git diff'
-# alias gdisc='git discard'
+alias ga='git add'
+alias gr='git rm'
+alias gf='git fetch'
+alias gu='git pull'
+alias gst='git status --short'
+alias gd='git diff'
+alias gdisc='git discard'
 
 function gc() {
   args=$@
@@ -265,8 +271,6 @@ as="$HOME/Library/Application Support"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 source "/usr/local/share/autojump/autojump.zsh"
-# source "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-# source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 alias vim="nvim"
 
