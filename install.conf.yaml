@@ -24,3 +24,7 @@
 - link:
   ~/.gitconfig:
     path: git/gitconfig
+
+- link:
+  ~/.config/starship.toml:
+    path: starship.toml
