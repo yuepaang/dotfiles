@@ -65,7 +65,7 @@ disabled = false
 style = "bold italic #87A752"
 
 [line_break]
-disabled = true
+disabled = false
 
 [memory_usage]
 format = "$symbol[${ram}( | ${swap})]($style) "
