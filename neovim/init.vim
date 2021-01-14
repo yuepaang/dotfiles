@@ -139,6 +139,7 @@ function! PackInit() abort
         call minpac#add('jsit/toast.vim')
         call minpac#add('joshdick/onedark.vim')
         call minpac#add('adrian5/oceanic-next-vim')
+        call minpac#add('NLKNguyen/papercolor-theme')
     " }
 
     " Status Line {
@@ -343,7 +344,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'oceanicnext'
+        \ 'colorscheme': 'PaperColor'
       \ }
     " let g:lightline = {
     "     \ 'colorscheme': 'seoul256',
@@ -623,8 +624,8 @@ endif
         " colo seoul256
 
         " colorscheme cosmic_latte
-        " set background=light
-        set background=dark
+        set background=light
+        " set background=dark
         let g:github_colors_soft = 1
         let g:github_colors_block_diffmark = 0
         let g:enable_bold_font = 1
@@ -653,9 +654,10 @@ endif
             " packadd! onedark.vim
             " colorscheme onedark
 
-            let g:oceanic_bold = 0
-            colorscheme oceanicnext
-            let g:oceanic_for_polyglot = 1
+            " let g:oceanic_bold = 0
+            " colorscheme oceanicnext
+            " let g:oceanic_for_polyglot = 1
+            colorscheme PaperColor
 
             " autocmd ColorScheme janah highlight Normal ctermbg=235
             " colorscheme janah
