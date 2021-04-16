@@ -344,7 +344,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'PaperColor'
+        \ 'colorscheme': 'seoul256'
       \ }
     " let g:lightline = {
     "     \ 'colorscheme': 'seoul256',
@@ -657,10 +657,10 @@ endif
             " let g:oceanic_bold = 0
             " colorscheme oceanicnext
             " let g:oceanic_for_polyglot = 1
-            colorscheme PaperColor
+            " colorscheme PaperColor
 
             " autocmd ColorScheme janah highlight Normal ctermbg=235
-            " colorscheme janah
+            colorscheme janah
 
             " colorscheme polar
             " func! s:polar_setup() abort
