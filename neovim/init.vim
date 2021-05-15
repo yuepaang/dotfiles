@@ -1,7 +1,7 @@
-" File              : init.vim
+" File              : neovim/init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2020-12-25 22:59:12
+" Last Modified Date: 2021-05-15 17:48:51
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 let g:ascii = [
@@ -140,6 +140,7 @@ function! PackInit() abort
         call minpac#add('joshdick/onedark.vim')
         call minpac#add('adrian5/oceanic-next-vim')
         call minpac#add('NLKNguyen/papercolor-theme')
+        call minpac#add('sainnhe/sonokai')
     " }
 
     " Status Line {
@@ -158,6 +159,9 @@ endfunction
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
+
+" fix error message
+packadd! sonokai
 
 " Improve Performance
 let g:python_host_skip_check=1
@@ -344,7 +348,7 @@ endif
 
 " lightline {
     let g:lightline = {
-        \ 'colorscheme': 'seoul256'
+        \ 'colorscheme': 'sonokai'
       \ }
     " let g:lightline = {
     "     \ 'colorscheme': 'seoul256',
@@ -647,6 +651,12 @@ endif
         if &diff
             colorscheme github
         else
+            " The configuration options should be placed before `colorscheme sonokai`.
+            " let g:sonokai_style = 'andromeda'
+            let g:sonokai_style = 'shusia'
+            let g:sonokai_enable_italic = 1
+            let g:sonokai_disable_italic_comment = 1
+            colorscheme sonokai
             " colorscheme base16-eighties
             " colorscheme hybrid_material
             " colorscheme toast
