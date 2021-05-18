@@ -46,16 +46,11 @@ function! PackInit() abort
             call coc#util#install_extension(g:coc_global_extensions)
         endfunction
 
-        " call minpac#add('https://github.com/neoclide/coc.nvim', {'branch': 'master', 'do': function('s:coc_plugins')})
         call minpac#add('neoclide/coc.nvim', {'branch': 'master', 'do': {-> system('yarn install --frozen-lockfile')}})
         call minpac#add('https://github.com/Shougo/neco-vim')
         call minpac#add('https://github.com/neoclide/coc-neco')
         call minpac#add('Shougo/neoinclude.vim')
         call minpac#add('jsfaint/coc-neoinclude')
-    " }
-
-    " Linter {
-        " call minpac#add('w0rp/ale')
     " }
 
     " Utilities {
@@ -68,10 +63,6 @@ function! PackInit() abort
 
     " tags view {
         call minpac#add('majutsushi/tagbar')
-    " }
-
-    " tags view {
-        " call minpac#add('scrooloose/nerdtree')
     " }
 
     " Search {
@@ -108,6 +99,7 @@ function! PackInit() abort
     " Coding {
         call minpac#add('mg979/vim-visual-multi')
         call minpac#add('Yggdroot/indentLine')
+        call minpac#add('dense-analysis/ale')
 
     " }
 
@@ -138,7 +130,6 @@ function! PackInit() abort
     " Terminal {
         call minpac#add('jlanzarotta/bufexplorer')
         call minpac#add('mg979/vim-xtabline')
-        call minpac#add('voldikss/vim-floaterm')
     " }
 
 endfunction
@@ -167,10 +158,12 @@ function! ConfigStatusLine()
   lua require('cfg.galaxyline')
 endfunction
 
+
 augroup status_line_init
   autocmd!
   autocmd VimEnter * call ConfigStatusLine()
 augroup END
+
 
 " fugitive {
 	nmap tf :Gdiff<CR>
@@ -283,11 +276,10 @@ augroup END
     let pumwidth = 40
     let pumheight = 20
 
-    augroup CustomGroup
+    augroup number_toggle
         autocmd!
-        au InsertEnter * set norelativenumber
-        au InsertLeave * set relativenumber
-        au BufEnter * set formatoptions-=cross
+        autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+        autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
     augroup END
 
     " select only to the last character of the line
@@ -315,15 +307,16 @@ augroup END
     set cursorline
     set scrolloff=6
     set lz
-    set updatetime=300
     set noshowmode
     set laststatus=2
     set cmdheight=2
-    set shortmess+=I
+    " set shortmess+=I
     set title
     set titlestring=%-25.55F\ %a%r%m titlelen=70"
     set mouse=a
     set go-=T
+    set nobackup
+    set nowritebackup
 
 
     silent! set number relativenumber display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
@@ -361,9 +354,9 @@ augroup END
     " Performance
     silent! set updatetime=300 timeout timeoutlen=500 ttimeout ttimeoutlen=50 ttyfast lazyredraw
     set tm=1000 ttm=50
-    silent! set backup swapfile undofile
+    " silent! set backup swapfile undofile
     " Option
-    silent! set signcolumn=yes splitbelow splitright
+    silent! set signcolumn=number splitbelow splitright
 
     syntax enable
     syntax on
@@ -383,16 +376,16 @@ augroup END
     if exists('&pumwidth') | let &pumwidth = pumwidth | endif
     if exists('&pumheight') | let &pumheight = pumheight | endif
 
-    let vimrcdir   = fnamemodify(expand("$MYVIMRC"), ":h")
-    let &directory = vimrcdir."/.vim/swap//"
-    let &backupdir = vimrcdir."/.vim/backup//"
-    let &undodir = vimrcdir."/.vim/undo//"
-
-    for directory in [&directory, &backupdir, &undodir]
-    if !isdirectory(directory)
-        call mkdir(directory, 'p')
-    endif
-    endfor
+    " let vimrcdir   = fnamemodify(expand("$MYVIMRC"), ":h")
+    " let &directory = vimrcdir."/.vim/swap//"
+    " let &backupdir = vimrcdir."/.vim/backup//"
+    " let &undodir = vimrcdir."/.vim/undo//"
+    "
+    " for directory in [&directory, &backupdir, &undodir]
+        " if !isdirectory(directory)
+        "     call mkdir(directory, 'p')
+        " endif
+    " endfor
 
 
     " color {
@@ -570,20 +563,19 @@ augroup END
         \ 'help'
         \]
     let g:coc_global_extensions = [
-        \ 'coc-json',
         \ 'coc-html',
         \ 'coc-snippets',
-        \ 'coc-ultisnips',
         \ 'coc-pairs',
         \ 'coc-json',
+        \ 'coc-tsserver',
         \ 'coc-git',
         \ 'coc-lists',
-        \ 'coc-post',
         \ 'coc-stylelint',
         \ 'coc-yaml',
         \ 'coc-vimlsp',
-        \ 'coc-syntax',
         \ 'coc-tag',
+        \ 'coc-dictionary',
+        \ 'coc-word',
         \ 'coc-rust-analyzer',
         \ 'coc-clangd',
         \ 'coc-tabnine',
@@ -602,9 +594,7 @@ augroup END
 
     command! ExtensionUpdate call CocBuildUpdate()
 
-    " mac iterm2 enhance 'coc-imselect'
     nmap <space>e :CocCommand explorer<CR>
-
 
     " coc-go
     autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
@@ -643,7 +633,6 @@ augroup END
 
 
     " To make <cr> select the first completion item and confirm completion when no item have selected:
-    " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
     inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
     " Close preview window when completion is done.
@@ -662,18 +651,18 @@ augroup END
 
     " Remap keys for gotos
     nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gt <Plug>(coc-type-definition)
+    nmap <silent> 1gd <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
 
-    nmap <silent> grn <Plug>(coc-rename)
+    nmap <silent> <leader>rn <Plug>(coc-rename)
 
-    " Remap for format selected region
-    vmap gf  <Plug>(coc-format-selected)
-    nmap gf  <Plug>(coc-format-selected)
+    " Formatting selected code.
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader>f  <Plug>(coc-format-selected)
 
     " Use K for show documentation in preview window
-    nnoremap <silent> gm :call <SID>show_documentation()<CR>
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
 
     function! s:show_documentation()
         if (index(['vim','help'], &filetype) >= 0)
@@ -695,15 +684,16 @@ augroup END
             " Update signature help on jump placeholder
             autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     augroup end
+    augroup mygroup
 
-    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-    vmap <leader>a  <Plug>(coc-codeaction-selected)
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
     nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-    " Remap for do codeAction of current line
+    " Remap keys for applying codeAction to the current buffer.
     nmap <leader>ac  <Plug>(coc-codeaction)
-    " Fix autofix problem of current line
+    " Apply AutoFix to problem on the current line.
     nmap <leader>qf  <Plug>(coc-fix-current)
+
 
     " Map function and class text objects
     " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -737,7 +727,8 @@ augroup END
 
     " Using CocList
     " Show all diagnostics
-    " nnoremap <silent> <leader>la  :<C-u>CocList diagnostics<cr>
+    " Mappings for CoCList
+    " Show all diagnostics.
     nnoremap <silent> <leader>la  :<C-u>CocFzfList diagnostics<CR>
     nnoremap <silent> <leader>lb  :<C-u>CocFzfList diagnostics --current-buf<CR>
     " Manage extensions
@@ -770,38 +761,6 @@ augroup END
     nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
 
-    " function! CocHighlight() abort
-    "     if &filetype !=# 'markdown'
-    "         call CocActionAsync('highlight')
-    "     endif
-    " endfunction
-    "
-    "
-    " function! CocFloatingLockToggle() abort
-    "     if g:CocFloatingLock == 0
-    "         let g:CocFloatingLock = 1
-    "     elseif g:CocFloatingLock == 1
-    "         let g:CocFloatingLock = 0
-    "     endif
-    " endfunction
-    "
-    " function! CocHover() abort
-    "     if !coc#util#has_float() && g:CocHoverEnable == 1
-    "         call CocActionAsync('doHover')
-    "         call CocActionAsync('showSignatureHelp')
-    "     endif
-    " endfunction
-    "
-    " augroup CocAu
-    "     autocmd!
-    "     autocmd CursorHold * silent call CocHover()
-    "     autocmd CursorHold * silent call CocHighlight()
-    "     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    "     autocmd InsertEnter * call coc#util#float_hide()
-    "     autocmd VimEnter * inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
-    " augroup END
-    " let g:CocHoverEnable = 0
-
     highlight CocHighlightText cterm=bold gui=bold
     highlight CocErrorHighlight ctermfg=Gray guifg=#888888
     highlight CocCodeLens ctermfg=Gray guifg=#888888
@@ -817,7 +776,6 @@ augroup END
     let g:indentline_char='┆'
     " for indentLine
     let g:indentLine_fileTypeExclude = ['coc-explorer']
-    " let g:indentLine_fileTypeExclude = ['defx', 'tagbar']
     let g:indentLine_concealcursor = 'niv'
     let g:indentLine_color_term = 96
     let g:indentLine_color_gui= '#725972'
@@ -840,20 +798,6 @@ augroup END
         echo ': display help'
         echo 'Q: exit'
     endfunction
-" }
-
-" floaterm {
-	hi FloatermNF guibg=#333333
-	let g:floaterm_position		 = 'center'
-    let g:floaterm_keymap_new    = '<Leader>fn'
-	let g:floaterm_keymap_prev	 = '<leader>fp'
-	let g:floaterm_keymap_next	 = '<leader>fn'
-	let g:floaterm_keymap_toggle = '<leader>ff'
-
-
-    let g:floaterm_autoclose=1
-    let g:floaterm_width=0.8
-    let g:floaterm_height=0.8
 " }
 
 " startify {
@@ -915,3 +859,4 @@ map <leader>xl :XTabListBuffers<cr>
 " map <Leader>k <Plug>(easymotion-k)
 " map <Leader>h <Plug>(easymotion-linebackward)
 " " }
+

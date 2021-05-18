@@ -88,39 +88,19 @@
     //tslint
     //"tslint.autoFixOnSave": true,
     "coc.preferences.formatOnSaveFiletypes": ["css","markdown"],
-    //python
-    "python.linting.flake8Enabled": true,
-    "python.venvPath": "$HOME/Env",
-    "python.linting.flake8Path": "/usr/local/bin/flake8",
-    "python.linting.flake8Args": ["--select C,E,F,W,B,B950", "--max-line-length 80", "--extend-ignore E203, E501, W503"],
-    "python.linting.pydocstyleEnabled": true,
-    "python.formatting.provider": "black",
-    "python.formatting.blackPath": "/usr/local/bin/black",
-    "python.formatting.blackArgs": ["--line-length 79"],
-    // Golang
     "go.enable": true,
-	"go.disable": {
-		"workspaceFolders": true
-	},
     "go.goplsOptions": {
         "completeUnimported": true
     },
-    "go.goplsPath": "~/go/bin/gopls",
-    // RA
-    "rust-analyzer.serverPath": "~/.cargo/bin/rust-analyzer",
+    "rust-analyzer.enable": true,
+    "rust-analyzer.server.path": "$HOME/.cargo/bin/rust-analyzer",
     "rust-analyzer.updates.channel": "nightly",
-    "http.proxy": "127.0.0.1:8888",
-    // Bash
-    "sh.enable": true,
-    // pairs
-    "pairs.enableBackspace": false,
-    "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
-    // ls
-    "languageserver": {
-        "dockerfile": {
-            "command": "docker-langserver",
-            "filetypes": ["dockerfile"],
-            "args": ["--stdio"]
-        }
-    }
+    "pyright.enable": true,
+    "python.venvPath": "$HOME/Env",
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "/usr/local/bin/black",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": "/usr/local/bin/flake8",
+    "python.sortImports.path": "/usr/local/bin/isort"
+
 }
