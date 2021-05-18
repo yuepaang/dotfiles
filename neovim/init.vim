@@ -59,12 +59,12 @@ call plug#begin(s:plug_dir)
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-media-files.nvim'
     Plug 'folke/trouble.nvim'
     Plug 'folke/lsp-colors.nvim'
     Plug 'windwp/nvim-autopairs'
     Plug 'akinsho/nvim-bufferline.lua'
-
-
+    Plug 'sbdchd/neoformat'
 
 " Initialize plugin system
 call plug#end()
@@ -548,6 +548,8 @@ lua << EOF
 require('file-icons')
 require('misc-utils')
 require('top-bufferline')
+require('statusline')
+require('telescope-nvim')
 
 require("nvim-ale-diagnostic")
 
