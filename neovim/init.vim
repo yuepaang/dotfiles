@@ -192,6 +192,11 @@ endif
 
 " }
 
+augroup number_toggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
 " neovim {
     let g:mapleader="\<SPACE>"
@@ -201,12 +206,12 @@ endif
     let pumwidth = 40
     let pumheight = 20
 
-    augroup CustomGroup
-        autocmd!
-        au InsertEnter * set norelativenumber
-        au InsertLeave * set relativenumber
-        au BufEnter * set formatoptions-=cross
-    augroup END
+    " augroup CustomGroup
+    "     autocmd!
+    "     au InsertEnter * set norelativenumber
+    "     au InsertLeave * set relativenumber
+    "     au BufEnter * set formatoptions-=cross
+    " augroup END
 
     " select only to the last character of the line
     set selection=exclusive
@@ -518,6 +523,7 @@ inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 highlight link CompeDocumentation NormalFloat
 
 
+" Lspsaga
 nnoremap <silent> gh :Lspsaga lsp_finder<CR>
 nnoremap <silent><leader>ca :Lspsaga code_action<CR>
 vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
@@ -527,18 +533,10 @@ nnoremap <silent> gs :Lspsaga signature_help<CR>
 nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
 nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 nnoremap <silent>gr :Lspsaga rename<CR>
-nnoremap <silent> gd :Lspsaga preview_definition<CR>
-
-
-nnoremap <silent><leader>cd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
-
+nnoremap <silent> gD :Lspsaga preview_definition<CR>
 nnoremap <silent> <leader>cd :Lspsaga show_line_diagnostics<CR>
-nnoremap <silent><leader>cc <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
-
-nnoremap <silent> [e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>
-nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>
-nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
+nnoremap <silent> [d :Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> ]d :Lspsaga diagnostic_jump_prev<CR>
 
 lua << EOF
 require('file-icons')
@@ -563,6 +561,18 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 require('nvim-autopairs').setup()
 
+local i = require("icon-local")
+
+require("trouble").setup {
+          signs = {
+            error = i.diag.error,
+            warning = i.diag.warn,
+            hint = i.diag.hint,
+            information = i.diag.info,
+            other = i.diag.pass
+          }
+        }
+
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
@@ -575,7 +585,11 @@ local on_attach = function(client, bufnr)
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
   -- Mappings.
   local opts = { noremap=true, silent=true }
-   buf_set_keymap('n', 'gdd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '1gd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>k', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap("n", "gf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
 
 end
 
