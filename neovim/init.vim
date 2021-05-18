@@ -1,7 +1,7 @@
-" File              : neovim/init.vim
+" File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2021-05-15 17:48:51
+" Last Modified Date: 2021-05-18 10:13:00
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 let g:ascii = [
@@ -25,7 +25,8 @@ call plug#begin(s:plug_dir)
     Plug 'scrooloose/nerdcommenter'
     Plug 'cinuor/vim-header'
     Plug 'heavenshell/vim-pydocstring', {'do': 'make install'}
-    Plug 'w0rp/ale'
+    Plug 'dense-analysis/ale'
+    Plug 'nathunsmitty/nvim-ale-diagnostic'
     Plug 'majutsushi/tagbar'
     Plug 'vim-scripts/IndexedSearch'
     Plug 'haya14busa/incsearch.vim'
@@ -47,8 +48,6 @@ call plug#begin(s:plug_dir)
     Plug 'sainnhe/sonokai'
     Plug 'glepnir/galaxyline.nvim', {'branch': 'main'}
     Plug 'kyazdani42/nvim-web-devicons'
-    Plug 'jlanzarotta/bufexplorer'
-    Plug 'mg979/vim-xtabline'
 
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/lsp_extensions.nvim'
@@ -63,6 +62,7 @@ call plug#begin(s:plug_dir)
     Plug 'folke/trouble.nvim'
     Plug 'folke/lsp-colors.nvim'
     Plug 'windwp/nvim-autopairs'
+    Plug 'akinsho/nvim-bufferline.lua'
 
 
 
@@ -505,27 +505,6 @@ endif
 
 " }
 
-" Buffer explorer {
-let g:bufExplorerDefaultHelp=0
-let g:bufExplorerShowRelativePath=1
-nmap <leader>n :BufExplorer<CR>
-" }
-
-
-" vim-xtabline {
-
-let g:xtabline_settings = get(g:, 'xtabline_settings', {})
-let g:xtabline_settings.map_prefix = '<leader>x'
-let g:xtabline_settings.tabline_modes = ['buffers', 'tabs']
-autocmd vimenter * XTabTheme slate
-autocmd bufenter * XTabTheme slate
-let g:xtabline_settings.buffers_paths = 0
-let g:xtabline_settings.current_tab_paths = 0
-let g:xtabline_settings.other_tabs_paths = 0
-map <leader>xq :XTabCloseBuffer<cr>
-map <leader>xl :XTabListBuffers<cr>
-" }
-
 " Completion
 let g:compe = {}
 let g:compe.enabled = v:true
@@ -566,10 +545,24 @@ inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 highlight link CompeDocumentation NormalFloat
 
 lua << EOF
+require('file-icons')
+require('misc-utils')
+require('top-bufferline')
+
+require("nvim-ale-diagnostic")
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = false,
+    virtual_text = false,
+    signs = true,
+    update_in_insert = false,
+  }
+)
 
 local nvim_lsp = require('lspconfig')
 
--- Use an on_attach function to only map the following keys 
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -582,14 +575,14 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  -- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  -- buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  -- buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  -- buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
