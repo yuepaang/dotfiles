@@ -268,7 +268,7 @@ com="$dev/com"
 py="$dev/personal"
 as="$HOME/Library/Application Support"
 
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH:$HOME/go/bin"
 
 source "/usr/local/share/autojump/autojump.zsh"
 
