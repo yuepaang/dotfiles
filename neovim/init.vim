@@ -577,7 +577,6 @@ require('statusline')
 require('telescope-nvim')
 
 require("nvim-ale-diagnostic")
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = false,
@@ -586,6 +585,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = false,
   }
 )
+
+require('nvim-autopairs').setup()
 
 local nvim_lsp = require('lspconfig')
 
