@@ -33,7 +33,7 @@ call plug#begin(s:plug_dir)
     Plug 'junegunn/fzf', {'do': { -> system('./install --all')}}
     Plug 'junegunn/fzf.vim'
     Plug 'fszymanski/fzf-quickfix'
-    Plug 'sheerun/vim-polyglot'
+    " Plug 'sheerun/vim-polyglot'
     Plug 'honza/vim-snippets'
     Plug 'SirVer/ultisnips'
     Plug 'norcalli/snippets.nvim'
@@ -511,43 +511,6 @@ endif
 
 " }
 
-" Completion
-let g:compe = {}
-let g:compe.enabled = v:true
-let g:compe.autocomplete = v:true
-let g:compe.debug = v:false
-let g:compe.min_length = 1
-let g:compe.preselect = 'enable'
-let g:compe.throttle_time = 80
-let g:compe.source_timeout = 200
-let g:compe.incomplete_delay = 400
-let g:compe.max_abbr_width = 100
-let g:compe.max_kind_width = 100
-let g:compe.max_menu_width = 100
-let g:compe.documentation = v:true
-
-let g:compe.source = {}
-let g:compe.source.path = v:true
-let g:compe.source.buffer = v:true
-let g:compe.source.calc = v:true
-let g:compe.source.nvim_lsp = v:true
-let g:compe.source.nvim_lua = v:true
-let g:compe.source.ultisnips = v:true
-let g:compe.source.vsnips = v:true
-let g:compe.source.snippets_nvim = v:true
-let g:compe.source.spell = v:true
-let g:compe.source.tags = v:true
-
-let g:compe.source.tabnine = v:true
-let g:compe.source.tabnine = {}
-let g:compe.source.tabnine.max_line = 1000
-let g:compe.source.tabnine.max_num_results = 6
-let g:compe.source.tabnine.priority = 5000
-" setting sort to false means compe will leave tabnine to sort the completion items
-let g:compe.source.tabnine.sort = v:false
-let g:compe.source.tabnine.show_prediction_strength = v:true
-let g:compe.source.tabnine.ignore_pattern = ''
-
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
@@ -577,8 +540,6 @@ nnoremap <silent> ]e <cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_ne
 nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
 nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
 
-
-
 lua << EOF
 require('file-icons')
 require('misc-utils')
@@ -587,6 +548,8 @@ require('statusline')
 require('telescope-nvim')
 require('nvimtree')
 require('treesitter')
+require('custom_highlights')
+require('compe-completion')
 
 require("nvim-ale-diagnostic")
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
