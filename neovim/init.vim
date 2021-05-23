@@ -1,7 +1,7 @@
-" File              : neovim/init.vim
+" File              : init.vim
 " Author            : Yue Peng <yuepaang@gmail.com>
 " Date              : 2019-07-12 11:01:48
-" Last Modified Date: 2021-05-15 17:48:51
+" Last Modified Date: 2021-05-21 12:07:00
 " Last Modified By  : Yue Peng <yuepaang@gmail.com>
 
 let g:ascii = [
@@ -19,7 +19,7 @@ let g:ascii = [
 function! s:install_minpac() abort
     echo 'Installing minpac...'
     let cmd =
-                \ "git clone https://github.com/k-takata/minpac.git ./pack/minpac/opt/minpac"
+                \ "git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac"
     let out = system(cmd)
     if v:shell_error
         echohl ErrorMsg | echom 'Error!: ' . out | echohl None
@@ -47,10 +47,6 @@ function! PackInit() abort
         endfunction
 
         call minpac#add('neoclide/coc.nvim', {'branch': 'master', 'do': {-> system('yarn install --frozen-lockfile')}})
-        call minpac#add('https://github.com/Shougo/neco-vim')
-        call minpac#add('https://github.com/neoclide/coc-neco')
-        call minpac#add('Shougo/neoinclude.vim')
-        call minpac#add('jsfaint/coc-neoinclude')
     " }
 
     " Utilities {
@@ -272,9 +268,6 @@ augroup END
     let g:mapleader="\<SPACE>"
     let g:maplocalleader=","
 
-    let &ls = 2
-    let pumwidth = 40
-    let pumheight = 20
 
     augroup number_toggle
         autocmd!
@@ -304,13 +297,9 @@ augroup END
 
     " Appearance
     set noruler noshowcmd
-    set cursorline
     set scrolloff=6
     set lz
     set noshowmode
-    set laststatus=2
-    set cmdheight=2
-    " set shortmess+=I
     set title
     set titlestring=%-25.55F\ %a%r%m titlelen=70"
     set mouse=a
@@ -320,10 +309,10 @@ augroup END
 
 
     silent! set number relativenumber display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
-    " silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
-    " silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%y%w\ %3l:%-2c
+    silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
+    silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%y%w\ %3l:%-2c
     " silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
-    " silent! set cursorline nocursorcolumn colorcolumn=80 concealcursor=nvc conceallevel=0 norelativenumber
+    silent! set cursorline nocursorcolumn colorcolumn=80 concealcursor=nvc conceallevel=0
     " silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
     silent! set startofline linespace=0 whichwrap=b,s sidescroll=0
     " silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
@@ -371,10 +360,6 @@ augroup END
     scriptencoding utf-8
     set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 
-
-    if &ls == 2 | set nosmd | endif
-    if exists('&pumwidth') | let &pumwidth = pumwidth | endif
-    if exists('&pumheight') | let &pumheight = pumheight | endif
 
     " let vimrcdir   = fnamemodify(expand("$MYVIMRC"), ":h")
     " let &directory = vimrcdir."/.vim/swap//"
@@ -729,7 +714,7 @@ augroup END
     " Show all diagnostics
     " Mappings for CoCList
     " Show all diagnostics.
-    nnoremap <silent> <leader>la  :<C-u>CocFzfList diagnostics<CR>
+    nnoremap <silent> <leader>ld  :<C-u>CocFzfList diagnostics<CR>
     nnoremap <silent> <leader>lb  :<C-u>CocFzfList diagnostics --current-buf<CR>
     " Manage extensions
     " nnoremap <silent> <leader>le  :<C-u>CocList extensions<cr>

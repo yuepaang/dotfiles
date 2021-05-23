@@ -93,10 +93,10 @@
         "completeUnimported": true
     },
     "rust-analyzer.enable": true,
-    "rust-analyzer.server.path": "$HOME/.cargo/bin/rust-analyzer",
+    "rust-analyzer.server.path": "~/.cargo/bin/rust-analyzer",
     "rust-analyzer.updates.channel": "nightly",
     "pyright.enable": true,
-    "python.venvPath": "$HOME/Env",
+    "python.venvPath": "~/Env",
     "python.formatting.provider": "black",
     "python.formatting.blackPath": "/usr/local/bin/black",
     "python.linting.flake8Enabled": true,
