@@ -260,7 +260,6 @@ function rams() {
   done
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Commonly used directories.
 dev="$HOME/Developer"
@@ -319,3 +318,7 @@ export all_proxy="${all_proxy}"
 
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias luamake=/Users/yuepeng/common/lua-language-server/3rd/luamake/luamake
