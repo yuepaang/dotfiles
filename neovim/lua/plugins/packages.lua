@@ -39,6 +39,16 @@ require('packer').startup(function()
 
     use {
         -- disable = true,
+        'sainnhe/sonokai',
+        config = function()
+            vim.g.sonokai_style = 'atlantis'
+            -- Load the colorscheme
+            vim.cmd [[colorscheme sonokai]]
+        end
+    }
+
+    use {
+        disable = true,
         'folke/tokyonight.nvim',
         config = function()
             vim.g.tokyonight_style = 'storm' -- 'storm', 'night'  or 'day'
@@ -144,13 +154,6 @@ require('packer').startup(function()
             require('plugins.config.diffview')
         end
     }
-
-    use {
-        'windwp/nvim-autopairs',
-        config = function()
-            require('plugins.config.autopair')
-        end
-        }
 
     use {
         'famiu/feline.nvim',

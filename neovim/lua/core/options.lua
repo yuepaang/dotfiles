@@ -57,8 +57,6 @@ bo.smartindent = true
 wo.number = true
 wo.relativenumber = true
 
-cmd 'colorscheme tokyonight'
-
 api.nvim_command([[
     augroup number_toggle
         autocmd BufEnter,FocusGained,InsertLeave * set relativenumber

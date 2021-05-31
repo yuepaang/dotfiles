@@ -93,6 +93,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/yuepeng/.local/share/nvim/site/pack/packer/start/feline.nvim"
   },
+  ["galaxyline.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30plugins.config.statusline\frequire\0" },
+    loaded = true,
+    path = "/Users/yuepeng/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
+  },
   ["gitsigns.nvim"] = {
     config = { "\27LJ\2\n7\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\28plugins.config.gitsigns\frequire\0" },
     loaded = true,
@@ -198,6 +203,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/yuepeng/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  sonokai = {
+    config = { "\27LJ\2\n`\0\0\3\0\6\0\t6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\4\0'\2\5\0B\0\2\1K\0\1\0\24colorscheme sonokai\bcmd\ratlantis\18sonokai_style\6g\bvim\0" },
+    loaded = true,
+    path = "/Users/yuepeng/.local/share/nvim/site/pack/packer/start/sonokai"
+  },
   ["telescope-dap.nvim"] = {
     loaded = true,
     path = "/Users/yuepeng/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim"
@@ -211,15 +221,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/yuepeng/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
-  ["tokyonight.nvim"] = {
-    config = { "\27LJ\2\nþ\2\0\0\3\0\r\0!6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0+\1\2\0=\1\4\0006\0\0\0009\0\1\0+\1\1\0=\1\5\0006\0\0\0009\0\1\0+\1\1\0=\1\6\0006\0\0\0009\0\1\0+\1\1\0=\1\a\0006\0\0\0009\0\1\0+\1\1\0=\1\b\0006\0\0\0009\0\1\0005\1\n\0=\1\t\0006\0\0\0009\0\v\0'\2\f\0B\0\2\1K\0\1\0\27colorscheme tokyonight\bcmd\1\5\0\0\aqf\15vista_kind\rterminal\vpacker\24tokyonight_sidebars\27tokyonight_transparent tokyonight_italic_variables tokyonight_italic_functions\31tokyonight_italic_keywords\31tokyonight_italic_comments\nstorm\21tokyonight_style\6g\bvim\0" },
-    loaded = true,
-    path = "/Users/yuepeng/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
-  },
   ["trouble.nvim"] = {
     config = { "\27LJ\2\n6\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\27plugins.config.trouble\frequire\0" },
     loaded = true,
     path = "/Users/yuepeng/.local/share/nvim/site/pack/packer/start/trouble.nvim"
+  },
+  ultisnips = {
+    loaded = true,
+    path = "/Users/yuepeng/.local/share/nvim/site/pack/packer/start/ultisnips"
   },
   ["vim-easy-align"] = {
     loaded = true,
@@ -261,58 +270,62 @@ time("Setup for indent-blankline.nvim", false)
 time("packadd for indent-blankline.nvim", true)
 vim.cmd [[packadd indent-blankline.nvim]]
 time("packadd for indent-blankline.nvim", false)
--- Config for: nvim-comment
-time("Config for nvim-comment", true)
-try_loadstring("\27LJ\2\n6\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\27plugins.config.comment\frequire\0", "config", "nvim-comment")
-time("Config for nvim-comment", false)
--- Config for: nvim-colorizer.lua
-time("Config for nvim-colorizer.lua", true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29plugins.config.colorizer\frequire\0", "config", "nvim-colorizer.lua")
-time("Config for nvim-colorizer.lua", false)
--- Config for: diffview.nvim
-time("Config for diffview.nvim", true)
-try_loadstring("\27LJ\2\n7\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\28plugins.config.diffview\frequire\0", "config", "diffview.nvim")
-time("Config for diffview.nvim", false)
 -- Config for: nvim-lspconfig
 time("Config for nvim-lspconfig", true)
 try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23plugins.config.lsp\frequire\0", "config", "nvim-lspconfig")
 time("Config for nvim-lspconfig", false)
--- Config for: trouble.nvim
-time("Config for trouble.nvim", true)
-try_loadstring("\27LJ\2\n6\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\27plugins.config.trouble\frequire\0", "config", "trouble.nvim")
-time("Config for trouble.nvim", false)
--- Config for: feline.nvim
-time("Config for feline.nvim", true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\26plugins.config.feline\frequire\0", "config", "feline.nvim")
-time("Config for feline.nvim", false)
--- Config for: tokyonight.nvim
-time("Config for tokyonight.nvim", true)
-try_loadstring("\27LJ\2\nþ\2\0\0\3\0\r\0!6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0+\1\2\0=\1\4\0006\0\0\0009\0\1\0+\1\1\0=\1\5\0006\0\0\0009\0\1\0+\1\1\0=\1\6\0006\0\0\0009\0\1\0+\1\1\0=\1\a\0006\0\0\0009\0\1\0+\1\1\0=\1\b\0006\0\0\0009\0\1\0005\1\n\0=\1\t\0006\0\0\0009\0\v\0'\2\f\0B\0\2\1K\0\1\0\27colorscheme tokyonight\bcmd\1\5\0\0\aqf\15vista_kind\rterminal\vpacker\24tokyonight_sidebars\27tokyonight_transparent tokyonight_italic_variables tokyonight_italic_functions\31tokyonight_italic_keywords\31tokyonight_italic_comments\nstorm\21tokyonight_style\6g\bvim\0", "config", "tokyonight.nvim")
-time("Config for tokyonight.nvim", false)
 -- Config for: lspsaga.nvim
 time("Config for lspsaga.nvim", true)
 try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\18init_lsp_saga\flspsaga\frequire\0", "config", "lspsaga.nvim")
 time("Config for lspsaga.nvim", false)
--- Config for: vim-startify
-time("Config for vim-startify", true)
-try_loadstring("\27LJ\2\n7\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\28plugins.config.startify\frequire\0", "config", "vim-startify")
-time("Config for vim-startify", false)
 -- Config for: nvim-compe
 time("Config for nvim-compe", true)
 try_loadstring("\27LJ\2\n4\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\25plugins.config.compe\frequire\0", "config", "nvim-compe")
 time("Config for nvim-compe", false)
--- Config for: nvim-treesitter
-time("Config for nvim-treesitter", true)
-try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30plugins.config.treesitter\frequire\0", "config", "nvim-treesitter")
-time("Config for nvim-treesitter", false)
+-- Config for: feline.nvim
+time("Config for feline.nvim", true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\26plugins.config.feline\frequire\0", "config", "feline.nvim")
+time("Config for feline.nvim", false)
+-- Config for: vim-startify
+time("Config for vim-startify", true)
+try_loadstring("\27LJ\2\n7\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\28plugins.config.startify\frequire\0", "config", "vim-startify")
+time("Config for vim-startify", false)
 -- Config for: gitsigns.nvim
 time("Config for gitsigns.nvim", true)
 try_loadstring("\27LJ\2\n7\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\28plugins.config.gitsigns\frequire\0", "config", "gitsigns.nvim")
 time("Config for gitsigns.nvim", false)
+-- Config for: nvim-colorizer.lua
+time("Config for nvim-colorizer.lua", true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29plugins.config.colorizer\frequire\0", "config", "nvim-colorizer.lua")
+time("Config for nvim-colorizer.lua", false)
+-- Config for: nvim-treesitter
+time("Config for nvim-treesitter", true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30plugins.config.treesitter\frequire\0", "config", "nvim-treesitter")
+time("Config for nvim-treesitter", false)
+-- Config for: trouble.nvim
+time("Config for trouble.nvim", true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\27plugins.config.trouble\frequire\0", "config", "trouble.nvim")
+time("Config for trouble.nvim", false)
 -- Config for: telescope.nvim
 time("Config for telescope.nvim", true)
 try_loadstring("\27LJ\2\n8\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\29plugins.config.telescope\frequire\0", "config", "telescope.nvim")
 time("Config for telescope.nvim", false)
+-- Config for: galaxyline.nvim
+time("Config for galaxyline.nvim", true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\30plugins.config.statusline\frequire\0", "config", "galaxyline.nvim")
+time("Config for galaxyline.nvim", false)
+-- Config for: nvim-comment
+time("Config for nvim-comment", true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\27plugins.config.comment\frequire\0", "config", "nvim-comment")
+time("Config for nvim-comment", false)
+-- Config for: diffview.nvim
+time("Config for diffview.nvim", true)
+try_loadstring("\27LJ\2\n7\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\28plugins.config.diffview\frequire\0", "config", "diffview.nvim")
+time("Config for diffview.nvim", false)
+-- Config for: sonokai
+time("Config for sonokai", true)
+try_loadstring("\27LJ\2\n`\0\0\3\0\6\0\t6\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\4\0'\2\5\0B\0\2\1K\0\1\0\24colorscheme sonokai\bcmd\ratlantis\18sonokai_style\6g\bvim\0", "config", "sonokai")
+time("Config for sonokai", false)
 -- Config for: vim-mundo
 time("Config for vim-mundo", true)
 try_loadstring("\27LJ\2\n}\0\0\4\0\a\0\r6\0\0\0009\0\1\0)\1<\0=\1\2\0006\0\0\0009\0\1\0+\1\2\0=\1\3\0006\0\4\0'\2\5\0'\3\6\0B\0\3\1K\0\1\0\21:MundoToggle<cr>\t<F5>\tnmap\25mundo_preview_bottom\16mundo_width\6g\bvim\0", "config", "vim-mundo")

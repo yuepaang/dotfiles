@@ -22,6 +22,8 @@ nnoremap('<C-j>', '<C-w>j')
 nnoremap('<C-k>', '<C-w>k')
 nnoremap('<C-l>', '<C-w>l')
 
+nnoremap('<Leader>df', ':DiffviewOpen<CR>')
+
 nnoremap('<F2>', '"=strftime("%Y-%m-%d %H:%M:%S")<CR>P')
 
 nnoremap('<C-q>', ':q<CR>')
