@@ -65,8 +65,15 @@ api.nvim_command([[
         autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
     augroup END
 
-    augroup highlight_yank
-        au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
+]])
+api.nvim_command([[
+  augroup highlight_yank
+      au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
+  augroup END
+]])
+api.nvim_command([[
+    augroup vimrc-remember-cursor-position
+        autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
     augroup END
 ]])
 

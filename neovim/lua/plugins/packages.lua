@@ -143,6 +143,10 @@ require('packer').startup(function()
     }
 
     use {
+        'windwp/nvim-autopairs'
+        }
+
+    use {
         'famiu/feline.nvim',
         requires = {'nvim-web-devicons'},
         config = function()
