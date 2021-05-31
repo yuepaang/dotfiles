@@ -64,6 +64,9 @@ require('packer').startup(function()
     use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
+        config = function()
+            require("plugins.config.statusline")
+        end,
         -- some optional icons
         requires = {'kyazdani42/nvim-web-devicons'}
     }
@@ -143,7 +146,10 @@ require('packer').startup(function()
     }
 
     use {
-        'windwp/nvim-autopairs'
+        'windwp/nvim-autopairs',
+        config = function()
+            require('plugins.config.autopair')
+        end
         }
 
     use {

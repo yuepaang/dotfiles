@@ -67,9 +67,9 @@ api.nvim_command([[
 
 ]])
 api.nvim_command([[
-  augroup highlight_yank
-      au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
-  augroup END
+    augroup highlight_yank
+      autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=400}
+    augroup END
 ]])
 api.nvim_command([[
     augroup vimrc-remember-cursor-position
