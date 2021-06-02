@@ -28,3 +28,7 @@ nnoremap('<F2>', '"=strftime("%Y-%m-%d %H:%M:%S")<CR>P')
 
 nnoremap('<C-q>', ':q<CR>')
 nnoremap('<C-s>', ':w<CR>')
+
+nsoremap('n', '<Tab>', ':BufferPrevious<CR>')
+nsoremap('n', '<S-Tab>', ':BufferNext<CR>')
+nsoremap('n', '<Leader>bc', ':BufferClose<CR>')

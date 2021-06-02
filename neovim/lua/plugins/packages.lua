@@ -49,6 +49,14 @@ require('packer').startup(function()
 
     use {
         disable = true,
+        'shaunsingh/solarized.nvim',
+        config = function()
+            vim.cmd [[colorscheme solarized]]
+        end
+    }
+
+    use {
+        disable = true,
         'folke/tokyonight.nvim',
         config = function()
             vim.g.tokyonight_style = 'storm' -- 'storm', 'night'  or 'day'
@@ -238,5 +246,8 @@ require('packer').startup(function()
         end
     }
 
-end)
+    use {
+        'romgrk/barbar.nvim'
+    }
 
+end)

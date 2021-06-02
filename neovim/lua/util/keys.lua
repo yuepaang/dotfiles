@@ -11,6 +11,13 @@ local function noremap(type, input, output)
     })
 end
 
+function nsoremap(type, input, output)
+    vim.api.nvim_set_keymap(type, input, output, {
+        noremap = true,
+        silent = true
+    })
+end
+
 function nnoremap(input, output)
     noremap('n', input, output)
 end
@@ -42,4 +49,3 @@ end
 function tmap(input, output)
     map('t', input, output)
 end
-

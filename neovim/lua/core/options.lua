@@ -17,7 +17,7 @@ o.wildmenu = true
 o.wildmode = 'full'
 o.hlsearch = true
 
-o.listchars = [[tab:→ ,space:·,eol:¶,trail:·,extends:↷,precedes:↶]]
+-- o.listchars = [[tab:→ ,space:·,eol:¶,trail:·,extends:↷,precedes:↶]]
 
 o.clipboard = 'unnamedplus'
 
@@ -49,7 +49,7 @@ o.ttimeout = true
 o.ttimeoutlen = 50
 o.ttyfast = true
 o.lazyredraw = true
-o.scrolloff = 6
+o.scrolloff = 3
 
 bo.autoindent = true
 bo.smartindent = true
@@ -89,3 +89,5 @@ wo.cursorcolumn = true
 g.loaded_perl_provider = 0
 g.loaded_python_provider = 0
 
+cmd([[autocmd BufWritePre * %s/\s\+$//e]])                             --remove trailing whitespaces
+cmd([[autocmd BufWritePre * %s/\n\+\%$//e]])
