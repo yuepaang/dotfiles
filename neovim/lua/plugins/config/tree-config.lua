@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
   vim.g.nvim_tree_side       = 'left'
-  vim.g.nvim_tree_width      = 65
+  vim.g.nvim_tree_width      = 45
 
   vim.g.nvim_tree_auto_open  = 0
   vim.g.nvim_tree_auto_close = 1

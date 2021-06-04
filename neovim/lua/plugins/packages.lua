@@ -22,10 +22,11 @@ require('packer').startup(function()
     }
 
     use {
-        disable = true,
+        -- disable = true,
         'marko-cerovac/material.nvim',
         config = function()
-            vim.g.material_style = 'palenight'
+            -- vim.g.material_style = 'palenight'
+            vim.g.material_style = 'lighter'
             vim.g.material_italic_comments = true
             vim.g.material_italic_keywords = false
             vim.g.material_italic_functions = false
@@ -38,7 +39,7 @@ require('packer').startup(function()
     }
 
     use {
-        -- disable = true,
+        disable = true,
         'sainnhe/sonokai',
         config = function()
             vim.g.sonokai_style = 'atlantis'
@@ -163,13 +164,13 @@ require('packer').startup(function()
         end
     }
 
-    use {
-        'famiu/feline.nvim',
-        requires = {'nvim-web-devicons'},
-        config = function()
-            require('plugins.config.feline')
-        end
-    }
+    -- use {
+    --     'famiu/feline.nvim',
+    --     requires = {'nvim-web-devicons'},
+    --     config = function()
+    --         require('plugins.config.feline')
+    --     end
+    -- }
 
     use {
         'mhinz/vim-startify',
