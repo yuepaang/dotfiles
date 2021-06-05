@@ -107,7 +107,7 @@ function! PackInit() abort
         " call minpac#add('morhetz/gruvbox')
         " call minpac#add('ayu-theme/ayu-vim')
         " call minpac#add('hzchirs/vim-material')
-        " call minpac#add('nightsense/cosmic_latte')
+        call minpac#add('nightsense/cosmic_latte')
         " call minpac#add('jacoborus/tender.vim')
         " call minpac#add('chriskempson/base16-vim')
         " call minpac#add('mhinz/vim-janah')
@@ -115,12 +115,14 @@ function! PackInit() abort
         " call minpac#add('jsit/toast.vim')
         " call minpac#add('joshdick/onedark.vim')
         " call minpac#add('adrian5/oceanic-next-vim')
-        " call minpac#add('NLKNguyen/papercolor-theme')
+        call minpac#add('NLKNguyen/papercolor-theme')
+        " call minpac#add('ishan9299/modus-theme-vim')
+        call minpac#add('Th3Whit3Wolf/one-nvim')
         call minpac#add('sainnhe/sonokai')
     " }
 
     " Status Line {
-        call minpac#add('glepnir/galaxyline.nvim', {'branch': 'main'})
+        call minpac#add('glepnir/spaceline.vim')
         call minpac#add('kyazdani42/nvim-web-devicons')
     " }
     " Terminal {
@@ -135,7 +137,7 @@ command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 
 " fix error message
-packadd! sonokai
+" packadd! sonokai
 
 " Improve Performance
 let g:python_host_skip_check=1
@@ -149,16 +151,6 @@ else
     let g:python3_host_prog='/usr/bin/python3'
     let g:python_host_prog='/usr/bin/python'
 endif
-
-function! ConfigStatusLine()
-  lua require('cfg.galaxyline')
-endfunction
-
-
-augroup status_line_init
-  autocmd!
-  autocmd VimEnter * call ConfigStatusLine()
-augroup END
 
 
 " fugitive {
@@ -282,50 +274,33 @@ augroup END
     " Clear current-search highlighting by hitting <CR> in normal mode.
     nnoremap <silent> <CR> :nohlsearch<CR><CR>
 
-    " To disable conceal regardless of conceallevel setting
-    let g:vim_markdown_conceal = 0
-    let g:vim_markdown_conceal_code_blocks = 0
-    let g:tex_conceal = ""
-    let g:vim_markdown_math = 1
-
     set autowrite
     set autochdir!
     set colorcolumn=80
     set hidden
     set list lcs=tab:\|\ " tab indent guide
     set nocompatible
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=0
+    set expandtab
+    set foldmethod=syntax
+    set nofoldenable
+    set backspace=2
+    set cursorline
 
     " Appearance
     set noruler noshowcmd
-    set scrolloff=6
+    set scrolloff=3
+    set synmaxcol=500
     set lz
-    set noshowmode
     set title
     set titlestring=%-25.55F\ %a%r%m titlelen=70"
     set mouse=a
     set go-=T
     set nobackup
     set nowritebackup
-
-
-    silent! set number relativenumber display=lastline,uhex wrap wrapmargin=0 guioptions=ce key=
-    silent! set noshowmatch matchtime=1 noshowmode shortmess+=I cmdheight=2 cmdwinheight=10 showbreak=
-    silent! set noshowcmd noruler rulerformat= laststatus=2 statusline=%t\ %=\ %m%r%y%w\ %3l:%-2c
-    " silent! set title titlelen=100 titleold= titlestring=%f noicon norightleft showtabline=1
-    silent! set cursorline nocursorcolumn colorcolumn=80 concealcursor=nvc conceallevel=0
-    " silent! set list listchars=tab:>\ ,nbsp:_ synmaxcol=3000 ambiwidth=double breakindent breakindentopt=
-    silent! set startofline linespace=0 whichwrap=b,s sidescroll=0
-    " silent! set equalalways nowinfixwidth nowinfixheight winminwidth=3 winminheight=3 nowarn noconfirm
-    silent! set fillchars=vert:\|,fold:\  eventignore= helplang=en viewoptions=options,cursor virtualedit=block
-
-    " Editing
-    silent! set iminsert=0 imsearch=0 nopaste pastetoggle= nogdefault comments& commentstring=#\ %s
-    silent! set smartindent autoindent shiftround shiftwidth=4 expandtab tabstop=4 smarttab softtabstop=4
-    silent! set foldclose=all foldcolumn=0 nofoldenable foldlevel=0 foldmarker& foldmethod=indent
-    silent! set textwidth=0 backspace=indent,eol,start nrformats-=octal formatoptions-=cro nojoinspaces
-    silent! set noautochdir write nowriteany writedelay=0 verbose=0 verbosefile= notildeop noinsertmode
-    silent! set tags=tags,./tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
-    silent! set tags+=../../../../../../tags,../../../../../../../tags,~/Documents/scala/tags,~/Documents/*/tags tagstack
+    set cmdheight=2
 
     " Clipboard
     silent! set clipboard=unnamed,unnamedplus
@@ -338,24 +313,33 @@ augroup END
 
     " Command line
     silent! set wildchar=9 wildmenu wildmode=list:longest,full wildoptions= wildignorecase cedit=<C-k>
-    silent! set wildignore=*.~,*.?~,*.o,*.sw?,*.bak,*.hi,*.pyc,*.out,*.lock suffixes=*.pdf
+    silent! set wildignore=*.~,*.?~,*.o,*.sw?,*.bak,*.hi,*.pyc,*.out,*.lock,*.swp suffixes=*.pdf
 
     " Performance
     silent! set updatetime=300 timeout timeoutlen=500 ttimeout ttimeoutlen=50 ttyfast lazyredraw
     set tm=1000 ttm=50
     " silent! set backup swapfile undofile
     " Option
-    silent! set signcolumn=number splitbelow splitright
+    silent! set splitbelow splitright
+
+    if has("patch-8.1.1564")
+        " Recently vim can merge signcolumn and number column into one
+        set signcolumn=number
+    else
+        set signcolumn=yes
+    endif
 
     syntax enable
-    syntax on
     filetype off
     filetype plugin on
     filetype indent on
+    set autoindent
+    set smartindent
+    set shiftround
 
     set encoding=utf-8 nobomb
     set termencoding=utf-8
-    set fileencodings=utf-8,gbk,utf-16le,cp1252,iso-8859-15,ucs-bom
+    set fileencodings=ucs-bom,utf-8,gbk,utf-16le,cp1252,iso-8859-15
     set fileformats=unix,dos,mac
     scriptencoding utf-8
     set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
@@ -398,10 +382,13 @@ augroup END
         else
             " The configuration options should be placed before `colorscheme sonokai`.
             " let g:sonokai_style = 'andromeda'
-            let g:sonokai_style = 'shusia'
-            let g:sonokai_enable_italic = 1
-            let g:sonokai_disable_italic_comment = 1
-            colorscheme sonokai
+            " let g:sonokai_style = 'shusia'
+            " let g:sonokai_enable_italic = 1
+            " let g:sonokai_disable_italic_comment = 1
+            " colorscheme sonokai
+            " colorscheme PaperColor
+            " colorscheme modus-operandi
+            colorscheme one-nvim
 
             set fillchars+=vert:│
 
@@ -484,7 +471,7 @@ augroup END
 
 " Tagbar {
 
-    nmap <silent> <F4> :TagbarToggle<CR>
+    nmap <silent> <F8> :TagbarToggle<CR>
 
     let g:tagbar_width=35
     let g:tagbar_type_go = {
@@ -581,17 +568,15 @@ augroup END
 
     nmap <space>e :CocCommand explorer<CR>
 
-    " coc-go
-    autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-
     " Snippets
     " Use <C-j> for jump to next placeholder, it's default of coc.nvim
     let g:coc_snippet_next = '<c-j>'
 
     " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
     let g:coc_snippet_prev = '<c-k>'
-    let g:coc_status_error_sign = '•'
-    let g:coc_status_warning_sign = '•'
+
+    " Use <C-j> for both expand and jump (make expand higher priority.)
+    imap <C-j> <Plug>(coc-snippets-expand-jump)
 
     " Use tab for trigger completion with characters ahead and navigate.
     " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -636,7 +621,7 @@ augroup END
 
     " Remap keys for gotos
     nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> 1gd <Plug>(coc-type-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
 
@@ -669,7 +654,6 @@ augroup END
             " Update signature help on jump placeholder
             autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     augroup end
-    augroup mygroup
 
     xmap <leader>a  <Plug>(coc-codeaction-selected)
     nmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -753,6 +737,11 @@ augroup END
     autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
     autocmd FileType markdown let b:coc_pairs_disabled = ['`']
+
+    augroup python_lang
+        autocmd FileType python nmap <leader>=  <Plug>(coc-format)
+        autocmd FileType python nnoremap <leader>rp :w!<CR>:call VimuxRunCommand("clear; python3 " . bufname("%"))<CR>
+    augroup end
 " }
 
 
@@ -845,3 +834,4 @@ map <leader>xl :XTabListBuffers<cr>
 " map <Leader>h <Plug>(easymotion-linebackward)
 " " }
 
+let g:spaceline_seperate_style = 'slant'
