@@ -119,6 +119,7 @@ function! PackInit() abort
         " call minpac#add('ishan9299/modus-theme-vim')
         call minpac#add('Th3Whit3Wolf/one-nvim')
         call minpac#add('sainnhe/sonokai')
+        call minpac#add('dracula/vim')
     " }
 
     " Status Line {
@@ -388,7 +389,8 @@ endif
             " colorscheme sonokai
             " colorscheme PaperColor
             " colorscheme modus-operandi
-            colorscheme one-nvim
+            " colorscheme one-nvim
+            colorscheme dracula
 
             set fillchars+=vert:│
 

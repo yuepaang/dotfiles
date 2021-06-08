@@ -1,3 +1,6 @@
+import:
+  - ~/dotfiles/dracula.yml
+
 draw_bold_text_with_bright_colors: true
 
 window:
@@ -22,29 +25,3 @@ font:
   offset:
     x: 0
     y: 0
-
-colors:
-  primary:
-    background: "0x2d2a2e"
-    foreground: "0xe3e1e4"
-
-  normal:
-    black: "0x1a181a"
-    red: "0xf85e84"
-    green: "0x9ecd6f"
-    yellow: "0xe5c463"
-    blue: "0x7accd7"
-    magenta: "0xab9df2"
-    cyan: "0xef9062"
-    white: "0xe3e1e4"
-
-  bright:
-    black: "0x1a181a"
-    red: "0xf85e84"
-    green: "0x9ecd6f"
-    yellow: "0xe5c463"
-    blue: "0x7accd7"
-    magenta: "0xab9df2"
-    cyan: "0xef9062"
-    white: "0xe3e1e4"
-
