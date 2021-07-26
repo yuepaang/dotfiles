@@ -1,0 +1,218 @@
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
+
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit's installer chunk
+
+zinit light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-history-substring-search
+zinit wait lucid atload"zicompinit; zicdreplay" light-mode for \
+    zsh-users/zsh-completions
+zinit wait lucid atload'_zsh_autosuggest_start' light-mode for \
+    zsh-users/zsh-autosuggestions
+
+###=========== Start of user config =================###
+function set_win_title(){
+    print -Pn "\e]0;%~\a"
+}
+precmd_functions+=(set_win_title)
+setopt autocd     # automatically cd into typed directory.
+stty stop undef   # disable ctrl-s to freeze terminal.
+
+# History in cache directory:
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.cache/zsh/history
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+
+# highlights tab completion
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*' # case insensitive
+
+bindkey -v # vi mode
+KEYTIMEOUT=1
+# bindkey "jk" vi-cmd-mode
+
+# history substring function
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+
+# # Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+_fix_cursor() {
+   echo -ne '\e[5 q'
+}
+precmd_functions+=(_fix_cursor)
+
+function lfcd() {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp" >/dev/null
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+
+bindkey '^[[Z' reverse-menu-complete # fix reverse menu
+bindkey '^[[P' delete-char
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+
+# File Download
+if (( $+commands[curl] )); then
+  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
+elif (( $+commands[wget] )); then
+  alias get='wget --continue --progress=bar --timestamping'
+fi
+
+alias l='exa -1a --color=auto'         # Lists in one column, hidden files.
+alias ll='ls -l'        # Lists human readable sizes.
+alias la='ll -a'         # Lists human readable sizes, hidden files.
+alias ls="exa -G --color=auto --icons -a -s type"
+# alias ls="nat"
+alias sl='ls'            # I often screw this up.
+alias newest_ls="ls -lh --sort date -r --color=always | head -25"
+
+if [ "$(command -v bat)" ]; then
+  unalias -m 'cat'
+  alias cat='bat -pp --theme="Nord"'
+fi
+
+# Simple clear command.
+alias cl='clear'
+
+
+# Remove all items safely, to Trash (`brew install trash`).
+[[ -z "$commands[trash]" ]] || alias rm='trash' 2>&1 > /dev/null
+
+
+alias brewup='brew update && brew upgrade'
+
+alias stats='sort | uniq -c | sort -r'
+# Lists the ten most used commands.
+alias history-stats="history 0 | awk '{print \$2}' | stats | head"
+
+# Checks whether connection is up.
+alias net="ping google.com | grep -E --only-match --color=never '[0-9\.]+ ms'"
+
+# Opens file in EDITOR.
+function edit() {
+  local dir=$1
+  [[ -z "$dir" ]] && dir='.'
+  $EDITOR $dir
+}
+alias e=edit
+
+
+function _calcram() {
+  local sum
+  sum=0
+  for i in `ps aux | grep -i "$1" | grep -v "grep" | awk '{print $6}'`; do
+    sum=$(($i + $sum))
+  done
+  sum=$(echo "scale=2; $sum / 1024.0" | bc)
+  echo $sum
+}
+
+# Show how much RAM application uses.
+# $ ram safari
+# # => safari uses 154.69 MBs of RAM
+function ram() {
+  local sum
+  local app="$1"
+  if [ -z "$app" ]; then
+    echo "First argument - pattern to grep from processes"
+    return 0
+  fi
+
+  sum=$(_calcram $app)
+  if [[ $sum != "0" ]]; then
+    echo "${fg[blue]}${app}${reset_color} uses ${fg[green]}${sum}${reset_color} MBs of RAM"
+  else
+    echo "No active processes matching pattern '${fg[blue]}${app}${reset_color}'"
+  fi
+}
+
+# Same, but tracks RAM usage in realtime. Will run until you stop it.
+# $ rams safari
+function rams() {
+  local sum
+  local app="$1"
+  if [ -z "$app" ]; then
+    echo "First argument - pattern to grep from processes"
+    return 0
+  fi
+
+  while true; do
+    sum=$(_calcram $app)
+    if [[ $sum != "0" ]]; then
+      echo -en "${fg[blue]}${app}${reset_color} uses ${fg[green]}${sum}${reset_color} MBs of RAM\r"
+    else
+      echo -en "No active processes matching pattern '${fg[blue]}${app}${reset_color}'\r"
+    fi
+    sleep 1
+  done
+}
+
+# Commonly used directories.
+dev="$HOME/Developer"
+com="$dev/com"
+py="$dev/personal"
+as="$HOME/Library/Application Support"
+
+export PATH="$HOME/.cargo/bin:$PATH"
+
+source "/usr/local/share/autojump/autojump.zsh"
+
+alias vim="nvim"
+
+
+export http_proxy=`scutil --proxy | awk '\
+/HTTPEnable/ { enabled = $3; } \
+/HTTPProxy/ { server = $3; } \
+/HTTPPort/ { port = $3; } \
+END { if (enabled == "1") { print "http://" server ":" port; } }'`
+export http_proxy="${http_proxy}"
+export https_proxy="${http_proxy}"
+
+export all_proxy=`scutil --proxy | awk '\
+/SOCKSEnable/ { enabled = $3; } \
+/SOCKSProxy/ { server = $3; } \
+/SOCKSPort/ { port = $3; } \
+END { if (enabled == "1") { print "socks5://" server ":" port; } }'`
+export all_proxy="${all_proxy}"
+
+
+export PATH="$HOME/.poetry/bin:$PATH"
+
+export MAVEN_OPTS="-Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8118"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_291.jdk/Contents/Home"
+export PATH=$PATH:$JAVA_HOME/bin
+
+eval "$(starship init zsh)"
