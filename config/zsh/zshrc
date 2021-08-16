@@ -30,7 +30,7 @@ stty stop undef   # disable ctrl-s to freeze terminal.
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
+# HISTFILE=~/.cache/zsh/history
 setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
 setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
 
@@ -191,6 +191,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 source "/usr/local/share/autojump/autojump.zsh"
 
 alias vim="nvim"
+
+alias sf="ssh -oPort=6000 -D 0.0.0.0:8388 yuepeng@127.0.0.1"
 
 
 export http_proxy=`scutil --proxy | awk '\

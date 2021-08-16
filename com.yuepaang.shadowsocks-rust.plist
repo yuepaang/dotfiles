@@ -8,7 +8,7 @@
         <array>
             <string>/Users/yuepeng/common/shadowsocks-rust/target/release/sslocal</string>
             <string>-c</string>
-            <string>/Users/yuepeng/config.json</string>
+            <string>/Users/yuepeng/common/shadowsocks-rust/examples/config.json</string>
         </array>
         <key>KeepAlive</key><!--后台保持运行-->
         <true/>
