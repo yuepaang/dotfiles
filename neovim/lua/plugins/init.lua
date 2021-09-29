@@ -80,7 +80,7 @@ return require('packer').startup(function(use)
 		  {'fannheyward/telescope-coc.nvim', opt = true},
 		}
 	}
-	
+
 	-- nvim-tree
 	use {'kyazdani42/nvim-tree.lua',
 	  cmd = {'NvimTreeToggle','NvimTreeOpen'},
@@ -102,6 +102,10 @@ return require('packer').startup(function(use)
 
 	-- vim ascii draw
 	use {'jbyuki/venn.nvim', cmd = {'VBox', 'VFill'}}
+
+	-- cheat.sh
+	use {'RishabhRD/nvim-cheat.sh', cmd = {'Cheat', 'CheatList', 'CheatWithoutComments', 'CheatListWithoutComments'}}
+	use {'RishabhRD/popfix', after = 'nvim-cheat.sh'}
 
   -- }
 end)
