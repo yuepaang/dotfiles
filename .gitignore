@@ -4,3 +4,6 @@ pack
 .vim
 .netrwhist
 .DS_Store
+*/packer_compiled.lua
+backup/
+typeshed/
