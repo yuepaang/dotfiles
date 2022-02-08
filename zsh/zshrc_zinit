@@ -326,3 +326,4 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 eval "$(atuin init zsh)"
 alias tv="tidy-viewer"
+eval $(thefuck --alias)
