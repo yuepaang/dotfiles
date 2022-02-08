@@ -1,5 +1,5 @@
 -- local fn = vim.fn
--- local api = vim.api
+local api = vim.api
 local global = require('core.global')
 local defer = require('utils.defer')
 -- local event = require('core.event')
@@ -86,3 +86,24 @@ local function load_nvim_config()
 end
 
 load_nvim_config()
+
+
+api.nvim_command([[
+    augroup number_toggle
+        autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+        autocmd BufLeave,FocusLost,InsertEnter   * set number
+    augroup END
+]])
+
+vim.cmd [[
+	autocmd WinEnter * setlocal cursorline
+	autocmd WinLeave * setlocal nocursorline
+]]
+
+api.nvim_command([[
+    augroup vimrc-remember-cursor-position
+        autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    augroup END
+]])
+vim.cmd([[autocmd BufWritePre * %s/\s\+$//e]])                             --remove trailing whitespaces
+vim.cmd([[autocmd BufWritePre * %s/\n\+\%$//e]])
