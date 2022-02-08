@@ -57,7 +57,7 @@ local function load_options()
     switchbuf      = "useopen";
     backspace      = "indent,eol,start";
     diffopt        = "filler,iwhite,internal,algorithm:patience";
-    completeopt    = "menuone,noselect";
+    completeopt    = "menu,menuone,noselect";
     jumpoptions    = "stack";
     showmode       = false;
     shortmess      = "aoOTIcF";
@@ -89,7 +89,7 @@ local function load_options()
     synmaxcol      = 2500;
     formatoptions  = "1jcroql";
     textwidth      = 80;
-    expandtab      = no;
+    expandtab      = false;
     autoindent     = true;
     tabstop        = 4;
     shiftwidth     = 4;
@@ -131,7 +131,7 @@ local function load_options()
     vim.g.python3_host_prog = '/usr/bin/python3'
   end
 
-    for name, value in pairs(global_local) do
+	for name, value in pairs(global_local) do
 	    vim.o[name] = value
     end
     bind_option(bw_local)
