@@ -5,14 +5,6 @@ local defer = require('utils.defer')
 -- local event = require('core.event')
 local pack = require('core.pack')
 
--- local function check_packer()
--- 	local install_path = global.data_dir .. 'pack/packer/start/packer.nvim'
--- 	if fn.empty(fn.glob(install_path)) > 0 then
--- 	  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
--- 	  api.nvim_command 'packadd packer.nvim'
--- 	end
--- end
-
 -- Create cache dir and subs dir
 local createdir = function ()
   local data_dir = {
@@ -69,7 +61,6 @@ local set_colorscheme = function()
 end
 
 local function load_nvim_config()
-	-- check_packer()
 	createdir()
 	disable_distribution_plugins()
 	set_leader_map()
@@ -82,7 +73,7 @@ local function load_nvim_config()
 	require('core.command')
 	require('keymap')
 	set_colorscheme()
-	defer.load(250)
+	defer.load(200)
 end
 
 load_nvim_config()
