@@ -52,6 +52,14 @@ function config.nvim_cmp()
 			{ name = 'path' },
 			{ name = 'cmp_tabnine' },
 			{ name = 'luasnip' },
+			{
+				name = "look",
+				keyword_length = 2,
+				option = {
+					convert_case = true,
+					loud = true
+				}
+			}
 		}),
 		mapping = {
 			["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -102,6 +110,7 @@ function config.nvim_cmp()
 					cmp_tabnine = "[TAB]",
 					luasnip = "[SNP]",
 					path = "[PATH]",
+					look = "[LOOK]",
 				})[entry.source.name]
 
 				return vim_item

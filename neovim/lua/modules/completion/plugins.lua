@@ -5,7 +5,7 @@ local conf = require('modules.completion.config')
 completion['hrsh7th/nvim-cmp'] = {
 	opt = true,
 	setup = function()
-		require("utils.defer").packer_defer_load("nvim-cmp", 150)
+		require("utils.defer").packer_defer_load("nvim-cmp", 175)
 	end,
 	config = conf.nvim_cmp
 }
@@ -29,6 +29,10 @@ completion['hrsh7th/nvim-cmp'] = {
  completion['tzachar/cmp-tabnine'] = {
 	after = 'nvim-cmp', run='./install.sh'
  }
+
+ completion['octaltree/cmp-look'] = {
+	after = 'nvim-cmp'
+}
 
  completion['L3MON4D3/LuaSnip'] = {
 	after = "nvim-cmp", config = conf.luasnip

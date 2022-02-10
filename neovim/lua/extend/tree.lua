@@ -6,22 +6,14 @@ tree.toggle = function()
 		vim.cmd [[PackerLoad nvim-tree.lua]]
 	end
 
-	local ntree = require'nvim-tree'
 	local view = require'nvim-tree.view'
-	local lib = require'nvim-tree.lib'
-
 	if view.win_open() then
-		require'bufferline.state'.set_offset(0)
-		view.close()
+	  require'nvim-tree.view'.close()
+	  -- view.close()
+	  require'bufferline.state'.set_offset(0)
 	else
-		if vim.g.nvim_tree_follow == 1 then
-			require'bufferline.state'.set_offset(31, 'File Explorer')
-			ntree.find_files(true)
-		end
-		if not view.win_open() then
-			require'bufferline.state'.set_offset(31, 'File Explorer')
-			lib.open()
-		end
+	  require'bufferline.state'.set_offset(31, 'File Explorer')
+	  require'nvim-tree'.find_file(true)
 	end
 end
 
