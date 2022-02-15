@@ -34,6 +34,15 @@ completion['hrsh7th/nvim-cmp'] = {
 	after = 'nvim-cmp'
 }
 
+
+ completion['SirVer/ultisnips'] = {
+	after = 'nvim-cmp'
+}
+
+ completion['quangnguyen30192/cmp-nvim-ultisnips'] = {
+	after = 'nvim-cmp'
+}
+
  completion['L3MON4D3/LuaSnip'] = {
 	after = "nvim-cmp", config = conf.luasnip
  }

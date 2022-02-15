@@ -44,6 +44,7 @@ function config.nvim_cmp()
 		snippet = {
 			expand = function(args)
 				require('luasnip').lsp_expand(args.body)
+				vim.fn["UltiSnips#Anon"](args.body)
 			end,
 		},
 		sources =  cmp.config.sources({
@@ -52,6 +53,7 @@ function config.nvim_cmp()
 			{ name = 'path' },
 			{ name = 'cmp_tabnine' },
 			{ name = 'luasnip' },
+			{ name = 'ultisnips' },
 			{
 				name = "look",
 				keyword_length = 2,
