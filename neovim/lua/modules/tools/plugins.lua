@@ -75,6 +75,8 @@ tools['kyazdani42/nvim-web-devicons'] = {}
 
 tools['bfredl/nvim-luadev'] = {}
 
+tools['wakatime/vim-wakatime'] = {}
+
 tools['cinuor/gotests.nvim'] = {
 	opt = true,
 	ft = 'go',
