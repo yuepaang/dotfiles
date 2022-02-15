@@ -73,7 +73,7 @@ tools['nvim-lua/plenary.nvim'] = {}
 
 tools['kyazdani42/nvim-web-devicons'] = {}
 
-tools['bfredl/nvim-luadev'] = {}
+-- tools['bfredl/nvim-luadev'] = {}
 
 tools['wakatime/vim-wakatime'] = {}
 
@@ -85,6 +85,12 @@ tools['cinuor/gotests.nvim'] = {
 			require("utils.defer").packer_defer_load("gotests.nvim", 1000)
 		end
 	end
+}
+
+tools['ahmedkhalf/project.nvim'] = {
+	opt = true,
+	setup = function() require("utils.defer").packer_defer_load("project.nvim", 100) end,
+	config = conf.project
 }
 
 return tools
