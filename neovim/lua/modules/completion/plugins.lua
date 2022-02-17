@@ -47,7 +47,7 @@ completion['hrsh7th/nvim-cmp'] = {
 	after = "nvim-cmp", config = conf.luasnip
  }
 
- completion['rafamadriz/friendly-snippets'] = {
+ completion['cinuor/friendly-snippets'] = {
 	 opt = true
  }
 

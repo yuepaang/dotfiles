@@ -61,6 +61,7 @@ local plug_map = {
 	["n|<Leader>ff"] = map_cr('Telescope find_files'):with_noremap(),
 	["n|<Leader>fg"] = map_cr('Telescope live_grep'):with_noremap(),
 	["n|<Leader>fp"] = map_cr('Telescope projects'):with_noremap(),
+	["n|<Leader>fj"] = map_cr('Telescope todo-comments todo'):with_noremap(),
 
 	-- Comment
 	["n|<Leader>cc"] = map_cr('lua require("Comment.api").toggle_current_linewise()'):with_noremap():with_silent(),
@@ -120,8 +121,6 @@ local plug_map = {
 	["n|te"] = map_cr("lua require'gotests'.exported_test()"):with_noremap():with_silent(),
 
     -- customized
-	["n|<C-q>"] = map_cmd(":q<CR>"):with_noremap(),
-    ["n|<C-s>"] = map_cmd(":w<CR>"):with_noremap(),
     ["n|<CR>"] = map_cmd(":nohlsearch<CR><CR>"):with_noremap(),
     ["n|<F3>"] = map_cmd("a<C-R>=strftime('%Y-%m-%d %H:%M:%S')<Esc>"):with_noremap(),
     ["i|<F3>"] = map_cmd("<C-R>=strftime('%Y-%m-%d %H:%M:%S')<CR>"):with_noremap(),

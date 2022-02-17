@@ -73,7 +73,7 @@ local function load_nvim_config()
 	require('keymap')
 	require('core.mapping')
 	set_colorscheme()
-	defer.load(200)
+	defer.load(100)
 end
 
 load_nvim_config()
