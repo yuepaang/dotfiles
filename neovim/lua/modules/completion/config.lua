@@ -13,21 +13,43 @@ function config.nvim_lsp_installer()
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+	capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+	local servers = {
+      pyright = {
+        filetypes = {"python"},
+        init_options = {
+          formatters = {
+            black = {
+              command = "black",
+              args = {"--quiet", "-"},
+              rootPatterns = {"pyproject.toml"},
+            },
+            formatFiletypes = {
+              python = {"black"}
+            }
+          }
+        },
+      },
+    }
 
 	local lsp_installer = require("nvim-lsp-installer")
-	lsp_installer.on_server_ready(function(server)
-	  local opts = {
-		capabilities = capabilities,
-		on_attach = function(client,bufnr)
-			require "lsp_signature".on_attach({
-				bind = true, -- This is mandatory, otherwise border config won't get registered.
-				hint_enable = false,
-				floating_window_above_cur_line = true,
-				handler_opts = {border = "none"}
-			})
-		end,
-	  }
 
+	lsp_installer.on_server_ready(function(server)
+	    local opt = servers[server.name] or {}
+		local opts = {
+			capabilities = capabilities,
+			on_attach = function(client, bufnr)
+				require "lsp_signature".on_attach({
+					bind = true, -- This is mandatory, otherwise border config won't get registered.
+					hint_enable = false,
+					floating_window_above_cur_line = true,
+					handler_opts = {border = "none"}
+				})
+			end,
+		}
+
+		opts = vim.tbl_deep_extend('force', {}, opts, opt)
 	  -- (optional) Customize the options passed to the server
 	  -- if server.name == "tsserver" then
 	  --     opts.root_dir = function() ... end
@@ -76,6 +98,7 @@ function config.nvim_cmp()
 				i = cmp.mapping.abort(),
 				c = cmp.mapping.close(),
 			}),
+			['<C-c>'] = cmp.mapping.abort(),
 			['<CR>'] = cmp.mapping.confirm({
 				behavior = cmp.ConfirmBehavior.Replace,
 				select = true
