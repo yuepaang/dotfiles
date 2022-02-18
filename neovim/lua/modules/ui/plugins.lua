@@ -14,6 +14,10 @@ ui['nvim-treesitter/nvim-treesitter'] = {
 	end
 }
 
+ui['JoosepAlviste/nvim-ts-context-commentstring'] = {
+	after = {'nvim-treesitter'}
+}
+
 ui['norcalli/nvim-colorizer.lua'] = {
 	ft={"lua", "vim", "markdown"},
 	config = function() require('colorizer').setup() end
@@ -39,6 +43,11 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
 ui['cinuor/lsp-action.nvim'] = {
 	after = "nvim-lspconfig",
 	config = conf.lspaction
+}
+
+ui['tami5/lspsaga.nvim'] = {
+	after = "nvim-lspconfig",
+	config = conf.lspsaga
 }
 
 return ui

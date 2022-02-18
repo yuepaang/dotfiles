@@ -38,6 +38,17 @@ function config.treesitter()
       enable = true,
       additional_vim_regex_highlighting = false,
     },
+	context_commentstring = {
+        enable = true
+    },
+	textsubjects = {
+        enable = true,
+        prev_selection = ',', -- (Optional) keymap to select the previous selection
+        keymaps = {
+          ['.'] = 'textsubjects-smart',
+          -- [';'] = 'textsubjects-container-outer',
+        },
+    },
 	textobjects = {
 		select = {
 		  enable = true,
@@ -173,6 +184,18 @@ function config.blankline()
 	require("indent_blankline").setup {
 		show_end_of_line = true,
 	}
+end
+
+function config.lspsaga()
+  local saga = require('lspsaga')
+  saga.init_lsp_saga({
+    code_action_keys = {
+      quit = {"q", "<ESC>"},
+    },
+    rename_action_keys = {
+      quit = {"q", "<ESC>"},
+    },
+  })
 end
 
 function config.lspaction()

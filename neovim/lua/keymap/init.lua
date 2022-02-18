@@ -13,7 +13,8 @@ local plug_map = {
 
 	-- LSP
 	["n|gd"] = map_cr("lua require('telescope.builtin').lsp_definitions()"):with_noremap():with_silent();
-	["n|gD"] = map_cr("lua vim.lsp.buf.declaration()"):with_noremap():with_silent();
+	-- ["n|gD"] = map_cr("lua vim.lsp.buf.declaration()"):with_noremap():with_silent();
+	["n|gD"] = map_cr(":Lspsaga preview_definition<CR>"):with_noremap():with_silent();
 	["n|gt"] = map_cr("lua require('telescope.builtin').lsp_type_definitions()"):with_noremap():with_silent();
 	["n|gi"] = map_cr("lua require('telescope.builtin').lsp_implementations()"):with_noremap():with_silent();
 	["n|gr"] = map_cr("lua require('telescope.builtin').lsp_references()"):with_noremap():with_silent();
@@ -26,6 +27,12 @@ local plug_map = {
 	["n|gn"] = map_cr("lua require('lspaction.rename').rename()"):with_noremap():with_silent();
 	["n|<C-f>"] = map_cr("lua require('extend.scroll').scroll_down()"):with_noremap():with_silent();
 	["n|<C-b>"] = map_cr("lua require('extend.scroll').scroll_up()"):with_noremap():with_silent();
+
+	-- lspsaga
+	["n|se"] = map_cr(":Lspsaga rename<CR>"):with_noremap():with_silent();
+	["n|sh"] = map_cr("<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>"):with_noremap():with_silent();
+	["n|sp"] = map_cr("<cmd>lua require'lspsaga.provider'.preview_definition()<CR>"):with_noremap():with_silent();
+	["n|sH"] = map_cr("<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>"):with_noremap():with_silent();
 
 	-- Diagnostics
 	["n|<C-n>"] = map_cr("lua require('lspaction.diagnostic').navigate'next'()"):with_noremap():with_silent();
