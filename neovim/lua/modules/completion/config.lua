@@ -72,9 +72,7 @@ function config.nvim_cmp()
 		mapping = {
 			["<C-p>"] = cmp.mapping.select_prev_item(),
 			["<C-n>"] = cmp.mapping.select_next_item(),
-			['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-2), { 'i', 'c' }),
-			['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(2), { 'i', 'c' }),
-			['<C-e>'] = cmp.mapping({
+			['<C-f>'] = cmp.mapping({
 				i = cmp.mapping.abort(),
 				c = cmp.mapping.close(),
 			}),
@@ -83,27 +81,21 @@ function config.nvim_cmp()
 				select = true
 			}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
-			-- ["<C-n>"] = cmp.mapping(function(fallback)
-			-- 	if cmp.visible() then
-			-- 		cmp.select_next_item()
-			-- 	elseif luasnip.expand_or_jumpable() then
-			-- 		luasnip.expand_or_jump()
-			-- 	elseif has_words_before() then
-			-- 		cmp.complete()
-			-- 	else
-			-- 		fallback()
-			-- 	end
-			-- end, { "i", "s" }),
-			--
-			-- ["<C-p>"] = cmp.mapping(function(fallback)
-			-- 	if cmp.visible() then
-			-- 		cmp.select_prev_item()
-			-- 	elseif luasnip.jumpable(-1) then
-			-- 		luasnip.jump(-1)
-			-- 	else
-			-- 		fallback()
-			-- 	end
-			-- end, { "i", "s" }),
+			['<C-d>'] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.scroll_docs(2)
+				else
+					fallback()
+				end
+			end, {"i", "s"}),
+
+			['<C-u>'] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.scroll_docs(-2)
+				else
+					fallback()
+				end
+			end, {"i", "s"}),
 
 			["<C-k>"] = cmp.mapping(function(fallback)
 				if luasnip.jumpable(-1) then
