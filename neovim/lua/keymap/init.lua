@@ -18,13 +18,13 @@ local plug_map = {
 	["n|gt"] = map_cr("lua require('telescope.builtin').lsp_type_definitions()"):with_noremap():with_silent();
 	["n|gi"] = map_cr("lua require('telescope.builtin').lsp_implementations()"):with_noremap():with_silent();
 	["n|gr"] = map_cr("lua require('telescope.builtin').lsp_references()"):with_noremap():with_silent();
-	["n|gh"] = map_cr("lua require('lspaction.hover').render_hover_doc()"):with_noremap():with_silent();
+	["n|gh"] = map_cr("lua require('lspsaga.hover').render_hover_doc()"):with_noremap():with_silent();
 	["n|gf"] = map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent();
 	["v|gf"] = map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent();
-	["n|ga"] = map_cr("lua require('lspaction.codeaction').code_action()"):with_noremap():with_silent();
-	["v|ga"] = map_cu("lua require('lspaction.codeaction').range_code_action()"):with_noremap():with_silent();
+	["n|ga"] = map_cr("lua require('lspsaga.codeaction').code_action()"):with_noremap():with_silent();
+	["v|ga"] = map_cu("lua require('lspsaga.codeaction').range_code_action()"):with_noremap():with_silent();
 	["n|gs"] = map_cr("lua require('lsp_signature').signature()"):with_noremap():with_silent();
-	["n|gn"] = map_cr("lua require('lspaction.rename').rename()"):with_noremap():with_silent();
+	["n|gn"] = map_cr("lua require('lspsaga.rename').rename()"):with_noremap():with_silent();
 	["n|<C-f>"] = map_cr("lua require('extend.scroll').scroll_down()"):with_noremap():with_silent();
 	["n|<C-b>"] = map_cr("lua require('extend.scroll').scroll_up()"):with_noremap():with_silent();
 
@@ -35,11 +35,11 @@ local plug_map = {
 	["n|sH"] = map_cr("<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>"):with_noremap():with_silent();
 
 	-- Diagnostics
-	["n|<C-n>"] = map_cr("lua require('lspaction.diagnostic').navigate'next'()"):with_noremap():with_silent();
-	["n|<C-p>"] = map_cr("lua require('lspaction.diagnostic').navigate'prev'()"):with_noremap():with_silent();
+	["n|<C-n>"] = map_cr("lua require('lspsaga.diagnostic').navigate'next'()"):with_noremap():with_silent();
+	["n|<C-p>"] = map_cr("lua require('lspsaga.diagnostic').navigate'prev'()"):with_noremap():with_silent();
 	["n|<Leader>ee"] = map_cr("lua require('Telescope.builtin').diagnostics({ignore_filename=true})"):with_noremap():with_silent();
 	["n|<Leader>dd"] = map_cr("lua require('Telescope.builtin').diagnostics({bufnr=0})"):with_noremap():with_silent();
-	["n|<Leader>ww"] = map_cr("lua require('lspaction.diagnostic').toggle_virtual_text()"):with_noremap():with_silent();
+	["n|<Leader>vt"] = map_cr("lua require('lspsaga.diagnostic').toggle_virtual_text()"):with_noremap():with_silent();
 
     -- Plugin MarkdownPreview
     ["n|mw"] = map_cu('MarkdownPreviewToggle'):with_noremap():with_silent(),

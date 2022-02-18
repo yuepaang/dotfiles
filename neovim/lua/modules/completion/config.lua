@@ -148,7 +148,7 @@ function config.nvim_cmp()
 				end
 
 				local icons = require "utils.icons"
-				vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
+				vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
 
 				vim_item.menu = ({
 					nvim_lsp = "[LSP]",
