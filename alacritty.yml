@@ -50,10 +50,17 @@ window:
   #   - SimpleFullscreen
   startup_mode: Maximized
 
+  # Window title
+  #title: Alacritty
+  # Window class (Linux only):
+  #class: Alacritty
+  # Allow terminal applications to change Alacritty's window title.
+  dynamic_title: true
+
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
   # disable scrolling.
-  history: 0
+  history: 100000
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
@@ -63,7 +70,7 @@ mouse:
   hide_when_typing: true
 
 font:
-  size: 14.0
+  size: 15.0
 
   normal:
     family: Hack Nerd Font
@@ -81,7 +88,7 @@ font:
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
     x: 0
-    y: 1
+    y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increase the x offset to move the glyph to
@@ -481,8 +488,30 @@ custom_cursor_colors: true
 
 bell:
   animation: EaseOutExpo
-  color: '0xffffff'
   duration: 0
+  color: '0xffffff'
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+
+cursor:
+  # Cursor style
+  #
+  # Values for `style`:
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
+
+# Live config reload (changes require restart)
+live_config_reload: true
 
 # Key bindings
 #
