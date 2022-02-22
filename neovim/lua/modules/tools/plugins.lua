@@ -7,7 +7,7 @@ tools['dstein64/vim-startuptime'] = {
 
 tools['nvim-telescope/telescope.nvim'] = {
 	opt = true,
-	setup = function() require("utils.defer").add("telescope.nvim", 90) end,
+	setup = function() require("utils.defer").add("telescope.nvim", 80) end,
 	config = conf.telescope,
 	requires = {
 		{'nvim-telescope/telescope-fzy-native.nvim', opt = true},
@@ -41,13 +41,6 @@ tools['voldikss/vim-floaterm'] = {
 		require("modules.tools.config").floaterm()
 		require("utils.defer").packer_defer_load("vim-floaterm", 1000)
 	end
-}
-
-tools['lewis6991/gitsigns.nvim'] = {
-	opt = true,
-	config = conf.gitsigns,
-	requires = {'nvim-lua/plenary.nvim'},
-	setup = function() require("utils.defer").add("gitsigns.nvim", 90) end,
 }
 
 tools['voldikss/vim-translator'] = {
@@ -87,7 +80,7 @@ tools['cinuor/gotests.nvim'] = {
 
 tools['ahmedkhalf/project.nvim'] = {
 	opt = true,
-	setup = function() require("utils.defer").packer_defer_load("project.nvim", 100) end,
+	setup = function() require("utils.defer").add("project.nvim", 90) end,
 	config = conf.project
 }
 
