@@ -269,6 +269,7 @@ py="$dev/personal"
 as="$HOME/Library/Application Support"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 
 source "/usr/local/share/autojump/autojump.zsh"
 
@@ -327,3 +328,11 @@ export PATH=$PATH:$JAVA_HOME/bin
 eval "$(atuin init zsh)"
 alias tv="tidy-viewer"
 eval $(thefuck --alias)
+
+dig () {
+	dog $1 $2 $3 | nali
+}
+
+ping() {
+	/sbin/ping $1 $2 $3 | nali
+}
