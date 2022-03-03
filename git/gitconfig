@@ -1,98 +1,120 @@
-# This is Git's per-user configuration file.
+[init]
+	defaultBranch = main
+
+[hub]
+	protocol = https
+
 [user]
 	name = Yue Peng
 	email = yuepaang@gmail.com
 [core]
+	ignoreCase = false
 	editor = nvim
 	excludesfile = ~/.gitignore
 	pager = delta
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+	# Make `git rebase` safer on OS X
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
 
 [interactive]
-  diffFilter = delta --color-only
+	diffFilter = delta --color-only --features=interactive
+
+[diff]
+	# Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
+	# https://blog.github.com/2018-04-05-git-217-released/
+	colorMoved = default
 
 [delta]
-  side-by-side = true
-  plus-style = syntax "#012800"
-  minus-style = normal "#340001"
-  line-numbers-left-format = ""
-  line-numbers-right-format = "│ "
-  syntax-theme = Monokai Extended
+	max-line-length = 700
+	syntax-theme = base16
+	hyperlinks = true
+	side-by-side = true
+	plus-style = syntax "#012800"
+	minus-style = normal "#340001"
+	line-numbers-left-format = ""
+	line-numbers-right-format = "│ "
+	# syntax-theme = Monokai Extended
 
 [credential]
 	helper = store
 
 [github]
-  user = yuepaang
+	user = yuepaang
+
+[apply]
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
 
 [alias]
-  unstage = reset HEAD --
-  a = add
-  b = branch
-  c = commit
-  d = diff
-  f = fetch
-  g = grep
-  l = log
-  m = merge
-  o = checkout
-  p = pull
-  r = remote
-  s = status
-  st = status
-  w = whatchanged
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=oneline -n 20 --graph --abbrev-commit
+	# log key - our favorite way to show our key performance indicators, i.e. our most useful summary.
+	lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
 
-  ca = commit --append
-  co = checkout
-  dc = diff --cache
-  ds = diff --staged
-  # log key - our favorite way to show our key performance indicators, i.e. our most useful summary.
-  lk = log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'
+	# View the current working tree status using the short format
+	s = status -s
 
-  # Stash aliases
-  save = stash save
-  pop = stash pop
+	sclone = clone --depth=1
 
-  discard = reset --hard HEAD
-  ch = checkout
-  sign = commit -S -m
-  signtag = 'tag -s -m ""'
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
-  graph = log --graph
-  last = log -n 10
-  whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-  rmtag = "!sh -c 'git tag -d $1; git push origin :refs/tags/$1'"
+	# Amend the currently staged files to the latest commit
+	amend = commit --amend --reuse-message=HEAD
 
-  release   = !sh "$HOME/dotfiles/git-extras/git-release.sh"
-  sign-release   = !sh "$HOME/dotfiles/git-extras/git-sign-release.sh"
-  setup     = !zsh "$HOME/dotfiles/git-extras/git-setup.sh"
-  summary   = !zsh "$HOME/dotfiles/git-extras/git-summary.sh"
-  pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1; } ; f"
-  cleanup = !ruby "$HOME/dotfiles/git-extras/git-cleanup.rb"
+	# Color graph log view
+	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+
+	co = checkout
+	branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+
+	# Stash aliases
+	save = stash save
+	pop = stash pop
+
+	discard = reset --hard HEAD
+	sign = commit -S -m
+	signtag = 'tag -s -m ""'
+
+	last = log -n 10
+	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+	rmtag = "!sh -c 'git tag -d $1; git push origin :refs/tags/$1'"
+
+	release   = !sh "$HOME/dotfiles/git-extras/git-release.sh"
+	sign-release   = !sh "$HOME/dotfiles/git-extras/git-sign-release.sh"
+	setup     = !zsh "$HOME/dotfiles/git-extras/git-setup.sh"
+	summary   = !zsh "$HOME/dotfiles/git-extras/git-summary.sh"
+	pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1; } ; f"
+	cleanup = !ruby "$HOME/dotfiles/git-extras/git-cleanup.rb"
+
+	count   = !git shortlog -sn
 
 [push]
-  default = simple
+	default = current
+	followTags = true
 
 [color]
-  ui = true
-
-[format]
-  pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(bold yellow)%GK%Creset
-  graph = true
+  ui = auto
 
 [advice]
   statusHints = false
 
-[log]
-  abbrevCommit = true
-
 [merge]
-  conflictstyle = diff3
+	conflictstyle = diff3
 
 [mergetool]
-  keepBackup = false
+	keepBackup = false
 
 [pull]
-  rebase = true
+	rebase = true
+
+# correct typos
+[help]
+	autocorrect = 1
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
@@ -100,17 +122,31 @@
   process = git-lfs filter-process
   required = true
 
-[color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
+[color "diff"]  # i still love these choices in 2022.
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
 
-[color "diff"]
-  meta = 11
-  frag = magenta bold
-  commit = yellow bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
+	newMoved = cyan dim
+	oldMoved = blue dim
+	newMovedAlternative = cyan italic
+	oldMovedAlternative = blue italic
 
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[color "diff-highlight"]  # mostly dead. only needed when using diff-so-fancy
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
