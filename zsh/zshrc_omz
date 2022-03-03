@@ -1,0 +1,181 @@
+eval "$(starship init zsh)"
+
+export TERM="xterm-256color"
+export ZSH="$HOME/.oh-my-zsh"
+
+DISABLE_MAGIC_FUNCTIONS="true"
+COMPLETION_WAITING_DOTS="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+plugins=(
+	git
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+	safe-paste
+	autoswitch_virtualenv
+	)
+
+source $ZSH/oh-my-zsh.sh
+
+export LANG=en_US.UTF-8
+
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"       # The path to the history file.
+HISTSIZE=10000                   # The maximum number of events to save in the internal history.
+SAVEHIST=10000                   # The maximum number of events to save in the history file.
+
+# File Download
+if (( $+commands[curl] )); then
+  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
+elif (( $+commands[wget] )); then
+  alias get='wget --continue --progress=bar --timestamping'
+fi
+
+alias l='exa -1a --color=auto'         # Lists in one column, hidden files.
+alias ll='ls -l'        # Lists human readable sizes.
+alias la='ll -a'         # Lists human readable sizes, hidden files.
+alias ls="exa -G --color=auto --icons -a -s type"
+# alias ls="nat"
+alias sl='ls'            # I often screw this up.
+alias newest_ls="ls -lh --sort date -r --color=always | head -25"
+
+if [ "$(command -v bat)" ]; then
+  unalias -m 'cat'
+  alias cat='bat -pp --theme="Nord"'
+fi
+
+# Simple clear command.
+alias cl='clear'
+
+# Remove all items safely, to Trash (`brew install trash`).
+[[ -z "$commands[trash]" ]] || alias rm='trash' 2>&1 > /dev/null
+
+
+alias brewup='brew update && brew upgrade'
+
+alias stats='sort | uniq -c | sort -r'
+# Lists the ten most used commands.
+alias history-stats="history 0 | awk '{print \$2}' | stats | head"
+
+# Checks whether connection is up.
+alias net="ping google.com | grep -E --only-match --color=never '[0-9\.]+ ms'"
+
+# Opens file in EDITOR.
+function edit() {
+  local dir=$1
+  [[ -z "$dir" ]] && dir='.'
+  $EDITOR $dir
+}
+alias e=edit
+
+
+function _calcram() {
+  local sum
+  sum=0
+  for i in `ps aux | grep -i "$1" | grep -v "grep" | awk '{print $6}'`; do
+    sum=$(($i + $sum))
+  done
+  sum=$(echo "scale=2; $sum / 1024.0" | bc)
+  echo $sum
+}
+
+# Show how much RAM application uses.
+# $ ram safari
+# # => safari uses 154.69 MBs of RAM
+function ram() {
+  local sum
+  local app="$1"
+  if [ -z "$app" ]; then
+    echo "First argument - pattern to grep from processes"
+    return 0
+  fi
+
+  sum=$(_calcram $app)
+  if [[ $sum != "0" ]]; then
+    echo "${fg[blue]}${app}${reset_color} uses ${fg[green]}${sum}${reset_color} MBs of RAM"
+  else
+    echo "No active processes matching pattern '${fg[blue]}${app}${reset_color}'"
+  fi
+}
+
+# Same, but tracks RAM usage in realtime. Will run until you stop it.
+# $ rams safari
+function rams() {
+  local sum
+  local app="$1"
+  if [ -z "$app" ]; then
+    echo "First argument - pattern to grep from processes"
+    return 0
+  fi
+
+  while true; do
+    sum=$(_calcram $app)
+    if [[ $sum != "0" ]]; then
+      echo -en "${fg[blue]}${app}${reset_color} uses ${fg[green]}${sum}${reset_color} MBs of RAM\r"
+    else
+      echo -en "No active processes matching pattern '${fg[blue]}${app}${reset_color}'\r"
+    fi
+    sleep 1
+  done
+}
+
+# use atuin
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Commonly used directories.
+dev="$HOME/Developer"
+com="$dev/com"
+py="$dev/personal"
+as="$HOME/Library/Application Support"
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+
+source "/usr/local/share/autojump/autojump.zsh"
+
+alias vim="nvim"
+
+# function autoproxy() {
+#     emulate -L zsh -o extended_glob
+#     local scutil_output=$(scutil --proxy)
+#     # 先按行分割为数组，然后利用 `(M)` + `:#` 取出数组中匹配 ` [A-Za-z]# : [^ ]#}` 的元素
+#     # （此处使用了 extended glob，不用也行，不过没这么直观……)
+#     # 再 `/:` 去掉每个元素中的冒号，最后 `=` 对结果进行 shell word split 并存到关联数组里
+#     local -A info=(${=${(M)${(f)scutil_output}:# [A-Za-z]# : [^ ]#}/:})
+#     if (( $info[HTTPEnable] )); then
+#         export http_proxy=http://$info[HTTPProxy]:$info[HTTPPort]
+#     fi
+# }
+
+export http_proxy=`scutil --proxy | awk '\
+/HTTPEnable/ { enabled = $3; } \
+/HTTPProxy/ { server = $3; } \
+/HTTPPort/ { port = $3; } \
+END { if (enabled == "1") { print "http://" server ":" port; } }'`
+export http_proxy="${http_proxy}"
+export https_proxy="${http_proxy}"
+
+export all_proxy=`scutil --proxy | awk '\
+/SOCKSEnable/ { enabled = $3; } \
+/SOCKSProxy/ { server = $3; } \
+/SOCKSPort/ { port = $3; } \
+END { if (enabled == "1") { print "socks5://" server ":" port; } }'`
+export all_proxy="${all_proxy}"
+
+
+export PATH="$HOME/.poetry/bin:$PATH"
+
+export MAVEN_OPTS="-Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8118"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_291.jdk/Contents/Home"
+export PATH=$PATH:$JAVA_HOME/bin
+
+eval "$(atuin init zsh)"
+alias tv="tidy-viewer"
+eval $(thefuck --alias)
+
+dig () {
+	dog $1 $2 $3 | nali
+}
+
+ping() {
+	/sbin/ping $1 $2 $3 | nali
+}
