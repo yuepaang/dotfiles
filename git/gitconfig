@@ -1,12 +1,26 @@
 [init]
 	defaultBranch = main
 
+[include]
+	path = ~/dotfiles/git/themes.gitconfig
+
 [hub]
 	protocol = https
 
 [user]
 	name = Yue Peng
 	email = yuepaang@gmail.com
+
+[pretty]
+  compact=%h %ad, %s
+  f-lg1=%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)
+  f-lg1-1=%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)[%an]%C(reset)%C(auto)%d%C(reset)
+  f-lg2=%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)
+  f-g=%C(yellow)%h%C(reset) - %s%d %C(dim white)- %an%C(reset)
+  f-q=%an, %h, %ar, %s
+  f-json={%n  \"commit\": \"%H\",%n  \"abbreviated_commit\": \"%h\",%n  \"tree\": \"%T\",%n  \"abbreviated_tree\": \"%t\",%n  \"parent\": \"%P\",%n  \"abbreviated_parent\": \"%p\",%n  \"refs\": \"%D\",%n  \"encoding\": \"%e\",%n  \"subject\": \"%s\",%n  \"sanitized_subject_line\": \"%f\",%n  \"body\": \"%b\",%n  \"commit_notes\": \"%N\",%n  \"verification_flag\": \"%G?\",%n  \"signer\": \"%GS\",%n  \"signer_key\": \"%GK\",%n  \"author\": {%n    \"name\": \"%aN\",%n    \"email\": \"%aE\",%n    \"date\": \"%aD\"%n  },%n  \"commiter\": {%n    \"name\": \"%cN\",%n    \"email\": \"%cE\",%n    \"date\": \"%cD\"%n  }%n},
+
+
 [core]
 	ignoreCase = false
 	editor = nvim
@@ -70,6 +84,15 @@
 	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
 
 	co = checkout
+	ci = commit
+
+	di = diff
+	# interesting diffs
+	ds = diff --staged
+	wd = diff --word-diff --ignore-all-space
+	wds = !git wd --staged
+
+	br = branch
 	branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
 
 	# Stash aliases
@@ -92,6 +115,9 @@
 	cleanup = !ruby "$HOME/dotfiles/git-extras/git-cleanup.rb"
 
 	count   = !git shortlog -sn
+
+[fetch]
+	prune = true
 
 [push]
 	default = current

@@ -50,6 +50,14 @@ function config.nvim_lsp_installer()
             end
         }
 
+		if server.name == 'rust_analyzer' then
+			require 'rust-tools'.setup {
+			  server = vim.tbl_deep_extend( 'force', server:get_default_options(), opts )
+			}
+			server:attach_buffers()
+			return
+		end
+
         opts = vim.tbl_deep_extend('force', {}, opts, opt)
         -- (optional) Customize the options passed to the server
         -- if server.name == "tsserver" then
