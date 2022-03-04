@@ -104,29 +104,26 @@ local function load_options()
     concealcursor  = "niv";
   }
 
-  if global.is_mac then
-    vim.g.clipboard = {
-      name = "macOS-clipboard",
-      copy = {
-        ["+"] = "pbcopy",
-        ["*"] = "pbcopy",
-      },
-      paste = {
-        ["+"] = "pbpaste",
-        ["*"] = "pbpaste",
-      },
-      cache_enabled = 0
-    }
+  vim.g.clipboard = {
+    name = "myProvider",
+    copy = {
+  	["+"] = "clipboard-provider copy",
+  	["*"] = "clipboard-provider copy",
+    },
+    paste = {
+  	["+"] = "clipboard-provider paste",
+  	["*"] = "clipboard-provider paste",
+    },
+    cache_enabled = 0
+  }
 
-    vim.g.python_host_skip_check=1
-    vim.g.python_host_prog = '/usr/bin/python'
+  if global.is_mac then
+
     vim.g.python3_host_skip_check=1
-    vim.g.python3_host_prog = '/usr/local/opt/python@3.9/bin/python3'
+    vim.g.python3_host_prog = '/usr/local/bin/python3'
   end
 
   if global.is_linux then
-    vim.g.python_host_skip_check=1
-    vim.g.python_host_prog = '/usr/bin/python'
     vim.g.python3_host_skip_check=1
     vim.g.python3_host_prog = '/usr/bin/python3'
   end
