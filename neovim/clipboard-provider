@@ -8,8 +8,8 @@
 #exec 2>> ~/clipboard-provider.out
 #set -x
 
-: ${COPY_PROVIDERS:=osc52 pb tmux xclip local}
-: ${PASTE_PROVIDERS:=pb tmux xclip local}
+: ${COPY_PROVIDERS:=osc52 pb xclip tmux local}
+: ${PASTE_PROVIDERS:=pb xclip tmux local}
 : ${TTY:=`(tty || tty </proc/$PPID/fd/0) 2>/dev/null | grep /dev/`}
 
 LOCAL_STORAGE=$HOME/.clipboard-provider.out
@@ -26,7 +26,7 @@ main() {
             for p in $PASTE_PROVIDERS; do
                 ${p}_provider paste && status=0 && break
             done ;;
-    esac
+   esac
 
     exit $status
 }
