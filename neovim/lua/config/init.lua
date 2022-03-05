@@ -47,3 +47,17 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
   g["loaded_" .. plugin] = 1
 end
+
+-- add clipboard-provider
+g.clipboard = {
+    name = "myProvider",
+    copy = {
+      ["+"] = "clipboard-provider copy",
+      ["*"] = "clipboard-provider copy",
+    },
+    paste = {
+      ["+"] = "clipboard-provider paste",
+      ["*"] = "clipboard-provider paste",
+    },
+    cache_enabled = 0
+  }
