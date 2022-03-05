@@ -10,45 +10,21 @@ function config.nvim_lsp_installer()
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-    local servers = {
-        pyright = {
-            filetypes = {"python"},
-            init_options = {
-                formatters = {
-                    black = {
-                        command = "black",
-                        args = {"--quiet", "-"},
-                        rootPatterns = {"pyproject.toml"}
-                    },
-                    formatFiletypes = {
-                        python = {"black"}
-                    }
-                }
-            }
-        }
-    }
-
     local lsp_installer = require("nvim-lsp-installer")
 
     lsp_installer.on_server_ready(function(server)
-        local opt = servers[server.name] or {}
-        local opts = {
-            capabilities = capabilities,
-            on_attach = function(client, bufnr)
-                local function buf_set_option(...)
-                    vim.api.nvim_buf_set_option(bufnr, ...)
-                end
-                buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-                require"lsp_signature".on_attach({
-                    bind = true, -- This is mandatory, otherwise border config won't get registered.
-                    hint_enable = false,
-                    floating_window_above_cur_line = true,
-                    handler_opts = {
-                        border = "none"
-                    }
-                })
-            end
-        }
+		local opts = {
+			capabilities = capabilities,
+			on_attach = function(client,bufnr)
+				vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+				require "lsp_signature".on_attach({
+					bind = true, -- This is mandatory, otherwise border config won't get registered.
+					hint_enable = false,
+					floating_window_above_cur_line = true,
+					handler_opts = {border = "none"}
+				})
+			end
+		}
 
 		if server.name == 'rust_analyzer' then
 			require 'rust-tools'.setup {
@@ -58,7 +34,6 @@ function config.nvim_lsp_installer()
 			return
 		end
 
-        opts = vim.tbl_deep_extend('force', {}, opts, opt)
         -- (optional) Customize the options passed to the server
         -- if server.name == "tsserver" then
         --     opts.root_dir = function() ... end
@@ -179,6 +154,39 @@ function config.luasnip()
     require("luasnip.loaders.from_vscode").lazy_load({
         paths = {"~/.local/share/nvim/site/pack/packer/opt/friendly-snippets"}
     })
+end
+
+function config.null_ls()
+	local null_ls = require("null-ls")
+
+	null_ls.setup({
+		cmd = { "nvim" },
+		debounce = 250,
+		debug = false,
+		default_timeout = 5000,
+		diagnostics_format = "#{m}",
+		fallback_severity = vim.diagnostic.severity.ERROR,
+		log = {
+			enable = true,
+			level = "warn",
+			use_console = "async",
+		},
+		on_attach = nil,
+		on_init = nil,
+		on_exit = nil,
+		root_dir = require("null-ls.utils").root_pattern(
+			".null-ls-root",
+			"Makefile",
+			".git",
+			"poetry.lock",
+			"go.mod"
+		),
+		sources = {
+			null_ls.builtins.formatting.prettier,
+			null_ls.builtins.formatting.black,
+		},
+		update_in_insert = false,
+	})
 end
 
 return config

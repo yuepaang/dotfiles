@@ -64,6 +64,12 @@ completion['williamboman/nvim-lsp-installer'] = {
     after = {'nvim-lspconfig', 'lsp_signature.nvim'},
     config = conf.nvim_lsp_installer
 }
+
+completion['jose-elias-alvarez/null-ls.nvim'] = {
+	after='nvim-lspconfig',
+	config = conf.null_ls
+}
+
 completion['simrat39/rust-tools.nvim'] = {
     after = 'nvim-lspconfig'
 }
