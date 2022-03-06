@@ -24,6 +24,14 @@ local plug_map = {
 
 bind.nvim_load_mapping(plug_map)
 
+vim.api.nvim_command([[
+    augroup number_toggle
+      set number
+      autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
+      autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
+    augroup END
+]])
+
 require "config"
 require "utils"
 require("plugins").setup()
