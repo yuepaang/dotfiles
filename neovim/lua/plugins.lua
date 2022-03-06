@@ -44,6 +44,9 @@ function M.setup()
     -- Performance
     use { "lewis6991/impatient.nvim" }
 
+    -- wakatime
+    use 'wakatime/vim-wakatime'
+
     -- Load only when require
     use { "nvim-lua/plenary.nvim", module = "plenary" }
 
@@ -386,6 +389,8 @@ function M.setup()
       },
       disable = not PLUGINS.nvim_cmp.enabled,
     }
+
+    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
     -- Auto pairs
     use {
