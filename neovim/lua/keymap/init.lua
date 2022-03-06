@@ -30,7 +30,7 @@ local plug_map = {
 
 	-- lspsaga
 	["n|se"] = map_cr(":Lspsaga rename<CR>"):with_noremap():with_silent();
-	["n|sh"] = map_cr("<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>"):with_noremap():with_silent();
+	-- ["n|sh"] = map_cr("<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>"):with_noremap():with_silent();
 	["n|sp"] = map_cr("<cmd>lua require'lspsaga.provider'.preview_definition()<CR>"):with_noremap():with_silent();
 	["n|sH"] = map_cr("<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>"):with_noremap():with_silent();
 

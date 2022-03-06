@@ -161,7 +161,8 @@ function config.null_ls()
 
 	null_ls.setup({
 		cmd = { "nvim" },
-		debounce = 250,
+		debounce = 150,
+		save_after_format = false,
 		debug = false,
 		default_timeout = 5000,
 		diagnostics_format = "#{m}",
@@ -183,7 +184,9 @@ function config.null_ls()
 		),
 		sources = {
 			null_ls.builtins.formatting.prettier,
-			null_ls.builtins.formatting.black,
+			null_ls.builtins.formatting.black.with { extra_args = { "--fast" } },
+			null-ls.builtins.formatting.isort,
+			null-ls.builtins.formatting.stylua,
 		},
 		update_in_insert = false,
 	})
