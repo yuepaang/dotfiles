@@ -390,8 +390,6 @@ function M.setup()
       disable = not PLUGINS.nvim_cmp.enabled,
     }
 
-    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
-
     -- Auto pairs
     use {
       "windwp/nvim-autopairs",
@@ -607,7 +605,8 @@ function M.setup()
     }
 
     -- AI completion
-    use { "github/copilot.vim", event = "InsertEnter" }
+    -- use { "github/copilot.vim", event = "InsertEnter" }
+    use { "github/copilot.vim" }
 
     -- Legendary
     use {

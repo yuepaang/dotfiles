@@ -30,6 +30,15 @@ local kind_icons = {
   TypeParameter = "",
 }
 
+local function replace_termcodes(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local function check_backspace()
+  local col = vim.fn.col(".") - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+end
+
 function M.setup()
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -58,7 +67,6 @@ function M.setup()
           luasnip = "[Snip]",
           nvim_lua = "[Lua]",
           treesitter = "[Treesitter]",
-          cmp_tabnine = "[TN]",
           path = "[Path]",
           nvim_lsp_signature_help = "[Signature]",
         })[entry.source.name]
@@ -83,12 +91,15 @@ function M.setup()
         end,
       },
       ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
+        local copilot_keys = vim.fn["copilot#Accept"]()
+        if copilot_keys ~= "" then
+          vim.api.nvim_feedkeys(copilot_keys, "i", true)
+        elseif cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        elseif has_words_before() then
-          cmp.complete()
+          vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+        elseif check_backspace() then
+          vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
         else
           fallback()
         end
@@ -101,7 +112,9 @@ function M.setup()
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
+          vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-jump-prev"), "")
+        elseif has_words_before() then
+          cmp.complete()
         else
           fallback()
         end
@@ -119,7 +132,6 @@ function M.setup()
       { name = "nvim_lua" },
       { name = "path" },
       { name = "nvim_lsp_signature_help" },
-      {name = "cmp_tabnine"},
       -- { name = "spell" },
       -- { name = "emoji" },
       -- { name = "calc" },
