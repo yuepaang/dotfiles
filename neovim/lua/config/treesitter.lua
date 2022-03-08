@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-  require("nvim-treesitter.configs").setup {
+  require("nvim-treesitter.configs").setup({
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
     ensure_installed = "maintained",
 
@@ -11,6 +11,8 @@ function M.setup()
     highlight = {
       -- `false` will disable the whole extension
       enable = true,
+      use_languagetree = true,
+      disable = {},
     },
 
     incremental_selection = {
@@ -44,6 +46,10 @@ function M.setup()
           ["if"] = "@function.inner",
           ["ac"] = "@class.outer",
           ["ic"] = "@class.inner",
+          ["al"] = "@loop.outer",
+          ["il"] = "@loop.inner",
+          ["is"] = "@statement.inner",
+          ["as"] = "@statement.outer",
         },
       },
 
@@ -104,7 +110,7 @@ function M.setup()
       enable = true,
       enable_autocmd = false,
     },
-  }
+  })
 end
 
 return M
