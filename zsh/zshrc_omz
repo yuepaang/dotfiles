@@ -164,6 +164,7 @@ export all_proxy="${all_proxy}"
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
+# override proxy to sepecific area
 export MAVEN_OPTS="-Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8118"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_291.jdk/Contents/Home"
 export PATH=$PATH:$JAVA_HOME/bin
