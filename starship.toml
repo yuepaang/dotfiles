@@ -5,37 +5,62 @@ add_newline = false
 [line_break]
 disabled = true
 
-# Replace the "❯" symbol in the prompt with "➟"
-[character]      # The name of the module we are configuring is "character"
-use_symbol_for_status = true
-symbol = "  ➟"     # The "symbol" segment is being set to "➜"
-success_symbol = "🔥"
-error_symbol = "  ✗"
-style_success = "bold #00A652"
-style_failure = "bold #df382c"
+# First param ─┌
+[username]
+format = "[$user]($style)@"
+style_user = "bold dimmed blue"
+style_root = "bold red"
+show_always = true
 
-[cmd_duration]
-min_time = 4
-show_milliseconds = false
+# Second param
+[hostname]
+format = "[$hostname]($style) in "
+style = "bold dimmed blue"
+# trim_at = "-"
+ssh_only = false
 disabled = false
-prefix = " ⏲️  "
-style = "bold italic #87A752"
 
-# configure directory
+# Third param …
 [directory]
 truncation_length = 10
-truncate_to_repo = true # truncates directory to root folder if in github repo
-prefix = " 📂️ "
+truncate_to_repo = true
 style = "bold italic #87A752"
 
-# shows the hostname on new lines
-[hostname]
-ssh_only = false
-prefix = "💻️ "
-# suffix = ">>"
-trim_at = ".companyname.com"
+# Last param in the first line/row
+[cmd_duration]
+min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
+format = "took [$duration]($style)"
+
+# SECOND LINE/ROW: Prompt
+#
+# Somethere at the beginning
+[battery]
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+
+[[battery.display]]  # "bold red" style when capacity is between 0% and 10%
+threshold = 30
+style = "bold red"
+
+[[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
+threshold = 70
+style = "bold yellow"
+
+[[battery.display]]  # "bold green" style when capacity is between 10% and 30%
+threshold = 85
+style = "bold green"
+
+# Prompt: param 2 └─
+[character]
+success_symbol = "[](bold green)"
+error_symbol = "[](bold red)"
+vicmd_symbol = "[](bold green)"
+
+
+[memory_usage]
+symbol = " "
+format = "$symbol[${ram}( | ${swap})]($style) "
+threshold = 30
+style = "bold dimmed white"
 disabled = false
-style = "bold italic #87A752"
-
-[username]
-disabled = true

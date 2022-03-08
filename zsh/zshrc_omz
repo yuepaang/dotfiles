@@ -180,3 +180,4 @@ dig () {
 ping() {
 	/sbin/ping $1 $2 $3 | nali
 }
+eval "$(pyenv init -)"
