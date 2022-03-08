@@ -24,6 +24,26 @@ function M.setup(servers, options)
         if server.name == "rust_analyzer" then
           require("rust-tools").setup {
             server = vim.tbl_deep_extend("force", server:get_default_options(), opts),
+            -- rust-tools options
+            tools = {
+              autoSetHints = true,
+              hover_with_actions = true,
+              inlay_hints = {
+                show_parameter_hints = false,
+                parameter_hints_prefix = "",
+                other_hints_prefix = "",
+              },
+            },
+            settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+              ["rust-analyzer"] = {
+                -- enable clippy on save
+                checkOnSave = {
+                    command = "clippy"
+                },
+              },
+            },
           }
           server:attach_buffers()
         else
