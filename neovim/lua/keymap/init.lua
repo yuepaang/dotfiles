@@ -30,7 +30,7 @@ local plug_map = {
 
 	-- lspsaga
 	["n|se"] = map_cr(":Lspsaga rename<CR>"):with_noremap():with_silent();
-	["n|sh"] = map_cr("<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>"):with_noremap():with_silent();
+	-- ["n|sh"] = map_cr("<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>"):with_noremap():with_silent();
 	["n|sp"] = map_cr("<cmd>lua require'lspsaga.provider'.preview_definition()<CR>"):with_noremap():with_silent();
 	["n|sH"] = map_cr("<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>"):with_noremap():with_silent();
 
@@ -71,7 +71,7 @@ local plug_map = {
 	["n|<Leader>vv"] = map_cu('lua require"symbols-outline".toggle_outline()'):with_noremap():with_silent(),
 
 	-- Plugin NvimTree
-	["n|tt"] = map_cr("lua require('extend.tree').toggle()"):with_noremap():with_silent(),
+	["n|<Leader>fe"] = map_cr("lua require('extend.tree').toggle()"):with_noremap():with_silent(),
 
 	-- Plugin translator
 	["n|tr"] = map_cu("TranslateW"):with_silent(),

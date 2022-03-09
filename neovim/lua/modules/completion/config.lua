@@ -8,7 +8,6 @@ function config.nvim_lsp_installer()
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     local lsp_installer = require("nvim-lsp-installer")
 
@@ -25,14 +24,6 @@ function config.nvim_lsp_installer()
 				})
 			end
 		}
-
-		if server.name == 'rust_analyzer' then
-			require 'rust-tools'.setup {
-			  server = vim.tbl_deep_extend( 'force', server:get_default_options(), opts )
-			}
-			server:attach_buffers()
-			return
-		end
 
         -- (optional) Customize the options passed to the server
         -- if server.name == "tsserver" then
@@ -161,7 +152,9 @@ function config.null_ls()
 
 	null_ls.setup({
 		cmd = { "nvim" },
-		debounce = 250,
+
+		debounce = 150,
+		save_after_format = false,
 		debug = false,
 		default_timeout = 5000,
 		diagnostics_format = "#{m}",
@@ -174,16 +167,18 @@ function config.null_ls()
 		on_attach = nil,
 		on_init = nil,
 		on_exit = nil,
-		root_dir = require("null-ls.utils").root_pattern(
-			".null-ls-root",
-			"Makefile",
-			".git",
-			"poetry.lock",
-			"go.mod"
-		),
+		-- root_dir = require("null-ls.utils").root_pattern(
+		-- 	".null-ls-root",
+		-- 	"Makefile",
+		-- 	".git",
+		-- 	"poetry.lock",
+		-- 	"go.mod"
+		-- ),
 		sources = {
 			null_ls.builtins.formatting.prettier,
-			null_ls.builtins.formatting.black,
+			null_ls.builtins.formatting.black.with { extra_args = { "--fast" } },
+			null_ls.builtins.formatting.isort,
+			null_ls.builtins.formatting.stylua,
 		},
 		update_in_insert = false,
 	})

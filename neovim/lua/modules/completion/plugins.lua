@@ -70,8 +70,4 @@ completion['jose-elias-alvarez/null-ls.nvim'] = {
 	config = conf.null_ls
 }
 
-completion['simrat39/rust-tools.nvim'] = {
-    after = 'nvim-lspconfig'
-}
-
 return completion
