@@ -104,7 +104,7 @@ local function load_options()
      concealcursor  = "niv";
    }
 
-	 vim.g.clipboard = {
+	vim.g.clipboard = {
 	   name = "myProvider",
 	   copy = {
 		["+"] = "clipboard-provider copy",
@@ -115,18 +115,10 @@ local function load_options()
 		["*"] = "clipboard-provider paste",
 	   },
 	   cache_enabled = 0
-	 }
+	}
 
-	 if global.is_mac then
-
-	   vim.g.python3_host_skip_check=1
-	   vim.g.python3_host_prog = '/usr/local/bin/python3'
-	 end
-
-	 if global.is_linux then
-	   vim.g.python3_host_skip_check=1
-	   vim.g.python3_host_prog = '/usr/bin/python3'
-	 end
+	vim.g.python3_host_skip_check=1
+	vim.g.python3_host_prog = '$HOME/.pyenv/versions/3.10.2/bin/python'
 
 	for name, value in pairs(global_local) do
 	    vim.o[name] = value
