@@ -10,7 +10,7 @@ function config.telescope()
   local actions_layout = require "telescope.actions.layout"
 	require('telescope').setup {
 		defaults = {
-			initial_mode = "insert",
+			initial_mode = "normal",
 			prompt_prefix = '🔭 ',
 			selection_caret = " ",
 			sorting_strategy = 'ascending',
@@ -310,7 +310,26 @@ function config.project()
 		-- Path where project.nvim will store the project history for use in
 		-- telescope
 		datapath = vim.fn.stdpath("data"),
+		telescope_on_project_selected = function(path, open)
+			require("auto-session").RestoreSession()
+		end
 	}
+end
+
+function config.autosession()
+	vim.o.sessionoptions="buffers,curdir,folds,help,tabpages,winsize,winpos"
+	require('auto-session').setup({
+		log_level = 'info',
+		auto_session_enable_last_session = false,
+		auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
+		auto_session_enabled = false,
+		auto_save_enabled = false,
+		auto_restore_enabled = false,
+		auto_session_suppress_dirs = {'~/'},
+		-- the configs below are lua only
+		bypass_session_save_file_types = nil,
+		post_restore_cmds = { require('extend.tree').toggle }
+	})
 end
 
 return config
