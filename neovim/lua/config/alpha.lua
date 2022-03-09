@@ -36,8 +36,10 @@ function M.setup()
   dashboard.section.header.val = header()
 
   dashboard.section.buttons.val = {
+    dashboard.button("f", "  Find files", ":Telescope find_files <CR>"),
     dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
     dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
+    dashboard.button("r", " Recent files", ":Telescope oldfiles <CR>"),
     dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
   }
 
@@ -71,6 +73,7 @@ function M.setup()
   dashboard.section.header.opts.hl = "Include"
   dashboard.section.buttons.opts.hl = "Function"
   dashboard.section.buttons.opts.hl_shortcut = "Type"
+
   dashboard.opts.opts.noautocmd = true
 
   alpha.setup(dashboard.opts)

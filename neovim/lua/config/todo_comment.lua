@@ -1,6 +1,11 @@
 local M = {}
 
 function M.setup()
+  local error_red = "#F44747"
+  local warning_orange = "#ff8800"
+  local info_yellow = "#FFCC66"
+  local hint_blue = "#4FC1FF"
+  local perf_purple = "#7C3AED"
   require("todo-comments").setup({
     signs = true, -- show icons in the signs column
     sign_priority = 8, -- sign priority
@@ -8,7 +13,7 @@ function M.setup()
     keywords = {
       FIX = {
         icon = " ", -- icon used for the sign, and in search results
-        color = "error", -- can be a hex color, or a named color (see below)
+        color = error_red, -- can be a hex color, or a named color (see below)
         alt = {
           "FIXME",
           "BUG",
@@ -23,11 +28,11 @@ function M.setup()
         }, -- a set of other keywords that all map to this FIX keywords
         -- signs = false, -- configure signs for some keywords individually
       },
-      TODO = { icon = " ", color = "info" },
-      HACK = { icon = " ", color = "warning" },
-      WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-      PERF = { icon = " ", color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-      NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+      TODO = { icon = " ", color = hint_blue, alt = {"TIP"} },
+      HACK = { icon = " ", color = warning_orange },
+      WARN = { icon = " ", color = warning_orange, alt = { "WARNING", "XXX" } },
+      PERF = { icon = " ", color = perf_purple, alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+      NOTE = { icon = " ", color = info_yellow, alt = { "INFO" } },
     },
     merge_keywords = true, -- when true, custom keywords will be merged with the defaults
     -- highlighting of the line containing the todo comment
@@ -36,22 +41,15 @@ function M.setup()
     -- * after: highlights after the keyword (todo text)
     highlight = {
       before = "", -- "fg" or "bg" or empty
-      keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+      keyword = "fg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
       after = "fg", -- "fg" or "bg" or empty
-      pattern = [[.*<(KEYWORDS)\s*:+\s*]], -- pattern or table of patterns, used for highlightng (vim regex)
+      pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
       comments_only = true, -- uses treesitter to match keywords in comments only
       max_line_len = 400, -- ignore lines longer than this
       exclude = {}, -- list of file types to exclude highlighting
     },
     -- list of named colors where we try to extract the guifg from the
     -- list of hilight groups or use the hex color if hl not found as a fallback
-    colors = {
-      error = { "#DC2626" },
-      warning = { "#FBBF24" },
-      info = { "#2563EB" },
-      hint = { "#10B981" },
-      default = { "#7C3AED" },
-    },
     search = {
       command = "rg",
       args = {
