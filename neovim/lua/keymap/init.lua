@@ -71,7 +71,7 @@ local plug_map = {
 	["n|<Leader>vv"] = map_cu('lua require"symbols-outline".toggle_outline()'):with_noremap():with_silent(),
 
 	-- Plugin NvimTree
-	["n|tt"] = map_cr("lua require('extend.tree').toggle()"):with_noremap():with_silent(),
+	["n|<Leader>fe"] = map_cr("lua require('extend.tree').toggle()"):with_noremap():with_silent(),
 
 	-- Plugin translator
 	["n|tr"] = map_cu("TranslateW"):with_silent(),
