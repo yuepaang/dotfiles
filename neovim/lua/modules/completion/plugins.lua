@@ -31,6 +31,10 @@ completion['tzachar/cmp-tabnine'] = {
     run = 'bash install.sh'
 }
 
+completion['github/copilot.vim'] = {
+    after = 'nvim-cmp',
+}
+
 completion['octaltree/cmp-look'] = {
     after = 'nvim-cmp'
 }

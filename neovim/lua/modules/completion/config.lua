@@ -43,6 +43,56 @@ function config.nvim_cmp()
 
     local cmp = require('cmp')
     local luasnip = require('luasnip')
+
+	local g = vim.g
+	g.copilot_no_tab_map = true
+	g.copilot_assume_mapped = true
+	g.copilot_tab_fallback = ""
+	local tab_complete_copilot_first = true
+
+	local has_words_before = function()
+		local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+		return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+    end
+
+    local function replace_termcodes(str)
+		return vim.api.nvim_replace_termcodes(str, true, true, true)
+    end
+
+    local function check_backspace()
+		local col = vim.fn.col(".") - 1
+		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+    end
+
+	local tab_complete = function(fallback)
+		local copilot_keys = vim.fn["copilot#Accept"]()
+    	if tab_complete_copilot_first then
+			if copilot_keys ~= "" then
+				vim.api.nvim_feedkeys(copilot_keys, "i", true)
+			elseif cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+			elseif check_backspace() then
+				vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+			else
+				fallback()
+			end
+    	else
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif copilot_keys ~= "" then
+				vim.api.nvim_feedkeys(copilot_keys, "i", true)
+			elseif luasnip.expand_or_jumpable() then
+				vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+			elseif check_backspace() then
+				vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+			else
+				fallback()
+			end
+    	end
+    end
+
     cmp.setup({
         snippet = {
             expand = function(args)
@@ -71,6 +121,7 @@ function config.nvim_cmp()
             }
         }}),
         mapping = {
+			['<TAB>'] = tab_complete,
             ["<C-p>"] = cmp.mapping.select_prev_item(),
             ["<C-n>"] = cmp.mapping.select_next_item(),
             ['<C-f>'] = cmp.mapping({
