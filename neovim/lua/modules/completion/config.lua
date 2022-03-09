@@ -152,6 +152,7 @@ function config.null_ls()
 
 	null_ls.setup({
 		cmd = { "nvim" },
+
 		debounce = 150,
 		save_after_format = false,
 		debug = false,

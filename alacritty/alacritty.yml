@@ -1,15 +1,3 @@
-# import:
-  # - ~/dotfiles/dracula.yml
-
-env:
-  # TERM variable
-  #
-  # This value is used to set the `$TERM` environment variable for
-  # each instance of Alacritty. If it is not present, alacritty will
-  # check the local terminfo database and use `alacritty` if it is
-  # available, otherwise `xterm-256color` is used.
-  TERM: xterm-256color
-
 window:
   # Window dimensions (changes require restart)
   #
@@ -17,15 +5,18 @@ window:
   # setting is ignored.
   dimensions:
     columns: 100
-    lines: 85
+    lines: 36
 
+  position:
+    x: 1050
+    y: 250
       # Window padding (changes require restart)
   #
   # Blank space added around the window in pixels. This padding is not scaled by
   # DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 0
-    y: 0
+    x: 25
+    y: 25
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
@@ -56,6 +47,8 @@ window:
   #class: Alacritty
   # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
+
+  opacity: 1
 
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
@@ -458,6 +451,34 @@ schemes:
       magenta: '#b77ee0'
       cyan:    '#54ced6'
       white:   '#282a2e'
+
+  Pink: &Pink
+    # Default colors
+    primary:
+      background: '0x202330'
+      foreground: '0xfae8b6'
+
+    # Normal colors
+    normal:
+      black:   '0xFAE8B6'
+      red:     '0xff38a2'
+      green:   '0x9cd162'
+      yellow:  '0xffc85b'
+      blue:    '0xeba4ac'
+      magenta: '0xd9bcef'
+      cyan:    '0x87c095'
+      white:   '0xfff0f5'
+
+    # Bright colors
+    bright:
+      black:   '0xFAE8B6'
+      red:     '0xff38a2'
+      green:   '0x9cd162'
+      yellow:  '0xffc85b'
+      blue:    '0xeba4ac'
+      magenta: '0xd9bcef'
+      cyan:    '0x87c095'
+      white:   '0xfff0f5'
 
 ######################################################################
 ## SET THEME: Choose ONE color scheme from those in the above list. ##
