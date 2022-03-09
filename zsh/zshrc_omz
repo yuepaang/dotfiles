@@ -182,3 +182,6 @@ ping() {
 }
 
 alias pipup="pip freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install --upgrade"
+
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
