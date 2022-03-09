@@ -286,7 +286,9 @@ function M.setup()
           "telescope-dap.nvim",
         },
         requires = {
+          -- An implementation of the Popup API from vim in Neovim
           "nvim-lua/popup.nvim",
+          -- Useful lua functions used ny lots of plugins
           "nvim-lua/plenary.nvim",
           { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
           "nvim-telescope/telescope-project.nvim",
@@ -391,6 +393,7 @@ function M.setup()
     })
 
     -- Auto pairs
+    -- Autopairs, integrates with both cmp and treesitter
     use({
       "windwp/nvim-autopairs",
       wants = "nvim-treesitter",
@@ -420,6 +423,11 @@ function M.setup()
 
     use({
       "nvim-treesitter/playground",
+      requires = "nvim-treesitter",
+    })
+
+    use({
+      "p00f/nvim-ts-rainbow",
       requires = "nvim-treesitter",
     })
 

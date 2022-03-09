@@ -20,7 +20,10 @@ end
 
 local sources = {
   -- formatting
-  b.formatting.prettierd,
+  b.formatting.prettier.with {
+    extra_filetypes = { "toml", "solidity" },
+    extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+  },
   b.formatting.shfmt,
   b.formatting.fixjson,
   b.formatting.black.with { extra_args = { "--fast" } },
@@ -49,7 +52,7 @@ local sources = {
 
 function M.setup(opts)
   nls.setup {
-    -- debug = true,
+    debug = false,
     debounce = 150,
     save_after_format = false,
     sources = sources,

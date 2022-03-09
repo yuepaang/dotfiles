@@ -18,6 +18,9 @@ function M.setup()
         focusable = true,
         style = "minimal",
         border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
       },
     },
   }
@@ -30,7 +33,7 @@ function M.setup()
     { name = "DiagnosticSignInfo", text = "" },
   }
   for _, sign in ipairs(diagnostic_signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
   -- Diagnostic configuration
