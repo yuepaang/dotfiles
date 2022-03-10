@@ -70,4 +70,12 @@ editor['ggandor/lightspeed.nvim'] = {
     config = conf.lightspeed
 }
 
+editor['rcarriga/nvim-notify'] = {
+    event = "BufRead",
+    config = conf.notify
+}
+
+-- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+editor['antoinemadec/FixCursorHold.nvim'] = {}
+
 return editor
