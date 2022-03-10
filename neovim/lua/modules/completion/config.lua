@@ -29,6 +29,15 @@ function config.nvim_lsp_installer()
         -- if server.name == "tsserver" then
         --     opts.root_dir = function() ... end
         -- end
+		if server.name == "sumneko_lua" then
+			opts.settings = {
+				Lua = {
+					diagnostics = {
+						globals = {'vim', 'packer_plugins'}
+					}
+				}
+			}
+		end
 
         -- This setup() function is exactly the same as lspconfig's setup function.
         -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md

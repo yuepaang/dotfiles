@@ -42,7 +42,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Windowed
+  startup_mode: Maximized
 
   # Window title
   #title: Alacritty
@@ -50,6 +50,7 @@ window:
   #class: Alacritty
   # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
+  opacity: 1.0
 
 scrolling:
   # maximum number of lines in the scrollback buffer. Specifying '0' will
@@ -77,7 +78,7 @@ mouse:
   hide_when_typing: true
 
 font:
-  size: 15.0
+  size: 18.0
 
   normal:
     # family: Hack Nerd Font
@@ -528,8 +529,6 @@ bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xffffff'
-
-background_opacity: 1.0
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"

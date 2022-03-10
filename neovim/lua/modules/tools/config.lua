@@ -10,7 +10,7 @@ function config.telescope()
     local actions_layout = require "telescope.actions.layout"
     require('telescope').setup {
         defaults = {
-            initial_mode = "normal",
+            initial_mode = "insert",
             prompt_prefix = '🔭 ',
             selection_caret = " ",
             sorting_strategy = 'ascending',
