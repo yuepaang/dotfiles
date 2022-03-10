@@ -29,8 +29,6 @@ local plug_map = {
 	["n|<C-b>"] = map_cr("lua require('extend.scroll').scroll_up()"):with_noremap():with_silent();
 
 	-- lspsaga
-	["n|se"] = map_cr(":Lspsaga rename<CR>"):with_noremap():with_silent();
-	-- ["n|sh"] = map_cr("<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>"):with_noremap():with_silent();
 	["n|sp"] = map_cr("<cmd>lua require'lspsaga.provider'.preview_definition()<CR>"):with_noremap():with_silent();
 	["n|sH"] = map_cr("<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>"):with_noremap():with_silent();
 
@@ -93,8 +91,8 @@ local plug_map = {
 	["n|<S-h>"] = map_cu("BufferPrevious"):with_noremap():with_silent(),
 	["n|<S-l>"] = map_cu("BufferNext"):with_noremap():with_silent(),
 	["n|<S-c>"] = map_cu("BufferClose"):with_noremap():with_silent(),
-	["n|<S-b>"] = map_cu("BufferCloseBuffersLeft"):with_noremap():with_silent(),
-	["n|<S-m>"] = map_cu("BufferCloseBuffersRight"):with_noremap():with_silent(),
+	["n|<S-x>"] = map_cu("BufferCloseBuffersLeft"):with_noremap():with_silent(),
+	["n|<S-v>"] = map_cu("BufferCloseBuffersRight"):with_noremap():with_silent(),
 	["n|<S-i>"] = map_cu("BufferPin"):with_noremap():with_silent(),
 	["n|<S-p>"] = map_cu("BufferPick"):with_noremap():with_silent(),
 	["n|<S-s>"] = map_cu("BufferOrderByBufferNumber"):with_noremap():with_silent(),
