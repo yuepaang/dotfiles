@@ -347,10 +347,6 @@ function config.floaterm()
     vim.g.floaterm_opener = "edit"
 end
 
-function config.translator()
-    vim.g.translator_window_borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"}
-end
-
 function config.project()
     require("project_nvim").setup {
         -- Manual mode doesn't automatically change your root directory, so you have

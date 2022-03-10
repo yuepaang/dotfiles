@@ -10,8 +10,7 @@ ui['nvim-treesitter/nvim-treesitter'] = {
     requires = {{
         'nvim-treesitter/nvim-treesitter-textobjects',
         opt = true
-    }, {'RRethy/nvim-treesitter-textsubjects'}, {'JoosepAlviste/nvim-ts-context-commentstring'},
-                {'windwp/nvim-ts-autotag'}, {
+    }, {'RRethy/nvim-treesitter-textsubjects'}, {
         'lewis6991/spellsitter.nvim',
         config = conf.spellsitter
     }, {'p00f/nvim-ts-rainbow'}, {

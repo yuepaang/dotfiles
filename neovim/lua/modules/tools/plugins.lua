@@ -50,11 +50,6 @@ tools['voldikss/vim-floaterm'] = {
     end
 }
 
-tools['voldikss/vim-translator'] = {
-    cmd = {'TranslateW'},
-    setup = conf.translator()
-}
-
 tools['jbyuki/venn.nvim'] = {
     cmd = {'VBox', 'VFill'}
 }
