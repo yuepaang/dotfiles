@@ -123,4 +123,14 @@ function config.gitsigns()
     }
 end
 
+function config.hlslens()
+	require('hlslens').setup {}
+end
+
+function config.scrollbar()
+	require('scrollbar').setup {
+		require('scrollbar.handlers.search').setup()
+	}
+end
+
 return config

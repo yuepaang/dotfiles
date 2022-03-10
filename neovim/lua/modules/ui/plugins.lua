@@ -56,4 +56,14 @@ ui['lewis6991/gitsigns.nvim'] = {
     end
 }
 
+ui['petertriho/nvim-scrollbar'] = {
+	requires = {
+        {
+          'kevinhwang91/nvim-hlslens',
+          config = conf.hlslens,
+        },
+    },
+	config = conf.scrollbar
+}
+
 return ui
