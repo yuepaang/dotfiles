@@ -10,7 +10,7 @@ editor['numToStr/Comment.nvim'] = {
 }
 
 editor['phaazon/hop.nvim'] = {
-	branch = "v1",
+    branch = "v1",
     opt = true,
     setup = function()
         require("utils.defer").packer_defer_load("hop.nvim", 1000)
@@ -66,8 +66,8 @@ editor['romgrk/barbar.nvim'] = {
 }
 
 editor['ggandor/lightspeed.nvim'] = {
-	requires = {'tpope/vim-repeat'},
-	config = conf.lightspeed
+    requires = {'tpope/vim-repeat'},
+    config = conf.lightspeed
 }
 
 return editor

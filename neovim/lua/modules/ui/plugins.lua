@@ -7,25 +7,17 @@ ui['nvim-treesitter/nvim-treesitter'] = {
         require("utils.defer").add("nvim-treesitter", 100)
     end,
     config = conf.treesitter,
-    requires = {
-		{
-			'nvim-treesitter/nvim-treesitter-textobjects',
-			opt = true
-		},
-		{
-			'RRethy/nvim-treesitter-textsubjects'
-		},
-		{
-			'JoosepAlviste/nvim-ts-context-commentstring'
-		},
-		{
-			'windwp/nvim-ts-autotag'
-		},
-		{
-			'lewis6991/spellsitter.nvim',
-			config = conf.spellsitter
-		}
-    },
+    requires = {{
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        opt = true
+    }, {'RRethy/nvim-treesitter-textsubjects'}, {'JoosepAlviste/nvim-ts-context-commentstring'},
+                {'windwp/nvim-ts-autotag'}, {
+        'lewis6991/spellsitter.nvim',
+        config = conf.spellsitter
+    }, {'p00f/nvim-ts-rainbow'}, {
+        'SmiteshP/nvim-gps',
+        config = conf.gps
+    }},
     run = ':TSUpdate'
 }
 
@@ -48,6 +40,8 @@ ui['nvim-lualine/lualine.nvim'] = {
 ui['cinuor/gruvbox.nvim'] = {
     opt = true
 }
+
+ui['NTBBloodbath/doom-one.nvim'] = {}
 
 ui['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
@@ -72,24 +66,20 @@ ui['lewis6991/gitsigns.nvim'] = {
 }
 
 ui['petertriho/nvim-scrollbar'] = {
-	requires = {
-        {
-          'kevinhwang91/nvim-hlslens',
-          config = conf.hlslens,
-        },
-    },
-	config = conf.scrollbar
+    requires = {{
+        'kevinhwang91/nvim-hlslens',
+        config = conf.hlslens
+    }},
+    config = conf.scrollbar
 }
 
 ui['goolord/alpha-nvim'] = {
-	config = conf.alpha
+    config = conf.alpha
 }
 
 ui['j-hui/fidget.nvim'] = {
-	requires = {
-      'nvim-lualine/lualine.nvim',
-    },
-	config = conf.fidget
+    requires = {'nvim-lualine/lualine.nvim'},
+    config = conf.fidget
 }
 
 return ui

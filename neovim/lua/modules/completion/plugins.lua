@@ -32,7 +32,7 @@ completion['tzachar/cmp-tabnine'] = {
 }
 
 completion['github/copilot.vim'] = {
-    after = 'nvim-cmp',
+    after = 'nvim-cmp'
 }
 
 completion['octaltree/cmp-look'] = {
@@ -70,13 +70,13 @@ completion['williamboman/nvim-lsp-installer'] = {
 }
 
 completion['jose-elias-alvarez/null-ls.nvim'] = {
-	after='nvim-lspconfig',
-	config = conf.null_ls
+    after = 'nvim-lspconfig',
+    config = conf.null_ls
 }
 
 completion['RRethy/vim-illuminate'] = {
-	after = 'nvim-lspconfig',
-	config = conf.illuminate
+    after = 'nvim-lspconfig',
+    config = conf.illuminate
 }
 
 return completion

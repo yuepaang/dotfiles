@@ -1,1 +1,1 @@
-vim.cmd [[command GruvboxDump lua require('extend.gruvbox').dump()]]
+-- vim.cmd [[command GruvboxDump lua require('extend.gruvbox').dump()]]

@@ -8,36 +8,45 @@ function config.nvim_lsp_installer()
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     local lsp_installer = require("nvim-lsp-installer")
 
-    lsp_installer.on_server_ready(
-	function(server)
-		local opts = {
-			capabilities = capabilities,
-			on_attach = function(client,bufnr)
-				vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-				require "lsp_signature".on_attach({
-					bind = true, -- This is mandatory, otherwise border config won't get registered.
-					hint_enable = false,
-					floating_window_above_cur_line = true,
-					handler_opts = {border = "none"}
-				})
-				require("illuminate").on_attach(client)
-			end
-		}
+    lsp_installer.on_server_ready(function(server)
+        local opts = {
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+                vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+                require"lsp_signature".on_attach({
+                    bind = true, -- This is mandatory, otherwise border config won't get registered.
+                    hint_enable = false,
+                    floating_window_above_cur_line = true,
+                    handler_opts = {
+                        border = "none"
+                    }
+                })
+                require("illuminate").on_attach(client)
+            end
+        }
 
         -- (optional) Customize the options passed to the server
         -- if server.name == "tsserver" then
         --     opts.root_dir = function() ... end
         -- end
+        if server.name == "sumneko_lua" then
+            opts.settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = {'vim'}
+                    }
+                }
+            }
+        end
 
         -- This setup() function is exactly the same as lspconfig's setup function.
         -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
         server:setup(opts)
-    end
-	)
+    end)
 end
 
 function config.nvim_cmp()
@@ -48,57 +57,52 @@ function config.nvim_cmp()
     local cmp = require('cmp')
     local luasnip = require('luasnip')
 
-	local g = vim.g
-	g.copilot_no_tab_map = true
-	g.copilot_assume_mapped = true
-	g.copilot_tab_fallback = ""
-	local tab_complete_copilot_first = true
-
-	local has_words_before = function()
-		local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-		return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-    end
+    local g = vim.g
+    g.copilot_no_tab_map = true
+    g.copilot_assume_mapped = true
+    g.copilot_tab_fallback = ""
+    local tab_complete_copilot_first = true
 
     local function replace_termcodes(str)
-		return vim.api.nvim_replace_termcodes(str, true, true, true)
+        return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
 
     local function check_backspace()
-		local col = vim.fn.col(".") - 1
-		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+        local col = vim.fn.col(".") - 1
+        return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
     end
 
-	local tab_complete = function(fallback)
-		local copilot_keys = vim.fn["copilot#Accept"]()
-    	if tab_complete_copilot_first then
-			if copilot_keys ~= "" then
-				vim.api.nvim_feedkeys(copilot_keys, "i", true)
-			elseif cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_jumpable() then
-				vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
-			elseif check_backspace() then
-				vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
-			else
-				fallback()
-			end
-    	else
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif copilot_keys ~= "" then
-				vim.api.nvim_feedkeys(copilot_keys, "i", true)
-			elseif luasnip.expand_or_jumpable() then
-				vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
-			elseif check_backspace() then
-				vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
-			else
-				fallback()
-			end
-    	end
+    local tab_complete = function(fallback)
+        local copilot_keys = vim.fn["copilot#Accept"]()
+        if tab_complete_copilot_first then
+            if copilot_keys ~= "" then
+                vim.api.nvim_feedkeys(copilot_keys, "i", true)
+            elseif cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+            elseif check_backspace() then
+                vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+            else
+                fallback()
+            end
+        else
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif copilot_keys ~= "" then
+                vim.api.nvim_feedkeys(copilot_keys, "i", true)
+            elseif luasnip.expand_or_jumpable() then
+                vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+            elseif check_backspace() then
+                vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+            else
+                fallback()
+            end
+        end
     end
 
     cmp.setup({
-		preselect = cmp.PreselectMode.None,
+        preselect = cmp.PreselectMode.None,
         snippet = {
             expand = function(args)
                 require('luasnip').lsp_expand(args.body)
@@ -126,7 +130,7 @@ function config.nvim_cmp()
             }
         }}),
         mapping = {
-			['<TAB>'] = tab_complete,
+            ['<TAB>'] = tab_complete,
             ["<C-p>"] = cmp.mapping.select_prev_item(),
             ["<C-n>"] = cmp.mapping.select_next_item(),
             ['<C-f>'] = cmp.mapping({
@@ -204,40 +208,39 @@ function config.luasnip()
 end
 
 function config.null_ls()
-	local null_ls = require("null-ls")
+    local null_ls = require("null-ls")
 
-	null_ls.setup({
-		cmd = { "nvim" },
-
-		debounce = 150,
-		save_after_format = false,
-		debug = false,
-		default_timeout = 5000,
-		diagnostics_format = "#{m}",
-		fallback_severity = vim.diagnostic.severity.ERROR,
-		log = {
-			enable = true,
-			level = "warn",
-			use_console = "async",
-		},
-		on_attach = nil,
-		on_init = nil,
-		on_exit = nil,
-		-- root_dir = require("null-ls.utils").root_pattern(
-		-- 	".null-ls-root",
-		-- 	"Makefile",
-		-- 	".git",
-		-- 	"poetry.lock",
-		-- 	"go.mod"
-		-- ),
-		sources = {
-			null_ls.builtins.formatting.prettier,
-			null_ls.builtins.formatting.black.with { extra_args = { "--fast" } },
-			null_ls.builtins.formatting.isort,
-			null_ls.builtins.formatting.stylua,
-		},
-		update_in_insert = false,
-	})
+    null_ls.setup({
+        cmd = {"nvim"},
+        diagnostics = {
+            globals = {'vim'}
+        },
+        debounce = 150,
+        save_after_format = false,
+        debug = false,
+        default_timeout = 5000,
+        diagnostics_format = "#{m}",
+        fallback_severity = vim.diagnostic.severity.ERROR,
+        log = {
+            enable = true,
+            level = "warn",
+            use_console = "async"
+        },
+        on_attach = nil,
+        on_init = nil,
+        on_exit = nil,
+        -- root_dir = require("null-ls.utils").root_pattern(
+        -- 	".null-ls-root",
+        -- 	"Makefile",
+        -- 	".git",
+        -- 	"poetry.lock",
+        -- 	"go.mod"
+        -- ),
+        sources = {null_ls.builtins.formatting.prettier, null_ls.builtins.formatting.black.with {
+            extra_args = {"--fast"}
+        }, null_ls.builtins.formatting.isort, null_ls.builtins.formatting.stylua},
+        update_in_insert = false
+    })
 end
 
 function config.illuminate()
