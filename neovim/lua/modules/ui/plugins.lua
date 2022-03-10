@@ -66,4 +66,8 @@ ui['petertriho/nvim-scrollbar'] = {
 	config = conf.scrollbar
 }
 
+ui['goolord/alpha-nvim'] = {
+	config = conf.alpha
+}
+
 return ui
