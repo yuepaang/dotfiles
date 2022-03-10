@@ -64,4 +64,9 @@ editor['romgrk/barbar.nvim'] = {
     requires = {'kyazdani42/nvim-web-devicons'}
 }
 
+editor['ggandor/lightspeed.nvim'] = {
+	requires = {'tpope/vim-repeat'},
+	config = conf.lightspeed
+}
+
 return editor

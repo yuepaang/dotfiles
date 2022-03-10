@@ -171,4 +171,10 @@ function config.hop()
 	require'hop'.setup()
 end
 
+function config.lightspeed()
+	require('lightspeed').setup({
+		ignore_case = true,
+	})
+end
+
 return config

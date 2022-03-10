@@ -104,7 +104,7 @@ function config.lspsaga()
 end
 
 function config.gitsigns()
-    require('gitsigns').setup {
+    require('gitsigns').setup{
         keymaps = {},
         watch_gitdir = {
             interval = 2000,
@@ -114,7 +114,7 @@ function config.gitsigns()
         current_line_blame_opts = {
             virt_text = true,
             virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-            delay = 1000,
+            delay = 100,
             ignore_whitespace = false
         },
         current_line_blame_formatter_opts = {

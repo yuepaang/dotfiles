@@ -92,7 +92,7 @@ local plug_map = {
 	-- barbar.nvim
 	["n|<S-h>"] = map_cu("BufferPrevious"):with_noremap():with_silent(),
 	["n|<S-l>"] = map_cu("BufferNext"):with_noremap():with_silent(),
-	["n|<S-n>"] = map_cu("BufferClose"):with_noremap():with_silent(),
+	["n|<S-c>"] = map_cu("BufferClose"):with_noremap():with_silent(),
 	["n|<S-b>"] = map_cu("BufferCloseBuffersLeft"):with_noremap():with_silent(),
 	["n|<S-m>"] = map_cu("BufferCloseBuffersRight"):with_noremap():with_silent(),
 	["n|<S-i>"] = map_cu("BufferPin"):with_noremap():with_silent(),
