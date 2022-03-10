@@ -75,10 +75,13 @@ function config.autopairs()
 	  vim.cmd [[PackerLoad nvim-cmp]]
 	end
 	local cmp = require("cmp")
+	local npairs = require("nvim-autopairs")
 
-	require('nvim-autopairs').setup({
+	npairs.setup({
 		disable_filetype = {'TelescopePrompt'}
 	})
+	npairs.add_rules(require "nvim-autopairs.rules.endwise-lua")
+
 	local cmp_autopairs = require("nvim-autopairs.completion.cmp")
     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 end
