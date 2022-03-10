@@ -8,8 +8,23 @@ ui['nvim-treesitter/nvim-treesitter'] = {
     end,
     config = conf.treesitter,
     requires = {
-        'nvim-treesitter/nvim-treesitter-textobjects',
-        opt = true
+		{
+			'nvim-treesitter/nvim-treesitter-textobjects',
+			opt = true
+		},
+		{
+			'RRethy/nvim-treesitter-textsubjects'
+		},
+		{
+			'JoosepAlviste/nvim-ts-context-commentstring'
+		},
+		{
+			'windwp/nvim-ts-autotag'
+		},
+		{
+			'lewis6991/spellsitter.nvim',
+			config = conf.spellsitter
+		}
     },
     run = ':TSUpdate'
 }

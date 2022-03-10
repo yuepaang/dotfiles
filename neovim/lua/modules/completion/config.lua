@@ -98,6 +98,7 @@ function config.nvim_cmp()
     end
 
     cmp.setup({
+		preselect = cmp.PreselectMode.None,
         snippet = {
             expand = function(args)
                 require('luasnip').lsp_expand(args.body)

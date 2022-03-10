@@ -116,6 +116,10 @@ local plug_map = {
 	["n|ta"] = map_cr("lua require'gotests'.all_test()"):with_noremap():with_silent(),
 	["n|te"] = map_cr("lua require'gotests'.exported_test()"):with_noremap():with_silent(),
 
+	-- Neogen
+	["n|<Leader>cg"] = map_cmd(":Neogen func<CR>"):with_noremap():with_silent(),
+	["n|<Leader>cG"] = map_cmd(":Neogen class<CR>"):with_noremap():with_silent(),
+
     -- customized
     ["n|<CR>"] = map_cmd(":nohlsearch<CR><CR>"):with_noremap(),
     ["n|<F3>"] = map_cmd("a<C-R>=strftime('%Y-%m-%d %H:%M:%S')<Esc>"):with_noremap(),

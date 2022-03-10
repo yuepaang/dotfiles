@@ -11,6 +11,7 @@ function config.treesitter()
 
     vim.api.nvim_command('set foldmethod=expr')
     vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
+
     require('nvim-treesitter.configs').setup {
         ensure_installed = {"bash", "cmake", "comment", "c", "cpp", "dot", "dockerfile", "go", "gomod", "gowork",
                             "hjson", "html", "lua", "make", "python", "regex", "rust", "toml", "vim", "yaml"},
@@ -18,6 +19,19 @@ function config.treesitter()
             enable = true,
             additional_vim_regex_highlighting = false
         },
+		rainbow = {
+			enable = true,
+			extended_mode = true,
+			max_file_lines = nil,
+		},
+		textsubjects = {
+			enable = true,
+			prev_selection = ',', -- (Optional) keymap to select the previous selection
+			keymaps = {
+			  ['.'] = 'textsubjects-smart',
+			  -- [';'] = 'textsubjects-container-outer',
+			},
+		},
         textobjects = {
             select = {
                 enable = true,
@@ -40,7 +54,13 @@ function config.treesitter()
                     ["ih"] = "@call.inner"
                 }
             }
-        }
+        },
+		autotag = {
+			enable = true,
+		},
+		context_commentstring = {
+			enable = true
+		},
     }
 end
 
@@ -134,6 +154,12 @@ end
 function config.scrollbar()
 	require('scrollbar').setup {
 		require('scrollbar.handlers.search').setup()
+	}
+end
+
+function config.spellsitter()
+	require('spellsitter').setup {
+		enable = true,
 	}
 end
 

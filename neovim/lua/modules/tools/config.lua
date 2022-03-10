@@ -332,4 +332,8 @@ function config.autosession()
 	})
 end
 
+function config.neogen()
+	require('neogen').setup {}
+end
+
 return config

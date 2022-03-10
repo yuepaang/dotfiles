@@ -90,4 +90,11 @@ tools['rmagatti/auto-session'] = {
 	config = conf.autosession
 }
 
+tools['danymat/neogen'] = {
+	config = conf.neogen,
+	cmd = { "Neogen" }
+}
+
+tools['tpope/vim-surround'] = {}
+
 return tools
