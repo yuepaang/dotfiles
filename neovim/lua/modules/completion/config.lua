@@ -10,31 +10,86 @@ function config.nvim_lsp_installer()
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+    local on_attach = function(client, bufnr)
+        -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+        local function buf_set_option(...)
+            vim.api.nvim_buf_set_option(bufnr, ...)
+        end
+
+        -- Enable completion triggered by <c-x><c-o>
+        buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+        require"lsp_signature".on_attach({
+            bind = true, -- This is mandatory, otherwise border config won't get registered.
+            hint_enable = false,
+            floating_window_above_cur_line = true,
+            handler_opts = {
+                border = "none"
+            }
+        })
+
+        -- local opts = { noremap=true, silent=true }
+        -- buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+        -- buf_set_keymap('v', '=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+        require("illuminate").on_attach(client)
+
+    end
+
     local lsp_installer = require("nvim-lsp-installer")
 
-    lsp_installer.on_server_ready(function(server)
-        local opts = {
-            capabilities = capabilities,
-            on_attach = function(client, bufnr)
-                vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-                require"lsp_signature".on_attach({
-                    bind = true, -- This is mandatory, otherwise border config won't get registered.
-                    hint_enable = false,
-                    floating_window_above_cur_line = true,
-                    handler_opts = {
-                        border = "none"
-                    }
-                })
-                require("illuminate").on_attach(client)
-            end
+    local default_opt = {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        flags = {
+            debounce_text_changes = 150
         }
+    }
+
+    local lspconfig = require('lspconfig')
+    local format_config = require 'modules.completion.format'
+
+    local servers = {
+        tsserver = {
+            root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git")
+        },
+        pyright = {
+            filetypes = {"python"},
+            init_options = {
+                formatters = {
+                    black = {
+                        command = "black",
+                        args = {"--quiet", "-"},
+                        rootPatterns = {"pyproject.toml"}
+                    },
+                    formatFiletypes = {
+                        python = {"black"}
+                    }
+                }
+            }
+        },
+        efm = {
+            filetypes = vim.tbl_keys(format_config),
+            init_options = {
+                documentFormatting = true
+            },
+            root_dir = lspconfig.util.root_pattern {'.git/', '.'},
+            settings = {
+                languages = format_config
+            }
+        }
+    }
+
+    servers.sumneko_lua = require('lua-dev').setup(default_opt)
+
+    lsp_installer.on_server_ready(function(server)
+        local opt = servers[server.name] or {}
+        opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
 
         -- (optional) Customize the options passed to the server
         -- if server.name == "tsserver" then
         --     opts.root_dir = function() ... end
         -- end
         if server.name == "sumneko_lua" then
-            opts.settings = {
+            opt.settings = {
                 Lua = {
                     diagnostics = {
                         globals = {'vim'}
@@ -45,7 +100,7 @@ function config.nvim_lsp_installer()
 
         -- This setup() function is exactly the same as lspconfig's setup function.
         -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-        server:setup(opts)
+        server:setup(opt)
     end)
 end
 
@@ -207,43 +262,10 @@ function config.luasnip()
     })
 end
 
-function config.null_ls()
-    local null_ls = require("null-ls")
-
-    null_ls.setup({
-        cmd = {"nvim"},
-        diagnostics = {
-            globals = {'vim'}
-        },
-        debounce = 150,
-        save_after_format = false,
-        debug = false,
-        default_timeout = 5000,
-        diagnostics_format = "#{m}",
-        fallback_severity = vim.diagnostic.severity.ERROR,
-        log = {
-            enable = true,
-            level = "warn",
-            use_console = "async"
-        },
-        on_attach = nil,
-        on_init = nil,
-        on_exit = nil,
-        -- root_dir = require("null-ls.utils").root_pattern(
-        -- 	".null-ls-root",
-        -- 	"Makefile",
-        -- 	".git",
-        -- 	"poetry.lock",
-        -- 	"go.mod"
-        -- ),
-        sources = {null_ls.builtins.formatting.prettier, null_ls.builtins.formatting.black.with {
-            extra_args = {"--fast"}
-        }, null_ls.builtins.formatting.isort, null_ls.builtins.formatting.stylua},
-        update_in_insert = false
-    })
-end
-
 function config.illuminate()
+    require('illuminate').setup {
+        enable = true
+    }
 end
 
 return config

@@ -66,7 +66,8 @@ end
 
 function config.blankline()
     require("indent_blankline").setup {
-        show_end_of_line = true
+        show_end_of_line = true,
+        indentLine_fileTypeExclude = {'alpha'}
     }
 end
 
@@ -163,6 +164,36 @@ end
 
 function config.gps()
     require('nvim-gps').setup {}
+end
+
+function config.doom_one()
+    require('doom-one').setup({
+        cursor_coloring = true,
+        terminal_colors = true,
+        italic_comments = true,
+        enable_treesitter = true,
+        transparent_background = true,
+        pumblend = {
+            enable = true,
+            transparency_amount = 20
+        },
+        plugins_integrations = {
+            neorg = true,
+            barbar = true,
+            bufferline = true,
+            gitgutter = true,
+            gitsigns = true,
+            telescope = true,
+            neogit = true,
+            nvim_tree = true,
+            dashboard = true,
+            startify = true,
+            whichkey = true,
+            indent_blankline = true,
+            vim_illuminate = true,
+            lspsaga = true
+        }
+    })
 end
 
 function config.alpha()

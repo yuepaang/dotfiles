@@ -3,11 +3,11 @@ local global = require("core.global")
 local function bind_option(options)
     for k, v in pairs(options) do
         if v == true then
-            vim.cmd('set ' .. k)
+            vim.cmd("set " .. k)
         elseif v == false then
-            vim.cmd('set ' .. 'no' .. k)
+            vim.cmd("set " .. "no" .. k)
         else
-            vim.cmd('set ' .. k .. '=' .. v)
+            vim.cmd("set " .. k .. "=" .. v)
         end
     end
 end
@@ -15,7 +15,7 @@ end
 local function load_options()
     local global_local = {
         termguicolors = true,
-        mouse = 'a',
+        mouse = "a",
         errorbells = true,
         visualbell = true,
         hidden = true,
@@ -49,7 +49,7 @@ local function load_options()
         wrapscan = true,
         inccommand = "nosplit",
         grepformat = "%f:%l:%c:%m",
-        grepprg = 'rg --hidden --vimgrep --smart-case --',
+        grepprg = "rg --hidden --vimgrep --smart-case --",
         breakat = [[\ \	;:,!?]],
         startofline = false,
         whichwrap = "h,l,<,>,[,],~",
@@ -68,7 +68,7 @@ local function load_options()
         ruler = false,
         list = true,
         showmatch = true,
-        background = 'dark',
+        background = "dark",
         -- showtabline    = 2;
         winwidth = 30,
         winminwidth = 15,
@@ -87,7 +87,7 @@ local function load_options()
         winblend = 10,
         number = true,
         relativenumber = true,
-        cursorline = true
+        cursorline = true,
     }
 
     local bw_local = {
@@ -107,24 +107,24 @@ local function load_options()
         foldenable = true,
         signcolumn = "yes",
         conceallevel = 0,
-        concealcursor = "niv"
+        concealcursor = "niv",
     }
 
     vim.g.clipboard = {
         name = "myProvider",
         copy = {
             ["+"] = "clipboard-provider copy",
-            ["*"] = "clipboard-provider copy"
+            ["*"] = "clipboard-provider copy",
         },
         paste = {
             ["+"] = "clipboard-provider paste",
-            ["*"] = "clipboard-provider paste"
+            ["*"] = "clipboard-provider paste",
         },
-        cache_enabled = 0
+        cache_enabled = 0,
     }
 
     vim.g.python3_host_skip_check = 1
-    vim.g.python3_host_prog = '$HOME/.pyenv/versions/3.10.2/bin/python'
+    vim.g.python3_host_prog = "$HOME/.pyenv/versions/3.10.2/bin/python"
 
     for name, value in pairs(global_local) do
         vim.o[name] = value
@@ -132,29 +132,46 @@ local function load_options()
     bind_option(bw_local)
 
     -- disable builtins plugins
-    local disabled_built_ins = {"netrw", "netrwPlugin", "netrwSettings", "netrwFileHandlers", "gzip", "zip",
-                                "zipPlugin", "tar", "tarPlugin", "getscript", "getscriptPlugin", "vimball",
-                                "vimballPlugin", "2html_plugin", "logipat", "rrhelper", "spellfile_plugin", "matchit"}
+    local disabled_built_ins = {
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
+        "gzip",
+        "zip",
+        "zipPlugin",
+        "tar",
+        "tarPlugin",
+        "getscript",
+        "getscriptPlugin",
+        "vimball",
+        "vimballPlugin",
+        "2html_plugin",
+        "logipat",
+        "rrhelper",
+        "spellfile_plugin",
+        "matchit",
+    }
 
     for _, plugin in pairs(disabled_built_ins) do
         vim.g["loaded_" .. plugin] = 1
     end
 
-    vim.cmd [[
+    vim.cmd([[
 		hi Pmenu ctermfg=white ctermbg=238
-	]]
+	]])
 
-    vim.cmd [[
+    vim.cmd([[
 		" Uncomment the following to have Vim jump to the last position when
 		" reopening a file
 		if has("autocmd")
 			au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 		endif
-	]]
-    vim.cmd [[
+	]])
+    vim.cmd([[
 		autocmd WinEnter * setlocal cursorline
 		autocmd WinLeave * setlocal nocursorline
-	]]
+	]])
 end
 
 load_options()

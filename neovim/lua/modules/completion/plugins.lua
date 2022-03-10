@@ -69,14 +69,8 @@ completion['williamboman/nvim-lsp-installer'] = {
     config = conf.nvim_lsp_installer
 }
 
-completion['jose-elias-alvarez/null-ls.nvim'] = {
-    after = 'nvim-lspconfig',
-    config = conf.null_ls
-}
+completion['RRethy/vim-illuminate'] = {}
 
-completion['RRethy/vim-illuminate'] = {
-    after = 'nvim-lspconfig',
-    config = conf.illuminate
-}
+completion['folke/lua-dev.nvim'] = {}
 
 return completion
