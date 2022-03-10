@@ -168,7 +168,9 @@ function config.barbar()
 end
 
 function config.hop()
-	require'hop'.setup()
+	require'hop'.setup({
+		keys = 'etovxqpdygfblzhckisuran'
+	})
 end
 
 function config.lightspeed()

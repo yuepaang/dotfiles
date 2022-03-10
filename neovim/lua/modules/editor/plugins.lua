@@ -10,6 +10,7 @@ editor['numToStr/Comment.nvim'] = {
 }
 
 editor['phaazon/hop.nvim'] = {
+	branch = "v1",
     opt = true,
     setup = function()
         require("utils.defer").packer_defer_load("hop.nvim", 1000)

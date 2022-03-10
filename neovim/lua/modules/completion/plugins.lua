@@ -74,4 +74,9 @@ completion['jose-elias-alvarez/null-ls.nvim'] = {
 	config = conf.null_ls
 }
 
+completion['RRethy/vim-illuminate'] = {
+	after = 'nvim-lspconfig',
+	config = conf.illuminate
+}
+
 return completion

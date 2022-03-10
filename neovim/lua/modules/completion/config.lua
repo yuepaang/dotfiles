@@ -8,10 +8,12 @@ function config.nvim_lsp_installer()
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+	capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     local lsp_installer = require("nvim-lsp-installer")
 
-    lsp_installer.on_server_ready(function(server)
+    lsp_installer.on_server_ready(
+	function(server)
 		local opts = {
 			capabilities = capabilities,
 			on_attach = function(client,bufnr)
@@ -22,6 +24,7 @@ function config.nvim_lsp_installer()
 					floating_window_above_cur_line = true,
 					handler_opts = {border = "none"}
 				})
+				require("illuminate").on_attach(client)
 			end
 		}
 
@@ -33,7 +36,8 @@ function config.nvim_lsp_installer()
         -- This setup() function is exactly the same as lspconfig's setup function.
         -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
         server:setup(opts)
-    end)
+    end
+	)
 end
 
 function config.nvim_cmp()
@@ -233,6 +237,9 @@ function config.null_ls()
 		},
 		update_in_insert = false,
 	})
+end
+
+function config.illuminate()
 end
 
 return config
