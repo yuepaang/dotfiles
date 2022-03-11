@@ -255,6 +255,8 @@ function M.setup()
 
   keymap("n", "<C-l>", "<C-w>l>", _opts)
   keymap("n", "<C-h>", "<C-w>h", _opts)
+  keymap("n", "<C-j>", "<C-w>j>", _opts)
+  keymap("n", "<C-k>", "<C-w>k", _opts)
 
   normal_keymap()
   visual_keymap()
