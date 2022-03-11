@@ -43,14 +43,16 @@
 	colorMoved = default
 
 [delta]
+	line-numbers = true
 	max-line-length = 700
-	syntax-theme = base16
+	syntax-theme = gruvbox
 	hyperlinks = true
-	side-by-side = true
+	side-by-side = false
 	plus-style = syntax "#012800"
 	minus-style = normal "#340001"
 	line-numbers-left-format = ""
 	line-numbers-right-format = "│ "
+	file-modified-label = modified:
 	# syntax-theme = Monokai Extended
 
 [credential]
@@ -67,7 +69,8 @@
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 	# log key - our favorite way to show our key performance indicators, i.e. our most useful summary.
-	lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+	; lg = log --color --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an (%G?)>%Creset' --abbrev-commit
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 
 	# View the current working tree status using the short format
 	s = status -s

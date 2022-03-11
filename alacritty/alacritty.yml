@@ -81,16 +81,19 @@ font:
   size: 18.0
 
   normal:
+    family: PragmataPro Mono Liga
     # family: Hack Nerd Font
     family: UbuntuMono Nerd Font
     style: Regular
 
   bold:
+    family: PragmataPro Mono Liga
     # family: Hack Nerd Font
     family: UbuntuMono Nerd Font
     style: Bold
 
   italic:
+    family: PragmataPro Mono Liga
     # family: Hack Nerd Font
     family: UbuntuMono Nerd Font
     style: Ilatic

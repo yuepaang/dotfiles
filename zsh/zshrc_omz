@@ -11,15 +11,32 @@ plugins=(
 	zsh-syntax-highlighting
 	safe-paste
 	autoswitch_virtualenv
+	pyenv
+	aliases
 	)
 
 source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+export LC_ALL=en_US.UTF-8
+
+source "/usr/local/share/autojump/autojump.zsh"
+
+alias vim="nvim"
+
+
+## ZSH options
+setopt functionargzero
+setopt hist_ignore_space
+
+# change highlight color
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 
 HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"       # The path to the history file.
-HISTSIZE=10000                   # The maximum number of events to save in the internal history.
-SAVEHIST=10000                   # The maximum number of events to save in the history file.
+HISTSIZE=100000000                   # The maximum number of events to save in the internal history.
+SAVEHIST=$HISTSIZE                  # The maximum number of events to save in the history file.
 
 # File Download
 if (( $+commands[curl] )); then
@@ -28,17 +45,46 @@ elif (( $+commands[wget] )); then
   alias get='wget --continue --progress=bar --timestamping'
 fi
 
+# exa replace for ls
 alias l='exa -1a --color=auto'         # Lists in one column, hidden files.
-alias ll='ls -l'        # Lists human readable sizes.
-alias la='ll -a'         # Lists human readable sizes, hidden files.
+alias ll='exa -lbF --git'        # Lists human readable sizes.
+alias la='exa -lbhHigmuSa --time-style=long-iso --git --color-scale'         # Lists human readable sizes, hidden files.
+alias lx='exa -lbhHigmuSa@ --time-style=long-iso --git --color-scale'
+alias llt='exa -l --git --tree'
+alias lt='exa --tree --level=2'
+alias llm='exa -lbGF --git --sort=modified'
+alias lld='exa -lbhHFGmuSa --group-directories-first'
 alias ls="exa -G --color=auto --icons -a -s type"
-# alias ls="nat"
+
 alias sl='ls'            # I often screw this up.
 alias newest_ls="ls -lh --sort date -r --color=always | head -25"
 
+# Extract
+extract () {
+     if [ -f $1 ] ; then
+         case $1 in
+             *.tar.bz2)   tar xjf $1        ;;
+             *.tar.gz)    tar xzf $1     ;;
+             *.bz2)       bunzip2 $1       ;;
+             *.rar)       rar x $1     ;;
+             *.gz)        gunzip $1     ;;
+             *.tar)       tar xf $1        ;;
+             *.tbz2)      tar xjf $1      ;;
+             *.tgz)       tar xzf $1       ;;
+             *.zip)       unzip $1     ;;
+             *.Z)         uncompress $1  ;;
+             *.7z)        7z x $1    ;;
+             *)           echo "'$1' cannot be extracted via extract()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
+
+# bat
 if [ "$(command -v bat)" ]; then
   unalias -m 'cat'
-  alias cat='bat -pp --theme="Nord"'
+  alias cat='bat -pp --theme="Sublime Snazzy"'
 fi
 
 # Simple clear command.
@@ -125,12 +171,25 @@ com="$dev/com"
 py="$dev/personal"
 as="$HOME/Library/Application Support"
 
+# {{{ Language specific configuration
+
+# {{{ Go
+if [ -d /usr/local/go/bin/ ]; then
+  export GOPATH="$HOME/go"
+  export GOBIN="$GOPATH/bin"
+  export PATH="/usr/local/go/bin:$GOBIN:$PATH"
+elif [ -d ~/.go/bin/ ]; then
+  export GOPATH="$HOME/.gopath"
+  export GOROOT="$HOME/.go"
+  export GOBIN="$GOPATH/bin"
+  export PATH="$GOPATH/bin:$PATH"
+fi
+# }}}
+
+# {{{ Rust
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
+# }}}
 
-source "/usr/local/share/autojump/autojump.zsh"
-
-alias vim="nvim"
 
 # function autoproxy() {
 #     emulate -L zsh -o extended_glob
@@ -160,7 +219,9 @@ END { if (enabled == "1") { print "socks5://" server ":" port; } }'`
 export all_proxy="${all_proxy}"
 
 
-export PATH="$HOME/.poetry/bin:$PATH"
+if [[ -d "$HOME/.poetry/bin/" ]]; then
+  export PATH="$HOME/.poetry/bin/:$PATH"
+fi
 
 # override proxy to sepecific area
 export MAVEN_OPTS="-Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8118"
@@ -183,6 +244,3 @@ eval "$(starship init zsh)"
 
 
 alias pipup="pip freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install --upgrade"
-
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
