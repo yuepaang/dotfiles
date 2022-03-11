@@ -229,7 +229,8 @@ function config.notify()
             DEBUG = "",
             TRACE = "✎",
           },
-        })
+	})
+	vim.notify = require "notify"
 end
 
 return config

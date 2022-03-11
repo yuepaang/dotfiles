@@ -144,7 +144,7 @@ local function load_options()
         "vimballPlugin",
         "2html_plugin",
         "matchit",
-		"matchparen",
+        "matchparen",
         "logipat",
         "rrhelper",
         "netrw",
@@ -158,8 +158,8 @@ local function load_options()
     end
 
     vim.cmd([[
-		hi Pmenu ctermfg=white ctermbg=238
-	]])
+      hi Pmenu ctermfg=white ctermbg=238
+    ]])
 
     vim.cmd([[
 		" Uncomment the following to have Vim jump to the last position when

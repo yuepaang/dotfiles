@@ -1,36 +1,40 @@
 local config = {}
 
 function config.lualine()
-    require('modules.ui.lualine_config')
+    require("modules.ui.lualine_config")
 end
 
 function config.treesitter()
-    if not packer_plugins['nvim-treesitter-textobjects'].loaded then
-        vim.cmd [[PackerLoad nvim-treesitter-textobjects]]
+    if not packer_plugins["nvim-treesitter-textobjects"].loaded then
+        vim.cmd([[PackerLoad nvim-treesitter-textobjects]])
     end
 
-    vim.api.nvim_command('set foldmethod=expr')
-    vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
+    vim.api.nvim_command("set foldmethod=expr")
+    vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
 
-    require('nvim-treesitter.configs').setup {
-        ensure_installed = {"bash", "cmake", "comment", "c", "cpp", "dot", "dockerfile", "go", "gomod", "gowork",
-                            "hjson", "html", "lua", "make", "python", "regex", "rust", "toml", "vim", "yaml"},
+    require("nvim-treesitter.configs").setup({
+        ensure_installed = "maintained",
+        sync_install = false,
+        ignore_install = {""},
         highlight = {
             enable = true,
+            disable = {"css"},
             additional_vim_regex_highlighting = false
+        },
+        autopairs = {
+            enable = true
+        },
+        indent = {
+            enable = true,
+            disable = {"yaml", "css"}
         },
         rainbow = {
             enable = true,
             extended_mode = true,
             max_file_lines = nil
         },
-        textsubjects = {
-            enable = true,
-            prev_selection = ',', -- (Optional) keymap to select the previous selection
-            keymaps = {
-                ['.'] = 'textsubjects-smart'
-                -- [';'] = 'textsubjects-container-outer',
-            }
+        endwise = {
+            enable = true
         },
         textobjects = {
             select = {
@@ -54,59 +58,38 @@ function config.treesitter()
                     ["ih"] = "@call.inner"
                 }
             }
+        },
+        context_commentstring = {
+            enable = true,
+            enable_autocmd = false
         }
-    }
+    })
 end
 
 function config.blankline()
-	vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
-	vim.g.indent_blankline_filetype_exclude = {
-		"help",
-		"startify",
-		"dashboard",
-		"packer",
-		"neogitstatus",
-		"NvimTree",
-		"Trouble",
-	}
-	vim.g.indentLine_enabled = 1
-	-- vim.g.indent_blankline_char = "│"
-	vim.g.indent_blankline_char = "▏"
-	-- vim.g.indent_blankline_char = "▎"
-	vim.g.indent_blankline_show_trailing_blankline_indent = false
-	vim.g.indent_blankline_show_first_indent_level = true
-	vim.g.indent_blankline_use_treesitter = true
-	vim.g.indent_blankline_show_current_context = true
-	vim.g.indent_blankline_context_patterns = {
-		"class",
-		"return",
-		"function",
-		"method",
-		"^if",
-		"^while",
-		"jsx_element",
-		"^for",
-		"^object",
-		"^table",
-		"block",
-		"arguments",
-		"if_statement",
-		"else_clause",
-		"jsx_element",
-		"jsx_self_closing_element",
-		"try_statement",
-		"catch_clause",
-		"import_statement",
-		"operation_type",
-	}
-    require("indent_blankline").setup {
+    vim.g.indent_blankline_buftype_exclude = {"terminal", "nofile"}
+    vim.g.indent_blankline_filetype_exclude = {"help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree",
+                                               "Trouble"}
+    vim.g.indentLine_enabled = 1
+    -- vim.g.indent_blankline_char = "│"
+    vim.g.indent_blankline_char = "▏"
+    -- vim.g.indent_blankline_char = "▎"
+    vim.g.indent_blankline_show_trailing_blankline_indent = false
+    vim.g.indent_blankline_show_first_indent_level = true
+    vim.g.indent_blankline_use_treesitter = true
+    vim.g.indent_blankline_show_current_context = true
+    vim.g.indent_blankline_context_patterns = {"class", "return", "function", "method", "^if", "^while", "jsx_element",
+                                               "^for", "^object", "^table", "block", "arguments", "if_statement",
+                                               "else_clause", "jsx_element", "jsx_self_closing_element",
+                                               "try_statement", "catch_clause", "import_statement", "operation_type"}
+    require("indent_blankline").setup({
         -- char = "▏",
         -- show_end_of_line = true,
         -- disable_with_nolist = true,
         -- buftype_exclude = {"terminal"},
         -- filetype_exclude = {"help", "git", "markdown", "snippets", "text", "gitconfig", "alpha"},
-		show_current_context = true,
-    }
+        show_current_context = true
+    })
     vim.cmd([[
         function! Should_activate_indentblankline() abort
             if index(g:indent_blankline_filetype_exclude, &filetype) == -1
@@ -123,8 +106,8 @@ function config.blankline()
 end
 
 function config.lspsaga()
-    local lspsaga = require 'lspsaga'
-    lspsaga.setup { -- defaults ...
+    local lspsaga = require("lspsaga")
+    lspsaga.setup({ -- defaults ...
         debug = false,
         use_saga_diagnostic_sign = true,
         use_diagnostic_virtual_text = false,
@@ -172,53 +155,94 @@ function config.lspsaga()
         diagnostic_prefix_format = "%d. ",
         diagnostic_message_format = "%m %c",
         highlight_prefix = true
-    }
+    })
 end
 
 function config.gitsigns()
-    require('gitsigns').setup {
-        keymaps = {},
+    require("gitsigns").setup {
+        signs = {
+            add = {
+                hl = "GitSignsAdd",
+                text = "▎",
+                numhl = "GitSignsAddNr",
+                linehl = "GitSignsAddLn"
+            },
+            change = {
+                hl = "GitSignsChange",
+                text = "▎",
+                numhl = "GitSignsChangeNr",
+                linehl = "GitSignsChangeLn"
+            },
+            delete = {
+                hl = "GitSignsDelete",
+                text = "契",
+                numhl = "GitSignsDeleteNr",
+                linehl = "GitSignsDeleteLn"
+            },
+            topdelete = {
+                hl = "GitSignsDelete",
+                text = "契",
+                numhl = "GitSignsDeleteNr",
+                linehl = "GitSignsDeleteLn"
+            },
+            changedelete = {
+                hl = "GitSignsChange",
+                text = "▎",
+                numhl = "GitSignsChangeNr",
+                linehl = "GitSignsChangeLn"
+            }
+        },
+        signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+        numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+        word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir = {
-            interval = 2000,
+            interval = 1000,
             follow_files = true
         },
+        attach_to_untracked = true,
         current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
         current_line_blame_opts = {
             virt_text = true,
-            virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-            delay = 100,
+            virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+            delay = 1000,
             ignore_whitespace = false
         },
         current_line_blame_formatter_opts = {
             relative_time = false
+        },
+        sign_priority = 6,
+        update_debounce = 100,
+        status_formatter = nil, -- Use default
+        max_file_length = 40000,
+        preview_config = {
+            -- Options passed to nvim_open_win
+            border = "rounded",
+            style = "minimal",
+            relative = "cursor",
+            row = 0,
+            col = 1
+        },
+        yadm = {
+            enable = false
         }
     }
 end
 
 function config.fidget()
-    require('fidget').setup {}
+    require("fidget").setup({})
 end
 
 function config.hlslens()
-    require('hlslens').setup {}
-end
-
-function config.scrollbar()
-    require('scrollbar').setup {require('scrollbar.handlers.search').setup()}
-end
-
-function config.spellsitter()
-    require('spellsitter').setup {
-        enable = true
-    }
+    require("hlslens").setup({})
 end
 
 function config.gps()
-    require('nvim-gps').setup {}
+    require("nvim-gps").setup({})
 end
 
 function config.doom_one()
-    require('doom-one').setup({
+    require("doom-one").setup({
         cursor_coloring = true,
         terminal_colors = true,
         italic_comments = true,
@@ -248,7 +272,7 @@ function config.doom_one()
 end
 
 function config.alpha()
-    local dashboard = require "alpha.themes.dashboard"
+    local dashboard = require("alpha.themes.dashboard")
     local function header()
         return {[[                                               ]],
                 [[ppppppppppppppp    yyyyyyy            yyyyyyy  ]],
@@ -282,12 +306,12 @@ function config.alpha()
     local function footer()
         -- Number of plugins
         local total_plugins = #vim.tbl_keys(packer_plugins)
-        local datetime = os.date "%d-%m-%Y %H:%M:%S"
+        local datetime = os.date("%d-%m-%Y %H:%M:%S")
         local plugins_text = "   " .. total_plugins .. " plugins" .. "   v" .. vim.version().major .. "." ..
                                  vim.version().minor .. "." .. vim.version().patch .. "   " .. datetime
 
         -- Quote
-        local fortune = require "alpha.fortune"
+        local fortune = require("alpha.fortune")
         local quote = table.concat(fortune(), "\n")
 
         return plugins_text .. "\n" .. quote
@@ -301,7 +325,7 @@ function config.alpha()
     dashboard.section.buttons.opts.hl_shortcut = "Type"
 
     dashboard.opts.opts.noautocmd = true
-    require('alpha').setup(dashboard.opts)
+    require("alpha").setup(dashboard.opts)
 end
 
 return config

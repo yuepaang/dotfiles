@@ -66,12 +66,13 @@ editor['romgrk/barbar.nvim'] = {
 }
 
 editor['ggandor/lightspeed.nvim'] = {
+	key = {'s', 'S', 'f', 'F', 't', 'T'},
     requires = {'tpope/vim-repeat'},
     config = conf.lightspeed
 }
 
 editor['rcarriga/nvim-notify'] = {
-    event = "BufRead",
+    event = "VimEnter",
     config = conf.notify
 }
 
