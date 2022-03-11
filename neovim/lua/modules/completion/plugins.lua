@@ -58,25 +58,62 @@ completion["cinuor/friendly-snippets"] = {
 
 completion["neovim/nvim-lspconfig"] = {
     after = "nvim-cmp",
+	wants = {
+          "nvim-lsp-installer",
+          "cmp-nvim-lsp",
+          "lua-dev.nvim",
+          "vim-illuminate",
+          "null-ls.nvim",
+          "schemastore.nvim",
+        },
+	requires = {
+          "williamboman/nvim-lsp-installer",
+          "folke/lua-dev.nvim",
+          "RRethy/vim-illuminate",
+          "jose-elias-alvarez/null-ls.nvim",
+          {
+            "j-hui/fidget.nvim",
+            config = function()
+              require("fidget").setup {}
+            end,
+          },
+          "b0o/schemastore.nvim",
+          -- "ray-x/lsp_signature.nvim",
+        },
+	config = function()
+		require("modules.completion.lsp").setup()
+	end,
 }
 
-completion["ray-x/lsp_signature.nvim"] = {
-    after = "nvim-lspconfig",
-}
-
-completion["williamboman/nvim-lsp-installer"] = {
-    after = { "nvim-lspconfig", "lsp_signature.nvim" },
-    config = conf.nvim_lsp_installer,
-}
-
-completion["jose-elias-alvarez/null-ls.nvim"] = {
-    after = "nvim-lspconfig",
-    config = conf.null_ls,
-}
+-- completion["ray-x/lsp_signature.nvim"] = {
+--     after = "nvim-lspconfig",
+-- }
+--
+-- completion["williamboman/nvim-lsp-installer"] = {
+--     after = { "nvim-lspconfig", "lsp_signature.nvim" },
+--     config = conf.nvim_lsp_installer,
+-- }
+--
+-- completion["jose-elias-alvarez/null-ls.nvim"] = {
+--     after = "nvim-lspconfig",
+--     config = conf.null_ls,
+-- }
 
 completion["danymat/neogen"] = {
     after = "nvim-cmp",
     config = conf.neogen,
+}
+
+completion["RRethy/vim-illuminate"] = {}
+
+completion["simrat39/rust-tools.nvim"] = {
+	opt = true,
+	require = "rust-lang/rust.vim",
+	module = "rust-tools",
+	ft = "rust",
+	config = function()
+        require("modules.completion.rust").setup()
+	end,
 }
 
 return completion

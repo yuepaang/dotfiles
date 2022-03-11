@@ -196,8 +196,8 @@ function config.nvim_tree()
                 -- list of mappings to set on the tree manually
                 list = {},
             },
-            number = false,
-            relativenumber = false,
+            number = true,
+            relativenumber = true,
             signcolumn = "yes",
         },
     })

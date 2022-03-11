@@ -229,10 +229,6 @@ function config.gitsigns()
     }
 end
 
-function config.fidget()
-    require("fidget").setup({})
-end
-
 function config.hlslens()
     require("hlslens").setup({})
 end

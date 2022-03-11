@@ -75,9 +75,4 @@ ui["goolord/alpha-nvim"] = {
     config = conf.alpha,
 }
 
-ui["j-hui/fidget.nvim"] = {
-    requires = { "nvim-lualine/lualine.nvim" },
-    config = conf.fidget,
-}
-
 return ui
