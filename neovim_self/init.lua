@@ -2,7 +2,7 @@ local vim = vim
 vim.g.mapleader = " "
 
 -- auto commands
-vim.api.nvim_command([[
+vim.cmd([[
   augroup number_toggle
     set number
     autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
@@ -13,6 +13,10 @@ vim.api.nvim_command([[
     autocmd FileType gitcommit setlocal wrap
     autocmd FileType gitcommit setlocal spell
   augroup end
+
+  augroup vimrc-remember-cursor-position
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  augroup END
 
 ]])
 
