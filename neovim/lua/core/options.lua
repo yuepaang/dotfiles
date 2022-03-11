@@ -133,10 +133,6 @@ local function load_options()
 
     -- disable builtins plugins
     local disabled_built_ins = {
-        "netrw",
-        "netrwPlugin",
-        "netrwSettings",
-        "netrwFileHandlers",
         "gzip",
         "zip",
         "zipPlugin",
@@ -147,10 +143,14 @@ local function load_options()
         "vimball",
         "vimballPlugin",
         "2html_plugin",
+        "matchit",
+		"matchparen",
         "logipat",
         "rrhelper",
-        "spellfile_plugin",
-        "matchit",
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
     }
 
     for _, plugin in pairs(disabled_built_ins) do

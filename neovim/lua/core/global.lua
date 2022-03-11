@@ -3,9 +3,15 @@ local home = os.getenv("HOME")
 local path_sep = '/'
 local os_name = vim.loop.os_uname().sysname
 
+local is_wsl = (function()
+  local output = vim.fn.systemlist "uname -r"
+  return not not string.find(output[1] or "", "WSL")
+end)()
+
 function global:load_variables()
     self.is_mac = os_name == 'Darwin'
     self.is_linux = os_name == 'Linux'
+	self.is_wsl = is_wsl
     self.vim_path = vim.fn.stdpath('config')
     self.cache_dir = home .. path_sep .. '.cache' .. path_sep .. 'nvim' .. path_sep
     self.path_sep = path_sep

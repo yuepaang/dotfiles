@@ -16,7 +16,7 @@ function config.todo()
 			}, -- a set of other keywords that all map to this FIX keywords
 		  -- signs = false, -- configure signs for some keywords individually
 		},
-		TODO = { icon = " ", color = "info"},
+		TODO = { icon = " ", color = "info", alt = {"TIP"}},
 		HACK = { icon = " ", color = "warning"},
 		WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX"} },
 		PERF = { icon = " ", color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
@@ -29,7 +29,7 @@ function config.todo()
 	  -- * after: highlights after the keyword (todo text)
 	  highlight = {
 		before = "", -- "fg" or "bg" or empty
-		keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+		keyword = "fg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
 		after = "fg", -- "fg" or "bg" or empty
 		pattern = [[.*<(KEYWORDS)\s*:+\s*]], -- pattern or table of patterns, used for highlightng (vim regex)
 		comments_only = true, -- uses treesitter to match keywords in comments only
@@ -64,6 +64,21 @@ end
 
 function config.comment()
 	require('Comment').setup{
+		pre_hook = function(ctx)
+			local U = require "Comment.utils"
+
+			local location = nil
+			if ctx.ctype == U.ctype.block then
+			  location = require("ts_context_commentstring.utils").get_cursor_location()
+			elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+			  location = require("ts_context_commentstring.utils").get_visual_start_location()
+			end
+
+			return require("ts_context_commentstring.internal").calculate_commentstring {
+			  key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
+			  location = location,
+			}
+		end,
 		padding = true,
 		sticky = true,
 		ignore = nil,
