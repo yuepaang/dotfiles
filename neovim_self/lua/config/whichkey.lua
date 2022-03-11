@@ -1,6 +1,6 @@
 local M = {}
 
-local whichkey = require "which-key"
+local whichkey = require("which-key")
 local next = next
 
 local conf = {
@@ -180,12 +180,12 @@ local function visual_keymap()
 end
 
 local function code_keymap()
-  vim.cmd "autocmd FileType * lua CodeRunner()"
+  vim.cmd("autocmd FileType * lua CodeRunner()")
 
   function CodeRunner()
     local bufnr = vim.api.nvim_get_current_buf()
     local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
-    local fname = vim.fn.expand "%:p:t"
+    local fname = vim.fn.expand("%:p:t")
     local keymap_c = {}
 
     if ft == "python" then
@@ -236,7 +236,26 @@ local function code_keymap()
   end
 end
 
+-- local term_opts = { silent = true }
+
+-- Shorten function name
+local keymap = vim.api.nvim_set_keymap
+
 function M.setup()
+  local _opts = { noremap = true, silent = true }
+  -- Navigate buffers
+  keymap("n", "<S-l>", ":bnext<CR>", _opts)
+  keymap("n", "<S-h>", ":bprevious<CR>", _opts)
+
+  keymap("n", "<F3>", "a<C-R>=strftime('%Y-%m-%d %H:%M:%S')<Esc>", _opts)
+  keymap("i", "<F3>", "<C-R>=strftime('%Y-%m-%d %H:%M:%S')<CR>", _opts)
+
+  keymap("n", "<C-s>", ":w<CR>", _opts)
+  keymap("n", "<C-q>", ":q<CR>", _opts)
+
+  keymap("n", "<C-l>", "<C-w>l>", _opts)
+  keymap("n", "<C-h>", "<C-w>h", _opts)
+
   normal_keymap()
   visual_keymap()
   code_keymap()
