@@ -17,8 +17,8 @@ ui["nvim-treesitter/nvim-treesitter"] = {
             "SmiteshP/nvim-gps",
             config = conf.gps,
         },
-		{"JoosepAlviste/nvim-ts-context-commentstring"},
-		{"RRethy/nvim-treesitter-endwise", event = "InsertEnter"},
+        { "JoosepAlviste/nvim-ts-context-commentstring" },
+        { "RRethy/nvim-treesitter-endwise", event = "InsertEnter" },
     },
     run = ":TSUpdate",
 }

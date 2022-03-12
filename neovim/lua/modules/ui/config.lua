@@ -15,26 +15,26 @@ function config.treesitter()
     require("nvim-treesitter.configs").setup({
         ensure_installed = "maintained",
         sync_install = false,
-        ignore_install = {""},
+        ignore_install = { "" },
         highlight = {
             enable = true,
-            disable = {"css"},
-            additional_vim_regex_highlighting = false
+            disable = { "css" },
+            additional_vim_regex_highlighting = false,
         },
         autopairs = {
-            enable = true
+            enable = true,
         },
         indent = {
             enable = true,
-            disable = {"yaml", "css"}
+            disable = { "yaml", "css" },
         },
         rainbow = {
             enable = true,
             extended_mode = true,
-            max_file_lines = nil
+            max_file_lines = nil,
         },
         endwise = {
-            enable = true
+            enable = true,
         },
         textobjects = {
             select = {
@@ -55,21 +55,28 @@ function config.treesitter()
                     ["ib"] = "@block.inner",
                     ["as"] = "@statement.outer",
                     ["ah"] = "@call.outer",
-                    ["ih"] = "@call.inner"
-                }
-            }
+                    ["ih"] = "@call.inner",
+                },
+            },
         },
         context_commentstring = {
             enable = true,
-            enable_autocmd = false
-        }
+            enable_autocmd = false,
+        },
     })
 end
 
 function config.blankline()
-    vim.g.indent_blankline_buftype_exclude = {"terminal", "nofile"}
-    vim.g.indent_blankline_filetype_exclude = {"help", "startify", "dashboard", "packer", "neogitstatus", "NvimTree",
-                                               "Trouble"}
+    vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
+    vim.g.indent_blankline_filetype_exclude = {
+        "help",
+        "startify",
+        "dashboard",
+        "packer",
+        "neogitstatus",
+        "NvimTree",
+        "Trouble",
+    }
     vim.g.indentLine_enabled = 1
     -- vim.g.indent_blankline_char = "│"
     vim.g.indent_blankline_char = "▏"
@@ -78,17 +85,35 @@ function config.blankline()
     vim.g.indent_blankline_show_first_indent_level = true
     vim.g.indent_blankline_use_treesitter = true
     vim.g.indent_blankline_show_current_context = true
-    vim.g.indent_blankline_context_patterns = {"class", "return", "function", "method", "^if", "^while", "jsx_element",
-                                               "^for", "^object", "^table", "block", "arguments", "if_statement",
-                                               "else_clause", "jsx_element", "jsx_self_closing_element",
-                                               "try_statement", "catch_clause", "import_statement", "operation_type"}
+    vim.g.indent_blankline_context_patterns = {
+        "class",
+        "return",
+        "function",
+        "method",
+        "^if",
+        "^while",
+        "jsx_element",
+        "^for",
+        "^object",
+        "^table",
+        "block",
+        "arguments",
+        "if_statement",
+        "else_clause",
+        "jsx_element",
+        "jsx_self_closing_element",
+        "try_statement",
+        "catch_clause",
+        "import_statement",
+        "operation_type",
+    }
     require("indent_blankline").setup({
         -- char = "▏",
         -- show_end_of_line = true,
         -- disable_with_nolist = true,
         -- buftype_exclude = {"terminal"},
         -- filetype_exclude = {"help", "git", "markdown", "snippets", "text", "gitconfig", "alpha"},
-        show_current_context = true
+        show_current_context = true,
     })
     vim.cmd([[
         function! Should_activate_indentblankline() abort
@@ -123,7 +148,7 @@ function config.lspsaga()
             enable = true,
             sign = true,
             sign_priority = 40,
-            virtual_text = false
+            virtual_text = false,
         },
         -- finder_definition_icon = "  ",
         -- finder_reference_icon = "  ",
@@ -138,59 +163,59 @@ function config.lspsaga()
         -- },
         code_action_keys = {
             quit = "<C-c>",
-            exec = "<CR>"
+            exec = "<CR>",
         },
         rename_action_keys = {
             quit = "<C-c>",
-            exec = "<CR>"
+            exec = "<CR>",
         },
         -- definition_preview_icon = "  ",
         border_style = "round",
         rename_prompt_prefix = "➤",
         rename_output_qflist = {
             enable = false,
-            auto_open_qflist = false
+            auto_open_qflist = false,
         },
         server_filetype_map = {},
         diagnostic_prefix_format = "%d. ",
         diagnostic_message_format = "%m %c",
-        highlight_prefix = true
+        highlight_prefix = true,
     })
 end
 
 function config.gitsigns()
-    require("gitsigns").setup {
+    require("gitsigns").setup({
         signs = {
             add = {
                 hl = "GitSignsAdd",
                 text = "▎",
                 numhl = "GitSignsAddNr",
-                linehl = "GitSignsAddLn"
+                linehl = "GitSignsAddLn",
             },
             change = {
                 hl = "GitSignsChange",
                 text = "▎",
                 numhl = "GitSignsChangeNr",
-                linehl = "GitSignsChangeLn"
+                linehl = "GitSignsChangeLn",
             },
             delete = {
                 hl = "GitSignsDelete",
                 text = "契",
                 numhl = "GitSignsDeleteNr",
-                linehl = "GitSignsDeleteLn"
+                linehl = "GitSignsDeleteLn",
             },
             topdelete = {
                 hl = "GitSignsDelete",
                 text = "契",
                 numhl = "GitSignsDeleteNr",
-                linehl = "GitSignsDeleteLn"
+                linehl = "GitSignsDeleteLn",
             },
             changedelete = {
                 hl = "GitSignsChange",
                 text = "▎",
                 numhl = "GitSignsChangeNr",
-                linehl = "GitSignsChangeLn"
-            }
+                linehl = "GitSignsChangeLn",
+            },
         },
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
         numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -198,7 +223,7 @@ function config.gitsigns()
         word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir = {
             interval = 1000,
-            follow_files = true
+            follow_files = true,
         },
         attach_to_untracked = true,
         current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
@@ -206,10 +231,10 @@ function config.gitsigns()
             virt_text = true,
             virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
             delay = 1000,
-            ignore_whitespace = false
+            ignore_whitespace = false,
         },
         current_line_blame_formatter_opts = {
-            relative_time = false
+            relative_time = false,
         },
         sign_priority = 6,
         update_debounce = 100,
@@ -221,12 +246,12 @@ function config.gitsigns()
             style = "minimal",
             relative = "cursor",
             row = 0,
-            col = 1
+            col = 1,
         },
         yadm = {
-            enable = false
-        }
-    }
+            enable = false,
+        },
+    })
 end
 
 function config.hlslens()
@@ -246,7 +271,7 @@ function config.doom_one()
         transparent_background = true,
         pumblend = {
             enable = true,
-            transparency_amount = 20
+            transparency_amount = 20,
         },
         plugins_integrations = {
             neorg = true,
@@ -262,49 +287,63 @@ function config.doom_one()
             whichkey = true,
             indent_blankline = true,
             vim_illuminate = true,
-            lspsaga = true
-        }
+            lspsaga = true,
+        },
     })
 end
 
 function config.alpha()
     local dashboard = require("alpha.themes.dashboard")
     local function header()
-        return {[[                                               ]],
-                [[ppppppppppppppp    yyyyyyy            yyyyyyy  ]],
-                [[p::::::::::::::pp   y:::::y          y:::::y   ]],
-                [[p::::::::::::::::p   y:::::y        y:::::y    ]],
-                [[pp::::::::::::::::p   y:::::y      y:::::y     ]],
-                [[  p:::::pppppp:::::p    y:::::y   y:::::y      ]],
-                [[  p::::p     p:::::p     y:::::y y:::::y       ]],
-                [[  p::::p     p:::::p      y:::::y:::::y        ]],
-                [[  p::::p     p:::::p       y:::::::::y         ]],
-                [[  p::::p   p:::::p          y:::::::y          ]],
-                [[  p::::pppp::::p             y:::::y           ]],
-                [[  p:::::::::::p               y:::y            ]],
-                [[  p:::::::::p                 y:::y            ]],
-                [[  p::::p                      y:::y            ]],
-                [[  p::::p                      y:::y            ]],
-                [[  p::::p                      y:::y            ]],
-                [[  p::::p                      y:::y            ]],
-                [[  p::::p                      y:::y            ]],
-                [[  p::::p                      y:::y            ]],
-                [[  p::::p                      y:::y            ]], [[  pppppp                       yyy             ]]}
+        return {
+            [[                                               ]],
+            [[ppppppppppppppp    yyyyyyy            yyyyyyy  ]],
+            [[p::::::::::::::pp   y:::::y          y:::::y   ]],
+            [[p::::::::::::::::p   y:::::y        y:::::y    ]],
+            [[pp::::::::::::::::p   y:::::y      y:::::y     ]],
+            [[  p:::::pppppp:::::p    y:::::y   y:::::y      ]],
+            [[  p::::p     p:::::p     y:::::y y:::::y       ]],
+            [[  p::::p     p:::::p      y:::::y:::::y        ]],
+            [[  p::::p     p:::::p       y:::::::::y         ]],
+            [[  p::::p   p:::::p          y:::::::y          ]],
+            [[  p::::pppp::::p             y:::::y           ]],
+            [[  p:::::::::::p               y:::y            ]],
+            [[  p:::::::::p                 y:::y            ]],
+            [[  p::::p                      y:::y            ]],
+            [[  p::::p                      y:::y            ]],
+            [[  p::::p                      y:::y            ]],
+            [[  p::::p                      y:::y            ]],
+            [[  p::::p                      y:::y            ]],
+            [[  p::::p                      y:::y            ]],
+            [[  p::::p                      y:::y            ]],
+            [[  pppppp                       yyy             ]],
+        }
     end
     dashboard.section.header.val = header()
 
-    dashboard.section.buttons.val = {dashboard.button("f", "  Find files", ":Telescope find_files <CR>"),
-                                     dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-                                     dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
-                                     dashboard.button("r", " Recent files", ":Telescope oldfiles <CR>"),
-                                     dashboard.button("q", "  Quit Neovim", ":qa<CR>")}
+    dashboard.section.buttons.val = {
+        dashboard.button("f", "  Find files", ":Telescope find_files <CR>"),
+        dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+        dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
+        dashboard.button("r", " Recent files", ":Telescope oldfiles <CR>"),
+        dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+    }
 
     local function footer()
         -- Number of plugins
         local total_plugins = #vim.tbl_keys(packer_plugins)
         local datetime = os.date("%d-%m-%Y %H:%M:%S")
-        local plugins_text = "   " .. total_plugins .. " plugins" .. "   v" .. vim.version().major .. "." ..
-                                 vim.version().minor .. "." .. vim.version().patch .. "   " .. datetime
+        local plugins_text = "   "
+            .. total_plugins
+            .. " plugins"
+            .. "   v"
+            .. vim.version().major
+            .. "."
+            .. vim.version().minor
+            .. "."
+            .. vim.version().patch
+            .. "   "
+            .. datetime
 
         -- Quote
         local fortune = require("alpha.fortune")

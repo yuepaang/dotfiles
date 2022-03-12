@@ -1,5 +1,5 @@
-local lualine = require 'lualine'
-local auto_theme = require('lualine.themes.auto')
+local lualine = require("lualine")
+local auto_theme = require("lualine.themes.auto")
 local function window()
     return vim.api.nvim_win_get_number(0)
 end
@@ -22,16 +22,16 @@ local colors = {
 
 local conditions = {
     buffer_not_empty = function()
-        return vim.fn.empty(vim.fn.expand '%:t') ~= 1
+        return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
     end,
     hide_in_width = function()
         return vim.fn.winwidth(0) > 80
     end,
     check_git_workspace = function()
-        local filepath = vim.fn.expand '%:p:h'
-        local gitdir = vim.fn.finddir('.git', filepath .. ';')
+        local filepath = vim.fn.expand("%:p:h")
+        local gitdir = vim.fn.finddir(".git", filepath .. ";")
         return gitdir and #gitdir > 0 and #gitdir < #filepath
-    end
+    end,
 }
 
 -- New Config from cosmos
@@ -39,58 +39,66 @@ local config = {
     options = {
         icons_enabled = true,
         theme = auto_theme,
-        component_separators = '|',
+        component_separators = "|",
         section_separators = {
-            left = '',
-            right = ''
-        }
+            left = "",
+            right = "",
+        },
     },
     sections = {
-        lualine_a = {{
-            window,
-            separator = {
-                left = '',
-                right = ''
+        lualine_a = {
+            {
+                window,
+                separator = {
+                    left = "",
+                    right = "",
+                },
+                right_padding = 2,
             },
-            right_padding = 2
-        }},
-        lualine_b = {'mode', 'branch', 'diff', 'diagnostics', 'filename'},
+        },
+        lualine_b = { "mode", "branch", "diff", "diagnostics", "filename" },
         lualine_c = {},
         lualine_x = {},
-        lualine_y = {'encoding', 'fileformat', 'filetype', 'progress'},
-        lualine_z = {{
-            'location',
-            separator = {
-                left = '',
-                right = ''
+        lualine_y = { "encoding", "fileformat", "filetype", "progress" },
+        lualine_z = {
+            {
+                "location",
+                separator = {
+                    left = "",
+                    right = "",
+                },
+                left_padding = 2,
             },
-            left_padding = 2
-        }}
+        },
     },
     inactive_sections = {
         lualine_a = {},
-        lualine_b = {{
-            window,
-            separator = {
-                left = '',
-                right = ''
+        lualine_b = {
+            {
+                window,
+                separator = {
+                    left = "",
+                    right = "",
+                },
+                right_padding = 2,
             },
-            right_padding = 2
-        }},
-        lualine_c = {'filename'},
+        },
+        lualine_c = { "filename" },
         lualine_x = {},
-        lualine_y = {{
-            'location',
-            separator = {
-                left = '',
-                right = ''
+        lualine_y = {
+            {
+                "location",
+                separator = {
+                    left = "",
+                    right = "",
+                },
+                left_padding = 2,
             },
-            left_padding = 2
-        }},
-        lualine_z = {}
+        },
+        lualine_z = {},
     },
     tabline = {},
-    extensions = {}
+    extensions = {},
 }
 
 -- Config
@@ -363,11 +371,11 @@ local function index_of(tbl, val, cmp)
     return -1
 end
 
-local has_gps, gps = pcall(require, 'nvim-gps')
+local has_gps, gps = pcall(require, "nvim-gps")
 if has_gps then
     local component = {
         gps.get_location,
-        cond = gps.is_available
+        cond = gps.is_available,
     }
     if index_of(config.sections.lualine_b, component) < 0 then
         table.insert(config.sections.lualine_b, component)

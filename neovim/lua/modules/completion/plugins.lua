@@ -58,31 +58,31 @@ completion["cinuor/friendly-snippets"] = {
 
 completion["neovim/nvim-lspconfig"] = {
     after = "nvim-cmp",
-	wants = {
-          "nvim-lsp-installer",
-          "cmp-nvim-lsp",
-          "lua-dev.nvim",
-          "vim-illuminate",
-          "null-ls.nvim",
-          "schemastore.nvim",
-        },
-	requires = {
-          "williamboman/nvim-lsp-installer",
-          "folke/lua-dev.nvim",
-          "RRethy/vim-illuminate",
-          "jose-elias-alvarez/null-ls.nvim",
-          {
+    wants = {
+        "nvim-lsp-installer",
+        "cmp-nvim-lsp",
+        "lua-dev.nvim",
+        "vim-illuminate",
+        "null-ls.nvim",
+        "schemastore.nvim",
+    },
+    requires = {
+        "williamboman/nvim-lsp-installer",
+        "folke/lua-dev.nvim",
+        "RRethy/vim-illuminate",
+        "jose-elias-alvarez/null-ls.nvim",
+        {
             "j-hui/fidget.nvim",
             config = function()
-              require("fidget").setup {}
+                require("fidget").setup({})
             end,
-          },
-          "b0o/schemastore.nvim",
-          -- "ray-x/lsp_signature.nvim",
         },
-	config = function()
-		require("modules.completion.lsp").setup()
-	end,
+        "b0o/schemastore.nvim",
+        -- "ray-x/lsp_signature.nvim",
+    },
+    config = function()
+        require("modules.completion.lsp").setup()
+    end,
 }
 
 -- completion["ray-x/lsp_signature.nvim"] = {
@@ -107,13 +107,13 @@ completion["danymat/neogen"] = {
 completion["RRethy/vim-illuminate"] = {}
 
 completion["simrat39/rust-tools.nvim"] = {
-	opt = true,
-	require = "rust-lang/rust.vim",
-	module = "rust-tools",
-	ft = "rust",
-	config = function()
+    opt = true,
+    require = "rust-lang/rust.vim",
+    module = "rust-tools",
+    ft = "rust",
+    config = function()
         require("modules.completion.rust").setup()
-	end,
+    end,
 }
 
 return completion
