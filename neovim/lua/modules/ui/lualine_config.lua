@@ -1,5 +1,8 @@
 local lualine = require("lualine")
 local auto_theme = require("lualine.themes.auto")
+
+local gps = require("nvim-gps")
+
 local function window()
     return vim.api.nvim_win_get_number(0)
 end
@@ -34,74 +37,137 @@ local conditions = {
     end,
 }
 
+local function separator()
+    return "%="
+end
+
+local function lsp_client(msg)
+    msg = msg or ""
+    local buf_clients = vim.lsp.buf_get_clients()
+    if next(buf_clients) == nil then
+        if type(msg) == "boolean" or #msg == 0 then
+            return ""
+        end
+        return msg
+    end
+
+    local buf_ft = vim.bo.filetype
+    local buf_client_names = {}
+
+    -- add client
+    for _, client in pairs(buf_clients) do
+        if client.name ~= "null-ls" then
+            table.insert(buf_client_names, client.name)
+        end
+    end
+    -- add formatter
+    local formatters = require("config.lsp.null-ls.formatters")
+    local supported_formatters = formatters.list_registered(buf_ft)
+    vim.list_extend(buf_client_names, supported_formatters)
+
+    -- add linter
+    local linters = require("config.lsp.null-ls.linters")
+    local supported_linters = linters.list_registered(buf_ft)
+    vim.list_extend(buf_client_names, supported_linters)
+
+    -- add hover
+    local hovers = require("config.lsp.null-ls.hovers")
+    local supported_hovers = hovers.list_registered(buf_ft)
+    vim.list_extend(buf_client_names, supported_hovers)
+
+    return "[" .. table.concat(buf_client_names, ", ") .. "]"
+end
+
 -- New Config from cosmos
 local config = {
     options = {
         icons_enabled = true,
         theme = auto_theme,
-        component_separators = "|",
-        section_separators = {
-            left = "",
-            right = "",
-        },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = " ", right = "" },
+        disabled_filetypes = {},
+        always_divide_middle = true,
     },
     sections = {
-        lualine_a = {
+        -- lualine_a = {
+        --     {
+        --         window,
+        --         separator = {
+        --             left = "",
+        --             right = "",
+        --         },
+        --         right_padding = 2,
+        --     },
+        -- },
+        lualine_a = { "mode" },
+        -- lualine_b = { "mode", "branch", "diff", "diagnostics", "filename" },
+        lualine_b = {
+            "branch",
+            "diff",
             {
-                window,
-                separator = {
-                    left = "",
-                    right = "",
-                },
-                right_padding = 2,
+                "diagnostics",
+                sources = { "nvim_diagnostic" },
+                symbols = { error = " ", warn = " ", info = " ", hint = " " },
+                colored = false,
             },
         },
-        lualine_b = { "mode", "branch", "diff", "diagnostics", "filename" },
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = { "encoding", "fileformat", "filetype", "progress" },
+        -- lualine_c = {},
+        lualine_c = {
+            { separator },
+            { lsp_client, icon = " ", color = { fg = colors.violet, gui = "bold" } },
+            -- { lsp_progress },
+            {
+                gps.get_location,
+                cond = gps.is_available,
+                color = { fg = colors.green },
+            },
+        },
+        -- lualine_x = {},
+        lualine_x = { "filename", "encoding", "fileformat", "filetype" },
+        -- lualine_y = { "encoding", "fileformat", "filetype", "progress" },
+        lualine_y = { "progress" },
         lualine_z = {
             {
                 "location",
-                separator = {
-                    left = "",
-                    right = "",
-                },
-                left_padding = 2,
+                -- separator = {
+                --     left = "",
+                --     right = "",
+                -- },
+                -- left_padding = 2,
             },
         },
     },
     inactive_sections = {
         lualine_a = {},
         lualine_b = {
-            {
-                window,
-                separator = {
-                    left = "",
-                    right = "",
-                },
-                right_padding = 2,
-            },
+            -- {
+            --     window,
+            --     separator = {
+            --         left = "",
+            --         right = "",
+            --     },
+            --     right_padding = 2,
+            -- },
         },
         lualine_c = { "filename" },
-        lualine_x = {},
+        lualine_x = { "location" },
         lualine_y = {
             {
-                "location",
-                separator = {
-                    left = "",
-                    right = "",
-                },
-                left_padding = 2,
+                -- "location",
+                -- separator = {
+                --     left = "",
+                --     right = "",
+                -- },
+                -- left_padding = 2,
             },
         },
         lualine_z = {},
     },
     tabline = {},
-    extensions = {},
+    extensions = { "nvim-tree" },
 }
 
--- Config
+-- Config FLZ
 -- local config = {
 --     options = {
 --         -- Disable sections and component separators
@@ -358,29 +424,6 @@ local config = {
 --     },
 --     cond = conditions.hide_in_width
 -- }
-
-local function index_of(tbl, val, cmp)
-    cmp = cmp or function(a, b)
-        return a == b
-    end
-    for i, v in ipairs(tbl) do
-        if cmp(v, val) then
-            return i
-        end
-    end
-    return -1
-end
-
-local has_gps, gps = pcall(require, "nvim-gps")
-if has_gps then
-    local component = {
-        gps.get_location,
-        cond = gps.is_available,
-    }
-    if index_of(config.sections.lualine_b, component) < 0 then
-        table.insert(config.sections.lualine_b, component)
-    end
-end
 
 -- Now don't forget to initialize lualine
 lualine.setup(config)
