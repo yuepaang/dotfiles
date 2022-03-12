@@ -45,6 +45,8 @@ ui["cinuor/gruvbox.nvim"] = {
 
 ui["NTBBloodbath/doom-one.nvim"] = {}
 
+ui["sainnhe/everforest"] = {}
+
 ui["lukas-reineke/indent-blankline.nvim"] = {
     opt = true,
     setup = function()

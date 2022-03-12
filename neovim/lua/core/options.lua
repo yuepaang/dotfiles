@@ -124,7 +124,7 @@ local function load_options()
     }
 
     vim.g.python3_host_skip_check = 1
-    vim.g.python3_host_prog = "$HOME/.pyenv/versions/3.10.2/bin/python"
+    vim.g.python3_host_prog = "$HOME/.pyenv/versions/nvim-py3/bin/python"
 
     for name, value in pairs(global_local) do
         vim.o[name] = value

@@ -68,7 +68,8 @@ end
 
 local set_colorscheme = function()
     -- vim.cmd [[colorscheme gruvbox]]
-    vim.cmd([[colorscheme doom-one]])
+    -- vim.cmd([[colorscheme doom-one]])
+    vim.cmd([[colorscheme everforest]])
 end
 
 local function load_nvim_config()

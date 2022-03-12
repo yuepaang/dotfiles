@@ -78,7 +78,7 @@ completion["neovim/nvim-lspconfig"] = {
             end,
         },
         "b0o/schemastore.nvim",
-        -- "ray-x/lsp_signature.nvim",
+        "ray-x/lsp_signature.nvim",
     },
     config = function()
         require("modules.completion.lsp").setup()
