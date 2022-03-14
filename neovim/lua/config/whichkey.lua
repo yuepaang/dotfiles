@@ -174,6 +174,18 @@ local function visual_keymap()
         "Link",
       },
     },
+    r = {
+      name = "Refactor",
+      e = { [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], "Extract Function" },
+      f = {
+        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function to File')<CR>]],
+        "Extract Function to File",
+      },
+      v = { [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], "Extract Variable" },
+      i = { [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "Inline Variable" },
+      r = { [[ <Esc><Cmd>lua require('telescope').extensions.refactoring.refactors()<CR>]], "Refactor" },
+      V = { [[ <Esc><Cmd>lua require('refactoring').debug.print_var({})<CR>]], "Debug Print Var" },
+    },
   }
 
   whichkey.register(keymap, v_opts)
@@ -246,9 +258,6 @@ function M.setup()
   -- Navigate buffers
   keymap("n", "<S-l>", ":bnext<CR>", _opts)
   keymap("n", "<S-h>", ":bprevious<CR>", _opts)
-
-  keymap("n", "<F3>", "a<C-R>=strftime('%Y-%m-%d %H:%M:%S')<Esc>", _opts)
-  keymap("i", "<F3>", "<C-R>=strftime('%Y-%m-%d %H:%M:%S')<CR>", _opts)
 
   keymap("n", "<C-s>", ":w<CR>", _opts)
   keymap("n", "<C-q>", ":q<CR>", _opts)
