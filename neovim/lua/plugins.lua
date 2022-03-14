@@ -66,17 +66,26 @@ function M.setup()
 
     -- Colorscheme
     use({
+      "folke/tokyonight.nvim",
+      config = function()
+        vim.cmd("colorscheme tokyonight")
+      end,
+      disable = true,
+    })
+
+    use({
       "sainnhe/everforest",
       config = function()
         vim.cmd("colorscheme everforest")
       end,
+      disable = true,
     })
     use({
       "sainnhe/gruvbox-material",
       config = function()
         vim.cmd("colorscheme gruvbox-material")
       end,
-      disable = true,
+      disable = false,
     })
 
     -- Startup screen
@@ -229,7 +238,7 @@ function M.setup()
       config = function()
         require("config.neoscroll").setup()
       end,
-      disable = true,
+      disable = false,
     })
 
     -- Code documentation
@@ -697,8 +706,7 @@ function M.setup()
     })
 
     -- AI completion
-    -- use({ "github/copilot.vim", event = "InsertEnter" })
-    use({ "github/copilot.vim" })
+    use({ "github/copilot.vim", event = "InsertEnter" })
 
     use({
       "folke/todo-comments.nvim",
@@ -731,7 +739,16 @@ function M.setup()
       end,
     })
 
-    -- Refactoring - TODO
+    -- Refactoring
+    use({
+      "ThePrimeagen/refactoring.nvim",
+      module = { "refactoring", "telescope" },
+      keys = { [[<leader>r]] },
+      wants = { "telescope.nvim" },
+      config = function()
+        require("config.refactoring").setup()
+      end,
+    })
 
     -- Performance
     use({
@@ -765,11 +782,7 @@ function M.setup()
   local packer = require("packer")
 
   -- Performance
-  local status_ok, impatient = pcall(require, "impatient")
-  if not status_ok then
-    return
-  end
-  impatient.enable_profile()
+  pcall(require, "impatient")
   -- pcall(require, "packer_compiled")
 
   packer.init(conf)
