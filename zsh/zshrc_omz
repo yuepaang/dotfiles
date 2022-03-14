@@ -178,9 +178,8 @@ if [ -d /usr/local/go/bin/ ]; then
   export GOPATH="$HOME/go"
   export GOBIN="$GOPATH/bin"
   export PATH="/usr/local/go/bin:$GOBIN:$PATH"
-elif [ -d ~/.go/bin/ ]; then
-  export GOPATH="$HOME/.gopath"
-  export GOROOT="$HOME/.go"
+elif [ -d ~/go/bin/ ]; then
+  export GOPATH="$HOME/go"
   export GOBIN="$GOPATH/bin"
   export PATH="$GOPATH/bin:$PATH"
 fi
