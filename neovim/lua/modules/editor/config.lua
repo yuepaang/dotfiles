@@ -1,7 +1,6 @@
 local config = {}
 
 function config.todo()
-    -- require("todo-comments").setup {}
     require("todo-comments").setup({
         signs = true, -- show icons in the signs column
         sign_priority = 8, -- sign priority
@@ -87,9 +86,6 @@ function config.comment()
                 location = location,
             })
         end,
-        padding = true,
-        sticky = true,
-        ignore = nil,
     })
 end
 

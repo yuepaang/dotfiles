@@ -32,7 +32,7 @@ completion["tzachar/cmp-tabnine"] = {
 }
 
 completion["github/copilot.vim"] = {
-    after = "nvim-cmp",
+    event = "InsertEnter",
 }
 
 completion["octaltree/cmp-look"] = {
@@ -103,8 +103,6 @@ completion["danymat/neogen"] = {
     after = "nvim-cmp",
     config = conf.neogen,
 }
-
-completion["RRethy/vim-illuminate"] = {}
 
 completion["simrat39/rust-tools.nvim"] = {
     opt = true,

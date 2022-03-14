@@ -56,72 +56,68 @@ function config.nvim_cmp()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local neogen = require("neogen")
+    -- local tab_complete_copilot_first = true
 
-    vim.g.copilot_no_tab_map = true
-    vim.g.copilot_assume_mapped = true
-    vim.g.copilot_tab_fallback = ""
-    local tab_complete_copilot_first = true
-
-    local function replace_termcodes(str)
-        return vim.api.nvim_replace_termcodes(str, true, true, true)
-    end
-
-    local function check_backspace()
-        local col = vim.fn.col(".") - 1
-        return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-    end
-
+    -- local function replace_termcodes(str)
+    --     return vim.api.nvim_replace_termcodes(str, true, true, true)
+    -- end
+    --
+    -- local function check_backspace()
+    --     local col = vim.fn.col(".") - 1
+    --     return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+    -- end
+    --
     local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
-    local tab_complete = function(fallback)
-        local copilot_keys = vim.fn["copilot#Accept"]()
-        if tab_complete_copilot_first then
-            if copilot_keys ~= "" then
-                vim.api.nvim_feedkeys(copilot_keys, "i", true)
-            elseif cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-                -- vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
-                -- elseif check_backspace() then
-                -- vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
-            elseif has_words_before() then
-                cmp.complete()
-            else
-                fallback()
-            end
-        else
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif copilot_keys ~= "" then
-                vim.api.nvim_feedkeys(copilot_keys, "i", true)
-            elseif luasnip.expand_or_jumpable() then
-                vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
-            elseif check_backspace() then
-                vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
-            else
-                fallback()
-            end
-        end
-    end
-
-    local s_tab_complete = function(fallback)
-        if cmp.visible() then
-            cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-            vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-jump-prev"), "")
-        elseif has_words_before() then
-            cmp.complete()
-        else
-            fallback()
-        end
-    end
+    -- local tab_complete = function(fallback)
+    --     local copilot_keys = vim.fn["copilot#Accept"]()
+    --     if tab_complete_copilot_first then
+    --         if copilot_keys ~= "" then
+    --             vim.api.nvim_feedkeys(copilot_keys, "i", true)
+    --         elseif cmp.visible() then
+    --             cmp.select_next_item()
+    --         elseif luasnip.expand_or_jumpable() then
+    --             -- luasnip.expand_or_jump()
+    --             vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+    --         elseif check_backspace() then
+    --             vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+    --             -- elseif has_words_before() then
+    --             --     cmp.complete()
+    --         else
+    --             fallback()
+    --         end
+    --     else
+    --         if cmp.visible() then
+    --             cmp.select_next_item()
+    --         elseif copilot_keys ~= "" then
+    --             vim.api.nvim_feedkeys(copilot_keys, "i", true)
+    --         elseif luasnip.expand_or_jumpable() then
+    --             vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+    --         elseif check_backspace() then
+    --             vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+    --         else
+    --             fallback()
+    --         end
+    --     end
+    -- end
+    --
+    -- local s_tab_complete = function(fallback)
+    --     if cmp.visible() then
+    --         cmp.select_prev_item()
+    --     elseif luasnip.jumpable(-1) then
+    --         vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-jump-prev"), "")
+    --     elseif has_words_before() then
+    --         cmp.complete()
+    --     else
+    --         fallback()
+    --     end
+    -- end
 
     cmp.setup({
-        preselect = cmp.PreselectMode.None,
+        -- preselect = cmp.PreselectMode.None,
         completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
         experimental = { native_menu = false, ghost_text = false },
         snippet = {
@@ -130,12 +126,34 @@ function config.nvim_cmp()
                 vim.fn["UltiSnips#Anon"](args.body)
             end,
         },
+        formatting = {
+            fields = { cmp.ItemField.Abbr, cmp.ItemField.Kind, cmp.ItemField.Menu },
+            format = function(entry, vim_item)
+                local word = vim_item.abbr
+                if string.sub(word, -1, -1) == "~" then
+                    vim_item.abbr = string.sub(word, 0, -2)
+                end
+
+                local icons = require("utils.icons")
+                vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
+
+                vim_item.menu = ({
+                    nvim_lsp = "[LSP]",
+                    luasnip = "[SNIP]",
+                    buffer = "[BUF]",
+                    cmp_tabnine = "[TAB]",
+                    ultisnips = "[US]",
+                    path = "[PATH]",
+                    look = "[LOOK]",
+                    nvim_lsp_signature_help = "[SIGN]",
+                })[entry.source.name]
+
+                return vim_item
+            end,
+        },
         sources = cmp.config.sources({
             {
                 name = "nvim_lsp",
-            },
-            {
-                name = "treesitter",
             },
             {
                 name = "buffer",
@@ -153,6 +171,9 @@ function config.nvim_cmp()
                 name = "ultisnips",
             },
             {
+                name = "nvim_lsp_signature_help",
+            },
+            {
                 name = "look",
                 keyword_length = 2,
                 option = {
@@ -166,19 +187,63 @@ function config.nvim_cmp()
             winhighlight = "NormalFloat:NormalFloat,FloatBorder:TelescopeBorder",
         },
         mapping = {
-            ["<TAB>"] = tab_complete,
-            ["<S-TAB"] = s_tab_complete,
-            ["<C-p>"] = cmp.mapping.select_prev_item(),
-            ["<C-n>"] = cmp.mapping.select_next_item(),
+            -- ["<C-n>"] = cmp.mapping.select_next_item(),
+            -- ["<C-p>"] = cmp.mapping.select_prev_item(),
+            ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+            ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+            -- ["<Tab>"] = tab_complete,
+            -- ["<S-Tab>"] = s_tab_complete,
+            ["<Tab>"] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item()
+                elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                elseif has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end, {
+                "i",
+                "s",
+                "c",
+            }),
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                elseif luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
+                else
+                    fallback()
+                end
+            end, {
+                "i",
+                "s",
+                "c",
+            }),
+
             ["<C-f>"] = cmp.mapping({
                 i = cmp.mapping.abort(),
                 c = cmp.mapping.close(),
             }),
             ["<C-c>"] = cmp.mapping.abort(),
+
             ["<CR>"] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
                 select = true,
-            }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            }),
+            -- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+            ["<C-e>"] = cmp.mapping({
+                i = function(fallback)
+                    local copilot_keys = vim.fn["copilot#Accept"]()
+                    if copilot_keys ~= "" then
+                        vim.api.nvim_feedkeys(copilot_keys, "i", true)
+                    else
+                        cmp.mapping.abort()(fallback)
+                    end
+                end,
+                c = cmp.mapping.close(),
+            }),
 
             ["<C-d>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
@@ -195,50 +260,6 @@ function config.nvim_cmp()
                     fallback()
                 end
             end, { "i", "s" }),
-
-            ["<C-k>"] = cmp.mapping(function(fallback)
-                if luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                elseif neogen.jumpable(true) then
-                    neogen.jump_prev()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-            ["<C-j>"] = cmp.mapping(function(fallback)
-                if luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                elseif neogen.jumpable() then
-                    neogen.jump_next()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-        },
-        formatting = {
-            fields = { cmp.ItemField.Abbr, cmp.ItemField.Kind, cmp.ItemField.Menu },
-            format = function(entry, vim_item)
-                local word = vim_item.abbr
-                if string.sub(word, -1, -1) == "~" then
-                    vim_item.abbr = string.sub(word, 0, -2)
-                end
-
-                local icons = require("utils.icons")
-                vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
-
-                vim_item.menu = ({
-                    nvim_lsp = "[LSP]",
-                    buffer = "[BUF]",
-                    cmp_tabnine = "[TAB]",
-                    luasnip = "[SNIP]",
-                    ultisnips = "[US]",
-                    path = "[PATH]",
-                    look = "[LOOK]",
-                    treesitter = "[Treesitter]",
-                })[entry.source.name]
-
-                return vim_item
-            end,
         },
     })
 end
@@ -267,13 +288,6 @@ function config.null_ls()
         on_attach = nil,
         on_init = nil,
         on_exit = nil,
-        -- root_dir = require("null-ls.utils").root_pattern(
-        -- 	".null-ls-root",
-        -- 	"Makefile",
-        -- 	".git",
-        -- 	"poetry.lock",
-        -- 	"go.mod"
-        -- ),
         sources = {
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.formatting.black,
@@ -284,7 +298,7 @@ function config.null_ls()
 end
 
 function config.neogen()
-    require("neogen").setup({ snippet_engine = "luasnip" })
+    require("neogen").setup({})
 end
 
 return config

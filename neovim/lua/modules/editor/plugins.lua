@@ -77,6 +77,26 @@ editor["rcarriga/nvim-notify"] = {
 }
 
 -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
-editor["antoinemadec/FixCursorHold.nvim"] = {}
+editor["antoinemadec/FixCursorHold.nvim"] = {
+    event = "BufReadPre",
+    config = function()
+        vim.g.cursorhold_updatetime = 100
+    end,
+}
+
+editor["tpope/vim-surround"] = {
+    event = "InsertEnter",
+}
+
+editor["max397574/better-escape.nvim"] = {
+    event = "InsertEnter",
+    config = function()
+        require("better_escape").setup({
+            mapping = { "jk" },
+            timeout = vim.o.timeoutlen,
+            keys = "<ESC>",
+        })
+    end,
+}
 
 return editor

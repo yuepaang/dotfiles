@@ -6,83 +6,105 @@ function config.telescope()
         vim.cmd([[PackerLoad telescope-file-browser.nvim]])
     end
 
+    local transform_mod = require("telescope.actions.mt").transform_mod
+    local nvb_actions = transform_mod({
+        file_path = function(prompt_bufnr)
+            -- Get selected entry and the file full path
+            local content = require("telescope.actions.state").get_selected_entry()
+            local full_path = content.cwd .. require("plenary.path").path.sep .. content.value
+
+            -- Yank the path to unnamed and clipboard registers
+            vim.fn.setreg('"', full_path)
+            vim.fn.setreg("+", full_path)
+
+            -- Close the popup
+            require("utils").info("File path is yanked ")
+            require("telescope.actions").close(prompt_bufnr)
+        end,
+    })
+
+    local previewers = require("telescope.previewers")
+    local Job = require("plenary.job")
+    local preview_maker = function(filepath, bufnr, opts)
+        filepath = vim.fn.expand(filepath)
+        Job
+            :new({
+                command = "file",
+                args = { "--mime-type", "-b", filepath },
+                on_exit = function(j)
+                    local mime_type = vim.split(j:result()[1], "/")[1]
+
+                    if mime_type == "text" then
+                        -- Check file size
+                        vim.loop.fs_stat(filepath, function(_, stat)
+                            if not stat then
+                                return
+                            end
+                            if stat.size > 500000 then
+                                return
+                            else
+                                previewers.buffer_previewer_maker(filepath, bufnr, opts)
+                            end
+                        end)
+                    else
+                        vim.schedule(function()
+                            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY FILE" })
+                        end)
+                    end
+                end,
+            })
+            :sync()
+    end
+
     local actions = require("telescope.actions")
     local actions_layout = require("telescope.actions.layout")
     require("telescope").setup({
         defaults = {
-            initial_mode = "insert",
-            prompt_prefix = "🔭 ",
-            selection_caret = " ",
-            sorting_strategy = "ascending",
-            scroll_strategy = "limit",
-            set_env = {
-                ["COLORTERM"] = "truecolor",
-            },
-            path_display = { "smart", "truncate" },
-            results_title = true,
-            color_devicons = true,
-            vimgrep_arguments = {
-                "rg",
-                "--color=never",
-                "--no-heading",
-                "--with-filename",
-                "--line-number",
-                "--column",
-                "--smart-case",
-                "--trim", -- add this value
-            },
-            layout_strategy = "flex",
-            layout_config = {
-                horizontal = {
-                    width = 0.9,
-                    height = 0.9,
-                    preview_cutoff = 120,
-                    preview_width = 0.6,
-                    prompt_position = "top",
-                },
-                vertical = {
-                    width = 0.9,
-                    height = 0.9,
-                },
-            },
-            preview = {
-                hide_on_startup = true,
-            },
-            default_mappings = {
+            -- initial_mode = "insert",
+            -- prompt_prefix = "🔭 ",
+            -- selection_caret = " ",
+            -- sorting_strategy = "ascending",
+            -- scroll_strategy = "limit",
+            -- set_env = {
+            --     ["COLORTERM"] = "truecolor",
+            -- },
+            -- path_display = { "smart", "truncate" },
+            -- results_title = true,
+            -- color_devicons = true,
+            -- vimgrep_arguments = {
+            --     "rg",
+            --     "--color=never",
+            --     "--no-heading",
+            --     "--with-filename",
+            --     "--line-number",
+            --     "--column",
+            --     "--smart-case",
+            --     "--trim", -- add this value
+            -- },
+            -- layout_strategy = "flex",
+            -- layout_config = {
+            --     horizontal = {
+            --         width = 0.9,
+            --         height = 0.9,
+            --         preview_cutoff = 120,
+            --         preview_width = 0.6,
+            --         prompt_position = "top",
+            --     },
+            --     vertical = {
+            --         width = 0.9,
+            --         height = 0.9,
+            --     },
+            -- },
+            -- preview = {
+            --     hide_on_startup = true,
+            -- },
+            buffer_previewer_maker = preview_maker,
+            mappings = {
                 i = {
-                    ["<C-n>"] = actions.move_selection_next,
-                    ["<C-p>"] = actions.move_selection_previous,
-
-                    ["<C-c>"] = actions.close,
-
-                    -- ["<Down>"] = actions.move_selection_next,
-                    -- ["<Up>"] = actions.move_selection_previous,
-
-                    ["<CR>"] = actions.select_default,
-                    ["<C-s>"] = actions.select_horizontal,
-                    ["<C-v>"] = actions.select_vertical,
-                    ["<C-t>"] = actions.select_tab,
-
-                    ["<C-u>"] = actions.preview_scrolling_up,
-                    ["<C-d>"] = actions.preview_scrolling_down,
-
-                    ["<C-b>"] = actions.results_scrolling_up,
-                    ["<C-f>"] = actions.results_scrolling_down,
-
-                    ["<Tab>"] = actions_layout.toggle_preview,
-                    -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-                    -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-                    -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-                    -- ["<C-l>"] = actions.complete_tag,
-                    -- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-                    ["<C-w>"] = {
-                        "<c-s-w>",
-                        type = "command",
-                    },
-                },
-                n = {
-                    ["j"] = actions.move_selection_next,
-                    ["k"] = actions.move_selection_previous,
+                    ["<C-j>"] = actions.move_selection_next,
+                    ["<C-k>"] = actions.move_selection_previous,
+                    ["<C-n>"] = actions.cycle_history_next,
+                    ["<C-p>"] = actions.cycle_history_prev,
 
                     ["<C-c>"] = actions.close,
 
@@ -112,10 +134,34 @@ function config.telescope()
                     },
                 },
             },
-            extensions = {
-                fzy_native = {
-                    override_generic_sorter = true,
-                    override_file_sorter = true,
+            -- extensions = {
+            --     fzy_native = {
+            --         override_generic_sorter = true,
+            --         override_file_sorter = true,
+            --     },
+            -- },
+        },
+        pickers = {
+            find_files = {
+                theme = "ivy",
+                mappings = {
+                    n = {
+                        ["y"] = nvb_actions.file_path,
+                    },
+                    i = {
+                        ["<C-y>"] = nvb_actions.file_path,
+                    },
+                },
+            },
+            git_files = {
+                theme = "dropdown",
+                mappings = {
+                    n = {
+                        ["y"] = nvb_actions.file_path,
+                    },
+                    i = {
+                        ["<C-y>"] = nvb_actions.file_path,
+                    },
                 },
             },
         },

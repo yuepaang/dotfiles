@@ -107,8 +107,4 @@ tools["cinuor/which-key.nvim"] = {
     config = conf.which_key,
 }
 
-tools["tpope/vim-surround"] = {
-    event = "InsertEnter",
-}
-
 return tools

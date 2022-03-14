@@ -24,31 +24,63 @@ plug_map.normal = {
                 :with_silent()
                 :with_label("Enhanced NvimTree Toggle")
         ),
-        u = bind.convert_wk_format(
-            map_cr("lua require'gotests'.fun_test()"):with_noremap():with_silent():with_label("Generate Function Test")
-        ),
+        -- u = bind.convert_wk_format(
+        --     map_cr("lua require'gotests'.fun_test()"):with_noremap():with_silent():with_label("Generate Function Test")
+        -- ),
+        -- a = bind.convert_wk_format(
+        --     map_cr("lua require'gotests'.all_test()")
+        --         :with_noremap()
+        --         :with_silent()
+        --         :with_label("Generate All Function Test")
+        -- ),
+        -- e = bind.convert_wk_format(
+        --     map_cr("lua require'gotests'.exported_test()")
+        --         :with_noremap()
+        --         :with_silent()
+        --         :with_label("Generate Exported Function Test")
+        -- ),
+    },
+    ["<Leader>l"] = {
+        name = "LSP",
         a = bind.convert_wk_format(
-            map_cr("lua require'gotests'.all_test()")
+            map_cr("lua require('lspsaga.codeaction').code_action()")
                 :with_noremap()
                 :with_silent()
-                :with_label("Generate All Function Test")
+                :with_label("Code Action")
         ),
-        e = bind.convert_wk_format(
-            map_cr("lua require'gotests'.exported_test()")
+        d = bind.convert_wk_format(
+            map_cr("Telescope diagnostics<CR>"):with_noremap():with_silent():with_label("Diagnostics")
+        ),
+        f = bind.convert_wk_format(
+            map_cr("lua require('lspsaga.provider').lsp_finder()"):with_noremap():with_silent():with_label("Finder")
+        ),
+        h = bind.convert_wk_format(
+            map_cr("lua require('lspsaga.hover').render_hover_doc()")
                 :with_noremap()
                 :with_silent()
-                :with_label("Generate Exported Function Test")
+                :with_label("Hover symbols")
         ),
-        r = bind.convert_wk_format(map_cu("TranslateW"):with_silent():with_label("Translate Word In Cursor")),
+        n = bind.convert_wk_format(
+            map_cr("lua require('lspsaga.rename').rename()"):with_noremap():with_silent():with_label("Rename")
+        ),
+        p = bind.convert_wk_format(
+            map_cr("lua require'lspsaga.provider'.preview_definition()")
+                :with_noremap()
+                :with_silent()
+                :with_label("Preview symbol")
+        ),
+        r = bind.convert_wk_format(
+            map_cr("Telescope lsp_references"):with_noremap():with_silent():with_label("Reference")
+        ),
+        s = bind.convert_wk_format(
+            map_cr("Telescope lsp_document_symbols"):with_noremap():with_silent():with_label("Document Symbols")
+        ),
     },
 
     ["g"] = {
-        name = "Lsp Function",
+        name = "Goto",
         d = bind.convert_wk_format(
-            map_cr("lua require('telescope.builtin').lsp_definitions()")
-                :with_noremap()
-                :with_silent()
-                :with_label("Go To Definition")
+            map_cr("lua vim.lsp.buf.definition()<CR>"):with_noremap():with_silent():with_label("Go To Definition")
         ),
         D = bind.convert_wk_format(
             map_cr("lua vim.lsp.buf.declaration()"):with_noremap():with_silent():with_label("Go To Declaration")
@@ -59,17 +91,8 @@ plug_map.normal = {
                 :with_silent()
                 :with_label("Go To Type Definition")
         ),
-        i = bind.convert_wk_format(
-            map_cr("lua require('telescope.builtin').lsp_implementations()")
-                :with_noremap()
-                :with_silent()
-                :with_label("Go To Implementation")
-        ),
-        r = bind.convert_wk_format(
-            map_cr("lua require('telescope.builtin').lsp_references()")
-                :with_noremap()
-                :with_silent()
-                :with_label("Go To Reference")
+        I = bind.convert_wk_format(
+            map_cr("Telescope lsp_implementations<CR>"):with_noremap():with_silent():with_label("Go To Implementation")
         ),
         h = bind.convert_wk_format(
             map_cr("lua require('lspsaga.hover').render_hover_doc()")
@@ -80,34 +103,41 @@ plug_map.normal = {
         f = bind.convert_wk_format(
             map_cr("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Code Formatting")
         ),
-        a = bind.convert_wk_format(
-            map_cr("lua require('lspsaga.codeaction').code_action()")
-                :with_noremap()
-                :with_silent()
-                :with_label("Code Action")
-        ),
         s = bind.convert_wk_format(
-            map_cr("lua require('lsp_signature').signature()")
+            map_cr("lua require('lspsaga.signaturehelp').signature_help()")
                 :with_noremap()
                 :with_silent()
                 :with_label("Function Signature")
         ),
-        n = bind.convert_wk_format(
-            map_cr("lua require('lspsaga.rename').rename()"):with_noremap():with_silent():with_label("Rename")
-        ),
+    },
+    ["c"] = {
+        g = bind.convert_wk_format(map_cr("Neogen func"):with_noremap():with_silent():with_label("Func Doc")),
+        G = bind.convert_wk_format(map_cr("Neogen class"):with_noremap():with_silent():with_label("class Doc")),
     },
 
-    ["<C-n>"] = bind.convert_wk_format(
+    ["]d"] = bind.convert_wk_format(
         map_cr("lua require('lspsaga.diagnostic').navigate'next'()")
             :with_noremap()
             :with_silent()
             :with_label("Go To Next Diagnostic")
     ),
-    ["<C-p>"] = bind.convert_wk_format(
+    ["[d"] = bind.convert_wk_format(
         map_cr("lua require('lspsaga.diagnostic').navigate'prev'()")
             :with_noremap()
             :with_silent()
             :with_label("Go To Previous Diagnostic")
+    ),
+    ["]e"] = bind.convert_wk_format(
+        map_cr("lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>")
+            :with_noremap()
+            :with_silent()
+            :with_label("Go To Next Error")
+    ),
+    ["[e"] = bind.convert_wk_format(
+        map_cr("lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>")
+            :with_noremap()
+            :with_silent()
+            :with_label("Go To Previous Error")
     ),
 
     ["<leader>v"] = {
