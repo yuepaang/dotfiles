@@ -62,5 +62,5 @@ vicmd_symbol = "[](bold green)"
 symbol = " "
 format = "$symbol[${ram}( | ${swap})]($style) "
 threshold = 30
-style = "bold dimmed white"
+style = "bold dimmed blue"
 disabled = false
