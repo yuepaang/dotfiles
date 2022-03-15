@@ -32,11 +32,11 @@ local function bash(_, snip)
 end
 
 local snippets = {
-  s({ trig = "ymd", name = "Current date", dscr = "Insert the current date" }, {
+  s({ trig = "curd", name = "Current date", dscr = "Insert the current date" }, {
     p(os.date, "%Y-%m-%d"),
   }),
 
-  s({ trig = "dt", name = "Current datetime", dscr = "Insert the current datetime" }, {
+  s({ trig = "curdt", name = "Current datetime", dscr = "Insert the current datetime" }, {
     p(os.date, "%Y-%m-%d %H:%M:%S"),
   }),
 
