@@ -8,7 +8,7 @@ function M.setup()
   local conf = {
     profile = {
       enable = true,
-      threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+      threshold = 0.0001, -- the amount in ms that a plugins load time must be over for it to be included in the profile
     },
 
     display = {
@@ -18,6 +18,11 @@ function M.setup()
         })
       end,
     },
+    git = {
+      clone_timeout = 300,
+    },
+    auto_clean = true,
+    compile_on_sync = true,
   }
 
   -- Check if packer.nvim is installed
@@ -85,7 +90,7 @@ function M.setup()
       config = function()
         vim.cmd("colorscheme gruvbox-material")
       end,
-      disable = false,
+      disable = true,
     })
 
     -- Startup screen

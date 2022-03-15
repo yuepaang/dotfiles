@@ -12,6 +12,7 @@ function M.setup(servers, options)
         local opts = vim.tbl_deep_extend("force", options, servers[server.name] or {})
 
         if server.name == "sumneko_lua" then
+          opts = require("lua-dev").setup({ lspconfig = opts })
           opts.settings = {
             Lua = {
               diagnostics = {
@@ -19,7 +20,6 @@ function M.setup(servers, options)
               },
             },
           }
-          opts = require("lua-dev").setup({ lspconfig = opts })
         end
 
         if PLUGINS.coq.enabled then
@@ -27,11 +27,11 @@ function M.setup(servers, options)
           opts = coq.lsp_ensure_capabilities(opts)
         end
 
-        if server.name == "sumneko_lua" then
+        if server.name == "pyright" then
           opts.settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim" },
+            python = {
+              analysis = {
+                typeCheckingMode = "off",
               },
             },
           }
@@ -56,8 +56,14 @@ function M.setup(servers, options)
               -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
               ["rust-analyzer"] = {
                 -- enable clippy on save
+                cargo = {
+                  loadOutDirsFromCheck = true,
+                },
                 checkOnSave = {
                   command = "clippy",
+                },
+                experimental = {
+                  procAttrMacros = true,
                 },
               },
             },
