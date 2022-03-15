@@ -160,6 +160,10 @@ local function normal_keymap()
         "<cmd>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.open_in_browser})<cr>",
         "Link",
       },
+      j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+      k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+      p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+      d = { "<cmd>Gitsigns diffthis HEAD<cr>", "diffthis Head" },
     },
   }
   whichkey.register(keymap, opts)
@@ -266,6 +270,23 @@ function M.setup()
   keymap("n", "<C-h>", "<C-w>h", _opts)
   keymap("n", "<C-j>", "<C-w>j>", _opts)
   keymap("n", "<C-k>", "<C-w>k", _opts)
+
+  -- Visual --
+  -- Stay in indent mode
+  keymap("v", "<", "<gv", _opts)
+  keymap("v", ">", ">gv", _opts)
+
+  -- Move text up and down
+  keymap("v", "<A-k>", "<cmd>m .-2<CR>==", _opts)
+  keymap("v", "<A-j>", "<cmd>m .+1<CR>==", _opts)
+  keymap("v", "p", '"_dP', _opts)
+
+  -- Visual Block --
+  -- Move text up and down
+  keymap("x", "J", "<cmd>move '>+1<CR>gv-gv", _opts)
+  keymap("x", "K", "<cmd>move '<-2<CR>gv-gv", _opts)
+  keymap("x", "<A-j>", "<cmd>move '>+1<CR>gv-gv", _opts)
+  keymap("x", "<A-k>", "<cmd>move '<-2<CR>gv-gv", _opts)
 
   normal_keymap()
   visual_keymap()
