@@ -83,7 +83,7 @@ function M.setup()
       config = function()
         vim.cmd("colorscheme everforest")
       end,
-      disable = true,
+      disable = false,
     })
     use({
       "sainnhe/gruvbox-material",
@@ -548,7 +548,11 @@ function M.setup()
           {
             "j-hui/fidget.nvim",
             config = function()
-              require("fidget").setup({})
+              require("fidget").setup({
+                text = {
+                  spinner = "moon",
+                },
+              })
             end,
           },
           "b0o/schemastore.nvim",
