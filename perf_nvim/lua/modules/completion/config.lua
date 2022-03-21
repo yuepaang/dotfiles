@@ -204,11 +204,16 @@ function config.nvim_cmp()
 end
 
 function config.luasnip()
+	local snippets_folder = vim.fn.stdpath("config") .. "/lua/config/snip/snippets/"
+	local ls = require("luasnip")
 	require("luasnip.loaders.from_vscode").lazy_load({
 		paths = {
 			"~/.local/share/nvim/site/pack/packer/opt/friendly-snippets",
 		},
 	})
+
+	require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/python" } })
+	require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/rust" } })
 end
 
 function config.null_ls()
