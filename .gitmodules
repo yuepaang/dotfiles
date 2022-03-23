@@ -1,6 +1,0 @@
-[submodule "cosmos_nvim"]
-	path = cosmos_nvim
-	url = https://github.com/yetone/cosmos-nvim.git
-[submodule "nvim_flz"]
-	path = nvim_flz
-	url = https://github.com/cinuor/nvim.git
