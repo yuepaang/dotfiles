@@ -78,6 +78,7 @@ tools["cinuor/gotests.nvim"] = {
 			require("utils.defer").packer_defer_load("gotests.nvim", 1000)
 		end
 	end,
+	config = conf.gotests
 }
 
 tools["cinuor/project.nvim"] = {
@@ -108,6 +109,12 @@ tools["nathom/filetype.nvim"] = {
 	setup = function()
 		vim.g.did_load_filetypes = 1
 	end,
+}
+
+tools['rcarriga/nvim-notify'] = {
+	opt = true,
+	setup = function() require("utils.defer").packer_defer_load("nvim-notify", 100) end,
+	config = conf.notify
 }
 
 tools["wakatime/vim-wakatime"] = {}
