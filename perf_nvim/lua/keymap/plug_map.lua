@@ -25,16 +25,19 @@ plug_map.normal = {
 				:with_label("Enhanced NvimTree Toggle")
 		),
 		u = bind.convert_wk_format(
-			map_cr("lua require'gotests'.fun_test()"):with_noremap():with_silent():with_label("Generate Function Test")
+			map_cr("lua ('extend.misc').gotests('func')")
+				:with_noremap()
+				:with_silent()
+				:with_label("Generate Function Test")
 		),
 		a = bind.convert_wk_format(
-			map_cr("lua require'gotests'.all_test()")
+			map_cr("lua ('extend.misc').gotests('all')")
 				:with_noremap()
 				:with_silent()
 				:with_label("Generate All Function Test")
 		),
 		e = bind.convert_wk_format(
-			map_cr("lua require'gotests'.exported_test()")
+			map_cr("lua ('extend.misc').gotests('exported')")
 				:with_noremap()
 				:with_silent()
 				:with_label("Generate Exported Function Test")
@@ -188,7 +191,7 @@ plug_map.normal = {
 	},
 
 	["<leader>n"] = {
-		name = "Generate Documentation",
+		name = "Generate Documentation or Line Number Toggle",
 		c = bind.convert_wk_format(
 			map_cr("lua require('neogen').generate({type='class'})")
 				:with_noremap()
@@ -213,6 +216,18 @@ plug_map.normal = {
 				:with_silent()
 				:with_label("Generate File Documentation")
 		),
+		u = bind.convert_wk_format(
+			map_cr("lua require('extend.misc').toggle_nu()")
+				:with_noremap()
+				:with_silent()
+				:with_label("Toggle Absolute Line Number")
+		),
+		r = bind.convert_wk_format(
+			map_cr("lua require('extend.misc').toggle_rnu()")
+				:with_noremap()
+				:with_silent()
+				:with_label("Toggle Relative Line Number")
+		),
 	},
 
 	["<F7>"] = bind.convert_wk_format(
@@ -220,7 +235,7 @@ plug_map.normal = {
 			:with_noremap()
 			:with_label("Start Or Continue Debug")
 	),
-	["<F19>"] = bind.convert_wk_format(
+	["<S-F7>"] = bind.convert_wk_format(
 		map_cmd("<cmd>lua require('extend.dap').debug_stop()<CR>")
 			:with_noremap()
 			:with_label("Stop Debugging, Shortcut: Shift + F7")
@@ -228,7 +243,7 @@ plug_map.normal = {
 	["<F8>"] = bind.convert_wk_format(
 		map_cmd("<cmd>lua require('extend.dap').debug_pause()<CR>"):with_noremap():with_label("Pause Debug")
 	),
-	["<F20>"] = bind.convert_wk_format(
+	["<S-F8>"] = bind.convert_wk_format(
 		map_cmd("<cmd>lua require('extend.dap').debug_restart()<CR>"):with_noremap():with_label("Restart Debug")
 	),
 	["<F9>"] = bind.convert_wk_format(
@@ -249,7 +264,7 @@ plug_map.normal = {
 			:with_silent()
 			:with_label("Step Into")
 	),
-	["<F23>"] = bind.convert_wk_format(
+	["<S-F11>"] = bind.convert_wk_format(
 		map_cmd("<cmd>lua require('extend.dap').debug_step_out()<CR>")
 			:with_noremap()
 			:with_silent()
@@ -261,7 +276,7 @@ plug_map.normal = {
 			:with_silent()
 			:with_label("Run To Cursor")
 	),
-	["<F24>"] = bind.convert_wk_format(
+	["<S-F12>"] = bind.convert_wk_format(
 		map_cmd("<cmd>lua require('extend.dap').debug_run_last()<CR>")
 			:with_noremap()
 			:with_silent()

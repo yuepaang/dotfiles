@@ -1,14 +1,14 @@
 local config = {}
 
 function config.telescope()
-	require('utils.defer').load_immediately({'telescope-fzy-native.nvim', 'telescope-file-browser.nvim'})
+	require("utils.defer").load_immediately({ "telescope-fzy-native.nvim", "telescope-file-browser.nvim" })
 
 	local actions = require("telescope.actions")
 	local actions_layout = require("telescope.actions.layout")
 
 	require("telescope").setup({
 		defaults = {
-			initial_mode = "normal",
+			initial_mode = "insert",
 			prompt_prefix = "🔭 ",
 			selection_caret = " ",
 			sorting_strategy = "ascending",
@@ -111,9 +111,9 @@ function config.telescope()
 			},
 			pickers = {
 				find_files = {
-					find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
-				}
-			}
+					find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+				},
+			},
 		},
 	})
 	require("telescope").load_extension("fzy_native")
@@ -410,7 +410,7 @@ function config.notify()
 		background_colour = "Normal",
 
 		-- Minimum width for notification windows
-		minimum_width = 40,
+		minimum_width = 36,
 
 		-- Icons for the different levels
 		icons = {
@@ -422,13 +422,12 @@ function config.notify()
 		},
 	})
 
-	vim.notify = nvim_notify
-
+	vim.notify = require("extend.misc").wrapped_notify
 end
 
 function config.gotests()
-	require('gotests').setup({
-		verbose = false
+	require("gotests").setup({
+		verbose = false,
 	})
 end
 
