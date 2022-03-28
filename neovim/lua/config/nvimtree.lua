@@ -30,7 +30,7 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 function M.setup()
-  require("nvim-tree").setup {
+  require("nvim-tree").setup({
     disable_netrw = false,
     hijack_netrw = true,
     open_on_setup = false,
@@ -39,7 +39,6 @@ function M.setup()
       "dashboard",
       "alpha",
     },
-    auto_close = true,
     open_on_tab = false,
     hijack_cursor = false,
     update_to_buf_dir = {
@@ -61,9 +60,9 @@ function M.setup()
       mappings = {
         custom_only = false,
         list = {
-          { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-          { key = "h", cb = tree_cb "close_node" },
-          { key = "v", cb = tree_cb "vsplit" },
+          { key = { "l", "<CR>", "o" }, cb = tree_cb("edit") },
+          { key = "h", cb = tree_cb("close_node") },
+          { key = "v", cb = tree_cb("vsplit") },
         },
       },
       number = true,
@@ -102,7 +101,7 @@ function M.setup()
       folder_arrows = 1,
       tree_width = 30,
     },
-  }
+  })
 
   vim.g.nvim_tree_respect_buf_cwd = 1
 end

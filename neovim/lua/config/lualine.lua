@@ -40,17 +40,17 @@ local function lsp_client(msg)
   end
 
   -- add formatter
-  local formatters = require "config.lsp.null-ls.formatters"
+  local formatters = require("config.lsp.null-ls.formatters")
   local supported_formatters = formatters.list_registered(buf_ft)
   vim.list_extend(buf_client_names, supported_formatters)
 
   -- add linter
-  local linters = require "config.lsp.null-ls.linters"
+  local linters = require("config.lsp.null-ls.linters")
   local supported_linters = linters.list_registered(buf_ft)
   vim.list_extend(buf_client_names, supported_linters)
 
   -- add hover
-  local hovers = require "config.lsp.null-ls.hovers"
+  local hovers = require("config.lsp.null-ls.hovers")
   local supported_hovers = hovers.list_registered(buf_ft)
   vim.list_extend(buf_client_names, supported_hovers)
 
@@ -81,9 +81,9 @@ end
 -- end
 
 function M.setup()
-  local gps = require "nvim-gps"
+  local gps = require("nvim-gps")
 
-  require("lualine").setup {
+  require("lualine").setup({
     options = {
       icons_enabled = true,
       theme = "auto",
@@ -91,6 +91,7 @@ function M.setup()
       section_separators = { left = " ", right = "" },
       disabled_filetypes = {},
       always_divide_middle = true,
+      globalstatus = true,
     },
     sections = {
       lualine_a = { "mode" },
@@ -128,7 +129,7 @@ function M.setup()
     },
     tabline = {},
     extensions = {},
-  }
+  })
 end
 
 return M
