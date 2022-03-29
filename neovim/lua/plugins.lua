@@ -286,6 +286,7 @@ function M.setup()
       run = function()
         vim.fn["mkdp#util#install"]()
       end,
+      event = "BufRead",
       ft = "markdown",
       cmd = { "MarkdownPreview" },
     })
