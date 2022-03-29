@@ -24,23 +24,23 @@ opt.timeoutlen = 300 --	Time in milliseconds to wait for a mapped sequence to co
 opt.showmode = false -- Do not need to show the mode. We use the statusline instead.
 opt.scrolloff = 999 -- Lines of context
 opt.joinspaces = false -- No double spaces with join after a dot
+opt.laststatus = 3
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-opt.whichwrap:append "<>[]hl"
+opt.whichwrap:append("<>[]hl")
 
 -- disable nvim intro
-opt.shortmess:append "sI"
-
+opt.shortmess:append("sI")
 
 -- Better search
-opt.path:remove "/usr/include"
-opt.path:append "**"
+opt.path:remove("/usr/include")
+opt.path:append("**")
 -- vim.cmd [[set path=.,,,$PWD/**]] -- Set the path directly
 
 opt.wildignorecase = true
-opt.wildignore:append "**/node_modules/*"
-opt.wildignore:append "**/.git/*"
+opt.wildignore:append("**/node_modules/*")
+opt.wildignore:append("**/.git/*")
 
 -- Better Netrw, alternatively just use vinegar.vim
 -- g.netrw_banner = 0 -- Hide banner
@@ -50,14 +50,14 @@ opt.wildignore:append "**/.git/*"
 -- g.netrw_list_hide = (vim.fn["netrw_gitignore#Hide"]()) .. [[,\(^\|\s\s\)\zs\.\S\+]] -- use .gitignore
 
 -- Treesitter based folding
-cmd [[
+cmd([[
   set foldlevel=20
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
-]]
+]])
 
 -- Copilot
-cmd [[
+cmd([[
     imap <silent><script><expr> <C-s> copilot#Accept("\<CR>")
     let g:copilot_no_tab_map = v:true
-]]
+]])

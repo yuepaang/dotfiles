@@ -86,10 +86,19 @@ function M.setup()
       end,
       disable = false,
     })
+
     use({
       "sainnhe/gruvbox-material",
       config = function()
         vim.cmd("colorscheme gruvbox-material")
+      end,
+      disable = true,
+    })
+
+    use({
+      "arcticicestudio/nord-vim",
+      config = function()
+        vim.cmd("colorscheme nord")
       end,
       disable = true,
     })
@@ -786,6 +795,16 @@ function M.setup()
       ft = { "json" },
       config = function()
         require("config.package").setup()
+      end,
+    })
+
+    use({
+      "rmagatti/auto-session",
+      opt = true,
+      cmd = { "SaveSession", "RestoreSession" },
+      requires = { "rmagatti/session-lens" },
+      config = function()
+        require("config.autosession").setup()
       end,
     })
 
