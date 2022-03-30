@@ -25,6 +25,15 @@ function config.nvim_lsp_installer()
 		-- if server.name == "tsserver" then
 		--     opts.root_dir = function() ... end
 		-- end
+		if server.name == "sumneko_lua" then
+			opts.settings = {
+				Lua = {
+					diagnostics = {
+						globals = { "vim" },
+					},
+				},
+			}
+		end
 
 		-- This setup() function is exactly the same as lspconfig's setup function.
 		-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
@@ -238,7 +247,7 @@ function config.null_ls()
 			-- diagnostics
 			null_ls.builtins.diagnostics.write_good,
 			null_ls.builtins.diagnostics.tsc,
-			null_ls.builtins.diagnostics.selene,
+			-- null_ls.builtins.diagnostics.selene,
 			null_ls.builtins.hover.dictionary,
 		},
 		update_in_insert = false,

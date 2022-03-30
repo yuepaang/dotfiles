@@ -73,6 +73,7 @@ completion["CosmicNvim/cosmic-ui"] = {
 }
 
 completion["github/copilot.vim"] = {
+	after = { "nvim-cmp"},
 	event = "InsertEnter",
 }
 
