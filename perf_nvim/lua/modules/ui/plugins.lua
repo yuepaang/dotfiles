@@ -42,10 +42,11 @@ ui["lukas-reineke/indent-blankline.nvim"] = {
 ui["lewis6991/gitsigns.nvim"] = {
 	opt = true,
 	config = conf.gitsigns,
-	requires = { "nvim-lua/plenary.nvim" },
+	requires = { "nvim-lua/plenary.nvim", opt = true },
 	setup = function()
 		require("utils.defer").add("gitsigns.nvim", 90)
 	end,
+	event = {"BufRead", "BufNewFile"}
 }
 
 ui["MunifTanjim/nui.nvim"] = {
@@ -66,6 +67,13 @@ ui["j-hui/fidget.nvim"] = {
 				spinner = "moon"
 			}
 		})
+	end
+}
+
+ui["antoinemadec/FixCursorHold.nvim"] = {
+	event = "BufRead",
+	config = function()
+		vim.g.cursorhold_updatetime = 100
 	end
 }
 
