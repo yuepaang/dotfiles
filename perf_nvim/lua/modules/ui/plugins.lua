@@ -59,4 +59,14 @@ ui["goolord/alpha-nvim"] = {
 	end,
 }
 
+ui["j-hui/fidget.nvim"] = {
+	config = function()
+		require("fidget").setup({
+			text = {
+				spinner = "moon"
+			}
+		})
+	end
+}
+
 return ui

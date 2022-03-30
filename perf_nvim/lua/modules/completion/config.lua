@@ -2,7 +2,7 @@ local config = {}
 local icons = require("utils.icons")
 
 function config.nvim_lsp_installer()
-	require('utils.defer').load_immediately('cmp-nvim-lsp')
+	require("utils.defer").load_immediately("cmp-nvim-lsp")
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -66,7 +66,7 @@ function config.nvim_lsp_installer()
 end
 
 function config.nvim_cmp()
-	require('utils.defer').load_immediately({'LuaSnip', 'neogen'})
+	require("utils.defer").load_immediately({ "LuaSnip", "neogen" })
 
 	local cmp = require("cmp")
 	local luasnip = require("luasnip")
@@ -196,16 +196,18 @@ function config.nvim_cmp()
 end
 
 function config.luasnip()
-	local snippets_folder = vim.fn.stdpath("config") .. "/lua/config/snip/snippets/"
-	local ls = require("luasnip")
+	-- local snippets_folder = vim.fn.stdpath("config") .. "/lua/snippets/"
+	-- local ls = require("luasnip")
+
+	require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/python" } })
+	require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/rust" } })
+	require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/typescript" } })
+
 	require("luasnip.loaders.from_vscode").lazy_load({
 		paths = {
 			"~/.local/share/nvim/site/pack/packer/opt/friendly-snippets",
 		},
 	})
-
-	require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/python" } })
-	require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/rust" } })
 end
 
 function config.null_ls()
