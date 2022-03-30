@@ -10,6 +10,13 @@ ui["nvim-treesitter/nvim-treesitter"] = {
 	requires = { "nvim-treesitter/nvim-treesitter-textobjects", opt = true },
 	run = ":TSUpdate",
 }
+ui["p00f/nvim-ts-rainbow"] = {
+	after = "nvim-treesitter"
+}
+
+ui["windwp/nvim-ts-autotag"] = {
+	after = "nvim-treesitter"
+}
 
 ui["norcalli/nvim-colorizer.lua"] = {
 	ft = { "lua", "vim", "markdown" },
