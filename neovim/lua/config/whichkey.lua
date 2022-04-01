@@ -198,16 +198,16 @@ local function visual_keymap()
 end
 
 local function code_keymap()
-  if vim.fn.has("nvim-0.7") then
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "*",
-      callback = function()
-        vim.schedule(CodeRunner)
-      end,
-    })
-  else
-    vim.cmd("autocmd FileType * lua CodeRunner()")
-  end
+  -- if vim.fn.has("nvim-0.7") then
+  --   vim.api.nvim_create_autocmd("FileType", {
+  --     pattern = "*",
+  --     callback = function()
+  --       vim.schedule(CodeRunner)
+  --     end,
+  --   })
+  -- else
+  vim.cmd("autocmd FileType * lua CodeRunner()")
+  -- end
 
   function CodeRunner()
     local bufnr = vim.api.nvim_get_current_buf()
