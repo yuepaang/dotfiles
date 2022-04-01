@@ -264,7 +264,7 @@ function M.setup()
       disable = true,
     })
 
-	use { "google/vim-searchindex", event = "BufReadPre" }
+    use({ "google/vim-searchindex", event = "BufReadPre" })
 
     -- Code documentation
     use({

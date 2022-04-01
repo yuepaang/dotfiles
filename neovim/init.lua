@@ -8,9 +8,6 @@ vim.g.copilot_tab_fallback = ""
 vim.g.python3_host_skip_check = 1
 vim.g.python3_host_prog = "$HOME/.pyenv/versions/nvim-py3/bin/python"
 
--- vim.cmd("colorscheme onedark")
-
-require("autocmds")
 require("config")
 require("utils")
 require("plugins").setup()
