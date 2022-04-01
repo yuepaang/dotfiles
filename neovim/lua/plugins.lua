@@ -531,16 +531,6 @@ function M.setup()
       disable = false,
     })
 
-    use({
-      "nvim-treesitter/playground",
-      requires = "nvim-treesitter",
-    })
-
-    use({
-      "p00f/nvim-ts-rainbow",
-      requires = "nvim-treesitter",
-    })
-
     -- LSP
     if PLUGINS.nvim_cmp.enabled then
       use({
@@ -570,11 +560,7 @@ function M.setup()
           {
             "j-hui/fidget.nvim",
             config = function()
-              require("fidget").setup({
-                text = {
-                  spinner = "moon",
-                },
-              })
+              require("fidget").setup({})
             end,
           },
           "b0o/schemastore.nvim",

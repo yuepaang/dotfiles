@@ -31,15 +31,6 @@ local kind_icons = {
 }
 
 function M.setup()
-  local function replace_termcodes(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-  end
-
-  local function check_backspace()
-    local col = vim.fn.col(".") - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-  end
-
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -79,7 +70,16 @@ function M.setup()
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-e>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
+      -- ["<C-e>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
+      ["<C-e>"] = cmp.mapping(function(fallback)
+        cmp.mapping.abort()
+        local copilot_keys = vim.fn["copilot#Accept"]()
+        if copilot_keys ~= "" then
+          vim.api.nvim_feedkeys(copilot_keys, "i", true)
+        else
+          fallback()
+        end
+      end),
       ["<CR>"] = cmp.mapping({
         i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
         c = function(fallback)
@@ -91,15 +91,12 @@ function M.setup()
         end,
       }),
       ["<Tab>"] = cmp.mapping(function(fallback)
-        local copilot_keys = vim.fn["copilot#Accept"]()
-        if copilot_keys ~= "" then
-          vim.api.nvim_feedkeys(copilot_keys, "i", true)
-        elseif cmp.visible() then
+        if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
-          vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
-        elseif check_backspace() then
-          vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+          luasnip.expand_or_jump()
+        elseif has_words_before() then
+          cmp.complete()
         else
           fallback()
         end
@@ -112,9 +109,7 @@ function M.setup()
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
-          vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-jump-prev"), "")
-        elseif has_words_before() then
-          cmp.complete()
+          luasnip.jump(-1)
         else
           fallback()
         end

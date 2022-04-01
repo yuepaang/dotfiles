@@ -18,10 +18,6 @@ function M.setup()
       additional_vim_regex_highlighting = true,
     },
 
-    autopairs = {
-      enable = true,
-    },
-
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -117,21 +113,6 @@ function M.setup()
     context_commentstring = {
       enable = true,
       enable_autocmd = false,
-    },
-    rainbow = {
-      enable = true,
-      colors = {
-        "Gold",
-        "Orchid",
-        "DodgerBlue",
-        -- "Cornsilk",
-        -- "Salmon",
-        -- "LawnGreen",
-      },
-      disable = { "html" },
-    },
-    playground = {
-      enable = true,
     },
   })
 end
