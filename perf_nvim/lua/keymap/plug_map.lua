@@ -8,7 +8,6 @@ local plug_map = {}
 
 plug_map.raw = {
 	["t|ft"] = map_cmd([[<C-\><C-n>:FloatermToggle<CR>]]):with_noremap():with_silent(), -- floaterm toggle
-	["t|fg"] = map_cmd([[<C-\><C-n>:FloatermNew gitui<CR>]]):with_noremap():with_silent(), -- open gitui
 	["t|<C-h>"] = map_cmd([[<C-\><C-n>:FloatermPrev<CR>]]):with_noremap():with_silent(), -- previous terminal
 	["t|<C-l>"] = map_cmd([[<C-\><C-n>:FloatermNext<CR>]]):with_noremap():with_silent(), -- next terminal
 	["t|fk"] = map_cmd([[<C-\><C-n>:FloatermKill<CR>]]):with_noremap():with_silent(), -- just kill the front terminal
@@ -138,7 +137,7 @@ plug_map.normal = {
 		),
 	},
 
-	["m"] = {
+	["<leader>m"] = {
 		name = "MarkdownPreview, EasyAlign",
 		w = bind.convert_wk_format(
 			map_cu("MarkdownPreviewToggle"):with_noremap():with_silent():with_label("Toggle Markdown Preview")
@@ -324,8 +323,8 @@ plug_map.visual = {
 		),
 	},
 
-	["m"] = {
-		name = "EasyAlign",
+	["<leader>m"] = {
+		name = "MarkdownPreview, EasyAlign",
 		a = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)"):with_label("EasyAlign Selected Buffer"):with_mode("v")),
 	},
 

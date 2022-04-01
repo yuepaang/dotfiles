@@ -149,8 +149,10 @@ local function normal_keymap()
       s = { "<cmd>PackerSync<cr>", "Sync" },
       S = { "<cmd>PackerStatus<cr>", "Status" },
       u = { "<cmd>PackerUpdate<cr>", "Update" },
-      -- x = { "<cmd>cd %:p:h<cr>", "Change Directory" },
-      x = { "<cmd>set autochdir<cr>", "Auto ChDir" },
+      x = { "<cmd>cd %:p:h<cr>", "Change Directory" },
+      -- x = { "<cmd>set autochdir<cr>", "Auto ChDir" },
+      W = { "<cmd>SaveSession<cr>", "Save Workspace" },
+      w = { "<cmd>Telescope session-lens search_session<cr>", "Restore Workspace" },
     },
 
     g = {

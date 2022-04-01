@@ -17,10 +17,11 @@ function _G.edit_ft()
 end
 
 function _G.snippets_clear()
-  if type(ls.snippets) == "table" then
-    for m, _ in pairs(ls.snippets) do
-      package.loaded["config.snip.snippets." .. m] = nil
-    end
+  if ls.snippets == nil then
+    return
+  end
+  for m, _ in pairs(ls.snippets) do
+    package.loaded["config.snip.snippets." .. m] = nil
   end
   ls.snippets = setmetatable({}, {
     __index = function(t, k)

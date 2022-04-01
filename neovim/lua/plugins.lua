@@ -261,8 +261,10 @@ function M.setup()
       config = function()
         require("config.neoscroll").setup()
       end,
-      disable = false,
+      disable = true,
     })
+
+	use { "google/vim-searchindex", event = "BufReadPre" }
 
     -- Code documentation
     use({
@@ -480,7 +482,8 @@ function M.setup()
         "hrsh7th/cmp-cmdline",
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lsp-signature-help", -- "onsails/lspkind-nvim",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        -- "onsails/lspkind-nvim",
         -- "hrsh7th/cmp-calc",
         -- "f3fora/cmp-spell",
         -- "hrsh7th/cmp-emoji",
@@ -778,6 +781,8 @@ function M.setup()
       end,
     })
 
+    use({ "python-rope/ropevim", keys = { [[<C-x>]], [[C-c]] }, run = "pip install ropevim", disable = true })
+
     -- Performance
     use({
       "dstein64/vim-startuptime",
@@ -796,6 +801,14 @@ function M.setup()
       config = function()
         require("config.package").setup()
       end,
+      disable = true,
+    })
+
+    use({
+      "meain/vim-package-info",
+      ft = { "json" },
+      run = "npm install",
+      disable = true,
     })
 
     use({
@@ -803,6 +816,7 @@ function M.setup()
       opt = true,
       cmd = { "SaveSession", "RestoreSession" },
       requires = { "rmagatti/session-lens" },
+      wants = { "telescope.nvim", "session-lens" },
       config = function()
         require("config.autosession").setup()
       end,
