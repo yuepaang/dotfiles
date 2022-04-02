@@ -123,6 +123,13 @@ local function normal_keymap()
       v = { "<cmd>TestVisit<cr>", "Visit" },
     },
 
+    r = {
+      name = "Refactor",
+      i = { [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "Inline Variable" },
+      p = { [[ <Esc><Cmd>lua require('refactoring').debug.printf({below = false})<CR>]], "Debug Print" },
+      c = { [[ <Esc><Cmd>lua require('refactoring').debug.cleanup({below = false})<CR>]], "Debug Cleanup" },
+    },
+
     v = {
       name = "Vimspector",
       G = { "<cmd>lua require('config.vimspector').generate_debug_profile()<cr>", "Generate Debug Profile" },
@@ -151,6 +158,7 @@ local function normal_keymap()
       u = { "<cmd>PackerUpdate<cr>", "Update" },
       x = { "<cmd>cd %:p:h<cr>", "Change Directory" },
       -- x = { "<cmd>set autochdir<cr>", "Auto ChDir" },
+      e = { "!!$SHELL<CR>", "Execute line" },
       W = { "<cmd>SaveSession<cr>", "Save Workspace" },
       w = { "<cmd>Telescope session-lens search_session<cr>", "Restore Workspace" },
     },
@@ -198,6 +206,7 @@ local function visual_keymap()
 end
 
 local function code_keymap()
+  -- FIXME: not working in some machines
   -- if vim.fn.has("nvim-0.7") then
   --   vim.api.nvim_create_autocmd("FileType", {
   --     pattern = "*",
@@ -245,13 +254,17 @@ local function code_keymap()
         o = { "<cmd>TSLspOrganize<cr>", "Organize" },
         r = { "<cmd>TSLspRenameFile<cr>", "Rename File" },
         i = { "<cmd>TSLspImportAll<cr>", "Import All" },
-        t = { "<cmd>lua require('config.test').javascript_runner()<cr>", "Choose Test Runner" },
+        R = { "<cmd>lua require('config.test').javascript_runner()<cr>", "Choose Test Runner" },
+        s = { "<cmd>2TermExec cmd='yarn start'<cr>", "Yarn Start" },
+        t = { "<cmd>2TermExec cmd='yarn test'<cr>", "Yarn Test" },
       }
     end
 
     if fname == "package.json" then
       keymap_c.v = { "<cmd>lua require('package-info').show()<cr>", "Show Version" }
       keymap_c.c = { "<cmd>lua require('package-info').change_version()<cr>", "Change Version" }
+      keymap_c.s = { "<cmd>2TermExec cmd='yarn start'<cr>", "Yarn Start" }
+      keymap_c.t = { "<cmd>2TermExec cmd='yarn test'<cr>", "Yarn Test" }
     end
 
     if next(keymap_c) ~= nil then
@@ -263,42 +276,7 @@ local function code_keymap()
   end
 end
 
--- local term_opts = { silent = true }
-
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
-
 function M.setup()
-  local _opts = { noremap = true, silent = true }
-  -- Navigate buffers
-  keymap("n", "<S-l>", ":bnext<CR>", _opts)
-  keymap("n", "<S-h>", ":bprevious<CR>", _opts)
-
-  keymap("n", "<C-s>", ":w<CR>", _opts)
-  keymap("n", "<C-q>", ":q<CR>", _opts)
-
-  keymap("n", "<C-l>", "<C-w>l>", _opts)
-  keymap("n", "<C-h>", "<C-w>h", _opts)
-  keymap("n", "<C-j>", "<C-w>j>", _opts)
-  keymap("n", "<C-k>", "<C-w>k", _opts)
-
-  -- Visual --
-  -- Stay in indent mode
-  keymap("v", "<", "<gv", _opts)
-  keymap("v", ">", ">gv", _opts)
-
-  -- Move text up and down
-  keymap("v", "<A-k>", "<cmd>m .-2<CR>==", _opts)
-  keymap("v", "<A-j>", "<cmd>m .+1<CR>==", _opts)
-  keymap("v", "p", '"_dP', _opts)
-
-  -- Visual Block --
-  -- Move text up and down
-  keymap("x", "J", "<cmd>move '>+1<CR>gv-gv", _opts)
-  keymap("x", "K", "<cmd>move '<-2<CR>gv-gv", _opts)
-  keymap("x", "<A-j>", "<cmd>move '>+1<CR>gv-gv", _opts)
-  keymap("x", "<A-k>", "<cmd>move '<-2<CR>gv-gv", _opts)
-
   normal_keymap()
   visual_keymap()
   code_keymap()
