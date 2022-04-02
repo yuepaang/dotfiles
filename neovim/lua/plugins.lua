@@ -54,6 +54,15 @@ function M.setup()
     -- wakatime
     use("wakatime/vim-wakatime")
 
+    -- smarter splits
+    use({
+      "mrjones2014/smart-splits.nvim",
+      module = "smart-splits",
+      config = function()
+        require("config.smart-splits").setup()
+      end,
+    })
+
     -- Load only when require
     use({
       "nvim-lua/plenary.nvim",
@@ -65,6 +74,24 @@ function M.setup()
       "rcarriga/nvim-notify",
       event = "VimEnter",
       config = function()
+        require("notify").setup({
+          stages = "fade",
+          on_open = nil,
+          on_close = nil,
+          render = "default",
+          timeout = 5000,
+          max_width = nil,
+          max_height = nil,
+          background_colour = "Normal",
+          minimum_width = 50,
+          icons = {
+            ERROR = "",
+            WARN = "",
+            INFO = "",
+            DEBUG = "",
+            TRACE = "✎",
+          },
+        })
         vim.notify = require("notify")
       end,
     })
@@ -239,7 +266,7 @@ function M.setup()
     -- IDE
     use({
       "antoinemadec/FixCursorHold.nvim",
-      event = "BufReadPre",
+      event = { "BufRead", "BufNewFile" },
       config = function()
         vim.g.cursorhold_updatetime = 100
       end,
@@ -433,13 +460,9 @@ function M.setup()
     -- User interface
     use({
       "stevearc/dressing.nvim",
-      event = "BufReadPre",
+      event = "BufWinEnter",
       config = function()
-        require("dressing").setup({
-          select = {
-            backend = { "telescope", "fzf", "builtin" },
-          },
-        })
+        require("config.dressing").setup()
       end,
       disable = false,
     })

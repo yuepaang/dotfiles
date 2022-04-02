@@ -70,6 +70,7 @@ local function normal_keymap()
   local keymap = {
     ["w"] = { "<cmd>update!<CR>", "Save" },
     ["q"] = { "<cmd>q!<CR>", "Quit" },
+    ["h"] = { "<cmd>nohlsearch<CR>", "No highlight search" },
     -- ["t"] = { "<cmd>ToggleTerm<CR>", "Terminal" },
 
     b = {
