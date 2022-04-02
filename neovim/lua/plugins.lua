@@ -285,10 +285,12 @@ function M.setup()
     })
     use({
       "ggandor/lightspeed.nvim",
+      requires = { "tpope/vim-repeat" },
       keys = { "s", "S", "f", "F", "t", "T" },
       config = function()
         require("lightspeed").setup({})
       end,
+      event = "BufRead",
     })
 
     -- Markdown
