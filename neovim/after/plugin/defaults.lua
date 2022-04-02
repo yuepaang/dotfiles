@@ -61,4 +61,12 @@ cmd([[
 cmd([[
     imap <silent><script><expr> <C-s> copilot#Accept("\<CR>")
     let g:copilot_no_tab_map = v:true
+    let g:copilot_assume_mapped = v:true
+    let g:copilot_tab_fallback = ""
+]])
+
+-- Python host
+cmd([[
+  let g:python3_host_skip_check = 1
+  let g:python3_host_prog = "$HOME/.pyenv/versions/nvim-py3/bin/python"
 ]])
