@@ -69,7 +69,7 @@ local function normal_keymap()
 
   local keymap = {
     ["w"] = { "<cmd>update!<CR>", "Save" },
-    ["q"] = { "<cmd>q!<CR>", "Quit" },
+    ["q"] = { "<cmd>q<CR>", "Quit" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No highlight search" },
     -- ["t"] = { "<cmd>ToggleTerm<CR>", "Terminal" },
 
@@ -122,6 +122,7 @@ local function normal_keymap()
       o = { "<cmd>UltestOutput<cr>", "Output" },
       s = { "<cmd>TestSuite<cr>", "Suite" },
       v = { "<cmd>TestVisit<cr>", "Visit" },
+      p = { "<Plug>PlenaryTestFile", "PlenaryTestFile" },
     },
 
     r = {

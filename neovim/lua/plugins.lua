@@ -61,6 +61,7 @@ function M.setup()
       config = function()
         require("config.smart-splits").setup()
       end,
+      disable = true,
     })
 
     -- Load only when require
@@ -145,6 +146,10 @@ function M.setup()
         require("config.alpha").setup()
       end,
     })
+
+    -- Doc
+    use({ "nanotee/luv-vimdocs", event = "BufReadPre" })
+    use({ "milisims/nvim-luaref", event = "BufReadPre" })
 
     -- Better Netrw
     use({ "tpope/vim-vinegar" })
@@ -812,7 +817,7 @@ function M.setup()
       config = function()
         require("config.package").setup()
       end,
-      disable = true,
+      disable = false,
     })
 
     use({
@@ -832,6 +837,8 @@ function M.setup()
         require("config.autosession").setup()
       end,
     })
+
+    use({ "tpope/vim-obsession", cmd = { "Obsess" } })
 
     -- Bootstrap Neovim
     if packer_bootstrap then

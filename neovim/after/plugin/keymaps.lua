@@ -6,16 +6,10 @@ local expr_opts = { noremap = true, expr = true, silent = true }
 keymap("i", "jk", "<ESC>", default_opts)
 keymap("t", "jk", "<C-\\><C-n>", default_opts)
 
--- keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", default_opts)
--- keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", default_opts)
--- keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", default_opts)
--- keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", default_opts)
-
--- Better window navigation
-keymap("n", "<C-h>", "<cmd>lua require'smart-splits'.move_cursor_left()<cr>", default_opts)
-keymap("n", "<C-j>", "<cmd>lua require'smart-splits'.move_cursor_down()<cr>", default_opts)
-keymap("n", "<C-k>", "<cmd>lua require'smart-splits'.move_cursor_up()<cr>", default_opts)
-keymap("n", "<C-l>", "<cmd>lua require'smart-splits'.move_cursor_right()<cr>", default_opts)
+keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", default_opts)
+keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", default_opts)
+keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", default_opts)
+keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", default_opts)
 
 -- Center search results
 keymap("n", "n", "nzz", default_opts)
@@ -24,6 +18,11 @@ keymap("n", "N", "Nzz", default_opts)
 -- Visual line wraps
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", expr_opts)
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
+
+-- -- Always center
+-- keymap("n", "k", "kzz", default_opts)
+-- keymap("n", "j", "jzz", default_opts)
+-- keymap("n", "G", "Gzz", default_opts)
 
 -- Better indent
 keymap("v", "<", "<gv", default_opts)
