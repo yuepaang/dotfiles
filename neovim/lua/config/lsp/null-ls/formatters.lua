@@ -6,7 +6,7 @@ local nls_sources = require("null-ls.sources")
 
 local method = require("null-ls").methods.FORMATTING
 
-M.autoformat = true
+M.autoformat = false
 
 function M.toggle()
   M.autoformat = not M.autoformat

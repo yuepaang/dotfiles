@@ -6,3 +6,4 @@ typeshed/
 packer_compiled.lua
 .luarc.json
 compiled.lua
+__pycache__

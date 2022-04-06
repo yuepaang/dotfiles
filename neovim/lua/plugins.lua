@@ -20,6 +20,9 @@ function M.setup()
     },
     git = {
       clone_timeout = 300,
+      subcommands = {
+        update = "pull --ff-only --progress --rebase=true",
+      },
     },
     auto_clean = true,
     compile_on_sync = true,
@@ -528,6 +531,14 @@ function M.setup()
         "honza/vim-snippets",
       },
       disable = not PLUGINS.nvim_cmp.enabled,
+    })
+
+    use({
+      "simrat39/symbols-outline.nvim",
+      cmd = "SymbolsOutline",
+      setup = function()
+        require("config.symbols-outline").setup()
+      end,
     })
 
     -- Auto pairs

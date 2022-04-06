@@ -33,6 +33,7 @@ local function keymappings(client, bufnr)
       L = { "<cmd>lua vim.lsp.codelens.refresh()<CR>", "Refresh CodeLens" },
       l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "Run CodeLens" },
       h = { "<cmd>lua vim.diagnostic.hide()<CR>", "Hide Diagnostics" },
+      S = { "<cmd>SymbolsOutline<CR>", "List Symbols Outline" },
     },
   }
   if client.resolved_capabilities.document_formatting then
