@@ -202,6 +202,15 @@ function config.nvim_cmp()
 			end,
 		},
 	})
+	cmp.setup.filetype("TelescopePrompt", {
+		sources = cmp.config.sources({ { name = "path" } }),
+	})
+
+	cmp.setup.cmdline("/", {
+		sources = {
+			{ name = "buffer" },
+		},
+	})
 end
 
 function config.luasnip()

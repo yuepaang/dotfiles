@@ -107,12 +107,7 @@ function plugins.convert_compile_file()
 	file:close()
 
 	os.remove(packer_compiled)
-end
-
-function plugins.magic_compile()
-	plugins.compile()
-	plugins.convert_compile_file()
-	vim.notify("compiling lua file finished")
+	vim.notify("`compiled.lua` Generated")
 end
 
 function plugins.auto_compile()
@@ -130,12 +125,13 @@ function plugins.load_compile()
 	else
 		assert("Missing packer compile file Run PackerCompile Or PackerInstall to fix")
 	end
-	vim.cmd([[command! PackerCompile lua require('core.pack').magic_compile()]])
+	vim.cmd([[command! PackerCompile lua require('core.pack').compile()]])
 	vim.cmd([[command! PackerInstall lua require('core.pack').install()]])
 	vim.cmd([[command! PackerUpdate lua require('core.pack').update()]])
 	vim.cmd([[command! PackerSync lua require('core.pack').sync()]])
 	vim.cmd([[command! PackerClean lua require('core.pack').clean()]])
-	vim.cmd([[autocmd User PackerComplete lua require('core.pack').magic_compile()]])
+	vim.cmd([[autocmd User PackerComplete lua require('core.pack').compile()]])
+	vim.cmd([[autocmd User PackerCompileDone lua require('core.pack').convert_compile_file()]])
 	vim.cmd([[command! PackerStatus  lua require('packer').status()]])
 	vim.cmd(
 		[[command! -bang -nargs=+ -complete=customlist,v:lua.require'packer'.loader_complete PackerLoad lua require('packer').loader(<f-args>, '<bang>' == '!')]]

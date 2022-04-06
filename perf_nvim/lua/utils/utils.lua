@@ -41,4 +41,12 @@ utils.wrap2 = function(str, limit)
 	return wrapped_msg
 end
 
+utils.remove_cached_package = function(module)
+	for name, _ in pairs(package.loaded) do
+		if name:match(module) then
+			package.loaded[name] = nil
+		end
+	end
+end
+
 return utils

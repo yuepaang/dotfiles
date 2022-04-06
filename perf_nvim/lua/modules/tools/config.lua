@@ -48,8 +48,8 @@ function config.telescope()
 			},
 			default_mappings = {
 				i = {
-					["<C-n>"] = actions.move_selection_next,
-					["<C-p>"] = actions.move_selection_previous,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-k>"] = actions.move_selection_previous,
 
 					-- ["<C-c>"] = actions.close,
 
@@ -61,11 +61,11 @@ function config.telescope()
 					["<C-v>"] = actions.select_vertical,
 					["<C-t>"] = actions.select_tab,
 
-					["<C-u>"] = actions.preview_scrolling_up,
-					["<C-d>"] = actions.preview_scrolling_down,
+					["<UP>"] = actions.preview_scrolling_up,
+					["<DOWN>"] = actions.preview_scrolling_down,
 
-					["<C-b>"] = actions.results_scrolling_up,
-					["<C-f>"] = actions.results_scrolling_down,
+					["<C-u>"] = actions.results_scrolling_up,
+					["<C-d>"] = actions.results_scrolling_down,
 
 					["<Tab>"] = actions_layout.toggle_preview,
 					-- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
@@ -88,11 +88,11 @@ function config.telescope()
 					["v"] = actions.select_vertical,
 					["t"] = actions.select_tab,
 
-					["<C-u>"] = actions.preview_scrolling_up,
-					["<C-d>"] = actions.preview_scrolling_down,
+					["<UP>"] = actions.preview_scrolling_up,
+					["<DOWN>"] = actions.preview_scrolling_down,
 
-					["<C-b>"] = actions.results_scrolling_up,
-					["<C-f>"] = actions.results_scrolling_down,
+					["<C-u>"] = actions.results_scrolling_up,
+					["<C-d>"] = actions.results_scrolling_down,
 
 					["<Tab>"] = actions_layout.toggle_preview,
 					-- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
