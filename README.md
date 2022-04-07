@@ -1,1 +1,1 @@
-# DotFiles of PY.
+# PY's dotfiles.
