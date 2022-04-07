@@ -82,6 +82,8 @@ local function load_options()
     listchars      = "tab:»·,nbsp:+,trail:·,extends:→,precedes:←";
     pumblend       = 0;
     winblend       = 10;
+	number         = true;
+	relativenumber = true;
   }
 
   local bw_local  = {
