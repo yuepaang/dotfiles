@@ -54,6 +54,20 @@ local set_leader_map = function()
     vim.g.mapleader = " "
 end
 
+local set_keymap = function()
+    local keymap = vim.api.nvim_set_keymap
+    local default_opts = { noremap = true, silent = true }
+    -- Better indent
+    keymap("v", "<", "<gv", default_opts)
+    keymap("v", ">", ">gv", default_opts)
+
+    -- Cancel search highlighting with ESC
+    keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", default_opts)
+
+    -- Paste over currently selected text without yanking it
+    keymap("v", "p", '"_dP', default_opts)
+end
+
 local set_colorscheme = function()
     vim.cmd([[colorscheme gruvbox]])
 end
@@ -62,6 +76,7 @@ local function load_nvim_config()
     createdir()
     disable_distribution_plugins()
     set_leader_map()
+    set_keymap()
 
     pack.ensure_plugins()
     pack.load_compile()

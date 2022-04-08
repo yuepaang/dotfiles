@@ -23,7 +23,7 @@ function autocmd.load_autocmds()
             {
                 "WinEnter,BufEnter,InsertLeave",
                 "*",
-                [[if ! &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal cursorline | endif]],
+				[[if ! &cursorline && &filetype !~# '^\(dashboard\|clap_\)' && ! &pvw | setlocal cursorline | endif]],
             },
             {
                 "WinLeave,BufLeave,InsertEnter",
@@ -45,6 +45,19 @@ function autocmd.load_autocmds()
 
         yank = {
             { "TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]] },
+        },
+
+        nonewline = {
+            -- don't auto comment new line
+            { "BufEnter", [[set formatoptions-=cro]] },
+        },
+
+        oldlocations = {
+            {
+                "BufReadPost",
+                "*",
+                [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]],
+            },
         },
     }
 
