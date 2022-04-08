@@ -75,4 +75,10 @@ editor["max397574/better-escape.nvim"] = {
 	end,
 }
 
+editor["ggandor/lightspeed.nvim"] = {
+	requires = { 'tpope/vim-repeat' },
+	config = conf.lightspeed,
+	event = 'BufRead',
+}
+
 return editor

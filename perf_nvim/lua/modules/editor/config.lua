@@ -170,4 +170,8 @@ function config.hop()
 	require("hop").setup()
 end
 
+function config.lightspeend()
+	require("lightspeend").setup({ ignore_case = true })
+end
+
 return config
