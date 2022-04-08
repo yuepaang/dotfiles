@@ -78,7 +78,7 @@ ui["j-hui/fidget.nvim"] = {
 }
 
 ui["antoinemadec/FixCursorHold.nvim"] = {
-    event = "BufRead",
+    event = { "BufRead", "BufNewFile" },
     config = function()
         vim.g.cursorhold_updatetime = 100
     end,

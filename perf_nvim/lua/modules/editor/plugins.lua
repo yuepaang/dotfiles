@@ -17,6 +17,10 @@ editor["phaazon/hop.nvim"] = {
     config = conf.hop,
 }
 
+editor["tpope/vim-surround"] = {
+    event = "InsertEnter",
+}
+
 editor["andymass/vim-matchup"] = {
     opt = true,
     setup = function()
@@ -77,6 +81,7 @@ editor["max397574/better-escape.nvim"] = {
 
 editor["ggandor/lightspeed.nvim"] = {
     requires = { "tpope/vim-repeat" },
+    keys = { "s", "S", "f", "F", "t", "T" },
     config = conf.lightspeed,
     event = "BufRead",
 }
