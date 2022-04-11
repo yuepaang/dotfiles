@@ -23,6 +23,12 @@ plug_map.normal = {
                 :with_silent()
                 :with_label("Enhanced NvimTree Toggle")
         ),
+        w = bind.convert_wk_format(
+            map_cr("lua require'nvim-tree.actions.reloaders'.reload_explorer()")
+                :with_noremap()
+                :with_silent()
+                :with_label("NvimTree Refresh")
+        ),
         u = bind.convert_wk_format(
             map_cr("lua ('extend.misc').gotests('func')")
                 :with_noremap()
