@@ -1,7 +1,11 @@
 local config = {}
 
 function config.telescope()
-    require("utils.defer").load_immediately({ "telescope-fzy-native.nvim", "telescope-file-browser.nvim" })
+    require("utils.defer").load_immediately({
+        "telescope-fzy-native.nvim",
+        "telescope-file-browser.nvim",
+        "nvim-neoclip.lua",
+    })
 
     local actions = require("telescope.actions")
     local actions_layout = require("telescope.actions.layout")
@@ -12,7 +16,7 @@ function config.telescope()
             prompt_prefix = "",
             selection_caret = " ",
             sorting_strategy = "ascending",
-            scroll_strategy = "limit",
+            scroll_strategy = "cycle",
             set_env = { ["COLORTERM"] = "truecolor" },
             path_display = {
                 shorten = { len = 2, exclude = { -2, -1 } },
@@ -123,6 +127,7 @@ function config.telescope()
     require("telescope").load_extension("file_browser")
     require("telescope").load_extension("todo-comments")
     require("telescope").load_extension("projects")
+	require('telescope').load_extension('neoclip')
 end
 
 function config.nvim_tree()

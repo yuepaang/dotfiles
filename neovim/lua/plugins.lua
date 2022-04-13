@@ -468,9 +468,14 @@ function M.setup()
     -- User interface
     use({
       "stevearc/dressing.nvim",
-      event = "BufWinEnter",
+      event = "BufReadPre",
       config = function()
-        require("config.dressing").setup()
+        require("config.dressing").setup({
+          input = { relative = "editor" },
+          select = {
+            backend = { "telescope", "fzf", "builtin" },
+          },
+        })
       end,
       disable = false,
     })
@@ -828,7 +833,7 @@ function M.setup()
       config = function()
         require("config.package").setup()
       end,
-      disable = false,
+      disable = true,
     })
 
     use({
@@ -838,15 +843,32 @@ function M.setup()
       disable = true,
     })
 
+    -- Session
+    -- use({
+    --   "rmagatti/auto-session",
+    --   opt = true,
+    --   cmd = { "SaveSession", "RestoreSession" },
+    --   requires = { "rmagatti/session-lens" },
+    --   wants = { "telescope.nvim", "session-lens" },
+    --   config = function()
+    --     require("config.autosession").setup()
+    --   end,
+    -- })
     use({
-      "rmagatti/auto-session",
-      opt = true,
-      cmd = { "SaveSession", "RestoreSession" },
-      requires = { "rmagatti/session-lens" },
-      wants = { "telescope.nvim", "session-lens" },
+      "jedrzejboczar/possession.nvim",
       config = function()
-        require("config.autosession").setup()
+        require("config.possession").setup()
       end,
+      cmd = { "PossessionSave", "PosessionLoad", "PosessionShow", "PossessionList" },
+      disable = true,
+    })
+    use({
+      "tpope/vim-obsession",
+      cmd = { "Obsess" },
+      config = function()
+        require("config.obsession").setup()
+      end,
+      disable = true,
     })
 
     use({ "tpope/vim-obsession", cmd = { "Obsess" } })

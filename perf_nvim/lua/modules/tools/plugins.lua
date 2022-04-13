@@ -8,7 +8,7 @@ tools["dstein64/vim-startuptime"] = {
 tools["nvim-telescope/telescope.nvim"] = {
     opt = true,
     setup = function()
-        require("utils.defer").add("telescope.nvim", 80)
+        require("utils.defer").add("telescope.nvim", 70)
     end,
     config = conf.telescope,
     requires = {
@@ -120,5 +120,12 @@ tools["rcarriga/nvim-notify"] = {
 }
 
 tools["wakatime/vim-wakatime"] = {}
+
+tools["tami5/sqlite.lua"] = {
+    opt = true,
+    setup = function()
+        require("utils.defer").add("sqlite.lua", 90)
+    end,
+}
 
 return tools
