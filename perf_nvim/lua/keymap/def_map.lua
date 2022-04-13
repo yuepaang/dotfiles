@@ -26,6 +26,8 @@ def_map.normal = {
     ["<C-u>"] = bind.convert_wk_format(
         map_cr("lua require('extend.scroll').scroll_up()"):with_noremap():with_silent():with_label("Smooth Scroll Up")
     ),
+    ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy")),
+    ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Change Without Copy")),
 }
 
 def_map.insert = {
@@ -82,6 +84,8 @@ def_map.visual = {
             :with_label("Smooth Scroll Up")
             :with_mode("x")
     ),
+    ["x"] = bind.convert_wk_format(map_cmd('"_d'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
+    ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Cut Without Copy"):with_mode("x")),
 }
 
 return def_map
