@@ -86,7 +86,7 @@ editor["ggandor/lightspeed.nvim"] = {
     event = "BufRead",
 }
 
-editor["cinuor/nvim-neoclip.lua"] = {
+editor["AckslD/nvim-neoclip.lua"] = {
     opt = true,
     setup = function()
         require("utils.defer").add("nvim-neoclip.lua", 80)
