@@ -305,7 +305,7 @@ plug_map.normal = {
         map_cu("BufferCloseBuffersRight"):with_noremap():with_silent():with_label("Close All Buffers Right")
     ),
     ["<S-i>"] = bind.convert_wk_format(map_cu("BufferPin"):with_noremap():with_silent():with_label("Pin Buffer")),
-    ["<S-p>"] = bind.convert_wk_format(map_cu("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
+    ["<S-o>"] = bind.convert_wk_format(map_cu("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
     ["<S-s>"] = bind.convert_wk_format(
         map_cu("BufferOrderByBufferNumber"):with_noremap():with_silent():with_label("Sort Buffer")
     ),
