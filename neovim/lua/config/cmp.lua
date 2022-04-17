@@ -131,9 +131,11 @@ function M.setup()
       -- { name = "emoji" },
       -- { name = "calc" },
     },
-    documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-      winhighlight = "NormalFloat:NormalFloat,FloatBorder:TelescopeBorder",
+    window = {
+      documentation = {
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        winhighlight = "NormalFloat:NormalFloat,FloatBorder:TelescopeBorder",
+      },
     },
   })
 
