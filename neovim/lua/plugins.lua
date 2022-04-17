@@ -871,8 +871,6 @@ function M.setup()
       disable = true,
     })
 
-    use({ "tpope/vim-obsession", cmd = { "Obsess" } })
-
     -- Bootstrap Neovim
     if packer_bootstrap then
       print("Restart Neovim required after installation!")
