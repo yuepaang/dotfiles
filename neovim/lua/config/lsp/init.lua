@@ -33,7 +33,7 @@ local servers = {
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = { "vim" },
+          globals = { "vim", "PLUGINS" },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
@@ -41,7 +41,11 @@ local servers = {
             [vim.fn.expand("$VIMRUNTIME/lua")] = true,
             [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
           },
+          maxPreload = 2000,
+          preloadFileSize = 50000,
         },
+        completion = { callSnippet = "Both" },
+        telemetry = { enable = false },
       },
     },
   },

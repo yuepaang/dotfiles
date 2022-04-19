@@ -2,6 +2,7 @@ local M = {}
 
 local snippets_folder = vim.fn.stdpath("config") .. "/lua/config/snip/snippets/"
 local ls = require("luasnip")
+-- local f = ls.function_node
 
 -- function _G.edit_ft()
 --   -- returns table like {"lua", "all"}
@@ -55,18 +56,19 @@ function M.setup()
     --     },
     --   },
     -- },
-    -- ext_opts = {
-    --   [types.choiceNode] = {
-    --     active = {
-    --       virt_text = { { "●", "GruvboxOrange" } },
-    --     },
-    --   },
-    --   [types.insertNode] = {
-    --     active = {
-    --       virt_text = { { "●", "GruvboxBlue" } },
-    --     },
-    --   },
-    -- },
+    store_selection_keys = "<C-q>",
+    ext_opts = {
+      [types.choiceNode] = {
+        active = {
+          virt_text = { { "●", "GruvboxOrange" } },
+        },
+      },
+      [types.insertNode] = {
+        active = {
+          virt_text = { { "●", "GruvboxBlue" } },
+        },
+      },
+    },
   })
 
   -- _G.snippets_clear()
