@@ -4,8 +4,9 @@ local utils = require "core.utils"
 local colorscheme = utils.user_plugin_opts "colorscheme"
 
 local set = vim.opt
+local g = vim.g
 
-vim.cmd(string.format("colorscheme %s", colorscheme))
+vim.api.nvim_command(("colorscheme %s"):format(colorscheme))
 
 set.fileencoding = "utf-8" -- File content encoding for the buffer
 set.spelllang = "en" -- Support US english
@@ -46,11 +47,7 @@ set.timeoutlen = 300 -- Length of time to wait for a mapped sequence
 set.updatetime = 300 -- Length of time to wait before triggering the plugin
 set.fillchars = { eob = " " } -- Disable `~` on nonexistent lines
 
--- Copilot
-vim.cmd([[
-    imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
-    let g:copilot_no_tab_map = v:true
-    let g:copilot_assume_mapped = v:true
-    let g:copilot_tab_fallback = ""
-]])
+g.do_filetype_lua = 1 -- use filetype.lua
+g.did_load_filetypes = 0 -- don't use filetype.vim
+
 return M
