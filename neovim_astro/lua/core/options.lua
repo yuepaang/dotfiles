@@ -50,4 +50,13 @@ set.fillchars = { eob = " " } -- Disable `~` on nonexistent lines
 g.do_filetype_lua = 1 -- use filetype.lua
 g.did_load_filetypes = 0 -- don't use filetype.vim
 
+-- Copilot
+vim.cmd([[
+    imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+    let g:copilot_no_tab_map = v:true
+    let g:copilot_assume_mapped = v:true
+    let g:copilot_tab_fallback = ""
+]])
+
+
 return M
