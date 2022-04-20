@@ -7,6 +7,7 @@ function M.config()
     if user_settings.vscode_snippet_paths ~= nil then
       loader.lazy_load { paths = user_settings.vscode_snippet_paths }
     end
+    loader.lazy_load {paths = "snippets/python"}
     loader.lazy_load()
   end
 end
