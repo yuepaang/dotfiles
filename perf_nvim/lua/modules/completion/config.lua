@@ -31,6 +31,22 @@ function config.nvim_lsp_installer()
 					diagnostics = {
 						globals = { "vim", "PLUGINS" },
 					},
+					workspace = {
+						library = {
+							[vim.fn.expand "$VIMRUNTIME/lua"] = true,
+							[vim.fn.stdpath "config" .. "/lua"] = true,
+						},
+					},
+				},
+			}
+		end
+
+		if server.name == "pyright" then
+			opts.settings = {
+				python = {
+					analysis = {
+						typeCheckingMode = "off",
+					},
 				},
 			}
 		end
