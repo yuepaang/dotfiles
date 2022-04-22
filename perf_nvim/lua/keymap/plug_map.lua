@@ -15,14 +15,17 @@ plug_map.raw = {
 }
 
 plug_map.normal = {
-    ["t"] = {
-        name = "Tree,Gotests,Translate",
-        t = bind.convert_wk_format(
+	["<leader>"] = {
+		name = "leader",
+        e = bind.convert_wk_format(
             map_cr("lua require('extend.tree').toggle()")
                 :with_noremap()
                 :with_silent()
                 :with_label("Enhanced NvimTree Toggle")
         ),
+	},
+    ["t"] = {
+        name = "Gotests,Translate",
         w = bind.convert_wk_format(
             map_cr("lua require'nvim-tree.actions.reloaders'.reload_explorer()")
                 :with_noremap()

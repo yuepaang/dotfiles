@@ -34,6 +34,7 @@ local cmp = {
     Null = "ﳠ",
     Parameter = "",
     Associated = "",
+	Robot = "ﮧ",
 }
 
 local diagnostics = {
