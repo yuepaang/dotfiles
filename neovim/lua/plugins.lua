@@ -102,6 +102,13 @@ function M.setup()
 
 		-- Colorscheme
 		use({
+			"rebelot/kanagawa.nvim",
+			config = function()
+				vim.cmd("colorscheme kanagawa")
+			end,
+			disable = false,
+		})
+		use({
 			"folke/tokyonight.nvim",
 			config = function()
 				vim.cmd("colorscheme tokyonight")
@@ -115,7 +122,7 @@ function M.setup()
 				vim.g.everforest_better_performance = 1
 				vim.cmd("colorscheme everforest")
 			end,
-			disable = false,
+			disable = true,
 		})
 
 		use({
