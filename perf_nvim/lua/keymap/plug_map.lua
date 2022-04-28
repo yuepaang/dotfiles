@@ -15,15 +15,15 @@ plug_map.raw = {
 }
 
 plug_map.normal = {
-	["<leader>"] = {
-		name = "leader",
+    ["<leader>"] = {
+        name = "leader",
         e = bind.convert_wk_format(
             map_cr("lua require('extend.tree').toggle()")
                 :with_noremap()
                 :with_silent()
                 :with_label("Enhanced NvimTree Toggle")
         ),
-	},
+    },
     ["t"] = {
         name = "Gotests,Translate",
         w = bind.convert_wk_format(
@@ -184,7 +184,7 @@ plug_map.normal = {
     ["<leader>c"] = {
         name = "Comment",
         c = bind.convert_wk_format(
-            map_cr('lua require("Comment.api").toggle_current_linewise()')
+            map_cmd("<Plug>(comment_toggle_current_linewise)")
                 :with_noremap()
                 :with_silent()
                 :with_label("Comment Current Line")
@@ -242,53 +242,33 @@ plug_map.normal = {
     },
 
     ["<F7>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_continue()<CR>")
-            :with_noremap()
-            :with_label("Start Or Continue Debug")
+        map_cu("DapContinue"):with_noremap():with_silent():with_label("Start Or Continue Debug")
     ),
     ["<S-F7>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_stop()<CR>")
-            :with_noremap()
-            :with_label("Stop Debugging, Shortcut: Shift + F7")
+        map_cu("DapTerminate"):with_noremap():with_silent():with_label("Stop Debugging, Shortcut: Shift + F7")
     ),
     ["<F8>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_pause()<CR>"):with_noremap():with_label("Pause Debug")
+        map_cr("lua require('extend.dap').debug_pause()"):with_noremap():with_silent():with_label("Pause Debug")
     ),
     ["<S-F8>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_restart()<CR>"):with_noremap():with_label("Restart Debug")
+        map_cr("lua require('extend.dap').debug_restart()"):with_noremap():with_silent():with_label("Restart Debug")
     ),
     ["<F9>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_toggle()<CR>")
-            :with_noremap()
-            :with_silent()
-            :with_label("Toggle Breakpoint")
+        map_cu("DapToggleBreakpoint"):with_noremap():with_silent():with_label("Toggle Breakpoint")
     ),
-    ["<F10>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_step_over()<CR>")
-            :with_noremap()
-            :with_silent()
-            :with_label("Step Over")
-    ),
-    ["<F11>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_step_into()<CR>")
-            :with_noremap()
-            :with_silent()
-            :with_label("Step Into")
-    ),
+    ["<F10>"] = bind.convert_wk_format(map_cu("DapStepOver"):with_noremap():with_silent():with_label("Step Over")),
+    ["<F11>"] = bind.convert_wk_format(map_cu("DapStepInto"):with_noremap():with_silent():with_label("Step Into")),
     ["<S-F11>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_step_out()<CR>")
-            :with_noremap()
-            :with_silent()
-            :with_label("Step Out, Shortcut: Shift + F11")
+        map_cu("DapStepOut"):with_noremap():with_silent():with_label("Step Out, Shortcut: Shift + F11")
     ),
     ["<F12>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_run_to_cursor()<CR>")
+        map_cr("lua require('extend.dap').debug_run_to_cursor()")
             :with_noremap()
             :with_silent()
             :with_label("Run To Cursor")
     ),
     ["<S-F12>"] = bind.convert_wk_format(
-        map_cmd("<cmd>lua require('extend.dap').debug_run_last()<CR>")
+        map_cr("lua require('extend.dap').debug_run_last()")
             :with_noremap()
             :with_silent()
             :with_label("Run To Last, Shortcut: Shift + F12")
@@ -297,9 +277,18 @@ plug_map.normal = {
     ["<S-h>"] = bind.convert_wk_format(
         map_cu("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")
     ),
+    ["<A-h>"] = bind.convert_wk_format(
+        map_cu("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")
+    ),
     ["<S-l>"] = bind.convert_wk_format(map_cu("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
+    ["<A-l>"] = bind.convert_wk_format(
+        map_cu("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")
+    ),
     ["<S-n>"] = bind.convert_wk_format(
-        map_cu("BufferClose"):with_noremap():with_silent():with_label("Close Current Buffer")
+        map_cr("lua require('extend.misc').enhanced_buffer_close()")
+            :with_noremap()
+            :with_silent()
+            :with_label("Close Current Buffer")
     ),
     ["<S-b>"] = bind.convert_wk_format(
         map_cu("BufferCloseBuffersLeft"):with_noremap():with_silent():with_label("Close All Buffers Left")
@@ -310,7 +299,7 @@ plug_map.normal = {
     ["<S-i>"] = bind.convert_wk_format(map_cu("BufferPin"):with_noremap():with_silent():with_label("Pin Buffer")),
     ["<S-o>"] = bind.convert_wk_format(map_cu("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
     ["<S-s>"] = bind.convert_wk_format(
-        map_cu("BufferOrderByBufferNumber"):with_noremap():with_silent():with_label("Sort Buffer")
+        map_cu("BufferOrderByDirectory"):with_noremap():with_silent():with_label("Sort Buffer")
     ),
 
     ["<C-Space>"] = bind.convert_wk_format(map_cr("WhichKey"):with_noremap():with_silent():with_label("Show Keymaps")),
@@ -350,14 +339,14 @@ plug_map.visual = {
     ["<leader>c"] = {
         name = "Comment",
         c = bind.convert_wk_format(
-            map_cu('lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())')
+            map_cmd("<Plug>(comment_toggle_linewise_visual)")
                 :with_noremap()
                 :with_silent()
                 :with_label("Comment Selected Line")
                 :with_mode("v")
         ),
-        b = bind.convert_wk_format(
-            map_cu('lua require("Comment.api").toggle_blockwise_op(vim.fn.visualmode())')
+        v = bind.convert_wk_format(
+            map_cmd("<Plug>(comment_toggle_linewise_visual)")
                 :with_noremap()
                 :with_silent()
                 :with_label("Comment Selected Code Block")

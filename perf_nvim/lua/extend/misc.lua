@@ -1,3 +1,5 @@
+local utils = require("utils.utils")
+
 local misc = {}
 
 misc.safe_exit = function()
@@ -59,6 +61,28 @@ misc.toggle_rnu = function()
         vim.cmd([[:set nornu]])
     else
         vim.cmd([[:set rnu]])
+    end
+end
+
+misc.reload = function()
+    utils.remove_cached_package("^core")
+    require("core")
+    vim.notify("Configuration Reloaded")
+end
+
+misc.enhanced_buffer_close = function()
+    require("utils.defer").load_immediately("barbar.nvim")
+
+    local win_num = vim.api.nvim_win_get_number(0)
+    local filetype = vim.bo.filetype
+    if filetype == "TelescopePrompt" then
+        return
+    end
+
+    if win_num > 2 then
+        vim.cmd([[bdelete!]])
+    else
+        vim.cmd([[BufferClose]])
     end
 end
 

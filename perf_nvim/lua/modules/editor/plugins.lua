@@ -63,7 +63,7 @@ editor["romgrk/barbar.nvim"] = {
     opt = true,
     setup = function()
         require("modules.editor.config").barbar()
-        require("utils.defer").add("barbar.nvim", 90)
+        require("utils.defer").add("barbar.nvim", 100)
     end,
     requires = { "kyazdani42/nvim-web-devicons" },
 }

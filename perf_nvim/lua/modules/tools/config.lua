@@ -13,6 +13,7 @@ function config.telescope()
     require("telescope").setup({
         defaults = {
             initial_mode = "insert",
+            wrap_results = false,
             prompt_prefix = "",
             selection_caret = " ",
             sorting_strategy = "ascending",
@@ -44,8 +45,10 @@ function config.telescope()
                     prompt_position = "top",
                 },
                 vertical = {
-                    width = 0.9,
                     height = 0.9,
+                    width = 0.9,
+                    preview_cutoff = 40,
+                    prompt_position = "top",
                 },
             },
             preview = {
@@ -110,6 +113,7 @@ function config.telescope()
                     -- ["<C-w>"] = { "<c-s-w>", type = "command" },
                 },
             },
+
             extensions = {
                 fzy_native = {
                     override_generic_sorter = true,
@@ -127,16 +131,23 @@ function config.telescope()
     require("telescope").load_extension("file_browser")
     require("telescope").load_extension("todo-comments")
     require("telescope").load_extension("projects")
-	require('telescope').load_extension('neoclip')
+    require("telescope").load_extension("neoclip")
+end
+
+function config.nvim_tree_setup()
+    vim.g.nvim_tree_respect_buf_cwd = 1
+    vim.g.nvim_tree_git_hl = 0
+    vim.g.nvim_tree_highlight_opened_files = 1
+    vim.g.nvim_tree_add_trailing = 1
+    vim.g.nvim_tree_group_empty = 1
+    vim.g.nvim_tree_create_in_closed_folder = 1
 end
 
 function config.nvim_tree()
-    vim.g.nvim_tree_respect_buf_cwd = 1
     local icons = require("utils.icons")
     require("nvim-tree").setup({
         auto_reload_on_write = true,
         disable_netrw = true,
-        hide_root_folder = false,
         hijack_cursor = true,
         hijack_netrw = true,
         hijack_unnamed_buffer_when_opening = false,
@@ -168,10 +179,10 @@ function config.nvim_tree()
             update_cwd = true,
             ignore_list = {},
         },
-        update_to_buf_dir = {
-            enable = true,
-            auto_open = true,
-        },
+        -- update_to_buf_dir   = {
+        --   enable = true,
+        --   auto_open = true,
+        -- },
         diagnostics = {
             enable = true,
             show_on_dirs = true,
@@ -183,6 +194,7 @@ function config.nvim_tree()
             },
         },
         actions = {
+            use_system_clipboard = true,
             change_dir = {
                 enable = true,
                 global = false,
@@ -343,7 +355,7 @@ function config.project()
 end
 
 function config.autosession()
-    vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos"
+    vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,globals"
     require("auto-session").setup({
         log_level = "info",
         auto_session_enable_last_session = false,
