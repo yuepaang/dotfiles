@@ -45,7 +45,7 @@ local function normal_keymap()
       c = { "<cmd>Telescope commands<cr>", "Commands" },
       r = { "<cmd>Telescope file_browser<cr>", "Browser" },
       w = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Current Buffer" },
-      e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+      -- e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     }
 
     keymap_p = {
@@ -214,17 +214,16 @@ local function visual_keymap()
 end
 
 local function code_keymap()
-  -- FIXME: not working in some machines
-  -- if vim.fn.has("nvim-0.7") then
-  --   vim.api.nvim_create_autocmd("FileType", {
-  --     pattern = "*",
-  --     callback = function()
-  --       vim.schedule(CodeRunner)
-  --     end,
-  --   })
-  -- else
-  vim.cmd("autocmd FileType * lua CodeRunner()")
-  -- end
+  if vim.fn.has("nvim-0.7") then
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "*",
+      callback = function()
+        vim.schedule(CodeRunner)
+      end,
+    })
+  else
+    vim.cmd("autocmd FileType * lua CodeRunner()")
+  end
 
   function CodeRunner()
     local bufnr = vim.api.nvim_get_current_buf()
