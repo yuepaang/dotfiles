@@ -3,17 +3,17 @@ local lualine = require("lualine")
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  bg       = '#202328',
-  fg       = '#bbc2cf',
-  yellow   = '#fabd2f',
-  cyan     = '#008080',
-  darkblue = '#081633',
-  green    = '#b8bb26',
-  orange   = '#FE8019',
-  violet   = '#a9a1e1',
-  magenta  = '#d3869b',
-  blue     = '#83a598',
-  red      = '#fb4934',
+    bg = '#202328',
+    fg = '#bbc2cf',
+    yellow = '#fabd2f',
+    cyan = '#008080',
+    darkblue = '#081633',
+    green = '#b8bb26',
+    orange = '#FE8019',
+    violet = '#a9a1e1',
+    magenta = '#d3869b',
+    blue = '#83a598',
+    red = '#fb4934'
 }
 
 local conditions = {
@@ -27,13 +27,13 @@ local conditions = {
         local filepath = vim.fn.expand("%:p:h")
         local gitdir = vim.fn.finddir(".git", filepath .. ";")
         return gitdir and #gitdir > 0 and #gitdir < #filepath
-    end,
+    end
 }
 
 -- Config
 local config = {
     options = {
-        disabled_filetypes = { "Outline", "NvimTree", "packer" },
+        disabled_filetypes = {"alpha", "Outline", "NvimTree", "packer", "startuptime"},
         -- Disable sections and component separators
         component_separators = "",
         section_separators = "",
@@ -44,15 +44,21 @@ local config = {
             normal = {
                 -- a = { fg = colors.fg, bg = colors.bg },
                 -- b = { fg = colors.fg, bg = colors.bg },
-                c = { fg = colors.fg, bg = colors.bg },
+                c = {
+                    fg = colors.fg,
+                    bg = colors.bg
+                }
             },
             inactive = {
-                x = { fg = colors.fg, bg = colors.bg },
+                x = {
+                    fg = colors.fg,
+                    bg = colors.bg
+                }
                 -- y = { fg = colors.fg, bg = colors.bg },
                 -- z = { fg = colors.fg, bg = colors.bg },
-            },
+            }
         },
-        always_divide_middle = true,
+        always_divide_middle = true
     },
     sections = {
         -- these are to remove the defaults
@@ -61,7 +67,7 @@ local config = {
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = {}
     },
     inactive_sections = {
         -- these are to remove the defaults
@@ -70,9 +76,9 @@ local config = {
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = {}
     },
-    extensions = { "nvim-tree" },
+    extensions = {"nvim-tree"}
 }
 
 local function ins(section, component)
@@ -129,56 +135,93 @@ ins_c({
             rm = colors.cyan,
             ["r?"] = colors.cyan,
             ["!"] = colors.red,
-            t = colors.red,
+            t = colors.red
         }
         vim.api.nvim_command("hi! LualineMode guifg=" .. mode_color[vim.fn.mode()] .. " guibg=" .. colors.bg)
         return ""
     end,
     color = "LualineMode",
-    padding = { left = 0, right = 1 },
+    padding = {
+        left = 0,
+        right = 1
+    }
 })
 
 ins_c({
     "filename",
     file_status = false,
     cond = conditions.buffer_not_empty,
-    color = { fg = colors.green, gui = "bold" },
-    padding = { left = 1, right = 1 },
-    separator = "┃",
+    color = {
+        fg = colors.green,
+        gui = "bold"
+    },
+    padding = {
+        left = 1,
+        right = 1
+    },
+    separator = "┃"
 })
 
 ins_c({
     "diagnostics",
-    sources = { "nvim_lsp" },
-    symbols = { error = " ", warn = " ", info = " " },
-    diagnostics_color = {
-        color_error = { fg = colors.red },
-        color_warn = { fg = colors.yellow },
-        color_info = { fg = colors.cyan },
+    sources = {"nvim_lsp"},
+    symbols = {
+        error = " ",
+        warn = " ",
+        info = " "
     },
-    separator = "┃",
+    diagnostics_color = {
+        color_error = {
+            fg = colors.red
+        },
+        color_warn = {
+            fg = colors.yellow
+        },
+        color_info = {
+            fg = colors.cyan
+        }
+    },
+    separator = "┃"
 })
 
 ins_x({
     "location",
-    padding = { left = 0, right = 0 },
-    color = { fg = colors.fg, gui = "bold" },
-    separator = "-",
+    padding = {
+        left = 0,
+        right = 0
+    },
+    color = {
+        fg = colors.fg,
+        gui = "bold"
+    },
+    separator = "-"
 })
 
 ins_x({
     "progress",
-    padding = { left = 0, right = 1 },
-    color = { fg = colors.fg, gui = "bold" },
-    separator = "-",
+    padding = {
+        left = 0,
+        right = 1
+    },
+    color = {
+        fg = colors.fg,
+        gui = "bold"
+    },
+    separator = "-"
 })
 
 ins_x({
     "filesize",
     cond = conditions.buffer_not_empty,
-    padding = { left = 1, right = 1 },
-    color = { fg = colors.fg, gui = "bold" },
-    separator = "┃",
+    padding = {
+        left = 1,
+        right = 1
+    },
+    color = {
+        fg = colors.fg,
+        gui = "bold"
+    },
+    separator = "┃"
 })
 
 -- Add components to right sections
@@ -186,36 +229,64 @@ ins_x({
     "o:encoding", -- option component same as &encoding in viml
     fmt = string.upper, -- I'm not sure why it's upper case either ;)
     cond = conditions.hide_in_width,
-    color = { fg = colors.green, gui = "bold" },
-    padding = { left = 1, right = 0 },
+    color = {
+        fg = colors.green,
+        gui = "bold"
+    },
+    padding = {
+        left = 1,
+        right = 0
+    }
 })
 
 ins_x({
     "fileformat",
     fmt = string.upper,
     icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-    color = { fg = colors.green, gui = "bold" },
-    padding = { left = 1, right = 1 },
-    separator = "┃",
+    color = {
+        fg = colors.green,
+        gui = "bold"
+    },
+    padding = {
+        left = 1,
+        right = 1
+    },
+    separator = "┃"
 })
 
 ins_x({
     "branch",
     icon = "",
-    color = { fg = colors.violet, gui = "bold" },
-    padding = { left = 1, right = 0 },
+    color = {
+        fg = colors.violet,
+        gui = "bold"
+    },
+    padding = {
+        left = 1,
+        right = 0
+    }
 })
 
 ins_x({
     "diff",
     -- Is it me or the symbol for modified us really weird
-    symbols = { added = " ", modified = "柳", removed = " " },
-    diff_color = {
-        added = { fg = colors.green },
-        modified = { fg = colors.orange },
-        removed = { fg = colors.red },
+    symbols = {
+        added = " ",
+        modified = "柳",
+        removed = " "
     },
-    cond = conditions.hide_in_width,
+    diff_color = {
+        added = {
+            fg = colors.green
+        },
+        modified = {
+            fg = colors.orange
+        },
+        removed = {
+            fg = colors.red
+        }
+    },
+    cond = conditions.hide_in_width
 })
 
 -- Now don't forget to initialize lualine

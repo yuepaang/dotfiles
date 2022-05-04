@@ -9,20 +9,32 @@ function config.todo()
             FIX = {
                 icon = " ", -- icon used for the sign, and in search results
                 color = "error", -- can be a hex color, or a named color (see below)
-                alt = {
-                    "FIXME",
-                    "BUG",
-                    "FIXIT",
-                    "ISSUE",
-                    "ERROR",
-                }, -- a set of other keywords that all map to this FIX keywords
+                alt = {"FIXME", "BUG", "FIXIT", "ISSUE", "ERROR"} -- a set of other keywords that all map to this FIX keywords
                 -- signs = false, -- configure signs for some keywords individually
             },
-            TODO = { icon = " ", color = "info" },
-            HACK = { icon = " ", color = "warning" },
-            WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-            PERF = { icon = " ", color = "default", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-            NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+            TODO = {
+                icon = " ",
+                color = "info"
+            },
+            HACK = {
+                icon = " ",
+                color = "warning"
+            },
+            WARN = {
+                icon = " ",
+                color = "warning",
+                alt = {"WARNING", "XXX"}
+            },
+            PERF = {
+                icon = " ",
+                color = "default",
+                alt = {"OPTIM", "PERFORMANCE", "OPTIMIZE"}
+            },
+            NOTE = {
+                icon = " ",
+                color = "hint",
+                alt = {"INFO"}
+            }
         },
         merge_keywords = true, -- when true, custom keywords will be merged with the defaults
         -- highlighting of the line containing the todo comment
@@ -36,31 +48,25 @@ function config.todo()
             attern = [[.*<(KEYWORDS)\v(\s+\(.*\)|:)+]], -- pattern or table of patterns, used for highlightng (vim regex)
             comments_only = true, -- uses treesitter to match keywords in comments only
             max_line_len = 400, -- ignore lines longer than this
-            exclude = {}, -- list of file types to exclude highlighting
+            exclude = {} -- list of file types to exclude highlighting
         },
         -- list of named colors where we try to extract the guifg from the
         -- list of hilight groups or use the hex color if hl not found as a fallback
         colors = {
-            error = { "#DC2626" },
-            warning = { "#FBBF24" },
-            info = { "#2563EB" },
-            hint = { "#10B981" },
-            default = { "#7C3AED" },
+            error = {"#DC2626"},
+            warning = {"#FBBF24"},
+            info = {"#2563EB"},
+            hint = {"#10B981"},
+            default = {"#7C3AED"}
         },
         search = {
             command = "rg",
-            args = {
-                "--color=never",
-                "--no-heading",
-                "--with-filename",
-                "--line-number",
-                "--column",
-            },
+            args = {"--color=never", "--no-heading", "--with-filename", "--line-number", "--column"},
             -- regex that will be used to match keywords.
             -- don't replace the (KEYWORDS) placeholder
-            pattern = [[\b(KEYWORDS)(\s+\(.*\)|:)+]], -- ripgrep regex
+            pattern = [[\b(KEYWORDS)(\s+\(.*\)|:)+]] -- ripgrep regex
             -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
-        },
+        }
     })
 end
 
@@ -68,7 +74,7 @@ function config.comment()
     require("Comment").setup({
         padding = true,
         sticky = true,
-        ignore = nil,
+        ignore = nil
     })
 end
 
@@ -79,13 +85,17 @@ function config.autopairs()
 
     require("nvim-autopairs").setup({})
     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({
+        map_char = {
+            tex = ""
+        }
+    }))
 end
 
 function config.neoscroll()
     require("neoscroll").setup({
         -- All these keys will be mapped to their corresponding default scrolling animation
-        mappings = { "<C-f>", "<C-b>" },
+        mappings = {"<C-f>", "<C-b>"},
         hide_cursor = false, -- Hide cursor while scrolling
         stop_eof = true, -- Stop at <EOF> when scrolling downwards
         use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
@@ -94,7 +104,7 @@ function config.neoscroll()
         easing_function = nil, -- Default easing function
         pre_hook = nil, -- Function to run before the scrolling animation starts
         post_hook = nil, -- Function to run after the scrolling animation ends
-        performance_mode = false,
+        performance_mode = false
     })
 end
 
@@ -104,7 +114,7 @@ function config.barbar()
         animation = true,
 
         -- Enable/disable auto-hiding the tab bar when there is a single buffer
-        auto_hide = false,
+        auto_hide = true,
 
         -- Enable/disable current/total tabpages indicator (top right corner)
         tabpages = true,
@@ -118,9 +128,7 @@ function config.barbar()
         clickable = true,
 
         -- Excludes buffers from the tabline
-        exclude_ft = {
-            "dap-repl",
-        },
+        exclude_ft = {"alpha", "dap-repl"},
         exclude_name = {},
 
         -- Enable/disable icons
@@ -165,7 +173,7 @@ function config.barbar()
 
         -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
         -- where X is the buffer number. But only a static string is accepted here.
-        no_name_title = nil,
+        no_name_title = nil
     }
 end
 
@@ -174,7 +182,9 @@ function config.hop()
 end
 
 function config.lightspeend()
-    require("lightspeend").setup({ ignore_case = true })
+    require("lightspeend").setup({
+        ignore_case = true
+    })
 end
 
 function config.neoclip()
@@ -200,15 +210,15 @@ function config.neoclip()
             return not all(data.event.regcontents, is_whitespace)
         end,
         preview = true,
-        default_register = { '"', "+", "*" },
+        default_register = {'"', "+", "*"},
         default_register_macros = "z",
         enable_macro_history = false,
         content_spec_column = false,
         on_paste = {
-            set_reg = false,
+            set_reg = false
         },
         on_replay = {
-            set_reg = false,
+            set_reg = false
         },
         keys = {
             telescope = {
@@ -218,7 +228,7 @@ function config.neoclip()
                     paste_behind = "<c-k>",
                     replay = "<c-z>", -- replay a macro
                     delete = "<c-d>", -- delete an entry
-                    custom = {},
+                    custom = {}
                 },
                 n = {
                     select = "<cr>",
@@ -226,10 +236,10 @@ function config.neoclip()
                     paste_behind = "P",
                     replay = "z",
                     delete = "d",
-                    custom = {},
-                },
-            },
-        },
+                    custom = {}
+                }
+            }
+        }
     })
 end
 

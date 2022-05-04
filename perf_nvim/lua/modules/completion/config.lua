@@ -1,12 +1,16 @@
 local config = {}
 
 function config.nvim_lsp_installer()
-    local servers = { "gopls", "pyright", "sumneko_lua" }
-    require("nvim-lsp-installer").setup({})
+    local servers = {"gopls", "pyright", "sumneko_lua"}
+    require("nvim-lsp-installer").setup({
+        automatic_installation = true
+    })
 
     require("utils.defer").load_immediately("cmp-nvim-lsp")
     local icons = require("utils.icons")
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = "rounded"
+    })
     vim.diagnostic.config({
         underline = true,
         signs = true,
@@ -15,16 +19,16 @@ function config.nvim_lsp_installer()
         float = {
             border = "rounded",
             focusable = false,
-            header = { icons.diag.debug_sign .. " Diagnostics:" },
-            source = "always",
+            header = {icons.diag.debug_sign .. " Diagnostics:"},
+            source = "always"
         },
         virtual_text = {
             spacing = 4,
             source = "always",
             severity = {
-                min = vim.diagnostic.severity.HINT,
-            },
-        },
+                min = vim.diagnostic.severity.HINT
+            }
+        }
     })
 
     local diag_icon = icons.diag
@@ -34,7 +38,7 @@ function config.nvim_lsp_installer()
         hint_sign = diag_icon.hint_sign,
         infor_sign = diag_icon.infor_sign,
         debug_sign = diag_icon.debug_sign,
-        use_diagnostic_virtual_text = false,
+        use_diagnostic_virtual_text = false
     })
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -46,7 +50,9 @@ function config.nvim_lsp_installer()
             bind = true, -- This is mandatory, otherwise border config won't get registered.
             hint_enable = false,
             floating_window_above_cur_line = true,
-            handler_opts = { border = "rounded" },
+            handler_opts = {
+                border = "rounded"
+            }
         }, bufnr)
     end
 
@@ -61,15 +67,15 @@ function config.nvim_lsp_installer()
             default_opts.settings = {
                 Lua = {
                     diagnostics = {
-                        globals = { "vim", "PLUGINS" },
+                        globals = {"vim", "PLUGINS"}
                     },
                     workspace = {
                         library = {
                             [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.stdpath("config") .. "/lua"] = true,
-                        },
-                    },
-                },
+                            [vim.fn.stdpath("config") .. "/lua"] = true
+                        }
+                    }
+                }
             }
         end
 
@@ -77,22 +83,22 @@ function config.nvim_lsp_installer()
             default_opts.settings = {
                 python = {
                     analysis = {
-                        typeCheckingMode = "off",
-                    },
-                },
+                        typeCheckingMode = "off"
+                    }
+                }
             }
         end
 
         lspconfig[lsp].setup({
             cmd_env = default_opts.cmd_env,
             on_attach = on_attach,
-            capabilities = capabilities,
+            capabilities = capabilities
         })
     end
 end
 
 function config.nvim_cmp()
-    require("utils.defer").load_immediately({ "LuaSnip", "neogen" })
+    require("utils.defer").load_immediately({"LuaSnip", "neogen"})
 
     local cmp = require("cmp")
     local types = require("cmp.types")
@@ -110,49 +116,66 @@ function config.nvim_cmp()
         snippet = {
             expand = function(args)
                 require("luasnip").lsp_expand(args.body)
-            end,
+            end
         },
         window = {
             completion = cmp.config.window.bordered({
-                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None"
             }),
             documentation = cmp.config.window.bordered({
-                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-            }),
+                winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None"
+            })
         },
-        sources = cmp.config.sources({
-            { name = "luasnip", priority = 100 },
-            { name = "nvim_lsp", priority = 99 },
-            { name = "cmp_tabnine", priority = 98 },
-            { name = "copilot", priority = 97 },
-
-            { name = "buffer", priority = 50 },
-            { name = "path", priority = 49 },
-            {
-                name = "look",
-                keyword_length = 2,
-                option = { convert_case = true, loud = true },
-                priority = 48,
-            },
-        }),
+        sources = cmp.config.sources({{
+            name = "luasnip",
+            priority = 100
+        }, {
+            name = "nvim_lsp",
+            priority = 99
+        }, {
+            name = "cmp_tabnine"
+        }, {
+            name = "copilot"
+        }, {
+            name = "buffer"
+        }, {
+            name = "path"
+        }, {
+            name = "look",
+            keyword_length = 2,
+            option = {
+                convert_case = true,
+                loud = true
+            }
+        }}),
         mapping = cmp.mapping.preset.insert({
             ["<Down>"] = {
-                i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
+                i = cmp.mapping.select_next_item({
+                    behavior = types.cmp.SelectBehavior.Select
+                })
             },
             ["<Up>"] = {
-                i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
+                i = cmp.mapping.select_prev_item({
+                    behavior = types.cmp.SelectBehavior.Select
+                })
             },
             ["<C-n>"] = {
-                i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+                i = cmp.mapping.select_next_item({
+                    behavior = types.cmp.SelectBehavior.Insert
+                })
             },
             ["<C-p>"] = {
-                i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+                i = cmp.mapping.select_prev_item({
+                    behavior = types.cmp.SelectBehavior.Insert
+                })
             },
             ["<CR>"] = {
-                i = cmp.mapping.confirm({ select = true }),
+                i = cmp.mapping.confirm({
+                    select = true
+                })
             },
             ["<C-e>"] = {
-                i = cmp.mapping.abort(),
+                i = cmp.mapping.abort()
             },
             ["<C-k>"] = cmp.mapping(function(fallback)
                 if require("luasnip").jumpable(-1) then
@@ -162,7 +185,7 @@ function config.nvim_cmp()
                 else
                     fallback()
                 end
-            end, { "i", "s" }),
+            end, {"i", "s"}),
             ["<C-j>"] = cmp.mapping(function(fallback)
                 if require("luasnip").expand_or_jumpable() then
                     require("luasnip").expand_or_jump()
@@ -171,31 +194,30 @@ function config.nvim_cmp()
                 else
                     fallback()
                 end
-            end, { "i", "s" }),
+            end, {"i", "s"}),
             ["<C-d>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.scroll_docs(2)
                 else
                     fallback()
                 end
-            end, { "i", "s" }),
+            end, {"i", "s"}),
             ["<C-u>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.scroll_docs(-2)
                 else
                     fallback()
                 end
-            end, { "i", "s" }),
+            end, {"i", "s"})
         }),
         view = {
-            entries = { name = "custom", selection_order = "top_down" },
+            entries = {
+                name = "custom",
+                selection_order = "top_down"
+            }
         },
         formatting = {
-            fields = {
-                cmp.ItemField.Abbr,
-                cmp.ItemField.Kind,
-                cmp.ItemField.Menu,
-            },
+            fields = {cmp.ItemField.Abbr, cmp.ItemField.Kind, cmp.ItemField.Menu},
             format = function(entry, vim_item)
                 local word = vim_item.abbr
                 if string.sub(word, -1, -1) == "~" then
@@ -212,34 +234,44 @@ function config.nvim_cmp()
                     luasnip = "[SNP]",
                     path = "[PATH]",
                     look = "[LOOK]",
-                    copilot = "[AI]",
+                    copilot = "[AI]"
                 })[entry.source.name]
 
                 return vim_item
-            end,
-        },
+            end
+        }
     })
 
     cmp.setup.filetype("TelescopePrompt", {
-        sources = cmp.config.sources({ { name = "path" } }),
+        sources = cmp.config.sources({{
+            name = "path"
+        }})
     })
 
     -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-            { name = "buffer" },
-        },
+        sources = {{
+            name = "buffer"
+        }}
     })
 
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-            { name = "path" },
-        }, {
-            { name = "cmdline" },
+        mapping = cmp.mapping.preset.cmdline({
+            ['<Down>'] = {
+                c = cmp.mapping.select_next_item({
+                    behavior = types.cmp.SelectBehavior.Insert
+                })
+            }
         }),
+        sources = cmp.config.sources({{
+            name = "path"
+        }}, {{
+            name = "cmdline"
+        }}, {{
+            name = 'path'
+        }})
     })
 end
 
@@ -247,14 +279,18 @@ function config.luasnip()
     -- local snippets_folder = vim.fn.stdpath("config") .. "/lua/snippets/"
     -- local ls = require("luasnip")
 
-    require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/python" } })
-    require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/rust" } })
-    require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets/typescript" } })
+    require("luasnip.loaders.from_vscode").lazy_load({
+        paths = {"./snippets/python"}
+    })
+    require("luasnip.loaders.from_vscode").lazy_load({
+        paths = {"./snippets/rust"}
+    })
+    require("luasnip.loaders.from_vscode").lazy_load({
+        paths = {"./snippets/typescript"}
+    })
 
     require("luasnip.loaders.from_vscode").lazy_load({
-        paths = {
-            "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets",
-        },
+        paths = {"~/.local/share/nvim/site/pack/packer/opt/friendly-snippets"}
     })
 end
 
@@ -262,7 +298,7 @@ function config.null_ls()
     local null_ls = require("null-ls")
 
     null_ls.setup({
-        cmd = { "nvim" },
+        cmd = {"nvim"},
         debounce = 250,
         debug = false,
         default_timeout = 5000,
@@ -271,62 +307,41 @@ function config.null_ls()
         log = {
             enable = true,
             level = "warn",
-            use_console = "async",
+            use_console = "async"
         },
         on_attach = nil,
         on_init = nil,
         on_exit = nil,
-        sources = {
-            null_ls.builtins.formatting.prettier,
-            null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
-            null_ls.builtins.formatting.isort,
-            null_ls.builtins.formatting.shfmt,
-            null_ls.builtins.formatting.fixjson,
-            null_ls.builtins.formatting.stylua,
-            -- diagnostics
-            null_ls.builtins.diagnostics.write_good,
-            null_ls.builtins.diagnostics.tsc,
-            -- null_ls.builtins.diagnostics.selene,
-            null_ls.builtins.hover.dictionary,
-        },
-        update_in_insert = false,
+        sources = {null_ls.builtins.formatting.prettier, null_ls.builtins.formatting.black.with({
+            extra_args = {"--fast"}
+        }), null_ls.builtins.formatting.isort, null_ls.builtins.formatting.shfmt, null_ls.builtins.formatting.fixjson,
+                   null_ls.builtins.formatting.stylua, -- diagnostics
+        null_ls.builtins.diagnostics.write_good, null_ls.builtins.diagnostics.tsc,
+        -- null_ls.builtins.diagnostics.selene,
+                   null_ls.builtins.hover.dictionary},
+        update_in_insert = false
     })
 end
 
 function config.neogen()
-    require("neogen").setup({ snippet_engine = "luasnip" })
+    require("neogen").setup({
+        snippet_engine = "luasnip"
+    })
 end
 
-function config.cosmicui()
-    require("cosmic-ui").setup({
-        -- default border to use
-        -- 'single', 'double', 'rounded', 'solid', 'shadow'
-        border_style = "rounded",
-
-        -- rename popup settings
+function config.rename()
+    require('rename').setup({
         rename = {
             border = {
-                highlight = "FloatBorder",
-                style = "single",
-                title = " Rename ",
-                title_align = "left",
-                title_hl = "FloatBorder",
+                highlight = 'FloatBorder',
+                style = 'rounded',
+                title = ' Rename ',
+                title_align = 'left',
+                title_hl = 'FloatBorder'
             },
-            prompt = "➤ ",
-            prompt_hl = "Comment",
-        },
-
-        code_actions = {
-            min_width = nil,
-            border = {
-                bottom_hl = "FloatBorder",
-                highlight = "FloatBorder",
-                style = "single",
-                title = "Code Actions",
-                title_align = "center",
-                title_hl = "FloatBorder",
-            },
-        },
+            prompt = '➤ ',
+            prompt_hl = 'Comment'
+        }
     })
 end
 

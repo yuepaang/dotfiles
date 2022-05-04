@@ -65,9 +65,11 @@ local function load_options()
         scrolloff = 2,
         sidescrolloff = 5,
         foldlevelstart = 99,
+        foldmethod = "expr",
+        foldexpr = "nvim_treesitter#foldexpr()",
         ruler = false,
         list = true,
-        --showtabline    = 2;
+        -- showtabline    = 2;
         winwidth = 30,
         winminwidth = 15,
         pumheight = 15,
@@ -84,8 +86,10 @@ local function load_options()
         pumblend = 0,
         winblend = 0,
         fillchars = "eob: ",
+        lazyredraw = true,
+        synmaxcol = 200,
         number = true,
-        relativenumber = true,
+        relativenumber = true
     }
 
     local bw_local = {
@@ -93,7 +97,7 @@ local function load_options()
         synmaxcol = 2500,
         formatoptions = "1jcroql",
         textwidth = 80,
-        expandtab = false,
+        expandtab = true,
         autoindent = true,
         tabstop = 4,
         shiftwidth = 4,
@@ -101,24 +105,24 @@ local function load_options()
         breakindentopt = "shift:2,min:20",
         wrap = true,
         linebreak = true,
-        colorcolumn = "80",
+        -- colorcolumn = "80",
         foldenable = true,
         signcolumn = "yes",
         conceallevel = 0,
-        concealcursor = "niv",
+        concealcursor = "niv"
     }
 
     vim.g.clipboard = {
         name = "myProvider",
         copy = {
             ["+"] = "clipboard-provider copy",
-            ["*"] = "clipboard-provider copy",
+            ["*"] = "clipboard-provider copy"
         },
         paste = {
             ["+"] = "clipboard-provider paste",
-            ["*"] = "clipboard-provider paste",
+            ["*"] = "clipboard-provider paste"
         },
-        cache_enabled = 0,
+        cache_enabled = 0
     }
 
     if global.is_mac then

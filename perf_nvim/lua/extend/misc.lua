@@ -3,7 +3,7 @@ local utils = require("utils.utils")
 local misc = {}
 
 misc.safe_exit = function()
-    require("utils.defer").load_immediately({ "vim-floaterm", "nvim-tree.lua" })
+    require("utils.defer").load_immediately({"vim-floaterm", "nvim-tree.lua"})
 
     -- close floaterm
     local floatermBufnr = vim.call("floaterm#buflist#gather")
@@ -25,10 +25,11 @@ misc.safe_save = function()
     require("utils.defer").load_immediately("auto-session")
     vim.cmd([[write]])
     require("auto-session").SaveSession()
+    vim.notify("Current Session Saved")
 end
 
 misc.gotests = function(type)
-    require("utils.defer").load_immediately({ "auto-session", "nvim-tree.lua" })
+    require("utils.defer").load_immediately({"auto-session", "nvim-tree.lua"})
 
     if type == "func" then
         require("gotests").fun_test()

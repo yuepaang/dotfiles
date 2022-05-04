@@ -11,6 +11,9 @@ function handler.add(plugin, priority)
 end
 
 local do_load = function()
+    if not packer_plugins['plenary.nvim'].loaded then
+    require("packer").loader('plenary.nvim')
+  end
     table.sort(defer_packages, function(a, b)
         return a.priority > b.priority
     end)
