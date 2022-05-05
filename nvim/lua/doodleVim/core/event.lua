@@ -40,9 +40,9 @@ function autocmd.load_autocmds()
       { "TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]] };
     },
 
-    -- action = {
-    --   { "CursorHold,CursorHoldI", "*", "lua require'nvim-lightbulb'.update_lightbulb()" };
-    -- },
+    action = {
+      { "CursorHold,CursorHoldI", "*", "lua require'nvim-lightbulb'.update_lightbulb()" };
+    },
 
     nonewline = {
       -- don't auto comment new line

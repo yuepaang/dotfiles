@@ -16,10 +16,10 @@ tools['nvim-telescope/telescope.nvim'] = {
   }
 }
 
--- tools['kosayoda/nvim-lightbulb'] = {
---   after = 'telescope.nvim',
---   config = conf.lightbulb
--- }
+tools['kosayoda/nvim-lightbulb'] = {
+  after = 'telescope.nvim',
+  config = conf.lightbulb
+}
 
 tools['kyazdani42/nvim-tree.lua'] = {
   opt = true,
