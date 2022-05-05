@@ -46,25 +46,25 @@ end
 function lsp.lsp_references(opts)
   require('doodleVim.utils.defer').load_immediately('telescope.nvim')
   opts = opts or {}
-  builtin.lsp_references(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
+  builtin.lsp_references(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_definitions(opts)
   require('doodleVim.utils.defer').load_immediately('telescope.nvim')
   opts = opts or {}
-  builtin.lsp_definitions(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
+  builtin.lsp_definitions(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_type_definition(opts)
   require('doodleVim.utils.defer').load_immediately('telescope.nvim')
   opts = opts or {}
-  builtin.lsp_type_definition(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
+  builtin.lsp_type_definition(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_implementations(opts)
   require('doodleVim.utils.defer').load_immediately('telescope.nvim')
   opts = opts or {}
-  builtin.lsp_implementations(vim.tbl_extend("force", opts, {entry_maker = file_and_details_entry()}))
+  builtin.lsp_implementations(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
 end
 
 return lsp

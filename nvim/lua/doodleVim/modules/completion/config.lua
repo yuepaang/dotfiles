@@ -260,7 +260,8 @@ function config.null_ls()
     on_exit = nil,
     sources = {
       null_ls.builtins.formatting.prettier,
-      null_ls.builtins.formatting.black,
+      null_ls.builtins.formatting.black.with { extra_args = { "--fast" } },
+      null_ls.builtins.formatting.isort
     },
     update_in_insert = false,
   })

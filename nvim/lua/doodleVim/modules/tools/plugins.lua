@@ -10,16 +10,16 @@ tools['nvim-telescope/telescope.nvim'] = {
   setup = function() require("doodleVim.utils.defer").add("telescope.nvim", 70) end,
   config = conf.telescope,
   requires = {
-    {'nvim-telescope/telescope-fzy-native.nvim', opt = true},
-    {'nvim-telescope/telescope-file-browser.nvim', opt = true},
-	{'nvim-telescope/telescope-ui-select.nvim', opt = true}
+    { 'nvim-telescope/telescope-fzy-native.nvim', opt = true },
+    { 'nvim-telescope/telescope-file-browser.nvim', opt = true },
+    { 'nvim-telescope/telescope-ui-select.nvim', opt = true }
   }
 }
 
-tools['kosayoda/nvim-lightbulb'] = {
-  after = 'telescope.nvim',
-  config = conf.lightbulb
-}
+-- tools['kosayoda/nvim-lightbulb'] = {
+--   after = 'telescope.nvim',
+--   config = conf.lightbulb
+-- }
 
 tools['kyazdani42/nvim-tree.lua'] = {
   opt = true,
@@ -51,12 +51,12 @@ tools['voldikss/vim-floaterm'] = {
 }
 
 tools['voldikss/vim-translator'] = {
-  cmd = {'TranslateW'},
+  cmd = { 'TranslateW' },
   setup = conf.translator()
 }
 
 tools['jbyuki/venn.nvim'] = {
-  cmd = {'VBox', 'VFill'}
+  cmd = { 'VBox', 'VFill' }
 }
 
 tools['TovarishFin/vim-solidity'] = {
@@ -64,7 +64,7 @@ tools['TovarishFin/vim-solidity'] = {
 }
 
 tools['towolf/vim-helm'] = {
-  ft='helm'
+  ft = 'helm'
 }
 
 tools['nvim-lua/plenary.nvim'] = {
@@ -114,8 +114,8 @@ tools['rcarriga/nvim-notify'] = {
 }
 
 tools['tami5/sqlite.lua'] = {
-	opt = true,
-	setup = function() require("doodleVim.utils.defer").add("sqlite.lua", 90) end,
+  opt = true,
+  setup = function() require("doodleVim.utils.defer").add("sqlite.lua", 90) end,
 }
 
 return tools
