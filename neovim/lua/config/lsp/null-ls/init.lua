@@ -26,6 +26,8 @@ local sources = {
 	b.formatting.black.with({ extra_args = { "--fast" } }),
 	b.formatting.isort,
 	b.formatting.stylua,
+  b.formatting.rustfmt,
+  b.formatting.gofmt,
 	-- with_root_file(b.formatting.stylua, "stylua.toml"),
 
 	-- diagnostics

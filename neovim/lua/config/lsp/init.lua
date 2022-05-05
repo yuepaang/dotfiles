@@ -16,8 +16,16 @@ local servers = {
       ["rust-analyzer"] = {
         cargo = { allFeatures = true },
         checkOnSave = {
+          allFeatures = true,
           command = "clippy",
           extraArgs = { "--no-deps" },
+        },
+        procMacro = {
+          ignored = {
+            ["async-trait"] = { "async_trait" },
+            ["napi-derive"] = { "napi" },
+            ["async-recursion"] = { "async_recursion" },
+          },
         },
       },
     },
@@ -33,7 +41,7 @@ local servers = {
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = { "vim", "PLUGINS" },
+          globals = { "vim", "PLUGINS", "dump" },
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
@@ -44,7 +52,7 @@ local servers = {
           maxPreload = 2000,
           preloadFileSize = 50000,
         },
-        completion = { callSnippet = "Both" },
+        completion = { callSnippet = "Both", enable = true, showWord = "Disable" },
         telemetry = { enable = false },
       },
     },
@@ -78,7 +86,6 @@ local function on_attach(client, bufnr)
 
   -- Configure formatting
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
-
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -92,7 +99,8 @@ local opts = {
   on_attach = on_attach,
   capabilities = capabilities,
   flags = {
-    debounce_text_changes = 150,
+    allow_incremental_sync = true,
+    debounce_text_changes = 200,
   },
 }
 
