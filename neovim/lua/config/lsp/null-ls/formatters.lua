@@ -6,7 +6,7 @@ local nls_sources = require("null-ls.sources")
 
 local method = require("null-ls").methods.FORMATTING
 
-M.autoformat = true
+M.autoformat = false
 
 function M.toggle()
   M.autoformat = not M.autoformat
@@ -19,7 +19,15 @@ end
 
 function M.format()
   if M.autoformat then
-    vim.lsp.buf.formatting_sync(nil, 2000)
+    -- vim.lsp.buf.formatting_sync(nil, 2000)
+    vim.lsp.buf.format({
+      async = true,
+      filter = function(clients)
+        return vim.tbl_filter(function(client)
+          return client.name ~= "tsserver"
+        end, clients)
+      end,
+    })
   end
 end
 

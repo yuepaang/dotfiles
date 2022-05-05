@@ -45,7 +45,7 @@ local function normal_keymap()
       c = { "<cmd>Telescope commands<cr>", "Commands" },
       r = { "<cmd>Telescope file_browser<cr>", "Browser" },
       w = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Current Buffer" },
-      -- e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+      e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     }
 
     keymap_p = {
@@ -63,14 +63,14 @@ local function normal_keymap()
       o = { "<cmd>FzfLua oldfiles<cr>", "Old Files" },
       g = { "<cmd>FzfLua live_grep<cr>", "Live Grep" },
       c = { "<cmd>FzfLua commands<cr>", "Commands" },
-      -- e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+      e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     }
   end
 
   local keymap = {
     ["w"] = { "<cmd>update!<CR>", "Save" },
     ["q"] = { "<cmd>q<CR>", "Quit" },
-    ["h"] = { "<cmd>nohlsearch<CR>", "No highlight search" },
+    -- ["h"] = { "<cmd>nohlsearch<CR>", "No highlight search" },
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     -- ["t"] = { "<cmd>ToggleTerm<CR>", "Terminal" },
 
@@ -79,6 +79,8 @@ local function normal_keymap()
       c = { "<Cmd>BDelete this<Cr>", "Close Buffer" },
       f = { "<Cmd>BDelete! this<Cr>", "Force Close Buffer" },
       D = { "<Cmd>BWipeout other<Cr>", "Delete All Buffers" },
+      b = { "<Cmd>BufferLinePick<Cr>", "Pick a Buffer" },
+      p = { "<Cmd>BufferLinePickClose<Cr>", "Pick & Close a Buffer" },
     },
 
     c = {
@@ -104,6 +106,7 @@ local function normal_keymap()
       m = { "<Cmd>lua require('harpoon.ui').toggle_quick_menu()<Cr>", "UI Menu" },
       c = { "<Cmd>lua require('harpoon.cmd-ui').toggle_quick_menu()<Cr>", "Command Menu" },
     },
+    ["0"] = { "<Cmd>2ToggleTerm<Cr>", "ToggleTerm 2" },
     ["1"] = { "<Cmd>lua require('harpoon.ui').nav_file(1) <Cr>", "File 1" },
     ["2"] = { "<Cmd>lua require('harpoon.ui').nav_file(2) <Cr>", "File 2" },
     ["3"] = { "<Cmd>lua require('harpoon.term').gotoTerminal(1)<Cr>", "Terminal 1" },

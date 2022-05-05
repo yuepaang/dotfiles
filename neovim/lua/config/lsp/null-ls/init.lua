@@ -20,10 +20,7 @@ end
 
 local sources = {
 	-- formatting
-	b.formatting.prettier.with({
-		extra_filetypes = { "toml", "solidity" },
-		extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-	}),
+  b.formatting.prettierd,
 	b.formatting.shfmt,
 	b.formatting.fixjson,
 	b.formatting.black.with({ extra_args = { "--fast" } }),
@@ -43,7 +40,7 @@ local sources = {
 
 	-- code actions
 	b.code_actions.gitsigns,
-	b.code_actions.eslint_d,
+	-- b.code_actions.eslint_d,
 	b.code_actions.gitrebase,
 	b.code_actions.refactoring,
 
