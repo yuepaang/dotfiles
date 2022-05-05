@@ -79,10 +79,6 @@ local function on_attach(client, bufnr)
   -- Configure formatting
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
 
-  -- Configure for Typescript
-  -- if client.name == "tsserver" then
-  --   require("config.lsp.ts-utils").setup(client)
-  -- end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

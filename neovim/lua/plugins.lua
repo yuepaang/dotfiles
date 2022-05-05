@@ -106,14 +106,23 @@ function M.setup()
       config = function()
         vim.cmd("colorscheme kanagawa")
       end,
-      disable = false,
+      disable = true,
     })
+
     use({
       "folke/tokyonight.nvim",
       config = function()
         vim.cmd("colorscheme tokyonight")
       end,
       disable = true,
+    })
+
+    use({
+      "numToStr/Sakura.nvim",
+      config = function()
+        require("Sakura").load()
+      end,
+      disable = false,
     })
 
     use({

@@ -69,6 +69,8 @@ function M.setup(servers, options)
             },
           })
           server:attach_buffers()
+        elseif server.name == "tsserver" then
+          require("typescript").setup({ server = opts })
         else
           server:setup(opts)
         end
