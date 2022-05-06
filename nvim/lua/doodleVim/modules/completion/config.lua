@@ -9,7 +9,36 @@ function config.nvim_lsp_installer()
     }
 
     require('doodleVim.utils.defer').load_immediately('cmp-nvim-lsp')
+
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+    local on_attach = function(_, bufnr)
+        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        require "lsp_signature".on_attach({
+            bind = true, -- This is mandatory, otherwise border config won't get registered.
+            hint_enable = false,
+            floating_window_above_cur_line = true,
+            handler_opts = { border = "rounded" }
+        }, bufnr)
+    end
+
+    local lspconfig = require 'lspconfig'
+    for _, lsp in ipairs(servers) do
+        local server_available, server = require("nvim-lsp-installer.servers").get_server(lsp)
+        if not server_available then
+            server:install()
+        end
+        local default_opts = server:get_default_options()
+        lspconfig[lsp].setup {
+            cmd_env = default_opts.cmd_env,
+            on_attach = on_attach,
+            capabilities = capabilities,
+        }
+    end
+
     local icons = require("doodleVim.utils.icons")
+    -- add border to hover()
     vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
     vim.diagnostic.config({
         underline = true,
@@ -31,6 +60,7 @@ function config.nvim_lsp_installer()
         },
     })
 
+    -- config diagnostics sign
     local diag_icon = icons.diag
     require("doodleVim.extend.diagnostics").setup({
         error_sign = diag_icon.error_sign,
@@ -41,34 +71,18 @@ function config.nvim_lsp_installer()
         use_diagnostic_virtual_text = false,
     })
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+    -- from null-ls to other lsp clients
+    -- @see https://github.com/jose-elias-alvarez/null-ls.nvim/issues/197#issuecomment-922792992
+    local default_exe_handler = vim.lsp.handlers['workspace/executeCommand']
+    vim.lsp.handlers['workspace/executeCommand'] = vim.lsp.with(function(err, result, ctx, config)
+        -- supress NULL_LS error msg
+        local prefix = 'NULL_LS'
 
-    local on_attach = function(_, bufnr)
-        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-        require "lsp_signature".on_attach(
-            {
-                bind = true, -- This is mandatory, otherwise border config won't get registered.
-                hint_enable = false,
-                floating_window_above_cur_line = true,
-                handler_opts = { border = "rounded" }
-            }, bufnr
-        )
-    end
-
-    local lspconfig = require 'lspconfig'
-    for _, lsp in ipairs(servers) do
-        local server_available, server = require("nvim-lsp-installer.servers").get_server(lsp)
-        if not server_available then
-            server:install()
+        if err and ctx.params.command:sub(1, #prefix) == prefix then
+            return
         end
-        local default_opts = server:get_default_options()
-        lspconfig[lsp].setup {
-            cmd_env = default_opts.cmd_env,
-            on_attach = on_attach,
-            capabilities = capabilities,
-        }
-    end
+        return default_exe_handler(err, result, ctx, config)
+    end, { float = { border = "rounded" } })
 end
 
 function config.nvim_cmp()
@@ -263,7 +277,8 @@ function config.null_ls()
         sources = {
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.formatting.black.with { extra_args = { "--fast" } },
-            null_ls.builtins.formatting.isort
+            null_ls.builtins.formatting.isort,
+            null_ls.builtins.code_actions.gitsigns,
         },
         update_in_insert = false,
     })
