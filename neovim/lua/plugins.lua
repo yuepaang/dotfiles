@@ -110,6 +110,14 @@ function M.setup()
     })
 
     use({
+      "rmehri01/onenord.nvim",
+      config = function()
+        require("theme").init()
+      end,
+      disable = false,
+    })
+
+    use({
       "folke/tokyonight.nvim",
       config = function()
         vim.cmd("colorscheme tokyonight")
@@ -122,7 +130,7 @@ function M.setup()
       config = function()
         require("Sakura").load()
       end,
-      disable = false,
+      disable = true,
     })
 
     use({
@@ -321,7 +329,7 @@ function M.setup()
     use({
       "danymat/neogen",
       config = function()
-        require("neogen").setup({})
+        require("neogen").setup({ snippet_engine = "luasnip" })
       end,
       cmd = { "Neogen" },
     })
@@ -439,6 +447,7 @@ function M.setup()
           "trouble.nvim",
           "telescope-dap.nvim",
           "telescope-frecency.nvim",
+          "nvim-neoclip.lua",
         },
         requires = { -- An implementation of the Popup API from vim in Neovim
           "nvim-lua/popup.nvim", -- Useful lua functions used ny lots of plugins
@@ -464,6 +473,15 @@ function M.setup()
             end,
           },
           "nvim-telescope/telescope-dap.nvim",
+          {
+            "AckslD/nvim-neoclip.lua",
+            requires = {
+              { "tami5/sqlite.lua", module = "sqlite" },
+              config = function()
+                require("neoclip").setup()
+              end,
+            },
+          },
         },
       })
     end
