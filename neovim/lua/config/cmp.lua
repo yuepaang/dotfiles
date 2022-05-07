@@ -43,7 +43,16 @@ function M.setup()
   local cmp = require("cmp")
 
   cmp.setup({
-    completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
+    confirmation = {
+      get_commit_characters = function()
+        return {}
+      end,
+    },
+    completion = {
+      completeopt = "menu,menuone,noinsert",
+      keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
+      keyword_length = 1,
+    },
     -- experimental = { native_menu = false, ghost_text = false },
     -- view = {
     --   entries = "native",
@@ -94,7 +103,7 @@ function M.setup()
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-e>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
+      ["<C-q>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
       -- ["<C-e>"] = cmp.mapping(function(fallback)
       --   cmp.mapping.abort()
       --   local copilot_keys = vim.fn["copilot#Accept"]()
@@ -200,6 +209,7 @@ function M.setup()
       -- { name = "emoji" },
       -- { name = "calc" },
     },
+    preselect = cmp.PreselectMode.None,
     window = {
       documentation = {
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
@@ -210,6 +220,7 @@ function M.setup()
 
   -- Use buffer source for `/`
   cmp.setup.cmdline("/", {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = "buffer" },
     },
@@ -217,6 +228,7 @@ function M.setup()
 
   -- Use cmdline & path source for ':'
   cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = "path" },
     }, {
