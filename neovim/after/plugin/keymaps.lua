@@ -11,6 +11,11 @@ keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", default_opts)
 keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", default_opts)
 keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", default_opts)
 
+keymap("n", "<C-h>", "<C-w>h", default_opts)
+keymap("n", "<C-j>", "<C-w>j", default_opts)
+keymap("n", "<C-k>", "<C-w>k", default_opts)
+keymap("n", "<C-l>", "<C-w>l", default_opts)
+
 -- Center search results
 keymap("n", "n", "nzz", default_opts)
 keymap("n", "N", "Nzz", default_opts)
@@ -51,3 +56,7 @@ keymap("n", "<Down>", ":resize +1<CR>", default_opts)
 -- Insert blank line
 keymap("n", "]<Space>", "o<Esc>", default_opts)
 keymap("n", "[<Space>", "O<Esc>", default_opts)
+
+-- Browser search
+keymap("n", "gx", "<Plug>(openbrowser-smart-search)", default_opts)
+keymap("x", "gx", "<Plug>(openbrowser-smart-search)", default_opts)

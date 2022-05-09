@@ -324,14 +324,27 @@ function M.setup()
     })
 
     use({ "google/vim-searchindex", event = "BufReadPre" })
+    use({ "tyru/open-browser.vim", event = "BufReadPre" })
 
     -- Code documentation
     use({
       "danymat/neogen",
       config = function()
-        require("neogen").setup({ snippet_engine = "luasnip" })
+        require("config.neogen").setup()
       end,
       cmd = { "Neogen" },
+      module = "neogen",
+      disable = false,
+    })
+
+    use({
+      "kkoomen/vim-doge",
+      run = ":call doge#install()",
+      config = function()
+        require("config.doge").setup()
+      end,
+      cmd = { "DogeGenerate", "DogeCreateDocStandard" },
+      disable = false,
     })
 
     use({
@@ -448,6 +461,9 @@ function M.setup()
           "telescope-dap.nvim",
           "telescope-frecency.nvim",
           "nvim-neoclip.lua",
+          "telescope-smart-history.nvim",
+          "telescope-arecibo.nvim",
+          "telescope-media-files.nvim",
         },
         requires = { -- An implementation of the Popup API from vim in Neovim
           "nvim-lua/popup.nvim", -- Useful lua functions used ny lots of plugins
@@ -482,6 +498,12 @@ function M.setup()
               end,
             },
           },
+          "nvim-telescope/telescope-smart-history.nvim",
+          {
+            "nvim-telescope/telescope-arecibo.nvim",
+            rocks = { "openssl", "lua-http-parser" },
+          },
+          "nvim-telescope/telescope-media-files.nvim",
         },
       })
     end
@@ -940,6 +962,20 @@ function M.setup()
       end,
       disable = true,
     })
+
+    -- Plugin
+    use({
+      "tpope/vim-scriptease",
+      cmd = {
+        "Messages", --view messages in quickfix list
+        "Verbose", -- view verbose output in preview window.
+        "Time", -- measure how long it takes to run some stuff.
+      },
+      event = "BufReadPre",
+    })
+
+    -- Quickfix
+    use({ "romainl/vim-qf", event = "BufReadPre", disable = true })
 
     -- Bootstrap Neovim
     if packer_bootstrap then
