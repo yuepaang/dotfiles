@@ -36,7 +36,7 @@ local function keymappings(client, bufnr)
       S = { "<cmd>SymbolsOutline<CR>", "List Symbols Outline" },
     },
   }
-  if client.server_capabilities.document_formatting then
+  if client.resolved_capabilities.document_formatting then
     keymap_l.l.F = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Document" }
   end
 
@@ -53,7 +53,7 @@ local function keymappings(client, bufnr)
 end
 
 local function signature_help(client, bufnr)
-  local trigger_chars = client.server_capabilities.signature_help_trigger_characters
+  local trigger_chars = client.resolved_capabilities.signature_help_trigger_characters
   for _, char in ipairs(trigger_chars) do
     vim.keymap.set("i", char, function()
       vim.defer_fn(function()
