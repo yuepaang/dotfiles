@@ -76,6 +76,8 @@ completion["doodleEsc/rename.nvim"] = {
   config = conf.rename,
 }
 
-completion["github/copilot.vim"] = {}
+completion["github/copilot.vim"] = {
+  event = "InsertEnter",
+}
 
 return completion
