@@ -76,8 +76,6 @@ completion["doodleEsc/rename.nvim"] = {
   config = conf.rename,
 }
 
-completion["github/copilot.vim"] = {
-  opt = true,
-}
+completion["github/copilot.vim"] = {}
 
 return completion
