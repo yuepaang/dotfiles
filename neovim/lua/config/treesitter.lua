@@ -1,5 +1,7 @@
 local M = {}
 
+local colors = require("theme").colors
+
 function M.setup()
   require("nvim-treesitter.configs").setup({
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -16,6 +18,21 @@ function M.setup()
       use_languagetree = true,
       disable = { "css" },
       additional_vim_regex_highlighting = true,
+    },
+
+    rainbow = {
+      colors = {
+        colors.red,
+        colors.orange,
+        colors.yellow,
+        colors.green,
+        colors.magenta,
+        colors.cyan,
+        colors.blue,
+      },
+      enable = true,
+      extended_mode = true,
+      max_file_lines = nil,
     },
 
     incremental_selection = {

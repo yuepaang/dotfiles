@@ -409,6 +409,7 @@ function M.setup()
         { "nvim-treesitter/nvim-treesitter-textobjects" },
         "windwp/nvim-ts-autotag",
         "JoosepAlviste/nvim-ts-context-commentstring",
+        "p00f/nvim-ts-rainbow",
       },
     })
 
