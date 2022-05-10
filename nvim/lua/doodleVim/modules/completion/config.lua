@@ -118,7 +118,6 @@ function config.nvim_cmp()
             { name = 'luasnip', priority = 100 },
             { name = 'nvim_lsp', priority = 99 },
             { name = 'cmp_tabnine' },
-            { name = "copilot" },
             { name = 'buffer' },
             { name = 'path' },
             {
@@ -143,9 +142,9 @@ function config.nvim_cmp()
             ['<CR>'] = {
                 i = cmp.mapping.confirm({ select = true }),
             },
-            ['<C-e>'] = {
-                i = cmp.mapping.abort(),
-            },
+            -- ['<C-e>'] = {
+            --     i = cmp.mapping.abort(),
+            -- },
             ["<C-k>"] = cmp.mapping(function(fallback)
                 if require('luasnip').jumpable(-1) then
                     require('luasnip').jump(-1)
@@ -204,7 +203,6 @@ function config.nvim_cmp()
                     luasnip = "[SNP]",
                     path = "[PATH]",
                     look = "[LOOK]",
-                    copilot = "[AI]",
                 })[entry.source.name]
 
                 return vim_item
@@ -302,12 +300,6 @@ function config.rename()
             prompt_hl = 'Comment',
         },
     })
-end
-
-function config.copilot()
-    vim.defer_fn(function()
-        require("copilot").setup()
-    end, 200)
 end
 
 return config
