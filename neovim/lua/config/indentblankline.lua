@@ -7,54 +7,94 @@ function M.setup()
   -- g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
   -- g.indent_blankline_show_trailing_blankline_indent = false
 
-  vim.g.indentLine_enabled = 1
-  vim.g.indent_blankline_show_trailing_blankline_indent = false
-  vim.g.indent_blankline_show_first_indent_level = true
-  vim.g.indent_blankline_use_treesitter = true
-  vim.g.indent_blankline_show_current_context = true
-  vim.g.indent_blankline_char = "▏"
-  vim.g.indent_blankline_buftype_exclude = {
-    "nofile",
-    "terminal",
-    "lsp-installer",
-    "lspinfo",
-  }
-  vim.g.indent_blankline_filetype_exclude = {
-    "help",
-    "startify",
-    "dashboard",
-    "packer",
-    "neogitstatus",
-    "NvimTree",
-    "neo-tree",
-    "Trouble",
-  }
-  vim.g.indent_blankline_context_patterns = {
-    "class",
-    "return",
-    "function",
-    "method",
-    "^if",
-    "^while",
-    "jsx_element",
-    "^for",
-    "^object",
-    "^table",
-    "block",
-    "arguments",
-    "if_statement",
-    "else_clause",
-    "jsx_element",
-    "jsx_self_closing_element",
-    "try_statement",
-    "catch_clause",
-    "import_statement",
-    "operation_type",
-  }
+  -- vim.g.indentLine_enabled = 1
+  -- vim.g.indent_blankline_show_trailing_blankline_indent = false
+  -- vim.g.indent_blankline_show_first_indent_level = true
+  -- vim.g.indent_blankline_use_treesitter = true
+  -- vim.g.indent_blankline_show_current_context = true
+  -- vim.g.indent_blankline_char = "▏"
+  -- vim.g.indent_blankline_buftype_exclude = {
+  --   "nofile",
+  --   "terminal",
+  --   "lsp-installer",
+  --   "lspinfo",
+  -- }
+  -- vim.g.indent_blankline_filetype_exclude = {
+  --   "help",
+  --   "startify",
+  --   "dashboard",
+  --   "packer",
+  --   "neogitstatus",
+  --   "NvimTree",
+  --   "neo-tree",
+  --   "Trouble",
+  -- }
+  -- vim.g.indent_blankline_context_patterns = {
+  --   "class",
+  --   "return",
+  --   "function",
+  --   "method",
+  --   "^if",
+  --   "^while",
+  --   "jsx_element",
+  --   "^for",
+  --   "^object",
+  --   "^table",
+  --   "block",
+  --   "arguments",
+  --   "if_statement",
+  --   "else_clause",
+  --   "jsx_element",
+  --   "jsx_self_closing_element",
+  --   "try_statement",
+  --   "catch_clause",
+  --   "import_statement",
+  --   "operation_type",
+  -- }
 
   require("indent_blankline").setup({
     show_current_context = true,
     show_current_context_start = false,
+    char = "│",
+    space_char_blankline = " ",
+    show_first_indent_level = true,
+    filetype_exclude = {
+        "startify",
+        "dashboard",
+        "dotooagenda",
+        "log",
+        "fugitive",
+        "gitcommit",
+        "packer",
+        "vimwiki",
+        "markdown",
+        "txt",
+        "vista",
+        "help",
+        "todoist",
+        "NvimTree",
+        "peekaboo",
+        "git",
+        "TelescopePrompt",
+        "undotree",
+        "flutterToolsOutline",
+        "", -- for all buffers without a file type
+    },
+    buftype_exclude = { "terminal", "nofile" },
+    show_trailing_blankline_indent = false,
+    context_patterns = {
+        "class",
+        "function",
+        "method",
+        "block",
+        "list_literal",
+        "selector",
+        "^if",
+        "^table",
+        "if_statement",
+        "while",
+        "for",
+    },
   })
 end
 

@@ -37,7 +37,11 @@ if vim.fn.has("nvim-0.7") then
 
   -- don't auto comment new line
   api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
+
+  vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
+
 else
+
   local cmd = vim.cmd
 
   -- Highlight on yank
@@ -68,4 +72,6 @@ else
 
   -- don't auto comment new line
   cmd([[autocmd BufEnter * set formatoptions-=cro]])
+
+  cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 end
