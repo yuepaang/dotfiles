@@ -276,6 +276,7 @@ function config.null_ls()
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.formatting.black.with { extra_args = { "--fast" } },
             null_ls.builtins.formatting.isort,
+            null_ls.builtins.formatting.taplo,
             null_ls.builtins.code_actions.gitsigns,
         },
         update_in_insert = false,
