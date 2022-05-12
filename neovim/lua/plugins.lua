@@ -114,7 +114,7 @@ function M.setup()
       config = function()
         require("theme").init()
       end,
-      disable = false,
+      disable = true,
     })
 
     use({
@@ -139,7 +139,7 @@ function M.setup()
         vim.g.everforest_better_performance = 1
         vim.cmd("colorscheme everforest")
       end,
-      disable = true,
+      disable = false,
     })
 
     use({
