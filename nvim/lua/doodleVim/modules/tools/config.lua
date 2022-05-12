@@ -55,8 +55,6 @@ function config.telescope()
       preview = {
         hide_on_startup = false,
       },
-      -- border = true,
-      -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       default_mappings = {
         i = {
           ["<C-j>"] = actions.move_selection_next,
@@ -75,9 +73,9 @@ function config.telescope()
           ["<C-b>"] = actions.results_scrolling_up,
           ["<C-f>"] = actions.results_scrolling_down,
 
-          ["<Tab>"] = actions_layout.toggle_preview,
+          ["<Tab>"]     = actions_layout.toggle_preview,
           ["<C-Space>"] = actions.which_key,
-          ["<C-c>"] = actions.close,
+          ["q"]         = actions.close,
           --
           -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
           -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
@@ -567,6 +565,7 @@ function config.neoclip()
     end
     return true
   end
+
   require("neoclip").setup({
     history = 50,
     enable_persistent_history = true,
