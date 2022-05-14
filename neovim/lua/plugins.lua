@@ -356,11 +356,12 @@ function M.setup()
       disable = true,
     })
     use({
-      "ggandor/lightspeed.nvim",
+      "ggandor/leap.nvim",
       requires = { "tpope/vim-repeat" },
       keys = { "s", "S", "f", "F", "t", "T" },
       config = function()
-        require("lightspeed").setup({})
+        local leap = require "leap"
+        leap.set_default_keymaps()
       end,
       event = "BufRead",
     })
@@ -376,6 +377,14 @@ function M.setup()
       cmd = { "MarkdownPreview" },
     })
 
+     use {
+      "jakewvincent/mkdnflow.nvim",
+      config = function()
+        require("mkdnflow").setup {}
+      end,
+      ft = "markdown",
+    }
+
     -- Status line
     use({
       "nvim-lualine/lualine.nvim",
@@ -386,6 +395,7 @@ function M.setup()
       end,
       wants = "nvim-web-devicons",
     })
+
     use({
       "SmiteshP/nvim-gps",
       requires = "nvim-treesitter/nvim-treesitter",
@@ -395,6 +405,14 @@ function M.setup()
         require("nvim-gps").setup()
       end,
     })
+
+    use {
+      "b0o/incline.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("incline").setup()
+      end,
+    }
 
     -- Treesitter
     use({
