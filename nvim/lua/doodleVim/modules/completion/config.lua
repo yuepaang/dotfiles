@@ -30,10 +30,42 @@ function config.nvim_lsp_installer()
             server:install()
         end
         local default_opts = server:get_default_options()
+
+        local settings = {}
+        if lsp == "sumneko_lua" then
+            settings = {
+                Lua = {
+                    runtime = {
+                        version = "LuaJIT",
+                    },
+                    diagnostics = {
+                        globals = {
+                            "vim",
+                            "use",
+                            "describe",
+                            "it",
+                            "assert",
+                            "before_each",
+                            "after_each",
+                        },
+                    },
+                    disable = {
+                        "lowercase-global",
+                        "undefined-global",
+                        "unused-local",
+                        "unused-function",
+                        "unused-vararg",
+                        "trailing-space",
+                    },
+                },
+            }
+        end
+
         lspconfig[lsp].setup {
             cmd_env = default_opts.cmd_env,
             on_attach = on_attach,
             capabilities = capabilities,
+            settings = settings,
         }
     end
 
@@ -273,10 +305,12 @@ function config.null_ls()
         on_init = nil,
         on_exit = nil,
         sources = {
-            null_ls.builtins.formatting.prettier,
+            null_ls.builtins.formatting.prettierd,
             null_ls.builtins.formatting.black.with { extra_args = { "--fast" } },
             null_ls.builtins.formatting.isort,
             null_ls.builtins.formatting.taplo,
+            null_ls.builtins.formatting.shfmt.with { filetypes = { "sh", "bash", "zsh" } },
+
             null_ls.builtins.code_actions.gitsigns,
         },
         update_in_insert = false,

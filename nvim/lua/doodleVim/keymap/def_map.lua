@@ -37,10 +37,10 @@ def_map.normal = {
   ["<ESC>"] = bind.convert_wk_format(
     map_cmd(":nohlsearch<Bar>:echo<CR>"):with_noremap():with_label("Cancel search highlighting")
   ),
-  ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy")),
-  ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Change Without Copy")),
-  ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy")),
-  ["P"] = bind.convert_wk_format(map_cmd('""p'):with_noremap():with_label('Paste Content In Register "')),
+  -- ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy")),
+  -- ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Change Without Copy")),
+  -- ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy")),
+  -- ["P"] = bind.convert_wk_format(map_cmd('""p'):with_noremap():with_label('Paste Content In Register "')),
 }
 
 def_map.insert = {
@@ -97,12 +97,12 @@ def_map.visual = {
   ),
   [">"] = bind.convert_wk_format(map_cmd(">gv"):with_noremap():with_label("Indent Right"):with_mode("x")),
   ["<"] = bind.convert_wk_format(map_cmd("<gv"):with_noremap():with_label("Indent Left"):with_mode("x")),
-  ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
-  ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Cut Without Copy"):with_mode("x")),
-  ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
-  ["P"] = bind.convert_wk_format(
-    map_cmd('""p'):with_noremap():with_label('Paste Content In Register "'):with_mode("x")
-  ),
+  -- ["x"] = bind.convert_wk_format(map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
+  -- ["c"] = bind.convert_wk_format(map_cmd('"_c'):with_noremap():with_label("Cut Without Copy"):with_mode("x")),
+  -- ["d"] = bind.convert_wk_format(map_cmd('""d'):with_noremap():with_label("Delete Without Copy"):with_mode("x")),
+  -- ["P"] = bind.convert_wk_format(
+  --   map_cmd('""p'):with_noremap():with_label('Paste Content In Register "'):with_mode("x")
+  -- ),
 }
 
 return def_map
