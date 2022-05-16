@@ -61,6 +61,16 @@ function config.nvim_lsp_installer()
             }
         end
 
+        if lsp == "pyright" then
+            settings = {
+                python = {
+                    analysis = {
+                        typeCheckingMode = "off"
+                    }
+                }
+            }
+        end
+
         lspconfig[lsp].setup {
             cmd_env = default_opts.cmd_env,
             on_attach = on_attach,
