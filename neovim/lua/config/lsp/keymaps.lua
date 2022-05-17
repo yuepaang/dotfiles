@@ -47,6 +47,7 @@ local function keymappings(client, bufnr)
     s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
     I = { "<cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
     t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
+    f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Document" },
   }
   whichkey.register(keymap_l, { buffer = bufnr, prefix = "<leader>" })
   whichkey.register(keymap_g, { buffer = bufnr, prefix = "g" })
