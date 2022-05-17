@@ -1,5 +1,27 @@
 local M = {}
 
+local py_logo = {
+  [[                                          ]],
+  [[                                          ]],
+  [[                                          ]],
+  [[                                          ]],
+  [[                                          ]],
+  [[             ███████ ██    ██             ]],
+  [[             ██   ██  ██  ██              ]],
+  [[             ███████   ████               ]],
+  [[             ██         ██                ]],
+  [[             ██         ██                ]],
+  [[                                          ]],
+  [[         ██    ██ ██ ███    ███           ]],
+  [[         ██    ██ ██ ████  ████           ]],
+  [[         ██    ██ ██ ██ ████ ██           ]],
+  [[          ██  ██  ██ ██  ██  ██           ]],
+  [[           ████   ██ ██      ██           ]],
+  [[                                          ]],
+  [[                                          ]],
+  [[                                          ]],
+}
+
 function M.setup()
   local status_ok, alpha = pcall(require, "alpha")
   if not status_ok then
@@ -7,33 +29,34 @@ function M.setup()
   end
 
   local dashboard = require("alpha.themes.dashboard")
-  local function header()
-    return {
-      [[                                               ]],
-      [[ppppppppppppppp    yyyyyyy            yyyyyyy  ]],
-      [[p::::::::::::::pp   y:::::y          y:::::y   ]],
-      [[p::::::::::::::::p   y:::::y        y:::::y    ]],
-      [[pp::::::::::::::::p   y:::::y      y:::::y     ]],
-      [[  p:::::pppppp:::::p    y:::::y   y:::::y      ]],
-      [[  p::::p     p:::::p     y:::::y y:::::y       ]],
-      [[  p::::p     p:::::p      y:::::y:::::y        ]],
-      [[  p::::p     p:::::p       y:::::::::y         ]],
-      [[  p::::p   p:::::p          y:::::::y          ]],
-      [[  p::::pppp::::p             y:::::y           ]],
-      [[  p:::::::::::p               y:::y            ]],
-      [[  p:::::::::p                 y:::y            ]],
-      [[  p::::p                      y:::y            ]],
-      [[  p::::p                      y:::y            ]],
-      [[  p::::p                      y:::y            ]],
-      [[  p::::p                      y:::y            ]],
-      [[  p::::p                      y:::y            ]],
-      [[  p::::p                      y:::y            ]],
-      [[  p::::p                      y:::y            ]],
-      [[  pppppp                       yyy             ]],
-    }
-  end
+  -- local function header()
+  --   return {
+  --     [[                                                  ]],
+  --     [[   ppppppppppppppp    yyyyyyy            yyyyyyy  ]],
+  --     [[   p::::::::::::::pp   y:::::y          y:::::y   ]],
+  --     [[   p::::::::::::::::p   y:::::y        y:::::y    ]],
+  --     [[   pp::::::::::::::::p   y:::::y      y:::::y     ]],
+  --     [[     p:::::pppppp:::::p    y:::::y   y:::::y      ]],
+  --     [[     p::::p     p:::::p     y:::::y y:::::y       ]],
+  --     [[     p::::p     p:::::p      y:::::y:::::y        ]],
+  --     [[     p::::p     p:::::p       y:::::::::y         ]],
+  --     [[     p::::p   p:::::p          y:::::::y          ]],
+  --     [[     p::::pppp::::p             y:::::y           ]],
+  --     [[     p:::::::::::p               y:::y            ]],
+  --     [[     p:::::::::p                 y:::y            ]],
+  --     [[     p::::p                      y:::y            ]],
+  --     [[     p::::p                      y:::y            ]],
+  --     [[     p::::p                      y:::y            ]],
+  --     [[     p::::p                      y:::y            ]],
+  --     [[     p::::p                      y:::y            ]],
+  --     [[     p::::p                      y:::y            ]],
+  --     [[     p::::p                      y:::y            ]],
+  --     [[     pppppp                       yyy             ]],
+  --   }
+  -- end
 
-  dashboard.section.header.val = header()
+  -- dashboard.section.header.val = header()
+  dashboard.section.header.val = py_logo
 
   dashboard.section.buttons.val = {
     dashboard.button("f", "  Find files", ":Telescope find_files <CR>"),
