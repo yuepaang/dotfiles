@@ -896,14 +896,15 @@ function M.setup()
         -- AI completion
         use({ "github/copilot.vim", event = "InsertEnter" })
 
-        use({
+        -- Todo
+        use {
             "folke/todo-comments.nvim",
             requires = "nvim-lua/plenary.nvim",
             config = function()
-                require("config.todo_comment").setup()
+                require("todo-comments").setup {}
             end,
-        })
-
+            cmd = { "TodoQuickfix", "TodoTrouble", "TodoTelescope" },
+        }
         -- Legendary
         use({
             "mrjones2014/legendary.nvim",
