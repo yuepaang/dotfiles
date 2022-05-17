@@ -35,6 +35,7 @@ local py_logo = {
 }
 
 local function footer()
+    local datetime = os.date(" %Y-%m-%d") .. "  -  "
     local author = "שּ " .. "yuepaang" .. "  -  "
     local total_plugins = " " .. #vim.tbl_keys(packer_plugins) .. " plugins" .. "  -  "
     local version = vim.version()
@@ -43,7 +44,7 @@ local function footer()
     local fortune = require("alpha.fortune")
     local quote = table.concat(fortune(), "\n")
 
-    return author .. total_plugins .. nvim_version_info .. quote
+    return datetime .. author .. total_plugins .. nvim_version_info .. quote
 end
 
 dashboard.section.header.val = py_logo
