@@ -54,7 +54,7 @@ function M.hl.mode(base)
       vim.tbl_deep_extend(
         "force",
         lualine_avail and lualine[M.modes[vim.fn.mode()][2]:lower()].a
-        or { fg = C.bg_1, bg = M.modes[vim.fn.mode()][3] },
+          or { fg = C.bg_1, bg = M.modes[vim.fn.mode()][3] },
         base or {}
       )
     )
@@ -73,7 +73,7 @@ function M.provider.lsp_progress()
         Lsp.message or "",
         Lsp.percentage or 0
       )
-      or ""
+    or ""
 end
 
 local function null_ls_providers(filetype)
@@ -95,17 +95,19 @@ local function null_ls_sources(filetype, source)
   return methods_avail and null_ls_providers(filetype)[methods.internal[source]] or {}
 end
 
-function M.provider.lsp_client_names()
-  local buf_client_names = {}
-  for _, client in ipairs(vim.lsp.buf_get_clients(0)) do
-    if client.name == "null-ls" then
-      vim.list_extend(buf_client_names, null_ls_sources(vim.bo.filetype, "FORMATTING"))
-      vim.list_extend(buf_client_names, null_ls_sources(vim.bo.filetype, "DIAGNOSTICS"))
-    else
-      table.insert(buf_client_names, client.name)
+function M.provider.lsp_client_names(expand_null_ls)
+  return function()
+    local buf_client_names = {}
+    for _, client in ipairs(vim.lsp.buf_get_clients(0)) do
+      if client.name == "null-ls" and expand_null_ls then
+        vim.list_extend(buf_client_names, null_ls_sources(vim.bo.filetype, "FORMATTING"))
+        vim.list_extend(buf_client_names, null_ls_sources(vim.bo.filetype, "DIAGNOSTICS"))
+      else
+        table.insert(buf_client_names, client.name)
+      end
     end
+    return table.concat(buf_client_names, ", ")
   end
-  return table.concat(buf_client_names, ", ")
 end
 
 function M.provider.treesitter_status()
