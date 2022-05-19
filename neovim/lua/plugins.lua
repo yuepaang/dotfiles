@@ -434,6 +434,7 @@ function M.setup()
             config = function()
                 require("incline").setup()
             end,
+            disable = false,
         }
 
         -- Treesitter
@@ -534,9 +535,9 @@ function M.setup()
                         "AckslD/nvim-neoclip.lua",
                         requires = {
                             { "tami5/sqlite.lua", module = "sqlite" },
-                            config = function()
-                                require("neoclip").setup()
-                            end,
+                            -- config = function()
+                            --     require("neoclip").setup()
+                            -- end,
                         },
                     },
                     "nvim-telescope/telescope-smart-history.nvim",
@@ -1067,6 +1068,29 @@ function M.setup()
                 vim.g.translator_history_enable = true
             end,
         }
+
+        -- REPL
+        use {
+            "hkupty/iron.nvim",
+            config = function()
+                require("config.iron").setup()
+            end,
+            disable = true,
+        }
+
+        -- Testing
+        use {
+            "m-demare/attempt.nvim",
+            requires = "nvim-lua/plenary.nvim",
+            module = { "attempt" },
+            config = function()
+                require("attempt").setup()
+            end,
+            disable = true,
+        }
+        -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
+        -- https://github.com/rbong/vim-buffest
+        -- https://github.com/ziontee113/syntax-tree-surfer
 
         -- Bootstrap Neovim
         if packer_bootstrap then
