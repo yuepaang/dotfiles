@@ -451,7 +451,7 @@ function M.setup()
     use({
       "nvim-treesitter/nvim-treesitter",
       opt = true,
-      event = "BufRead",
+      event = "BufReadPre",
       run = ":TSUpdate",
       config = function()
         require("config.treesitter").setup()
@@ -460,6 +460,7 @@ function M.setup()
         { "nvim-treesitter/nvim-treesitter-textobjects" },
         "windwp/nvim-ts-autotag",
         "JoosepAlviste/nvim-ts-context-commentstring",
+        "nvim-treesitter/nvim-treesitter-context",
         "p00f/nvim-ts-rainbow",
       },
     })
@@ -667,6 +668,8 @@ function M.setup()
     -- Autopairs, integrates with both cmp and treesitter
     use({
       "windwp/nvim-autopairs",
+      opt = true,
+      event = "InsertEnter",
       wants = "nvim-treesitter",
       module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
       config = function()
@@ -677,6 +680,7 @@ function M.setup()
     -- Auto tag
     use({
       "windwp/nvim-ts-autotag",
+      opt = true,
       wants = "nvim-treesitter",
       event = "InsertEnter",
       config = function()
@@ -689,6 +693,7 @@ function M.setup()
     -- End wise
     use({
       "RRethy/nvim-treesitter-endwise",
+      opt = true,
       wants = "nvim-treesitter",
       event = "InsertEnter",
       disable = false,
@@ -850,6 +855,7 @@ function M.setup()
       wants = { "nvim-dap-virtual-text", "DAPInstall.nvim", "nvim-dap-ui", "nvim-dap-python", "which-key.nvim" },
       requires = {
         "alpha2phi/DAPInstall.nvim",
+        -- { "Pocco81/dap-buddy.nvim", branch = "dev" },
         "theHamsta/nvim-dap-virtual-text",
         "rcarriga/nvim-dap-ui",
         "mfussenegger/nvim-dap-python",
@@ -1101,6 +1107,8 @@ function M.setup()
     -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     -- https://github.com/rbong/vim-buffest
     -- https://github.com/ziontee113/syntax-tree-surfer
+    -- https://github.com/filipdutescu/renamer.nvim
+    -- https://www.reddit.com/r/neovim/comments/usap7v/winbar_now_on_nightly/
 
     -- Bootstrap Neovim
     if packer_bootstrap then
