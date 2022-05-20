@@ -3,15 +3,15 @@ local conf = require("doodleVim.modules.py.config")
 
 py["wakatime/vim-wakatime"] = {}
 
-py["j-hui/fidget.nvim"] = {
-    config = function()
-        require("fidget").setup({
-            text = {
-                spinner = "moon",
-            },
-        })
-    end,
-}
+-- py["j-hui/fidget.nvim"] = {
+--     config = function()
+--         require("fidget").setup({
+--             text = {
+--                 spinner = "moon",
+--             },
+--         })
+--     end,
+-- }
 
 py["max397574/better-escape.nvim"] = {
     event = { "InsertEnter" },
@@ -24,10 +24,10 @@ py["max397574/better-escape.nvim"] = {
     end,
 }
 
-py["ggandor/lightspeed.nvim"] = {
+py["ggandor/leap.nvim"] = {
     requires = { "tpope/vim-repeat" },
     keys = { "s", "S", "f", "F", "t", "T" },
-    config = conf.lightspeed,
+    config = conf.leap,
     event = "BufRead",
 }
 

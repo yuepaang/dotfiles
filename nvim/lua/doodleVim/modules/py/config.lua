@@ -1,9 +1,8 @@
 local config = {}
 
-function config.lightspeend()
-    require("lightspeend").setup({
-        ignore_case = true
-    })
+function config.leap()
+    local leap = require("leap")
+    leap.set_default_keymaps()
 end
 
 return config
