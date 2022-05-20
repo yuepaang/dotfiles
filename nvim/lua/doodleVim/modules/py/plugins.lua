@@ -3,6 +3,8 @@ local conf = require("doodleVim.modules.py.config")
 
 py["wakatime/vim-wakatime"] = {}
 
+py["github/copilot.vim"] = { event = "InsertEnter" }
+
 -- py["j-hui/fidget.nvim"] = {
 --     config = function()
 --         require("fidget").setup({
