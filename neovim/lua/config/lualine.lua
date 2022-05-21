@@ -55,7 +55,7 @@ local function lsp_client(msg)
   vim.list_extend(buf_client_names, supported_hovers)
 
   -- add code action
-  local code_actions = require "config.lsp.null-ls.code_actions"
+  local code_actions = require("config.lsp.null-ls.code_actions")
   local supported_code_actions = code_actions.list_registered(buf_ft)
   vim.list_extend(buf_client_names, supported_code_actions)
 
@@ -69,7 +69,6 @@ local function lsp_client(msg)
   end
   table.sort(client_names)
   return "[" .. table.concat(client_names, ", ") .. "]"
-
 end
 
 -------- use fidget.nvim ------
@@ -95,6 +94,8 @@ end
 --   return table.concat(status, "  ") .. " " .. spinners[frame + 1]
 -- end
 
+local icons = require("config.icons")
+
 function M.setup()
   local gps = require("nvim-gps")
 
@@ -116,7 +117,12 @@ function M.setup()
         {
           "diagnostics",
           sources = { "nvim_diagnostic" },
-          symbols = { error = " ", warn = " ", info = " ", hint = " " },
+          symbols = {
+            error = icons.diagnostics.Error,
+            warn = icons.diagnostics.Warning,
+            info = icons.diagnostics.Information,
+            hint = icons.diagnostics.Hint,
+          },
           colored = false,
         },
       },
