@@ -443,7 +443,7 @@ function M.setup()
       config = function()
         require("incline").setup()
       end,
-      disable = false,
+      disable = true,
     })
 
     -- Treesitter
@@ -456,11 +456,11 @@ function M.setup()
         require("config.treesitter").setup()
       end,
       requires = {
-        { "nvim-treesitter/nvim-treesitter-textobjects" },
-        "windwp/nvim-ts-autotag",
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        "nvim-treesitter/nvim-treesitter-context",
-        "p00f/nvim-ts-rainbow",
+        { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPre" },
+        { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+        { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufReadPre" },
+        { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre" },
+        { "p00f/nvim-ts-rainbow", event = "BufReadPre" },
       },
     })
 
@@ -556,6 +556,7 @@ function M.setup()
             rocks = { "openssl", "lua-http-parser" },
           },
           "nvim-telescope/telescope-media-files.nvim",
+          "dhruvmanila/telescope-bookmarks.nvim",
         },
       })
     end
@@ -797,6 +798,15 @@ function M.setup()
         require("lspsaga").setup({})
       end,
     })
+
+    -- renamer.nvim
+    use {
+      "filipdutescu/renamer.nvim",
+      module = { "renamer" },
+      config = function()
+        require("renamer").setup {}
+      end,
+    }
 
     -- Rust
     use({
@@ -1120,22 +1130,14 @@ function M.setup()
       branch = "main",
       event = "BufReadPre",
       config = function()
-        local ok, cybu = pcall(require, "cybu")
-        if not ok then
-          return
-        end
-        cybu.setup()
-        vim.keymap.set("n", "K", "<Plug>(CybuPrev)")
-        vim.keymap.set("n", "J", "<Plug>(CybuNext)")
+        require("config.cybu").setup()
       end,
       disable = true,
     })
+    use { "tversteeg/registers.nvim", disable = true }
 
     -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     -- https://github.com/rbong/vim-buffest
-    -- https://github.com/filipdutescu/renamer.nvim
-    -- https://www.reddit.com/r/neovim/comments/usap7v/winbar_now_on_nightly/
-    -- https://github.com/tversteeg/registers.nvim
 
     -- Bootstrap Neovim
     if packer_bootstrap then

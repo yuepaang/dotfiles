@@ -20,14 +20,15 @@ end
 
 local sources = {
 	-- formatting
-  b.formatting.prettierd,
+	b.formatting.prettierd,
 	b.formatting.shfmt,
 	b.formatting.fixjson,
 	b.formatting.black.with({ extra_args = { "--fast" } }),
 	b.formatting.isort,
 	b.formatting.stylua,
-  b.formatting.rustfmt,
-  b.formatting.gofmt,
+
+	b.formatting.rustfmt,
+	b.formatting.gofmt,
 	-- with_root_file(b.formatting.stylua, "stylua.toml"),
 
 	-- diagnostics
@@ -36,7 +37,7 @@ local sources = {
 	b.diagnostics.eslint_d,
 	b.diagnostics.flake8,
 	b.diagnostics.tsc,
-	-- b.diagnostics.selene,
+	b.diagnostics.selene,
 	-- with_root_file(b.diagnostics.selene, "selene.toml"),
 	with_diagnostics_code(b.diagnostics.shellcheck),
 

@@ -9,7 +9,7 @@ local d = ls.dynamic_node
 local f = ls.function_node
 local p = require("luasnip.extras").partial
 local fmt = require("luasnip.extras.fmt").fmt
-local fmta = require("luasnip.extras.fmt").fmta
+-- local fmta = require("luasnip.extras.fmt").fmta
 -- local isn = ls.indent_snippet_node
 -- local events = require "luasnip.util.events"
 -- local types = require "luasnip.util.types"
@@ -148,7 +148,7 @@ local snippets = {
     p(os.date, "%Y-%m-%d %H:%M:%S"),
   }),
 
-  s({ trig = "pwd" }, { f(bash, {}) }),
+  -- s({ trig = "pwd" }, { f(bash, {}) }),
 
   s(
     "dt",
@@ -164,13 +164,13 @@ local snippets = {
     foo({1}, {3}) {{
         return {2} * {4}
       }}
-    ]],
+    ]] ,
       {
-        i(1, "x"),
-        rep(1),
-        i(2, "y"),
-        rep(2),
-      }
+      i(1, "x"),
+      rep(1),
+      i(2, "y"),
+      rep(2),
+    }
     )
   ),
 

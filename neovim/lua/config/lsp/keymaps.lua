@@ -21,18 +21,19 @@ local function keymappings(client, bufnr)
   local keymap_l = {
     l = {
       name = "LSP",
+      D = { "<cmd>lua require('config.lsp').toggle_diagnostics()<CR>", "Toggle Inline Diagnostics" },
       R = { "<cmd>Trouble lsp_references<cr>", "Trouble References" },
       a = { "<cmd>Telescope lsp_code_actions<CR>", "Code Action" },
       d = { "<cmd>Telescope diagnostics<CR>", "Diagnostics" },
       f = { "<cmd>Lspsaga lsp_finder<CR>", "Finder" },
       i = { "<cmd>LspInfo<CR>", "Lsp Info" },
-      n = { "<cmd>Lspsaga rename<CR>", "Rename" },
+      n = { "<cmd>lua require('renamer').rename()<CR>", "Rename" },
       r = { "<cmd>Telescope lsp_references<CR>", "References" },
       s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
       t = { "<cmd>TroubleToggle document_diagnostics<CR>", "Trouble" },
       L = { "<cmd>lua vim.lsp.codelens.refresh()<CR>", "Refresh CodeLens" },
       l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "Run CodeLens" },
-      D = { "<cmd>lua require('config.lsp').toggle_diagnostics()<CR>", "Toggle Inline Diagnostics" },
+
       S = { "<cmd>SymbolsOutline<CR>", "List Symbols Outline" },
     },
   }
@@ -54,7 +55,8 @@ local function keymappings(client, bufnr)
 end
 
 local function signature_help(client, bufnr)
-  local trigger_chars = client.server_capabilities.signatureHelpProvider.triggerCharacters
+  -- local trigger_chars = client.server_capabilities.signatureHelpProvider.triggerCharacters
+  local trigger_chars = client.resolved_capabilities.signatureHelpProvider.triggerCharacters
   for _, char in ipairs(trigger_chars) do
     vim.keymap.set("i", char, function()
       vim.defer_fn(function()

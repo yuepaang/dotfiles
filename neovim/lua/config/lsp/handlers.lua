@@ -11,18 +11,14 @@ function M.setup()
       border = "rounded",
     },
     diagnostic = {
-      -- disable virtual text
-      virtual_text = false,
-      update_in_insert = true,
+      virtual_text = { spacing = 4, prefix = "●" },
       underline = true,
+      update_in_insert = false,
       severity_sort = true,
       float = {
         focusable = true,
         style = "minimal",
         border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
       },
     },
   }
@@ -35,7 +31,7 @@ function M.setup()
     { name = "DiagnosticSignInfo", text = icons.diagnostics.Info },
   }
   for _, sign in ipairs(diagnostic_signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
   end
 
   -- Diagnostic configuration

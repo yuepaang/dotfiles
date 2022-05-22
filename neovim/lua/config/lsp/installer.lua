@@ -1,5 +1,5 @@
-local lsp_installer_servers = require("nvim-lsp-installer.servers")
-local utils = require("utils")
+local lsp_installer_servers = require "nvim-lsp-installer.servers"
+local utils = require "utils"
 
 local M = {}
 
@@ -12,65 +12,22 @@ function M.setup(servers, options)
         local opts = vim.tbl_deep_extend("force", options, servers[server.name] or {})
 
         if server.name == "sumneko_lua" then
-          opts = require("lua-dev").setup({ lspconfig = opts })
-          opts.settings = {
-            Lua = {
-              diagnostics = {
-                globals = { "vim" },
-              },
-            },
-          }
+          opts = require("lua-dev").setup { lspconfig = opts }
         end
 
         if PLUGINS.coq.enabled then
-          local coq = require("coq")
+          local coq = require "coq"
           opts = coq.lsp_ensure_capabilities(opts)
-        end
-
-        if server.name == "pyright" then
-          opts.settings = {
-            python = {
-              analysis = {
-                typeCheckingMode = "off",
-              },
-            },
-          }
         end
 
         -- https://github.com/williamboman/nvim-lsp-installer/wiki/Rust
         if server.name == "rust_analyzer" then
-          require("rust-tools").setup({
+          require("rust-tools").setup {
             server = vim.tbl_deep_extend("force", server:get_default_options(), opts),
-            -- rust-tools options
-            tools = {
-              autoSetHints = true,
-              hover_with_actions = true,
-              inlay_hints = {
-                show_parameter_hints = false,
-                parameter_hints_prefix = "",
-                other_hints_prefix = "",
-              },
-            },
-            settings = {
-              -- to enable rust-analyzer settings visit:
-              -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-              ["rust-analyzer"] = {
-                -- enable clippy on save
-                cargo = {
-                  loadOutDirsFromCheck = true,
-                },
-                checkOnSave = {
-                  command = "clippy",
-                },
-                experimental = {
-                  procAttrMacros = true,
-                },
-              },
-            },
-          })
+          }
           server:attach_buffers()
         elseif server.name == "tsserver" then
-          require("typescript").setup({ server = opts })
+          require("typescript").setup { server = opts }
         else
           server:setup(opts)
         end

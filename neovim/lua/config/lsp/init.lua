@@ -10,7 +10,15 @@ local servers = {
       },
     },
   },
-  pyright = {},
+  pyright = {
+    settings = {
+      python = {
+        analysis = {
+          typeCheckingMode = "off",
+        },
+      },
+    }
+  },
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
@@ -58,7 +66,7 @@ local servers = {
       },
     },
   },
-  tsserver = {},
+  tsserver = { disable_formatting = true },
   vimls = {},
   -- tailwindcss = {},
   -- solang = {},
@@ -105,7 +113,7 @@ local opts = {
   capabilities = capabilities,
   flags = {
     allow_incremental_sync = true,
-    debounce_text_changes = 200,
+    debounce_text_changes = 150,
   },
 }
 
