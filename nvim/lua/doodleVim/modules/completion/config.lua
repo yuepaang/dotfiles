@@ -8,7 +8,7 @@ function config.nvim_lsp_installer()
     handler.lsp_diagnostic()
     handler.null_ls_depress()
 
-    local servers = { 'gopls', 'pyright', 'sumneko_lua' }
+    local servers = { 'gopls', 'pyright', 'sumneko_lua', 'rust_analyzer' }
     require("nvim-lsp-installer").setup {
         automatic_installation = false,
     }
@@ -275,10 +275,16 @@ function config.null_ls()
         on_init = nil,
         on_exit = nil,
         sources = {
-            null_ls.builtins.formatting.prettierd,
+            -- null_ls.builtins.formatting.prettierd,
+            null_ls.builtins.formatting.prettier.with {
+                extra_filetypes = { "toml", "solidity" },
+                extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+            },
             null_ls.builtins.formatting.black.with { extra_args = { "--fast" } },
             null_ls.builtins.formatting.isort,
-            null_ls.builtins.formatting.taplo,
+            null_ls.builtins.formatting.gofmt,
+            null_ls.builtins.formatting.rustfmt,
+            null_ls.builtins.formatting.stylua,
             null_ls.builtins.formatting.shfmt.with { filetypes = { "sh", "bash", "zsh" } },
 
             null_ls.builtins.code_actions.gitsigns,
