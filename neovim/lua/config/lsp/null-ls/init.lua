@@ -53,7 +53,6 @@ local sources = {
 
 function M.setup(opts)
 	nls.setup({
-		debug = false,
 		debounce = 150,
 		save_after_format = false,
 		sources = sources,
