@@ -76,4 +76,6 @@ completion["doodleEsc/rename.nvim"] = {
   config = conf.rename,
 }
 
+completion["RRethy/vim-illuminate"] = {}
+
 return completion
