@@ -415,7 +415,7 @@ function M.setup()
         require("config.lualine").setup()
       end,
       wants = "nvim-web-devicons",
-      disable = true,
+      disable = false,
     })
 
     use({
@@ -424,7 +424,7 @@ function M.setup()
       config = function()
         require("config.feline").setup()
       end,
-      disable = false,
+      disable = true,
     })
 
     use({
@@ -800,13 +800,13 @@ function M.setup()
     })
 
     -- renamer.nvim
-    use {
+    use({
       "filipdutescu/renamer.nvim",
       module = { "renamer" },
       config = function()
-        require("renamer").setup {}
+        require("renamer").setup({})
       end,
-    }
+    })
 
     -- Rust
     use({
@@ -1134,7 +1134,7 @@ function M.setup()
       end,
       disable = true,
     })
-    use { "tversteeg/registers.nvim", disable = true }
+    use({ "tversteeg/registers.nvim", disable = true })
 
     -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     -- https://github.com/rbong/vim-buffest
