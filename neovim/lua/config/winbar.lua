@@ -99,7 +99,7 @@ function M.statusline()
       .. ""
       .. "%*"
       .. "%#WinBarContent#"
-      .. "%f"
+      .. "%t"
       .. "%*"
       .. "%#WinBarSeparator#"
       .. ""
