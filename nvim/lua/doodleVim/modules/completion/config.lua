@@ -6,7 +6,7 @@ function config.nvim_lsp_installer()
   handler.lsp_diagnostic()
   handler.null_ls_depress()
 
-  local servers = { "gopls", "pyright", "sumneko_lua", "rust_analyzer" }
+  local servers = { "gopls", "pyright", "sumneko_lua", "rust_analyzer", "bashls", "yamlls" }
   require("nvim-lsp-installer").setup({
     automatic_installation = false,
   })
