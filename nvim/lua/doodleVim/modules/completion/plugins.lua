@@ -76,6 +76,10 @@ completion["doodleEsc/rename.nvim"] = {
   config = conf.rename,
 }
 
-completion["RRethy/vim-illuminate"] = {}
+completion["RRethy/vim-illuminate"] = {
+  config = function()
+    vim.g.Illuminate_ftblacklist = { "alpha", "NvimTree" }
+  end,
+}
 
 return completion

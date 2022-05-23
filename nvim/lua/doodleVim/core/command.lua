@@ -18,6 +18,12 @@ vim.api.nvim_create_autocmd("FocusGained", { command = [[:checktime]] })
 
 vim.api.nvim_create_user_command("Format", vim.lsp.buf.format, {})
 
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  callback = function()
+    vim.cmd "hi link illuminatedWord LspReferenceText"
+  end,
+})
+
 -- Copilot
 vim.cmd([[
     imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")

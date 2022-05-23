@@ -119,6 +119,12 @@ plug_map.normal = {
     ),
   },
 
+  ["<leader>g"] = {
+    name = "Git",
+    j = bind.convert_wk_format(map_cu("Gitsigns next_hunk"):with_noremap():with_silent():with_label("Next Hunk")),
+    k = bind.convert_wk_format(map_cu("Gitsigns prev_hunk"):with_noremap():with_silent():with_label("Previous Hunk")),
+  },
+
   ["<leader>p"] = {
     name = "Packer Manage",
     u = bind.convert_wk_format(
@@ -276,10 +282,11 @@ plug_map.normal = {
       :with_label("Run To Last, Shortcut: Shift + F12")
   ),
 
-  ["<S-h>"] = bind.convert_wk_format(
-    map_cu("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")
-  ),
-  ["<S-l>"] = bind.convert_wk_format(map_cu("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
+  -- ["<S-h>"] = bind.convert_wk_format(
+  --   map_cu("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")
+  -- ),
+  -- ["<S-l>"] = bind.convert_wk_format(map_cu("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
+
   ["<M-h>"] = bind.convert_wk_format(
     map_cu("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")
   ),
@@ -305,11 +312,6 @@ plug_map.normal = {
   ),
 
   ["<C-Space>"] = bind.convert_wk_format(map_cr("WhichKey"):with_noremap():with_silent():with_label("Show Keymaps")),
-
-  ["<M-n>"] = bind.convert_wk_format(map_cu("Gitsigns next_hunk"):with_noremap():with_silent():with_label("Next Hunk")),
-  ["<M-p>"] = bind.convert_wk_format(
-    map_cu("Gitsigns prev_hunk"):with_noremap():with_silent():with_label("Previous Hunk")
-  ),
 }
 
 plug_map.visual = {
