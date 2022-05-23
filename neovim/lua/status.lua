@@ -24,7 +24,6 @@ M.modes = {
   ["Rv"] = { "V-REPLACE", "Replace", C.red_1 },
   ["s"] = { "SELECT", "Visual", C.orange_1 },
   ["S"] = { "S-LINE", "Visual", C.orange_1 },
-  [""] = { "S-BLOCK", "Visual", C.orange_1 },
   ["c"] = { "COMMAND", "Command", C.yellow_1 },
   ["cv"] = { "COMMAND", "Command", C.yellow_1 },
   ["ce"] = { "COMMAND", "Command", C.yellow_1 },

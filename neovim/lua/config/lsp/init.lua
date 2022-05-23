@@ -62,7 +62,7 @@ local servers = {
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = { "vim", "PLUGINS", "dump" },
+          globals = { "vim", "PLUGINS", "dump", "packer_plugins" },
           disable = { "lowercase-global" },
         },
         workspace = {
