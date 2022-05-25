@@ -123,10 +123,10 @@ function config.nvim_cmp()
       }),
     },
     sources = cmp.config.sources({
-      { name = "luasnip", priority = 100 },
-      { name = "nvim_lsp", priority = 99 },
-      { name = "cmp_tabnine" },
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
       { name = "buffer" },
+      { name = "cmp_tabnine" },
       { name = "path" },
       {
         name = "look",
