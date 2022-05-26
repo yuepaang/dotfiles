@@ -282,10 +282,10 @@ plug_map.normal = {
       :with_label("Run To Last, Shortcut: Shift + F12")
   ),
 
-  -- ["<S-h>"] = bind.convert_wk_format(
-  --   map_cu("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")
-  -- ),
-  -- ["<S-l>"] = bind.convert_wk_format(map_cu("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
+  ["<S-h>"] = bind.convert_wk_format(
+    map_cu("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")
+  ),
+  ["<S-l>"] = bind.convert_wk_format(map_cu("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
 
   ["<M-h>"] = bind.convert_wk_format(
     map_cu("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")

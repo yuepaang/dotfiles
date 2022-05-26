@@ -3,13 +3,13 @@ local autocmd = {}
 
 function autocmd.nvim_create_augroups(definitions)
     for group_name, definition in pairs(definitions) do
-        vim.api.nvim_command('augroup ' .. group_name)
-        vim.api.nvim_command('autocmd!')
+        vim.api.nvim_command("augroup " .. group_name)
+        vim.api.nvim_command("autocmd!")
         for _, def in ipairs(definition) do
-            local command = table.concat(vim.tbl_flatten { 'autocmd', def }, ' ')
+            local command = table.concat(vim.tbl_flatten({ "autocmd", def }), " ")
             vim.api.nvim_command(command)
         end
-        vim.api.nvim_command('augroup END')
+        vim.api.nvim_command("augroup END")
     end
 end
 
@@ -22,11 +22,11 @@ function autocmd.load_autocmds()
         ft = {
             { "BufReadPost,BufNewFile", "*.sol", " setf solidity" },
             { "FileType", "Outline", " setlocal signcolumn=no" },
-            { "FileType", "python", " setlocal colorcolumn=80" }
+            { "FileType", "python", " setlocal colorcolumn=80" },
         },
 
         lightbulb = {
-            { "CursorHold,CursorHoldI", "*", "lua require'lightbulb'.check()" };
+            { "CursorHold,CursorHoldI", "*", "lua require'lightbulb'.check()" },
         },
 
         _general_settings = {
@@ -37,23 +37,26 @@ function autocmd.load_autocmds()
 
         _markdown = {
             { "FileType", "markdown", "setlocal wrap" },
-            { "FileType", "markdown", "setlocal spell" }
+            { "FileType", "markdown", "setlocal spell" },
         },
 
         _git = {
             { "FileType", "gitcommit", "setlocal wrap" },
-            { "FileType", "gitcommit", "setlocal spell" }
+            { "FileType", "gitcommit", "setlocal spell" },
         },
 
         nonewline = {
             -- don't auto comment new line
-            { "BufEnter", [[set formatoptions-=cro]] }
+            { "BufEnter", [[set formatoptions-=cro]] },
         },
 
         oldlocations = {
-            { "BufReadPost", "*",
-                [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
-        }
+            {
+                "BufReadPost",
+                "*",
+                [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]],
+            },
+        },
     }
 
     autocmd.nvim_create_augroups(definitions)
