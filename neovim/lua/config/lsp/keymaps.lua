@@ -23,7 +23,7 @@ local function keymappings(client, bufnr)
       name = "LSP",
       D = { "<cmd>lua require('config.lsp').toggle_diagnostics()<CR>", "Toggle Inline Diagnostics" },
       R = { "<cmd>Trouble lsp_references<cr>", "Trouble References" },
-      a = { "<cmd>Telescope lsp_code_actions<CR>", "Code Action" },
+      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
       d = { "<cmd>Telescope diagnostics<CR>", "Diagnostics" },
       f = { "<cmd>Lspsaga lsp_finder<CR>", "Finder" },
       i = { "<cmd>LspInfo<CR>", "Lsp Info" },

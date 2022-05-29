@@ -20,9 +20,9 @@ local servers = {
           rootPatterns = { "pyproject.toml" },
         },
         formatFiletypes = {
-          python = { "black" }
-        }
-      }
+          python = { "black" },
+        },
+      },
     },
     settings = {
       python = {
@@ -30,7 +30,7 @@ local servers = {
           typeCheckingMode = "off",
         },
       },
-    }
+    },
   },
   rust_analyzer = {
     settings = {
@@ -68,8 +68,8 @@ local servers = {
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = {
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
           },
           maxPreload = 2000,
           preloadFileSize = 50000,
@@ -85,6 +85,8 @@ local servers = {
   -- solang = {},
   yamlls = {},
   taplo = {},
+  jdtls = {},
+  dockerls = {},
 }
 
 -- local lsp_signature = require "lsp_signature"
@@ -95,7 +97,7 @@ local servers = {
 --   },
 -- }
 
-local function on_attach(client, bufnr)
+function M.on_attach(client, bufnr)
   -- Enable completion triggered by <C-X><C-O>
   -- See `:help omnifunc` and `:help ins-completion` for more information.
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -118,12 +120,14 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 if PLUGINS.nvim_cmp.enabled then
-  capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities) -- for nvim-cmp
+  M.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities) -- for nvim-cmp
+else
+  M.capabilities = capabilities
 end
 
 local opts = {
-  on_attach = on_attach,
-  capabilities = capabilities,
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
   flags = {
     allow_incremental_sync = true,
     debounce_text_changes = 150,
@@ -150,6 +154,16 @@ function M.toggle_diagnostics()
   else
     vim.diagnostic.hide()
   end
+end
+
+function M.remove_unused_imports()
+  vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
+  vim.cmd "packadd cfilter"
+  vim.cmd "Cfilter /main/"
+  vim.cmd "Cfilter /The import/"
+  vim.cmd "cdo normal dd"
+  vim.cmd "cclose"
+  vim.cmd "wa"
 end
 
 return M

@@ -1,46 +1,62 @@
 local M = {}
 
-vim.g.nvim_tree_icons = {
-  default = "",
-  symlink = "",
-  git = {
-    unstaged = "",
-    staged = "S",
-    unmerged = "",
-    renamed = "➜",
-    deleted = "",
-    untracked = "U",
-    ignored = "◌",
-  },
-  folder = {
-    -- arrow_open = " ",
-    -- arrow_closed = "",
-    default = "",
-    open = "",
-    empty = "",
-    empty_open = "",
-    symlink = "",
-  },
-}
-
 local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
 if not config_status_ok then
   return
 end
 
+local tree_cb = nvim_tree_config.nvim_tree_callback
+
 function M.setup()
-  require("nvim-tree").setup({
+  require("nvim-tree").setup {
     renderer = {
+      add_trailing = false,
+      group_empty = false,
+      highlight_git = false,
+      highlight_opened_files = "none",
+      root_folder_modifier = ":t",
       indent_markers = {
-        enable = true,
+        enable = false,
+        icons = {
+          corner = "└ ",
+          edge = "│ ",
+          none = "  ",
+        },
+      },
+      icons = {
+        glyphs = {
+
+          default = "",
+          symlink = "",
+          folder = {
+            -- arrow_open = " ",
+            -- arrow_closed = "",
+            default = "",
+            open = "",
+            empty = "",
+            empty_open = "",
+            symlink = "",
+          },
+          git = {
+            unstaged = "",
+            staged = "S",
+            unmerged = "",
+            renamed = "➜",
+            deleted = "",
+            untracked = "U",
+            ignored = "◌",
+          },
+        },
       },
     },
-    filters = {
-      dotfiles = false,
+    hijack_directories = {
+      enable = false,
     },
-    disable_netrw = false,
-    hijack_netrw = true,
-    open_on_setup = false,
+    filters = {
+      custom = { ".git" },
+      exclude = { ".gitignore" },
+    },
+    respect_buf_cwd = true,
     ignore_ft_on_setup = {
       "startify",
       "dashboard",
@@ -54,13 +70,22 @@ function M.setup()
       ignore = true,
       timeout = 500,
     },
-
     view = {
-      side = "left",
       width = 30,
-      hide_root_folder = true,
-      number = true,
-      relativenumber = true,
+      height = 30,
+      hide_root_folder = false,
+      side = "left",
+      -- auto_resize = true,
+      mappings = {
+        custom_only = false,
+        list = {
+          { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+          { key = "h", cb = tree_cb "close_node" },
+          { key = "v", cb = tree_cb "vsplit" },
+        },
+      },
+      number = false,
+      relativenumber = false,
     },
     update_cwd = true,
     update_focused_file = {
@@ -86,9 +111,7 @@ function M.setup()
       cmd = "trash",
       require_confirm = true,
     },
-  })
-
-  vim.g.nvim_tree_respect_buf_cwd = 1
+  }
 end
 
 return M
