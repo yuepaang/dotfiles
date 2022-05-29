@@ -1154,6 +1154,15 @@ function M.setup()
       disable = true,
     }
     use { "tversteeg/registers.nvim", disable = true }
+    use {
+      "TaDaa/vimade",
+      cmd = { "VimadeToggle", "VimadeEnable", "VimadeDisable" },
+      disable = false,
+      config = function()
+        vim.g.vimade.fadelevel = 0.7
+        vim.g.vimade.enablesigns = 1
+      end,
+    }
 
     -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     -- https://github.com/rbong/vim-buffest

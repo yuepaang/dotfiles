@@ -87,6 +87,7 @@ local servers = {
   taplo = {},
   jdtls = {},
   dockerls = {},
+  bashls = {},
 }
 
 -- local lsp_signature = require "lsp_signature"
@@ -114,6 +115,18 @@ function M.on_attach(client, bufnr)
 
   -- Configure formatting
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
+
+  -- tagfunc
+  if client.server_capabilities.definitionProvider then
+    vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+  end
+
+  -- Configure for jdtls
+  if client.name == "jdt.ls" then
+    require("jdtls").setup_dap { hotcodereplace = "auto" }
+    require("jdtls.dap").setup_dap_main_class_configs()
+    vim.lsp.codelens.refresh()
+  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
