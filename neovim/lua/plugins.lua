@@ -378,7 +378,20 @@ function M.setup()
         local leap = require "leap"
         leap.set_default_keymaps()
       end,
-      event = "BufRead",
+    }
+
+    use {
+      "abecodes/tabout.nvim",
+      event = { "InsertEnter" },
+      opt = true,
+      wants = { "nvim-treesitter" },
+      after = { "nvim-cmp" },
+      config = function()
+        require("tabout").setup {
+          completion = false,
+          ignore_beginning = false,
+        }
+      end,
     }
 
     -- Markdown
@@ -720,8 +733,8 @@ function M.setup()
       use {
         "neovim/nvim-lspconfig",
         opt = true,
-        event = "VimEnter",
-        -- event = { "BufReadPre" },
+        -- event = "VimEnter",
+        event = { "BufReadPre" },
         -- keys = { "<leader>l", "<leader>f" },
         -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "cmp-nvim-lsp" },
         wants = {
@@ -862,6 +875,18 @@ function M.setup()
 
     -- Java
     use { "mfussenegger/nvim-jdtls", ft = { "java" } }
+
+    -- Flutter
+    use {
+      "akinsho/flutter-tools.nvim",
+      opt = true,
+      ft = { "dart" },
+      event = { "BufRead pubspec.yaml" },
+      requires = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("config.flutter").setup()
+      end,
+    }
 
     -- Terminal
     use {

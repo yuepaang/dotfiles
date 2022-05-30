@@ -51,8 +51,9 @@ local function normal_keymap()
 
     keymap_p = {
       name = "Project",
-      p = { "<cmd>lua require'telescope'.extensions.project.project{}<cr>", "List" },
+      p = { "<cmd>lua require'telescope'.extensions.project.project{display_type = 'full'}<cr>", "List" },
       s = { "<cmd>Telescope repo list<cr>", "Search" },
+      P = { "<cmd>TermExec cmd='BROWSER=brave yarn dev'<cr>", "Slidev" },
     }
   end
 
