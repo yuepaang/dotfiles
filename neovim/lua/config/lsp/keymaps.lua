@@ -1,6 +1,6 @@
 local M = {}
 
-local whichkey = require("which-key")
+local whichkey = require "which-key"
 
 local keymap = vim.api.nvim_set_keymap
 local buf_keymap = vim.api.nvim_buf_set_keymap
@@ -47,9 +47,18 @@ local function keymappings(client, bufnr)
     D = { "<Cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
     s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
     I = { "<cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
-    t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
+    b = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
   }
+
+  local keymap_v_l = {
+    l = {
+      name = "LSP",
+      a = { "<cmd>'<,'>lua vim.lsp.buf.range_code_action()<CR>", "Code Action" },
+    },
+  }
+
   whichkey.register(keymap_l, { buffer = bufnr, prefix = "<leader>" })
+  whichkey.register(keymap_v_l, { mode = "v", buffer = bufnr, prefix = "<leader>" })
   whichkey.register(keymap_g, { buffer = bufnr, prefix = "g" })
 end
 
