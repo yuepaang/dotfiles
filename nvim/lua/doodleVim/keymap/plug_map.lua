@@ -189,9 +189,14 @@ plug_map.normal = {
     j = bind.convert_wk_format(
       map_cr("Telescope todo-comments todo"):with_noremap():with_silent():with_label("Find Todos")
     ),
-    o = bind.convert_wk_format(map_cr("Telescope oldfiles"):with_noremap():with_silent():with_label("Find old files")),
-    d = bind.convert_wk_format(
+    o = bind.convert_wk_format(
+      map_cr("Telescope oldfiles"):with_noremap():with_silent():with_label("Find Recent Files")
+    ),
+    n = bind.convert_wk_format(
       map_cr("Telescope neoclip"):with_noremap():with_silent():with_label("Find Saved Buffer In Clipboard")
+    ),
+    l = bind.convert_wk_format(
+      map_cr("Telescope buffers"):with_noremap():with_silent():with_label("Buffers Navigation")
     ),
   },
 
