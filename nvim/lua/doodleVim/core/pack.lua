@@ -39,7 +39,26 @@ function Packer:load_packer()
     end
     packer.init({
         compile_path = packer_compiled,
-        git = { clone_timeout = 120 },
+        -- git = { clone_timeout = 120 },
+        git = {
+            cmd = 'git', -- The base command for git operations
+            subcommands = { -- Format strings for git subcommands
+                update         = 'pull --ff-only --progress --rebase=false',
+                install        = 'clone --depth %i --no-single-branch --progress',
+                fetch          = 'fetch --depth 999999 --progress',
+                checkout       = 'checkout %s --',
+                update_branch  = 'merge --ff-only @{u}',
+                current_branch = 'branch --show-current',
+                diff           = 'log --color=never --pretty=format:FMT --no-show-signature HEAD@{1}...HEAD',
+                diff_fmt       = '%%h %%s (%%cr)',
+                get_rev        = 'rev-parse --short HEAD',
+                get_msg        = 'log --color=never --pretty=format:FMT --no-show-signature HEAD -n 1',
+                submodules     = 'submodule update --init --recursive --progress'
+            },
+            depth = 1, -- Git clone depth
+            clone_timeout = 60, -- Timeout, in seconds, for git clones
+            default_url_format = 'https://github.com/%s' -- Lua format string used for "aaa/bbb" style plugins
+        },
         disable_commands = true
     })
     packer.reset()
@@ -55,7 +74,7 @@ function Packer:init_ensure_plugins()
     local packer_dir = data_dir .. 'pack/packer/opt/packer.nvim'
     local state = uv.fs_stat(packer_dir)
     if not state then
-        local cmd = "!git clone https://github.com/wbthomason/packer.nvim " .. packer_dir
+        local cmd = "!git clone --depth 1 https://github.com/wbthomason/packer.nvim " .. packer_dir
         api.nvim_command(cmd)
         self:load_packer()
         packer.install()
