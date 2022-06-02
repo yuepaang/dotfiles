@@ -41,8 +41,6 @@ if vim.fn.has "nvim-0.7" then
   -- Fix highlight issue
   api.nvim_create_autocmd("VimEnter", { command = [[syntax enable]] })
 
-  vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
-
   -- winbar
   -- api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
   --   callback = function()
@@ -110,5 +108,4 @@ else
   -- Fix highlight issue
   cmd [[autocmd VimEnter * syntax enable]]
 
-  cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
 end

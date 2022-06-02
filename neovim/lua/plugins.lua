@@ -357,6 +357,16 @@ function M.setup()
       disable = false,
     }
 
+    use {
+      "kkoomen/vim-doge",
+      run = ":call doge#install()",
+      config = function()
+        require("config.doge").setup()
+      end,
+      cmd = { "DogeGenerate", "DogeCreateDocStandard" },
+      disable = false,
+    }
+
     -- Jump
     use {
       "phaazon/hop.nvim",
@@ -878,6 +888,7 @@ function M.setup()
       config = function()
         require("config.flutter").setup()
       end,
+      disable = true,
     }
 
     -- Terminal
