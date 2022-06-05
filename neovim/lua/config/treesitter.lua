@@ -3,7 +3,7 @@ local M = {}
 local colors = require("theme").colors
 
 function M.setup()
-  require("nvim-treesitter.configs").setup({
+  require("nvim-treesitter.configs").setup {
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
     ensure_installed = "all",
 
@@ -36,7 +36,7 @@ function M.setup()
       },
     },
 
-    indent = { enable = true },
+    indent = { enable = true, disable = { "python" } },
 
     -- vim-matchup
     matchup = {
@@ -122,7 +122,7 @@ function M.setup()
       enable = true,
       enable_autocmd = false,
     },
-  })
+  }
 end
 
 return M

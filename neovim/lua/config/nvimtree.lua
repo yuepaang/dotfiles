@@ -8,7 +8,8 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 function M.setup()
-  require("nvim-tree").setup {
+  local nvim_tree = require "nvim-tree"
+  nvim_tree.setup {
     renderer = {
       add_trailing = false,
       group_empty = false,

@@ -223,6 +223,20 @@ function M.setup()
       end,
     }
 
+    use {
+      "ldelossa/gh.nvim",
+      opt = true,
+      wants = { "litee.nvim" },
+      requires = { { "ldelossa/litee.nvim" } },
+      event = "BufReadPre",
+      cmd = { "GHOpenPR" },
+      config = function()
+        require("litee.lib").setup()
+        require("litee.gh").setup()
+      end,
+      disable = true,
+    }
+
     -- WhichKey
     use {
       "folke/which-key.nvim",
@@ -388,13 +402,12 @@ function M.setup()
 
     use {
       "abecodes/tabout.nvim",
-      opt = true,
       wants = { "nvim-treesitter" },
       after = { "nvim-cmp" },
       config = function()
         require("tabout").setup {
           completion = false,
-          ignore_beginning = false,
+          ignore_beginning = true,
         }
       end,
     }
@@ -495,6 +508,7 @@ function M.setup()
         { "JoosepAlviste/nvim-ts-context-commentstring", event = "BufReadPre" },
         { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre" },
         { "p00f/nvim-ts-rainbow", event = "BufReadPre" },
+        -- { "yioneko/nvim-yati", event = "BufReadPre" },
       },
     }
 
@@ -1163,6 +1177,47 @@ function M.setup()
     }
 
     use {
+      "gbprod/substitute.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("config.substitute").setup()
+      end,
+      disable = true,
+    }
+    use {
+      "AckslD/nvim-trevJ.lua",
+      config = function()
+        require("trevj").setup()
+      end,
+      module = "trevj",
+      setup = function()
+        vim.keymap.set("n", ",j", function()
+          require("trevj").format_at_cursor()
+        end)
+      end,
+      disable = true,
+    }
+    use {
+      "narutoxy/dim.lua",
+      requires = { "nvim-treesitter/nvim-treesitter", "neovim/nvim-lspconfig" },
+      config = function()
+        require("dim").setup {
+          disable_lsp_decorations = true,
+        }
+      end,
+      disable = true,
+    }
+    use {
+      "linty-org/key-menu.nvim",
+      config = function()
+        require("config.keymenu").setup()
+      end,
+      event = "VimEnter",
+      disable = true,
+    }
+    use { "mg979/vim-visual-multi", event = "BufReadPre", disable = false }
+
+    use {
       "ziontee113/syntax-tree-surfer",
       opt = true,
       event = "BufReadPre",
@@ -1170,7 +1225,7 @@ function M.setup()
       config = function()
         require("config.syntaxtreesurfer").setup()
       end,
-      disable = false,
+      disable = true,
     }
     use {
       "ghillb/cybu.nvim",
@@ -1185,7 +1240,7 @@ function M.setup()
     use {
       "TaDaa/vimade",
       cmd = { "VimadeToggle", "VimadeEnable", "VimadeDisable" },
-      disable = false,
+      disable = true,
       config = function()
         vim.g.vimade.fadelevel = 0.7
         vim.g.vimade.enablesigns = 1
