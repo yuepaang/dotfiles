@@ -8,7 +8,7 @@ function M.setup()
   local conf = {
     profile = {
       enable = true,
-      threshold = 0.0001, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+      threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
     },
 
     display = {
@@ -18,14 +18,6 @@ function M.setup()
         }
       end,
     },
-    git = {
-      clone_timeout = 300,
-      subcommands = {
-        update = "pull --ff-only --progress --rebase=true",
-      },
-    },
-    auto_clean = true,
-    compile_on_sync = true,
   }
 
   -- Check if packer.nvim is installed
@@ -44,7 +36,7 @@ function M.setup()
       }
       vim.cmd [[packadd packer.nvim]]
     end
-    -- vim.cmd("autocmd BufWritePost plugins.lua source <afile> | PackerCompile")
+    vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
   end
 
   -- Plugins
@@ -56,16 +48,6 @@ function M.setup()
 
     -- wakatime
     use "wakatime/vim-wakatime"
-
-    -- smarter splits
-    use {
-      "mrjones2014/smart-splits.nvim",
-      module = "smart-splits",
-      config = function()
-        require("config.smart-splits").setup()
-      end,
-      disable = true,
-    }
 
     -- Load only when require
     use {
@@ -1237,6 +1219,7 @@ function M.setup()
       disable = true,
     }
     use { "tversteeg/registers.nvim", disable = true }
+
     use {
       "TaDaa/vimade",
       cmd = { "VimadeToggle", "VimadeEnable", "VimadeDisable" },
@@ -1245,6 +1228,14 @@ function M.setup()
         vim.g.vimade.fadelevel = 0.7
         vim.g.vimade.enablesigns = 1
       end,
+    }
+
+    use {
+      "AckslD/nvim-gfold.lua",
+      config = function()
+        require("gfold").setup()
+      end,
+      disable = true,
     }
 
     -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
