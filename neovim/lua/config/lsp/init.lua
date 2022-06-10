@@ -79,7 +79,7 @@ local servers = {
       },
     },
   },
-  tsserver = { disable_formatting = true },
+  -- tsserver = { disable_formatting = true },
   vimls = {},
   -- tailwindcss = {},
   -- solang = {},
@@ -97,6 +97,8 @@ local servers = {
 --     border = "rounded",
 --   },
 -- }
+-- newly add
+require "config.lsp.lsp_signature"
 
 function M.on_attach(client, bufnr)
   -- Enable completion triggered by <C-X><C-O>

@@ -10,7 +10,6 @@ local function keymappings(client, bufnr)
 
   -- Key mappings
   buf_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  -- vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 
   keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
   keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
@@ -33,7 +32,6 @@ local function keymappings(client, bufnr)
       t = { "<cmd>TroubleToggle document_diagnostics<CR>", "Trouble" },
       L = { "<cmd>lua vim.lsp.codelens.refresh()<CR>", "Refresh CodeLens" },
       l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "Run CodeLens" },
-
       S = { "<cmd>SymbolsOutline<CR>", "List Symbols Outline" },
     },
   }
@@ -48,6 +46,8 @@ local function keymappings(client, bufnr)
     s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
     I = { "<cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
     b = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
+    r = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto References" },
+    l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open float diagnostics" },
   }
 
   local keymap_v_l = {
@@ -62,22 +62,22 @@ local function keymappings(client, bufnr)
   whichkey.register(keymap_g, { buffer = bufnr, prefix = "g" })
 end
 
-local function signature_help(client, bufnr)
-  local trigger_chars = client.server_capabilities.signatureHelpProvider.triggerCharacters
-  for _, char in ipairs(trigger_chars) do
-    vim.keymap.set("i", char, function()
-      vim.defer_fn(function()
-        pcall(vim.lsp.buf.signature_help)
-      end, 0)
-      return char
-    end, {
-      buffer = bufnr,
-      noremap = true,
-      silent = true,
-      expr = true,
-    })
-  end
-end
+-- local function signature_help(client, bufnr)
+--   local trigger_chars = client.server_capabilities.signatureHelpProvider.triggerCharacters
+--   for _, char in ipairs(trigger_chars) do
+--     vim.keymap.set("i", char, function()
+--       vim.defer_fn(function()
+--         pcall(vim.lsp.buf.signature_help)
+--       end, 0)
+--       return char
+--     end, {
+--       buffer = bufnr,
+--       noremap = true,
+--       silent = true,
+--       expr = true,
+--     })
+--   end
+-- end
 
 function M.setup(client, bufnr)
   keymappings(client, bufnr)

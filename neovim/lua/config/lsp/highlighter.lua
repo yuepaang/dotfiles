@@ -1,6 +1,6 @@
 local M = {}
 
-local utils = require("utils")
+local utils = require "utils"
 
 M.highlight = true
 
@@ -15,23 +15,30 @@ end
 
 function M.highlight(client)
   if M.highlight then
-    if client.server_capabilities.documentHighlightProvider then
-      local present, illuminate = pcall(require, "illuminate")
-      if present then
-        illuminate.on_attach(client)
-      else
-        vim.api.nvim_exec(
-          [[
-              augroup lsp_document_highlight
-                autocmd! * <buffer>
-                autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-              augroup END
-            ]],
-          false
-        )
-      end
+
+    local status_ok, illuminate = pcall(require, "illuminate")
+    if not status_ok then
+      return
     end
+    illuminate.on_attach(client)
+
+    -- if client.server_capabilities.documentHighlightProvider then
+    --   local present, illuminate = pcall(require, "illuminate")
+    --   if present then
+    --     illuminate.on_attach(client)
+    --   else
+    --     vim.api.nvim_exec(
+    --       [[
+    --           augroup lsp_document_highlight
+    --             autocmd! * <buffer>
+    --             autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+    --             autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+    --           augroup END
+    --         ]],
+    --       false
+    --     )
+    --   end
+    -- end
   end
 end
 
