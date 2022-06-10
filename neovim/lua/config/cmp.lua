@@ -2,7 +2,7 @@ local M = {}
 
 vim.o.completeopt = "menu,menuone,noselect"
 
-local types = require("cmp.types")
+local types = require "cmp.types"
 
 local kind_icons = {
   Text = "",
@@ -35,14 +35,14 @@ local kind_icons = {
 function M.setup()
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
   end
 
-  local luasnip = require("luasnip")
-  local neogen = require("neogen")
-  local cmp = require("cmp")
+  local luasnip = require "luasnip"
+  local neogen = require "neogen"
+  local cmp = require "cmp"
 
-  cmp.setup({
+  cmp.setup {
     confirmation = {
       get_commit_characters = function()
         return {}
@@ -63,17 +63,36 @@ function M.setup()
       end,
     },
     formatting = {
+      fields = {
+        cmp.ItemField.Abbr,
+        cmp.ItemField.Kind,
+        cmp.ItemField.Menu,
+      },
       format = function(entry, vim_item)
-        -- Kind icons
-        vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+        local word = vim_item.abbr
+        if string.sub(word, -1, -1) == "~" then
+          vim_item.abbr = string.sub(word, 0, -2)
+        end
+
+        if entry.source.name == "cmp_tabnine" then
+          -- if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+          -- menu = entry.completion_item.data.detail .. " " .. menu
+          -- end
+          vim_item.kind = "ﮧ"
+        else
+          -- Kind icons
+          vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+        end
+
         -- Source
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
-          buffer = "[Buffer]",
-          luasnip = "[Snip]",
+          buffer = "[BUF]",
+          cmp_tabnine = "[TAB]",
+          luasnip = "[SNP]",
           nvim_lua = "[Lua]",
-          treesitter = "[Treesitter]",
-          path = "[Path]",
+          -- treesitter = "[Treesitter]",
+          path = "[PATH]",
           nvim_lsp_signature_help = "[Signature]",
         })[entry.source.name]
         return vim_item
@@ -81,7 +100,7 @@ function M.setup()
     },
     mapping = {
       -- ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-      ["<C-l>"] = cmp.mapping({
+      ["<C-l>"] = cmp.mapping {
         i = function(fallback)
           if luasnip.choice_active() then
             luasnip.change_choice(1)
@@ -89,21 +108,21 @@ function M.setup()
             fallback()
           end
         end,
-      }),
-      ["<C-u>"] = cmp.mapping({
+      },
+      ["<C-u>"] = cmp.mapping {
         i = function(fallback)
           if luasnip.choice_active() then
-            require("luasnip.extras.select_choice")()
+            require "luasnip.extras.select_choice" ()
           else
             fallback()
           end
         end,
-      }),
+      },
       -- ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-q>"] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
+      ["<C-q>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
       -- ["<C-e>"] = cmp.mapping(function(fallback)
       --   cmp.mapping.abort()
       --   local copilot_keys = vim.fn["copilot#Accept"]()
@@ -113,16 +132,16 @@ function M.setup()
       --     fallback()
       --   end
       -- end),
-      ["<CR>"] = cmp.mapping({
-        i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
+      ["<CR>"] = cmp.mapping {
+        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
         c = function(fallback)
           if cmp.visible() then
-            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
           else
             fallback()
           end
         end,
-      }),
+      },
       ["<C-j>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -188,19 +207,20 @@ function M.setup()
       --   "c",
       -- }),
       ["<C-y>"] = {
-        i = cmp.mapping.confirm({ select = false }),
+        i = cmp.mapping.confirm { select = false },
       },
       ["<C-n>"] = {
-        i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+        i = cmp.mapping.select_next_item { behavior = types.cmp.SelectBehavior.Insert },
       },
       ["<C-p>"] = {
-        i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+        i = cmp.mapping.select_prev_item { behavior = types.cmp.SelectBehavior.Insert },
       },
     },
     sources = {
       { name = "nvim_lsp" },
-      { name = "treesitter" },
+      -- { name = "treesitter" },
       { name = "buffer" },
+      { name = "cmp_tabnine" },
       { name = "luasnip" },
       { name = "nvim_lua" },
       { name = "path" },
@@ -217,7 +237,7 @@ function M.setup()
         winhighlight = "NormalFloat:NormalFloat,FloatBorder:TelescopeBorder",
       },
     },
-  })
+  }
 
   -- Use buffer source for `/`
   cmp.setup.cmdline("/", {
@@ -238,8 +258,8 @@ function M.setup()
   })
 
   -- Auto pairs
-  local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+  local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 end
 
 return M
