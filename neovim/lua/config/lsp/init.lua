@@ -62,7 +62,7 @@ local servers = {
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = { "vim", "PLUGINS", "describe", "it", "before_each", "after_each", "packer_plugins", "dump" },
+          globals = { "vim", "describe", "it", "before_each", "after_each", "packer_plugins", "dump" },
           disable = { "lowercase-global", "undefined-global", "unused-local", "unused-vararg", "trailing-space" },
         },
         workspace = {
@@ -87,6 +87,7 @@ local servers = {
   taplo = {},
   jdtls = {},
   dockerls = {},
+  graphql = {},
   bashls = {},
 }
 
@@ -134,11 +135,7 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-if PLUGINS.nvim_cmp.enabled then
-  M.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities) -- for nvim-cmp
-else
-  M.capabilities = capabilities
-end
+M.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities) -- for nvim-cmp
 
 local opts = {
   on_attach = M.on_attach,

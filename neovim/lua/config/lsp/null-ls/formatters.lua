@@ -27,6 +27,7 @@ function M.format()
           and client.name ~= "jsonls"
           and client.name ~= "html"
           and client.name ~= "sumneko_lua"
+          and client.name ~= "jdt.ls"
       end,
     })
     vim.fn.winrestview(view)

@@ -60,10 +60,7 @@ function M.setup(servers, options)
       require("typescript").setup { server = opts }
     elseif server_name == "jdtls" then
       -- Do nothing, jdtls is handled by nvim-jdtls
-      -- print "jdtls is handled by nvim-jdtls"
-    elseif server_name == "dartls" then
-      -- Do nothing, jdtls is handled by flutter-tools
-      -- print "dartls is handled by flutter-tools"
+      print "jdtls is handled by nvim-jdtls"
     else
       lspconfig[server_name].setup(opts)
     end
