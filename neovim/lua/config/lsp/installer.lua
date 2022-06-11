@@ -1,20 +1,17 @@
-local lsp_installer_servers = require "nvim-lsp-installer.servers"
-local utils = require "utils"
-
 local M = {}
 
 function M.setup(servers, options)
+  local lspconfig = require "lspconfig"
+  local icons = require "config.icons"
+
   local settings = {
-    ensure_installed = servers,
-    -- automatic_installation = false,
+    ensure_installed = vim.tbl_keys(servers),
+    automatic_installation = false,
     ui = {
       icons = {
-        -- server_installed = "◍",
-        -- server_pending = "◍",
-        -- server_uninstalled = "◍",
-        -- server_installed = "✓",
-        -- server_pending = "➜",
-        -- server_uninstalled = "✗",
+        server_installed = icons.server_installed,
+        server_pending = icons.server_pending,
+        server_uninstalled = icons.server_uninstalled,
       },
       keymaps = {
         toggle_server_expand = "<CR>",
@@ -31,16 +28,13 @@ function M.setup(servers, options)
     -- max_concurrent_installers = 4,
     -- install_root_dir = path.concat { vim.fn.stdpath "data", "lsp_servers" },
   }
+
+  -- nvim-lsp-installer must be set up before nvim-lspconfig
   local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
   if not status_ok then
     return
   end
   lsp_installer.setup(settings)
-
-  local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-  if not lspconfig_status_ok then
-    return
-  end
 
   for server_name, _ in pairs(servers) do
     local opts = vim.tbl_deep_extend("force", options, servers[server_name] or {})
@@ -49,18 +43,26 @@ function M.setup(servers, options)
       opts = require("lua-dev").setup { lspconfig = opts }
     end
 
-    -- https://github.com/williamboman/nvim-lsp-installer/wiki/Rust
-    if server_name == "rust_analyzer" then
-      local _, server = lsp_installer_servers.get_server(server_name)
-      require("rust-tools").setup {
-        server = vim.tbl_deep_extend("force", server:get_default_options(), opts),
-      }
-      server:attach_buffers()
-    elseif server_name == "tsserver" then
-      require("typescript").setup { server = opts }
-    elseif server_name == "jdtls" then
-      -- Do nothing, jdtls is handled by nvim-jdtls
+    if server_name == "jdtls" then
       print "jdtls is handled by nvim-jdtls"
+      -- https://github.com/williamboman/nvim-lsp-installer/wiki/Rust
+    elseif server_name == "rust_analyzer" then
+      -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience
+      local extension_path = vim.fn.glob(vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-*")
+      local codelldb_path = extension_path .. "adapter/codelldb"
+      local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+      require("rust-tools").setup {
+        server = opts,
+        dap = {
+          adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+        },
+      }
+    elseif server_name == "tsserver" then
+      require("typescript").setup {
+        disable_commands = false,
+        debug = false,
+        server = opts,
+      }
     else
       lspconfig[server_name].setup(opts)
     end
