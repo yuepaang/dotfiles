@@ -148,7 +148,7 @@ function M.setup()
   telescope.load_extension "media_files"
   -- telescope.load_extension "bookmarks"
   -- require("telescope").load_extension "flutter" -- Flutter
-  telescope.load_extension "aerial"
+  -- telescope.load_extension "aerial"
 end
 
 return M
