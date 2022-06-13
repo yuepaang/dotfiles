@@ -11,25 +11,8 @@ local servers = {
     },
   },
   pyright = {
-    filetypes = { "python" },
-    init_options = {
-      formatters = {
-        black = {
-          command = "black",
-          args = { "--quiet", "-" },
-          rootPatterns = { "pyproject.toml" },
-        },
-        formatFiletypes = {
-          python = { "black" },
-        },
-      },
-    },
-    settings = {
-      python = {
-        analysis = {
-          typeCheckingMode = "off",
-        },
-      },
+    analysis = {
+      typeCheckingMode = "off",
     },
   },
   rust_analyzer = {

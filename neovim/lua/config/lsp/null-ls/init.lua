@@ -22,14 +22,14 @@ local sources = {
   -- formatting
   b.formatting.prettierd,
   b.formatting.shfmt,
+  b.formatting.shellharden,
   b.formatting.fixjson,
-  b.formatting.black,
+  b.formatting.black.with { extra_args = { "--fast" } },
   b.formatting.isort,
   b.formatting.stylua,
-
+  b.formatting.google_java_format,
   b.formatting.rustfmt,
   b.formatting.gofmt,
-  b.formatting.google_java_format,
   -- with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
@@ -39,14 +39,18 @@ local sources = {
   b.diagnostics.flake8,
   b.diagnostics.tsc,
   -- b.diagnostics.selene,
+  -- b.diagnostics.codespell,
   -- with_root_file(b.diagnostics.selene, "selene.toml"),
   with_diagnostics_code(b.diagnostics.shellcheck),
+  b.diagnostics.zsh,
 
   -- code actions
   b.code_actions.gitsigns,
   b.code_actions.eslint_d,
   b.code_actions.gitrebase,
   b.code_actions.refactoring,
+  b.code_actions.proselint,
+  b.code_actions.shellcheck,
 
   -- hover
   b.hover.dictionary,

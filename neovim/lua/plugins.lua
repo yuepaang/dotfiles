@@ -698,42 +698,42 @@ function M.setup()
     }
 
     -- LSP
-      use {
-        "neovim/nvim-lspconfig",
-        opt = true,
-        -- event = "VimEnter",
-        event = { "BufReadPre" },
-        -- keys = { "<leader>l", "<leader>f" },
-        -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "cmp-nvim-lsp" },
-        wants = {
-          "nvim-lsp-installer",
-          "cmp-nvim-lsp",
-          "lua-dev.nvim",
-          "vim-illuminate",
-          "null-ls.nvim",
-          "schemastore.nvim",
-          -- "nvim-lsp-ts-utils",
-          "typescript.nvim",
+    use {
+      "neovim/nvim-lspconfig",
+      opt = true,
+      -- event = "VimEnter",
+      event = { "BufReadPre" },
+      -- keys = { "<leader>l", "<leader>f" },
+      -- wants = { "nvim-lsp-installer", "lsp_signature.nvim", "cmp-nvim-lsp" },
+      wants = {
+        "nvim-lsp-installer",
+        "cmp-nvim-lsp",
+        "lua-dev.nvim",
+        "vim-illuminate",
+        "null-ls.nvim",
+        "schemastore.nvim",
+        -- "nvim-lsp-ts-utils",
+        "typescript.nvim",
+      },
+      config = function()
+        require("config.lsp").setup()
+      end,
+      requires = {
+        "williamboman/nvim-lsp-installer",
+        "folke/lua-dev.nvim",
+        "RRethy/vim-illuminate",
+        "jose-elias-alvarez/null-ls.nvim",
+        {
+          "j-hui/fidget.nvim",
+          config = function()
+            require("fidget").setup {}
+          end,
         },
-        config = function()
-          require("config.lsp").setup()
-        end,
-        requires = {
-          "williamboman/nvim-lsp-installer",
-          "folke/lua-dev.nvim",
-          "RRethy/vim-illuminate",
-          "jose-elias-alvarez/null-ls.nvim",
-          {
-            "j-hui/fidget.nvim",
-            config = function()
-              require("fidget").setup {}
-            end,
-          },
-          "b0o/schemastore.nvim",
-          -- "jose-elias-alvarez/nvim-lsp-ts-utils",
-          "jose-elias-alvarez/typescript.nvim",
-        },
-      }
+        "b0o/schemastore.nvim",
+        -- "jose-elias-alvarez/nvim-lsp-ts-utils",
+        "jose-elias-alvarez/typescript.nvim",
+      },
+    }
 
     -- trouble.nvim
     use {
@@ -1052,6 +1052,15 @@ function M.setup()
       config = function()
         require("sidebar-nvim").setup { open = false }
       end,
+    }
+
+    use {
+      "stevearc/aerial.nvim",
+      config = function()
+        require("aerial").setup()
+      end,
+      module = { "aerial" },
+      cmd = { "AerialToggle" },
     }
 
     -- Translation
