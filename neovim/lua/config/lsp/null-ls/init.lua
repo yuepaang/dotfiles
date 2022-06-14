@@ -30,6 +30,7 @@ local sources = {
   b.formatting.google_java_format,
   b.formatting.rustfmt,
   b.formatting.gofmt,
+  b.formatting.jq,
   -- with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
@@ -37,7 +38,7 @@ local sources = {
   -- b.diagnostics.markdownlint,
   b.diagnostics.eslint_d,
   b.diagnostics.flake8,
-  b.diagnostics.tsc,
+  -- b.diagnostics.tsc,
   -- b.diagnostics.selene,
   -- b.diagnostics.codespell,
   -- with_root_file(b.diagnostics.selene, "selene.toml"),

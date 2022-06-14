@@ -2,25 +2,6 @@ local g = vim.g
 
 g.mapleader = " "
 
--- g.copilot_no_tab_map = true
--- g.copilot_assume_mapped = true
--- g.copilot_tab_fallback = ""
--- g.copilot_filetypes = {
---   ["*"] = false,
---   ["javascript"] = true,
---   ["typescript"] = true,
---   ["lua"] = false,
---   ["rust"] = true,
---   ["c"] = true,
---   ["c#"] = true,
---   ["c++"] = true,
---   ["go"] = true,
---   ["python"] = true,
--- }
-
--- g.python3_host_skip_check = 1
--- g.python3_host_prog = "$HOME/.pyenv/versions/nvim-py3/bin/python"
-
 -- add clipboard-provider
 g.clipboard = {
   name = "myProvider",
