@@ -29,17 +29,46 @@ if vim.fn.has "nvim-0.7" then
   api.nvim_create_autocmd("FocusGained", { command = [[:checktime]] })
 
   -- windows to close with "q"
-  api.nvim_create_autocmd(
-    "FileType",
-    { pattern = { "help", "startuptime", "qf", "lspinfo" }, command = [[nnoremap <buffer><silent> q :close<CR>]] }
-  )
-  api.nvim_create_autocmd("FileType", { pattern = "man", command = [[nnoremap <buffer><silent> q :quit<CR>]] })
+  api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir", "startuptime" },
+    callback = function()
+      vim.cmd [[
+      nnoremap <silent> <buffer> q :close<CR> 
+      set nobuflisted 
+    ]]
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "gitcommit", "markdown" },
+    callback = function()
+      vim.opt_local.wrap = true
+      vim.opt_local.spell = true
+    end,
+  })
+
+  vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
 
   -- don't auto comment new line
   api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
   -- Fix highlight issue
-  api.nvim_create_autocmd("VimEnter", { command = [[syntax enable]] })
+  -- api.nvim_create_autocmd("VimEnter", { command = [[syntax enable]] })
+
+  api.nvim_create_autocmd({ "VimEnter" }, {
+    callback = function()
+      vim.cmd "hi link illuminatedWord LspReferenceText"
+    end,
+  })
+
+  api.nvim_create_autocmd({ "User" }, {
+    pattern = { "AlphaReady" },
+    callback = function()
+      vim.cmd [[
+      set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
+    ]]
+    end,
+  })
 
   -- winbar
   -- api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
@@ -107,5 +136,4 @@ else
 
   -- Fix highlight issue
   cmd [[autocmd VimEnter * syntax enable]]
-
 end
