@@ -110,6 +110,7 @@ local function normal_keymap()
     r = { "<cmd>Telescope file_browser<cr>", "Browser" },
     w = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" },
     e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+    t = { "<cmd>TodoTelescope<Cr>", "TODO" },
   }
 
   keymap_p = {
