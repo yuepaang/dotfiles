@@ -121,13 +121,14 @@ local function normal_keymap()
   }
 
   local keymap = {
-    -- ["w"] = { "<cmd>update!<CR>", "Save" },
+    ["w"] = { "<cmd>update!<CR>", "Save" },
     -- ["q"] = { "<cmd>q<CR>", "Quit" },
     -- ["h"] = { "<cmd>nohlsearch<CR>", "No highlight search" },
     -- ["t"] = { "<cmd>ToggleTerm<CR>", "Terminal" },
 
-    ["w"] = { "<cmd>w<CR>", "Write" },
+    -- ["w"] = { "<cmd>w<CR>", "Write" },
     ["q"] = { '<cmd>lua require("functions").smart_quit()<CR>', "Quit" },
+    -- ["q"] = { "<cmd>lua require('utils').quit()<CR>", "Quit" },
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 
     a = {
@@ -351,16 +352,12 @@ local function visual_keymap()
 end
 
 local function code_keymap()
-  if vim.fn.has "nvim-0.7" then
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "*",
-      callback = function()
-        vim.schedule(CodeRunner)
-      end,
-    })
-  else
-    vim.cmd "autocmd FileType * lua CodeRunner()"
-  end
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    callback = function()
+      vim.schedule(CodeRunner)
+    end,
+  })
 
   function CodeRunner()
     local bufnr = vim.api.nvim_get_current_buf()

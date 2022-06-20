@@ -43,6 +43,17 @@ function M.setup()
       enable = true,
     },
 
+    -- nvim-treesitter-textsubjects
+    textsubjects = {
+      enable = true,
+      prev_selection = ",", -- (Optional) keymap to select the previous selection
+      keymaps = {
+        ["."] = "textsubjects-smart",
+        [";"] = "textsubjects-container-outer",
+        ["i;"] = "textsubjects-container-inner",
+      },
+    },
+
     -- nvim-treesitter-textobjects
     textobjects = {
       select = {
@@ -103,7 +114,6 @@ function M.setup()
       --     ["<leader>cF"] = "@class.outer",
       --   },
       -- },
-      --
     },
 
     -- endwise
