@@ -56,7 +56,7 @@ plug_map.normal = {
       :with_silent()
       :with_label("Generate Exported Function Test")
     ),
-    r = bind.convert_wk_format(map_cu("TranslateW"):with_silent():with_label("Translate Word In Cursor")),
+    r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor")),
   },
 
   ["g"] = {
@@ -112,7 +112,7 @@ plug_map.normal = {
   ["<leader>v"] = {
     name = "Symbols-Outline",
     v = bind.convert_wk_format(
-      map_cu('lua ensure_require"symbols-outline".toggle_outline()')
+      map_cr('lua ensure_require"symbols-outline".toggle_outline()')
       :with_noremap()
       :with_silent()
       :with_label("Symbols And Function Preview")
@@ -160,19 +160,19 @@ plug_map.normal = {
   ["<leader>m"] = {
     name = "MarkdownPreview, EasyAlign",
     w = bind.convert_wk_format(
-      map_cu("MarkdownPreviewToggle"):with_noremap():with_silent():with_label("Toggle Markdown Preview")
+      map_cr("MarkdownPreviewToggle"):with_noremap():with_silent():with_label("Toggle Markdown Preview")
     ),
     a = bind.convert_wk_format(map_cmd("<Plug>(EasyAlign)"):with_label("EasyAlign File")),
   },
 
   ["f"] = {
     name = "Floaterm",
-    t = bind.convert_wk_format(map_cu("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm")),
+    t = bind.convert_wk_format(map_cr("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm")),
     r = bind.convert_wk_format(
-      map_cu("FloatermNew --cwd=<root>"):with_noremap():with_silent():with_label("Open Floaterm In Project Rood Dir")
+      map_cr("FloatermNew --cwd=<root>"):with_noremap():with_silent():with_label("Open Floaterm In Project Rood Dir")
     ),
     v = bind.convert_wk_format(
-      map_cu("FloatermNew --cwd=<buffer>"):with_noremap():with_silent():with_label("Open Floaterm In CWD")
+      map_cr("FloatermNew --cwd=<buffer>"):with_noremap():with_silent():with_label("Open Floaterm In CWD")
     ),
     d = { "Kill All Floaterm In Terminal Mode" },
     k = { "Kill Current Floaterm In Terminal Mode" },
@@ -213,7 +213,7 @@ plug_map.normal = {
       map_cr("lua ensure_require'hop'.hint_words()"):with_noremap():with_silent():with_label("Search Word")
     ),
     s = bind.convert_wk_format(
-      map_cu("lua ensure_require'hop'.hint_char2()"):with_noremap():with_silent():with_label("Search By First 2 Char")
+      map_cr("lua ensure_require'hop'.hint_char2()"):with_noremap():with_silent():with_label("Search By First 2 Char")
     ),
   },
 
@@ -258,10 +258,10 @@ plug_map.normal = {
   },
 
   ["<F7>"] = bind.convert_wk_format(
-    map_cu("DapContinue"):with_noremap():with_silent():with_label("Start Or Continue Debug")
+    map_cr("DapContinue"):with_noremap():with_silent():with_label("Start Or Continue Debug")
   ),
   ["<S-F7>"] = bind.convert_wk_format(
-    map_cu("DapTerminate"):with_noremap():with_silent():with_label("Stop Debugging, Shortcut: Shift + F7")
+    map_cr("DapTerminate"):with_noremap():with_silent():with_label("Stop Debugging, Shortcut: Shift + F7")
   ),
   ["<F8>"] = bind.convert_wk_format(
     map_cr("lua require('dap').pause()"):with_noremap():with_silent():with_label("Pause Debug")
@@ -272,10 +272,10 @@ plug_map.normal = {
   ["<F9>"] = bind.convert_wk_format(
     map_cr("DapToggleBreakpoint"):with_noremap():with_silent():with_label("Toggle Breakpoint")
   ),
-  ["<F10>"] = bind.convert_wk_format(map_cu("DapStepOver"):with_noremap():with_silent():with_label("Step Over")),
-  ["<F11>"] = bind.convert_wk_format(map_cu("DapStepInto"):with_noremap():with_silent():with_label("Step Into")),
+  ["<F10>"] = bind.convert_wk_format(map_cr("DapStepOver"):with_noremap():with_silent():with_label("Step Over")),
+  ["<F11>"] = bind.convert_wk_format(map_cr("DapStepInto"):with_noremap():with_silent():with_label("Step Into")),
   ["<S-F11>"] = bind.convert_wk_format(
-    map_cu("DapStepOut"):with_noremap():with_silent():with_label("Step Out, Shortcut: Shift + F11")
+    map_cr("DapStepOut"):with_noremap():with_silent():with_label("Step Out, Shortcut: Shift + F11")
   ),
   ["<F12>"] = bind.convert_wk_format(
     map_cr("lua require('dap').run_to_cursor()"):with_noremap():with_silent():with_label("Run To Cursor")
@@ -288,15 +288,15 @@ plug_map.normal = {
   ),
 
   ["<S-h>"] = bind.convert_wk_format(
-    map_cu("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")
+    map_cr("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")
   ),
-  ["<S-l>"] = bind.convert_wk_format(map_cu("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
+  ["<S-l>"] = bind.convert_wk_format(map_cr("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
 
   ["<M-h>"] = bind.convert_wk_format(
-    map_cu("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")
+    map_cr("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")
   ),
   ["<M-l>"] = bind.convert_wk_format(
-    map_cu("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")
+    map_cr("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")
   ),
   ["<S-n>"] = bind.convert_wk_format(
     map_cr("lua require('doodleVim.extend.misc').enhanced_buffer_close()")
@@ -305,18 +305,22 @@ plug_map.normal = {
     :with_label("Close Current Buffer")
   ),
   ["<S-b>"] = bind.convert_wk_format(
-    map_cu("BufferCloseBuffersLeft"):with_noremap():with_silent():with_label("Close All Buffers Left")
+    map_cr("BufferCloseBuffersLeft"):with_noremap():with_silent():with_label("Close All Buffers Left")
   ),
   ["<S-m>"] = bind.convert_wk_format(
-    map_cu("BufferCloseBuffersRight"):with_noremap():with_silent():with_label("Close All Buffers Right")
+    map_cr("BufferCloseBuffersRight"):with_noremap():with_silent():with_label("Close All Buffers Right")
   ),
-  ["<S-i>"] = bind.convert_wk_format(map_cu("BufferPin"):with_noremap():with_silent():with_label("Pin Buffer")),
-  ["<S-o>"] = bind.convert_wk_format(map_cu("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
+  ["<S-i>"] = bind.convert_wk_format(map_cr("BufferPin"):with_noremap():with_silent():with_label("Pin Buffer")),
+  ["<S-o>"] = bind.convert_wk_format(map_cr("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
   ["<S-s>"] = bind.convert_wk_format(
-    map_cu("BufferOrderByDirectory"):with_noremap():with_silent():with_label("Sort Buffer")
+    map_cr("BufferOrderByDirectory"):with_noremap():with_silent():with_label("Sort Buffer")
   ),
 
   ["<C-Space>"] = bind.convert_wk_format(map_cr("WhichKey"):with_noremap():with_silent():with_label("Show Keymaps")),
+  ["<M-n>"] = bind.convert_wk_format(map_cr("Gitsigns next_hunk"):with_noremap():with_silent():with_label("Next Hunk")),
+  ["<M-p>"] = bind.convert_wk_format(
+    map_cr("Gitsigns prev_hunk"):with_noremap():with_silent():with_label("Previous Hunk")
+  ),
 }
 
 plug_map.visual = {
