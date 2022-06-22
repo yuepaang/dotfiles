@@ -520,6 +520,9 @@ function M.setup()
         "telescope-arecibo.nvim",
         "telescope-media-files.nvim",
         "telescope-github.nvim",
+        "telescope-zoxide",
+        "cder.nvim",
+        -- "telescope-ui-select.nvim",
       },
       requires = { -- An implementation of the Popup API from vim in Neovim
         "nvim-lua/popup.nvim", -- Useful lua functions used ny lots of plugins
@@ -562,6 +565,9 @@ function M.setup()
         "nvim-telescope/telescope-media-files.nvim",
         "dhruvmanila/telescope-bookmarks.nvim",
         "nvim-telescope/telescope-github.nvim",
+        "jvgrootveld/telescope-zoxide",
+        "Zane-/cder.nvim",
+        -- "nvim-telescope/telescope-ui-select.nvim",
       },
     }
 
@@ -600,6 +606,12 @@ function M.setup()
         }
       end,
       disable = false,
+    }
+
+    use {
+      "ray-x/guihua.lua",
+      run = "cd lua/fzy && make",
+      disable = true,
     }
 
     -- Completion
@@ -803,6 +815,7 @@ function M.setup()
       config = function()
         require("go").setup()
       end,
+      disable = true,
     }
 
     -- Java
@@ -1219,7 +1232,7 @@ function M.setup()
       disable = true,
     }
 
-     -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
+    -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     -- https://github.com/rbong/vim-buffest
     -- https://github.com/jamestthompson3/nvim-remote-containers
     -- https://github.com/esensar/nvim-dev-container
