@@ -135,6 +135,12 @@ function M.setup()
       end,
     }
 
+    use {
+      "rktjmp/lush.nvim",
+      cmd = { "LushRunQuickstart", "LushRunTutorial", "Lushify", "LushImport" },
+      disable = false,
+    }
+
     -- Startup screen
     use {
       "goolord/alpha-nvim",
@@ -577,7 +583,7 @@ function M.setup()
       opt = true,
       wants = "nvim-web-devicons",
       cmd = { "NvimTreeToggle", "NvimTreeClose" },
-      module = "nvim-tree",
+      -- module = "nvim-tree",
       config = function()
         require("config.nvimtree").setup()
       end,
@@ -1005,6 +1011,13 @@ function M.setup()
     }
     use { "kevinhwang91/nvim-hlslens", event = "BufReadPre", disable = true }
     use { "nvim-pack/nvim-spectre", module = "spectre", keys = { "<leader>s" } }
+    use {
+      "https://gitlab.com/yorickpeterse/nvim-pqf",
+      event = "BufReadPre",
+      config = function()
+        require("pqf").setup()
+      end,
+    }
 
     -- Performance
     use {
@@ -1192,6 +1205,17 @@ function M.setup()
       disable = true,
     }
     use { "mg979/vim-visual-multi", event = "BufReadPre", disable = false }
+
+    use {
+      "anuvyklack/hydra.nvim",
+      config = function()
+        require("config.hydra").setup()
+      end,
+      requires = "anuvyklack/keymap-layer.nvim",
+      module = { "hydra" },
+      event = { "BufReadPre" },
+      disable = true,
+    }
 
     use {
       "ziontee113/syntax-tree-surfer",
