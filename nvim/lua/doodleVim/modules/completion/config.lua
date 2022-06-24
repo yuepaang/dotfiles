@@ -1,20 +1,32 @@
 local config = {}
 
 function config.nvim_lsp_installer()
-  local servers = { "gopls", "pyright", "sumneko_lua", "rust_analyzer", "bashls", "yamlls" }
   require("nvim-lsp-installer").setup({
-    automatic_installation = false,
+    ensure_installed = {
+      "gopls",
+      "pylsp",
+      "sumneko_lua",
+      "jsonls",
+      "rust_analyzer",
+    },
+    automatic_installation = true,
     ui = {
       border = "rounded",
     },
   })
+
   local handler = require("doodleVim.modules.completion.handler")
   handler.lsp_hover()
   handler.lsp_diagnostic()
   handler.null_ls_depress()
 
-  require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
+  local servers = {}
+  local installed_servers = require("nvim-lsp-installer").get_installed_servers()
+  for _, item in ipairs(installed_servers) do
+    table.insert(servers, item.name)
+  end
 
+  require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -23,7 +35,7 @@ function config.nvim_lsp_installer()
 
   local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    require("doodleVim.modules.completion.handler").lsp_highlight_document(client)
+    -- require("doodleVim.modules.completion.handler").lsp_highlight_document(client)
     require("lsp_signature").on_attach({
       bind = true, -- This is mandatory, otherwise border config won't get registered.
       hint_enable = false,
@@ -35,6 +47,7 @@ function config.nvim_lsp_installer()
   lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
     capabilities = capabilities,
   })
+
   for _, lsp in ipairs(servers) do
     local server_available, server = require("nvim-lsp-installer.servers").get_server(lsp)
     if not server_available then
@@ -116,8 +129,6 @@ function config.nvim_cmp()
 
   local cmp = require("cmp")
   local types = require("cmp.types")
-  -- local luasnip = require("luasnip")
-  -- local neogen = require('neogen')
 
   cmp.setup({
     enabled = function()
@@ -142,10 +153,10 @@ function config.nvim_cmp()
       }),
     },
     sources = cmp.config.sources({
-      { name = "nvim_lsp" },
-      { name = "luasnip" },
-      { name = "buffer" },
+      { name = "luasnip", priority = 100 },
+      { name = "nvim_lsp", priority = 99 },
       { name = "cmp_tabnine" },
+      { name = "buffer" },
       { name = "path" },
     }, {
       {
@@ -273,9 +284,9 @@ function config.luasnip()
   require("luasnip.loaders.from_vscode").lazy_load({
     paths = { "./snippets/rust" },
   })
-  require("luasnip.loaders.from_vscode").lazy_load({
-    paths = { "./snippets/typescript" },
-  })
+  -- require("luasnip.loaders.from_vscode").lazy_load({
+  --   paths = { "./snippets/typescript" },
+  -- })
   require("luasnip.loaders.from_vscode").lazy_load({
     paths = {
       "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets",
