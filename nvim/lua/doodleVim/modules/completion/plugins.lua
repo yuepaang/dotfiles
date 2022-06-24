@@ -63,21 +63,27 @@ completion["doodleEsc/friendly-snippets"] = {
 }
 
 completion["neovim/nvim-lspconfig"] = {
-  after = "nvim-cmp",
+  after = "cmp-nvim-lsp",
 }
 
 completion["ray-x/lsp_signature.nvim"] = {
   after = "nvim-lspconfig",
 }
 
-completion['tamago324/nlsp-settings.nvim'] = {
-    after = 'nvim-lspconfig',
-    config = conf.nlsp_settings
+completion["tamago324/nlsp-settings.nvim"] = {
+  after = "nvim-lspconfig",
+  config = conf.nlsp_settings,
 }
 
 completion["williamboman/nvim-lsp-installer"] = {
-  after = { "nlsp-settings.nvim", "lsp_signature.nvim" },
+  opt = true,
+  after = { "nlsp-settings.nvim", "lsp_signature.nvim", "nvim-lspconfig" },
   config = conf.nvim_lsp_installer,
+}
+
+completion["doodleEsc/lightbulb.nvim"] = {
+  after = "nvim-lsp-installer",
+  config = conf.lightbulb,
 }
 
 completion["jose-elias-alvarez/null-ls.nvim"] = {

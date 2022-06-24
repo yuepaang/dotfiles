@@ -1,11 +1,6 @@
 local config = {}
 
 function config.nvim_lsp_installer()
-  local handler = require("doodleVim.modules.completion.handler")
-  handler.lsp_hover()
-  handler.lsp_diagnostic()
-  handler.null_ls_depress()
-
   local servers = { "gopls", "pyright", "sumneko_lua", "rust_analyzer", "bashls", "yamlls" }
   require("nvim-lsp-installer").setup({
     automatic_installation = false,
@@ -13,8 +8,12 @@ function config.nvim_lsp_installer()
       border = "rounded",
     },
   })
+  local handler = require("doodleVim.modules.completion.handler")
+  handler.lsp_hover()
+  handler.lsp_diagnostic()
+  handler.null_ls_depress()
 
-  require("doodleVim.utils.defer").load_immediately("cmp-nvim-lsp")
+  require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -113,7 +112,7 @@ function config.nlsp_settings()
 end
 
 function config.nvim_cmp()
-  require("doodleVim.utils.defer").load_immediately({ "LuaSnip", "neogen" })
+  require("doodleVim.utils.defer").immediate_load({ "LuaSnip", "neogen" })
 
   local cmp = require("cmp")
   local types = require("cmp.types")
@@ -338,6 +337,63 @@ function config.rename()
       prompt = "➤ ",
       prompt_hl = "Comment",
     },
+  })
+end
+
+function config.lightbulb()
+  local icons = require("doodleVim.utils.icons")
+  require("lightbulb").setup({
+    -- LSP client names to ignore
+    -- Example: {"sumneko_lua", "null-ls"}
+    ignore = { "null-ls" },
+    sign = {
+      enabled = true,
+      -- Priority of the gutter sign
+      priority = 20,
+      text = icons.diag.hint_sign,
+    },
+    float = {
+      enabled = false,
+      -- Text to show in the popup float
+      text = icons.diag.hint_sign,
+      -- Available keys for window options:
+      -- - height     of floating window
+      -- - width      of floating window
+      -- - wrap_at    character to wrap at for computing height
+      -- - max_width  maximal width of floating window
+      -- - max_height maximal height of floating window
+      -- - pad_left   number of columns to pad contents at left
+      -- - pad_right  number of columns to pad contents at right
+      -- - pad_top    number of lines to pad contents at top
+      -- - pad_bottom number of lines to pad contents at bottom
+      -- - offset_x   x-axis offset of the floating window
+      -- - offset_y   y-axis offset of the floating window
+      -- - anchor     corner of float to place at the cursor (NW, NE, SW, SE)
+      -- - winblend   transparency of the window (0-100)
+      win_opts = {},
+    },
+    virtual_text = {
+      enabled = false,
+      -- Text to show at virtual text
+      text = icons.diag.hint_sign,
+      -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
+      hl_mode = "replace",
+    },
+    status_text = {
+      enabled = false,
+      -- Text to provide when code actions are available
+      text = icons.diag.hint_sign,
+      -- Text to provide when no actions are available
+      text_unavailable = "",
+    },
+  })
+
+  vim.api.nvim_create_augroup("lightbulb", { clear = true })
+
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    group = "lightbulb",
+    pattern = "*",
+    command = "lua require'lightbulb'.check()",
   })
 end
 

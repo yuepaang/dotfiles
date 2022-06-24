@@ -4,7 +4,7 @@ local conf = require("doodleVim.modules.editor.config")
 editor["numToStr/Comment.nvim"] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").packer_defer_load("Comment.nvim", 200)
+    require("doodleVim.utils.defer").defer_load("Comment.nvim", 200)
   end,
   config = conf.comment,
 }
@@ -20,14 +20,14 @@ editor["phaazon/hop.nvim"] = {
 editor["andymass/vim-matchup"] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").packer_defer_load("vim-matchup", 200)
+    require("doodleVim.utils.defer").defer_load("vim-matchup", 200)
   end,
 }
 
 editor["junegunn/vim-easy-align"] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").packer_defer_load("vim-easy-align", 500)
+    require("doodleVim.utils.defer").defer_load("vim-easy-align", 500)
   end,
 }
 
@@ -50,7 +50,7 @@ editor["folke/todo-comments.nvim"] = {
 editor["windwp/nvim-autopairs"] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").packer_defer_load("nvim-autopairs", 200)
+    require("doodleVim.utils.defer").defer_load("nvim-autopairs", 200)
   end,
   config = conf.autopairs,
 }
