@@ -32,6 +32,7 @@ keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 -- keymap("n", "G", "Gzz", default_opts)
 
 -- Better indent
+-- Stay in indent mode
 keymap("v", "<", "<gv", default_opts)
 keymap("v", ">", ">gv", default_opts)
 
@@ -43,9 +44,8 @@ keymap("n", "<S-h>", ":bprevious<CR>", default_opts)
 keymap("n", "<S-l>", ":bnext<CR>", default_opts)
 keymap("n", "<S-n>", ":BDelete this<CR>", default_opts)
 
-
 -- Cancel search highlighting with ESC
-keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>", default_opts)
+keymap("n", "<ESC><ESC>", ":nohlsearch<Bar>:echo<CR>", default_opts)
 
 -- Move selected line / block of text in visual mode
 keymap("x", "K", ":move '<-2<CR>gv-gv", default_opts)
