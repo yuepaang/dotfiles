@@ -21,7 +21,7 @@ ui["norcalli/nvim-colorizer.lua"] = {
 ui["nvim-lualine/lualine.nvim"] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").add("lualine.nvim", 90)
+    require("doodleVim.utils.defer").add("lualine.nvim", 99)
   end,
   requires = { "kyazdani42/nvim-web-devicons" },
   config = conf.lualine,
@@ -33,7 +33,9 @@ ui["doodleEsc/gruvbox.nvim"] = {
 
 ui["MunifTanjim/nui.nvim"] = {
   opt = true,
-  after = "nvim-lspconfig",
+  setup = function()
+    require("doodleVim.utils.defer").add("nui.nvim", 99)
+  end,
 }
 
 ui["goolord/alpha-nvim"] = {

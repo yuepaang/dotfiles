@@ -5,6 +5,7 @@ function config.telescope()
     "telescope-fzy-native.nvim",
     "telescope-file-browser.nvim",
     "nvim-neoclip.lua",
+    'project.nvim',
     "telescope-ui-select.nvim",
   })
 
@@ -395,6 +396,8 @@ end
 
 function config.translator()
   vim.g.translator_window_borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+  vim.g.translator_proxy_url = 'socks5://127.0.0.1:7980'
+    vim.g.translator_default_engines = {'google'}
 end
 
 function config.project()
