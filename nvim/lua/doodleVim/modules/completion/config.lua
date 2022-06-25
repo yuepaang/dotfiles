@@ -55,6 +55,7 @@ function config.nvim_lsp_installer()
     end
     local default_opts = server:get_default_options()
 
+    -- servers' settings
     local settings = {}
     if lsp == "sumneko_lua" then
       settings = {

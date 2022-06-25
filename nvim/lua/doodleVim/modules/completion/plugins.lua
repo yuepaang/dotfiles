@@ -53,12 +53,10 @@ completion["hrsh7th/cmp-cmdline"] = {
   after = "nvim-cmp",
 }
 
-completion["github/copilot.vim"] = {
-  opt = true,
-}
+-- completion["github/copilot.vim"] = {}
 
 completion["zbirenbaum/copilot.lua"] = {
-  after = "nvim-cmp",
+  event = { "VimEnter" },
   config = function()
     vim.defer_fn(function()
       require("copilot").setup {
@@ -78,7 +76,7 @@ completion["zbirenbaum/copilot.lua"] = {
 }
 
 completion["zbirenbaum/copilot-cmp"] = {
-  after = { "copilot.lua", "nvim-cmp" },
+  module = "copilot_cmp",
 }
 
 completion["L3MON4D3/LuaSnip"] = {

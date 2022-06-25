@@ -1,8 +1,8 @@
-local global = require("doodleVim.core.global")
-local defer = require("doodleVim.utils.defer")
-local pack = require("doodleVim.core.pack")
-local event = require("doodleVim.core.event")
-local options = require("doodleVim.core.options")
+local global = require "doodleVim.core.global"
+local defer = require "doodleVim.utils.defer"
+local pack = require "doodleVim.core.pack"
+local event = require "doodleVim.core.event"
+local options = require "doodleVim.core.options"
 
 -- Create cache dir and subs dir
 local createdir = function()
@@ -60,7 +60,7 @@ local set_leader_map = function()
 end
 
 local set_colorscheme = function()
-  vim.cmd([[colorscheme gruvbox]])
+  vim.cmd [[colorscheme gruvbox]]
 end
 
 local function load_nvim_config()
@@ -70,7 +70,7 @@ local function load_nvim_config()
   event.load_autocmds()
   pack.ensure_plugins()
   pack.load_compile()
-  require("doodleVim.core.command")
+  require "doodleVim.core.command"
   set_colorscheme()
   defer.load(50)
   createdir()
