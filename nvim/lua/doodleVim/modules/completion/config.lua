@@ -1,7 +1,7 @@
 local config = {}
 
 function config.nvim_lsp_installer()
-  require("nvim-lsp-installer").setup({
+  require("nvim-lsp-installer").setup {
     ensure_installed = {
       "gopls",
       "pylsp",
@@ -13,9 +13,9 @@ function config.nvim_lsp_installer()
     ui = {
       border = "rounded",
     },
-  })
+  }
 
-  local handler = require("doodleVim.modules.completion.handler")
+  local handler = require "doodleVim.modules.completion.handler"
   handler.lsp_hover()
   handler.lsp_diagnostic()
   handler.null_ls_depress()
@@ -26,12 +26,12 @@ function config.nvim_lsp_installer()
     table.insert(servers, item.name)
   end
 
-  require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
+  require("doodleVim.utils.defer").immediate_load "cmp-nvim-lsp"
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-  local lspconfig = require("lspconfig")
+  local lspconfig = require "lspconfig"
 
   local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -104,36 +104,36 @@ function config.nvim_lsp_installer()
       }
     end
 
-    lspconfig[lsp].setup({
+    lspconfig[lsp].setup {
       cmd_env = default_opts.cmd_env,
       on_attach = on_attach,
       capabilities = capabilities,
       settings = settings,
-    })
+    }
   end
 end
 
 function config.nlsp_settings()
   local vim_path = require("doodleVim.core.global").vim_path
-  require("nlspsettings").setup({
+  require("nlspsettings").setup {
     config_home = vim_path .. "/nlsp-settings",
     local_settings_dir = ".nlsp-settings",
     local_settings_root_markers = { ".git" },
     append_default_schemas = true,
     loader = "json",
-  })
+  }
 end
 
 function config.nvim_cmp()
-  require("doodleVim.utils.defer").immediate_load({ "LuaSnip", "neogen" })
+  require("doodleVim.utils.defer").immediate_load { "LuaSnip", "neogen" }
 
-  local cmp = require("cmp")
-  local types = require("cmp.types")
+  local cmp = require "cmp"
+  local types = require "cmp.types"
 
   vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
   vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
 
-  cmp.setup({
+  cmp.setup {
     enabled = function()
       local disabled = false
       disabled = disabled or (vim.api.nvim_buf_get_option(0, "buftype") == "prompt")
@@ -148,17 +148,17 @@ function config.nvim_cmp()
       end,
     },
     window = {
-      completion = cmp.config.window.bordered({
+      completion = cmp.config.window.bordered {
         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-      }),
-      documentation = cmp.config.window.bordered({
+      },
+      documentation = cmp.config.window.bordered {
         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-      }),
+      },
     },
     sources = cmp.config.sources({
-      { name = "copilot" },
       { name = "luasnip", priority = 100 },
       { name = "nvim_lsp", priority = 99 },
+      { name = "copilot" },
       { name = "cmp_tabnine" },
       { name = "buffer" },
       { name = "path" },
@@ -169,9 +169,9 @@ function config.nvim_cmp()
         option = { convert_case = true, loud = true },
       },
     }),
-    mapping = cmp.mapping.preset.insert({
+    mapping = cmp.mapping.preset.insert {
       ["<CR>"] = {
-        i = cmp.mapping.confirm({ select = true }),
+        i = cmp.mapping.confirm { select = true },
       },
       ["<C-e>"] = {
         i = cmp.mapping.abort(),
@@ -222,7 +222,7 @@ function config.nvim_cmp()
           fallback()
         end
       end, { "i", "s" }),
-    }),
+    },
     view = {
       entries = { name = "custom", selection_order = "top_down" },
     },
@@ -238,7 +238,7 @@ function config.nvim_cmp()
           vim_item.abbr = string.sub(word, 0, -2)
         end
 
-        local icons = require("doodleVim.utils.icons")
+        local icons = require "doodleVim.utils.icons"
         vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
 
         if entry.source.name == "cmp_tabnine" then
@@ -257,12 +257,13 @@ function config.nvim_cmp()
           luasnip = "[SNP]",
           path = "[PATH]",
           look = "[LOOK]",
+          copilot = "[AI]",
         })[entry.source.name]
 
         return vim_item
       end,
     },
-  })
+  }
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline("/", {
@@ -274,14 +275,14 @@ function config.nvim_cmp()
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(":", {
-    mapping = cmp.mapping.preset.cmdline({
+    mapping = cmp.mapping.preset.cmdline {
       ["<Up>"] = {
-        c = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
+        c = cmp.mapping.select_prev_item { behavior = types.cmp.SelectBehavior.Insert },
       },
       ["<Down>"] = {
-        c = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
+        c = cmp.mapping.select_next_item { behavior = types.cmp.SelectBehavior.Insert },
       },
-    }),
+    },
     sources = cmp.config.sources({
       { name = "cmdline" },
     }, {
@@ -291,26 +292,26 @@ function config.nvim_cmp()
 end
 
 function config.luasnip()
-  require("luasnip.loaders.from_vscode").lazy_load({
+  require("luasnip.loaders.from_vscode").lazy_load {
     paths = { "./snippets/python" },
-  })
-  require("luasnip.loaders.from_vscode").lazy_load({
+  }
+  require("luasnip.loaders.from_vscode").lazy_load {
     paths = { "./snippets/rust" },
-  })
+  }
   -- require("luasnip.loaders.from_vscode").lazy_load({
   --   paths = { "./snippets/typescript" },
   -- })
-  require("luasnip.loaders.from_vscode").lazy_load({
+  require("luasnip.loaders.from_vscode").lazy_load {
     paths = {
       "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets",
     },
-  })
+  }
 end
 
 function config.null_ls()
-  local null_ls = require("null-ls")
+  local null_ls = require "null-ls"
 
-  null_ls.setup({
+  null_ls.setup {
     cmd = { "nvim" },
     debounce = 250,
     debug = false,
@@ -327,29 +328,29 @@ function config.null_ls()
     on_exit = nil,
     sources = {
       -- null_ls.builtins.formatting.prettierd,
-      null_ls.builtins.formatting.prettier.with({
+      null_ls.builtins.formatting.prettier.with {
         extra_filetypes = { "toml", "solidity" },
         extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-      }),
+      },
       -- null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
       -- null_ls.builtins.formatting.isort,
       -- null_ls.builtins.formatting.gofmt,
       -- null_ls.builtins.formatting.rustfmt,
       null_ls.builtins.formatting.stylua,
-      null_ls.builtins.formatting.shfmt.with({ filetypes = { "sh", "bash", "zsh" } }),
+      null_ls.builtins.formatting.shfmt.with { filetypes = { "sh", "bash", "zsh" } },
 
       null_ls.builtins.code_actions.gitsigns,
     },
     update_in_insert = false,
-  })
+  }
 end
 
 function config.neogen()
-  require("neogen").setup({ snippet_engine = "luasnip" })
+  require("neogen").setup { snippet_engine = "luasnip" }
 end
 
 function config.rename()
-  require("rename").setup({
+  require("rename").setup {
     rename = {
       border = {
         highlight = "FloatBorder",
@@ -361,12 +362,12 @@ function config.rename()
       prompt = "➤ ",
       prompt_hl = "Comment",
     },
-  })
+  }
 end
 
 function config.lightbulb()
-  local icons = require("doodleVim.utils.icons")
-  require("lightbulb").setup({
+  local icons = require "doodleVim.utils.icons"
+  require("lightbulb").setup {
     -- LSP client names to ignore
     -- Example: {"sumneko_lua", "null-ls"}
     ignore = { "null-ls" },
@@ -410,7 +411,7 @@ function config.lightbulb()
       -- Text to provide when no actions are available
       text_unavailable = "",
     },
-  })
+  }
 
   vim.api.nvim_create_augroup("lightbulb", { clear = true })
 

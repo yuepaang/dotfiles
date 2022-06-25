@@ -1,5 +1,5 @@
 local completion = {}
-local conf = require("doodleVim.modules.completion.config")
+local conf = require "doodleVim.modules.completion.config"
 
 -- COMPLETION
 completion["hrsh7th/nvim-cmp"] = {
@@ -29,8 +29,8 @@ completion["hrsh7th/cmp-path"] = {
 completion["tzachar/cmp-tabnine"] = {
   after = "nvim-cmp",
   config = function()
-    local tabnine = require("cmp_tabnine.config")
-    tabnine:setup({
+    local tabnine = require "cmp_tabnine.config"
+    tabnine:setup {
       max_lines = 1000,
       max_num_results = 20,
       sort = true,
@@ -40,7 +40,7 @@ completion["tzachar/cmp-tabnine"] = {
         -- uncomment to ignore in lua:
         -- lua = true
       },
-    })
+    }
   end,
   run = "./install.sh",
 }
@@ -51,6 +51,34 @@ completion["octaltree/cmp-look"] = {
 
 completion["hrsh7th/cmp-cmdline"] = {
   after = "nvim-cmp",
+}
+
+completion["github/copilot.vim"] = {
+  opt = true,
+}
+
+completion["zbirenbaum/copilot.lua"] = {
+  after = "nvim-cmp",
+  config = function()
+    vim.defer_fn(function()
+      require("copilot").setup {
+        cmp = {
+          enabled = true,
+          method = "getPanelCompletions",
+        },
+        panel = { -- no config options yet
+          enabled = true,
+        },
+        ft_disable = { "markdown" },
+        -- plugin_manager_path = vim.fn.stdpath "data" .. "/site/pack/packer",
+        -- server_opts_overrides = {},
+      }
+    end, 100)
+  end,
+}
+
+completion["zbirenbaum/copilot-cmp"] = {
+  after = { "copilot.lua", "nvim-cmp" },
 }
 
 completion["L3MON4D3/LuaSnip"] = {
