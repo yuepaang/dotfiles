@@ -21,4 +21,29 @@ py["ggandor/leap.nvim"] = {
   event = "BufRead",
 }
 
+py["zbirenbaum/copilot.lua"] = {
+
+  event = { "VimEnter" },
+  config = function()
+    vim.defer_fn(function()
+      require("copilot").setup({
+        cmp = {
+          enabled = true,
+          method = "getPanelCompletions",
+        },
+        panel = { -- no config options yet
+          enabled = true,
+        },
+        ft_disable = { "markdown" },
+        -- plugin_manager_path = vim.fn.stdpath "data" .. "/site/pack/packer",
+        -- server_opts_overrides = {},
+      })
+    end, 100)
+  end,
+}
+py["zbirenbaum/copilot-cmp"] = {
+
+  module = "copilot_cmp",
+}
+
 return py

@@ -130,6 +130,9 @@ function config.nvim_cmp()
   local cmp = require("cmp")
   local types = require("cmp.types")
 
+  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+  vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
+
   cmp.setup({
     enabled = function()
       local disabled = false
@@ -153,6 +156,7 @@ function config.nvim_cmp()
       }),
     },
     sources = cmp.config.sources({
+      { name = "copilot" },
       { name = "luasnip", priority = 100 },
       { name = "nvim_lsp", priority = 99 },
       { name = "cmp_tabnine" },
@@ -236,6 +240,15 @@ function config.nvim_cmp()
 
         local icons = require("doodleVim.utils.icons")
         vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
+
+        if entry.source.name == "cmp_tabnine" then
+          vim_item.kind = "ﮧ"
+          vim_item.kind_hl_group = "CmpItemKindTabnine"
+        end
+        if entry.source.name == "copilot" then
+          vim_item.kind = ""
+          vim_item.kind_hl_group = "CmpItemKindCopilot"
+        end
 
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
