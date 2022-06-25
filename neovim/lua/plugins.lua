@@ -72,7 +72,6 @@ function M.setup()
       end,
       disable = true,
     }
-
     use {
       "rmehri01/onenord.nvim",
       config = function()
@@ -80,7 +79,6 @@ function M.setup()
       end,
       disable = true,
     }
-
     use {
       "folke/tokyonight.nvim",
       config = function()
@@ -88,7 +86,6 @@ function M.setup()
       end,
       disable = true,
     }
-
     use {
       "numToStr/Sakura.nvim",
       config = function()
@@ -96,7 +93,6 @@ function M.setup()
       end,
       disable = true,
     }
-
     use {
       "sainnhe/everforest",
       config = function()
@@ -105,12 +101,10 @@ function M.setup()
       end,
       disable = false,
     }
-
     use {
       "projekt0n/github-nvim-theme",
       disable = true,
     }
-
     use {
       "sainnhe/gruvbox-material",
       config = function()
@@ -118,7 +112,6 @@ function M.setup()
       end,
       disable = true,
     }
-
     use {
       "arcticicestudio/nord-vim",
       config = function()
@@ -126,7 +119,6 @@ function M.setup()
       end,
       disable = true,
     }
-
     use {
       "norcalli/nvim-colorizer.lua",
       cmd = "ColorizerToggle",
@@ -134,7 +126,6 @@ function M.setup()
         require("colorizer").setup()
       end,
     }
-
     use {
       "rktjmp/lush.nvim",
       cmd = { "LushRunQuickstart", "LushRunTutorial", "Lushify", "LushImport" },
@@ -178,7 +169,6 @@ function M.setup()
       opt = true,
       cmd = { "Git", "GBrowse", "Gdiffsplit", "Gvdiffsplit" },
       requires = { "tpope/vim-rhubarb", "idanarye/vim-merginal" },
-      -- wants = { "vim-rhubarb" },
     }
     use {
       "ruifm/gitlinker.nvim",
@@ -200,7 +190,6 @@ function M.setup()
       end,
       disable = false,
     }
-
     use {
       "akinsho/git-conflict.nvim",
       cmd = {
@@ -216,7 +205,6 @@ function M.setup()
         require("git-conflict").setup()
       end,
     }
-
     use {
       "ldelossa/gh.nvim",
       opt = true,
@@ -230,7 +218,6 @@ function M.setup()
       end,
       disable = true,
     }
-
     use { "f-person/git-blame.nvim", cmd = { "GitBlameToggle" } }
     use {
       "tanvirtin/vgit.nvim",
@@ -317,7 +304,6 @@ function M.setup()
       "kazhala/close-buffers.nvim",
       cmd = { "BDelete", "BWipeout" },
     }
-
     use {
       "matbme/JABS.nvim",
       cmd = "JABSOpen",
@@ -326,7 +312,6 @@ function M.setup()
       end,
       disable = false,
     }
-
     use {
       "chentoast/marks.nvim",
       event = "BufReadPre",
@@ -362,7 +347,6 @@ function M.setup()
       end,
       disable = true,
     }
-
     use { "google/vim-searchindex", event = "BufReadPre" }
     use { "tyru/open-browser.vim", event = "BufReadPre" }
 
@@ -376,7 +360,6 @@ function M.setup()
       module = "neogen",
       disable = false,
     }
-
     use {
       "kkoomen/vim-doge",
       run = ":call doge#install()",
@@ -405,7 +388,6 @@ function M.setup()
         leap.set_default_keymaps()
       end,
     }
-
     use {
       "abecodes/tabout.nvim",
       wants = { "nvim-treesitter" },
@@ -430,7 +412,6 @@ function M.setup()
       cmd = { "MarkdownPreview" },
       requires = { "zhaozg/vim-diagram", "aklt/plantuml-syntax" },
     }
-
     use {
       "jakewvincent/mkdnflow.nvim",
       config = function()
@@ -438,7 +419,6 @@ function M.setup()
       end,
       ft = "markdown",
     }
-
     use {
       "nvim-neorg/neorg",
       config = function()
@@ -469,15 +449,6 @@ function M.setup()
       end,
       wants = "nvim-web-devicons",
       disable = false,
-    }
-
-    use {
-      "feline-nvim/feline.nvim",
-      after = "nvim-web-devicons",
-      config = function()
-        require("config.feline").setup()
-      end,
-      disable = true,
     }
 
     -- Treesitter
@@ -604,7 +575,7 @@ function M.setup()
       "stevearc/dressing.nvim",
       event = "BufReadPre",
       config = function()
-        require("config.dressing").setup {
+        require("dressing").setup {
           input = { relative = "editor" },
           select = {
             backend = { "telescope", "fzf", "builtin" },
@@ -613,7 +584,6 @@ function M.setup()
       end,
       disable = false,
     }
-
     use {
       "ray-x/guihua.lua",
       run = "cd lua/fzy && make",
@@ -621,7 +591,6 @@ function M.setup()
     }
 
     -- Completion
-
     use {
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
@@ -673,17 +642,16 @@ function M.setup()
         },
       },
     }
-
     use {
       "simrat39/symbols-outline.nvim",
       cmd = "SymbolsOutline",
       setup = function()
         require("config.symbols-outline").setup()
       end,
+      disable = true,
     }
 
     -- Auto pairs
-    -- Autopairs, integrates with both cmp and treesitter
     use {
       "windwp/nvim-autopairs",
       opt = true,
@@ -798,7 +766,6 @@ function M.setup()
         require("config.rust").setup()
       end,
     }
-
     use {
       "saecki/crates.nvim",
       event = { "BufRead Cargo.toml" },
@@ -886,6 +853,7 @@ function M.setup()
       config = function()
         require("config.vimspector").setup()
       end,
+      disable = true,
     }
 
     -- Test
@@ -911,9 +879,7 @@ function M.setup()
       config = function()
         require("config.test").setup()
       end,
-      disable = true,
     }
-
     use { "diepm/vim-rest-console", ft = { "rest" }, disable = false }
     use {
       "NTBBloodbath/rest.nvim",
@@ -956,15 +922,6 @@ function M.setup()
     -- AI completion
     use { "github/copilot.vim", event = "InsertEnter" }
 
-    -- Todo
-    use {
-      "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("config.todocomments").setup()
-      end,
-      cmd = { "TodoQuickfix", "TodoTrouble", "TodoTelescope" },
-    }
     -- Legendary
     use {
       "mrjones2014/legendary.nvim",
@@ -998,9 +955,7 @@ function M.setup()
         require("config.refactoring").setup()
       end,
     }
-
     use { "python-rope/ropevim", run = "pip install ropevim", disable = true }
-
     use {
       "kevinhwang91/nvim-bqf",
       ft = "qf",
@@ -1039,7 +994,6 @@ function M.setup()
       end,
       disable = false,
     }
-
     use {
       "meain/vim-package-info",
       ft = { "json" },
@@ -1067,7 +1021,6 @@ function M.setup()
       cmd = { "PossessionSave", "PosessionLoad", "PosessionShow", "PossessionList" },
       disable = true,
     }
-
     use {
       "tpope/vim-obsession",
       cmd = { "Obsess" },
@@ -1101,6 +1054,16 @@ function M.setup()
     -- Quickfix
     use { "romainl/vim-qf", event = "BufReadPre", disable = true }
 
+    -- Todo
+    use {
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("config.todocomments").setup()
+      end,
+      cmd = { "TodoQuickfix", "TodoTrouble", "TodoTelescope" },
+    }
+
     -- Diffview
     use {
       "sindrets/diffview.nvim",
@@ -1116,7 +1079,6 @@ function M.setup()
         vim.g.vista_default_executive = "nvim_lsp"
       end,
     }
-
     use {
       "sidebar-nvim/sidebar.nvim",
       cmd = { "SidebarNvimToggle" },
@@ -1124,7 +1086,6 @@ function M.setup()
         require("sidebar-nvim").setup { open = false }
       end,
     }
-
     use {
       "stevearc/aerial.nvim",
       config = function()
@@ -1164,7 +1125,6 @@ function M.setup()
       end,
       disable = false,
     }
-
     use {
       "gbprod/substitute.nvim",
       event = "BufReadPre",
@@ -1205,7 +1165,6 @@ function M.setup()
       disable = true,
     }
     use { "mg979/vim-visual-multi", event = "BufReadPre", disable = false }
-
     use {
       "anuvyklack/hydra.nvim",
       config = function()
@@ -1217,6 +1176,7 @@ function M.setup()
       disable = true,
     }
 
+    -- Disabled
     use {
       "ziontee113/syntax-tree-surfer",
       opt = true,
@@ -1229,15 +1189,13 @@ function M.setup()
     }
     use {
       "ghillb/cybu.nvim",
-      branch = "main",
       event = "BufReadPre",
       config = function()
         require("config.cybu").setup()
       end,
-      disable = true,
+      disable = false,
     }
     use { "tversteeg/registers.nvim", disable = true }
-
     use {
       "TaDaa/vimade",
       cmd = { "VimadeToggle", "VimadeEnable", "VimadeDisable" },
@@ -1247,7 +1205,6 @@ function M.setup()
         vim.g.vimade.enablesigns = 1
       end,
     }
-
     use {
       "AckslD/nvim-gfold.lua",
       config = function()
@@ -1255,12 +1212,15 @@ function M.setup()
       end,
       disable = true,
     }
-
     -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     -- https://github.com/rbong/vim-buffest
     -- https://github.com/jamestthompson3/nvim-remote-containers
     -- https://github.com/esensar/nvim-dev-container
     -- https://github.com/mrjones2014/smart-splits.nvim
+    -- https://github.com/ziontee113/icon-picker.nvim
+    -- https://github.com/rktjmp/lush.nvim
+    -- https://github.com/charludo/projectmgr.nvim
+    -- https://github.com/katawful/kreative
 
     -- Bootstrap Neovim
     if packer_bootstrap then

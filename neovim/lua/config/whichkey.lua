@@ -197,6 +197,7 @@ local function normal_keymap()
       o = { "<cmd>UltestOutput<cr>", "Output" },
       s = { "<cmd>TestSuite<cr>", "Suite" },
       v = { "<cmd>TestVisit<cr>", "Visit" },
+      t = { "<cmd>Translate<cr>", "Translate" },
       p = { "<Plug>PlenaryTestFile", "PlenaryTestFile" },
     },
 
