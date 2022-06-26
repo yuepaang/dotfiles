@@ -66,16 +66,16 @@ function M.setup()
 
     -- Colorscheme
     use {
-      "rebelot/kanagawa.nvim",
+      "lunarvim/darkplus.nvim",
       config = function()
-        vim.cmd "colorscheme kanagawa"
+        vim.cmd "colorscheme darkplus"
       end,
       disable = true,
     }
     use {
-      "rmehri01/onenord.nvim",
+      "rebelot/kanagawa.nvim",
       config = function()
-        require("theme").init()
+        vim.cmd "colorscheme kanagawa"
       end,
       disable = true,
     }
@@ -108,6 +108,8 @@ function M.setup()
     use {
       "sainnhe/gruvbox-material",
       config = function()
+        vim.g.gruvbox_material_background = "hard"
+        vim.g.gruvbox_material_better_performance = 1
         vim.cmd "colorscheme gruvbox-material"
       end,
       disable = true,
