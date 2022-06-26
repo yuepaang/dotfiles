@@ -5,7 +5,7 @@
 -- http://vrl.cs.brown.edu/color
 
 local M = {}
-local hex_re = vim.regex("#\\x\\x\\x\\x\\x\\x")
+local hex_re = vim.regex "#\\x\\x\\x\\x\\x\\x"
 
 local HEX_DIGITS = {
   ["0"] = 0,
@@ -118,11 +118,11 @@ function M.setup(colors, config)
     colors = M.colorschemes[colors]
   end
 
-  if vim.fn.exists("syntax_on") then
-    vim.cmd("syntax reset")
+  if vim.fn.exists "syntax_on" then
+    vim.cmd "syntax reset"
   end
-  vim.cmd("set termguicolors")
-  vim.cmd([[ highlight clear ]])
+  vim.cmd "set termguicolors"
+  vim.cmd [[ highlight clear ]]
 
   M.colors = colors or M.colorschemes[vim.env.BASE16_THEME] or M.colorschemes["schemer-dark"]
   local hi = M.highlight

@@ -1,7 +1,5 @@
 local M = {}
 
-local colors = require("theme").colors
-
 function M.setup()
   require("nvim-treesitter.configs").setup {
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -10,20 +8,25 @@ function M.setup()
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,
 
-    ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
-
     highlight = {
       -- `false` will disable the whole extension
       enable = true,
-      use_languagetree = true,
-      disable = { "css" },
-      additional_vim_regex_highlighting = true,
+      disable = { "css", "markdown" },
     },
 
     rainbow = {
       enable = true,
       extended_mode = true,
       max_file_lines = nil,
+      colors = {
+        "Gold",
+        "Orchid",
+        "DodgerBlue",
+        -- "Cornsilk",
+        -- "Salmon",
+        -- "LawnGreen",
+      },
+      disable = { "html" },
     },
 
     incremental_selection = {
@@ -34,6 +37,10 @@ function M.setup()
         scope_incremental = "grc",
         node_decremental = "grm",
       },
+    },
+
+    autopairs = {
+      enable = true,
     },
 
     indent = { enable = true, disable = { "python", "java" } },
@@ -68,10 +75,6 @@ function M.setup()
           ["if"] = "@function.inner",
           ["ac"] = "@class.outer",
           ["ic"] = "@class.inner",
-          ["al"] = "@loop.outer",
-          ["il"] = "@loop.inner",
-          ["is"] = "@statement.inner",
-          ["as"] = "@statement.outer",
         },
       },
 
@@ -132,6 +135,9 @@ function M.setup()
       enable = true,
       enable_autocmd = false,
     },
+
+    -- indent
+    -- yati = { enable = true },
   }
 end
 
