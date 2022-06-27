@@ -1,18 +1,18 @@
 local config = {}
 
 function config.telescope()
-  require("doodleVim.utils.defer").immediate_load({
+  require("doodleVim.utils.defer").immediate_load {
     "telescope-fzy-native.nvim",
     "telescope-file-browser.nvim",
     "nvim-neoclip.lua",
-    'project.nvim',
+    "project.nvim",
     "telescope-ui-select.nvim",
-  })
+  }
 
-  local actions = require("telescope.actions")
-  local actions_layout = require("telescope.actions.layout")
+  local actions = require "telescope.actions"
+  local actions_layout = require "telescope.actions.layout"
 
-  require("telescope").setup({
+  require("telescope").setup {
     defaults = {
       initial_mode = "normal",
       wrap_results = false,
@@ -58,8 +58,8 @@ function config.telescope()
       },
       default_mappings = {
         i = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
+          ["<C-j>"] = actions.move_selection_next,
+          ["<C-k>"] = actions.move_selection_previous,
 
           ["<CR>"] = actions.select_default,
           ["<C-x>"] = actions.select_horizontal,
@@ -84,8 +84,8 @@ function config.telescope()
           -- ["<C-w>"] = { "<c-s-w>", type = "command" },
         },
         n = {
-          ["<C-n>"] = actions.move_selection_next,
-          ["<C-p>"] = actions.move_selection_previous,
+          ["<j>"] = actions.move_selection_next,
+          ["<k>"] = actions.move_selection_previous,
 
           ["<CR>"] = actions.select_default,
           ["<C-x>"] = actions.select_horizontal,
@@ -100,6 +100,7 @@ function config.telescope()
 
           ["<Tab>"] = actions_layout.toggle_preview,
           ["<C-Space>"] = actions.which_key,
+          ["<C-c>"] = actions.close,
           ["q"] = actions.close,
           -- ["<C-Space>"] = actions.which_key,
           -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
@@ -117,9 +118,9 @@ function config.telescope()
         override_file_sorter = true,
       },
       ["ui-select"] = {
-        require("telescope.themes").get_dropdown({
+        require("telescope.themes").get_dropdown {
           -- even more opts
-        }),
+        },
 
         -- pseudo code / specification for writing custom displays, like the one
         -- for "codeactions"
@@ -141,18 +142,18 @@ function config.telescope()
         find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
       },
     },
-  })
-  require("telescope").load_extension("fzy_native")
-  require("telescope").load_extension("file_browser")
-  require("telescope").load_extension("todo-comments")
-  require("telescope").load_extension("projects")
-  require("telescope").load_extension("neoclip")
-  require("telescope").load_extension("ui-select")
+  }
+  require("telescope").load_extension "fzy_native"
+  require("telescope").load_extension "file_browser"
+  require("telescope").load_extension "todo-comments"
+  require("telescope").load_extension "projects"
+  require("telescope").load_extension "neoclip"
+  require("telescope").load_extension "ui-select"
 end
 
 function config.nvim_tree()
-  local icons = require("doodleVim.utils.icons")
-  require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
+  local icons = require "doodleVim.utils.icons"
+  require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
     auto_reload_on_write = true,
     create_in_closed_folder = true,
     disable_netrw = true,
@@ -315,14 +316,14 @@ function config.nvim_tree()
         profile = false,
       },
     },
-  })
+  }
   require("nvim-tree.events").on_file_created(function(file)
     vim.cmd("edit " .. file.fname)
   end)
 end
 
 function config.symbols_outline()
-  local icons = require("doodleVim.utils.icons")
+  local icons = require "doodleVim.utils.icons"
   vim.g.symbols_outline = {
     highlight_hovered_item = true,
     show_guides = true,
@@ -396,12 +397,12 @@ end
 
 function config.translator()
   vim.g.translator_window_borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-  vim.g.translator_proxy_url = 'socks5://127.0.0.1:7980'
-    vim.g.translator_default_engines = {'google'}
+  vim.g.translator_proxy_url = "socks5://127.0.0.1:7980"
+  vim.g.translator_default_engines = { "google" }
 end
 
 function config.project()
-  require("project_nvim").setup({
+  require("project_nvim").setup {
     -- Manual mode doesn't automatically change your root directory, so you have
     -- the option to manually do so using `:ProjectRoot` command.
     manual_mode = false,
@@ -433,7 +434,7 @@ function config.project()
 
     -- Path where project.nvim will store the project history for use in
     -- telescope
-    datapath = vim.fn.stdpath("data"),
+    datapath = vim.fn.stdpath "data",
 
     -- Function to call when you select a project from telecope
     -- Accepts:
@@ -444,13 +445,13 @@ function config.project()
     --    "change_working_directory"  : just change the directory
     -- Note: All will change the directory regardless
     telescope_on_project_selected = function(path, open)
-      local Lib = require("auto-session-library")
-      local AutoSession = require("auto-session")
+      local Lib = require "auto-session-library"
+      local AutoSession = require "auto-session"
       local sessions_dir = AutoSession.get_root_dir()
       local session_name = Lib.escaped_session_name_from_cwd()
       local branch_name = ""
       if AutoSession.conf.auto_session_use_git_branch then
-        local out = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")
+        local out = vim.fn.systemlist "git rev-parse --abbrev-ref HEAD"
         if vim.v.shell_error ~= 0 then
           vim.api.nvim_err_writeln(string.format("git failed with: %s", table.concat(out, "\n")))
         end
@@ -463,23 +464,23 @@ function config.project()
       local session_file = string.format(sessions_dir .. "%s.vim", session_name)
 
       if Lib.is_readable(session_file) then
-        vim.cmd([[silent! lua require('auto-session').RestoreSession()]])
-        vim.notify("Current Session Loaded")
+        vim.cmd [[silent! lua require('auto-session').RestoreSession()]]
+        vim.notify "Current Session Loaded"
       else
-        vim.cmd([[:ene]])
+        vim.cmd [[:ene]]
         require("doodleVim.extend.tree").toggle()
         vim.notify("No Session Found, Open In Current Dir", "warn")
       end
     end,
-  })
+  }
 end
 
 function config.autosession()
   vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,globals"
-  require("auto-session").setup({
+  require("auto-session").setup {
     log_level = "info",
     auto_session_enable_last_session = false,
-    auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
+    auto_session_root_dir = vim.fn.stdpath "data" .. "/sessions/",
     auto_session_enabled = false,
     auto_save_enabled = false,
     auto_restore_enabled = false,
@@ -487,12 +488,12 @@ function config.autosession()
     -- the configs below are lua only
     bypass_session_save_file_types = nil,
     post_restore_cmds = { require("doodleVim.extend.tree").toggle },
-  })
+  }
 end
 
 function config.which_key()
-  local wk = require("which-key")
-  wk.setup({
+  local wk = require "which-key"
+  wk.setup {
     key_labels = {
       ["<space>"] = "SPC",
       ["<leader>"] = "SPC",
@@ -511,12 +512,12 @@ function config.which_key()
       winblend = 0,
     },
     ignore_missing = false,
-  })
+  }
 
   -- bind common doodleVim.keymap
-  local bind = require("doodleVim.keymap.bind")
-  local def_map = require("doodleVim.keymap.def_map")
-  local plug_map = require("doodleVim.keymap.plug_map")
+  local bind = require "doodleVim.keymap.bind"
+  local def_map = require "doodleVim.keymap.def_map"
+  local plug_map = require "doodleVim.keymap.plug_map"
 
   -- bind raw doodleVim.keymap
   bind.nvim_load_mapping(plug_map.raw)
@@ -532,9 +533,9 @@ function config.which_key()
 end
 
 function config.notify()
-  local icons = require("doodleVim.utils.icons")
-  local nvim_notify = require("notify")
-  nvim_notify.setup({
+  local icons = require "doodleVim.utils.icons"
+  local nvim_notify = require "notify"
+  nvim_notify.setup {
     -- Animation style (see below for details)
     stages = "slide",
 
@@ -570,15 +571,15 @@ function config.notify()
       DEBUG = icons.diag.debug_sign,
       TRACE = icons.diag.trace_sign,
     },
-  })
+  }
 
   vim.notify = require("doodleVim.extend.misc").wrapped_notify
 end
 
 function config.gotests()
-  require("gotests").setup({
+  require("gotests").setup {
     verbose = false,
-  })
+  }
 end
 
 function config.neoclip()
@@ -595,12 +596,12 @@ function config.neoclip()
     return true
   end
 
-  require("neoclip").setup({
+  require("neoclip").setup {
     history = 50,
     enable_persistent_history = true,
     continuous_sync = true,
     enable_system_clipboard = true,
-    db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
+    db_path = vim.fn.stdpath "data" .. "/databases/neoclip.sqlite3",
     filter = function(data)
       return not all(data.event.regcontents, is_whitespace)
     end,
@@ -635,11 +636,11 @@ function config.neoclip()
         },
       },
     },
-  })
+  }
 end
 
 function config.tmux()
-  require("tmux").setup({
+  require("tmux").setup {
     -- overwrite default configuration
     -- here, e.g. to enable default bindings
     copy_sync = {
@@ -666,7 +667,7 @@ function config.tmux()
       -- sets resize steps for y axis
       resize_step_y = 1,
     },
-  })
+  }
 end
 
 return config
