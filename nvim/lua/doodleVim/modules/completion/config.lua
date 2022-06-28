@@ -8,6 +8,7 @@ function config.nvim_lsp_installer()
       "sumneko_lua",
       "jsonls",
       "rust_analyzer",
+      "taplo",
     },
     automatic_installation = true,
     ui = {
@@ -85,14 +86,14 @@ function config.nvim_lsp_installer()
           },
         },
       }
-    elseif lsp == "pyright" then
-      settings = {
-        python = {
-          analysis = {
-            typeCheckingMode = "off",
-          },
-        },
-      }
+      -- elseif lsp == "pyright" then
+      --   settings = {
+      --     python = {
+      --       analysis = {
+      --         typeCheckingMode = "off",
+      --       },
+      --     },
+      --   }
     elseif lsp == "rust_analyzer" then
       settings = {
         ["rust-analyzer"] = {
@@ -131,9 +132,6 @@ function config.nvim_cmp()
   local cmp = require "cmp"
   local types = require "cmp.types"
 
-  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-  vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
-
   cmp.setup {
     enabled = function()
       local disabled = false
@@ -159,7 +157,6 @@ function config.nvim_cmp()
     sources = cmp.config.sources({
       { name = "luasnip", priority = 100 },
       { name = "nvim_lsp", priority = 99 },
-      { name = "copilot" },
       { name = "cmp_tabnine" },
       { name = "buffer" },
       { name = "path" },
@@ -242,15 +239,6 @@ function config.nvim_cmp()
         local icons = require "doodleVim.utils.icons"
         vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
 
-        if entry.source.name == "cmp_tabnine" then
-          vim_item.kind = "ﮧ"
-          vim_item.kind_hl_group = "CmpItemKindTabnine"
-        end
-        if entry.source.name == "copilot" then
-          vim_item.kind = ""
-          vim_item.kind_hl_group = "CmpItemKindCopilot"
-        end
-
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
           buffer = "[BUF]",
@@ -258,7 +246,6 @@ function config.nvim_cmp()
           luasnip = "[SNP]",
           path = "[PATH]",
           look = "[LOOK]",
-          copilot = "[AI]",
         })[entry.source.name]
 
         return vim_item
@@ -335,8 +322,8 @@ function config.null_ls()
       },
       -- null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
       -- null_ls.builtins.formatting.isort,
-      -- null_ls.builtins.formatting.gofmt,
-      -- null_ls.builtins.formatting.rustfmt,
+      null_ls.builtins.formatting.gofmt,
+      null_ls.builtins.formatting.rustfmt,
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.shfmt.with { filetypes = { "sh", "bash", "zsh" } },
 
