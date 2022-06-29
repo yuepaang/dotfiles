@@ -3,6 +3,8 @@ local conf = require("doodleVim.modules.py.config")
 
 py["wakatime/vim-wakatime"] = {}
 
+py["github/copilot.vim"] = {}
+
 py["max397574/better-escape.nvim"] = {
   event = { "InsertEnter" },
   config = function()

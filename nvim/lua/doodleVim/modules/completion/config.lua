@@ -171,9 +171,9 @@ function config.nvim_cmp()
       ["<CR>"] = {
         i = cmp.mapping.confirm { select = true },
       },
-      ["<C-e>"] = {
-        i = cmp.mapping.abort(),
-      },
+      -- ["<C-e>"] = {
+      --   i = cmp.mapping.abort(),
+      -- },
       ["<C-p>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()

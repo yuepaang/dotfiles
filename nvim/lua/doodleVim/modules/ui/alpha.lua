@@ -2,6 +2,12 @@ local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
 local logo = {
+    "                ███████   ██    ██                   ",
+    "                ██   ██    ██  ██                    ",
+    "                ███████     ████                     ",
+    "                ██           ██                      ",
+    "                ██           ██                      ",
+    "                                                     ",
     "                                                     ",
     "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
     "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
@@ -12,27 +18,27 @@ local logo = {
     "                                                     ",
 }
 
-local py_logo = {
-    [[                                          ]],
-    [[                                          ]],
-    [[                                          ]],
-    [[                                          ]],
-    [[                                          ]],
-    [[             ███████ ██    ██             ]],
-    [[             ██   ██  ██  ██              ]],
-    [[             ███████   ████               ]],
-    [[             ██         ██                ]],
-    [[             ██         ██                ]],
-    [[                                          ]],
-    [[         ██    ██ ██ ███    ███           ]],
-    [[         ██    ██ ██ ████  ████           ]],
-    [[         ██    ██ ██ ██ ████ ██           ]],
-    [[          ██  ██  ██ ██  ██  ██           ]],
-    [[           ████   ██ ██      ██           ]],
-    [[                                          ]],
-    [[                                          ]],
-    [[                                          ]]
-}
+-- local py_logo = {
+--     [[                                          ]],
+--     [[                                          ]],
+--     [[                                          ]],
+--     [[                                          ]],
+--     [[                                          ]],
+--     [[             ███████ ██    ██             ]],
+--     [[             ██   ██  ██  ██              ]],
+--     [[             ███████   ████               ]],
+--     [[             ██         ██                ]],
+--     [[             ██         ██                ]],
+--     [[                                          ]],
+--     [[         ██    ██ ██ ███    ███           ]],
+--     [[         ██    ██ ██ ████  ████           ]],
+--     [[         ██    ██ ██ ██ ████ ██           ]],
+--     [[          ██  ██  ██ ██  ██  ██           ]],
+--     [[           ████   ██ ██      ██           ]],
+--     [[                                          ]],
+--     [[                                          ]],
+--     [[                                          ]]
+-- }
 
 local function footer()
     local datetime = os.date(" %Y-%m-%d") .. "  -  "
@@ -47,11 +53,11 @@ local function footer()
     return datetime .. author .. total_plugins .. nvim_version_info .. quote
 end
 
-dashboard.section.header.val = py_logo
+dashboard.section.header.val = logo
 
 dashboard.section.buttons.val = {
     dashboard.button("o", "  Open CWD",        "<cmd>ene|OpenTree<CR>"),
-    dashboard.button("h", "  Recent Projects", "<cmd>Telescope projects<CR>"),
+    dashboard.button("p", "  Recent Projects", "<cmd>Telescope projects<CR>"),
     dashboard.button("r", "  Recent File",     "<cmd>Telescope oldfiles<CR>"),
     dashboard.button("e", "  New file",        "<cmd>ene<CR>"),
     dashboard.button("f", "  Find File",       "<cmd>Telescope find_files<CR>"),

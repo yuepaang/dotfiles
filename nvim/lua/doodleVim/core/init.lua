@@ -50,6 +50,15 @@ local disable_distribution_plugins = function()
   vim.g.loaded_shada_plugin = 1
 end
 
+local setup_copilot = function()
+  vim.cmd [[
+    imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+    let g:copilot_no_tab_map = v:true
+    let g:copilot_assume_mapped = v:true
+    let g:copilot_tab_fallback = ""
+  ]]
+end
+
 local set_leader_map = function()
   vim.api.nvim_set_keymap("n", " ", "", { noremap = true })
   vim.api.nvim_set_keymap("x", " ", "", { noremap = true })
@@ -74,6 +83,7 @@ local function load_nvim_config()
   set_colorscheme()
   defer.load(50)
   createdir()
+  setup_copilot()
 end
 
 load_nvim_config()
