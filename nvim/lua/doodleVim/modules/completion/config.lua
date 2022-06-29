@@ -7,6 +7,7 @@ function config.nvim_lsp_installer()
       "pylsp",
       "sumneko_lua",
       "jsonls",
+      "yamlls",
       "rust_analyzer",
       "taplo",
     },
@@ -56,10 +57,8 @@ function config.nvim_lsp_installer()
     end
     local default_opts = server:get_default_options()
 
-    -- servers' settings
-    local settings = {}
     if lsp == "sumneko_lua" then
-      settings = {
+      local settings = {
         Lua = {
           runtime = {
             version = "LuaJIT",
@@ -86,32 +85,54 @@ function config.nvim_lsp_installer()
           },
         },
       }
-      -- elseif lsp == "pyright" then
-      --   settings = {
-      --     python = {
-      --       analysis = {
-      --         typeCheckingMode = "off",
-      --       },
-      --     },
-      --   }
+      lspconfig[lsp].setup {
+        cmd_env = default_opts.cmd_env,
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = settings,
+      }
     elseif lsp == "rust_analyzer" then
-      settings = {
-        ["rust-analyzer"] = {
-          cargo = { allFeatures = true },
-          checkOnSave = {
-            command = "clippy",
-            extraArgs = { "--no-deps" },
+      local rust_opts = {
+        -- tools = {
+        --   on_initialized = function()
+        --     vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
+        --       pattern = { "*.rs" },
+        --       callback = function()
+        --         vim.lsp.codelens.refresh()
+        --       end,
+        --     })
+        --   end,
+        --   inlay_hints = {
+        --     parameter_hints_prefix = " ",
+        --     other_hints_prefix = " ",
+        --   },
+        -- },
+        server = {
+          on_attach = on_attach,
+          capabilities = capabilities,
+
+          settings = {
+            ["rust-analyzer"] = {
+              lens = {
+                enable = true,
+              },
+              cargo = { allFeatures = true },
+              checkOnSave = {
+                command = "clippy",
+                extraArgs = { "--no-deps" },
+              },
+            },
           },
         },
       }
+      require("rust-tools").setup(rust_opts)
+    else
+      lspconfig[lsp].setup {
+        cmd_env = default_opts.cmd_env,
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
     end
-
-    lspconfig[lsp].setup {
-      cmd_env = default_opts.cmd_env,
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = settings,
-    }
   end
 end
 

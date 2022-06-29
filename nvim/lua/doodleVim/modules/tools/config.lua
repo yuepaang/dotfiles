@@ -14,7 +14,7 @@ function config.telescope()
 
   require("telescope").setup {
     defaults = {
-      initial_mode = "normal",
+      -- initial_mode = "normal",
       wrap_results = false,
       prompt_prefix = "",
       selection_caret = " ",
@@ -58,6 +58,9 @@ function config.telescope()
       },
       default_mappings = {
         i = {
+          ["<C-n>"] = actions.cycle_history_next,
+          ["<C-p>"] = actions.cycle_history_prev,
+
           ["<C-j>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
 

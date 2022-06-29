@@ -23,4 +23,9 @@ py["ggandor/leap.nvim"] = {
   event = "BufRead",
 }
 
+py["simrat39/rust-tools.nvim"] = {
+    after = {"nvim-lspconfig"}
+}
+
+
 return py
