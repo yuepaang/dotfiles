@@ -1,5 +1,5 @@
 local py = {}
-local conf = require("doodleVim.modules.py.config")
+local conf = require "doodleVim.modules.py.config"
 
 py["wakatime/vim-wakatime"] = {}
 
@@ -7,13 +7,7 @@ py["github/copilot.vim"] = {}
 
 py["max397574/better-escape.nvim"] = {
   event = { "InsertEnter" },
-  config = function()
-    require("better_escape").setup({
-      mapping = { "ii", "jj", "jk", "kj" },
-      timeout = vim.o.timeoutlen,
-      keys = "<ESC>",
-    })
-  end,
+  config = conf.better_escape,
 }
 
 py["ggandor/leap.nvim"] = {
@@ -24,8 +18,13 @@ py["ggandor/leap.nvim"] = {
 }
 
 py["simrat39/rust-tools.nvim"] = {
-    after = {"nvim-lspconfig"}
+  after = { "nvim-lspconfig" },
 }
 
+py["Saecki/crates.nvim"] = {
+  after = "null-ls.nvim",
+  config = conf.crates,
+  requires = { "nvim-lua/plenary.nvim" },
+}
 
 return py

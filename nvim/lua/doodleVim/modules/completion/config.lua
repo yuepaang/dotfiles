@@ -91,22 +91,36 @@ function config.nvim_lsp_installer()
         capabilities = capabilities,
         settings = settings,
       }
+    elseif lsp == "yamlls" then
+      local settings = {
+        yaml = {
+          schemaStore = {
+            enable = true,
+          },
+        },
+      }
+      lspconfig[lsp].setup {
+        cmd_env = default_opts.cmd_env,
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = settings,
+      }
     elseif lsp == "rust_analyzer" then
       local rust_opts = {
-        -- tools = {
-        --   on_initialized = function()
-        --     vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-        --       pattern = { "*.rs" },
-        --       callback = function()
-        --         vim.lsp.codelens.refresh()
-        --       end,
-        --     })
-        --   end,
-        --   inlay_hints = {
-        --     parameter_hints_prefix = " ",
-        --     other_hints_prefix = " ",
-        --   },
-        -- },
+        tools = {
+          on_initialized = function()
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
+              pattern = { "*.rs" },
+              callback = function()
+                vim.lsp.codelens.refresh()
+              end,
+            })
+          end,
+          inlay_hints = {
+            parameter_hints_prefix = " ",
+            other_hints_prefix = " ",
+          },
+        },
         server = {
           on_attach = on_attach,
           capabilities = capabilities,
@@ -125,7 +139,11 @@ function config.nvim_lsp_installer()
           },
         },
       }
-      require("rust-tools").setup(rust_opts)
+      local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
+      if not rust_tools_status_ok then
+        return
+      end
+      rust_tools.setup(rust_opts)
     else
       lspconfig[lsp].setup {
         cmd_env = default_opts.cmd_env,
