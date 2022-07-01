@@ -14,6 +14,10 @@ completion["hrsh7th/cmp-nvim-lsp"] = {
   after = "nvim-cmp",
 }
 
+completion["hrsh7th/cmp-nvim-lua"] = {
+  after = "nvim-cmp",
+}
+
 completion["saadparwaiz1/cmp_luasnip"] = {
   after = "nvim-cmp",
 }
@@ -45,10 +49,6 @@ completion["tzachar/cmp-tabnine"] = {
   run = "./install.sh",
 }
 
-completion["octaltree/cmp-look"] = {
-  after = "nvim-cmp",
-}
-
 completion["hrsh7th/cmp-cmdline"] = {
   after = "nvim-cmp",
 }
@@ -56,6 +56,10 @@ completion["hrsh7th/cmp-cmdline"] = {
 completion["L3MON4D3/LuaSnip"] = {
   after = "nvim-cmp",
   config = conf.luasnip,
+}
+
+completion["saadparwaiz1/cmp_luasnip"] = {
+  after = "nvim-cmp",
 }
 
 completion["doodleEsc/friendly-snippets"] = {
@@ -99,6 +103,10 @@ completion["danymat/neogen"] = {
 completion["doodleEsc/rename.nvim"] = {
   after = { "nvim-lspconfig", "nui.nvim" },
   config = conf.rename,
+}
+
+completion["b0o/SchemaStore.nvim"] = {
+  after = { "nvim-lspconfig"},
 }
 
 return completion

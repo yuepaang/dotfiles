@@ -27,4 +27,10 @@ py["Saecki/crates.nvim"] = {
   requires = { "nvim-lua/plenary.nvim" },
 }
 
+py["christianchiarulli/nvim-gps"] = {
+  after = "nvim-treesitter",
+  branch = "text_hl",
+  config = conf.gps
+}
+
 return py

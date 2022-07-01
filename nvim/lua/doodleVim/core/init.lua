@@ -72,6 +72,21 @@ local set_colorscheme = function()
   vim.cmd [[colorscheme gruvbox]]
 end
 
+local setup_others_autocommands = function()
+  vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
+    callback = function()
+      require("doodleVim.modules.py.winbar").get_winbar()
+    end,
+  })
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "gitcommit", "markdown" },
+    callback = function()
+      vim.opt_local.wrap = true
+      vim.opt_local.spell = true
+    end,
+  })
+end
+
 local function load_nvim_config()
   disable_distribution_plugins()
   set_leader_map()
@@ -84,6 +99,7 @@ local function load_nvim_config()
   defer.load(50)
   createdir()
   setup_copilot()
+  setup_others_autocommands()
 end
 
 load_nvim_config()

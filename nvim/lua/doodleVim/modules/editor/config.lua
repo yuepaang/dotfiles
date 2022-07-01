@@ -1,8 +1,8 @@
 local config = {}
 
 function config.todo()
-  local icons = require("doodleVim.utils.icons")
-  require("todo-comments").setup({
+  local icons = require "doodleVim.utils.icons"
+  require("todo-comments").setup {
     signs = true, -- show icons in the signs column
     sign_priority = 8, -- sign priority
     -- keywords recognized as todo comments
@@ -63,28 +63,47 @@ function config.todo()
       -- don't replace the (KEYWORDS) placeholder
       pattern = [[\b(KEYWORDS)(\s?\(.*\)|:)+]], -- ripgrep regex
     },
-  })
+  }
 end
 
 function config.comment()
-  require("Comment").setup({
+  require("Comment").setup {
     padding = true,
     sticky = true,
     ignore = nil,
-  })
+  }
 end
 
 function config.autopairs()
-   require('doodleVim.utils.defer').immediate_load('nvim-cmp')
+  require("doodleVim.utils.defer").immediate_load "nvim-cmp"
 
-  local cmp = require("cmp")
-  require("nvim-autopairs").setup({})
-  local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+  local cmp = require "cmp"
+  require("nvim-autopairs").setup {
+    check_ts = true,
+    ts_config = {
+      lua = { "string", "source" },
+      javascript = { "string", "template_string" },
+      java = false,
+    },
+    disable_filetype = { "TelescopePrompt", "spectre_panel" },
+    fast_wrap = {
+      map = "<M-e>",
+      chars = { "{", "[", "(", '"', "'" },
+      pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+      offset = 0, -- Offset from pattern match
+      end_key = "$",
+      keys = "qwertyuiopzxcvbnmasdfghjkl",
+      check_comma = true,
+      highlight = "PmenuSel",
+      highlight_grey = "LineNr",
+    },
+  }
+  local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 end
 
 function config.neoscroll()
-  require("neoscroll").setup({
+  require("neoscroll").setup {
     -- All these keys will be mapped to their corresponding default scrolling animation
     mappings = { "<C-f>", "<C-b>" },
     hide_cursor = false, -- Hide cursor while scrolling
@@ -96,7 +115,7 @@ function config.neoscroll()
     pre_hook = nil, -- Function to run before the scrolling animation starts
     post_hook = nil, -- Function to run after the scrolling animation ends
     performance_mode = false,
-  })
+  }
 end
 
 function config.barbar()
@@ -176,7 +195,7 @@ function config.hop()
 end
 
 function config.gitsigns()
-  require("gitsigns").setup({
+  require("gitsigns").setup {
     signs = {
       add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
       change = { hl = "GitSignsChange", text = "│", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
@@ -208,17 +227,17 @@ function config.gitsigns()
       col = 1,
     },
     current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
-  })
+  }
 end
 
 function config.blankline()
-  require("indent_blankline").setup({
+  require("indent_blankline").setup {
     show_end_of_line = true,
-  })
+  }
 end
 
 function config.mkdnflow()
-  require("mkdnflow").setup({
+  require("mkdnflow").setup {
     filetypes = { md = true, rmd = true, markdown = true },
     create_dirs = true,
     perspective = {
@@ -256,7 +275,7 @@ function config.mkdnflow()
       transform_explicit = function(text)
         text = text:gsub(" ", "-")
         text = text:lower()
-        text = os.date("%Y-%m-%d_") .. text
+        text = os.date "%Y-%m-%d_" .. text
         return text
       end,
     },
@@ -267,7 +286,7 @@ function config.mkdnflow()
       in_progress = "-",
       complete = "X",
     },
-  })
+  }
 end
 
 return config

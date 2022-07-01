@@ -105,6 +105,22 @@ function config.nvim_lsp_installer()
         capabilities = capabilities,
         settings = settings,
       }
+    elseif lsp == "jsonls" then
+      local status_ok, schemastore = pcall(require, "schemastore")
+      if not status_ok then
+        return
+      end
+      local settings = {
+        json = {
+          schemas = schemastore.json.schemas(),
+        },
+      }
+      lspconfig[lsp].setup {
+        cmd_env = default_opts.cmd_env,
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = settings,
+      }
     elseif lsp == "rust_analyzer" then
       local rust_opts = {
         tools = {
@@ -193,26 +209,27 @@ function config.nvim_cmp()
         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
       },
     },
-    sources = cmp.config.sources({
-      { name = "luasnip", priority = 100 },
-      { name = "nvim_lsp", priority = 99 },
-      { name = "cmp_tabnine" },
-      { name = "buffer" },
-      { name = "path" },
-    }, {
-      {
-        name = "look",
-        keyword_length = 2,
-        option = { convert_case = true, loud = true },
-      },
-    }),
+    sources = cmp.config.sources {
+      { name = "crates", group_index = 1 },
+      { name = "nvim_lsp", group_index = 2 },
+      { name = "nvim_lua", group_index = 2 },
+      { name = "luasnip", group_index = 2 },
+      { name = "buffer", group_index = 2 },
+      { name = "cmp_tabnine", group_index = 2 },
+      { name = "path", group_index = 2 },
+    },
+    confirm_opts = {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
+    },
     mapping = cmp.mapping.preset.insert {
       ["<CR>"] = {
         i = cmp.mapping.confirm { select = true },
       },
-      -- ["<C-e>"] = {
-      --   i = cmp.mapping.abort(),
-      -- },
+      ["<C-c>"] = {
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      },
       ["<C-p>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
@@ -280,11 +297,12 @@ function config.nvim_cmp()
 
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
+          nvim_lua = "[LUA]",
+          crates = "[CRATES]",
           buffer = "[BUF]",
           cmp_tabnine = "[TAB]",
-          luasnip = "[SNP]",
+          luasnip = "[SNIP]",
           path = "[PATH]",
-          look = "[LOOK]",
         })[entry.source.name]
 
         return vim_item
@@ -325,9 +343,9 @@ function config.luasnip()
   require("luasnip.loaders.from_vscode").lazy_load {
     paths = { "./snippets/rust" },
   }
-  -- require("luasnip.loaders.from_vscode").lazy_load({
-  --   paths = { "./snippets/typescript" },
-  -- })
+  require("luasnip.loaders.from_vscode").lazy_load {
+    paths = { "./snippets/typescript" },
+  }
   require("luasnip.loaders.from_vscode").lazy_load {
     paths = {
       "~/.local/share/nvim/site/pack/packer/opt/friendly-snippets",
