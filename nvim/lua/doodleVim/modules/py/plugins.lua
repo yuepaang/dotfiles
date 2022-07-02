@@ -30,7 +30,12 @@ py["Saecki/crates.nvim"] = {
 py["christianchiarulli/nvim-gps"] = {
   after = "nvim-treesitter",
   branch = "text_hl",
-  config = conf.gps
+  config = conf.gps,
+}
+
+py["abecodes/tabout.nvim"] = {
+  after = "nvim-treesitter",
+  config = conf.tabout,
 }
 
 return py
