@@ -100,6 +100,9 @@ plug_map.normal = {
     n = bind.convert_wk_format(
       map_cr("lua require('rename').rename()"):with_noremap():with_silent():with_label "Rename"
     ),
+    s = bind.convert_wk_format(
+      map_cr("lua vim.lsp.buf.signature_help()"):with_noremap():with_silent():with_label "Signature Help"
+    ),
   },
 
   ["<C-n>"] = bind.convert_wk_format(

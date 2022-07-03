@@ -106,7 +106,9 @@ completion["doodleEsc/rename.nvim"] = {
 }
 
 completion["b0o/SchemaStore.nvim"] = {
-  after = { "nvim-lspconfig"},
+  after = { "nvim-lspconfig" },
 }
+
+completion["RRethy/vim-illuminate"] = {}
 
 return completion

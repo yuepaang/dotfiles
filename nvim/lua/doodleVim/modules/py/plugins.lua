@@ -38,4 +38,14 @@ py["abecodes/tabout.nvim"] = {
   config = conf.tabout,
 }
 
+py["stevearc/aerial.nvim"] = {}
+
+py["j-hui/fidget.nvim"] = {
+  config = conf.fidget,
+}
+
+py["drybalka/tree-climber.nvim"] = {
+  config = conf.tree_climber,
+}
+
 return py

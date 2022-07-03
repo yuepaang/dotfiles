@@ -136,7 +136,7 @@ function config.tabout()
     act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
     default_tab = "<C-t>", -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
     default_shift_tab = "<C-d>", -- reverse shift default action,
-    enable_backwards = true, -- well ...
+    enable_backwards = false, -- well ...
     completion = true, -- if the tabkey is used in a completion pum
     tabouts = {
       { open = "'", close = "'" },
@@ -146,9 +146,28 @@ function config.tabout()
       { open = "[", close = "]" },
       { open = "{", close = "}" },
     },
-    ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+    ignore_beginning = false, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
     exclude = {}, -- tabout will ignore these filetypes
   }
+end
+
+function config.fidget()
+  local status_ok, fidget = pcall(require, "fidget")
+  if not status_ok then
+    return
+  end
+
+  fidget.setup()
+end
+
+function config.tree_climber()
+  local keyopts = { noremap = true, silent = true }
+  -- vim.keymap.set({'n', 'v', 'o'}, '<m-k>', require('tree-climber').goto_parent, keyopts)
+  -- vim.keymap.set({'n', 'v', 'o'}, '<m-j>', require('tree-climber').goto_child, keyopts)
+  vim.keymap.set({ "n", "v", "o" }, "J", require("tree-climber").goto_next, keyopts)
+  vim.keymap.set({ "n", "v", "o" }, "K", require("tree-climber").goto_prev, keyopts)
+  vim.keymap.set("n", "<m-h>", require("tree-climber").swap_prev, keyopts)
+  vim.keymap.set("n", "<m-l>", require("tree-climber").swap_next, keyopts)
 end
 
 return config

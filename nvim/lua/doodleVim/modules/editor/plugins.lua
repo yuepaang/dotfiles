@@ -1,5 +1,5 @@
 local editor = {}
-local conf = require("doodleVim.modules.editor.config")
+local conf = require "doodleVim.modules.editor.config"
 
 editor["numToStr/Comment.nvim"] = {
   opt = true,
@@ -86,10 +86,20 @@ editor["jakewvincent/mkdnflow.nvim"] = {
   config = conf.mkdnflow,
 }
 
-editor["tpope/vim-surround"] = {
+-- editor["tpope/vim-surround"] = {
+--   opt = true,
+--   setup = function()
+--     require("doodleVim.utils.defer").defer_load("vim-surround", 200)
+--   end,
+-- }
+
+editor["kylechui/nvim-surround"] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").defer_load("vim-surround", 200)
+    require("doodleVim.utils.defer").defer_load("nvim-surround", 200)
+  end,
+  config = function()
+    require("nvim-surround").setup()
   end,
 }
 

@@ -37,13 +37,16 @@ function config.nvim_lsp_installer()
 
   local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    -- require("doodleVim.modules.completion.handler").lsp_highlight_document(client)
-    require("lsp_signature").on_attach({
-      bind = true, -- This is mandatory, otherwise border config won't get registered.
-      hint_enable = false,
-      floating_window_above_cur_line = true,
-      handler_opts = { border = "rounded" },
-    }, bufnr)
+    require("doodleVim.modules.completion.handler").lsp_highlight_document(client)
+
+    -- buggy
+
+    -- require("lsp_signature").on_attach({
+    --   bind = true, -- This is mandatory, otherwise border config won't get registered.
+    --   hint_enable = false,
+    --   floating_window_above_cur_line = true,
+    --   handler_opts = { border = "rounded" },
+    -- }, bufnr)
   end
 
   lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
