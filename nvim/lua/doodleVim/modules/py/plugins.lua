@@ -38,8 +38,6 @@ py["abecodes/tabout.nvim"] = {
   config = conf.tabout,
 }
 
-py["stevearc/aerial.nvim"] = {}
-
 py["j-hui/fidget.nvim"] = {
   config = conf.fidget,
 }

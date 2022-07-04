@@ -25,11 +25,15 @@ M.lsp_highlight_document = function(client)
 end
 
 M.lsp_hover = function()
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", width = 60 })
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover,
+    { border = "rounded", width = 60, height = 30 }
+  )
   -- newly added
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
     width = 60,
+    height = 30,
   })
 end
 
