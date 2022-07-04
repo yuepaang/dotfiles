@@ -36,7 +36,15 @@ function M.setup()
       }
       vim.cmd [[packadd packer.nvim]]
     end
-    vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+    -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+
+    -- Run PackerCompile if there are changes in this file
+    -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+    local packer_grp = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
+    vim.api.nvim_create_autocmd(
+      { "BufWritePost" },
+      { pattern = "init.lua", command = "source <afile> | PackerCompile", group = packer_grp }
+    )
   end
 
   -- Plugins
@@ -250,6 +258,7 @@ function M.setup()
       config = function()
         require("config.whichkey").setup()
       end,
+      disable = false,
     }
 
     -- IndentLine
@@ -941,6 +950,8 @@ function M.setup()
       opt = true,
       keys = { [[<C-p>]] },
       wants = { "dressing.nvim" },
+      module = { "legendary" },
+      cmd = { "Legendary" },
       config = function()
         require("config.legendary").setup()
       end,
@@ -984,6 +995,17 @@ function M.setup()
       event = "BufReadPre",
       config = function()
         require("pqf").setup()
+      end,
+    }
+
+    use {
+      "kevinhwang91/nvim-ufo",
+      opt = true,
+      event = { "BufReadPre" },
+      wants = { "promise-async" },
+      requires = "kevinhwang91/promise-async",
+      config = function()
+        require("ufo").setup()
       end,
     }
 
@@ -1186,7 +1208,7 @@ function M.setup()
       requires = "anuvyklack/keymap-layer.nvim",
       module = { "hydra" },
       event = { "BufReadPre" },
-      disable = true,
+      disable = false,
     }
 
     -- Disabled
@@ -1237,7 +1259,7 @@ function M.setup()
 
     -- Bootstrap Neovim
     if packer_bootstrap then
-      print "Restart Neovim required after installation!"
+      print "Neovim restart is required after installation!"
       require("packer").sync()
     end
   end

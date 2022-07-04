@@ -45,7 +45,6 @@ function M.setup(servers, options)
 
     if server_name == "jdtls" then
       print "jdtls is handled by nvim-jdtls"
-      -- https://github.com/williamboman/nvim-lsp-installer/wiki/Rust
     elseif server_name == "rust_analyzer" then
       -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience
       local extension_path = vim.fn.glob(vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-*")

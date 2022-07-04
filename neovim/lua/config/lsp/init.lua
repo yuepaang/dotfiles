@@ -83,11 +83,14 @@ local servers = {
   vimls = {},
   -- tailwindcss = {},
   -- solang = {},
-  yamlls = {},
+  yamlls = {
+    schemastore = {
+      enable = true,
+    },
+  },
   taplo = {},
-  jdtls = {},
   dockerls = {},
-  graphql = {},
+  -- graphql = {},
   bashls = {},
 }
 
@@ -108,13 +111,13 @@ function M.on_attach(client, bufnr)
 
   -- Use LSP as the handler for formatexpr.
   -- See `:help formatexpr` for more information.
-  vim.api.nvim_buf_set_option(0, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
 
   -- Configure key mappings
   require("config.lsp.keymaps").setup(client, bufnr)
 
   -- Configure highlighting
-  require("config.lsp.highlighter").setup(client)
+  require("config.lsp.highlighter").setup(client, bufnr)
 
   -- Configure formatting
   require("config.lsp.null-ls.formatters").setup(client, bufnr)
@@ -143,6 +146,10 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
 
 M.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities) -- for nvim-cmp
 

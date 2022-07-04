@@ -1,12 +1,13 @@
-local api = vim.api
+-- local api = vim.api
 local g = vim.g
 local opt = vim.opt
 local cmd = vim.cmd
 
 -- Remap leader and local leader to <Space>
-api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
+-- api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set("", "<Space>", "<Nop>", { noremap = true, silent = true })
 g.mapleader = " "
-g.maplocalleader = " "
+g.maplocalleader = ","
 g.vimsyn_embed = "lPr" -- Syntax embedding for Lua, Python and Ruby
 
 opt.termguicolors = true -- Enable colors in terminal
@@ -65,11 +66,14 @@ opt.wildignore:append("**/.git/*")
 -- g.netrw_list_hide = (vim.fn["netrw_gitignore#Hide"]()) .. [[,\(^\|\s\s\)\zs\.\S\+]] -- use .gitignore
 
 -- Treesitter based folding
-cmd([[
-  set foldlevel=20
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-]])
+-- cmd([[
+--   set foldlevel=20
+--   set foldmethod=expr
+--   set foldexpr=nvim_treesitter#foldexpr()
+-- ]])
+opt.foldcolumn = "1"
+opt.foldlevel = 99
+opt.foldenable = true
 
 -- Copilot
 cmd([[
