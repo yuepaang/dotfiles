@@ -7,30 +7,30 @@ local is_windows = function()
 end
 
 python.adapters = function(callback, config)
-  if config.request == 'attach' then
+  if config.request == "attach" then
     local port = (config.connect or config).port
-    callback({
-      type = 'server',
-      port = assert(port, '`connect.port` is required for a python `attach` configuration'),
-      host = (config.connect or config).host or '127.0.0.1',
-    })
+    callback {
+      type = "server",
+      port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+      host = (config.connect or config).host or "127.0.0.1",
+    }
   else
-    callback({
-      type = 'executable';
-      command = adapter_python_path;
-      args = { '-m', 'debugpy.adapter' };
-    })
+    callback {
+      type = "executable",
+      command = adapter_python_path,
+      args = { "-m", "debugpy.adapter" },
+    }
   end
 end
 
 python.configurations = {
   {
-    type = 'python';
-    request = 'launch';
-    name = 'Launch file';
-    program = '${file}';
+    type = "python",
+    request = "launch",
+    name = "Launch file",
+    program = "${file}",
     pythonPath = function()
-      local venv_path = os.getenv("VIRTUAL_ENV")
+      local venv_path = os.getenv "VIRTUAL_ENV"
       if venv_path then
         if is_windows() then
           return venv_path .. "\\Scripts\\python.exe"
@@ -38,19 +38,19 @@ python.configurations = {
         return venv_path .. "/bin/python"
       end
       return vim.g.python3_host_prog
-    end
+    end,
   },
   {
-    type = 'python';
-    request = 'launch';
-    name = 'Launch file with arguments';
-    program = '${file}';
+    type = "python",
+    request = "launch",
+    name = "Launch file with arguments",
+    program = "${file}",
     args = function()
-      local args_string = vim.fn.input('Arguments: ')
+      local args_string = vim.fn.input "Arguments: "
       return vim.split(args_string, " +")
-    end;
+    end,
     pythonPath = function()
-      local venv_path = os.getenv("VIRTUAL_ENV")
+      local venv_path = os.getenv "VIRTUAL_ENV"
       if venv_path then
         if is_windows() then
           return venv_path .. "\\Scripts\\python.exe"
@@ -58,19 +58,25 @@ python.configurations = {
         return venv_path .. "/bin/python"
       end
       return vim.g.python3_host_prog
-    end
+    end,
   },
   {
-    type = 'python';
-    request = 'attach';
-    name = 'Attach remote';
+    type = "python",
+    request = "attach",
+    name = "Attach remote",
     connect = function()
-      local host = vim.fn.input('Host [127.0.0.1]: ')
-      host = host ~= '' and host or '127.0.0.1'
-      local port = tonumber(vim.fn.input('Port [5678]: ')) or 5678
+      local host = vim.fn.input "Host [127.0.0.1]: "
+      host = host ~= "" and host or "127.0.0.1"
+      local port = tonumber(vim.fn.input "Port [5678]: ") or 5678
       return { host = host, port = port }
-    end;
-  }
+    end,
+  },
 }
+
+python.setup = function(dap)
+  -- TODO: check debugpy installed, otherwise install it
+  dap.adapters.python = python.adapters
+  dap.configurations.python = python.configurations
+end
 
 return python

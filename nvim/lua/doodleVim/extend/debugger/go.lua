@@ -8,32 +8,30 @@ go.adapters = function(callback, config)
   local port = config.port or "38697"
   local addr = string.format("%s:%s", host, port)
   local opts = {
-    stdio = {nil, stdout},
-    args = {"dap", "-l", addr},
-    detached = true
+    stdio = { nil, stdout },
+    args = { "dap", "-l", addr },
+    detached = true,
   }
   handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
     stdout:close()
     handle:close()
     if code ~= 0 then
-      print('dlv exited with code', code)
+      print("dlv exited with code", code)
     end
   end)
-  assert(handle, 'Error running dlv: ' .. tostring(pid_or_err))
+  assert(handle, "Error running dlv: " .. tostring(pid_or_err))
   stdout:read_start(function(err, chunk)
     assert(not err, err)
     if chunk then
       vim.schedule(function()
-        require('dap.repl').append(chunk)
+        require("dap.repl").append(chunk)
       end)
     end
   end)
   -- Wait for delve to start
-  vim.defer_fn(
-    function()
-      callback({type = "server", host = "127.0.0.1", port = port})
-    end,
-    100)
+  vim.defer_fn(function()
+    callback { type = "server", host = "127.0.0.1", port = port }
+  end, 100)
 end
 
 go.configurations = {
@@ -54,7 +52,7 @@ go.configurations = {
     name = "Attach",
     mode = "local",
     request = "attach",
-    processId = require('dap.utils').pick_process,
+    processId = require("dap.utils").pick_process,
   },
   {
     type = "go",
@@ -69,7 +67,14 @@ go.configurations = {
     request = "launch",
     mode = "test",
     program = "./${relativeFileDirname}",
-  }
+  },
 }
+
+go.setup = function(dap)
+  -- TODO: check dlv installed, otherwise install it
+
+  dap.adapters.go = go.adapters
+  dap.configurations.go = go.configurations
+end
 
 return go
