@@ -46,4 +46,8 @@ py["drybalka/tree-climber.nvim"] = {
   config = conf.tree_climber,
 }
 
+py["alpertuna/vim-header"] = {
+  config = conf.header,
+}
+
 return py

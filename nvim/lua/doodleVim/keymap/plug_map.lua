@@ -258,6 +258,10 @@ plug_map.normal = {
     ),
   },
 
+  ["<F4>"] = bind.convert_wk_format(
+    map_cr("AddHeader<CR>"):with_noremap():with_silent():with_label "Start Or Continue Debug"
+  ),
+
   ["<F7>"] = bind.convert_wk_format(
     map_cr("DapContinue"):with_noremap():with_silent():with_label "Start Or Continue Debug"
   ),
