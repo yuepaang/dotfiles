@@ -1002,7 +1002,8 @@ function M.setup()
     use {
       "kevinhwang91/nvim-ufo",
       opt = true,
-      event = { "BufReadPre" },
+      -- event = { "BufReadPre" },
+      keys = { "zc", "zo", "zR", "zm" },
       wants = { "promise-async" },
       requires = "kevinhwang91/promise-async",
       config = function()
@@ -1014,7 +1015,7 @@ function M.setup()
         vim.keymap.set("n", "zR", require("ufo").openAllFolds)
         vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
       end,
-      disable = false,
+      disable = true,
     }
 
     -- Performance
