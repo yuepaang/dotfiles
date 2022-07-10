@@ -1,11 +1,12 @@
 local debug = {}
-local conf = require("doodleVim.modules.debug.config")
+local conf = require "doodleVim.modules.debug.config"
 
 debug["mfussenegger/nvim-dap"] = {
   opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").defer_load("nvim-dap", 500)
-  end,
+  after = "mason.nvim",
+  -- setup = function()
+  --   require("doodleVim.utils.defer").defer_load("nvim-dap", 500)
+  -- end,
   config = conf.dap,
 }
 
