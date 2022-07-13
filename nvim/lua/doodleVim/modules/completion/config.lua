@@ -65,10 +65,7 @@ function config.mason()
       download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
   }
-end
-
-function config.nvim_lsp_installer()
-  require("nvim-lsp-installer").setup {
+  require("mason-lspconfig").setup {
     ensure_installed = {
       "gopls",
       "pylsp",
@@ -79,9 +76,6 @@ function config.nvim_lsp_installer()
       "taplo",
     },
     automatic_installation = true,
-    ui = {
-      border = "rounded",
-    },
   }
 
   local handler = require "doodleVim.modules.completion.handler"
@@ -485,6 +479,19 @@ function config.luasnip()
   }
 end
 
+function config.gotools()
+  require("gotools").setup {
+    ui = {
+      border = {
+        style = "rounded",
+      },
+      win_options = {
+        winhighlight = "Normal:GruvboxBlue,FloatBorder:FloatBorder",
+      },
+    },
+  }
+end
+
 function config.null_ls()
   local null_ls = require "null-ls"
 
@@ -517,6 +524,9 @@ function config.null_ls()
       null_ls.builtins.formatting.shfmt.with { filetypes = { "sh", "bash", "zsh" } },
 
       null_ls.builtins.code_actions.gitsigns,
+
+      require("gotools").code_actions.gotests,
+      require("gotools").code_actions.gomodifytags,
     },
     update_in_insert = false,
   }
