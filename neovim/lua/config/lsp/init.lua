@@ -2,7 +2,7 @@ local M = {}
 
 local servers = {
   gopls = {},
-  html = {},
+  -- html = {},
   jsonls = {
     settings = {
       json = {
@@ -11,25 +11,8 @@ local servers = {
     },
   },
   pyright = {
-    filetypes = { "python" },
-    init_options = {
-      formatters = {
-        black = {
-          command = "black",
-          args = { "--quiet", "-" },
-          rootPatterns = { "pyproject.toml" },
-        },
-        formatFiletypes = {
-          python = { "black" },
-        },
-      },
-    },
-    settings = {
-      python = {
-        analysis = {
-          typeCheckingMode = "off",
-        },
-      },
+    analysis = {
+      typeCheckingMode = "off",
     },
   },
   rust_analyzer = {
@@ -79,10 +62,8 @@ local servers = {
       },
     },
   },
-  -- tsserver = { disable_formatting = true },
+  tsserver = { disable_formatting = true },
   vimls = {},
-  -- tailwindcss = {},
-  -- solang = {},
   yamlls = {
     schemastore = {
       enable = true,
@@ -90,7 +71,6 @@ local servers = {
   },
   taplo = {},
   dockerls = {},
-  -- graphql = {},
   bashls = {},
 }
 
