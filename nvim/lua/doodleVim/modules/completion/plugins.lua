@@ -97,11 +97,6 @@ completion["doodleEsc/lightbulb.nvim"] = {
   config = conf.lightbulb,
 }
 
-completion["doodleEsc/gotools.nvim"] = {
-  after = "mason.nvim",
-  config = conf.gotools,
-}
-
 completion["jose-elias-alvarez/null-ls.nvim"] = {
   after = "mason.nvim",
   config = conf.null_ls,
