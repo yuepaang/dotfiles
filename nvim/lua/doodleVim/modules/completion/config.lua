@@ -84,10 +84,10 @@ function config.mason()
   handler.null_ls_depress()
 
   local servers = {}
-  local installed_servers = require("nvim-lsp-installer").get_installed_servers()
-  for _, item in ipairs(installed_servers) do
-    table.insert(servers, item.name)
-  end
+    local installed_servers = require("mason-lspconfig.settings").current.ensure_installed
+    for _, item in ipairs(installed_servers) do
+        table.insert(servers, item)
+    end
 
   require("doodleVim.utils.defer").immediate_load "cmp-nvim-lsp"
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -171,11 +171,6 @@ function config.mason()
   })
 
   for _, lsp in ipairs(servers) do
-    local server_available, server = require("nvim-lsp-installer.servers").get_server(lsp)
-    if not server_available then
-      server:install()
-    end
-    local default_opts = server:get_default_options()
 
     if lsp == "sumneko_lua" then
       local settings = {
@@ -206,7 +201,6 @@ function config.mason()
         },
       }
       lspconfig[lsp].setup {
-        cmd_env = default_opts.cmd_env,
         on_attach = on_attach,
         capabilities = capabilities,
         settings = settings,
@@ -220,7 +214,6 @@ function config.mason()
         },
       }
       lspconfig[lsp].setup {
-        cmd_env = default_opts.cmd_env,
         on_attach = on_attach,
         capabilities = capabilities,
         settings = settings,
@@ -236,7 +229,6 @@ function config.mason()
         },
       }
       lspconfig[lsp].setup {
-        cmd_env = default_opts.cmd_env,
         on_attach = on_attach,
         capabilities = capabilities,
         settings = settings,
@@ -288,7 +280,6 @@ function config.mason()
       rust_tools.setup(rust_opts)
     else
       lspconfig[lsp].setup {
-        cmd_env = default_opts.cmd_env,
         on_attach = on_attach,
         capabilities = capabilities,
       }

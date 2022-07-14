@@ -79,12 +79,6 @@ completion["tamago324/nlsp-settings.nvim"] = {
   config = conf.nlsp_settings,
 }
 
-completion["williamboman/nvim-lsp-installer"] = {
-  opt = true,
-  after = { "nlsp-settings.nvim", "lsp_signature.nvim", "nvim-lspconfig" },
-  config = conf.nvim_lsp_installer,
-}
-
 completion["williamboman/mason.nvim"] = {
   opt = true,
   branch = "alpha",
