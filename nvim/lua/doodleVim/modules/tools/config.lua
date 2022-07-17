@@ -251,10 +251,10 @@ function config.nvim_tree()
       indent_markers = {
         enable = true,
         icons = {
-          corner = "└ ",
-          -- edge = "│ ",
-          edge = "├ ",
-          none = "  ",
+          corner = "└",
+          edge = "│",
+          item = "│",
+          none = " ",
         },
       },
       icons = {
