@@ -84,14 +84,6 @@ tools["nvim-lua/plenary.nvim"] = {
 
 tools["kyazdani42/nvim-web-devicons"] = {}
 
-tools["doodleEsc/gotests.nvim"] = {
-  opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").register("gotests", "gotests.nvim")
-  end,
-  config = conf.gotests,
-}
-
 tools["doodleEsc/which-key.nvim"] = {
   opt = true,
   setup = function()
