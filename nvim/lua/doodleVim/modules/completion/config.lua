@@ -471,6 +471,7 @@ function config.luasnip()
 end
 
 function config.gotools()
+    require("doodleVim.utils.defer").immediate_load("mason.nvim")
     require("gotools").setup({
         ui = {
             border = {
@@ -480,6 +481,14 @@ function config.gotools()
                 winhighlight = "Normal:GruvboxBlue,FloatBorder:FloatBorder",
             },
         },
+        tools = {
+            gotests = {
+                bin = require "mason-core.path".bin_prefix() .. "/" .. "gotests",
+            },
+            gomodifytags = {
+                bin = require "mason-core.path".bin_prefix() .. "/" .. "gomodifytags",
+            }
+        }
     })
 end
 
