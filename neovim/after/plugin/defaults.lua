@@ -45,19 +45,19 @@ opt.cmdheight = 0
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-opt.whichwrap:append("<>[]hl")
+opt.whichwrap:append "<>[]hl"
 
 -- disable nvim intro
-opt.shortmess:append("sI")
+opt.shortmess:append "sI"
 
 -- Better search
-opt.path:remove("/usr/include")
-opt.path:append("**")
+opt.path:remove "/usr/include"
+opt.path:append "**"
 -- vim.cmd [[set path=.,,,$PWD/**]] -- Set the path directly
 
 opt.wildignorecase = true
-opt.wildignore:append("**/node_modules/*")
-opt.wildignore:append("**/.git/*")
+opt.wildignore:append "**/node_modules/*"
+opt.wildignore:append "**/.git/*"
 
 -- Better Netrw, alternatively just use vinegar.vim
 -- g.netrw_banner = 0 -- Hide banner
@@ -76,15 +76,15 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- opt.foldlevelstart = -1
 -- opt.foldenable = true
 -- Copilot
-cmd([[
+cmd [[
     imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
     let g:copilot_no_tab_map = v:true
     let g:copilot_assume_mapped = v:true
     let g:copilot_tab_fallback = ""
-]])
+]]
 
 -- Python host
-cmd([[
+cmd [[
   let g:python3_host_skip_check = 1
   let g:python3_host_prog = "$HOME/.pyenv/versions/nvim-py3/bin/python"
-]])
+]]
