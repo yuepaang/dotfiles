@@ -74,6 +74,7 @@ function config.mason()
       "jsonls",
       "yamlls",
       "taplo",
+      "marksman",
     },
     automatic_installation = true,
   })
@@ -83,10 +84,24 @@ function config.mason()
   handler.lsp_diagnostic()
   handler.null_ls_depress()
 
-  local servers = {}
-  local installed_servers = require("mason-lspconfig.settings").current.ensure_installed
+  local function contains(tab, val)
+    for _, value in ipairs(tab) do
+      if value == val then
+        return true
+      end
+    end
+    return false
+  end
+
+  local lsp_servers = {}
+  local installed_servers = require("mason-registry").get_installed_packages()
+  local package_to_lspconfig = require("mason-lspconfig.mappings.server").package_to_lspconfig
+
   for _, item in ipairs(installed_servers) do
-    table.insert(servers, item)
+    if contains(item.spec.categories, "LSP") then
+      local lsp_server = package_to_lspconfig[item.name]
+      table.insert(lsp_servers, lsp_server)
+    end
   end
 
   require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
@@ -170,7 +185,7 @@ function config.mason()
     capabilities = capabilities,
   })
 
-  for _, lsp in ipairs(servers) do
+  for _, lsp in ipairs(lsp_servers) do
     if lsp == "sumneko_lua" then
       local settings = {
         Lua = {
