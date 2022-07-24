@@ -81,7 +81,7 @@ completion["tamago324/nlsp-settings.nvim"] = {
 
 completion["williamboman/mason.nvim"] = {
   opt = true,
-  branch = "alpha",
+  branch = "main",
   after = "nvim-cmp",
   config = conf.mason,
 }
