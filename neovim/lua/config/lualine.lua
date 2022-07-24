@@ -40,22 +40,22 @@ local function lsp_client(msg)
   end
 
   -- add formatter
-  local formatters = require("config.lsp.null-ls.formatters")
+  local formatters = require "config.lsp.null-ls.formatters"
   local supported_formatters = formatters.list_registered(buf_ft)
   vim.list_extend(buf_client_names, supported_formatters)
 
   -- add linter
-  local linters = require("config.lsp.null-ls.linters")
+  local linters = require "config.lsp.null-ls.linters"
   local supported_linters = linters.list_registered(buf_ft)
   vim.list_extend(buf_client_names, supported_linters)
 
   -- add hover
-  local hovers = require("config.lsp.null-ls.hovers")
+  local hovers = require "config.lsp.null-ls.hovers"
   local supported_hovers = hovers.list_registered(buf_ft)
   vim.list_extend(buf_client_names, supported_hovers)
 
   -- add code action
-  local code_actions = require("config.lsp.null-ls.code_actions")
+  local code_actions = require "config.lsp.null-ls.code_actions"
   local supported_code_actions = code_actions.list_registered(buf_ft)
   vim.list_extend(buf_client_names, supported_code_actions)
 
@@ -94,18 +94,36 @@ end
 --   return table.concat(status, "  ") .. " " .. spinners[frame + 1]
 -- end
 
-local icons = require("config.icons")
+local icons = require "config.icons"
+
+local winbar = require "config.winbar"
 
 function M.setup()
   -- local gps = require("nvim-gps")
 
-  require("lualine").setup({
+  require("lualine").setup {
     options = {
       icons_enabled = true,
       theme = "auto",
       component_separators = { left = "", right = "" },
       section_separators = { left = " ", right = "" },
-      disabled_filetypes = {},
+      disabled_filetypes = {
+        statusline = {},
+        winbar = {
+          "help",
+          "startify",
+          "dashboard",
+          "packer",
+          "neogitstatus",
+          "NvimTree",
+          "Trouble",
+          "alpha",
+          "lir",
+          "Outline",
+          "spectre_panel",
+          "toggleterm",
+        },
+      },
       always_divide_middle = true,
       globalstatus = true,
     },
@@ -149,8 +167,25 @@ function M.setup()
       lualine_z = {},
     },
     tabline = {},
-    extensions = {},
-  })
+    winbar = {
+      lualine_a = { "diagnostics" },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = { winbar.get_winbar },
+      lualine_y = {},
+      lualine_z = {},
+    },
+
+    inactive_winbar = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {},
+    },
+    extensions = { "nvim-tree", "toggleterm", "quickfix" },
+  }
 end
 
 return M

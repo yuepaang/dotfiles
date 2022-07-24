@@ -49,9 +49,9 @@ local function get_location()
 end
 
 function M.get_winbar()
-  if excludes() then
-    return ""
-  end
+  -- if excludes() then
+  --   return ""
+  -- end
   if navic.is_available() then
     return "%#WinBarSeparator#"
         .. "%="
@@ -68,4 +68,3 @@ function M.get_winbar()
 end
 
 return M
-
