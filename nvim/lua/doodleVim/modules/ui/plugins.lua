@@ -18,6 +18,8 @@ ui["norcalli/nvim-colorizer.lua"] = {
   end,
 }
 
+ui["kyazdani42/nvim-web-devicons"] = {}
+
 ui["nvim-lualine/lualine.nvim"] = {
   opt = true,
   setup = function()

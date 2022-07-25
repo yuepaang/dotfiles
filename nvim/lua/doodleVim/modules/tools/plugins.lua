@@ -1,5 +1,5 @@
 local tools = {}
-local conf = require "doodleVim.modules.tools.config"
+local conf = require("doodleVim.modules.tools.config")
 
 tools["dstein64/vim-startuptime"] = {
   cmd = "StartupTime",
@@ -82,7 +82,7 @@ tools["nvim-lua/plenary.nvim"] = {
   opt = true,
 }
 
-tools["kyazdani42/nvim-web-devicons"] = {}
+-- tools["kyazdani42/nvim-web-devicons"] = {}
 
 tools["doodleEsc/which-key.nvim"] = {
   opt = true,
