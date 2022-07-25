@@ -128,4 +128,6 @@ completion["b0o/SchemaStore.nvim"] = {
 
 completion["RRethy/vim-illuminate"] = {}
 
+completion["christianchiarulli/lua-dev.nvim"] = {}
+
 return completion

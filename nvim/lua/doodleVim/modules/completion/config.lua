@@ -189,194 +189,58 @@ function config.mason_lspconfig()
     capabilities = capabilities,
   })
 
+  local opts = {}
+
   for _, lsp in ipairs(lsp_servers) do
+    opts = {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+
     if lsp == "sumneko_lua" then
-      local settings = {
-        Lua = {
-          type = {
-            -- weakUnionCheck = true,
-            -- weakNilCheck = true,
-            -- castNumberToInteger = true,
-          },
-          format = {
-            enable = false,
-          },
-          hint = {
-            enable = true,
-            arrayIndex = "Disable", -- "Enable", "Auto", "Disable"
-            await = true,
-            paramName = "Disable", -- "All", "Literal", "Disable"
-            paramType = false,
-            semicolon = "Disable", -- "All", "SameLine", "Disable"
-            setType = true,
-          },
-          runtime = {
-            version = "LuaJIT",
-            special = {
-              reload = "require",
-            },
-          },
-          diagnostics = {
-            globals = {
-              "vim",
-              "use",
-              "describe",
-              "it",
-              "assert",
-              "before_each",
-              "after_each",
-              "packer_plugins",
-            },
-          },
-          workspace = {
-            library = {
-              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-              [vim.fn.stdpath("config") .. "/lua"] = true,
-              -- [vim.fn.datapath "config" .. "/lua"] = true,
-            },
-          },
-          telemetry = {
-            enable = false,
-          },
-          disable = {
-            "lowercase-global",
-            "undefined-global",
-            "unused-local",
-            "unused-function",
-            "unused-vararg",
-            "trailing-space",
-          },
-        },
-      }
-      lspconfig[lsp].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = settings,
-      })
-    elseif lsp == "yamlls" then
-      local settings = {
-        yaml = {
-          schemaStore = {
-            enable = true,
-          },
-        },
-      }
-      lspconfig[lsp].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = settings,
-      })
-    elseif lsp == "jsonls" then
-      local status_ok, schemastore = pcall(require, "schemastore")
-      if not status_ok then
+      local l_status_ok, lua_dev = pcall(require, "lua-dev")
+      if not l_status_ok then
         return
       end
-      local settings = {
-        json = {
-          schemas = schemastore.json.schemas(),
-        },
-      }
-      lspconfig[lsp].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = settings,
-      })
-    elseif lsp == "rust_analyzer" then
-      local rust_opts = {
-        tools = {
-          on_initialized = function()
-            vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-              pattern = { "*.rs" },
-              callback = function()
-                vim.lsp.codelens.refresh()
-              end,
-            })
-          end,
-          inlay_hints = {
-            -- Only show inlay hints for the current line
-            only_current_line = true,
-
-            -- Event which triggers a refersh of the inlay hints.
-            -- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
-            -- not that this may cause higher CPU usage.
-            -- This option is only respected when only_current_line and
-            -- autoSetHints both are true.
-            only_current_line_autocmd = "CursorHold",
-
-            -- whether to show parameter hints with the inlay hints or not
-            -- default: true
-            show_parameter_hints = false,
-
-            -- whether to show variable name before type hints with the inlay hints or not
-            -- default: false
-            show_variable_name = false,
-
-            -- prefix for parameter hints
-            -- default: "<-"
-            -- parameter_hints_prefix = "<- ",
-            parameter_hints_prefix = " ",
-
-            -- prefix for all the other hints (type, chaining)
-            -- default: "=>"
-            -- other_hints_prefix = "=> ",
-            other_hints_prefix = " ",
-
-            -- whether to align to the lenght of the longest line in the file
-            max_len_align = false,
-
-            -- padding from the left if max_len_align is true
-            max_len_align_padding = 1,
-
-            -- whether to align to the extreme right or not
-            right_align = false,
-
-            -- padding from the right if right_align is true
-            right_align_padding = 7,
-
-            -- The color of the hints
-            highlight = "Comment",
-          },
-          hover_actions = {
-            auto_focus = false,
-            border = "rounded",
-            width = 60,
-            height = 30,
-          },
-        },
-        hover_actions = {
-          auto_focus = false,
-          border = "rounded",
-          width = 60,
-          -- height = 30,
-        },
-        server = {
-          cmd = { "rustup", "run", "nightly", os.getenv("HOME") .. "/.cargo/bin/rust-analyzer" },
+      local luadev = lua_dev.setup({
+        lspconfig = {
           on_attach = on_attach,
           capabilities = capabilities,
-
-          settings = {
-            ["rust-analyzer"] = {
-              lens = {
-                enable = true,
-              },
-              checkOnSave = {
-                command = "clippy",
-              },
-            },
-          },
         },
-      }
+      })
+      lspconfig.sumneko_lua.setup(luadev)
+      goto continue
+      -- old configuration
+      -- local settings = require("doodleVim.modules.completion.servers.sumneko")
+      -- lspconfig[lsp].setup({
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      --   settings = settings,
+      -- })
+    end
+
+    if lsp == "yamlls" then
+      local yamlls_opts = require("doodleVim.modules.completion.servers.yamlls")
+      opts = vim.tbl_deep_extend("force", yamlls_opts, opts)
+    end
+
+    if lsp == "jsonls" then
+      local jsonls_opts = require("doodleVim.modules.completion.servers.jsonls")
+      opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
+    end
+
+    if lsp == "rust_analyzer" then
+      local rust_opts = require("doodleVim.modules.completion.servers.rust")
       local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
       if not rust_tools_status_ok then
         return
       end
       rust_tools.setup(rust_opts)
-    else
-      lspconfig[lsp].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
+      goto continue
     end
+
+    lspconfig[lsp].setup(opts)
+    ::continue::
   end
 end
 
