@@ -69,6 +69,7 @@ function Packer:load_packer()
       default_url_format = "https://github.com/%s", -- Lua format string used for "aaa/bbb" style plugins
     },
     disable_commands = true,
+    max_job = 50,
   })
   packer.reset()
   local use = packer.use

@@ -1,5 +1,5 @@
 local py = {}
-local conf = require "doodleVim.modules.py.config"
+local conf = require("doodleVim.modules.py.config")
 
 py["wakatime/vim-wakatime"] = {}
 
@@ -40,10 +40,6 @@ py["abecodes/tabout.nvim"] = {
 
 py["j-hui/fidget.nvim"] = {
   config = conf.fidget,
-}
-
-py["drybalka/tree-climber.nvim"] = {
-  config = conf.tree_climber,
 }
 
 py["alpertuna/vim-header"] = {
