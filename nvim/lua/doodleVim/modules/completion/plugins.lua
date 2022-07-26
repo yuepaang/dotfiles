@@ -107,7 +107,7 @@ completion["doodleEsc/gotools.nvim"] = {
 }
 
 completion["jose-elias-alvarez/null-ls.nvim"] = {
-  after = { "mason.nvim", "gotools.nvim" },
+  after = { "mason-lspconfig.nvim", "gotools.nvim" },
   config = conf.null_ls,
 }
 
