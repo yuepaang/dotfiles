@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 return {
 	default_prog = { "zsh", "-l", "-c", "tmux attach || tmux" },
-	font = wezterm.font("Hack Nerd Font"),
+	font = wezterm.font_with_fallback({ "PragmataPro Mono Liga", "Hack Nerd Font" }),
 	font_size = 18,
 	colors = {
 		tab_bar = {
@@ -12,8 +12,9 @@ return {
 			},
 		},
 	},
+    color_scheme = "Dracula",
+	-- color_scheme = "DoomOne",
 	-- color_scheme = "tokyonight",
-	color_scheme = "DoomOne",
 	window_frame = {
 		font_size = 16.0,
 	},
