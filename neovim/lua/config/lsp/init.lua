@@ -68,10 +68,19 @@ local servers = {
     schemastore = {
       enable = true,
     },
+    settings = {
+      yaml = {
+        hover = true,
+        completion = true,
+        validate = true,
+        schemas = require("schemastore").json.schemas(),
+      },
+    },
   },
   taplo = {},
   dockerls = {},
   bashls = {},
+  marksman = {},
 }
 
 -- local lsp_signature = require "lsp_signature"
@@ -130,6 +139,13 @@ capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
+}
 
 M.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities) -- for nvim-cmp
 
@@ -151,6 +167,8 @@ function M.setup()
 
   -- Installer
   require("config.lsp.installer").setup(servers, opts)
+  -- Inlay hints
+  -- require("config.lsp.inlay-hints").setup()
 end
 
 local diagnostics_active = true

@@ -43,7 +43,7 @@ function M.setup()
       enable = true,
     },
 
-    indent = { enable = true, disable = { "python", "java" } },
+    indent = { enable = true, disable = { "python", "java", "rust" } },
 
     -- vim-matchup
     matchup = {
