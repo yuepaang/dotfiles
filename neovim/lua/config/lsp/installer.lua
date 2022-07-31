@@ -76,5 +76,6 @@ function M.setup(servers, options)
       }
     end,
   }
+end
 
 return M
