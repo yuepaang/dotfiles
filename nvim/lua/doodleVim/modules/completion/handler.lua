@@ -1,6 +1,6 @@
 local M = {}
 
-local icons = require "doodleVim.utils.icons"
+local icons = require("doodleVim.utils.icons")
 
 M.lsp_highlight_document = function(client)
   -- Set autocommands conditional on server_capabilities
@@ -17,7 +17,7 @@ M.lsp_highlight_document = function(client)
         autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]],
+    ]]   ,
         false
       )
     end
@@ -25,10 +25,8 @@ M.lsp_highlight_document = function(client)
 end
 
 M.lsp_hover = function()
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-    vim.lsp.handlers.hover,
-    { border = "rounded", width = 60, height = 30 }
-  )
+  vim.lsp.handlers["textDocument/hover"] =
+  vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", width = 60, height = 30 })
   -- newly added
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
@@ -38,7 +36,7 @@ M.lsp_hover = function()
 end
 
 M.lsp_diagnostic = function()
-  vim.diagnostic.config {
+  vim.diagnostic.config({
     underline = true,
     signs = true,
     update_in_insert = false,
@@ -46,7 +44,7 @@ M.lsp_diagnostic = function()
     float = {
       border = "rounded",
       focusable = false,
-      header = { icons.diag.debug_sign .. " Diagnostics:" },
+      header = { icons.diagnostics.debug_sign .. " Diagnostics:" },
       source = "always",
     },
     virtual_text = {
@@ -56,16 +54,16 @@ M.lsp_diagnostic = function()
         min = vim.diagnostic.severity.HINT,
       },
     },
-  }
+  })
 
-  require("doodleVim.extend.diagnostics").setup {
-    error_sign = icons.diag.error_sign,
-    warn_sign = icons.diag.warn_sign,
-    hint_sign = icons.diag.hint_sign,
-    infor_sign = icons.diag.infor_sign,
-    debug_sign = icons.diag.debug_sign,
+  require("doodleVim.extend.diagnostics").setup({
+    error_sign = icons.diagnostics.error_sign,
+    warn_sign = icons.diagnostics.warn_sign,
+    hint_sign = icons.diagnostics.hint_sign,
+    infor_sign = icons.diagnostics.infor_sign,
+    debug_sign = icons.diagnostics.debug_sign,
     use_diagnostic_virtual_text = false,
-  }
+  })
 end
 
 M.null_ls_depress = function()
