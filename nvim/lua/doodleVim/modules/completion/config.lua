@@ -79,6 +79,7 @@ function config.mason_lspconfig()
       "yamlls",
       "taplo",
       "marksman",
+      "bashls",
     },
     automatic_installation = true,
   })
@@ -176,13 +177,6 @@ function config.mason_lspconfig()
     -- note: on_attach deprecated
     -- require("lsp_signature").on_attach(cfg, bufnr) -- no need to specify bufnr if you don't use toggle_key
     signature.on_attach(cfg) -- no need to specify bufnr if you don't use toggle_key
-
-    -- require("lsp_signature").on_attach({
-    --   bind = true, -- This is mandatory, otherwise border config won't get registered.
-    --   hint_enable = false,
-    --   floating_window_above_cur_line = true,
-    --   handler_opts = { border = "rounded" },
-    -- }, bufnr)
   end
 
   lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
@@ -230,7 +224,7 @@ function config.mason_lspconfig()
     end
 
     if lsp == "rust_analyzer" then
-      local rust_opts = require("doodleVim.modules.completion.servers.rust")
+      local rust_opts = require("doodleVim.modules.completion.servers.rust").get_rust_opts(capabilities, on_attach)
       local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
       if not rust_tools_status_ok then
         return
