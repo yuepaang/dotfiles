@@ -1,6 +1,6 @@
 M = {}
 
-function M.get_rust_opts(capabilities, on_attach)
+M.get_rust_opts = function(capabilities, on_attach)
   return {
     tools = {
       on_initialized = function()
