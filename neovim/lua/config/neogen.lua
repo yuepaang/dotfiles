@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-  require("neogen").setup({
+  require("neogen").setup {
     snippet_engine = "luasnip",
     enabled = true,
     languages = {
@@ -36,7 +36,7 @@ function M.setup()
         },
       },
     },
-  })
+  }
 end
 
 return M

@@ -25,14 +25,14 @@ function M.setup()
       },
     },
     d = {
-      name = "+csf: Function Text Object",
+      name = "+dsf: Function Text Object",
       s = {
         F = { "<Plug>(DeleteSurroundingFunction)", "Delete Surrounding Function" },
         f = { "<Plug>(DeleteSurroundingFUNCTION)", "Delete Surrounding Outer Function" },
       },
     },
     c = {
-      name = "+dsf: Function Text Object",
+      name = "+csf: Function Text Object",
       s = {
         F = { "<Plug>(ChangeSurroundingFunction)", "Change Surrounding Function" },
         f = { "<Plug>(ChangeSurroundingFUNCTION)", "Change Outer surrounding Function" },

@@ -13,9 +13,7 @@ function M.setup()
 
     display = {
       open_fn = function()
-        return require("packer.util").float {
-          border = "rounded",
-        }
+        return require("packer.util").float { border = "rounded" }
       end,
     },
   }
@@ -36,7 +34,6 @@ function M.setup()
       }
       vim.cmd [[packadd packer.nvim]]
     end
-    -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
 
     -- Run PackerCompile if there are changes in this file
     -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
@@ -51,17 +48,15 @@ function M.setup()
   local function plugins(use)
     use { "wbthomason/packer.nvim" }
 
-    -- Performance
-    use { "lewis6991/impatient.nvim" }
-
+    -- PY
     -- wakatime
     use "wakatime/vim-wakatime"
 
+    -- Performance
+    use { "lewis6991/impatient.nvim" }
+
     -- Load only when require
-    use {
-      "nvim-lua/plenary.nvim",
-      module = "plenary",
-    }
+    use { "nvim-lua/plenary.nvim", module = "plenary" }
 
     -- Notification
     use {
@@ -74,30 +69,9 @@ function M.setup()
 
     -- Colorscheme
     use {
-      "lunarvim/darkplus.nvim",
-      config = function()
-        vim.cmd "colorscheme darkplus"
-      end,
-      disable = true,
-    }
-    use {
-      "rebelot/kanagawa.nvim",
-      config = function()
-        vim.cmd "colorscheme kanagawa"
-      end,
-      disable = true,
-    }
-    use {
       "folke/tokyonight.nvim",
       config = function()
         vim.cmd "colorscheme tokyonight"
-      end,
-      disable = true,
-    }
-    use {
-      "numToStr/Sakura.nvim",
-      config = function()
-        require("Sakura").load()
       end,
       disable = true,
     }
@@ -116,8 +90,6 @@ function M.setup()
     use {
       "sainnhe/gruvbox-material",
       config = function()
-        vim.g.gruvbox_material_background = "medium"
-        vim.g.gruvbox_material_better_performance = 1
         vim.cmd "colorscheme gruvbox-material"
       end,
       disable = true,
@@ -133,18 +105,7 @@ function M.setup()
       "norcalli/nvim-colorizer.lua",
       cmd = "ColorizerToggle",
       config = function()
-        require("colorizer").setup({ "*" }, {
-          RGB = true, -- #RGB hex codes
-          RRGGBB = true, -- #RRGGBB hex codes
-          names = false, -- "Name" codes like Blue oe blue
-          RRGGBBAA = true, -- #RRGGBBAA hex codes
-          rgb_fn = true, -- CSS rgb() and rgba() functions
-          hsl_fn = true, -- CSS hsl() and hsla() functions
-          css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-          -- Available modes: foreground, background, virtualtext
-          mode = "background", -- Set the display mode.)
-        })
+        require("colorizer").setup()
       end,
     }
     use {
@@ -189,7 +150,11 @@ function M.setup()
       "tpope/vim-fugitive",
       opt = true,
       cmd = { "Git", "GBrowse", "Gdiffsplit", "Gvdiffsplit" },
-      requires = { "tpope/vim-rhubarb", "idanarye/vim-merginal" },
+      requires = {
+        "tpope/vim-rhubarb",
+        "idanarye/vim-merginal",
+      },
+      -- wants = { "vim-rhubarb" },
     }
     use { "rbong/vim-flog", cmd = { "Flog", "Flogsplit", "Floggit" }, wants = { "vim-fugitive" } }
     use {
@@ -197,16 +162,18 @@ function M.setup()
       requires = "nvim-lua/plenary.nvim",
       module = "gitlinker",
       config = function()
-        require("gitlinker").setup {
-          mappings = nil,
-        }
+        require("gitlinker").setup { mappings = nil }
       end,
     }
     use {
       "pwntester/octo.nvim",
       cmd = "Octo",
       wants = { "telescope.nvim", "plenary.nvim", "nvim-web-devicons" },
-      requires = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim", "kyazdani42/nvim-web-devicons" },
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+        "kyazdani42/nvim-web-devicons",
+      },
       config = function()
         require("octo").setup()
       end,
@@ -277,9 +244,7 @@ function M.setup()
       "kyazdani42/nvim-web-devicons",
       module = "nvim-web-devicons",
       config = function()
-        require("nvim-web-devicons").setup {
-          default = true,
-        }
+        require("nvim-web-devicons").setup { default = true }
       end,
     }
 
@@ -304,30 +269,13 @@ function M.setup()
     }
 
     -- Motions
-    use {
-      "andymass/vim-matchup",
-      event = "CursorMoved",
-    }
-    use {
-      "wellle/targets.vim",
-      event = "CursorMoved",
-    }
-    use {
-      "unblevable/quick-scope",
-      event = "CursorMoved",
-      disable = false,
-    }
-    use {
-      "chaoren/vim-wordmotion",
-      opt = true,
-      fn = { "<Plug>WordMotion_w" },
-    }
+    use { "andymass/vim-matchup", event = "CursorMoved" }
+    use { "wellle/targets.vim", event = "CursorMoved" }
+    use { "unblevable/quick-scope", event = "CursorMoved", disable = false }
+    use { "chaoren/vim-wordmotion", opt = true, fn = { "<Plug>WordMotion_w" } }
 
     -- Buffer
-    use {
-      "kazhala/close-buffers.nvim",
-      cmd = { "BDelete", "BWipeout" },
-    }
+    use { "kazhala/close-buffers.nvim", cmd = { "BDelete", "BWipeout" } }
     use {
       "matbme/JABS.nvim",
       cmd = "JABSOpen",
@@ -347,7 +295,7 @@ function M.setup()
     -- IDE
     use {
       "antoinemadec/FixCursorHold.nvim",
-      event = { "BufRead", "BufNewFile" },
+      event = "BufReadPre",
       config = function()
         vim.g.cursorhold_updatetime = 100
       end,
@@ -384,6 +332,7 @@ function M.setup()
       module = "neogen",
       disable = false,
     }
+
     use {
       "kkoomen/vim-doge",
       run = ":call doge#install()",
@@ -394,7 +343,7 @@ function M.setup()
       disable = false,
     }
 
-    -- Jump
+    -- Jumps
     use {
       "phaazon/hop.nvim",
       cmd = { "HopWord", "HopChar1" },
@@ -403,10 +352,8 @@ function M.setup()
       end,
       disable = true,
     }
-    use { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" }, disable = false }
     use {
       "ggandor/leap.nvim",
-      requires = { "tpope/vim-repeat" },
       keys = { "s", "S", "f", "F", "t", "T" },
       config = function()
         local leap = require "leap"
@@ -424,6 +371,14 @@ function M.setup()
         }
       end,
     }
+    use { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" }, disable = false }
+    -- use {
+    --   "ggandor/lightspeed.nvim",
+    --   keys = { "s", "S", "f", "F", "t", "T" },
+    --   config = function()
+    --     require("lightspeed").setup {}
+    --   end,
+    -- }
 
     -- Markdown
     use {
@@ -432,7 +387,6 @@ function M.setup()
       run = function()
         vim.fn["mkdp#util#install"]()
       end,
-      event = "BufRead",
       ft = "markdown",
       cmd = { "MarkdownPreview" },
       requires = { "zhaozg/vim-diagram", "aklt/plantuml-syntax" },
@@ -473,7 +427,6 @@ function M.setup()
         require("config.lualine").setup()
       end,
       wants = "nvim-web-devicons",
-      disable = false,
     }
 
     -- Treesitter
@@ -528,13 +481,10 @@ function M.setup()
         "aerial.nvim",
         -- "telescope-ui-select.nvim",
       },
-      requires = { -- An implementation of the Popup API from vim in Neovim
-        "nvim-lua/popup.nvim", -- Useful lua functions used ny lots of plugins
+      requires = {
+        "nvim-lua/popup.nvim",
         "nvim-lua/plenary.nvim",
-        {
-          "nvim-telescope/telescope-fzf-native.nvim",
-          run = "make",
-        },
+        { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         "nvim-telescope/telescope-project.nvim",
         "cljoly/telescope-repo.nvim",
         "nvim-telescope/telescope-file-browser.nvim",
@@ -557,7 +507,7 @@ function M.setup()
           requires = {
             { "tami5/sqlite.lua", module = "sqlite" },
             -- config = function()
-            --     require("neoclip").setup()
+            --   require("neoclip").setup()
             -- end,
           },
         },
@@ -648,34 +598,7 @@ function M.setup()
         },
         "rafamadriz/friendly-snippets",
         "honza/vim-snippets",
-        {
-          "tzachar/cmp-tabnine",
-          config = function()
-            local tabnine = require "cmp_tabnine.config"
-            tabnine:setup {
-              max_lines = 1000,
-              max_num_results = 20,
-              sort = true,
-              run_on_every_keystroke = true,
-              snippet_placeholder = "..",
-              ignored_file_types = { -- default is not to ignore
-                -- uncomment to ignore in lua:
-                -- lua = true
-              },
-            }
-          end,
-          run = "./install.sh",
-          requires = "hrsh7th/nvim-cmp",
-        },
       },
-    }
-    use {
-      "simrat39/symbols-outline.nvim",
-      cmd = "SymbolsOutline",
-      setup = function()
-        require("config.symbols-outline").setup()
-      end,
-      disable = true,
     }
 
     -- Auto pairs
@@ -697,9 +620,7 @@ function M.setup()
       wants = "nvim-treesitter",
       event = "InsertEnter",
       config = function()
-        require("nvim-ts-autotag").setup {
-          enable = true,
-        }
+        require("nvim-ts-autotag").setup { enable = true }
       end,
     }
 
@@ -821,6 +742,7 @@ function M.setup()
           },
         }
       end,
+      disable = false,
     }
 
     -- Go
@@ -845,6 +767,9 @@ function M.setup()
       end,
       disable = true,
     }
+
+    -- Kotlin
+    use { "udalov/kotlin-vim", ft = { "kotlin" }, disable = true }
 
     -- Terminal
     use {
@@ -872,14 +797,8 @@ function M.setup()
         "rcarriga/nvim-dap-ui",
         "mfussenegger/nvim-dap-python",
         "nvim-telescope/telescope-dap.nvim",
-        {
-          "leoluz/nvim-dap-go",
-          module = "dap-go",
-        },
-        {
-          "jbyuki/one-small-step-for-vimkind",
-          module = "osv",
-        },
+        { "leoluz/nvim-dap-go", module = "dap-go" },
+        { "jbyuki/one-small-step-for-vimkind", module = "osv" },
       },
       config = function()
         require("config.dap").setup()
@@ -944,6 +863,7 @@ function M.setup()
         "neotest-jest",
         "neotest-vim-test",
         "neotest-rust",
+        -- "overseer.nvim",
       },
       requires = {
         "nvim-lua/plenary.nvim",
@@ -964,7 +884,7 @@ function M.setup()
     }
 
     -- AI completion
-    use { "github/copilot.vim", event = "InsertEnter" }
+    use { "github/copilot.vim", event = "InsertEnter", disable = false }
 
     -- Legendary
     use {
@@ -1019,7 +939,6 @@ function M.setup()
         require("pqf").setup()
       end,
     }
-
     use {
       "kevinhwang91/nvim-ufo",
       opt = true,
@@ -1040,17 +959,16 @@ function M.setup()
     }
 
     -- Performance
-    use {
-      "dstein64/vim-startuptime",
-      cmd = "StartupTime",
-    }
+    use { "dstein64/vim-startuptime", cmd = "StartupTime" }
     use { "nathom/filetype.nvim" }
 
     -- Web
     use {
       "vuki656/package-info.nvim",
       opt = true,
-      requires = { "MunifTanjim/nui.nvim" },
+      requires = {
+        "MunifTanjim/nui.nvim",
+      },
       wants = { "nui.nvim" },
       module = { "package-info" },
       ft = { "json" },
@@ -1122,7 +1040,6 @@ function M.setup()
     -- Todo
     use {
       "folke/todo-comments.nvim",
-      requires = "nvim-lua/plenary.nvim",
       config = function()
         require("config.todocomments").setup()
       end,
@@ -1266,7 +1183,6 @@ function M.setup()
       event = { "BufReadPre" },
       disable = true,
     }
-
     use { "Olical/conjure", cmd = { "ConjureSchool" }, disable = true }
 
     -- Disabled
@@ -1314,6 +1230,7 @@ function M.setup()
     -- https://github.com/rktjmp/lush.nvim
     -- https://github.com/charludo/projectmgr.nvim
     -- https://github.com/katawful/kreative
+    -- https://github.com/kevinhwang91/nvim-ufo
 
     -- Bootstrap Neovim
     if packer_bootstrap then

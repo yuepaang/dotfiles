@@ -43,16 +43,7 @@ function M.setup()
   local cmp = require "cmp"
 
   cmp.setup {
-    confirmation = {
-      get_commit_characters = function()
-        return {}
-      end,
-    },
-    completion = {
-      completeopt = "menu,menuone,noinsert",
-      keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-      keyword_length = 1,
-    },
+    completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
     -- experimental = { native_menu = false, ghost_text = false },
     -- view = {
     --   entries = "native",
@@ -63,36 +54,17 @@ function M.setup()
       end,
     },
     formatting = {
-      fields = {
-        cmp.ItemField.Abbr,
-        cmp.ItemField.Kind,
-        cmp.ItemField.Menu,
-      },
       format = function(entry, vim_item)
-        local word = vim_item.abbr
-        if string.sub(word, -1, -1) == "~" then
-          vim_item.abbr = string.sub(word, 0, -2)
-        end
-
-        if entry.source.name == "cmp_tabnine" then
-          -- if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-          -- menu = entry.completion_item.data.detail .. " " .. menu
-          -- end
-          vim_item.kind = "ﮧ"
-        else
-          -- Kind icons
-          vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-        end
-
+        -- Kind icons
+        vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
         -- Source
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
-          buffer = "[BUF]",
-          cmp_tabnine = "[TAB]",
-          luasnip = "[SNP]",
+          luasnip = "[Snip]",
+          buffer = "[Buffer]",
           nvim_lua = "[Lua]",
-          -- treesitter = "[Treesitter]",
-          path = "[PATH]",
+          treesitter = "[Treesitter]",
+          path = "[Path]",
           nvim_lsp_signature_help = "[Signature]",
         })[entry.source.name]
         return vim_item
@@ -112,7 +84,7 @@ function M.setup()
       ["<C-u>"] = cmp.mapping {
         i = function(fallback)
           if luasnip.choice_active() then
-            require "luasnip.extras.select_choice" ()
+            require "luasnip.extras.select_choice"()
           else
             fallback()
           end
@@ -122,16 +94,7 @@ function M.setup()
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-q>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
-      -- ["<C-e>"] = cmp.mapping(function(fallback)
-      --   cmp.mapping.abort()
-      --   local copilot_keys = vim.fn["copilot#Accept"]()
-      --   if copilot_keys ~= "" then
-      --     vim.api.nvim_feedkeys(copilot_keys, "i", true)
-      --   else
-      --     fallback()
-      --   end
-      -- end),
+      ["<C-e>"] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
       ["<CR>"] = cmp.mapping {
         i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
         c = function(fallback)
@@ -220,7 +183,6 @@ function M.setup()
       { name = "nvim_lsp" },
       { name = "nvim_lsp_signature_help" },
       { name = "luasnip" },
-      { name = "cmp_tabnine" },
       { name = "treesitter" },
       { name = "buffer" },
       { name = "nvim_lua" },
@@ -230,7 +192,6 @@ function M.setup()
       -- { name = "emoji" },
       -- { name = "calc" },
     },
-    preselect = cmp.PreselectMode.None,
     window = {
       documentation = {
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
@@ -241,7 +202,6 @@ function M.setup()
 
   -- Use buffer source for `/`
   cmp.setup.cmdline("/", {
-    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = "buffer" },
     },
@@ -249,7 +209,6 @@ function M.setup()
 
   -- Use cmdline & path source for ':'
   cmp.setup.cmdline(":", {
-    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = "path" },
     }, {

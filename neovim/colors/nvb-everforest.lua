@@ -1,6 +1,6 @@
 vim.g.colors_name = "nvb-everforest"
 
-require("config.colorscheme").setup({
+require("config.colorscheme").setup {
   base00 = "#2b3339",
   base01 = "#323c41",
   base02 = "#503946",
@@ -17,4 +17,4 @@ require("config.colorscheme").setup({
   base0D = "#a7c080",
   base0E = "#e67e80",
   base0F = "#d699b6",
-})
+}

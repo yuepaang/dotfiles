@@ -28,9 +28,6 @@ local sources = {
   b.formatting.isort,
   b.formatting.stylua,
   b.formatting.google_java_format,
-  b.formatting.rustfmt,
-  b.formatting.gofmt,
-  b.formatting.jq,
   -- with_root_file(b.formatting.stylua, "stylua.toml"),
 
   -- diagnostics
@@ -44,6 +41,10 @@ local sources = {
   -- with_root_file(b.diagnostics.selene, "selene.toml"),
   with_diagnostics_code(b.diagnostics.shellcheck),
   b.diagnostics.zsh,
+  -- b.diagnostics.cspell.with {
+  --   filetypes = { "python", "rust", "typescript" },
+  -- },
+  -- b.diagnostics.stylelint,
 
   -- code actions
   b.code_actions.gitsigns.with {
@@ -61,6 +62,7 @@ local sources = {
 
 function M.setup(opts)
   nls.setup {
+    -- debug = true,
     debounce = 150,
     save_after_format = false,
     sources = sources,

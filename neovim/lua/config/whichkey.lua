@@ -5,74 +5,10 @@ local legendary = require "legendary"
 local next = next
 
 local conf = {
-  plugins = {
-    marks = true, -- shows a list of your marks on ' and `
-    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-    spelling = {
-      enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-      suggestions = 20, -- how many suggestions should be shown in the list?
-    },
-    -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-    -- No actual key bindings are created
-    presets = {
-      operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-      motions = false, -- adds help for motions
-      text_objects = false, -- help for text objects triggered after entering an operator
-      windows = true, -- default bindings on <c-w>
-      nav = true, -- misc bindings to work with windows
-      z = true, -- bindings for folds, spelling and others prefixed with z
-      g = true, -- bindings for prefixed with g
-    },
-  },
-  -- add operators that will trigger motion and text object completion
-  -- to enable all native operators, set the preset / operators plugin above
-  -- operators = { gc = "Comments" },
-  key_labels = {
-    -- override the label used to display some keys. It doesn't effect WK in any other way.
-    -- For example:
-    -- ["<space>"] = "SPC",
-    -- ["<cr>"] = "RET",
-    -- ["<tab>"] = "TAB",
-  },
-  icons = {
-    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-    separator = "➜", -- symbol used between a key and it's label
-    group = "+", -- symbol prepended to a group
-  },
-  popup_mappings = {
-    scroll_down = "<c-d>", -- binding to scroll down inside the popup
-    scroll_up = "<c-u>", -- binding to scroll up inside the popup
-  },
   window = {
-    border = "rounded", -- none, single, double, shadow
+    border = "single", -- none, single, double, shadow
     position = "bottom", -- bottom, top
-    margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-    padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
-    winblend = 0,
   },
-  layout = {
-    height = { min = 4, max = 25 }, -- min and max height of the columns
-    width = { min = 20, max = 50 }, -- min and max width of the columns
-    spacing = 3, -- spacing between columns
-    align = "center", -- align columns left, center or right
-  },
-  ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-  show_help = false, -- show help message on the command line when the popup is visible
-  -- triggers = "auto", -- automatically setup triggers
-  -- triggers = {"<leader>"} -- or specify a list manually
-  triggers_blacklist = {
-    -- list of mode / prefixes that should never be hooked by WhichKey
-    -- this is mostly relevant for key maps that start with a native binding
-    -- most people should not need to change this
-    i = { "j", "k" },
-    v = { "j", "k" },
-  },
-  -- old
-  -- window = {
-  --   border = "single", -- none, single, double, shadow
-  --   position = "bottom", -- bottom, top
-  -- },
 }
 whichkey.setup(conf)
 
@@ -102,34 +38,28 @@ local function normal_keymap()
     name = "Find",
     f = { "<cmd>lua require('utils.finder').find_files()<cr>", "Files" },
     d = { "<cmd>lua require('utils.finder').find_dotfiles()<cr>", "Dotfiles" },
-    b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-    h = { "<cmd>Telescope help_tags<cr>", "Help" },
+    b = { "<cmd>lua require('telescope.builtin').buffers()<cr>", "Buffers" },
+    h = { "<cmd>lua require('telescope.builtin').help_tags()<cr>", "Help" },
     m = { "<cmd>lua require('telescope.builtin').marks()<cr>", "Marks" },
-    o = { "<cmd>Telescope oldfiles<cr>", "Old Files" },
-    g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
-    c = { "<cmd>Telescope commands<cr>", "Commands" },
-    r = { "<cmd>Telescope file_browser<cr>", "Browser" },
+    o = { "<cmd>lua require('telescope.builtin').oldfiles()<cr>", "Old Files" },
+    g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Live Grep" },
+    c = { "<cmd>lua require('telescope.builtin').commands()<cr>", "Commands" },
+    r = { "<cmd>lua require'telescope'.extensions.file_browser.file_browser()<cr>", "File Browser" },
     w = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", "Current Buffer" },
     e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-    t = { "<cmd>TodoTelescope<Cr>", "TODO" },
   }
 
   keymap_p = {
     name = "Project",
     p = { "<cmd>lua require'telescope'.extensions.project.project{display_type = 'full'}<cr>", "List" },
-    s = { "<cmd>Telescope repo list<cr>", "Search" },
+    s = { "<cmd>lua require'telescope'.extensions.repo.list{}<cr>", "Search" },
     P = { "<cmd>TermExec cmd='BROWSER=brave yarn dev'<cr>", "Slidev" },
   }
 
   local keymap = {
     ["w"] = { "<cmd>update!<CR>", "Save" },
-    -- ["q"] = { "<cmd>q<CR>", "Quit" },
-    -- ["h"] = { "<cmd>nohlsearch<CR>", "No highlight search" },
+    ["q"] = { "<cmd>lua require('utils').quit()<CR>", "Quit" },
     -- ["t"] = { "<cmd>ToggleTerm<CR>", "Terminal" },
-
-    -- ["w"] = { "<cmd>w<CR>", "Write" },
-    ["q"] = { '<cmd>lua require("functions").smart_quit()<CR>', "Quit" },
-    -- ["q"] = { "<cmd>lua require('utils').quit()<CR>", "Quit" },
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 
     a = {
@@ -197,7 +127,6 @@ local function normal_keymap()
       o = { "<cmd>UltestOutput<cr>", "Output" },
       s = { "<cmd>TestSuite<cr>", "Suite" },
       v = { "<cmd>TestVisit<cr>", "Visit" },
-      t = { "<cmd>Translate<cr>", "Translate" },
       p = { "<Plug>PlenaryTestFile", "PlenaryTestFile" },
     },
 
@@ -274,11 +203,7 @@ local function normal_keymap()
         "<cmd>lua require'gitlinker'.get_buf_range_url('n', {action_callback = require'gitlinker.actions'.open_in_browser})<cr>",
         "Link",
       },
-      j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-      k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-      p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-      d = { "<cmd>Gitsigns diffthis HEAD<cr>", "diffthis Head" },
-      z = { "<cmd>lua require('utils.term').git_client_toggle()<CR>", "Git TUI" },
+      g = { "<cmd>lua require('telescope').extensions.gh.gist()<CR>", "Gist" },
       -- g = {
       --   name = "+Github",
       --   c = {
@@ -324,6 +249,7 @@ local function normal_keymap()
       --     t = { "<cmd>GHToggleThread<cr>", "Toggle" },
       --   },
       -- },
+      z = { "<cmd>lua require('utils.term').git_client_toggle()<CR>", "Git TUI" },
     },
   }
   whichkey.register(keymap, opts)
@@ -339,6 +265,7 @@ local function visual_keymap()
         "Link",
       },
     },
+
     r = {
       name = "Refactor",
       e = { [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], "Extract Function" },
@@ -354,6 +281,7 @@ local function visual_keymap()
   }
 
   whichkey.register(keymap, v_opts)
+  legendary.bind_whichkey(keymap, v_opts, false)
 end
 
 local function code_keymap()

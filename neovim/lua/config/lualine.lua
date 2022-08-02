@@ -99,7 +99,7 @@ local icons = require "config.icons"
 local winbar = require "config.winbar"
 
 function M.setup()
-  -- local gps = require("nvim-gps")
+  -- local gps = require "nvim-gps"
 
   require("lualine").setup {
     options = {
@@ -175,7 +175,6 @@ function M.setup()
       lualine_y = {},
       lualine_z = {},
     },
-
     inactive_winbar = {
       lualine_a = {},
       lualine_b = {},

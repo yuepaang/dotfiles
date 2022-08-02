@@ -1,21 +1,5 @@
 local g = vim.g
 
-g.mapleader = " "
-
--- add clipboard-provider
-g.clipboard = {
-  name = "myProvider",
-  copy = {
-    ["+"] = "clipboard-provider copy",
-    ["*"] = "clipboard-provider copy",
-  },
-  paste = {
-    ["+"] = "clipboard-provider paste",
-    ["*"] = "clipboard-provider paste",
-  },
-  cache_enabled = 0,
-}
-
 -- Disable some builtin vim plugins
 local disabled_built_ins = {
   "2html_plugin",

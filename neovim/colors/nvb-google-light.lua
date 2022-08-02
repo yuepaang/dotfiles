@@ -1,6 +1,6 @@
 vim.g.colors_name = "nvb-google-light"
 
-require("config.colorscheme").setup({
+require("config.colorscheme").setup {
   base00 = "#ffffff",
   base01 = "#e0e0e0",
   base02 = "#c5c8c6",
@@ -17,4 +17,4 @@ require("config.colorscheme").setup({
   base0D = "#3971ed",
   base0E = "#a36ac7",
   base0F = "#3971ed",
-})
+}

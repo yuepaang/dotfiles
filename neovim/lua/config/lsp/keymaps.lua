@@ -12,6 +12,7 @@ local function keymappings(client, bufnr)
 
   -- Key mappings
   -- buf_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  -- vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
   keymap("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
 
   keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
@@ -23,7 +24,6 @@ local function keymappings(client, bufnr)
   local keymap_l = {
     l = {
       name = "LSP",
-      D = { "<cmd>lua require('config.lsp').toggle_diagnostics()<CR>", "Toggle Inline Diagnostics" },
       R = { "<cmd>Trouble lsp_references<cr>", "Trouble References" },
       a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
       d = { "<cmd>Telescope diagnostics<CR>", "Diagnostics" },
@@ -35,7 +35,7 @@ local function keymappings(client, bufnr)
       t = { "<cmd>TroubleToggle document_diagnostics<CR>", "Trouble" },
       L = { "<cmd>lua vim.lsp.codelens.refresh()<CR>", "Refresh CodeLens" },
       l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "Run CodeLens" },
-      S = { "<cmd>SymbolsOutline<CR>", "List Symbols Outline" },
+      D = { "<cmd>lua require('config.lsp').toggle_diagnostics()<CR>", "Toggle Inline Diagnostics" },
     },
   }
   if client.server_capabilities.documentFormattingProvider then
@@ -47,12 +47,10 @@ local function keymappings(client, bufnr)
     -- d = { "<Cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
     d = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", "Definition" },
     D = { "<Cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
-    s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
+    h = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
     I = { "<cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
     -- b = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
     b = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", "Goto Type Definition" },
-    r = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto References" },
-    l = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Open float diagnostics" },
   }
 
   local keymap_v_l = {

@@ -41,10 +41,11 @@ opt.splitbelow = true
 opt.splitright = true
 opt.laststatus = 3 -- Global statusline
 opt.cmdheight = 0
+
+-- Change to use lualine.nvim
 -- opt.winbar = "%{%v:lua.require'config.winbar'.get_winbar()%}"
 
--- go to previous/next line with h,l,left arrow and right arrow
--- when cursor reaches end/beginning of line
+-- go to previous/next line with h,l,left arrow and right arrow when cursor reaches end/beginning of line
 opt.whichwrap:append "<>[]hl"
 
 -- disable nvim intro
@@ -75,16 +76,17 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- opt.foldlevel = 99
 -- opt.foldlevelstart = -1
 -- opt.foldenable = true
+
 -- Copilot
 cmd [[
     imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
     let g:copilot_no_tab_map = v:true
-    let g:copilot_assume_mapped = v:true
-    let g:copilot_tab_fallback = ""
 ]]
 
--- Python host
-cmd [[
-  let g:python3_host_skip_check = 1
-  let g:python3_host_prog = "$HOME/.pyenv/versions/nvim-py3/bin/python"
-]]
+-- GUI
+opt.guifont = "Fira_Code:h14"
+
+if vim.g.neovide then
+  vim.g.neovide_transparency = 0.9
+  vim.g.neovide_fullscreen = true
+end

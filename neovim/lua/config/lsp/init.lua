@@ -1,8 +1,10 @@
 local M = {}
 
+-- local util = require "lspconfig.util"
+
 local servers = {
   gopls = {},
-  -- html = {},
+  html = {},
   jsonls = {
     settings = {
       json = {
@@ -15,21 +17,14 @@ local servers = {
       typeCheckingMode = "off",
     },
   },
+  -- pylsp = {}, -- Integration with rope for refactoring - https://github.com/python-rope/pylsp-rope
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
         cargo = { allFeatures = true },
         checkOnSave = {
-          allFeatures = true,
           command = "clippy",
           extraArgs = { "--no-deps" },
-        },
-        procMacro = {
-          ignored = {
-            ["async-trait"] = { "async_trait" },
-            ["napi-derive"] = { "napi" },
-            ["async-recursion"] = { "async_recursion" },
-          },
         },
       },
     },
@@ -45,7 +40,7 @@ local servers = {
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = { "vim", "describe", "it", "before_each", "after_each", "packer_plugins", "dump" },
+          globals = { "vim", "describe", "it", "before_each", "after_each", "packer_plugins" },
           -- disable = { "lowercase-global", "undefined-global", "unused-local", "unused-vararg", "trailing-space" },
         },
         workspace = {
@@ -54,16 +49,18 @@ local servers = {
             [vim.fn.expand "$VIMRUNTIME/lua"] = true,
             [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
           },
+          -- library = vim.api.nvim_get_runtime_file("", true),
           maxPreload = 2000,
           preloadFileSize = 50000,
         },
-        completion = { callSnippet = "Both", enable = true, showWord = "Disable" },
+        completion = { callSnippet = "Both" },
         telemetry = { enable = false },
       },
     },
   },
   tsserver = { disable_formatting = true },
   vimls = {},
+  tailwindcss = {},
   yamlls = {
     schemastore = {
       enable = true,
@@ -77,21 +74,16 @@ local servers = {
       },
     },
   },
-  taplo = {},
+  jdtls = {},
   dockerls = {},
+  graphql = {},
   bashls = {},
+  omnisharp = {},
+  kotlin_language_server = {},
+  emmet_ls = {},
   marksman = {},
+  angularls = {},
 }
-
--- local lsp_signature = require "lsp_signature"
--- lsp_signature.setup {
---   bind = true,
---   handler_opts = {
---     border = "rounded",
---   },
--- }
--- newly add
-require "config.lsp.lsp_signature"
 
 function M.on_attach(client, bufnr)
   -- Enable completion triggered by <C-X><C-O>
@@ -146,14 +138,12 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     "additionalTextEdits",
   },
 }
-
 M.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities) -- for nvim-cmp
 
 local opts = {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
   flags = {
-    allow_incremental_sync = true,
     debounce_text_changes = 150,
   },
 }
@@ -167,6 +157,7 @@ function M.setup()
 
   -- Installer
   require("config.lsp.installer").setup(servers, opts)
+
   -- Inlay hints
   -- require("config.lsp.inlay-hints").setup()
 end

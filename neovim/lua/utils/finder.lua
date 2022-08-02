@@ -34,7 +34,7 @@ end
 function M.find_dotfiles()
   require("telescope.builtin").find_files {
     prompt_title = "<Dotfiles>",
-    cwd = "$HOME/dotfiles/",
+    cwd = "$HOME/workspace/alpha2phi/dotfiles/",
   }
 end
 

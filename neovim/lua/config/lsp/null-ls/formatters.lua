@@ -7,7 +7,7 @@ local api = vim.api
 
 local method = require("null-ls").methods.FORMATTING
 
-M.autoformat = false
+M.autoformat = true
 
 function M.toggle()
   M.autoformat = not M.autoformat
@@ -29,6 +29,7 @@ function M.format()
           and client.name ~= "html"
           and client.name ~= "sumneko_lua"
           and client.name ~= "jdt.ls"
+        -- and client.name ~= "kotlin_language_server"
       end,
     }
     vim.fn.winrestview(view)
@@ -37,7 +38,7 @@ function M.format()
 end
 
 function M.setup(client, bufnr)
-  local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+  local filetype = api.nvim_buf_get_option(bufnr, "filetype")
 
   local enable = false
   if M.has_formatter(filetype) then

@@ -11,22 +11,12 @@ function M.setup()
     highlight = {
       -- `false` will disable the whole extension
       enable = true,
-      disable = { "css", "markdown" },
     },
 
     rainbow = {
       enable = true,
       extended_mode = true,
       max_file_lines = nil,
-      colors = {
-        "Gold",
-        "Orchid",
-        "DodgerBlue",
-        -- "Cornsilk",
-        -- "Salmon",
-        -- "LawnGreen",
-      },
-      disable = { "html" },
     },
 
     incremental_selection = {
@@ -37,10 +27,6 @@ function M.setup()
         scope_incremental = "grc",
         node_decremental = "grm",
       },
-    },
-
-    autopairs = {
-      enable = true,
     },
 
     indent = { enable = true, disable = { "python", "java", "rust", "lua" } },
@@ -127,7 +113,6 @@ function M.setup()
     -- autotag
     autotag = {
       enable = true,
-      disable = { "xml" },
     },
 
     -- context_commentstring

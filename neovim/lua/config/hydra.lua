@@ -64,6 +64,7 @@ local function telescope_menu()
   ██🬿      🭊██   _h_: vim help    _c_: execute command
  🭋█🬝🮄🮄🮄🮄🮄🮄🮄🮄🬆█🭀  _k_: keymap      _;_: commands history
  🭤🭒🬺🬹🬱🬭🬭🬭🬭🬵🬹🬹🭝🭙  _r_: registers   _?_: search history
+
                  _<Enter>_: Telescope           _<Esc>_ 
 ]]
 

@@ -4,19 +4,12 @@ local default_opts = { noremap = true, silent = true }
 local expr_opts = { noremap = true, expr = true, silent = true }
 
 -- Better escape using jk in insert and terminal mode
--- keymap("i", "jk", "<ESC>", default_opts)
--- keymap("t", "jk", "<C-\\><C-n>", default_opts)
-
--- keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", default_opts)
--- keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", default_opts)
--- keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", default_opts)
--- keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", default_opts)
-
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", default_opts)
-keymap("n", "<C-j>", "<C-w>j", default_opts)
-keymap("n", "<C-k>", "<C-w>k", default_opts)
-keymap("n", "<C-l>", "<C-w>l", default_opts)
+keymap("i", "jk", "<ESC>", default_opts)
+keymap("t", "jk", "<C-\\><C-n>", default_opts)
+keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", default_opts)
+keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", default_opts)
+keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", default_opts)
+keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", default_opts)
 
 -- Center search results
 keymap("n", "n", "nzz", default_opts)
@@ -32,7 +25,6 @@ keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", expr_opts)
 -- keymap("n", "G", "Gzz", default_opts)
 
 -- Better indent
--- Stay in indent mode
 keymap("v", "<", "<gv", default_opts)
 keymap("v", ">", ">gv", default_opts)
 
@@ -40,9 +32,8 @@ keymap("v", ">", ">gv", default_opts)
 keymap("v", "p", '"_dP', default_opts)
 
 -- Switch buffer
-keymap("n", "<S-h>", ":bprevious<CR>", default_opts)
-keymap("n", "<S-l>", ":bnext<CR>", default_opts)
-keymap("n", "<S-n>", ":BDelete this<CR>", default_opts)
+keymap("n", "<S-h>", ":BufferLineCyclePrev<CR>", default_opts)
+keymap("n", "<S-l>", ":BufferLineCycleNext<CR>", default_opts)
 
 -- Cancel search highlighting with ESC
 keymap("n", "<ESC><ESC>", ":nohlsearch<Bar>:echo<CR>", default_opts)
