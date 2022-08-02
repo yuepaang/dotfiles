@@ -374,7 +374,7 @@ function config.diffview()
       },
       win_config = { -- See ':h diffview-config-win_config'
         position = "left",
-        width = 35,
+        width = 30,
       },
     },
     file_history_panel = {
@@ -425,14 +425,14 @@ function config.diffview()
         ["U"] = actions.unstage_all, -- Unstage all entries.
         ["X"] = actions.restore_entry, -- Restore entry to the state on the left side.
         ["R"] = actions.refresh_files, -- Update stats and entries in the file list.
-        ["L"] = actions.open_commit_log, -- Open the commit log panel.
-        ["<c-b>"] = actions.scroll_view(-0.25), -- Scroll the view up
-        ["<c-f>"] = actions.scroll_view(0.25), -- Scroll the view down
-        ["<tab>"] = actions.select_next_entry,
-        ["<s-tab>"] = actions.select_prev_entry,
-        ["gf"] = actions.goto_file,
-        ["<C-w><C-f>"] = actions.goto_file_split,
-        ["<C-w>gf"] = actions.goto_file_tab,
+        ["L"] = actions.open_commit_log, -- Open the commit log panel0.
+        ["<c-u>"] = actions.scroll_view(-0.25), -- Scroll the view up
+        ["<c-d>"] = actions.scroll_view(0.25), -- Scroll the view down
+        -- ["<tab>"] = actions.select_next_entry,
+        -- ["<s-tab>"] = actions.select_prev_entry,
+        -- ["gf"] = actions.goto_file,
+        -- ["<C-w><C-f>"] = actions.goto_file_split,
+        ["<C-t>"] = actions.goto_file_tab,
         ["i"] = actions.listing_style, -- Toggle between 'list' and 'tree' views
         ["f"] = actions.toggle_flatten_dirs, -- Flatten empty subdirectories in tree listing style.
         ["<leader>e"] = actions.focus_files,
