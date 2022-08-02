@@ -44,8 +44,8 @@ local function keymappings(client, bufnr)
 
   local keymap_g = {
     name = "Goto",
-    -- d = { "<Cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
-    d = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", "Definition" },
+    d = { "<Cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
+    -- d = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", "Definition" },
     D = { "<Cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
     h = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
     I = { "<cmd>Telescope lsp_implementations<CR>", "Goto Implementation" },
