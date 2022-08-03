@@ -355,7 +355,7 @@ function config.diffview()
 
   require("diffview").setup({
     diff_binaries = false, -- Show diffs for binaries
-    enhanced_diff_hl = false, -- See ':h diffview-config-enhanced_diff_hl'
+    enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
     git_cmd = { "git" }, -- The git executable followed by default args.
     use_icons = true, -- Requires nvim-web-devicons
     icons = { -- Only applies when use_icons is true.
@@ -452,13 +452,13 @@ function config.diffview()
         ["<cr>"] = actions.select_entry,
         ["o"] = actions.select_entry,
         ["<2-LeftMouse>"] = actions.select_entry,
-        ["<c-b>"] = actions.scroll_view(-0.25),
-        ["<c-f>"] = actions.scroll_view(0.25),
-        ["<tab>"] = actions.select_next_entry,
-        ["<s-tab>"] = actions.select_prev_entry,
-        ["gf"] = actions.goto_file,
-        ["<C-w><C-f>"] = actions.goto_file_split,
-        ["<C-w>gf"] = actions.goto_file_tab,
+        ["<c-u>"] = actions.scroll_view(-0.25),
+        ["<c-d>"] = actions.scroll_view(0.25),
+        -- ["<tab>"] = actions.select_next_entry,
+        -- ["<s-tab>"] = actions.select_prev_entry,
+        -- ["gf"] = actions.goto_file,
+        -- ["<C-w><C-f>"] = actions.goto_file_split,
+        ["<C-o>"] = actions.goto_file_tab,
         ["<leader>e"] = actions.focus_files,
         ["<leader>b"] = actions.toggle_files,
       },
