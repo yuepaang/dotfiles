@@ -650,7 +650,7 @@ function M.setup()
         "schemastore.nvim",
         "typescript.nvim",
         "nvim-navic",
-        "goto-preview",
+        -- "goto-preview",
       },
       config = function()
         require("config.lsp").setup()
@@ -679,12 +679,12 @@ function M.setup()
           end,
           module = { "nvim-navic" },
         },
-        {
-          "rmagatti/goto-preview",
-          config = function()
-            require("goto-preview").setup {}
-          end,
-        },
+        -- {
+        --   "rmagatti/goto-preview",
+        --   config = function()
+        --     require("goto-preview").setup {}
+        --   end,
+        -- },
         -- {
         --   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         --   config = function()
@@ -780,7 +780,7 @@ function M.setup()
     -- Terminal
     use {
       "akinsho/toggleterm.nvim",
-      keys = { [[<C-\\>]] },
+      keys = { [[<C-\>]] },
       cmd = { "ToggleTerm", "TermExec" },
       module = { "toggleterm", "toggleterm.terminal" },
       config = function()
@@ -825,38 +825,6 @@ function M.setup()
 
     -- Test
     use {
-      "rcarriga/vim-ultest",
-      requires = { "vim-test/vim-test" },
-      opt = true,
-      keys = { "<leader>t" },
-      cmd = {
-        "TestNearest",
-        "TestFile",
-        "TestSuite",
-        "TestLast",
-        "TestVisit",
-        "Ultest",
-        "UltestNearest",
-        "UltestDebug",
-        "UltestLast",
-        "UltestSummary",
-      },
-      module = "ultest",
-      run = ":UpdateRemotePlugins",
-      config = function()
-        require("config.test").setup()
-      end,
-    }
-    use { "diepm/vim-rest-console", ft = { "rest" }, disable = false }
-    use {
-      "NTBBloodbath/rest.nvim",
-      config = function()
-        require("rest-nvim").setup {}
-        vim.keymap.set("n", "<C-j>", "<Plug>RestNvim", { noremap = true, silent = true })
-      end,
-      disable = true,
-    }
-    use {
       "nvim-neotest/neotest",
       opt = true,
       wants = {
@@ -869,9 +837,11 @@ function M.setup()
         "neotest-jest",
         "neotest-vim-test",
         "neotest-rust",
+        "vim-test",
         "overseer.nvim",
       },
       requires = {
+        "vim-test/vim-test",
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "antoinemadec/FixCursorHold.nvim",
@@ -882,11 +852,50 @@ function M.setup()
         "nvim-neotest/neotest-vim-test",
         "rouge8/neotest-rust",
       },
-      module = { "neotest" },
+      module = { "neotest", "neotest.async" },
+      cmd = {
+        "TestNearest",
+        "TestFile",
+        "TestSuite",
+        "TestLast",
+        "TestVisit",
+      },
       config = function()
         require("config.neotest").setup()
       end,
       disable = false,
+    }
+    -- use {
+    --   "rcarriga/vim-ultest",
+    --   requires = { "vim-test/vim-test" },
+    --   opt = true,
+    --   keys = { "<leader>t" },
+    --   cmd = {
+    --     "TestNearest",
+    --     "TestFile",
+    --     "TestSuite",
+    --     "TestLast",
+    --     "TestVisit",
+    --     "Ultest",
+    --     "UltestNearest",
+    --     "UltestDebug",
+    --     "UltestLast",
+    --     "UltestSummary",
+    --   },
+    --   module = "ultest",
+    --   run = ":UpdateRemotePlugins",
+    --   config = function()
+    --     require("config.test").setup()
+    --   end,
+    -- }
+    use { "diepm/vim-rest-console", ft = { "rest" }, disable = false }
+    use {
+      "NTBBloodbath/rest.nvim",
+      config = function()
+        require("rest-nvim").setup {}
+        vim.keymap.set("n", "<C-j>", "<Plug>RestNvim", { noremap = true, silent = true })
+      end,
+      disable = true,
     }
 
     -- AI completion
@@ -1106,7 +1115,19 @@ function M.setup()
     use {
       "stevearc/overseer.nvim",
       opt = true,
-      cmd = { "OverseerToggle", "OverseerRun", "OverseerBuild" },
+      cmd = {
+        "OverseerToggle",
+        "OverseerOpen",
+        "OverseerRun",
+        "OverseerBuild",
+        "OverseerClose",
+        "OverseerLoadBundle",
+        "OverseerSaveBundle",
+        "OverseerDeleteBundle",
+        "OverseerRunCmd",
+        "OverseerQuickAction",
+        "OverseerTaskAction",
+      },
       config = function()
         require("overseer").setup()
       end,
