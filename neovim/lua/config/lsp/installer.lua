@@ -47,10 +47,11 @@ function M.setup(servers, options)
       local extension_path = install_root_dir .. "/packages/codelldb/extension/"
       local codelldb_path = extension_path .. "adapter/codelldb"
       local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+      local ih = require "inlay-hints"
       require("rust-tools").setup {
         tools = {
-          autoSetHints = false,
-          executor = require("rust-tools/executors").toggleterm,
+          -- autoSetHints = false,
+          -- executor = require("rust-tools/executors").toggleterm,
           hover_actions = { border = "solid" },
           on_initialized = function()
             vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
@@ -59,7 +60,11 @@ function M.setup(servers, options)
                 vim.lsp.codelens.refresh()
               end,
             })
+            ih.set_all()
           end,
+          nlay_hints = {
+            auto = false,
+          },
         },
         server = opts,
         dap = {
