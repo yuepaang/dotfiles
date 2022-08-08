@@ -1,5 +1,9 @@
 local g = vim.g
 
+-- header
+g.header_field_author = "Yue Peng"
+g.header_field_author_email = "yuepaang@gmail.com"
+
 -- Disable some builtin vim plugins
 local disabled_built_ins = {
   "2html_plugin",

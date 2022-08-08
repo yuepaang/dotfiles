@@ -51,6 +51,8 @@ function M.setup()
     -- PY
     -- wakatime
     use "wakatime/vim-wakatime"
+    -- header
+    use "alpertuna/vim-header"
 
     -- Performance
     use { "lewis6991/impatient.nvim" }
@@ -582,6 +584,12 @@ function M.setup()
         "hrsh7th/cmp-nvim-lua",
         "ray-x/cmp-treesitter",
         "hrsh7th/cmp-cmdline",
+        -- Tabnine
+        {
+          "tzachar/cmp-tabnine",
+          run = "./install.sh",
+          requires = "hrsh7th/nvim-cmp",
+        },
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lsp-signature-help",

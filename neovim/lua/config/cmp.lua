@@ -61,6 +61,7 @@ function M.setup()
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
           luasnip = "[Snip]",
+          cmp_tabnine = "[TAB]",
           buffer = "[Buffer]",
           nvim_lua = "[Lua]",
           treesitter = "[Treesitter]",
@@ -183,6 +184,7 @@ function M.setup()
       { name = "nvim_lsp" },
       { name = "nvim_lsp_signature_help" },
       { name = "luasnip" },
+      { name = "cmp_tabnine" },
       { name = "treesitter" },
       { name = "buffer" },
       { name = "nvim_lua" },
