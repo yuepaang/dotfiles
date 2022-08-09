@@ -1149,6 +1149,13 @@ function M.setup()
       end,
     }
 
+    use {
+      "michaelb/sniprun",
+      run = "bash ./install.sh",
+      cmd = { "SnipRun", "SnipInfo", "SnipReset", "SnipReplMemoryClean", "SnipClose", "SnipLive" },
+      module = { "sniprun", "sniprun.api" },
+    }
+
     -- Testing
     use {
       "linty-org/readline.nvim",
@@ -1226,7 +1233,14 @@ function M.setup()
       event = { "BufReadPre" },
       disable = true,
     }
-    use { "Olical/conjure", cmd = { "ConjureSchool" }, disable = true }
+    use {
+      "Olical/conjure",
+      cmd = { "ConjureSchool" },
+      config = function()
+        vim.g["conjure#extract#tree_sitter#enabled"] = true
+      end,
+      disable = false,
+    }
 
     -- Disabled
     use {
