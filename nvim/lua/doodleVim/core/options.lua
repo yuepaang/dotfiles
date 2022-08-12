@@ -23,6 +23,12 @@ end
 
 M.load_options = function()
   local global_local = {
+    scriptencoding = "utf-8",
+    encoding = "utf-8",
+    fileencoding = "utf-8",
+
+    title = true,
+
     termguicolors = true,
     mouse = "a",
     errorbells = true,
@@ -31,7 +37,6 @@ M.load_options = function()
     fileformats = "unix,mac,dos",
     magic = true,
     virtualedit = "block",
-    encoding = "utf-8",
     viewoptions = "folds,cursor,curdir,slash,unix",
     clipboard = "unnamedplus",
     wildignorecase = true,
@@ -55,6 +60,7 @@ M.load_options = function()
     smartindent = true,
     infercase = true,
     incsearch = true,
+    hlsearch = true,
     wrapscan = true,
     inccommand = "nosplit",
     grepformat = "%f:%l:%c:%m",

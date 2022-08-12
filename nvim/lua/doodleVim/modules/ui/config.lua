@@ -29,6 +29,7 @@ function config.treesitter()
             "vim",
             "yaml",
             "markdown",
+            "norg",
         },
         sync_install = false,
         auto_install = true,
@@ -37,7 +38,7 @@ function config.treesitter()
         },
         highlight = {
             enable = true,
-            additional_vim_regex_highlighting = false,
+            additional_vim_regex_highlighting = true,
         },
         textobjects = {
             select = {
