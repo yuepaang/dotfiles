@@ -46,4 +46,8 @@ py["alpertuna/vim-header"] = {
   config = conf.header,
 }
 
+py["mg979/vim-visual-multi"] = {
+  event = { "BufReadPre" },
+}
+
 return py

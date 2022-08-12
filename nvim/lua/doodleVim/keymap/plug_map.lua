@@ -87,10 +87,10 @@ plug_map.normal = {
         ),
     },
 
-    ["<C-n>"] = bind.convert_wk_format(
+    ["]d"] = bind.convert_wk_format(
         map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():with_label "Go To Next Diagnostic"
     ),
-    ["<C-p>"] = bind.convert_wk_format(
+    ["[d"] = bind.convert_wk_format(
         map_cr("lua vim.diagnostic.goto_prev()"):with_noremap():with_silent():with_label "Go To Previous Diagnostic"
     ),
 
