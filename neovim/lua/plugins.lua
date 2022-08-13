@@ -67,6 +67,14 @@ function M.setup()
       config = function()
         require("config.notify").setup()
       end,
+      disable = false,
+    }
+    use {
+      "simrat39/desktop-notify.nvim",
+      config = function()
+        require("desktop-notify").override_vim_notify()
+      end,
+      disable = true,
     }
 
     -- Colorscheme
@@ -155,6 +163,7 @@ function M.setup()
       requires = {
         "tpope/vim-rhubarb",
         "idanarye/vim-merginal",
+        --[[ "rhysd/committia.vim", ]]
       },
       -- wants = { "vim-rhubarb" },
     }
