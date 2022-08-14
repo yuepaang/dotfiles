@@ -66,6 +66,7 @@ function M.setup()
           nvim_lua = "[Lua]",
           treesitter = "[Treesitter]",
           path = "[Path]",
+          rg = "[RG]",
           nvim_lsp_signature_help = "[Signature]",
         })[entry.source.name]
         return vim_item
@@ -186,6 +187,7 @@ function M.setup()
       { name = "luasnip" },
       { name = "cmp_tabnine" },
       { name = "treesitter" },
+      { name = "rg" },
       { name = "buffer" },
       { name = "nvim_lua" },
       { name = "path" },

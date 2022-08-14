@@ -98,7 +98,7 @@ local icons = require "config.icons"
 
 -- Temporary disable winbar due to this issue
 -- https://github.com/neovim/neovim/issues/19458
--- local winbar = require "config.winbar"
+local winbar = require "config.winbar"
 
 function M.setup()
   -- local gps = require "nvim-gps"
@@ -172,13 +172,11 @@ function M.setup()
     -- Temporary disable winbar due to this issue
     -- https://github.com/neovim/neovim/issues/19458
     winbar = {
-      -- lualine_a = { "diagnostics" },
-      lualine_a = {},
+      lualine_a = { "diagnostics" },
       lualine_b = {},
       lualine_c = {},
       -- https://github.com/neovim/neovim/issues/19458
-      -- lualine_x = { winbar.get_winbar },
-      lualine_x = {},
+      lualine_x = { winbar.get_winbar },
       lualine_y = {},
       lualine_z = {},
     },
