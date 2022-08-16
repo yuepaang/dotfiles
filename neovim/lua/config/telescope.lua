@@ -16,17 +16,8 @@ local nvb_actions = transform_mod {
     require("utils").info "File path is yanked "
     require("telescope.actions").close(prompt_bufnr)
   end,
-}
 
--- trouble.nvim
-local trouble = require "trouble.providers.telescope"
-local icons = require "config.icons"
-
-function M.setup()
-  local actions = require "telescope.actions"
-  local telescope = require "telescope"
-
-    -- VisiData
+  -- VisiData
   visidata = function(prompt_bufnr)
     -- Get the full path
     local content = require("telescope.actions.state").get_selected_entry()
@@ -39,6 +30,15 @@ function M.setup()
     local term = require "utils.term"
     term.open_term("vd " .. full_path, { direction = "float" })
   end,
+}
+
+-- trouble.nvim
+local trouble = require "trouble.providers.telescope"
+local icons = require "config.icons"
+
+function M.setup()
+  local actions = require "telescope.actions"
+  local telescope = require "telescope"
 
   -- Custom previewer
   local previewers = require "telescope.previewers"
@@ -51,25 +51,25 @@ function M.setup()
       on_exit = function(j)
         local mime_type = vim.split(j:result()[1], "/")[1]
 
-          if mime_type == "text" then
-            -- Check file size
-            vim.loop.fs_stat(filepath, function(_, stat)
-              if not stat then
-                return
-              end
-              if stat.size > 500000 then
-                return
-              else
-                previewers.buffer_previewer_maker(filepath, bufnr, opts)
-              end
-            end)
-          else
-            vim.schedule(function()
-              vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY FILE" })
-            end)
-          end
-        end,
-      }):sync()
+        if mime_type == "text" then
+          -- Check file size
+          vim.loop.fs_stat(filepath, function(_, stat)
+            if not stat then
+              return
+            end
+            if stat.size > 500000 then
+              return
+            else
+              previewers.buffer_previewer_maker(filepath, bufnr, opts)
+            end
+          end)
+        else
+          vim.schedule(function()
+            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY FILE" })
+          end)
+        end
+      end,
+    }):sync()
   end
 
   telescope.setup {
