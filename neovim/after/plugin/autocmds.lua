@@ -38,7 +38,8 @@ api.nvim_create_autocmd("FileType", {
     "toggleterm",
     "floggraph",
     "git",
-    "cheat"
+    "cheat",
+    "neotest-summary",
   },
   command = [[nnoremap <buffer><silent> q :bdelete!<CR>]],
 })
