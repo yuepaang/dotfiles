@@ -118,7 +118,6 @@ function config.mason_lspconfig()
 
   local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    require("doodleVim.modules.completion.handler").lsp_highlight_document(client)
     require("doodleVim.modules.completion.handler").attach_navic(client, bufnr)
 
     local cfg = {

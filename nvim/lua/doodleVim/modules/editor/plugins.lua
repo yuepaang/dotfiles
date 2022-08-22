@@ -39,7 +39,7 @@ editor["karb94/neoscroll.nvim"] = {
   config = conf.neoscroll,
 }
 
-editor["folke/todo-comments.nvim"] = {
+editor["B4mbus/todo-comments.nvim"] = {
   opt = true,
   setup = function()
     require("doodleVim.utils.defer").add("todo-comments.nvim", 99)
@@ -57,7 +57,7 @@ editor["windwp/nvim-autopairs"] = {
 
 editor["romgrk/barbar.nvim"] = {
   opt = true,
-  requires = { 'kyazdani42/nvim-web-devicons' },
+  requires = { "kyazdani42/nvim-web-devicons" },
   setup = function()
     require("doodleVim.modules.editor.config").barbar()
     require("doodleVim.utils.defer").add("barbar.nvim", 99)
