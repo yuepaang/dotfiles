@@ -267,10 +267,10 @@ function M.setup()
       config = function()
         require("config.comment").setup()
       end,
-      disable = true,
+      disable = false,
     }
 
-    use { "tpope/vim-commentary", keys = { "gc", "gcc", "gbc" }, disable = false }
+    use { "tpope/vim-commentary", keys = { "gc", "gcc", "gbc" }, disable = true }
 
     -- Better surround
     use { "tpope/vim-surround", event = "BufReadPre" }
@@ -336,6 +336,22 @@ function M.setup()
     }
     use { "google/vim-searchindex", event = "BufReadPre" }
     use { "tyru/open-browser.vim", event = "BufReadPre" }
+
+    use {
+      "bennypowers/nvim-regexplainer",
+      opt = true,
+      wants = { "nui.nvim" },
+      config = function()
+        require("regexplainer").setup()
+      end,
+      requires = {
+        "nvim-treesitter/nvim-treesitter",
+        "MunifTanjim/nui.nvim",
+      },
+      module = { "regexplainer" },
+      keys = { "gR" },
+      disable = true,
+    }
 
     -- Code documentation
     use {
