@@ -448,6 +448,13 @@ function M.setup()
       requires = { "nvim-lua/plenary.nvim", "Pocco81/TrueZen.nvim" },
       disable = true,
     }
+    use {
+      "phaazon/mind.nvim",
+      config = function()
+        require("mind").setup()
+      end,
+      disable = true,
+    }
 
     -- Status line
     use {
@@ -596,6 +603,13 @@ function M.setup()
     use {
       "ray-x/guihua.lua",
       run = "cd lua/fzy && make",
+      disable = true,
+    }
+    use {
+      "doums/suit.nvim",
+      config = function()
+        require("suit").setup {}
+      end,
       disable = true,
     }
 
