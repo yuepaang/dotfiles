@@ -339,8 +339,6 @@ function M.setup()
 
     use {
       "bennypowers/nvim-regexplainer",
-      opt = true,
-      wants = { "nui.nvim" },
       config = function()
         require("regexplainer").setup()
       end,
@@ -348,9 +346,7 @@ function M.setup()
         "nvim-treesitter/nvim-treesitter",
         "MunifTanjim/nui.nvim",
       },
-      module = { "regexplainer" },
-      keys = { "gR" },
-      disable = true,
+      disable = false,
     }
 
     -- Code documentation
@@ -1060,7 +1056,12 @@ function M.setup()
 
     -- Performance
     use { "dstein64/vim-startuptime", cmd = "StartupTime" }
-    use { "nathom/filetype.nvim" }
+    use {
+      "nathom/filetype.nvim",
+      cond = function()
+        return vim.fn.has "nvim-0.8.0" == 0
+      end,
+    }
 
     -- Web
     use {
