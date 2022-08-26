@@ -1,73 +1,73 @@
 local config = {}
 
 function config.lualine()
-    require('doodleVim.modules.ui.lualine_config')
+  require("doodleVim.modules.ui.lualine_config")
 end
 
 function config.treesitter()
-    require('doodleVim.utils.defer').immediate_load('nvim-treesitter-textobjects')
-    require('nvim-treesitter.configs').setup {
-        ensure_installed = {
-            "bash",
-            "cmake",
-            "comment",
-            "c",
-            "cpp",
-            "dot",
-            "dockerfile",
-            "go",
-            "gomod",
-            "gowork",
-            "json",
-            "html",
-            "lua",
-            "make",
-            "python",
-            "regex",
-            "rust",
-            "toml",
-            "vim",
-            "yaml",
-            "markdown",
-            "norg",
-        },
-        sync_install = false,
-        auto_install = true,
-        matchup = {
-            enable = true,
-        },
-        highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = true,
-        },
-        textobjects = {
-            select = {
-                enable = true,
+  require("doodleVim.utils.defer").immediate_load("nvim-treesitter-textobjects")
+  require("nvim-treesitter.configs").setup({
+    ensure_installed = {
+      "bash",
+      "cmake",
+      "comment",
+      "c",
+      "cpp",
+      "dot",
+      "dockerfile",
+      "go",
+      "gomod",
+      "gowork",
+      "json",
+      "html",
+      "lua",
+      "make",
+      "python",
+      "regex",
+      "rust",
+      "toml",
+      "vim",
+      "yaml",
+      "markdown",
+      "norg",
+    },
+    sync_install = false,
+    auto_install = true,
+    matchup = {
+      enable = true,
+    },
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+    },
+    textobjects = {
+      select = {
+        enable = true,
 
-                -- Automatically jump forward to textobj, similar to targets.vim
-                lookahead = true,
+        -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
 
-                keymaps = {
-                    -- You can use the capture groups defined in textobjects.scm
-                    ["af"] = "@function.outer",
-                    ["if"] = "@function.inner",
-                    ["ac"] = "@class.outer",
-                    ["ic"] = "@class.inner",
-                    ["al"] = "@loop.outer",
-                    ["il"] = "@loop.inner",
-                    ["ab"] = "@block.outer",
-                    ["ib"] = "@block.inner",
-                    ["as"] = "@statement.outer",
-                    ["ah"] = "@call.outer",
-                    ["ih"] = "@call.inner",
-                },
-            },
-        }
-    }
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+          ["al"] = "@loop.outer",
+          ["il"] = "@loop.inner",
+          ["ab"] = "@block.outer",
+          ["ib"] = "@block.inner",
+          ["as"] = "@statement.outer",
+          ["ah"] = "@call.outer",
+          ["ih"] = "@call.inner",
+        },
+      },
+    },
+  })
 end
 
 function config.alpha()
-    require("doodleVim.modules.ui.alpha")
+  require("doodleVim.modules.ui.alpha")
 end
 
 return config
