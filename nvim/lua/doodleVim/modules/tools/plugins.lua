@@ -50,9 +50,11 @@ tools["iamcco/markdown-preview.nvim"] = {
 tools["simrat39/symbols-outline.nvim"] = {
   opt = true,
   setup = function()
-    require("doodleVim.modules.tools.config").symbols_outline()
+    -- require("doodleVim.modules.tools.config").symbols_outline()
+    -- require("doodleVim.utils.defer").defer_load("symbols-outline.nvim", 200)
     require("doodleVim.utils.defer").register("symbols-outline", "symbols-outline.nvim")
   end,
+  config = conf.symbols_outline,
 }
 
 tools["voldikss/vim-floaterm"] = {
@@ -132,6 +134,7 @@ tools["nvim-neorg/neorg"] = {
   end,
   after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
   config = conf.neorg,
+  disable = true,
 }
 
 return tools

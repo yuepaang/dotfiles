@@ -78,6 +78,7 @@ editor["sindrets/diffview.nvim"] = {
     require("doodleVim.utils.defer").add("diffview.nvim", 99)
   end,
   config = conf.diffview,
+  disable = true,
 }
 
 editor["lukas-reineke/indent-blankline.nvim"] = {
