@@ -488,10 +488,10 @@ function M.setup()
         { "RRethy/nvim-treesitter-textsubjects", event = "BufReadPre" },
         { "nvim-treesitter/playground", cmd = { "TSPlaygroundToggle" } },
         {
-            "lewis6991/spellsitter.nvim",
-            config = function ()
-                require("spellsitter").setup()
-            end,
+          "lewis6991/spellsitter.nvim",
+          config = function()
+            require("spellsitter").setup()
+          end,
         },
         -- { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre" },
         -- { "yioneko/nvim-yati", event = "BufReadPre" },
@@ -632,25 +632,19 @@ function M.setup()
       config = function()
         require("config.cmp").setup()
       end,
-      wants = { "LuaSnip" },
+      wants = { "LuaSnip", "lspkind-nvim" },
       requires = {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",
         "ray-x/cmp-treesitter",
         "hrsh7th/cmp-cmdline",
-        -- Tabnine
-        {
-          "tzachar/cmp-tabnine",
-          run = "./install.sh",
-          requires = "hrsh7th/nvim-cmp",
-        },
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "lukas-reineke/cmp-rg",
         "davidsierradz/cmp-conventionalcommits",
-        -- "onsails/lspkind-nvim",
+        "onsails/lspkind-nvim",
         -- "hrsh7th/cmp-calc",
         -- "f3fora/cmp-spell",
         -- "hrsh7th/cmp-emoji",
@@ -663,6 +657,11 @@ function M.setup()
         },
         "rafamadriz/friendly-snippets",
         "honza/vim-snippets",
+        -- Tabnine
+        {
+          "tzachar/cmp-tabnine",
+          run = "./install.sh",
+        },
       },
     }
 
@@ -1369,7 +1368,7 @@ function M.setup()
       config = function()
         vim.g["conjure#extract#tree_sitter#enabled"] = true
       end,
-      disable = false,
+      disable = true,
     }
 
     -- Disabled

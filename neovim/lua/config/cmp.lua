@@ -3,34 +3,48 @@ local M = {}
 vim.o.completeopt = "menu,menuone,noselect"
 
 local types = require "cmp.types"
+local compare = require "cmp.config.compare"
+local lspkind = require "lspkind"
 
-local kind_icons = {
-  Text = "",
-  Method = "",
-  Function = "",
-  Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "ﴯ",
-  Interface = "",
-  Module = "",
-  Property = "ﰠ",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
+local source_mapping = {
+  nvim_lsp = "[LSP]",
+  luasnip = "[Snip]",
+  buffer = "[Buffer]",
+  nvim_lua = "[Lua]",
+  treesitter = "[Treesitter]",
+  path = "[Path]",
+  rg = "[RG]",
+  nvim_lsp_signature_help = "[Signature]",
+  cmp_tabnine = "[TNine]",
 }
+
+-- local kind_icons = {
+--   Text = "",
+--   Method = "",
+--   Function = "",
+--   Constructor = "",
+--   Field = "",
+--   Variable = "",
+--   Class = "ﴯ",
+--   Interface = "",
+--   Module = "",
+--   Property = "ﰠ",
+--   Unit = "",
+--   Value = "",
+--   Enum = "",
+--   Keyword = "",
+--   Snippet = "",
+--   Color = "",
+--   File = "",
+--   Reference = "",
+--   Folder = "",
+--   EnumMember = "",
+--   Constant = "",
+--   Struct = "",
+--   Event = "",
+--   Operator = "",
+--   TypeParameter = "",
+-- }
 
 function M.setup()
   local has_words_before = function()
@@ -48,27 +62,40 @@ function M.setup()
     -- view = {
     --   entries = "native",
     -- },
+    sorting = {
+      priority_weight = 2,
+      comparators = {
+        -- require "cmp_tabnine.compare",
+        compare.score,
+        compare.recently_used,
+        compare.offset,
+        compare.exact,
+        compare.kind,
+        compare.sort_text,
+        compare.length,
+        compare.order,
+      },
+    },
     snippet = {
       expand = function(args)
         require("luasnip").lsp_expand(args.body)
       end,
     },
-    formatting = {
-      format = function(entry, vim_item)
-        -- Kind icons
-        vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-        -- Source
-        vim_item.menu = ({
-          nvim_lsp = "[LSP]",
-          luasnip = "[Snip]",
-          cmp_tabnine = "[TAB]",
-          buffer = "[Buffer]",
-          nvim_lua = "[Lua]",
-          treesitter = "[Treesitter]",
-          path = "[Path]",
-          rg = "[RG]",
-          nvim_lsp_signature_help = "[Signature]",
-        })[entry.source.name]
+    format = lspkind.cmp_format {
+      mode = "symbol_text",
+      maxwidth = 40,
+
+      before = function(entry, vim_item)
+        vim_item.kind = lspkind.presets.default[vim_item.kind]
+
+        local menu = source_mapping[entry.source.name]
+        -- if entry.source.name == "cmp_tabnine" then
+        --   if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+        --     menu = entry.completion_item.data.detail .. " " .. menu
+        --   end
+        --   vim_item.kind = ""
+        -- end
+        vim_item.menu = menu
         return vim_item
       end,
     },
