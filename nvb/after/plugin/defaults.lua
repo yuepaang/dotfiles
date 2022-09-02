@@ -1,7 +1,7 @@
 -- local api = vim.api
 local g = vim.g
 local opt = vim.opt
-local cmd = vim.cmd
+-- local cmd = vim.cmd
 
 -- Remap leader and local leader to <Space>
 -- api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
@@ -79,7 +79,7 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- opt.foldenable = true
 
 -- Copilot
-cmd [[
+vim.cmd [[
     imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
     let g:copilot_no_tab_map = v:true
 ]]

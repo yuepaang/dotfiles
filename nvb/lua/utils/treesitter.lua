@@ -1,13 +1,13 @@
 local M = {}
 
 local python_function_query_string = [[
-  (function_definition
+  (function_definition 
     name: (identifier) @name (#offset! @name)
   ) @func
 ]]
 
 local lua_function_query_string = [[
-  TODO
+ TODO
 ]]
 
 local func_lookup = {
@@ -22,18 +22,17 @@ local function get_functions(bufnr, lang, query_string)
   local syntax_tree = parser:parse()[1]
   local root = syntax_tree:root()
   local query = vim.treesitter.parse_query(lang, query_string)
-
   local func_list = {}
 
   for _, captures, metadata in query:iter_matches(root, bufnr) do
     local row, col, _ = captures[1]:start()
     local name = vim.treesitter.query.get_node_text(captures[1], bufnr)
-    table.insert(func_info, { name, row, col, metadata[1].range })
+    table.insert(func_list, { name, row, col, metadata[1].range })
   end
   return func_list
 end
 
-function M.goto_function(bufnr, land)
+function M.goto_function(bufnr, lang)
   local query_string = func_lookup[lang]
   if not query_string then
     vim.notify(lang .. " is not supported", vim.log.levels.INFO)
