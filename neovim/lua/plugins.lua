@@ -83,7 +83,7 @@ function M.setup()
       config = function()
         vim.cmd "colorscheme tokyonight"
       end,
-      disable = true,
+      disable = false,
     }
     use {
       "sainnhe/everforest",
@@ -91,7 +91,7 @@ function M.setup()
         vim.g.everforest_better_performance = 1
         vim.cmd "colorscheme everforest"
       end,
-      disable = false,
+      disable = true,
     }
     use {
       "projekt0n/github-nvim-theme",
