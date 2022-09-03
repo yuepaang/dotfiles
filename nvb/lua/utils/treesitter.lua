@@ -2,13 +2,17 @@ local M = {}
 
 local python_function_query_string = [[
   (function_definition 
-    name: (identifier) @name (#offset! @name)
-  ) @func
+     name: (identifier) @func_name (#offset! @func_name)
+  )
 ]]
 
 local lua_function_query_string = [[
  (function_declaration
-    name: (dot_index_expression) @name (#offset! @name)
+    name: 
+    [
+      (dot_index_expression) 
+      (identifier) 
+    ] @func_name (#offset! @func_name) 
  )
 ]]
 
@@ -16,8 +20,6 @@ local func_lookup = {
   python = python_function_query_string,
   lua = lua_function_query_string,
 }
-
--- local bufnr_test = 23
 
 local function get_functions(bufnr, lang, query_string)
   local parser = vim.treesitter.get_parser(bufnr, lang)
@@ -35,19 +37,13 @@ local function get_functions(bufnr, lang, query_string)
 end
 
 function M.goto_function(bufnr, lang)
-  if win == nil then
-    win = vim.api.nvim_get_current_win()
-  end
-  if bufnr == nil then
-    bufnr = vim.api.nvim_get_current_buf()
-  end
-  if lang == nil then
-    lang = vim.api.nvim_buf_get_option(bufnr, "filetype")
-  end
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  lang = lang or vim.api.nvim_buf_get_option(bufnr, "filetype")
 
   local query_string = func_lookup[lang]
   if not query_string then
     vim.notify(lang .. " is not supported", vim.log.levels.INFO)
+    return
   end
   local func_list = get_functions(bufnr, lang, query_string)
   if vim.tbl_isempty(func_list) then
@@ -64,6 +60,9 @@ function M.goto_function(bufnr, lang)
       return "Function - " .. item
     end,
   }, function(_, idx)
+    if not idx then
+      return
+    end
     local goto_function = func_list[idx]
     local row, col = goto_function[2] + 1, goto_function[3] + 2
     vim.fn.setcharpos(".", { bufnr, row, col, 0 })
@@ -72,6 +71,6 @@ function M.goto_function(bufnr, lang)
 end
 
 -- M.goto_function(bufnr_test, "python")
-M.goto_function()
+-- M.goto_function()
 
 return M
