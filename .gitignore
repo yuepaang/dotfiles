@@ -7,3 +7,4 @@ pack
 */packer_compiled.lua
 backup/
 typeshed/
+neovim/plugins/packer_compiled.lua
