@@ -493,7 +493,7 @@ function M.setup()
             require("spellsitter").setup()
           end,
         },
-        -- { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre" },
+        { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre", disable = true },
         -- { "yioneko/nvim-yati", event = "BufReadPre" },
       },
     }
@@ -738,7 +738,8 @@ function M.setup()
         "b0o/schemastore.nvim",
         "jose-elias-alvarez/typescript.nvim",
         {
-          "SmiteshP/nvim-navic",
+          -- "SmiteshP/nvim-navic",
+          "alpha2phi/nvim-navic",
           config = function()
             require("nvim-navic").setup {}
           end,
