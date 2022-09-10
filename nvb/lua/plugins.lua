@@ -388,9 +388,9 @@ function M.setup()
     -- Jumps
     use {
       "phaazon/hop.nvim",
-      cmd = { "HopWord", "HopChar1" },
+      keys = { "f", "F", "t", "T" },
       config = function()
-        require("hop").setup {}
+        require("config.hop").setup()
       end,
       disable = true,
     }
@@ -401,6 +401,7 @@ function M.setup()
         local leap = require "leap"
         leap.set_default_keymaps()
       end,
+      disable = false,
     }
     use {
       "abecodes/tabout.nvim",
@@ -536,6 +537,7 @@ function M.setup()
         "cder.nvim",
         "telescope-bookmarks.nvim",
         "aerial.nvim",
+        "nvim-tree.lua",
         -- "telescope-ui-select.nvim",
       },
       requires = {
@@ -589,7 +591,7 @@ function M.setup()
       opt = true,
       wants = "nvim-web-devicons",
       cmd = { "NvimTreeToggle", "NvimTreeClose" },
-      -- module = "nvim-tree",
+      -- module = { "nvim-tree", "nvim-tree.actions.root.change-dir" },
       config = function()
         require("config.nvimtree").setup()
       end,
