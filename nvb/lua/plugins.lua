@@ -130,6 +130,24 @@ function M.setup()
       cmd = { "LushRunQuickstart", "LushRunTutorial", "Lushify", "LushImport" },
       disable = false,
     }
+    use {
+      "max397574/colortils.nvim",
+      cmd = "Colortils",
+      config = function()
+        require("colortils").setup()
+      end,
+    }
+    use {
+      "ziontee113/color-picker.nvim",
+      cmd = { "PickColor", "PickColorInsert" },
+      config = function()
+        require "color-picker"
+      end,
+    }
+    use {
+      "lifepillar/vim-colortemplate",
+      disable = true,
+    }
 
     -- Startup screen
     use {
@@ -388,15 +406,17 @@ function M.setup()
     -- Jumps
     use {
       "phaazon/hop.nvim",
+      cmd = "HopWord",
+      module = "hop",
       keys = { "f", "F", "t", "T" },
       config = function()
         require("config.hop").setup()
       end,
-      disable = true,
+      disable = false,
     }
     use {
       "ggandor/leap.nvim",
-      keys = { "s", "S", "f", "F", "t", "T" },
+      keys = { "s", "S"},
       config = function()
         local leap = require "leap"
         leap.set_default_keymaps()
@@ -503,6 +523,7 @@ function M.setup()
           end,
         },
         { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre", disable = true },
+        { "mfussenegger/nvim-treehopper", wants = { "hop.nvim" }, module = { "tsht" } },
         -- { "yioneko/nvim-yati", event = "BufReadPre" },
       },
     }
