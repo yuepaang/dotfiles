@@ -90,8 +90,8 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-emoji"
   use "hrsh7th/cmp-nvim-lua"
   -- use "zbirenbaum/copilot-cmp"
-  use { "tzachar/cmp-tabnine", commit = "1a8fd2795e4317fd564da269cc64a2fa17ee854e", 
-run = "./install.sh" }
+  use { "tzachar/cmp-tabnine", commit = "1a8fd2795e4317fd564da269cc64a2fa17ee854e",
+    run = "./install.sh" }
 
   -- Snippet
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -138,7 +138,7 @@ run = "./install.sh" }
   -- Utility
   use "rcarriga/nvim-notify"
   use "stevearc/dressing.nvim"
-  use "ghillb/cybu.nvim"
+  -- use "ghillb/cybu.nvim"
   use "moll/vim-bbye"
   use "lewis6991/impatient.nvim"
   use "lalitmee/browse.nvim"
@@ -156,7 +156,7 @@ run = "./install.sh" }
   -- use "Pocco81/DAPInstall.nvim"
 
   -- Tabline
-  -- use "akinsho/bufferline.nvim"
+  use "akinsho/bufferline.nvim"
   -- use "tiagovla/scope.nvim"
 
   -- Statusline
