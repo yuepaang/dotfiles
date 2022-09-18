@@ -26,9 +26,7 @@ vim.cmd [[
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
+if not status_ok then return end
 
 -- Have packer use a popup window
 packer.init {
@@ -36,9 +34,7 @@ packer.init {
   snapshot_path = fn.stdpath "config" .. "/snapshots",
   max_jobs = 50,
   display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
+    open_fn = function() return require("packer.util").float { border = "rounded" } end,
     prompt_border = "rounded", -- Border style of prompt popups.
   },
 }
@@ -90,8 +86,7 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-emoji"
   use "hrsh7th/cmp-nvim-lua"
   -- use "zbirenbaum/copilot-cmp"
-  use { "tzachar/cmp-tabnine", commit = "1a8fd2795e4317fd564da269cc64a2fa17ee854e",
-    run = "./install.sh" }
+  use { "tzachar/cmp-tabnine", commit = "1a8fd2795e4317fd564da269cc64a2fa17ee854e", run = "./install.sh" }
 
   -- Snippet
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -175,7 +170,6 @@ return packer.startup(function(use)
   -- Comment
   use "numToStr/Comment.nvim"
   use "folke/todo-comments.nvim"
-  -- use "B4mbus/todo-comments.nvim"
 
   -- Terminal
   use "akinsho/toggleterm.nvim"
@@ -244,12 +238,12 @@ return packer.startup(function(use)
 
   -- wakatime
   use {
-    "wakatime/vim-wakatime"
+    "wakatime/vim-wakatime",
   }
 
   -- header
   use {
-    "alpertuna/vim-header"
+    "alpertuna/vim-header",
   }
 
   -- Graveyard
@@ -285,7 +279,5 @@ return packer.startup(function(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
+  if PACKER_BOOTSTRAP then require("packer").sync() end
 end)
