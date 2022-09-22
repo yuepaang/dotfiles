@@ -158,10 +158,13 @@ function M.setup()
       enable = true,
       use_virtual_text = true,
       lint_events = { "BufWrite", "CursorHold" },
-      -- require("treesitter-context").setup {
-      --   enable = true,
-      -- }
-    },
+
+    -- markid
+    -- markid = { enable = true },
+    }
+    -- require("treesitter-context").setup {
+    --   enable = true,
+    -- }
   }
 end
 
