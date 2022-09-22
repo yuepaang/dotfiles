@@ -1308,6 +1308,7 @@ function M.setup()
         require("config.dadbod").setup()
       end,
       cmd = { "DBUIToggle", "DBUI", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
+      disable = true,
     }
     use {
       "nanotee/sqls.nvim",
