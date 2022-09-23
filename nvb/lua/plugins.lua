@@ -1469,6 +1469,18 @@ function M.setup()
       end,
       disable = true,
     }
+    use {
+      "epwalsh/obsidian.nvim",
+      disable = true,
+      config = function()
+        require("obsidian").setup {
+          dir = "~/Notes",
+          completion = {
+            nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
+          },
+        }
+      end,
+    }
     -- https://github.com/WhoIsSethDaniel/toggle-lsp-diagnostics.nvim
     -- https://github.com/rbong/vim-buffest
     -- https://github.com/jamestthompson3/nvim-remote-containers
