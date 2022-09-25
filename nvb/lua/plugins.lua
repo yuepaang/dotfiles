@@ -87,9 +87,7 @@ function M.setup()
     -- Colorscheme
     use {
       "folke/tokyonight.nvim",
-      config = function()
-        vim.cmd "colorscheme tokyonight"
-      end,
+      vim.cmd.colorscheme [[tokyonight]],
       disable = false,
     }
     use {
@@ -806,6 +804,14 @@ function M.setup()
         },
         {
           "David-Kunz/markid",
+          disable = true,
+        },
+        {
+          "simrat39/symbols-outline.nvim",
+          cmd = { "SymbolsOutline" },
+          config = function()
+            require("symbols-outline").setup()
+          end,
           disable = true,
         },
         -- {

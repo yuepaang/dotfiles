@@ -91,6 +91,9 @@ function M.setup()
         path = vim.fn.stdpath "data" .. "/telescope_history.sqlite3",
         limit = 100,
       },
+      border = {},
+      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      color_devicons = true,
     },
     pickers = {
       find_files = {
