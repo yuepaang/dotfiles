@@ -361,13 +361,6 @@ function M.setup()
 
     -- IDE
     use {
-      "antoinemadec/FixCursorHold.nvim",
-      event = "BufReadPre",
-      config = function()
-        vim.g.cursorhold_updatetime = 100
-      end,
-    }
-    use {
       "max397574/better-escape.nvim",
       event = { "InsertEnter" },
       config = function()
@@ -1034,7 +1027,6 @@ function M.setup()
       wants = {
         "plenary.nvim",
         "nvim-treesitter",
-        "FixCursorHold.nvim",
         "neotest-python",
         "neotest-plenary",
         "neotest-go",
@@ -1048,7 +1040,6 @@ function M.setup()
         "vim-test/vim-test",
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
-        "antoinemadec/FixCursorHold.nvim",
         "nvim-neotest/neotest-python",
         "nvim-neotest/neotest-plenary",
         "nvim-neotest/neotest-go",
