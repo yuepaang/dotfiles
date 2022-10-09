@@ -1,6 +1,8 @@
 local M = {}
 
 local icons = require "config.icons"
+local lualine = require "lualine"
+-- local api = vim.api
 
 -- Color table for highlights
 local colors = {
@@ -25,9 +27,19 @@ local function tab_stop()
   return icons.ui.Tab .. " " .. vim.bo.shiftwidth
 end
 
+local function show_macro_recording()
+  local rec_reg = vim.fn.reg_recording()
+  if rec_reg == "" then
+    return ""
+  else
+    return "recording @" .. rec_reg
+  end
+end
+
 local function lsp_client(msg)
   msg = msg or ""
   local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+
   if next(buf_clients) == nil then
     if type(msg) == "boolean" or #msg == 0 then
       return ""
@@ -107,7 +119,7 @@ local winbar = require "config.winbar"
 function M.setup()
   -- local gps = require "nvim-gps"
 
-  require("lualine").setup {
+  lualine.setup {
     options = {
       icons_enabled = true,
       theme = "auto",
@@ -137,9 +149,9 @@ function M.setup()
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_b = {
-        "branch",
-        "diff",
+      lualine_b = { "branch" },
+      lualine_c = {
+        { "diff", colored = false },
         {
           "diagnostics",
           sources = { "nvim_diagnostic" },
@@ -151,8 +163,11 @@ function M.setup()
           },
           colored = true,
         },
-      },
-      lualine_c = {
+        { separator },
+        {
+          "macro-recording",
+          fmt = show_macro_recording,
+        },
         { separator },
         { lsp_client, icon = icons.ui.Gear, color = { fg = colors.violet, gui = "bold" } },
         -- { lsp_progress },
@@ -162,8 +177,8 @@ function M.setup()
         --   color = { fg = colors.green },
         -- },
       },
-      lualine_x = { "filename", { tab_stop }, "encoding", "fileformat", "filetype" },
-      lualine_y = { "progress" },
+      lualine_x = { "filename", { tab_stop }, "encoding", "fileformat", "filetype", "progress" },
+      lualine_y = {},
       lualine_z = { "location" },
     },
     inactive_sections = {
@@ -193,7 +208,6 @@ function M.setup()
       },
       lualine_b = {},
       lualine_c = {},
-      -- https://github.com/neovim/neovim/issues/19458
       lualine_x = { winbar.get_winbar },
       lualine_y = {},
       lualine_z = {},
@@ -209,5 +223,28 @@ function M.setup()
     extensions = { "nvim-tree", "toggleterm", "quickfix" },
   }
 end
+
+-- api.nvim_create_autocmd("RecordingEnter", {
+--   callback = function()
+--     lualine.refresh {
+--       place = { "statusline" },
+--     }
+--   end,
+-- })
+
+-- api.nvim_create_autocmd("RecordingLeave", {
+--   callback = function()
+--     local timer = vim.loop.new_timer()
+--     timer:start(
+--       50,
+--       0,
+--       vim.schedule_wrap(function()
+--         lualine.refresh {
+--           place = { "statusline" },
+--         }
+--       end)
+--     )
+--   end,
+-- })
 
 return M

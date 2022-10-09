@@ -84,7 +84,7 @@ tools["nvim-lua/plenary.nvim"] = {
 
 -- tools["kyazdani42/nvim-web-devicons"] = {}
 
-tools["doodleEsc/which-key.nvim"] = {
+tools["folke/which-key.nvim"] = {
   opt = true,
   setup = function()
     require("doodleVim.utils.defer").defer_load("which-key.nvim", 100)
@@ -132,7 +132,6 @@ tools["nvim-neorg/neorg"] = {
   setup = function()
     require("doodleVim.utils.defer").defer_load("neorg", 500)
   end,
-  tag = "0.0.12",
   -- after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
   config = conf.neorg,
   -- disable = true,

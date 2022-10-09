@@ -9,6 +9,7 @@ local with_diagnostics_code = function(builtin)
     diagnostics_format = "#{m} [#{c}]",
   }
 end
+-- local refurb = require "config.lsp.null-ls.diagnostics.refurb"
 
 -- local with_root_file = function(builtin, file)
 --   return builtin.with {
@@ -34,13 +35,14 @@ local sources = {
   b.diagnostics.write_good,
   -- b.diagnostics.markdownlint,
   b.diagnostics.eslint_d,
-  -- b.diagnostics.flake8.with { extra_args = { "--max-line-length=120" } },
+  b.diagnostics.flake8.with { extra_args = { "--max-line-length=120" } },
   b.diagnostics.tsc,
   -- b.diagnostics.selene,
   -- b.diagnostics.codespell,
   -- with_root_file(b.diagnostics.selene, "selene.toml"),
   with_diagnostics_code(b.diagnostics.shellcheck),
   b.diagnostics.zsh,
+  -- refurb,
   -- b.diagnostics.cspell.with {
   --   filetypes = { "python", "rust", "typescript" },
   -- },
@@ -62,7 +64,7 @@ local sources = {
 
 function M.setup(opts)
   nls.setup {
-    -- debug = true,
+    debug = false,
     debounce = 150,
     save_after_format = false,
     sources = sources,
