@@ -63,7 +63,7 @@ map.Lsp = {
         map_cu("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting")
       ),
       a = bind.convert_wk_format(
-        map_cu("lua vim.lsp.buf.range_code_action()"):with_noremap():with_silent():with_label("Range Code Action")
+        map_cu("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Range Code Action")
       ),
       n = bind.convert_wk_format(
         map_cr("lua require('rename').rename()"):with_noremap():with_silent():with_label("Rename")
