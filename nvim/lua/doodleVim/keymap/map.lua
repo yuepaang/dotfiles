@@ -83,10 +83,7 @@ map.NvimTree_Translator = {
           :with_label("Enhanced NvimTree Toggle")
       ),
       w = bind.convert_wk_format(
-        map_cr("lua ensure_require'nvim-tree.actions.reloaders'.reload_explorer()")
-          :with_noremap()
-          :with_silent()
-          :with_label("NvimTree Refresh")
+        map_cmd("<Cmd>NvimTreeRefresh<CR>"):with_noremap():with_silent():with_label("NvimTree Refresh")
       ),
       r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor")),
     },
