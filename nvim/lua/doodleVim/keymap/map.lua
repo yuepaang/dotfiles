@@ -246,13 +246,13 @@ map.Comment = {
     ["<leader>c"] = {
       name = "Comment",
       c = bind.convert_wk_format(
-        map_cmd('<esc><cmd>lua require("comment.api").toggle.linewise(vim.fn.visualmode())<cr>')
+        map_cmd('<esc><cmd>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<cr>')
           :with_noremap()
           :with_silent()
           :with_label("comment selected line")
       ),
       v = bind.convert_wk_format(
-        map_cmd('<esc><cmd>lua require("comment.api").toggle.blockwise(vim.fn.visualmode())<cr>')
+        map_cmd('<esc><cmd>lua require("Comment.api").toggle.blockwise(vim.fn.visualmode())<cr>')
           :with_noremap()
           :with_silent()
           :with_label("comment selected line")
