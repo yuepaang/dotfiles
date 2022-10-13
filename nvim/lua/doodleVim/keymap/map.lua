@@ -46,7 +46,7 @@ map.Lsp = {
         map_cr("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Code Action")
       ),
       n = bind.convert_wk_format(
-        map_cr("lua require('rename').rename()"):with_noremap():with_silent():with_label("Rename")
+        map_cr("lua require('rename').rename({label='Rename'})"):with_noremap():with_silent():with_label("Rename")
       ),
     },
     ["<C-n>"] = bind.convert_wk_format(

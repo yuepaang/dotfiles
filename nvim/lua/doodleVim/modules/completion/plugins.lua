@@ -118,7 +118,7 @@ completion["danymat/neogen"] = {
 
 completion["doodleEsc/rename.nvim"] = {
   after = { "nvim-lspconfig", "nui.nvim" },
-  config = conf.rename,
+  -- config = conf.rename,
 }
 
 completion["b0o/SchemaStore.nvim"] = {

@@ -424,14 +424,6 @@ end
 function config.gotools()
   require("doodleVim.utils.defer").immediate_load("mason.nvim")
   require("gotools").setup({
-    ui = {
-      border = {
-        style = "rounded",
-      },
-      win_options = {
-        winhighlight = "Normal:GruvboxBlue,FloatBorder:FloatBorder",
-      },
-    },
     tools = {
       gotests = {
         bin = require("mason-core.path").bin_prefix() .. "/" .. "gotests",
@@ -517,21 +509,21 @@ function config.neogen()
   require("neogen").setup({ snippet_engine = "luasnip" })
 end
 
-function config.rename()
-  require("rename").setup({
-    rename = {
-      border = {
-        highlight = "FloatBorder",
-        style = "rounded",
-        title = " Rename ",
-        title_align = "left",
-        title_hl = "FloatBorder",
-      },
-      prompt = "➤ ",
-      prompt_hl = "Comment",
-    },
-  })
-end
+-- function config.rename()
+--   require("rename").setup({
+--     rename = {
+--       border = {
+--         highlight = "FloatBorder",
+--         style = "rounded",
+--         title = " Rename ",
+--         title_align = "left",
+--         title_hl = "FloatBorder",
+--       },
+--       prompt = "➤ ",
+--       prompt_hl = "Comment",
+--     },
+--   })
+-- end
 
 function config.lightbulb()
   local icons = require("doodleVim.utils.icons")
