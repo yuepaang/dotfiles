@@ -1,9 +1,154 @@
 local M = {}
 
+local Terminal = require("toggleterm.terminal").Terminal
+
+-- Git client
+local git_tui = "lazygit"
+-- local git_tui = "gitui"
+
+-- DOcker
+local docker_tui = "lazydocker"
+
+-- Committizen
+local git_cz = "git cz"
+
+-- Tokei
+local tokei = "tokei"
+
+-- Bottom
+local bottom = "btm"
+
+-- navi
+local navi = "navi fn welcome"
+
+local git_client = Terminal:new {
+  cmd = git_tui,
+  dir = "git_dir",
+  hidden = true,
+  direction = "float",
+  float_opts = {
+    border = "double",
+  },
+}
+
+local docker_client = Terminal:new {
+  cmd = docker_tui,
+  dir = "git_dir",
+  hidden = true,
+  direction = "float",
+  float_opts = {
+    border = "double",
+  },
+}
+
+local git_commit = Terminal:new {
+  cmd = git_cz,
+  dir = "git_dir",
+  hidden = true,
+  direction = "float",
+  float_opts = {
+    border = "double",
+  },
+}
+
+local project_info = Terminal:new {
+  cmd = tokei,
+  dir = "git_dir",
+  hidden = true,
+  direction = "float",
+  float_opts = {
+    border = "double",
+  },
+  close_on_exit = false,
+}
+
+local system_info = Terminal:new {
+  cmd = bottom,
+  dir = "git_dir",
+  hidden = true,
+  direction = "float",
+  float_opts = {
+    border = "double",
+  },
+  close_on_exit = true,
+}
+
+local interactive_cheatsheet = Terminal:new {
+  cmd = navi,
+  dir = "git_dir",
+  hidden = true,
+  direction = "float",
+  float_opts = {
+    border = "double",
+  },
+  close_on_exit = true,
+}
+
+function M.git_client_toggle()
+  git_client:toggle()
+end
+
+function M.docker_client_toggle()
+  docker_client:toggle()
+end
+
+function M.git_commit_toggle()
+  git_commit:toggle()
+end
+
+function M.project_info_toggle()
+  project_info:toggle()
+end
+
+function M.system_info_toggle()
+  system_info:toggle()
+end
+
+function M.interactive_cheatsheet_toggle()
+  interactive_cheatsheet:toggle()
+end
+
+-- Open a terminal
+local function default_on_open(term)
+  vim.cmd "stopinsert"
+  vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+end
+
+function M.open_term(cmd, opts)
+  opts = opts or {}
+  opts.size = opts.size or vim.o.columns * 0.5
+  opts.direction = opts.direction or "vertical"
+  opts.on_open = opts.on_open or default_on_open
+  opts.on_exit = opts.on_exit or nil
+
+  local new_term = Terminal:new {
+    cmd = cmd,
+    dir = "git_dir",
+    auto_scroll = false,
+    close_on_exit = false,
+    start_in_insert = false,
+    on_open = opts.on_open,
+    on_exit = opts.on_exit,
+  }
+  new_term:open(opts.size, opts.direction)
+end
+
+------------------ Cheatsheet ----------------------------
 local lang = ""
 local file_type = ""
+local function cht_on_open(term)
+  vim.cmd "stopinsert"
+  vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+  vim.api.nvim_buf_set_name(term.bufnr, "cheatsheet-" .. term.bufnr)
+  vim.api.nvim_buf_set_option(term.bufnr, "filetype", "cheat")
+  vim.api.nvim_buf_set_option(term.bufnr, "syntax", lang)
+end
 
-function M.cht_input()
+local function cht_on_exit(_)
+  vim.cmd [[normal gg]]
+end
+
+function M.cht()
   local buf = vim.api.nvim_get_current_buf()
   lang = ""
   file_type = vim.api.nvim_buf_get_option(buf, "filetype")
@@ -32,11 +177,12 @@ function M.cht_input()
         cmd = cmd .. "/" .. search
       end
     end
-    M.cht_cmd(cmd)
+    cmd = "curl cht.sh/" .. cmd
+    M.open_term(cmd, { on_open = cht_on_open, on_exit = cht_on_exit })
   end)
 end
 
-function M.so_input()
+function M.so()
   local buf = vim.api.nvim_get_current_buf()
   lang = ""
   file_type = vim.api.nvim_buf_get_option(buf, "filetype")
@@ -49,32 +195,9 @@ function M.so_input()
     else
       cmd = input
     end
-    M.so_cmd(cmd)
+    cmd = "so " .. cmd
+    M.open_term(cmd, { direction = "float" })
   end)
-end
-
-local function open_split()
-  vim.api.nvim_exec("vnew", true)
-  vim.api.nvim_exec("terminal", true)
-  local buf = vim.api.nvim_get_current_buf()
-  vim.api.nvim_buf_set_name(buf, "cheatsheet-" .. buf)
-  vim.api.nvim_buf_set_option(buf, "filetype", "cheat")
-  vim.api.nvim_buf_set_option(buf, "syntax", lang)
-end
-
-function M.cht_cmd(cmd)
-  open_split()
-  local chan_id = vim.b.terminal_job_id
-  local cht_cmd = "curl cht.sh/" .. cmd
-  vim.api.nvim_chan_send(chan_id, cht_cmd .. "\r\n")
-  vim.cmd [[stopinsert]]
-end
-
-function M.so_cmd(cmd)
-  open_split()
-  local chan_id = vim.b.terminal_job_id
-  local so_cmd = "so " .. cmd
-  vim.api.nvim_chan_send(chan_id, so_cmd .. "\n")
 end
 
 return M

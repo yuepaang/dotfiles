@@ -458,6 +458,14 @@ function M.setup()
       disable = false,
     }
 
+    use {
+      "echasnovski/mini.nvim",
+      event = { "BufReadPre" },
+      config = function()
+        require("config.mini").setup()
+      end,
+    }
+
     -- Code documentation
     use {
       "danymat/neogen",
@@ -833,7 +841,8 @@ function M.setup()
         "mason-lspconfig.nvim",
         "mason-tool-installer.nvim",
         "cmp-nvim-lsp",
-        "lua-dev.nvim",
+        -- "lua-dev.nvim",
+        "neodev.nvim",
         "vim-illuminate",
         "null-ls.nvim",
         "schemastore.nvim",
@@ -851,7 +860,8 @@ function M.setup()
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        "folke/lua-dev.nvim",
+        -- "folke/lua-dev.nvim",
+        "folke/neodev.nvim",
         "RRethy/vim-illuminate",
         "jose-elias-alvarez/null-ls.nvim",
         {

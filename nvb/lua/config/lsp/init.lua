@@ -37,7 +37,7 @@ local servers = {
       ["rust-analyzer"] = {
         cargo = { allFeatures = true },
         checkOnSave = {
-          command = "clippy",
+          command = "cargo clippy",
           extraArgs = { "--no-deps" },
         },
       },
@@ -220,7 +220,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     "additionalTextEdits",
   },
 }
-M.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities) -- for nvim-cmp
+-- M.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities) -- for nvim-cmp
+M.capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 local opts = {
   on_attach = M.on_attach,
