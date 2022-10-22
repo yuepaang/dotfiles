@@ -30,6 +30,7 @@ function config.treesitter()
       "yaml",
       "markdown",
       "norg",
+      "solidity",
     },
     sync_install = false,
     auto_install = true,

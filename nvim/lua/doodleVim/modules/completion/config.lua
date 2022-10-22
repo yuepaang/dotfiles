@@ -78,7 +78,6 @@ function config.mason_lspconfig()
       "jsonls",
       "yamlls",
       "taplo",
-      "marksman",
       "bashls",
     },
     automatic_installation = true,
