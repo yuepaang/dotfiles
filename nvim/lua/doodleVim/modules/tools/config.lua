@@ -807,8 +807,6 @@ function config.tmux()
 end
 
 function config.neorg()
-  vim.cmd([[Neorg sync-parsers]])
-
   require("neorg").setup({
     load = {
       ["core.defaults"] = {},
@@ -822,7 +820,7 @@ function config.neorg()
       },
       ["core.gtd.base"] = {
         config = {
-          workspace = "work",
+          workspace = "gtd",
         },
       },
       ["core.norg.concealer"] = {},
@@ -863,12 +861,6 @@ function config.neorg()
             keybinds.map_event("gtd-displays", "n", "<C-c>", "core.gtd.ui.close")
             keybinds.map_event("gtd-displays", "n", "e", "core.gtd.ui.edit_task")
             keybinds.map_event("gtd-displays", "n", "<Tab>", "core.gtd.ui.details")
-
-            -- Mode: toc-split
-            keybinds.map_event("toc-split", "n", "<CR>", "core.norg.qol.toc.hop-toc-link")
-            keybinds.map_event("toc-split", "n", "q", "core.norg.qol.toc.close")
-            keybinds.map_event("toc-split", "n", "<Esc>", "core.norg.qol.toc.close")
-            keybinds.map_event("toc-split", "n", "<C-c>", "core.norg.qol.toc.close")
           end,
         },
       },
