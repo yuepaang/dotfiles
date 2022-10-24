@@ -527,13 +527,13 @@ map.Default = {
   },
   v = {
     ["<C-d>"] = {
-      "<cmd>lua require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>",
+      "<cmd>lua ensure_require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>",
       "Smooth Scroll Down",
       noremap = true,
       silent = true,
     },
     ["<C-u>"] = {
-      "<cmd>lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>",
+      "<cmd>lua ensure_require('neoscroll').scroll(-vim.wo.scroll, true, 150)<CR>",
       "Smooth Scroll Up",
       noremap = true,
       silent = true,

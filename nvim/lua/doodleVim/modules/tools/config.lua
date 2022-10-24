@@ -807,6 +807,8 @@ function config.tmux()
 end
 
 function config.neorg()
+  vim.cmd([[Neorg sync-parsers]])
+
   require("neorg").setup({
     load = {
       ["core.defaults"] = {},
@@ -814,12 +816,13 @@ function config.neorg()
         config = {
           workspaces = {
             gtd = "~/Documents/Notes/gtd",
+            work = "~/Documents/Notes/work",
           },
         },
       },
       ["core.gtd.base"] = {
         config = {
-          workspace = "gtd",
+          workspace = "work",
         },
       },
       ["core.norg.concealer"] = {},
@@ -846,7 +849,7 @@ function config.neorg()
             keybinds.map_event("norg", "n", "<Leader>dc", "core.norg.qol.todo_items.todo.task_cancelled")
             keybinds.map_event("norg", "n", "<Leader>dr", "core.norg.qol.todo_items.todo.task_recurring")
             keybinds.map_event("norg", "n", "<Leader>di", "core.norg.qol.todo_items.todo.task_import")
-            keybinds.map_event("norg", "n", "<Leader><Space>", "core.norg.qol.todo_items.todo.task_cycle")
+            keybinds.map_event("norg", "n", "<Space><Space>", "core.norg.qol.todo_items.todo.task_cycle")
             keybinds.map_event("norg", "n", "<Leader>kc", "core.gtd.base.capture")
             keybinds.map_event("norg", "n", "<Leader>kv", "core.gtd.base.views")
             keybinds.map_event("norg", "n", "<Leader>ke", "core.gtd.base.edit")

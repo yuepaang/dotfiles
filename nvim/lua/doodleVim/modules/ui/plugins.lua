@@ -8,7 +8,7 @@ ui["nvim-treesitter/nvim-treesitter"] = {
   end,
   config = conf.treesitter,
   requires = { "nvim-treesitter/nvim-treesitter-textobjects", opt = true },
-  run = ":TSUpdate",
+  run = ":TSUpdate bash cmake comment c cpp dot dockerfile go gomod gowork json html lua make python regex rust toml vim yaml norg solidity",
 }
 
 ui["norcalli/nvim-colorizer.lua"] = {

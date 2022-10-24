@@ -1,8 +1,8 @@
-local global = require "doodleVim.core.global"
-local defer = require "doodleVim.utils.defer"
-local pack = require "doodleVim.core.pack"
-local event = require "doodleVim.core.event"
-local options = require "doodleVim.core.options"
+local global = require("doodleVim.core.global")
+local defer = require("doodleVim.utils.defer")
+local pack = require("doodleVim.core.pack")
+local event = require("doodleVim.core.event")
+local options = require("doodleVim.core.options")
 
 -- Create cache dir and subs dir
 local createdir = function()
@@ -51,12 +51,12 @@ local disable_distribution_plugins = function()
 end
 
 local setup_copilot = function()
-  vim.cmd [[
+  vim.cmd([[
     imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
     let g:copilot_no_tab_map = v:true
     let g:copilot_assume_mapped = v:true
     let g:copilot_tab_fallback = ""
-  ]]
+  ]])
 end
 
 local set_leader_map = function()
@@ -69,7 +69,7 @@ local set_leader_map = function()
 end
 
 local set_colorscheme = function()
-  vim.cmd [[colorscheme gruvbox]]
+  vim.cmd([[colorscheme gruvbox]])
 end
 
 local setup_others_autocommands = function()
@@ -94,7 +94,9 @@ local function load_nvim_config()
   event.load_autocmds()
   pack.ensure_plugins()
   pack.load_compile()
-  require "doodleVim.core.command"
+  defer.setup()
+
+  require("doodleVim.core.command")
   set_colorscheme()
   defer.load(50)
   createdir()
