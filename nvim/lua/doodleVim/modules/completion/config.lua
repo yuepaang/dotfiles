@@ -80,7 +80,7 @@ function config.mason_lspconfig()
       "taplo",
       "bashls",
     },
-    automatic_installation = true,
+    automatic_installation = false,
   })
 
   local handler = require("doodleVim.modules.completion.handler")

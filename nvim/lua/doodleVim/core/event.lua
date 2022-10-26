@@ -41,6 +41,10 @@ function autocmd.load_autocmds()
       { "FileType", "gitcommit", "setlocal spell" },
     },
 
+    _packer = {
+      { "User", "PackerComplete", "++once", "lua require('doodleVim.extend.packer').PostPacker()" },
+    },
+
     nonewline = {
       -- don't auto comment new line
       { "BufEnter", [[set formatoptions-=cro]] },
