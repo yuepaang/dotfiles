@@ -3,6 +3,7 @@
         "flake8"
     ],
     "pylsp.plugins.flake8.enabled": true,
+    "pylsp.plugins.flake8.maxLineLength": 180,
     "pylsp.plugins.yapf.enabled": false,
     "pylsp.plugins.yapf.enabled": false,
     "pylsp.plugins.rope_completion.enabled": true,
