@@ -49,10 +49,16 @@ map.Lsp = {
         map_cr("lua require('rename').rename({label='Rename'})"):with_noremap():with_silent():with_label("Rename")
       ),
     },
-    ["<C-n>"] = bind.convert_wk_format(
+    -- ["<C-n>"] = bind.convert_wk_format(
+    --   map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():with_label("Go To Next Diagnostic")
+    -- ),
+    -- ["<C-p>"] = bind.convert_wk_format(
+    --   map_cr("lua vim.diagnostic.goto_prev()"):with_noremap():with_silent():with_label("Go To Previous Diagnostic")
+    -- ),
+    ["]d"] = bind.convert_wk_format(
       map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():with_label("Go To Next Diagnostic")
     ),
-    ["<C-p>"] = bind.convert_wk_format(
+    ["[d"] = bind.convert_wk_format(
       map_cr("lua vim.diagnostic.goto_prev()"):with_noremap():with_silent():with_label("Go To Previous Diagnostic")
     ),
   },
@@ -347,6 +353,7 @@ map.Neogen_toogleNu = {
 
 map.Dap = {
   n = {
+    ["<F4>"] = bind.convert_wk_format(map_cr("AddHeader<CR>"):with_noremap():with_silent():with_label("Add Header")),
     ["<F7>"] = bind.convert_wk_format(
       map_cr("DapContinue"):with_noremap():with_silent():with_label("Start Or Continue Debug")
     ),
