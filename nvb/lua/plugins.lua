@@ -92,19 +92,6 @@ function M.setup()
       end,
       disable = true,
     }
-    use {
-      "folke/noice.nvim",
-      event = "VimEnter",
-      config = function()
-        require("noice").setup()
-      end,
-      requires = {
-        "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
-        "hrsh7th/nvim-cmp",
-      },
-      disable = true,
-    }
 
     -- Colorscheme
     use {
@@ -200,6 +187,7 @@ function M.setup()
     use {
       "TimUntersberger/neogit",
       cmd = "Neogit",
+      module = { "neogit" },
       config = function()
         require("config.neogit").setup()
       end,
@@ -300,6 +288,7 @@ function M.setup()
     use {
       "folke/which-key.nvim",
       event = "VimEnter",
+      module = { "which-key" },
       -- keys = { [[<leader>]] },
       config = function()
         require("config.whichkey").setup()
@@ -474,13 +463,21 @@ function M.setup()
       end,
       disable = false,
     }
-
     use {
       "echasnovski/mini.nvim",
       event = { "BufReadPre" },
       config = function()
         require("config.mini").setup()
       end,
+    }
+    use { "MunifTanjim/nui.nvim", disable = true }
+    use {
+      "folke/noice.nvim",
+      event = { "VimEnter" },
+      config = function()
+        require("noice").setup()
+      end,
+      disable = true,
     }
 
     -- Code documentation
@@ -643,44 +640,47 @@ function M.setup()
 
     use {
       "nvim-telescope/telescope.nvim",
-      opt = true,
+      event = { "VimEnter" },
       config = function()
         require("config.telescope").setup()
       end,
-      cmd = { "Telescope" },
-      module = { "telescope", "telescope.builtin" },
-      keys = { "<leader>f", "<leader>p", "<leader>z" },
       requires = {
         "nvim-lua/popup.nvim",
         "nvim-lua/plenary.nvim",
-        { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-        "nvim-telescope/telescope-project.nvim",
-        "cljoly/telescope-repo.nvim",
-        "nvim-telescope/telescope-file-browser.nvim",
-        { "nvim-telescope/telescope-frecency.nvim", requires = "tami5/sqlite.lua" },
+        {
+          "nvim-telescope/telescope-fzf-native.nvim",
+          run = "make",
+        },
+        { "nvim-telescope/telescope-project.nvim" },
+        { "cljoly/telescope-repo.nvim" },
+        { "nvim-telescope/telescope-file-browser.nvim" },
+        {
+          "nvim-telescope/telescope-frecency.nvim",
+          requires = "tami5/sqlite.lua",
+        },
         {
           "ahmedkhalf/project.nvim",
           config = function()
             require("config.project").setup()
           end,
         },
-        "nvim-telescope/telescope-dap.nvim",
+        { "nvim-telescope/telescope-dap.nvim" },
         {
           "AckslD/nvim-neoclip.lua",
           requires = {
             { "tami5/sqlite.lua", module = "sqlite" },
           },
         },
-        "nvim-telescope/telescope-smart-history.nvim",
+        { "nvim-telescope/telescope-smart-history.nvim" },
         {
           "alpha2phi/telescope-arecibo.nvim",
           rocks = { "openssl", "lua-http-parser" },
         },
-        "nvim-telescope/telescope-media-files.nvim",
-        "dhruvmanila/telescope-bookmarks.nvim",
-        "nvim-telescope/telescope-github.nvim",
-        "jvgrootveld/telescope-zoxide",
-        "Zane-/cder.nvim",
+        { "nvim-telescope/telescope-media-files.nvim" },
+        { "dhruvmanila/telescope-bookmarks.nvim" },
+        { "nvim-telescope/telescope-github.nvim" },
+        { "jvgrootveld/telescope-zoxide" },
+        { "Zane-/cder.nvim" },
         "nvim-telescope/telescope-symbols.nvim",
         -- "nvim-telescope/telescope-ui-select.nvim",
       },
@@ -747,11 +747,11 @@ function M.setup()
         "ray-x/cmp-treesitter",
         "hrsh7th/cmp-cmdline",
         "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lsp",
+        { "hrsh7th/cmp-nvim-lsp", module = { "cmp_nvim_lsp" } },
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "lukas-reineke/cmp-rg",
         "davidsierradz/cmp-conventionalcommits",
-        "onsails/lspkind-nvim",
+        { "onsails/lspkind-nvim", module = { "lspkind" } },
         -- "hrsh7th/cmp-calc",
         -- "f3fora/cmp-spell",
         -- "hrsh7th/cmp-emoji",
@@ -760,6 +760,7 @@ function M.setup()
           config = function()
             require("config.snip").setup()
           end,
+          module = { "luasnip" },
         },
         "rafamadriz/friendly-snippets",
         "honza/vim-snippets",
@@ -821,8 +822,8 @@ function M.setup()
             require("fidget").setup {}
           end,
         },
-        "b0o/schemastore.nvim",
-        "jose-elias-alvarez/typescript.nvim",
+        { "b0o/schemastore.nvim", module = { "schemastore" } },
+        { "jose-elias-alvarez/typescript.nvim", module = { "typescript" } },
         {
           "SmiteshP/nvim-navic",
           -- "alpha2phi/nvim-navic",
@@ -887,6 +888,7 @@ function M.setup()
     use {
       "folke/trouble.nvim",
       cmd = { "TroubleToggle", "Trouble" },
+      module = { "trouble.providers.telescope" },
       config = function()
         require("trouble").setup {
           use_diagnostic_signs = true,
@@ -976,18 +978,17 @@ function M.setup()
     use {
       "mfussenegger/nvim-dap",
       opt = true,
-      keys = { [[<leader>d]] },
       module = { "dap" },
       requires = {
         -- "alpha2phi/DAPInstall.nvim",
         -- { "Pocco81/dap-buddy.nvim", branch = "dev" },
-        "theHamsta/nvim-dap-virtual-text",
-        "rcarriga/nvim-dap-ui",
-        "mfussenegger/nvim-dap-python",
+        { "theHamsta/nvim-dap-virtual-text", module = { "nvim-dap-virtual-text" } },
+        { "rcarriga/nvim-dap-ui", module = { "dapui" } },
+        { "mfussenegger/nvim-dap-python", module = { "dap-python" } },
         "nvim-telescope/telescope-dap.nvim",
         { "leoluz/nvim-dap-go", module = "dap-go" },
         { "jbyuki/one-small-step-for-vimkind", module = "osv" },
-        { "mxsdev/nvim-dap-vscode-js" },
+        { "mxsdev/nvim-dap-vscode-js", module = { "dap-vscode-js" } },
         {
           "microsoft/vscode-js-debug",
           opt = true,
@@ -1014,54 +1015,26 @@ function M.setup()
     -- Test
     use {
       "nvim-neotest/neotest",
-      opt = true,
       requires = {
-        "vim-test/vim-test",
+        {
+          "vim-test/vim-test",
+          event = { "BufReadPre" },
+        },
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
-        "nvim-neotest/neotest-python",
-        "nvim-neotest/neotest-plenary",
-        "nvim-neotest/neotest-go",
-        "haydenmeade/neotest-jest",
-        "nvim-neotest/neotest-vim-test",
-        "rouge8/neotest-rust",
+        { "nvim-neotest/neotest-vim-test", module = { "neotest-vim-test" } },
+        { "nvim-neotest/neotest-python", module = { "neotest-python" } },
+        { "nvim-neotest/neotest-plenary", module = { "neotest-plenary" } },
+        { "nvim-neotest/neotest-go", module = { "neotest-go" } },
+        { "haydenmeade/neotest-jest", module = { "neotest-jest" } },
+        { "rouge8/neotest-rust", module = { "neotest-rust" } },
       },
       module = { "neotest", "neotest.async" },
-      cmd = {
-        "TestNearest",
-        "TestFile",
-        "TestSuite",
-        "TestLast",
-        "TestVisit",
-      },
       config = function()
         require("config.neotest").setup()
       end,
       disable = false,
     }
-    -- use {
-    --   "rcarriga/vim-ultest",
-    --   requires = { "vim-test/vim-test" },
-    --   opt = true,
-    --   keys = { "<leader>t" },
-    --   cmd = {
-    --     "TestNearest",
-    --     "TestFile",
-    --     "TestSuite",
-    --     "TestLast",
-    --     "TestVisit",
-    --     "Ultest",
-    --     "UltestNearest",
-    --     "UltestDebug",
-    --     "UltestLast",
-    --     "UltestSummary",
-    --   },
-    --   module = "ultest",
-    --   run = ":UpdateRemotePlugins",
-    --   config = function()
-    --     require("config.test").setup()
-    --   end,
-    -- }
     use { "diepm/vim-rest-console", ft = { "rest" }, disable = false }
     use {
       "NTBBloodbath/rest.nvim",
@@ -1090,8 +1063,14 @@ function M.setup()
     -- Harpoon
     use {
       "ThePrimeagen/harpoon",
-      keys = { [[<leader>j]] },
-      module = { "harpoon", "harpoon.cmd-ui", "harpoon.mark", "harpoon.ui", "harpoon.term" },
+      module = {
+        "harpoon",
+        "harpoon.cmd-ui",
+        "harpoon.mark",
+        "harpoon.ui",
+        "harpoon.term",
+        "telescope._extensions.harpoon",
+      },
       config = function()
         require("config.harpoon").setup()
       end,
@@ -1278,7 +1257,7 @@ function M.setup()
           end,
         }
       end,
-      module = { "aerial" },
+      module = { "aerial", "telescope._extensions.aerial" },
       cmd = { "AerialToggle" },
     }
 
