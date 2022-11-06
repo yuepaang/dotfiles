@@ -230,7 +230,7 @@ function M.setup()
       requires = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope.nvim",
-        "kyazdani42/nvim-web-devicons",
+        "nvim-tree/nvim-web-devicons",
       },
       config = function()
         require("octo").setup()
@@ -307,7 +307,7 @@ function M.setup()
 
     -- Better icons
     use {
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
       module = "nvim-web-devicons",
       config = function()
         require("nvim-web-devicons").setup { default = true }
@@ -442,7 +442,7 @@ function M.setup()
       config = function()
         require("focus").setup { hybridnumber = true }
       end,
-      disable = false,
+      disable = true,
     }
     use {
       "smjonas/live-command.nvim",
@@ -461,7 +461,7 @@ function M.setup()
           },
         }
       end,
-      disable = false,
+      disable = true,
     }
     use {
       "echasnovski/mini.nvim",
@@ -475,7 +475,7 @@ function M.setup()
       "folke/noice.nvim",
       event = { "VimEnter" },
       config = function()
-        require("noice").setup()
+        require("config.noice").setup()
       end,
       disable = true,
     }
@@ -687,7 +687,7 @@ function M.setup()
 
     -- nvim-tree
     use {
-      "kyazdani42/nvim-tree.lua",
+      "nvim-tree/nvim-tree.lua",
       opt = true,
       cmd = { "NvimTreeToggle", "NvimTreeClose" },
       config = function()
@@ -893,6 +893,7 @@ function M.setup()
           use_diagnostic_signs = true,
         }
       end,
+      disable = false,
     }
 
     -- lspsaga.nvim
