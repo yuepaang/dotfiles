@@ -181,8 +181,4 @@ completion["RRethy/vim-illuminate"] = {
 
 completion["christianchiarulli/lua-dev.nvim"] = {}
 
-completion["SmiteshP/nvim-navic"] = {
-  after = "mason-lspconfig.nvim",
-}
-
 return completion

@@ -14,6 +14,9 @@ function config.treesitter()
     },
     highlight = {
       enable = true,
+      disable = {
+        "lua",
+      },
     },
     textobjects = {
       select = {

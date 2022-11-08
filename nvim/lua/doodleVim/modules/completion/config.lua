@@ -79,7 +79,7 @@ function config.mason_lspconfig()
       "yamlls",
       "taplo",
       "bashls",
-      "clangd"
+      "clangd",
     },
     automatic_installation = false,
   })
@@ -112,7 +112,6 @@ function config.mason_lspconfig()
   require("doodleVim.utils.defer").immediate_load("cmp-nvim-lsp")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
-  -- capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
   capabilities.offsetEncoding = { "utf-16" }
 
@@ -120,7 +119,7 @@ function config.mason_lspconfig()
 
   local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    require("doodleVim.modules.completion.handler").attach_navic(client, bufnr)
+    -- require "doodleVim.modules.completion.handler".lsp_highlight_document(client)
 
     local cfg = {
       debug = false, -- set to true to enable debug logging
@@ -178,7 +177,7 @@ function config.mason_lspconfig()
     -- You can also do this inside lsp on_attach
     -- note: on_attach deprecated
     -- require("lsp_signature").on_attach(cfg, bufnr) -- no need to specify bufnr if you don't use toggle_key
-    signature.on_attach(cfg) -- no need to specify bufnr if you don't use toggle_key
+    signature.on_attach(cfg, bufnr) -- no need to specify bufnr if you don't use toggle_key
   end
 
   lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
@@ -279,14 +278,29 @@ function config.nvim_cmp()
         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
       }),
     },
+    -- sources = cmp.config.sources({
+    --   { name = "crates", group_index = 1 },
+    --   { name = "nvim_lsp", group_index = 2 },
+    --   { name = "nvim_lua", group_index = 2 },
+    --   { name = "luasnip", group_index = 2 },
+    --   { name = "buffer", group_index = 2 },
+    --   { name = "cmp_tabnine", group_index = 2 },
+    --   { name = "path", group_index = 2 },
+    -- }),
     sources = cmp.config.sources({
-      { name = "crates", group_index = 1 },
-      { name = "nvim_lsp", group_index = 2 },
-      { name = "nvim_lua", group_index = 2 },
-      { name = "luasnip", group_index = 2 },
-      { name = "buffer", group_index = 2 },
-      { name = "cmp_tabnine", group_index = 2 },
-      { name = "path", group_index = 2 },
+      { name = "crates" },
+      { name = "nvim_lsp" },
+      { name = "nvim_lua" },
+      { name = "luasnip" },
+      { name = "cmp_tabnine" },
+      { name = "buffer" },
+      { name = "path" },
+    }, {
+      {
+        name = "look",
+        keyword_length = 2,
+        option = { convert_case = true, loud = true },
+      },
     }),
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -296,9 +310,8 @@ function config.nvim_cmp()
       ["<CR>"] = {
         i = cmp.mapping.confirm({ select = false }),
       },
-      ["<C-c>"] = {
+      ["<C-e>"] = {
         i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
       },
       ["<C-p>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
@@ -364,12 +377,11 @@ function config.nvim_cmp()
         end
         local width = #word
         if width >= math.ceil(vim.o.columns / 4) then
-            width = math.ceil(width / 4)
-            local offset = width - #word
-            word = string.sub(word, 0, offset)
+          width = math.ceil(width / 4)
+          local offset = width - #word
+          word = string.sub(word, 0, offset)
         end
         vim_item.abbr = word
-
 
         local icons = require("doodleVim.utils.icons")
         vim_item.kind = string.format("%s %s", icons.cmp[vim_item.kind], vim_item.kind)
