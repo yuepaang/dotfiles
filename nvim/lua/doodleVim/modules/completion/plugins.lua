@@ -89,7 +89,7 @@ completion["williamboman/mason.nvim"] = {
     require("doodleVim.extend.packer").add("mason", function()
       require("doodleVim.utils.defer").immediate_load("mason.nvim")
       vim.cmd(
-        [[MasonInstall gopls json-lsp lua-language-server python-lsp-server rust-analyzer taplo debugpy delve gotests gomodifytags ]]
+        [[MasonInstall gopls json-lsp lua-language-server python-lsp-server rust-analyzer taplo debugpy delve gotests gomodifytags clangd ]]
       )
     end)
   end,
