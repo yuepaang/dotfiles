@@ -16,6 +16,7 @@ function config.treesitter()
       enable = true,
       disable = {
         "lua",
+        "help",
       },
     },
     textobjects = {
