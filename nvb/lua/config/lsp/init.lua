@@ -74,10 +74,10 @@ local servers = {
           maxPreload = 2000,
           preloadFileSize = 50000,
         },
-        completion = { callSnippet = "Both" },
+        completion = { callSnippet = "Replace" },
         telemetry = { enable = false },
         hint = {
-          enable = true,
+          enable = false,
         },
       },
     },
