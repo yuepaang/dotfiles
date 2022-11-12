@@ -524,12 +524,6 @@ function config.floaterm()
   vim.g.floaterm_opener = "edit"
 end
 
-function config.translator()
-  vim.g.translator_window_borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
-  vim.g.translator_proxy_url = "socks5://127.0.0.1:7980"
-  vim.g.translator_default_engines = { "google" }
-end
-
 function config.project()
   require("project_nvim").setup({
     -- Manual mode doesn't automatically change your root directory, so you have
@@ -866,6 +860,51 @@ function config.neorg()
       },
     },
   })
+end
+
+function config.venn()
+  require("doodleVim.utils.defer").immediate_load("hydra.nvim")
+
+  local doodleHydra = require("doodleVim.extend.hydra")
+  local hint = [[
+     Arrow^^^^^^   Select region with <C-v>
+     ^ ^ ^ ^ ^ ^   _f_: single line box
+     ^ ^ _K_ ^ ^   _d_: double line box
+     _H_ ^ ^ _L_   _h_: Hard line box
+     ^ ^ _J_ ^ ^   _o_: crossed single line
+     ^ ^ ^ ^ ^ ^   _F_: Fill the box
+     ^ ^ ^ ^ ^ ^                     _<Esc>_
+    ]]
+
+  local Hydra = require("hydra")
+  local venn_hydra = Hydra({
+    name = "Draw Diagram",
+    hint = hint,
+    config = {
+      color = "pink",
+      hint = {
+        border = "rounded",
+        position = "top-right",
+      },
+      on_enter = function()
+        vim.o.virtualedit = "all"
+      end,
+    },
+    mode = "n",
+    heads = {
+      { "H", "<C-v>h:VBox<CR>", { silent = true } },
+      { "J", "<C-v>j:VBox<CR>", { silent = true } },
+      { "K", "<C-v>k:VBox<CR>", { silent = true } },
+      { "L", "<C-v>l:VBox<CR>", { silent = true } },
+      { "f", ":VBox<CR>", { mode = "v", silent = true } },
+      { "d", ":VBoxD<CR>", { mode = "v", silent = true } },
+      { "h", ":VBoxH<CR>", { mode = "v", silent = true } },
+      { "o", ":VBoxO<CR>", { mode = "v", silent = true } },
+      { "F", ":VFill<CR>", { mode = "v", silent = true } },
+      { "<Esc>", nil, { exit = true } },
+    },
+  })
+  doodleHydra.add("venn", venn_hydra)
 end
 
 return config
