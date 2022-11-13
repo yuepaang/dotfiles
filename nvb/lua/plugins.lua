@@ -901,7 +901,7 @@ function M.setup()
       "glepnir/lspsaga.nvim",
       cmd = { "Lspsaga" },
       config = function()
-        require("lspsaga").init_lsp_saga()
+        require("config.lspsaga").setup()
       end,
     }
 
