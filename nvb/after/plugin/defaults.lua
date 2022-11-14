@@ -44,7 +44,7 @@ opt.cmdheight = 1 -- 0
 -- opt.cmdheight = 1 -- Crash during start-up for 0.8 nightly when set to 0
 opt.scrollback = 100000
 opt.splitkeep = "screen"
-opt.hidden = false
+opt.hidden = true
 
 -- Change to use lualine.nvim
 -- opt.winbar = "%{%v:lua.require'config.winbar'.get_winbar()%}"
