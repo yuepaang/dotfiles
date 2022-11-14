@@ -95,15 +95,6 @@ map.NvimTree = {
   },
 }
 
--- map.Translator = {
---   n = {
---     ["<leader>r"] = {
---       name = "Translator",
---       r = bind.convert_wk_format(map_cr("TranslateW"):with_silent():with_label("Translate Word In Cursor")),
---     },
---   },
--- }
-
 map.SymbolsOutline = {
   n = {
     ["<leader>j"] = {
@@ -403,34 +394,11 @@ map.Neogen = {
 map.Dap = {
   n = {
     ["<F4>"] = bind.convert_wk_format(map_cr("AddHeader<CR>"):with_noremap():with_silent():with_label("Add Header")),
-    ["<F7>"] = bind.convert_wk_format(
-      map_cr("DapContinue"):with_noremap():with_silent():with_label("Start Or Continue Debug")
-    ),
-    ["<S-F7>"] = bind.convert_wk_format(
-      map_cr("DapTerminate"):with_noremap():with_silent():with_label("Stop Debugging, Shortcut: Shift + F7")
-    ),
-    ["<F8>"] = bind.convert_wk_format(
-      map_cr("lua require('dap').pause()"):with_noremap():with_silent():with_label("Pause Debug")
-    ),
-    ["<S-F8>"] = bind.convert_wk_format(
-      map_cr("lua require('dap').restart()"):with_noremap():with_silent():with_label("Restart Debug")
-    ),
-    ["<F9>"] = bind.convert_wk_format(
-      map_cr("DapToggleBreakpoint"):with_noremap():with_silent():with_label("Toggle Breakpoint")
-    ),
-    ["<F10>"] = bind.convert_wk_format(map_cr("DapStepOver"):with_noremap():with_silent():with_label("Step Over")),
-    ["<F11>"] = bind.convert_wk_format(map_cr("DapStepInto"):with_noremap():with_silent():with_label("Step Into")),
-    ["<S-F11>"] = bind.convert_wk_format(
-      map_cr("DapStepOut"):with_noremap():with_silent():with_label("Step Out, Shortcut: Shift + F11")
-    ),
     ["<F12>"] = bind.convert_wk_format(
-      map_cr("lua require('dap').run_to_cursor()"):with_noremap():with_silent():with_label("Run To Cursor")
-    ),
-    ["<S-F12>"] = bind.convert_wk_format(
-      map_cr("lua require('dap').run_last()")
+      map_cr('lua require("doodleVim.extend.hydra").run("dap")')
         :with_noremap()
         :with_silent()
-        :with_label("Run To Last, Shortcut: Shift + F12")
+        :with_label("Start Debug Mode")
     ),
   },
 }

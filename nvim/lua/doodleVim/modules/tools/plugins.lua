@@ -65,7 +65,7 @@ tools["voldikss/vim-floaterm"] = {
   end,
 }
 
-tools["anuvyklack/hydra.nvim"] = {
+tools["doodleEsc/hydra.nvim"] = {
   opt = true,
   setup = function()
     require("doodleVim.utils.defer").defer_load("hydra.nvim", 100)
