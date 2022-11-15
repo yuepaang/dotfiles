@@ -256,14 +256,14 @@ end
 
 function config.nvim_cmp()
   require("doodleVim.utils.defer").immediate_load({
-        "LuaSnip",
-        "neogen",
-        "cmp-under-comparator",
+    "LuaSnip",
+    "neogen",
+    "cmp-under-comparator",
   })
 
   local cmp = require("cmp")
   local types = require("cmp.types")
-  local under_comparator = require "cmp-under-comparator".under
+  local under_comparator = require("cmp-under-comparator").under
   local WIDE_HEIGHT = 40
 
   cmp.setup({
@@ -286,30 +286,31 @@ function config.nvim_cmp()
         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
       }),
       documentation = {
-                max_height = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / vim.o.lines)),
-                max_width = math.floor((WIDE_HEIGHT * 2) * (vim.o.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
-                border = "rounded",
+        max_height = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / vim.o.lines)),
+        max_width = math.floor((WIDE_HEIGHT * 2) * (vim.o.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
+        border = "rounded",
         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
       },
     },
     sorting = {
-            priority_weight = 2,
-            comparators = {
-                cmp.config.compare.offset,
-                cmp.config.compare.exact,
-                cmp.config.compare.score,
-                under_comparator,
-                cmp.config.compare.recently_used,
-                cmp.config.compare.locality,
-                cmp.config.compare.kind,
-                cmp.config.compare.sort_text,
-                cmp.config.compare.length,
-                cmp.config.compare.order,
-            },
-        },
+      priority_weight = 2,
+      comparators = {
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.score,
+        under_comparator,
+        cmp.config.compare.recently_used,
+        cmp.config.compare.locality,
+        cmp.config.compare.kind,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+      },
+    },
     sources = cmp.config.sources({
       { name = "crates" },
       { name = "nvim_lsp" },
+      { name = "treesitter" },
       { name = "nvim_lua" },
       { name = "luasnip" },
       { name = "cmp_tabnine" },
@@ -414,6 +415,7 @@ function config.nvim_cmp()
           cmp_tabnine = "[TAB]",
           luasnip = "[SNIP]",
           path = "[PATH]",
+          treesitter = "[TS]",
         })[entry.source.name]
 
         return vim_item
@@ -554,22 +556,6 @@ end
 function config.neogen()
   require("neogen").setup({ snippet_engine = "luasnip" })
 end
-
--- function config.rename()
---   require("rename").setup({
---     rename = {
---       border = {
---         highlight = "FloatBorder",
---         style = "rounded",
---         title = " Rename ",
---         title_align = "left",
---         title_hl = "FloatBorder",
---       },
---       prompt = "➤ ",
---       prompt_hl = "Comment",
---     },
---   })
--- end
 
 function config.lightbulb()
   local icons = require("doodleVim.utils.icons")

@@ -53,6 +53,10 @@ completion["hrsh7th/cmp-cmdline"] = {
   after = "nvim-cmp",
 }
 
+completion["ray-x/cmp-treesitter"] = {
+  after = "nvim-cmp",
+}
+
 completion["lukas-reineke/cmp-under-comparator"] = {
   opt = true,
 }
@@ -88,9 +92,29 @@ completion["williamboman/mason.nvim"] = {
   setup = function()
     require("doodleVim.extend.packer").add("mason", function()
       require("doodleVim.utils.defer").immediate_load("mason.nvim")
-      vim.cmd(
-        [[MasonInstall gopls json-lsp lua-language-server python-lsp-server rust-analyzer taplo debugpy delve gotests gomodifytags clangd ]]
-      )
+      local binaries = {
+        "gopls",
+        "json-lsp",
+        "lua-language-server",
+        "python-lsp-server",
+        "debugpy",
+        "delve",
+        "gotests",
+        "gomodifytags",
+        "clangd",
+        "rust-analyzer",
+        "taplo",
+      }
+      local register = require("mason-registry")
+      local bins = ""
+      for _, bin in ipairs(binaries) do
+        if not register.is_installed(bin) then
+          bins = bins .. " " .. bin
+        end
+      end
+      if #bins > 0 then
+        vim.cmd("MasonInstall" .. bins)
+      end
     end)
   end,
   after = "nvim-cmp",

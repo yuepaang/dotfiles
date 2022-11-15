@@ -32,12 +32,12 @@ utils.wrap2 = function(str, limit)
   local limit = limit or 36
   local here = 1
   local wrapped_msg = ""
-      .. str:gsub("(%s+)()(%S+)()", function(sp, st, word, fi)
-        if fi - here > limit then
-          here = st
-          return "\n" .. word
-        end
-      end)
+    .. str:gsub("(%s+)()(%S+)()", function(sp, st, word, fi)
+      if fi - here > limit then
+        here = st
+        return "\n" .. word
+      end
+    end)
   return wrapped_msg
 end
 
@@ -60,6 +60,10 @@ utils.feedkeys = function(key, mode)
 
   local feedkey = vim.api.nvim_replace_termcodes(key, true, false, true)
   vim.api.nvim_feedkeys(feedkey, mode, false)
+end
+
+utils.ts_is_installed = function(lang)
+  return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".so", false) > 0
 end
 
 return utils
