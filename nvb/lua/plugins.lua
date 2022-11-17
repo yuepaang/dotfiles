@@ -6,6 +6,7 @@ function M.setup()
 
   -- packer.nvim configuration
   local conf = {
+    max_jobs = 50,
     profile = {
       enable = true,
       threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
@@ -887,7 +888,7 @@ function M.setup()
     use {
       "folke/trouble.nvim",
       cmd = { "TroubleToggle", "Trouble" },
-      module = { "trouble.providers.telescope" },
+      -- module = { "trouble.providers.telescope" },
       config = function()
         require("trouble").setup {
           use_diagnostic_signs = true,

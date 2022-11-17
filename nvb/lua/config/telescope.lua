@@ -33,7 +33,7 @@ local nvb_actions = transform_mod {
 }
 
 -- trouble.nvim
-local trouble = require "trouble.providers.telescope"
+-- local trouble = require "trouble.providers.telescope"
 local icons = require "config.icons"
 
 function M.setup()
@@ -85,7 +85,7 @@ function M.setup()
           ["<C-k>"] = actions.move_selection_previous,
           ["<C-n>"] = actions.cycle_history_next,
           ["<C-p>"] = actions.cycle_history_prev,
-          ["<c-z>"] = trouble.open_with_trouble,
+          -- ["<c-z>"] = trouble.open_with_trouble,
           ["?"] = actions_layout.toggle_preview,
         },
       },
