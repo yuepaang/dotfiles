@@ -882,6 +882,7 @@ _H_ ^ ^ _L_   _h_: Hard line box
       hint = hint,
       config = {
         color = "pink",
+        invoke_on_body = false,
         hint = {
           border = "rounded",
           position = "top-right",
@@ -890,6 +891,7 @@ _H_ ^ ^ _L_   _h_: Hard line box
           vim.o.virtualedit = "all"
         end,
       },
+      body = "",
       mode = "n",
       heads = {
         { "H", "<C-v>h:VBox<CR>", { silent = true } },
