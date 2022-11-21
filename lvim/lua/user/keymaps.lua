@@ -110,5 +110,6 @@ end
 vim.api.nvim_set_keymap("n", "K", ":lua require('user.keymaps').show_documentation()<CR>", opts)
 
 keymap("n", "<F4>", ":AddHeader<cr>", opts)
+keymap("n", "<C-s>", ":w<cr>", opts)
 
 return M
