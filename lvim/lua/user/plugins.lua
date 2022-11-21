@@ -1,6 +1,9 @@
 -- Additional Plugins
 lvim.plugins = {
   "wakatime/vim-wakatime",
+  "alpertuna/vim-header",
+
+  -- Original plugins
   "ellisonleao/gruvbox.nvim",
   "nvim-treesitter/playground",
   "nvim-treesitter/nvim-treesitter-textobjects",
