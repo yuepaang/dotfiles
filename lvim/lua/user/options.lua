@@ -105,3 +105,9 @@ vim.filetype.add {
 vim.g.header_field_author = "Yue Peng"
 vim.g.header_field_author_email = "yuepaang@gmail.com"
 lvim.colorscheme = "tokyonight"
+vim.cmd [[
+  imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+  let g:copilot_no_tab_map = v:true
+  let g:copilot_assume_mapped = v:true
+  let g:copilot_tab_fallback = ""
+]]
