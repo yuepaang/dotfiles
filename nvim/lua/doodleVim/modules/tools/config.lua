@@ -15,7 +15,7 @@ function config.telescope()
 
   require("telescope").setup({
     defaults = {
-      -- initial_mode = "normal",
+      initial_mode = "insert",
       wrap_results = false,
       prompt_prefix = "",
       selection_caret = icons.arrow.caret .. " ",
@@ -24,59 +24,6 @@ function config.telescope()
       set_env = { ["COLORTERM"] = "truecolor" },
       path_display = {
         shorten = { len = 2, exclude = { -2, -1 } },
-      },
-      file_ignore_patterns = {
-        ".git/",
-        "target/",
-        "docs/",
-        "vendor/*",
-        "%.lock",
-        "__pycache__/*",
-        "%.sqlite3",
-        "%.ipynb",
-        "node_modules/*",
-        "%.jpg",
-        "%.jpeg",
-        "%.png",
-        "%.svg",
-        "%.otf",
-        "%.ttf",
-        "%.webp",
-        ".dart_tool/",
-        ".github/",
-        ".gradle/",
-        ".idea/",
-        ".settings/",
-        ".vscode/",
-        "__pycache__/",
-        "build/",
-        "env/",
-        "gradle/",
-        "node_modules/",
-        "%.pdb",
-        "%.dll",
-        "%.class",
-        "%.exe",
-        "%.cache",
-        "%.ico",
-        "%.pdf",
-        "%.dylib",
-        "%.jar",
-        "%.docx",
-        "%.met",
-        "smalljre_*/*",
-        ".vale/",
-        "%.burp",
-        "%.mp4",
-        "%.mkv",
-        "%.rar",
-        "%.zip",
-        "%.7z",
-        "%.tar",
-        "%.bz2",
-        "%.epub",
-        "%.flac",
-        "%.tar.gz",
       },
       results_title = "Results",
       prompt_title = "Prompt",
@@ -112,11 +59,10 @@ function config.telescope()
       },
       default_mappings = {
         i = {
-          ["<C-n>"] = actions.cycle_history_next,
-          ["<C-p>"] = actions.cycle_history_prev,
-
           ["<C-j>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
+          ["<C-n>"] = actions.move_selection_next,
+          ["<C-p>"] = actions.move_selection_previous,
 
           ["<CR>"] = actions.select_default,
           ["<C-x>"] = actions.select_horizontal,
@@ -132,17 +78,12 @@ function config.telescope()
           ["<Tab>"] = actions_layout.toggle_preview,
           ["<C-Space>"] = actions.which_key,
           ["<C-c>"] = actions.close,
-          --
-          -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-          -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-          -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-          -- ["<C-l>"] = actions.complete_tag,
-          -- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-          -- ["<C-w>"] = { "<c-s-w>", type = "command" },
         },
         n = {
-          ["<j>"] = actions.move_selection_next,
-          ["<k>"] = actions.move_selection_previous,
+          ["j"] = actions.move_selection_next,
+          ["k"] = actions.move_selection_previous,
+          ["<C-n>"] = actions.move_selection_next,
+          ["<C-p>"] = actions.move_selection_previous,
 
           ["<CR>"] = actions.select_default,
           ["<C-x>"] = actions.select_horizontal,
@@ -159,13 +100,6 @@ function config.telescope()
           ["<C-Space>"] = actions.which_key,
           ["<C-c>"] = actions.close,
           ["q"] = actions.close,
-          -- ["<C-Space>"] = actions.which_key,
-          -- ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-          -- ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-          -- ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-          -- ["<C-l>"] = actions.complete_tag,
-          -- ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-          -- ["<C-w>"] = { "<c-s-w>", type = "command" },
         },
       },
     },
@@ -175,25 +109,56 @@ function config.telescope()
         override_generic_sorter = true, -- override the generic sorter
         override_file_sorter = true, -- override the file sorter
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+        -- the default case_mode is "smart_case"
       },
       ["ui-select"] = {
         require("telescope.themes").get_dropdown({
-          -- even more opts
+          initial_mode = "normal",
         }),
-
-        -- pseudo code / specification for writing custom displays, like the one
-        -- for "codeactions"
-        -- specific_opts = {
-        --   [kind] = {
-        --     make_indexed = function(items) -> indexed_items, width,
-        --     make_displayer = function(widths) -> displayer
-        --     make_display = function(displayer) -> function(e)
-        --     make_ordinal = function(e) -> string
-        --   },
-        --   -- for example to disable the custom builtin "codeactions" display
-        --      do the following
-        --   codeactions = false,
-        -- }
+        specific_opts = {
+          -- for gotools.nvim
+          ["gotools"] = {
+            make_indexed = function(items)
+              local indexed_items = {}
+              local widths = {
+                idx = 0,
+                command_title = 0,
+              }
+              for idx, item in ipairs(items) do
+                local entry = {
+                  idx = idx,
+                  command_title = item,
+                  text = item,
+                }
+                table.insert(indexed_items, entry)
+                widths.idx = math.max(widths.idx, require("plenary.strings").strdisplaywidth(entry.idx))
+                widths.command_title =
+                  math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
+              end
+              return indexed_items, widths
+            end,
+            make_displayer = function(widths)
+              return require("telescope.pickers.entry_display").create({
+                separator = " ",
+                items = {
+                  { width = widths.idx + 1 }, -- +1 for ":" suffix
+                  { width = widths.command_title },
+                },
+              })
+            end,
+            make_display = function(displayer)
+              return function(e)
+                return displayer({
+                  { e.value.idx .. ":", "TelescopePromptPrefix" },
+                  { e.value.command_title },
+                })
+              end
+            end,
+            make_ordinal = function(e)
+              return e.idx .. e.command_title
+            end,
+          },
+        },
       },
     },
     pickers = {
