@@ -115,5 +115,6 @@ vim.api.nvim_set_keymap("n", "K", ":lua require('user.keymaps').show_documentati
 
 keymap("n", "<F4>", ":AddHeader<cr>", opts)
 keymap("n", "<C-s>", ":w<cr>", opts)
+keymap("n", "<ESC><ESC>", ":nohlsearch<Bar>:echo<CR>", opts)
 
 return M
