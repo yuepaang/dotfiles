@@ -64,9 +64,6 @@ function M.setup()
     -- literate programming
     use {
       "~/workspace/alpha2phi/lp.nvim",
-      -- config = function()
-      --   require("lp").setup()
-      -- end,
       disable = true,
     }
 
