@@ -170,3 +170,9 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
 --     vim.lsp.buf.format { async = true }
 --   end,
 -- })
+
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd(
+  "BufReadPost",
+  { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
+)
