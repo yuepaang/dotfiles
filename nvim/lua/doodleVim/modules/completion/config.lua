@@ -523,6 +523,7 @@ function config.null_ls()
       null_ls.builtins.code_actions.gitsigns,
       require("gotools").code_actions.gotests,
       require("gotools").code_actions.gomodifytags,
+      require("gotools").code_actions.impl,
     },
     update_in_insert = false,
   })
