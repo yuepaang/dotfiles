@@ -47,7 +47,7 @@ local docker_client = Terminal:new {
   },
 }
 
-local docker_ctop = Terminal:new {
+local docker_ctop_client = Terminal:new {
   cmd = docker_ctop,
   dir = "git_dir",
   hidden = true,
@@ -57,7 +57,7 @@ local docker_ctop = Terminal:new {
   },
 }
 
-local docker_dockly = Terminal:new {
+local docker_dockly_client = Terminal:new {
   cmd = docker_dockly,
   dir = "git_dir",
   hidden = true,
@@ -119,11 +119,11 @@ function M.docker_client_toggle()
 end
 
 function M.docker_ctop_toggle()
-  docker_ctop:toggle()
+  docker_ctop_client:toggle()
 end
 
 function M.docker_dockly_toggle()
-  docker_dockly:toggle()
+  docker_dockly_client:toggle()
 end
 
 function M.git_commit_toggle()
@@ -231,6 +231,16 @@ function M.so()
     end
     cmd = "so " .. cmd
     M.open_term(cmd, { direction = "float" })
+  end)
+end
+
+function M.rust_book()
+  vim.ui.input({ prompt = "rust book: ", default = "" }, function(input)
+    if not input then
+      return
+    end
+    local cmd = "thebook " .. input
+    M.open_term(cmd, { direction = "tab" })
   end)
 end
 
