@@ -64,23 +64,6 @@ editor["romgrk/barbar.nvim"] = {
   end,
 }
 
-editor["lewis6991/gitsigns.nvim"] = {
-  opt = true,
-  config = conf.gitsigns,
-  setup = function()
-    require("doodleVim.utils.defer").add("gitsigns.nvim", 99)
-  end,
-}
-
-editor["sindrets/diffview.nvim"] = {
-  opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").add("diffview.nvim", 99)
-  end,
-  config = conf.diffview,
-  disable = true,
-}
-
 editor["lukas-reineke/indent-blankline.nvim"] = {
   opt = true,
   setup = function()

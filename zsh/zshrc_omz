@@ -24,7 +24,8 @@ export LC_ALL=en_US.UTF-8
 
 source "/usr/local/share/autojump/autojump.zsh"
 
-alias vim="nvim"
+# alias vim="nvim"
+alias vim="lvim"
 
 
 ## ZSH options
@@ -243,3 +244,4 @@ eval "$(starship init zsh)"
 
 
 alias pipup="pip freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install --upgrade"
+export PATH=/Users/yuepeng/.local/bin:$PATH
