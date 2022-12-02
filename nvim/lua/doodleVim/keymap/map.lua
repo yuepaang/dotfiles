@@ -304,19 +304,19 @@ map.Telescope = {
     ["<leader>f"] = {
       name = "Telescope Search",
       f = bind.convert_wk_format(map_cr("Telescope find_files"):with_noremap():with_silent():with_label("Find Files")),
-      d = bind.convert_wk_format(map_cr("Telescope live_grep"):with_noremap():with_silent():with_label("Live Grep")),
+      g = bind.convert_wk_format(map_cr("Telescope live_grep"):with_noremap():with_silent():with_label("Live Grep")),
       s = bind.convert_wk_format(
         map_cr("Telescope file_browser"):with_noremap():with_silent():with_label("File Browser")
       ),
-      h = bind.convert_wk_format(map_cr("Telescope projects"):with_noremap():with_silent():with_label("Find Projects")),
-      j = bind.convert_wk_format(
+      p = bind.convert_wk_format(map_cr("Telescope projects"):with_noremap():with_silent():with_label("Find Projects")),
+      t = bind.convert_wk_format(
         map_cr("Telescope todo-comments todo"):with_noremap():with_silent():with_label("Find Todos")
       ),
-      k = bind.convert_wk_format(
+      r = bind.convert_wk_format(
         map_cr("Telescope oldfiles"):with_noremap():with_silent():with_label("Find Recent Files")
       ),
-      n = bind.convert_wk_format(
-        map_cr("Telescope neoclip"):with_noremap():with_silent():with_label("Find Saved Buffer In Clipboard")
+      c = bind.convert_wk_format(
+        map_cr("Telescope command_history"):with_noremap():with_silent():with_label("Find Command History")
       ),
       b = bind.convert_wk_format(
         map_cr("Telescope buffers"):with_noremap():with_silent():with_label("Buffers Navigation")
@@ -513,6 +513,7 @@ map.Default = {
         :with_silent()
         :with_label("Smooth Scroll Up")
     ),
+    ["<M-n>"] = bind.convert_wk_format(map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage")),
     ["<ESC><ESC>"] = bind.convert_wk_format(
       map_cmd(":nohlsearch<Bar>:echo<CR>"):with_noremap():with_label("Cancel search highlighting")
     ),
