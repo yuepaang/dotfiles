@@ -693,6 +693,8 @@ function M.setup()
       end,
     }
 
+    use { "elihunter173/dirbuf.nvim", cmd = { "Dirbuf" } }
+
     -- Buffer line
     use {
       "akinsho/nvim-bufferline.lua",
