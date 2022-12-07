@@ -406,32 +406,66 @@ map.Dap = {
 map.Bufferline = {
   n = {
     ["<S-h>"] = bind.convert_wk_format(
-      map_cr("BufferPrevious"):with_noremap():with_silent():with_label("Previous Buffer")
+      map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPrevious')")
+        :with_noremap()
+        :with_silent()
+        :with_label("Previous Buffer")
     ),
-    ["<S-l>"] = bind.convert_wk_format(map_cr("BufferNext"):with_noremap():with_silent():with_label("Next Buffer")),
+    ["<S-l>"] = bind.convert_wk_format(
+      map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferNext')")
+        :with_noremap()
+        :with_silent()
+        :with_label("Next Buffer")
+    ),
     ["<S-n>"] = bind.convert_wk_format(
-      map_cr("lua require('doodleVim.extend.misc').enhanced_buffer_close()")
+      map_cr("lua require('doodleVim.extend.tab').enhanced_buffer_close()")
         :with_noremap()
         :with_silent()
         :with_label("Close Current Buffer")
     ),
     ["<M-s>"] = bind.convert_wk_format(
-      map_cr("BufferOrderByDirectory"):with_noremap():with_silent():with_label("Sort Buffer")
+      map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferOrderByDirectory')")
+        :with_noremap()
+        :with_silent()
+        :with_label("Sort Buffer")
     ),
     ["<M-b>"] = bind.convert_wk_format(
-      map_cr("BufferCloseBuffersLeft"):with_noremap():with_silent():with_label("Close All Buffers Left")
+      map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferCloseBuffersLeft')")
+        :with_noremap()
+        :with_silent()
+        :with_label("Close All Buffers Left")
     ),
     ["<M-m>"] = bind.convert_wk_format(
-      map_cr("BufferCloseBuffersRight"):with_noremap():with_silent():with_label("Close All Buffers Right")
+      map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferCloseBuffersRight')")
+        :with_noremap()
+        :with_silent()
+        :with_label("Close All Buffers Right")
     ),
     ["<M-h>"] = bind.convert_wk_format(
-      map_cr("BufferMovePrevious"):with_noremap():with_silent():with_label("Re-order To Previous")
+      map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMovePrevious')")
+        :with_noremap()
+        :with_silent()
+        :with_label("Re-order To Previous")
     ),
+    -- ["<M-l>"] = bind.convert_wk_format(map_cr("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")),
     ["<M-l>"] = bind.convert_wk_format(
-      map_cr("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")
+      map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMoveNext')")
+        :with_noremap()
+        :with_silent()
+        :with_label("Re-order To Next")
     ),
-    ["<M-i>"] = bind.convert_wk_format(map_cr("BufferPin"):with_noremap():with_silent():with_label("Pin Buffer")),
-    ["<M-o>"] = bind.convert_wk_format(map_cr("BufferPick"):with_noremap():with_silent():with_label("Pick Buffer")),
+    ["<M-i>"] = bind.convert_wk_format(
+      map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPin')")
+        :with_noremap()
+        :with_silent()
+        :with_label("Pin Buffer")
+    ),
+    ["<M-o>"] = bind.convert_wk_format(
+      map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPick')")
+        :with_noremap()
+        :with_silent()
+        :with_label("Pick Buffer")
+    ),
   },
 }
 
