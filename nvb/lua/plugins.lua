@@ -174,6 +174,16 @@ function M.setup()
       end,
     }
 
+    use {
+      "folke/drop.nvim",
+      event = "VimEnter",
+      config = function()
+        math.randomseed(os.time())
+        local theme = ({ "stars", "snow", "xmas" })[math.random(1, 3)]
+        require("drop").setup { theme = theme }
+      end,
+    }
+
     -- Doc
     use { "nanotee/luv-vimdocs", event = "BufReadPre" }
     use { "milisims/nvim-luaref", event = "BufReadPre" }
@@ -811,7 +821,7 @@ function M.setup()
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
-        -- "folke/lua-dev.nvim",
+        { "jayp0521/mason-null-ls.nvim" },
         "folke/neodev.nvim",
         "RRethy/vim-illuminate",
         "jose-elias-alvarez/null-ls.nvim",

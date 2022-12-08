@@ -307,6 +307,7 @@ function config.nvim_cmp()
         cmp.config.compare.order,
       },
     },
+    PreselectMode = "none",
     sources = cmp.config.sources({
       { name = "crates" },
       { name = "nvim_lsp" },
