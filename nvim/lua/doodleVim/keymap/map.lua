@@ -177,33 +177,32 @@ map.Floaterm = {
     ["<C-Space>"] = bind.convert_wk_format(
       map_cr("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm")
     ),
-    ["<leader>k"] = {
-      name = "Floaterm",
-      j = bind.convert_wk_format(
-        map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")
-      ),
-      k = bind.convert_wk_format(
-        map_cr("FloatermNew --cwd=<buffer>")
-          :with_noremap()
-          :with_silent()
-          :with_label("Open Floaterm In Current Buffer Dir")
-      ),
-    },
+    ["<M-j>"] = bind.convert_wk_format(
+      map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")
+    ),
+    ["<M-k>"] = bind.convert_wk_format(
+      map_cr("FloatermNew --cwd=<buffer>")
+        :with_noremap()
+        :with_silent()
+        :with_label("Open Floaterm In Current Buffer Dir")
+    ),
   },
 
   v = {
-    ["<leader>k"] = {
-      name = "Floaterm",
-      j = bind.convert_wk_format(
-        map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")
-      ),
-      k = bind.convert_wk_format(
-        map_cr("FloatermNew --cwd=<buffer>")
-          :with_noremap()
-          :with_silent()
-          :with_label("Open Floaterm In Current Buffer Dir")
-      ),
-    },
+    ["<M-j>"] = bind.convert_wk_format(
+      map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")
+    ),
+    ["<M-k>"] = bind.convert_wk_format(
+      map_cr("FloatermNew --cwd=<buffer>")
+        :with_noremap()
+        :with_silent()
+        :with_label("Open Floaterm In Current Buffer Dir")
+    ),
+    -- ["<leader>k"] = {
+    --     name = "Floaterm",
+    --     j = bind.convert_wk_format(map_cr('FloatermNew'):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir")),
+    --     k = bind.convert_wk_format(map_cr('FloatermNew --cwd=<buffer>'):with_noremap():with_silent():with_label("Open Floaterm In Current Buffer Dir")),
+    -- },
   },
 
   t = {
@@ -226,7 +225,7 @@ map.Floaterm = {
       noremap = true,
       silent = true,
     },
-    ["<M-k>"] = {
+    ["<C-k>"] = {
       vim.api.nvim_replace_termcodes(
         '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>',
         true,
@@ -237,7 +236,7 @@ map.Floaterm = {
       noremap = true,
       silent = true,
     },
-    ["<M-j>"] = {
+    ["<C-j>"] = {
       vim.api.nvim_replace_termcodes(
         '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>',
         true,
@@ -248,13 +247,13 @@ map.Floaterm = {
       noremap = true,
       silent = true,
     },
-    ["<C-j>"] = {
+    ["<M-j>"] = {
       vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
       "Floaterm In Project Root Dir",
       noremap = true,
       silent = true,
     },
-    ["<C-k>"] = {
+    ["<M-k>"] = {
       vim.api.nvim_replace_termcodes(
         '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").new()<CR>',
         true,
@@ -447,7 +446,6 @@ map.Bufferline = {
         :with_silent()
         :with_label("Re-order To Previous")
     ),
-    -- ["<M-l>"] = bind.convert_wk_format(map_cr("BufferMoveNext"):with_noremap():with_silent():with_label("Re-order To Next")),
     ["<M-l>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMoveNext')")
         :with_noremap()
