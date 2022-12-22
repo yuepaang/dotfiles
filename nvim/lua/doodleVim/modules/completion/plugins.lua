@@ -104,6 +104,7 @@ completion["williamboman/mason.nvim"] = {
         "clangd",
         "rust-analyzer",
         "taplo",
+        "impl",
       }
       local register = require("mason-registry")
       local bins = ""
