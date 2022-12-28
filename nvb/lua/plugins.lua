@@ -862,7 +862,7 @@ function M.setup()
           config = function()
             require("config.semantictokens").setup()
           end,
-          disable = false,
+          disable = true,
         },
         {
           "David-Kunz/markid",
