@@ -5,19 +5,12 @@ tools["dstein64/vim-startuptime"] = {
   cmd = "StartupTime",
 }
 
-tools["nvim-telescope/telescope.nvim"] = {
+tools["folke/todo-comments.nvim"] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").add("telescope.nvim", 70)
-    -- require("doodleVim.utils.defer").register("telescope", "telescope.nvim")
+    require("doodleVim.utils.defer").add("todo-comments.nvim", 80)
   end,
-  requires = {
-    { "nvim-telescope/telescope-fzf-native.nvim", opt = true, run = "make" },
-    { "nvim-telescope/telescope-file-browser.nvim", opt = true },
-    { "nvim-telescope/telescope-ui-select.nvim", opt = true },
-    { "LukasPietzschmann/telescope-tabs", opt = true },
-  },
-  config = conf.telescope,
+  config = conf.todo,
 }
 
 tools["doodleEsc/project.nvim"] = {
@@ -25,125 +18,88 @@ tools["doodleEsc/project.nvim"] = {
   setup = function()
     require("doodleVim.utils.defer").add("project.nvim", 80)
   end,
+  requires = {
+    { "rmagatti/auto-session", opt = true, config = conf.autosession },
+  },
   config = conf.project,
 }
 
-tools["rmagatti/auto-session"] = {
+tools["nvim-telescope/telescope.nvim"] = {
   opt = true,
   setup = function()
-    require("doodleVim.utils.defer").add("auto-session", 90)
+    require("doodleVim.utils.defer").add("telescope.nvim", 50)
   end,
-  config = conf.autosession,
+  requires = {
+    { "folke/todo-comments.nvim", opt = true },
+    { "doodleEsc/project.nvim", opt = true },
+    { "nvim-telescope/telescope-fzf-native.nvim", opt = true, run = "make" },
+    { "nvim-telescope/telescope-file-browser.nvim", opt = true },
+    { "nvim-telescope/telescope-ui-select.nvim", opt = true },
+    { "LukasPietzschmann/telescope-tabs", opt = true },
+    { "AckslD/nvim-neoclip.lua", config = conf.neoclip },
+  },
+  config = conf.telescope,
 }
 
-tools["kyazdani42/nvim-tree.lua"] = {
+tools['kyazdani42/nvim-tree.lua'] = {
   opt = true,
-  after = "barbar.nvim",
-  config = conf.nvim_tree,
+  setup = function()
+    require("doodleVim.utils.defer").add("nvim-tree.lua", 75)
+  end,
+  requires = {
+    { 'romgrk/barbar.nvim', opt = true },
+  },
+  config = conf.nvim_tree
 }
 
-tools["iamcco/markdown-preview.nvim"] = {
-  ft = "markdown",
+tools['iamcco/markdown-preview.nvim'] = {
+  ft = 'markdown',
   setup = conf.mkdp,
   run = ":call mkdp#util#install()",
 }
 
-tools["simrat39/symbols-outline.nvim"] = {
+tools['simrat39/symbols-outline.nvim'] = {
   opt = true,
   setup = function()
     require("doodleVim.utils.defer").register("symbols-outline", "symbols-outline.nvim")
   end,
-  config = conf.symbols_outline,
+  config = conf.symbols_outline
 }
 
-tools["voldikss/vim-floaterm"] = {
+tools['voldikss/vim-floaterm'] = {
   opt = true,
   setup = function()
     require("doodleVim.modules.tools.config").floaterm()
-    require("doodleVim.utils.defer").defer_load("vim-floaterm", 200)
-  end,
+    require("doodleVim.utils.defer").add("vim-floaterm", 40)
+  end
 }
 
-tools["anuvyklack/hydra.nvim"] = {
+tools['anuvyklack/hydra.nvim'] = {
   opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").defer_load("hydra.nvim", 200)
-  end,
-  config = conf.hydra,
+  setup = function() require("doodleVim.utils.defer").add("hydra.nvim", 40) end,
+  requires = {
+    { 'jbyuki/venn.nvim', opt = true },
+    { 'lewis6991/gitsigns.nvim', opt = true },
+    { 'nvim-telescope/telescope.nvim', opt = true },
+    { 'mfussenegger/nvim-dap', opt = true },
+  },
+  config = conf.hydra
 }
 
-tools["jbyuki/venn.nvim"] = {
+tools['towolf/vim-helm'] = {
+  ft = 'yaml'
+}
+
+tools['folke/which-key.nvim'] = {
   opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").defer_load("venn.nvim", 200)
-  end,
+  setup = function() require("doodleVim.utils.defer").add("which-key.nvim", 40) end,
+  config = conf.which_key
 }
 
-tools["towolf/vim-helm"] = {
-  ft = "yaml",
-}
-
-tools["nvim-lua/plenary.nvim"] = {
+tools['aserowy/tmux.nvim'] = {
   opt = true,
-}
-
--- tools["kyazdani42/nvim-web-devicons"] = {}
-
-tools["folke/which-key.nvim"] = {
-  opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").defer_load("which-key.nvim", 100)
-  end,
-  config = conf.which_key,
-}
-
-tools["nathom/filetype.nvim"] = {
-  setup = function()
-    vim.g.did_load_filetypes = 1
-  end,
-}
-
-tools["rcarriga/nvim-notify"] = {
-  opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").defer_load("nvim-notify", 100)
-  end,
-  config = conf.notify,
-}
-
--- HACK: Start by telescope config
-tools["AckslD/nvim-neoclip.lua"] = {
-  opt = true,
-  config = conf.neoclip,
-}
-
-tools["kkharji/sqlite.lua"] = {
-  opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").add("sqlite.lua", 90)
-  end,
-}
-
-tools["aserowy/tmux.nvim"] = {
-  opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").add("tmux.nvim", 50)
-  end,
-  config = conf.tmux,
-}
-
--- tools["nvim-neorg/neorg"] = {
---   opt = true,
---   after = { "nvim-treesitter", "telescope.nvim", "nvim-cmp" },
---   config = conf.neorg,
--- }
-
-tools["lewis6991/gitsigns.nvim"] = {
-  opt = true,
-  setup = function()
-    require("doodleVim.utils.defer").add("gitsigns.nvim", 99)
-  end,
-  config = conf.gitsigns,
+  setup = function() require("doodleVim.utils.defer").add("tmux.nvim", 40) end,
+  config = conf.tmux
 }
 
 tools["sindrets/diffview.nvim"] = {

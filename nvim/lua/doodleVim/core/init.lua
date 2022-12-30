@@ -8,11 +8,11 @@ local options = require("doodleVim.core.options")
 -- Create cache dir and subs dir
 local createdir = function()
   local data_dir = {
-    global.cache_dir .. "backup",
-    global.cache_dir .. "session",
-    global.cache_dir .. "swap",
-    global.cache_dir .. "tags",
-    global.cache_dir .. "undo",
+    global.cache_dir .. "/backup",
+    global.cache_dir .. "/session",
+    global.cache_dir .. "/swap",
+    global.cache_dir .. "/tags",
+    global.cache_dir .. "/undo",
   }
   -- There only check once that If cache_dir exists
   -- Then I don't want to check subs dir exists
@@ -74,11 +74,6 @@ local set_colorscheme = function()
 end
 
 local setup_others_autocommands = function()
-  vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost", "InsertEnter", "BufWritePost" }, {
-    callback = function()
-      require("doodleVim.modules.py.winbar").get_winbar()
-    end,
-  })
   vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "gitcommit", "markdown" },
     callback = function()
@@ -90,18 +85,20 @@ end
 
 local function load_nvim_config()
   disable_distribution_plugins()
-  set_leader_map()
   options.load_options()
-  event.load_autocmds()
-  command.load_user_command()
+  set_leader_map()
 
   pack.ensure_plugins()
   pack.load_compile()
-  defer.setup()
 
+  event.load_autocmds()
+  command.load_user_command()
   set_colorscheme()
+
+  defer.setup()
   defer.load(50)
   createdir()
+
   setup_copilot()
   setup_others_autocommands()
 end

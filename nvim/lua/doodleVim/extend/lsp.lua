@@ -41,14 +41,11 @@ end
 
 function lsp.lsp_references(opts)
   opts = opts or {}
-  require("doodleVim.utils.defer").immediate_load("barbar.nvim")
   require("telescope.builtin").lsp_references(vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() }))
 end
 
 function lsp.lsp_definitions(opts)
   opts = opts or {}
-  require("doodleVim.utils.defer").immediate_load("barbar.nvim")
-
   require("telescope.builtin").lsp_definitions(
     vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() })
   )
@@ -56,7 +53,6 @@ end
 
 function lsp.lsp_type_definition(opts)
   opts = opts or {}
-  require("doodleVim.utils.defer").immediate_load("barbar.nvim")
   require("telescope.builtin").lsp_type_definition(
     vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() })
   )
@@ -64,7 +60,6 @@ end
 
 function lsp.lsp_implementations(opts)
   opts = opts or {}
-  require("doodleVim.utils.defer").immediate_load("barbar.nvim")
   require("telescope.builtin").lsp_implementations(
     vim.tbl_extend("force", opts, { entry_maker = file_and_details_entry() })
   )
