@@ -11,6 +11,9 @@ M.get_rust_opts = function(capabilities, on_attach)
           end,
         })
       end,
+      runnables = {
+        use_telescope = true,
+      },
       inlay_hints = {
         -- Only show inlay hints for the current line
         only_current_line = true,
