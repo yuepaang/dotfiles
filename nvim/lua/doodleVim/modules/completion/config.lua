@@ -472,7 +472,6 @@ function config.luasnip()
 end
 
 function config.gotools()
-  -- require("doodleVim.utils.defer").immediate_load("mason.nvim")
   require("gotools").setup({
     tools = {
       gotests = {
@@ -512,10 +511,6 @@ function config.null_ls(_, plugin)
       use_console = "async",
     },
     on_attach = nil,
-    -- on_init = function(new_client, _)
-    --     print(vim.inspect(new_client))
-    --     new_client.offset_encoding = 'utf-32'
-    -- end,
     on_exit = nil,
     sources = {
       -- null_ls.builtins.formatting.prettierd,
