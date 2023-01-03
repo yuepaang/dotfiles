@@ -8,14 +8,6 @@ if vim.fn.isdirectory(vim.g.session_dir) == 0 then
   vim.fn.mkdir(vim.g.session_dir, "p")
 end
 
-local function get_session_name()
-  if vim.fn.trim(vim.fn.system "git rev-parse --is-inside-work-tree") == "true" then
-    return vim.fn.trim(vim.fn.system "basename `git rev-parse --show-toplevel`")
-  else
-    return "Session.vim"
-  end
-end
-
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 
@@ -43,6 +35,13 @@ local function delete_session(prompt_bufnr, _)
     end
   end)
   return true
+end
+
+local function get_session_name()
+  if vim.fn.trim(vim.fn.system "git rev-parse --is-inside-work-tree") == "true" then
+    return vim.fn.trim(vim.fn.system "basename `git rev-parse --show-toplevel`")
+  end
+  return "Session.vim"
 end
 
 local track_session = false
