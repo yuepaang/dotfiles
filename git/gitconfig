@@ -42,6 +42,7 @@
 	# https://blog.github.com/2018-04-05-git-217-released/
 	colorMoved = default
 	tool = difftastic
+  algorithm = patience
 
 [difftool]
         prompt = false
@@ -85,6 +86,7 @@
 
 	# View the current working tree status using the short format
 	s = status -s
+  st = status -sb
 
 	sclone = clone --depth=1
 
@@ -99,6 +101,10 @@
 
 	co = checkout
 	ci = commit
+
+  cp = cherry-pick
+	cps = cherry-pick -s
+	today = diff @{yesterday}.. --stat
 
 	di = diff
 	# interesting diffs
@@ -138,9 +144,6 @@
 	default = current
 	followTags = true
 
-[color]
-  ui = auto
-
 [advice]
   statusHints = false
 
@@ -163,21 +166,17 @@
   process = git-lfs filter-process
   required = true
 
-[color "diff"]  # i still love these choices in 2022.
-	meta = yellow bold
-	commit = green bold
-	frag = magenta bold
+[color]
+  ui = auto
+
+[color "diff"]
+	meta = cyan
+	frag = magenta
 	old = red bold
 	new = green bold
-	whitespace = red reverse
-
-	newMoved = cyan dim
-	oldMoved = blue dim
-	newMovedAlternative = cyan italic
-	oldMovedAlternative = blue italic
 
 [color "branch"]
-	current = yellow reverse
+	current = red
 	local = yellow
 	remote = green
 
