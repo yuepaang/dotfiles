@@ -45,6 +45,10 @@ function autocmd.load_autocmds()
       { "User", "PackerComplete", "++once", "lua require('doodleVim.extend.packer').PostPacker()" },
     },
 
+    _neorg = {
+      { "FileType", "norg", 'lua require("doodleVim.extend.hydra").run("neorg")' },
+    },
+
     nonewline = {
       -- don't auto comment new line
       { "BufEnter", [[set formatoptions-=cro]] },

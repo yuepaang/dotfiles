@@ -520,6 +520,12 @@ map.Hydra = {
           :with_silent()
           :with_label("Start Telescope")
       ),
+      n = bind.convert_wk_format(
+        map_cr('lua require("doodleVim.extend.hydra").run("neorg")')
+          :with_noremap()
+          :with_silent()
+          :with_label("Start Neorg TODO Menu")
+      ),
     },
   },
 }

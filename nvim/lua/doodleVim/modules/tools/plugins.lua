@@ -41,65 +41,79 @@ tools["nvim-telescope/telescope.nvim"] = {
   config = conf.telescope,
 }
 
-tools['kyazdani42/nvim-tree.lua'] = {
+tools["kyazdani42/nvim-tree.lua"] = {
   opt = true,
   setup = function()
     require("doodleVim.utils.defer").add("nvim-tree.lua", 75)
   end,
   requires = {
-    { 'romgrk/barbar.nvim', opt = true },
+    { "romgrk/barbar.nvim", opt = true },
   },
-  config = conf.nvim_tree
+  config = conf.nvim_tree,
 }
 
-tools['iamcco/markdown-preview.nvim'] = {
-  ft = 'markdown',
+tools["iamcco/markdown-preview.nvim"] = {
+  ft = "markdown",
   setup = conf.mkdp,
   run = ":call mkdp#util#install()",
 }
 
-tools['simrat39/symbols-outline.nvim'] = {
+tools["simrat39/symbols-outline.nvim"] = {
   opt = true,
   setup = function()
     require("doodleVim.utils.defer").register("symbols-outline", "symbols-outline.nvim")
   end,
-  config = conf.symbols_outline
+  config = conf.symbols_outline,
 }
 
-tools['voldikss/vim-floaterm'] = {
+tools["voldikss/vim-floaterm"] = {
   opt = true,
   setup = function()
     require("doodleVim.modules.tools.config").floaterm()
     require("doodleVim.utils.defer").add("vim-floaterm", 40)
-  end
+  end,
 }
 
-tools['anuvyklack/hydra.nvim'] = {
+tools["anuvyklack/hydra.nvim"] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").add("hydra.nvim", 40) end,
+  setup = function()
+    require("doodleVim.utils.defer").add("hydra.nvim", 40)
+  end,
   requires = {
-    { 'jbyuki/venn.nvim', opt = true },
-    { 'lewis6991/gitsigns.nvim', opt = true },
-    { 'nvim-telescope/telescope.nvim', opt = true },
-    { 'mfussenegger/nvim-dap', opt = true },
+    { "jbyuki/venn.nvim", opt = true },
+    { "lewis6991/gitsigns.nvim", opt = true },
+    { "nvim-telescope/telescope.nvim", opt = true },
+    { "mfussenegger/nvim-dap", opt = true },
   },
-  config = conf.hydra
+  config = conf.hydra,
 }
 
-tools['towolf/vim-helm'] = {
-  ft = 'yaml'
+tools["towolf/vim-helm"] = {
+  ft = "yaml",
 }
 
-tools['folke/which-key.nvim'] = {
+tools["folke/which-key.nvim"] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").add("which-key.nvim", 40) end,
-  config = conf.which_key
+  setup = function()
+    require("doodleVim.utils.defer").add("which-key.nvim", 40)
+  end,
+  config = conf.which_key,
 }
 
-tools['aserowy/tmux.nvim'] = {
+tools["aserowy/tmux.nvim"] = {
   opt = true,
-  setup = function() require("doodleVim.utils.defer").add("tmux.nvim", 40) end,
-  config = conf.tmux
+  setup = function()
+    require("doodleVim.utils.defer").add("tmux.nvim", 40)
+  end,
+  config = conf.tmux,
+}
+
+tools["nvim-neorg/neorg"] = {
+  opt = true,
+  setup = function()
+    require("doodleVim.utils.defer").add("neorg", 40)
+  end,
+  config = conf.neorg,
 }
 
 tools["sindrets/diffview.nvim"] = {
