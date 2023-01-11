@@ -41,7 +41,7 @@ tools["nvim-telescope/telescope.nvim"] = {
   config = conf.telescope,
 }
 
-tools["kyazdani42/nvim-tree.lua"] = {
+tools["nvim-tree/nvim-tree.lua"] = {
   opt = true,
   setup = function()
     require("doodleVim.utils.defer").add("nvim-tree.lua", 75)
