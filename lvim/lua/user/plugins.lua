@@ -7,6 +7,7 @@ lvim.plugins = {
   -- Original plugins
   "ellisonleao/gruvbox.nvim",
   "LunarVim/synthwave84.nvim",
+  "roobert/tailwindcss-colorizer-cmp.nvim",
   "lunarvim/github.nvim",
   "nvim-treesitter/playground",
   "nvim-treesitter/nvim-treesitter-textobjects",
