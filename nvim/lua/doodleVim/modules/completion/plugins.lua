@@ -67,7 +67,7 @@ completion["williamboman/mason-lspconfig.nvim"] = {
             "lua-language-server",
             "python-lsp-server",
             "debugpy",
-            "delve",
+            "ruff",
             "gotests",
             "gomodifytags",
             "clangd",

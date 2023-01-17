@@ -11,43 +11,39 @@ map.Lsp = {
       name = "Lsp Function",
       d = bind.convert_wk_format(
         map_cr("lua require('doodleVim.extend.lsp').lsp_definitions()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Go To Definition")
+        :with_noremap()
+        :with_silent()
+        :with_label("Go To Definition")
       ),
       D = bind.convert_wk_format(
         map_cr("lua vim.lsp.buf.declaration()"):with_noremap():with_silent():with_label("Go To Declaration")
       ),
       t = bind.convert_wk_format(
         map_cr("lua require('doodleVim.extend.lsp').lsp_type_definition()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Go To Type Definition")
+        :with_noremap()
+        :with_silent()
+        :with_label("Go To Type Definition")
       ),
       i = bind.convert_wk_format(
         map_cr("lua require('doodleVim.extend.lsp').lsp_implementations()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Go To Implementation")
+        :with_noremap()
+        :with_silent()
+        :with_label("Go To Implementation")
       ),
       r = bind.convert_wk_format(
         map_cr("lua require('doodleVim.extend.lsp').lsp_references()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Go To Reference")
+        :with_noremap()
+        :with_silent()
+        :with_label("Go To Reference")
       ),
-      h = bind.convert_wk_format(
-        map_cr("lua vim.lsp.buf.hover()"):with_noremap():with_silent():with_label("Hover Documentation")
-      ),
+      h = bind.convert_wk_format(map_cmd("<Cmd>lua vim.lsp.buf.hover()<CR>"):with_noremap():with_silent():with_label("Hover Documentation")),
       f = bind.convert_wk_format(
         map_cr("lua vim.lsp.buf.format { async = true }"):with_noremap():with_silent():with_label("Code Formatting")
       ),
-      a = bind.convert_wk_format(
-        map_cr("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Code Action")
-      ),
-      n = bind.convert_wk_format(
-        map_cr("lua require('rename').rename({label='Rename'})"):with_noremap():with_silent():with_label("Rename")
-      ),
+      a = bind.convert_wk_format(map_cmd("<Cmd>lua vim.lsp.buf.code_action()<CR>"):with_noremap():with_silent():
+        with_label("Code Action")),
+      n = bind.convert_wk_format(map_cmd("<Cmd>lua require('rename').rename({label='Rename'})<CR>"):with_noremap():
+        with_silent():with_label("Rename"))
     },
     -- ["<C-n>"] = bind.convert_wk_format(
     --   map_cr("lua vim.diagnostic.goto_next()"):with_noremap():with_silent():with_label("Go To Next Diagnostic")
@@ -65,15 +61,12 @@ map.Lsp = {
   v = {
     ["g"] = {
       name = "Lsp Function",
-      f = bind.convert_wk_format(
-        map_cu("lua vim.lsp.buf.formatting()"):with_noremap():with_silent():with_label("Selected Code Formatting")
-      ),
-      a = bind.convert_wk_format(
-        map_cu("lua vim.lsp.buf.code_action()"):with_noremap():with_silent():with_label("Range Code Action")
-      ),
-      n = bind.convert_wk_format(
-        map_cr("lua require('rename').rename()"):with_noremap():with_silent():with_label("Rename")
-      ),
+      f = bind.convert_wk_format(map_cmd("<Cmd>lua vim.lsp.buf.formatting()<CR>"):with_noremap():with_silent():
+        with_label("Selected Code Formatting")),
+      a = bind.convert_wk_format(map_cmd("<Cmd>lua vim.lsp.buf.code_action()<CR>"):
+        with_noremap():with_silent():with_label("Range Code Action")),
+      n = bind.convert_wk_format(map_cmd("<Cmd>lua require('rename').rename({label='Rename'})<CR>"):with_noremap():
+        with_silent():with_label("Rename"))
     },
   },
 }
@@ -84,9 +77,9 @@ map.NvimTree = {
       name = "Tree",
       t = bind.convert_wk_format(
         map_cr("lua require('doodleVim.extend.tree').toggle()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Enhanced NvimTree Toggle")
+        :with_noremap()
+        :with_silent()
+        :with_label("Enhanced NvimTree Toggle")
       ),
       r = bind.convert_wk_format(
         map_cr("lua require('doodleVim.extend.tree').find_file()"):with_noremap():with_silent():with_label("Find File")
@@ -101,9 +94,9 @@ map.SymbolsOutline = {
       name = "Symbols-Outline",
       j = bind.convert_wk_format(
         map_cr('lua ensure_require"symbols-outline".toggle_outline()')
-          :with_noremap()
-          :with_silent()
-          :with_label("Symbols And Function Preview")
+        :with_noremap()
+        :with_silent()
+        :with_label("Symbols And Function Preview")
       ),
     },
   },
@@ -126,18 +119,18 @@ map.Diagnostic = {
       name = "Show Diagnostics",
       d = bind.convert_wk_format(
         map_cr("Telescope diagnostics bufnr=0")
-          :with_noremap()
-          :with_silent()
-          :with_label("Show Diagnostics In Current Buffer")
+        :with_noremap()
+        :with_silent()
+        :with_label("Show Diagnostics In Current Buffer")
       ),
       e = bind.convert_wk_format(
         map_cr("Telescope diagnostics"):with_noremap():with_silent():with_label("Show Diagnostics In WorkSpace")
       ),
       f = bind.convert_wk_format(
         map_cr("lua require('doodleVim.extend.diagnostics').toggle_virtual_text()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Toggle Diagnostics Virtual Text")
+        :with_noremap()
+        :with_silent()
+        :with_label("Toggle Diagnostics Virtual Text")
       ),
     },
   },
@@ -182,9 +175,9 @@ map.Floaterm = {
     ),
     ["<M-k>"] = bind.convert_wk_format(
       map_cr("FloatermNew --cwd=<buffer>")
-        :with_noremap()
-        :with_silent()
-        :with_label("Open Floaterm In Current Buffer Dir")
+      :with_noremap()
+      :with_silent()
+      :with_label("Open Floaterm In Current Buffer Dir")
     ),
   },
 
@@ -194,9 +187,9 @@ map.Floaterm = {
     ),
     ["<M-k>"] = bind.convert_wk_format(
       map_cr("FloatermNew --cwd=<buffer>")
-        :with_noremap()
-        :with_silent()
-        :with_label("Open Floaterm In Current Buffer Dir")
+      :with_noremap()
+      :with_silent()
+      :with_label("Open Floaterm In Current Buffer Dir")
     ),
     -- ["<leader>k"] = {
     --     name = "Floaterm",
@@ -273,9 +266,9 @@ map.Comment = {
       name = "Comment",
       c = bind.convert_wk_format(
         map_cr('lua require("Comment.api").toggle.linewise.current()')
-          :with_noremap()
-          :with_silent()
-          :with_label("Comment Current Line")
+        :with_noremap()
+        :with_silent()
+        :with_label("Comment Current Line")
       ),
     },
   },
@@ -284,15 +277,15 @@ map.Comment = {
       name = "Comment",
       c = bind.convert_wk_format(
         map_cmd('<esc><cmd>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<cr>')
-          :with_noremap()
-          :with_silent()
-          :with_label("comment selected line")
+        :with_noremap()
+        :with_silent()
+        :with_label("comment selected line")
       ),
       v = bind.convert_wk_format(
         map_cmd('<esc><cmd>lua require("Comment.api").toggle.blockwise(vim.fn.visualmode())<cr>')
-          :with_noremap()
-          :with_silent()
-          :with_label("comment selected line")
+        :with_noremap()
+        :with_silent()
+        :with_label("comment selected line")
       ),
     },
   },
@@ -344,15 +337,15 @@ map.ToggleNumber = {
       name = "Toggle Line Number",
       n = bind.convert_wk_format(
         map_cr("lua require('doodleVim.extend.misc').toggle_nu()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Toggle Absolute Line Number")
+        :with_noremap()
+        :with_silent()
+        :with_label("Toggle Absolute Line Number")
       ),
       m = bind.convert_wk_format(
         map_cr("lua require('doodleVim.extend.misc').toggle_rnu()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Toggle Relative Line Number")
+        :with_noremap()
+        :with_silent()
+        :with_label("Toggle Relative Line Number")
       ),
     },
   },
@@ -364,27 +357,27 @@ map.Neogen = {
       name = "Generate Documentation",
       c = bind.convert_wk_format(
         map_cr("lua require('neogen').generate({type='class'})")
-          :with_noremap()
-          :with_silent()
-          :with_label("Generate Class Documentation")
+        :with_noremap()
+        :with_silent()
+        :with_label("Generate Class Documentation")
       ),
       t = bind.convert_wk_format(
         map_cr("lua require('neogen').generate({type='type'})")
-          :with_noremap()
-          :with_silent()
-          :with_label("Generate Type Documentation")
+        :with_noremap()
+        :with_silent()
+        :with_label("Generate Type Documentation")
       ),
       f = bind.convert_wk_format(
         map_cr("lua require('neogen').generate({type='func'})")
-          :with_noremap()
-          :with_silent()
-          :with_label("Generate Function Documentation")
+        :with_noremap()
+        :with_silent()
+        :with_label("Generate Function Documentation")
       ),
       d = bind.convert_wk_format(
         map_cr("lua require('neogen').generate({type='file'})")
-          :with_noremap()
-          :with_silent()
-          :with_label("Generate File Documentation")
+        :with_noremap()
+        :with_silent()
+        :with_label("Generate File Documentation")
       ),
     },
   },
@@ -395,9 +388,9 @@ map.Dap = {
     ["<F4>"] = bind.convert_wk_format(map_cr("AddHeader<CR>"):with_noremap():with_silent():with_label("Add Header")),
     ["<F12>"] = bind.convert_wk_format(
       map_cr('lua require("doodleVim.extend.hydra").run("dap")')
-        :with_noremap()
-        :with_silent()
-        :with_label("Start Debug Mode")
+      :with_noremap()
+      :with_silent()
+      :with_label("Start Debug Mode")
     ),
   },
 }
@@ -406,63 +399,63 @@ map.Bufferline = {
   n = {
     ["<S-h>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPrevious')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Previous Buffer")
+      :with_noremap()
+      :with_silent()
+      :with_label("Previous Buffer")
     ),
     ["<S-l>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferNext')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Next Buffer")
+      :with_noremap()
+      :with_silent()
+      :with_label("Next Buffer")
     ),
     ["<S-n>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_buffer_close()")
-        :with_noremap()
-        :with_silent()
-        :with_label("Close Current Buffer")
+      :with_noremap()
+      :with_silent()
+      :with_label("Close Current Buffer")
     ),
     ["<M-s>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferOrderByDirectory')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Sort Buffer")
+      :with_noremap()
+      :with_silent()
+      :with_label("Sort Buffer")
     ),
     ["<M-b>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferCloseBuffersLeft')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Close All Buffers Left")
+      :with_noremap()
+      :with_silent()
+      :with_label("Close All Buffers Left")
     ),
     ["<M-m>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferCloseBuffersRight')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Close All Buffers Right")
+      :with_noremap()
+      :with_silent()
+      :with_label("Close All Buffers Right")
     ),
     ["<M-h>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMovePrevious')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Re-order To Previous")
+      :with_noremap()
+      :with_silent()
+      :with_label("Re-order To Previous")
     ),
     ["<M-l>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMoveNext')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Re-order To Next")
+      :with_noremap()
+      :with_silent()
+      :with_label("Re-order To Next")
     ),
     ["<M-i>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPin')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Pin Buffer")
+      :with_noremap()
+      :with_silent()
+      :with_label("Pin Buffer")
     ),
     ["<M-o>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPick')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Pick Buffer")
+      :with_noremap()
+      :with_silent()
+      :with_label("Pick Buffer")
     ),
   },
 }
@@ -471,23 +464,23 @@ map.WhichKey = {
   n = {
     ["<F2>"] = bind.convert_wk_format(
       map_cr("lua require('doodleVim.extend.misc').toggle_whichkey()")
-        :with_noremap()
-        :with_silent()
-        :with_label("Show Keymaps")
+      :with_noremap()
+      :with_silent()
+      :with_label("Show Keymaps")
     ),
   },
   v = {
     ["<F2>"] = bind.convert_wk_format(
       map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
-        :with_noremap()
-        :with_label("Show Keymaps")
+      :with_noremap()
+      :with_label("Show Keymaps")
     ),
   },
   i = {
     ["<F2>"] = bind.convert_wk_format(
       map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
-        :with_noremap()
-        :with_label("Show Keymaps")
+      :with_noremap()
+      :with_label("Show Keymaps")
     ),
   },
 }
@@ -504,27 +497,27 @@ map.Hydra = {
       name = "Hydra Tools",
       g = bind.convert_wk_format(
         map_cr('lua require("doodleVim.extend.hydra").run("gitsigns")')
-          :with_noremap()
-          :with_silent()
-          :with_label("Start Gitsigns")
+        :with_noremap()
+        :with_silent()
+        :with_label("Start Gitsigns")
       ),
       v = bind.convert_wk_format(
         map_cr('lua require("doodleVim.extend.hydra").run("venn")')
-          :with_noremap()
-          :with_silent()
-          :with_label("Start Draw Ascii Diagram")
+        :with_noremap()
+        :with_silent()
+        :with_label("Start Draw Ascii Diagram")
       ),
       t = bind.convert_wk_format(
         map_cr('lua require("doodleVim.extend.hydra").run("telescope")')
-          :with_noremap()
-          :with_silent()
-          :with_label("Start Telescope")
+        :with_noremap()
+        :with_silent()
+        :with_label("Start Telescope")
       ),
       n = bind.convert_wk_format(
         map_cr('lua require("doodleVim.extend.hydra").run("neorg")')
-          :with_noremap()
-          :with_silent()
-          :with_label("Start Neorg TODO Menu")
+        :with_noremap()
+        :with_silent()
+        :with_label("Start Neorg TODO Menu")
       ),
     },
   },
@@ -535,27 +528,27 @@ map.Default = {
     ["Y"] = bind.convert_wk_format(map_cmd("y$"):with_label("Copy To End Of Line")),
     ["<C-q>"] = bind.convert_wk_format(
       map_cr('lua require("doodleVim.extend.misc").safe_exit()')
-        :with_noremap()
-        :with_silent()
-        :with_label("Save Session And Safe Exit")
+      :with_noremap()
+      :with_silent()
+      :with_label("Save Session And Safe Exit")
     ),
     ["<C-s>"] = bind.convert_wk_format(
       map_cr('silent! lua require("doodleVim.extend.misc").safe_save()')
-        :with_noremap()
-        :with_silent()
-        :with_label("Save Session")
+      :with_noremap()
+      :with_silent()
+      :with_label("Save Session")
     ),
     ["<C-d>"] = bind.convert_wk_format(
       map_cr("lua ensure_require('neoscroll').scroll(vim.wo.scroll, true, 150)")
-        :with_noremap()
-        :with_silent()
-        :with_label("Smooth Scroll Down")
+      :with_noremap()
+      :with_silent()
+      :with_label("Smooth Scroll Down")
     ),
     ["<C-u>"] = bind.convert_wk_format(
       map_cr("lua ensure_require('neoscroll').scroll(-vim.wo.scroll, true, 150)")
-        :with_noremap()
-        :with_silent()
-        :with_label("Smooth Scroll Up")
+      :with_noremap()
+      :with_silent()
+      :with_label("Smooth Scroll Up")
     ),
     ["<M-n>"] = bind.convert_wk_format(map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage")),
     ["<ESC><ESC>"] = bind.convert_wk_format(
