@@ -101,14 +101,14 @@ function M.setup()
         require("catppuccin").setup()
         vim.cmd [[colorscheme catppuccin]]
       end,
-      disable = true,
+      disable = false,
     }
     use {
       "folke/tokyonight.nvim",
       config = function()
         vim.cmd.colorscheme [[tokyonight]]
       end,
-      disable = false,
+      disable = true,
     }
     use {
       "sainnhe/everforest",
@@ -718,8 +718,8 @@ function M.setup()
 
     -- Buffer line
     use {
-      "akinsho/nvim-bufferline.lua",
-      event = "BufReadPre",
+      "akinsho/bufferline.nvim",
+      tag = "v3.*",
       config = function()
         require("config.bufferline").setup()
       end,
