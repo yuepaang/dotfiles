@@ -13,6 +13,8 @@ end
 
 lvim.builtin.treesitter.ensure_installed = "all"
 lvim.builtin.treesitter.autotag.enable = true
+lvim.builtin.treesitter.auto_install = false
+lvim.builtin.treesitter.ignore_install = { "markdown" }
 
 lvim.builtin.treesitter.textobjects = {
   select = {
