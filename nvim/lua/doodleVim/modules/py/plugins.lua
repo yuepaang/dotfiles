@@ -5,49 +5,8 @@ py["wakatime/vim-wakatime"] = {}
 
 py["github/copilot.vim"] = {}
 
-py["max397574/better-escape.nvim"] = {
-  event = { "InsertEnter" },
-  config = conf.better_escape,
-}
-
-py["ggandor/leap.nvim"] = {
-  requires = { "tpope/vim-repeat" },
-  keys = { "s", "S", "f", "F", "t", "T" },
-  config = conf.leap,
-  event = "BufRead",
-}
-
-py["simrat39/rust-tools.nvim"] = {
-  after = { "nvim-lspconfig" },
-}
-
-py["Saecki/crates.nvim"] = {
-  after = "null-ls.nvim",
-  config = conf.crates,
-  requires = { "nvim-lua/plenary.nvim" },
-}
-
-py["christianchiarulli/nvim-gps"] = {
-  after = "nvim-treesitter",
-  branch = "text_hl",
-  config = conf.gps,
-}
-
-py["abecodes/tabout.nvim"] = {
-  after = "nvim-treesitter",
-  config = conf.tabout,
-}
-
-py["j-hui/fidget.nvim"] = {
-  config = conf.fidget,
-}
-
 py["alpertuna/vim-header"] = {
-  config = conf.header,
-}
-
-py["mg979/vim-visual-multi"] = {
-  event = { "BufReadPre" },
+    config = conf.header,
 }
 
 return py

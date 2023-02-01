@@ -1,69 +1,114 @@
-local vim = vim
+local api = vim.api
 local autocmd = {}
 
 local function create_augroups(definitions)
-  for group_name, definition in pairs(definitions) do
-    vim.api.nvim_command("augroup " .. group_name)
-    vim.api.nvim_command("autocmd!")
-    for _, def in ipairs(definition) do
-      local command = table.concat(vim.tbl_flatten({ "autocmd", def }), " ")
-      vim.api.nvim_command(command)
+    for group_name, definition in pairs(definitions) do
+        local group = api.nvim_create_augroup(group_name, { clear = true })
+        for _, def in ipairs(definition) do
+            local opts = def.opts
+            opts.group = group
+            api.nvim_create_autocmd(def.event, opts)
+        end
     end
-    vim.api.nvim_command("augroup END")
-  end
 end
 
 function autocmd.load_autocmds()
-  local definitions = {
-    -- packer = {
-    --     { "BufWritePost", "*.lua", "lua require('doodleVim.core.pack').auto_compile()" };
-    -- },
+    local definitions = {
+        ft = {
+            {
+                event = { "BufReadPost,BufNewFile" },
+                opts = {
+                    pattern = "*.sol",
+                    command = "setf solidity",
+                    desc = "Set Solidity FileType",
+                }
 
-    ft = {
-      { "BufReadPost,BufNewFile", "*.sol", " setf solidity" },
-      { "FileType", "Outline", " setlocal signcolumn=no" },
-      { "FileType", "python", " setlocal colorcolumn=80" },
-    },
+            },
+            {
+                event = "FileType",
+                opts = {
+                    pattern = "Outline",
+                    command = "setlocal signcolumn=no",
+                }
+            },
+            {
+                event = "FileType",
+                opts = {
+                    pattern = "python",
+                    command = "setlocal colorcolumn=80",
+                }
+            },
+            {
+                event = "FileType",
+                opts = {
+                    pattern = { "qf", "help", "man", "lspinfo" },
+                    command = "nnoremap <silent> <buffer> q :close<CR>",
+                }
+            },
+            {
+                event = "FileType",
+                opts = {
+                    pattern = { "markdown", "gitcommit" },
+                    command = "setlocal wrap",
+                }
+            },
+            {
+                event = "FileType",
+                opts = {
+                    pattern = { "markdown", "gitcommit" },
+                    command = "setlocal spell",
+                }
+            },
+        },
 
-    _general_settings = {
-      { "FileType", "qf,help,man,lspinfo", "nnoremap <silent> <buffer> q :close<CR>" },
-      { "TextYankPost", "*", "silent! lua vim.highlight.on_yank({higroup='IncSearch', timeout=200})" },
-      { "VimResized", "*", "tabdo wincmd =" },
-    },
+        _general_settings = {
+            {
+                event = "TextYankPost",
+                opts = {
+                    pattern = "*",
+                    callback = function()
+                        vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 200 })
+                    end,
+                }
 
-    _markdown = {
-      { "FileType", "markdown", "setlocal wrap" },
-      { "FileType", "markdown", "setlocal spell" },
-    },
+            },
+            {
+                event = "VimResized",
+                opts = {
+                    pattern = "*",
+                    command = "tabdo wincmd ="
+                }
+            }
+        },
 
-    _git = {
-      { "FileType", "gitcommit", "setlocal wrap" },
-      { "FileType", "gitcommit", "setlocal spell" },
-    },
+        _lazy = {
+            {
+                event = "User",
+                opts = {
+                    pattern = { "LazySync", "LazyUpdate" },
+                    once = true,
+                    callback = function()
+                        require('doodleVim.extend.lazy').PostInstall()
+                    end,
+                }
 
-    _packer = {
-      { "User", "PackerComplete", "++once", "lua require('doodleVim.extend.packer').PostPacker()" },
-    },
+            },
+        },
 
-    _neorg = {
-      { "FileType", "norg", 'lua require("doodleVim.extend.hydra").run("neorg")' },
-    },
+        _defer_start = {
+            {
+                event = "UIEnter",
+                opts = {
+                    pattern = "*",
+                    callback = function()
+                        require('doodleVim.utils.defer').defer_start(100)
+                    end
+                }
+            },
+        },
+    }
 
-    nonewline = {
-      -- don't auto comment new line
-      { "BufEnter", [[set formatoptions-=cro]] },
-    },
-
-    oldlocations = {
-      {
-        "BufReadPost",
-        "*",
-        [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]],
-      },
-    },
-  }
-
-  create_augroups(definitions)
+    create_augroups(definitions)
 end
 
 return autocmd
