@@ -344,4 +344,16 @@ map.Default = {
     }
 }
 
+map.codewindow = {
+    n = {
+        ["<leader>w"] = {
+            name = "Code Window",
+            w = map_cr('lua require("codewindow").toggle_minimap()'):with_noremap()
+                :with_silent():with_label("Toggle Code Window"),
+            e = map_cr('lua require("codewindow").toggle_focus()'):with_noremap()
+                :with_silent():with_label("Toggle Code Focus"),
+        }
+    }
+}
+
 return map
