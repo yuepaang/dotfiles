@@ -82,13 +82,13 @@ function config.nvim_cmp(plugin, opts)
             ["<CR>"] = {
                 i = cmp.mapping.confirm({ select = false }),
             },
-            ['<C-e>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.abort()
-                else
-                    cmp.complete()
-                end
-            end),
+            -- ['<C-e>'] = cmp.mapping(function(fallback)
+            --     if cmp.visible() then
+            --         cmp.abort()
+            --     else
+            --         cmp.complete()
+            --     end
+            -- end),
             ["<C-p>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()

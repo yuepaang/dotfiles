@@ -302,10 +302,10 @@ map.Default = {
         ["<C-u>"] = map_cr("lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)"):
             with_noremap():with_silent():with_label("Smooth Scroll Up"),
         ["<M-n>"] = map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage"),
-        ["x"] = map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"),
-        ["c"] = map_cmd('"_c'):with_noremap():with_label("Change Without Copy"),
-        ["d"] = map_cmd('""d'):with_noremap():with_label("Delete Without Copy"),
-        ["P"] = map_cmd('""p'):with_noremap():with_label("Paste Content In Register \""),
+        -- ["x"] = map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"),
+        -- ["c"] = map_cmd('"_c'):with_noremap():with_label("Change Without Copy"),
+        -- ["d"] = map_cmd('""d'):with_noremap():with_label("Delete Without Copy"),
+        -- ["P"] = map_cmd('""p'):with_noremap():with_label("Paste Content In Register \""),
 
     },
     i = {
@@ -337,10 +337,10 @@ map.Default = {
             noremap = true, silent = true },
         [">"] = { ">gv", "Indent Right", noremap = true },
         ["<"] = { "<gv", "Indent Left", noremap = true },
-        ["x"] = { '"_x', "Delete Without Copy", noremap = true },
-        ["c"] = { '"_c', "Cut Without Copy", noremap = true },
-        ["d"] = { '""d', "Delete Without Copy", noremap = true },
-        ["P"] = { '""p', "Paste Content In Register \"", noremap = true },
+        -- ["x"] = { '"_x', "Delete Without Copy", noremap = true },
+        -- ["c"] = { '"_c', "Cut Without Copy", noremap = true },
+        -- ["d"] = { '""d', "Delete Without Copy", noremap = true },
+        -- ["P"] = { '""p', "Paste Content In Register \"", noremap = true },
     }
 }
 
