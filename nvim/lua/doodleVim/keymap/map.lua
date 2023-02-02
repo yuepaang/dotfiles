@@ -314,7 +314,7 @@ map.Default = {
         ["<C-d>"] = { "<Del>", "Delete", noremap = true, silent = true },
         ["<C-h>"] = { "<BS>", "Backspace", noremap = true, silent = true },
         ["<C-a>"] = { "<Esc>^i", "Append Before Head", noremap = true, silent = true },
-        ["<C-e>"] = { "<Esc>A", "Append After Tail", noremap = true, silent = true },
+        -- ["<C-e>"] = { "<Esc>A", "Append After Tail", noremap = true, silent = true },
         ["<C-l>"] = { "<Esc>o", "New Line", noremap = true, silent = true },
         ["<C-o>"] = { "<Esc>O", "New Line Upper", noremap = true, silent = true },
         ["<C-s>"] = { '<Esc>:lua require("doodleVim.extend.misc").safe_save()<CR>', "New Line Upper", noremap = true,
@@ -328,7 +328,7 @@ map.Default = {
         ["<C-d>"] = { "<Del>", "Delete", noremap = true, silent = true },
         ["<C-h>"] = { "<BS>", "Backspace", noremap = true, silent = true },
         ["<C-a>"] = { "<Home>", "Home", noremap = true, silent = true },
-        ["<C-e>"] = { "<End>", "End", noremap = true, silent = true },
+        -- ["<C-e>"] = { "<End>", "End", noremap = true, silent = true },
     },
     v = {
         ["<C-d>"] = { "<cmd>lua require('neoscroll').scroll(vim.wo.scroll, true, 150)<CR>", "Smooth Scroll Down",
