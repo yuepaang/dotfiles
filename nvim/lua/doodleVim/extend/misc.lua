@@ -5,10 +5,10 @@ misc.which_key_loaded = false
 
 misc.safe_exit = function()
     -- close floaterm
-    local floatermBufnr = vim.call("floaterm#buflist#gather")
-    if #floatermBufnr ~= 0 then
-        vim.cmd [[FloatermKill]]
-    end
+    -- local floatermBufnr = vim.call("floaterm#buflist#gather")
+    -- if #floatermBufnr ~= 0 then
+    --     vim.cmd [[FloatermKill]]
+    -- end
 
     -- close nvim-tree
     local view = require('nvim-tree.view')
