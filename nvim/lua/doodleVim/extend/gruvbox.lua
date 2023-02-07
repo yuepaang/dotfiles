@@ -1,60 +1,66 @@
 local gruvbox = {}
 
-local vim_path = require('doodleVim.core.global').vim_path
+local vim_path = require("doodleVim.core.global").vim_path
 local colors_path = vim_path .. "/colors"
 
-gruvbox.palette_overrides = {
-
-}
+gruvbox.palette_overrides = {}
 
 gruvbox.overrides = {
-    FloatermBorder = { link = "GruvboxOrange" },
-    CodewindowBorder = { fg = "#665c54" },
-    Pmenu = { link = "Normal" },
-    TelescopeNormal = { link = "GruvboxBlue" },
-    TelescopeSelection = { link = "GruvboxYellowBold" },
-    TelescopeMultiSelection = { link = "GruvboxGray" },
-    TelescopeSelectionCaret = { link = "GruvboxRed" },
-    TelescopeBorder = { link = "TelescopeNormal" },
-    TelescopePromptBorder = { link = "TelescopeNormal" },
-    TelescopeResultsBorder = { link = "TelescopeNormal" },
-    TelescopePreviewBorder = { link = "TelescopeNormal" },
-    TelescopeMatching = { link = "GruvboxRedBold" },
-    TelescopePromptPrefix = { link = "GruvboxRed" },
-    TelescopePrompt = { link = "TelescopeNormal" }
+  LightBulb = { link = "GruvboxYellowSign" },
+  FloatBorder = { link = "GruvboxBlue" },
+  FloatermBorder = { link = "GruvboxOrange" },
+  CodewindowBorder = { fg = "#665c54" },
+  RenamerNormal = { link = "Normal" },
+  RenamerBorder = { link = "GruvboxBlue" },
+  RenamerTitle = { link = "Title" },
+  Pmenu = { link = "Normal" },
+
+  -- Telescope
+  TelescopeNormal = { link = "GruvboxBlue" },
+  TelescopeSelection = { link = "GruvboxYellowBold" },
+  TelescopeMultiSelection = { link = "GruvboxGray" },
+  TelescopeSelectionCaret = { link = "GruvboxRed" },
+  TelescopeBorder = { link = "TelescopeNormal" },
+  TelescopePromptBorder = { link = "TelescopeNormal" },
+  TelescopeResultsBorder = { link = "TelescopeNormal" },
+  TelescopePreviewBorder = { link = "TelescopeNormal" },
+  TelescopeMatching = { link = "GruvboxRedBold" },
+  TelescopePromptPrefix = { link = "GruvboxRed" },
+  TelescopePrompt = { link = "TelescopeNormal" },
+
+  -- NvimTree
+  NvimTreeOpenedFile = { fg = "#b8bb26", bold = true },
 }
 
 gruvbox.dump = function()
-    require("gruvbox").setup({
-        overrides = require("doodleVim.Extend.gruvbox").overrides,
-        palette_overrides = require("doodleVim.Extend.gruvbox").palette_overrides
-    })
-    local groups = require("gruvbox.groups").setup()
-    local color_file_path = colors_path .. "/gruvbox.lua"
+  require("gruvbox").setup({
+    overrides = require("doodleVim.Extend.gruvbox").overrides,
+    palette_overrides = require("doodleVim.Extend.gruvbox").palette_overrides,
+  })
+  local groups = require("gruvbox.groups").setup()
+  local color_file_path = colors_path .. "/gruvbox.lua"
 
+  if vim.fn.filereadable(color_file_path) == 1 then
+    os.remove(color_file_path)
+  end
 
-    if vim.fn.filereadable(color_file_path) == 1 then
-        os.remove(color_file_path)
-    end
-
-    local file = io.open(color_file_path, "w")
-    for group, hl in pairs(groups) do
-        local line = "vim.api.nvim_set_hl(0,'" .. group .. "', " .. vim.inspect(hl) .. ")\n"
-        if file ~= nil then
-            file:write(line)
-        else
-            vim.notify("Can't open file " .. color_file_path .. "'", vim.log.levels.ERROR)
-            return
-        end
-
-    end
-
+  local file = io.open(color_file_path, "w")
+  for group, hl in pairs(groups) do
+    local line = "vim.api.nvim_set_hl(0,'" .. group .. "', " .. vim.inspect(hl) .. ")\n"
     if file ~= nil then
-        file:close()
-        return
+      file:write(line)
     else
-        vim.notify("Can't close file " .. color_file_path .. "'", vim.log.levels.ERROR)
+      vim.notify("Can't open file " .. color_file_path .. "'", vim.log.levels.ERROR)
+      return
     end
+  end
+
+  if file ~= nil then
+    file:close()
+    return
+  else
+    vim.notify("Can't close file " .. color_file_path .. "'", vim.log.levels.ERROR)
+  end
 end
 
 return gruvbox

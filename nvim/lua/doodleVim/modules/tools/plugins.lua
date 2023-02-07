@@ -1,101 +1,104 @@
 local tools = {}
 local conf = require("doodleVim.modules.tools.config")
 
-tools['nvim-telescope/telescope.nvim'] = {
-    lazy = true,
-    cmd = { "Telescope" },
-    dependencies = {
-        'nvim-telescope/telescope-file-browser.nvim',
-        'nvim-telescope/telescope-ui-select.nvim',
-        'LukasPietzschmann/telescope-tabs',
-        'folke/todo-comments.nvim',
-        'doodleEsc/project.nvim',
-        'AckslD/nvim-neoclip.lua',
-        'mortepau/codicons.nvim',
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    },
-    config = conf.telescope
+tools["nvim-telescope/telescope.nvim"] = {
+  lazy = true,
+  cmd = { "Telescope" },
+  dependencies = {
+    "nvim-telescope/telescope-file-browser.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
+    "LukasPietzschmann/telescope-tabs",
+    "folke/todo-comments.nvim",
+    "doodleEsc/project.nvim",
+    "AckslD/nvim-neoclip.lua",
+    "mortepau/codicons.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  },
+  config = conf.telescope,
 }
 
-tools['AckslD/nvim-neoclip.lua'] = {
-    lazy = true,
-    dependencies = { 'kkharji/sqlite.lua' },
-    config = conf.neoclip
+tools["AckslD/nvim-neoclip.lua"] = {
+  lazy = true,
+  dependencies = { "kkharji/sqlite.lua" },
+  config = conf.neoclip,
 }
 
-tools['kkharji/sqlite.lua'] = {
-    lazy = true,
+tools["kkharji/sqlite.lua"] = {
+  lazy = true,
 }
 
-tools['doodleEsc/project.nvim'] = {
-    lazy = true,
-    event = "VimEnter",
-    dependencies = { 'rmagatti/auto-session' },
-    config = conf.project
+tools["doodleEsc/project.nvim"] = {
+  lazy = true,
+  event = "VimEnter",
+  dependencies = { "rmagatti/auto-session" },
+  config = conf.project,
 }
 
-tools['rmagatti/auto-session'] = {
-    lazy = true,
-    config = conf.autosession
+tools["rmagatti/auto-session"] = {
+  lazy = true,
+  config = conf.autosession,
 }
 
-tools['kyazdani42/nvim-tree.lua'] = {
-    lazy = true,
-    dependencies = { 'romgrk/barbar.nvim' },
-    config = conf.nvim_tree
+tools["kyazdani42/nvim-tree.lua"] = {
+  lazy = true,
+  dependencies = {
+    "romgrk/barbar.nvim",
+    "mortepau/codicons.nvim",
+  },
+  config = conf.nvim_tree,
 }
 
-tools['iamcco/markdown-preview.nvim'] = {
-    lazy = true,
-    ft = 'markdown',
-    init = conf.mkdp,
-    build = ":call mkdp#util#install()",
+tools["iamcco/markdown-preview.nvim"] = {
+  lazy = true,
+  ft = "markdown",
+  init = conf.mkdp,
+  build = ":call mkdp#util#install()",
 }
 
-tools['simrat39/symbols-outline.nvim'] = {
-    lazy = true,
-    config = conf.symbols_outline
+tools["simrat39/symbols-outline.nvim"] = {
+  lazy = true,
+  config = conf.symbols_outline,
 }
 
-tools['voldikss/vim-floaterm'] = {
-    cmd = {
-        'FloatermNew',
-        'FloatermToggle'
-    },
-    init = function()
-        require("doodleVim.modules.tools.config").floaterm()
-    end
+tools["voldikss/vim-floaterm"] = {
+  cmd = {
+    "FloatermNew",
+    "FloatermToggle",
+  },
+  init = function()
+    require("doodleVim.modules.tools.config").floaterm()
+  end,
 }
 
-tools['anuvyklack/hydra.nvim'] = {
-    lazy = true,
-    dependencies = {
-        'jbyuki/venn.nvim',
-        'nvim-telescope/telescope.nvim',
-        'mfussenegger/nvim-dap',
-        'lewis6991/gitsigns.nvim',
-    },
-    config = conf.hydra
+tools["anuvyklack/hydra.nvim"] = {
+  lazy = true,
+  dependencies = {
+    "jbyuki/venn.nvim",
+    "nvim-telescope/telescope.nvim",
+    "mfussenegger/nvim-dap",
+    "lewis6991/gitsigns.nvim",
+  },
+  config = conf.hydra,
 }
 
-tools['jbyuki/venn.nvim'] = {
-    lazy = true,
+tools["jbyuki/venn.nvim"] = {
+  lazy = true,
 }
 
-tools['towolf/vim-helm'] = {
-    ft = 'yaml'
+tools["towolf/vim-helm"] = {
+  ft = "yaml",
 }
 
-tools['folke/which-key.nvim'] = {
-    lazy = true,
-    event = "User DeferStartWithFile",
-    config = conf.which_key
+tools["folke/which-key.nvim"] = {
+  lazy = true,
+  event = "User DeferStartWithFile",
+  config = conf.which_key,
 }
 
-tools['aserowy/tmux.nvim'] = {
-    lazy = true,
-    event = "User DeferStart",
-    config = conf.tmux
+tools["aserowy/tmux.nvim"] = {
+  lazy = true,
+  event = "User DeferStart",
+  config = conf.tmux,
 }
 
 -- tools['nvim-neorg/neorg'] = {
@@ -105,27 +108,30 @@ tools['aserowy/tmux.nvim'] = {
 --     config = conf.neorg
 -- }
 
-tools['sindrets/diffview.nvim'] = {
-    lazy = true,
-    cmd = { 'DiffviewOpen' },
-    config = conf.diffview,
+tools["sindrets/diffview.nvim"] = {
+  lazy = true,
+  cmd = { "DiffviewOpen" },
+  dependencies = {
+    "mortepau/codicons.nvim",
+  },
+  config = conf.diffview,
 }
 
-tools['mfussenegger/nvim-dap'] = {
-    lazy = true,
-    dependencies = {
-        "williamboman/mason.nvim",
-        'rcarriga/nvim-dap-ui',
-    },
-    init = function(plugin)
-        vim.g.dapui_setup = false
-    end,
-    -- config = conf.dap
+tools["mfussenegger/nvim-dap"] = {
+  lazy = true,
+  dependencies = {
+    "williamboman/mason.nvim",
+    "rcarriga/nvim-dap-ui",
+    "mortepau/codicons.nvim",
+  },
+  init = function(plugin)
+    vim.g.dapui_setup = false
+  end,
 }
 
-tools['rcarriga/nvim-dap-ui'] = {
-    lazy = true,
-    config = conf.dapui
+tools["rcarriga/nvim-dap-ui"] = {
+  lazy = true,
+  config = conf.dapui,
 }
 
 return tools
