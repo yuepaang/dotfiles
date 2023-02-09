@@ -475,6 +475,8 @@ map.Default = {
     x = {
         [">"] = { ">gv", "Indent Right", noremap = true },
         ["<"] = { "<gv", "Indent Left", noremap = true },
+        ["p"] = { '"_dP', "Paste Without Copy", noremap = true },
+
         -- ["x"] = { '"_x', "Delete Without Copy", noremap = true },
         -- ["c"] = { '"_c', "Cut Without Copy", noremap = true },
         -- ["d"] = { '""d', "Delete Without Copy", noremap = true },

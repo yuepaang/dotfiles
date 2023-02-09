@@ -194,7 +194,7 @@ function config.lightbulb()
         float = {
             enabled = false,
             -- Text to show in the popup float
-            text = "💡",,
+            text = "💡",
             -- Available keys for window options:
             -- - height     of floating window
             -- - width      of floating window

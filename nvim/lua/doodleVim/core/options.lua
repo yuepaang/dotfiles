@@ -91,6 +91,8 @@ M.load_options = function()
         fillchars      = "eob: ";
         lazyredraw     = true;
         synmaxcol      = 200;
+        number         = true;
+        relativenumber = true;
     }
 
     local bw_local = {
