@@ -1,4 +1,5 @@
 -- lvim.colorscheme = "darkplus"
+lvim.colorscheme = "tokyonight"
 lvim.log.level = "warn"
 lvim.builtin.alpha.active = true
 lvim.lsp.diagnostics.float.focusable = true
@@ -126,7 +127,6 @@ lvim.builtin.nvimtree.setup.view.mappings.list = {
 
 vim.g.header_field_author = "Yue Peng"
 vim.g.header_field_author_email = "yuepaang@gmail.com"
-lvim.colorscheme = "tokyonight"
 vim.cmd [[
   imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
   let g:copilot_no_tab_map = v:true
