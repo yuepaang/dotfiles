@@ -69,7 +69,6 @@ function ui.treesitter(plugin)
 end
 
 function ui.barbar(plugin)
-  local codicons = require("codicons")
   vim.g.bufferline = {
     -- Enable/disable animations
     animation = true,
@@ -111,9 +110,9 @@ function ui.barbar(plugin)
     -- Configure icons on the bufferline.
     icon_separator_active = "│",
     icon_separator_inactive = "│",
-    icon_close_tab = codicons.get("close"),
-    icon_close_tab_modified = codicons.get("circle-filled"),
-    icon_pinned = codicons.get("pinned"),
+    icon_close_tab = "",
+    icon_close_tab_modified = "",
+    icon_pinned = "",
 
     -- If true, new buffers will be inserted at the end of the list.
     -- Default is to insert after current buffer.
