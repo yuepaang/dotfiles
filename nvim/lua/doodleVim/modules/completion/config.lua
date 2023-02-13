@@ -249,9 +249,20 @@ function config.nvim_cmp(plugin, opts)
 end
 
 function config.luasnip()
+  require("luasnip.loaders.from_vscode").lazy_load()
     require("luasnip.loaders.from_vscode").lazy_load({
         paths = {
-            "~/.local/share/nvim/site/pack/lazy/opt/friendly-snippets",
+            "~/dotfiles/nvim/snippets/rust",
+        },
+    })
+    require("luasnip.loaders.from_vscode").lazy_load({
+        paths = {
+            "~/dotfiles/nvim/snippets/python",
+        },
+    })
+    require("luasnip.loaders.from_vscode").lazy_load({
+        paths = {
+            "~/dotfiles/nvim/snippets/go",
         },
     })
 end
