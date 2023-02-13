@@ -27,10 +27,6 @@ function config.lspconfig(plugin, opts)
       end
     end
 
-    if server == "sumneko_lua" then
-      server = "lua_ls"
-    end
-
     require("lspconfig")[server].setup(server_opts)
   end
 
@@ -187,7 +183,7 @@ function config.lightbulb()
   vim.fn.sign_define("LightBulbSign", { text = codicons.get("lightbulb"), texthl = "GruvboxYellowSign" })
 
   -- Showing defaults
-  require('nvim-lightbulb').setup({
+  require("nvim-lightbulb").setup({
     -- LSP client names to ignore
     -- Example: {"sumneko_lua", "null-ls"}
     ignore = { "null-ls" },
@@ -235,13 +231,13 @@ function config.lightbulb()
       -- see :help autocmd-pattern
       pattern = { "*" },
       -- see :help autocmd-events
-      events = { "CursorHold", "CursorHoldI" }
-    }
+      events = { "CursorHold", "CursorHoldI" },
+    },
   })
 end
 
 function config.fidget(plugin, opts)
-  require "fidget".setup({
+  require("fidget").setup({
     text = {
       spinner = "pipe", -- animation shown when tasks are ongoing
       done = "✔", -- character shown when all tasks are complete
@@ -267,20 +263,15 @@ function config.fidget(plugin, opts)
       leftpad = true, -- right-justify text in fidget box
       stack_upwards = true, -- list of tasks grows upwards
       max_width = 0, -- maximum width of the fidget box
-      fidget = -- function to format fidget title
-      function(fidget_name, spinner)
+      -- function to format fidget title
+      fidget = function(fidget_name, spinner)
         return string.format("%s %s", spinner, fidget_name)
       end,
-      task = -- function to format each task line
-      function(task_name, message, percentage)
-        return string.format(
-          "%s%s [%s]",
-          message,
-          percentage and string.format(" (%s%%)", percentage) or "",
-          task_name
-        )
+      -- function to format each task line
+      task = function(task_name, message, percentage)
+        return string.format("%s%s [%s]", message, percentage and string.format(" (%s%%)", percentage) or "", task_name)
       end,
-    }
+    },
   })
 end
 
