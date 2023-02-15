@@ -203,6 +203,7 @@ function config.gotools()
         }
       end,
     })
+    defaults.initial_mode = "normal"
   end
 end
 

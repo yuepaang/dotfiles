@@ -176,17 +176,17 @@ function config.dressing(plugin, opts)
       relative = "cursor",
 
       -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-      prefer_width = 25,
+      prefer_width = 20,
       width = nil,
       -- min_width and max_width can be a list of mixed types.
       -- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
       max_width = { 140, 0.9 },
-      min_width = { 20, 0.2 },
+      min_width = { 10, 0.1 },
 
       buf_options = {},
       win_options = {
         -- Window transparency (0-100)
-        winblend = 10,
+        winblend = 0,
         -- Disable line wrapping
         wrap = false,
       },
@@ -311,6 +311,12 @@ function config.dressing(plugin, opts)
       get_config = nil,
     },
   })
+  local custom_kind = require("dressing.select.telescope").custom_kind
+  local original_func = custom_kind["codeaction"]
+  custom_kind["codeaction"] = function(opts, defaults, items)
+    original_func(opts, defaults, items)
+    defaults.initial_mode = "normal"
+  end
 end
 
 return config
