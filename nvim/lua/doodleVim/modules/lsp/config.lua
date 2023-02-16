@@ -12,6 +12,11 @@ function config.lspconfig(plugin, opts)
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.offsetEncoding = { "utf-16" }
 
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+  }
+
   local function setup(server)
     local server_opts = servers[server] or {}
     server_opts.capabilities = capabilities
@@ -162,7 +167,7 @@ function config.gotools()
         table.insert(indexed_items, entry)
         widths.idx = math.max(widths.idx, require("plenary.strings").strdisplaywidth(entry.idx))
         widths.command_title =
-          math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
+        math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
       end
       return indexed_items, widths
     end
