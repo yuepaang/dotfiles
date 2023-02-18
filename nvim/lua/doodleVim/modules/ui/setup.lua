@@ -26,20 +26,18 @@ function ui.treesitter(plugin)
       "yaml",
       "solidity",
       "markdown",
-      "norg",
-      "norg_meta",
+      "org",
     }
 
     -- HACK: add norg and norg_meta parser_info to nvim-treesitter
 
     local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
-    parser_configs.norg = {
+    parser_configs.org = {
       install_info = {
-        url = "https://github.com/nvim-neorg/tree-sitter-norg",
-        files = { "src/parser.c", "src/scanner.cc" },
-        branch = "main",
-        revision = "5d9c76b5c9927955f7c5d5d946397584e307f69f",
-      },
+        url = 'https://github.com/milisims/tree-sitter-org',
+          revision = "081179c52b3e8175af62b9b91dc099d010c38770",
+          files = { 'src/parser.c', 'src/scanner.cc' },
+        },
     }
 
     parser_configs.norg_meta = {

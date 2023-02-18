@@ -154,4 +154,10 @@ tools['kevinhwang91/nvim-ufo'] = {
   config = conf.nvim_ufo
 }
 
+tools['nvim-orgmode/orgmode'] = {
+    lazy = true,
+    event = "User DeferStartWithFile",
+    config = conf.orgmode
+}
+
 return tools
