@@ -41,13 +41,13 @@ function M.setup(servers, server_options)
     ["jdtls"] = function()
       -- print "jdtls is handled by nvim-jdtls"
     end,
-    ["sumneko_lua"] = function()
-      local opts = vim.tbl_deep_extend("force", server_options, servers["sumneko_lua"] or {})
+    ["lua_ls"] = function()
+      local opts = vim.tbl_deep_extend("force", server_options, servers["lua_ls"] or {})
       require("neodev").setup {
         -- add any options here, or leave empty to use the default settings
         opts,
       }
-      lspconfig.sumneko_lua.setup {
+      lspconfig.lua_ls.setup {
         settings = {
           Lua = {
             completion = {
