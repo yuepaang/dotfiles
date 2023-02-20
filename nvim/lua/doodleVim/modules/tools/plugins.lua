@@ -140,24 +140,30 @@ tools["dstein64/vim-startuptime"] = {
   end,
 }
 
-tools['kevinhwang91/promise-async'] = {
-  lazy = true
+tools["kevinhwang91/promise-async"] = {
+  lazy = true,
 }
 
-tools['kevinhwang91/nvim-ufo'] = {
+tools["kevinhwang91/nvim-ufo"] = {
   lazy = true,
   event = "User DeferStartWithFile",
   dependencies = {
-    'nvim-treesitter/nvim-treesitter',
-    'kevinhwang91/promise-async',
+    "nvim-treesitter/nvim-treesitter",
+    "kevinhwang91/promise-async",
   },
-  config = conf.nvim_ufo
+  config = conf.nvim_ufo,
 }
 
-tools['nvim-orgmode/orgmode'] = {
-    lazy = true,
-    event = "User DeferStartWithFile",
-    config = conf.orgmode
+tools["nvim-orgmode/orgmode"] = {
+  lazy = true,
+  event = "User DeferStartWithFile",
+  config = conf.orgmode,
+}
+
+tools["chentoast/marks.nvim"] = {
+  lazy = true,
+  event = "User DeferStartWithFile",
+  config = conf.marks,
 }
 
 return tools

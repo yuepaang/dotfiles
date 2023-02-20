@@ -14,7 +14,7 @@ function config.lspconfig(plugin, opts)
 
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
-    lineFoldingOnly = true
+    lineFoldingOnly = true,
   }
 
   local function setup(server)
@@ -167,7 +167,7 @@ function config.gotools()
         table.insert(indexed_items, entry)
         widths.idx = math.max(widths.idx, require("plenary.strings").strdisplaywidth(entry.idx))
         widths.command_title =
-        math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
+          math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
       end
       return indexed_items, widths
     end
@@ -306,7 +306,7 @@ function config.fidget(plugin, opts)
   require("fidget").setup({
     text = {
       spinner = "pipe", -- animation shown when tasks are ongoing
-      done = "✔", -- character shown when all tasks are complete
+      done = "󰞑 ", -- character shown when all tasks are complete
       commenced = "Started", -- message shown when task starts
       completed = "Completed", -- message shown when task completes
     },
