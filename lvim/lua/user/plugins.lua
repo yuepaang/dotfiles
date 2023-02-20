@@ -35,7 +35,7 @@ lvim.plugins = {
   "lunarvim/templeos.nvim",
   "kevinhwang91/nvim-bqf",
   "is0n/jaq-nvim",
-  "hrsh7th/cmp-emoji",
+  -- "hrsh7th/cmp-emoji",
   "ggandor/leap.nvim",
   "nacro90/numb.nvim",
   "TimUntersberger/neogit",
