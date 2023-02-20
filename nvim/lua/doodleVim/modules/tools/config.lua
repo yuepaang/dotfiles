@@ -204,40 +204,40 @@ function config.nvim_tree()
         custom_only = true,
         list = {
           { key = { "<CR>", "o" }, action = "edit" },
-          { key = "<C-v>", action = "vsplit" },
-          { key = "<C-x>", action = "split" },
-          { key = "<C-t>", action = "tabnew" },
-          { key = "P", action = "parent_node" },
-          { key = "<BS>", action = "close_node" },
-          { key = "K", action = "first_sibling" },
-          { key = "J", action = "last_sibling" },
-          { key = "I", action = "toggle_git_ignored" },
-          { key = "H", action = "toggle_dotfiles" },
-          { key = "<C-r>", action = "refresh" },
-          { key = "a", action = "create" },
-          { key = "d", action = "remove" },
-          { key = "D", action = "trash" },
-          { key = "r", action = "rename" },
-          { key = "R", action = "full_rename" },
-          { key = "x", action = "cut" },
-          { key = "c", action = "copy" },
-          { key = "p", action = "paste" },
-          { key = "y", action = "copy_name" },
-          { key = "yp", action = "copy_path" },
-          { key = "ya", action = "copy_absolute_path" },
-          { key = "-", action = "dir_up" },
-          { key = "s", action = "system_open" },
-          { key = "f", action = "live_filter" },
-          { key = "F", action = "clear_live_filter" },
-          { key = "q", action = "close" },
-          { key = "C", action = "collapse_all" },
-          { key = "E", action = "expand_all" },
-          { key = "/", action = "search_node" },
-          { key = ".", action = "run_file_command" },
-          { key = "<Tab>", action = "toggle_file_info" },
-          { key = "?", action = "toggle_help" },
-          { key = "m", action = "toggle_mark" },
-          { key = "bmv", action = "bulk_move" },
+          { key = "<C-v>",         action = "vsplit" },
+          { key = "<C-x>",         action = "split" },
+          { key = "<C-t>",         action = "tabnew" },
+          { key = "P",             action = "parent_node" },
+          { key = "<BS>",          action = "close_node" },
+          { key = "K",             action = "first_sibling" },
+          { key = "J",             action = "last_sibling" },
+          { key = "I",             action = "toggle_git_ignored" },
+          { key = "H",             action = "toggle_dotfiles" },
+          { key = "<C-r>",         action = "refresh" },
+          { key = "a",             action = "create" },
+          { key = "d",             action = "remove" },
+          { key = "D",             action = "trash" },
+          { key = "r",             action = "rename" },
+          { key = "R",             action = "full_rename" },
+          { key = "x",             action = "cut" },
+          { key = "c",             action = "copy" },
+          { key = "p",             action = "paste" },
+          { key = "y",             action = "copy_name" },
+          { key = "yp",            action = "copy_path" },
+          { key = "ya",            action = "copy_absolute_path" },
+          { key = "-",             action = "dir_up" },
+          { key = "s",             action = "system_open" },
+          { key = "f",             action = "live_filter" },
+          { key = "F",             action = "clear_live_filter" },
+          { key = "q",             action = "close" },
+          { key = "C",             action = "collapse_all" },
+          { key = "E",             action = "expand_all" },
+          { key = "/",             action = "search_node" },
+          { key = ".",             action = "run_file_command" },
+          { key = "<Tab>",         action = "toggle_file_info" },
+          { key = "?",             action = "toggle_help" },
+          { key = "m",             action = "toggle_mark" },
+          { key = "bmv",           action = "bulk_move" },
         },
       },
     },
@@ -824,7 +824,7 @@ function config.diffview()
         ["X"] = actions.restore_entry, -- Restore entry to the state on the left side.
         ["R"] = actions.refresh_files, -- Update stats and entries in the file list.
         ["L"] = actions.open_commit_log, -- Open the commit log panel0
-        ["<c-u>"] = actions.scroll_view(-0.25), -- Scroll the view up
+        ["<c-u>"] = actions.scroll_view( -0.25), -- Scroll the view up
         ["<c-d>"] = actions.scroll_view(0.25), -- Scroll the view down
         -- ["<tab>"]         = actions.select_next_entry,
         -- ["<s-tab>"]       = actions.select_prev_entry,
@@ -850,7 +850,7 @@ function config.diffview()
         ["<cr>"] = actions.select_entry,
         ["o"] = actions.select_entry,
         ["<2-LeftMouse>"] = actions.select_entry,
-        ["<c-u>"] = actions.scroll_view(-0.25),
+        ["<c-u>"] = actions.scroll_view( -0.25),
         ["<c-d>"] = actions.scroll_view(0.25),
         -- ["<tab>"]         = actions.select_next_entry,
         -- ["<s-tab>"]       = actions.select_prev_entry,
@@ -902,8 +902,8 @@ function config.dapui()
             size = 0.25, -- Can be float or integer > 1
           },
           { id = "breakpoints", size = 0.25 },
-          { id = "stacks", size = 0.25 },
-          { id = "watches", size = 0.25 },
+          { id = "stacks",      size = 0.25 },
+          { id = "watches",     size = 0.25 },
         },
         size = 40,
         position = "left", -- Can be "left" or "right"
@@ -1057,60 +1057,6 @@ function config.orgmode(plugin, opts)
       DONE = ":background #10B981 :foreground #ebdbb2",
       DELEGATED = ":background #7C3AED :foreground #ebdbb2 :slant italic :underline on",
     },
-  })
-end
-
-function config.marks(plugin, opts)
-  require("marks").setup({
-    -- whether to map keybinds or not. default true
-    default_mappings = true,
-    -- which builtin marks to show. default {}
-    builtin_marks = { ".", "<", ">", "^" },
-    -- whether movements cycle back to the beginning/end of buffer. default true
-    cyclic = true,
-    -- whether the shada file is updated after modifying uppercase marks. default false
-    force_write_shada = false,
-    -- how often (in ms) to redraw signs/recompute mark positions.
-    -- higher values will have better performance but may cause visual lag,
-    -- while lower values may cause performance penalties. default 150.
-    refresh_interval = 250,
-    -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
-    -- marks, and bookmarks.
-    -- can be either a table with all/none of the keys, or a single number, in which case
-    -- the priority applies to all marks.
-    -- default 10.
-    sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
-    -- disables mark tracking for specific filetypes. default {}
-    excluded_filetypes = {
-      "NvimTree",
-      "Outline",
-      "DressingInput",
-      "dapui_watches",
-      "dapui_stacks",
-      "dapui_scopes",
-      "dapui_breakpoints",
-      "dapui_console",
-      "dapui_hover",
-      "alpha",
-      "help",
-      "qf",
-      "help",
-      "man",
-      "lspinfo",
-      "gitcommit",
-    },
-    -- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
-    -- sign/virttext. Bookmarks can be used to group together positions and quickly move
-    -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
-    -- default virt_text is "".
-    bookmark_0 = {
-      sign = "⚑",
-      virt_text = "hello world",
-      -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
-      -- defaults to false.
-      annotate = false,
-    },
-    mappings = {},
   })
 end
 
