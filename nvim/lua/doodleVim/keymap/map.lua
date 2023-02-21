@@ -10,60 +10,60 @@ map.Lsp = {
     ["g"] = {
       name = "Lsp Function",
       d = map_cr("lua require('doodleVim.extend.lsp').lsp_definitions()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Go To Definition"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Go To Definition"),
       D = map_cr("lua vim.lsp.buf.declaration()"):with_noremap():with_silent():with_label("Go To Declaration"),
       t = map_cr("lua require('doodleVim.extend.lsp').lsp_type_definition()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Go To Type Definition"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Go To Type Definition"),
       i = map_cr("lua require('doodleVim.extend.lsp').lsp_implementations()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Go To Implementation"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Go To Implementation"),
       r = map_cr("lua require('doodleVim.extend.lsp').lsp_references()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Go To Reference"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Go To Reference"),
       h = map_cr("lua require('doodleVim.extend.lsp').hover()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Hover Documentation"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Hover Documentation"),
       f = map_cr("lua require('doodleVim.extend.lsp').format({async=true})")
-          :with_noremap()
-          :with_silent()
-          :with_label("Code Formatting"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Code Formatting"),
       a = map_cr("lua require('doodleVim.extend.lsp').code_action()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Code Action"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Code Action"),
       n = map_cr("lua require('rename').rename({prompt='Rename'})"):with_noremap():with_silent():with_label("Rename"),
     },
     ["<C-n>"] = map_cr("lua vim.diagnostic.goto_next()")
-        :with_noremap()
-        :with_silent()
-        :with_label("Go To Next Diagnostic"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Go To Next Diagnostic"),
     ["<C-p>"] = map_cr("lua vim.diagnostic.goto_prev()")
-        :with_noremap()
-        :with_silent()
-        :with_label("Go To Previous Diagnostic"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Go To Previous Diagnostic"),
   },
   x = {
     ["g"] = {
       name = "Lsp Function",
       f = map_cmd("<Cmd>lua require('doodleVim.extend.lsp').format({async=true})<CR>")
-          :with_noremap()
-          :with_silent()
-          :with_label("Selected Code Formatting"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Selected Code Formatting"),
       a = map_cmd("<Cmd>lua require('doodleVim.extend.lsp').code_action()<CR>")
-          :with_noremap()
-          :with_silent()
-          :with_label("Range Code Action"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Range Code Action"),
       n = map_cmd("<Cmd>lua require('rename').rename({label='Rename'})<CR>")
-          :with_noremap()
-          :with_silent()
-          :with_label("Rename"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Rename"),
     },
   },
 }
@@ -73,13 +73,13 @@ map.NvimTree = {
     ["<leader>t"] = {
       name = "Tree",
       t = map_cr("lua require('doodleVim.extend.tree').toggle()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Enhanced NvimTree Toggle"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Enhanced NvimTree Toggle"),
       r = map_cr("lua require('doodleVim.extend.tree').find_file()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Find File"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Find File"),
     },
   },
 }
@@ -89,9 +89,9 @@ map.SymbolsOutline = {
     ["<leader>j"] = {
       name = "Symbols-Outline",
       j = map_cr("lua require'symbols-outline'.toggle_outline()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Symbols And Function Preview"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Symbols And Function Preview"),
     },
   },
 }
@@ -112,14 +112,14 @@ map.Diagnostic = {
     ["<leader>d"] = {
       name = "Show Diagnostics",
       d = map_cr("Telescope diagnostics bufnr=0")
-          :with_noremap()
-          :with_silent()
-          :with_label("Show Diagnostics In Current Buffer"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Show Diagnostics In Current Buffer"),
       e = map_cr("Telescope diagnostics"):with_noremap():with_silent():with_label("Show Diagnostics In WorkSpace"),
       f = map_cr("lua require('doodleVim.extend.diagnostics').toggle_virtual_text()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Toggle Diagnostics Virtual Text"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Toggle Diagnostics Virtual Text"),
     },
   },
 }
@@ -147,19 +147,17 @@ map.Floaterm = {
     ["<C-Space>"] = map_cr("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm"),
     ["<M-j>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
     ["<M-k>"] = map_cr("FloatermNew --cwd=<buffer>")
-        :with_noremap()
-        :with_silent()
-        :with_label("Open Floaterm In Current Buffer Dir"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Open Floaterm In Current Buffer Dir"),
   },
-
   v = {
     ["<M-j>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
     ["<M-k>"] = map_cr("FloatermNew --cwd=<buffer>")
-        :with_noremap()
-        :with_silent()
-        :with_label("Open Floaterm In Current Buffer Dir"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Open Floaterm In Current Buffer Dir"),
   },
-
   t = {
     ["<C-Space>"] = {
       vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
@@ -226,26 +224,26 @@ map.Comment = {
     ["<leader>c"] = {
       name = "Comment",
       c = map_cr('lua require("Comment.api").toggle.linewise.current()')
-          :with_noremap()
-          :with_silent()
-          :with_label("Comment Current Line"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Comment Current Line"),
       v = map_cr('lua require("Comment.api").toggle.blockwise.current()')
-          :with_noremap()
-          :with_silent()
-          :with_label("Comment Current Line With Block"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Comment Current Line With Block"),
     },
   },
   v = {
     ["<leader>c"] = {
       name = "Comment",
       c = map_cmd('<ESC><CMD>lua require("Comment.api").locked("toggle.linewise")(vim.fn.visualmode())<CR>')
-          :with_noremap()
-          :with_silent()
-          :with_label("comment selected line"),
+      :with_noremap()
+      :with_silent()
+      :with_label("comment selected line"),
       v = map_cmd('<ESC><CMD>lua require("Comment.api").locked("toggle.blockwise")(vim.fn.visualmode())<CR>')
-          :with_noremap()
-          :with_silent()
-          :with_label("comment selected line"),
+      :with_noremap()
+      :with_silent()
+      :with_label("comment selected line"),
     },
   },
 }
@@ -262,6 +260,7 @@ map.Telescope = {
       r = map_cr("Telescope oldfiles"):with_noremap():with_silent():with_label("Find Recent Files"),
       c = map_cr("Telescope command_history"):with_noremap():with_silent():with_label("Find Command History"),
       b = map_cr("Telescope buffers"):with_noremap():with_silent():with_label("Buffers Navigation"),
+      m = map_cr('Telescope marks'):with_noremap():with_silent():with_label("Find Marks"),
     },
   },
 }
@@ -281,13 +280,13 @@ map.ToggleNumber = {
     ["<leader>n"] = {
       name = "Toggle Line Number",
       n = map_cr("lua require('doodleVim.extend.misc').toggle_nu()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Toggle Absolute Line Number"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Toggle Absolute Line Number"),
       m = map_cr("lua require('doodleVim.extend.misc').toggle_rnu()")
-          :with_noremap()
-          :with_silent()
-          :with_label("Toggle Relative Line Number"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Toggle Relative Line Number"),
     },
   },
 }
@@ -297,21 +296,21 @@ map.Neogen = {
     ["<leader>g"] = {
       name = "Generate Documentation",
       c = map_cr("lua require('neogen').generate({type='class'})")
-          :with_noremap()
-          :with_silent()
-          :with_label("Generate Class Documentation"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Generate Class Documentation"),
       t = map_cr("lua require('neogen').generate({type='type'})")
-          :with_noremap()
-          :with_silent()
-          :with_label("Generate Type Documentation"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Generate Type Documentation"),
       f = map_cr("lua require('neogen').generate({type='func'})")
-          :with_noremap()
-          :with_silent()
-          :with_label("Generate Function Documentation"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Generate Function Documentation"),
       d = map_cr("lua require('neogen').generate({type='file'})")
-          :with_noremap()
-          :with_silent()
-          :with_label("Generate File Documentation"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Generate File Documentation"),
     },
   },
 }
@@ -319,73 +318,73 @@ map.Neogen = {
 map.Dap = {
   n = {
     ["<F12>"] = map_cr('lua require("doodleVim.extend.hydra").run("dap")')
-        :with_noremap()
-        :with_silent()
-        :with_label("Start Debug Mode"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Start Debug Mode"),
   },
 }
 
 map.Bufferline = {
   n = {
     ["<S-h>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPrevious')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Previous Buffer"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Previous Buffer"),
     ["<S-l>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferNext')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Next Buffer"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Next Buffer"),
     ["<S-n>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_buffer_close()")
-        :with_noremap()
-        :with_silent()
-        :with_label("Close Current Buffer"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Close Current Buffer"),
     ["<M-s>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferOrderByDirectory')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Sort Buffer"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Sort Buffer"),
     ["<M-b>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferCloseBuffersLeft')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Close All Buffers Left"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Close All Buffers Left"),
     ["<M-m>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferCloseBuffersRight')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Close All Buffers Right"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Close All Buffers Right"),
     ["<M-h>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMovePrevious')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Re-order To Previous"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Re-order To Previous"),
     ["<M-l>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferMoveNext')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Re-order To Next"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Re-order To Next"),
     ["<M-i>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPin')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Pin Buffer"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Pin Buffer"),
     ["<M-o>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferPick')")
-        :with_noremap()
-        :with_silent()
-        :with_label("Pick Buffer"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Pick Buffer"),
   },
 }
 
 map.WhichKey = {
   n = {
     ["<C-_>"] = map_cr("lua require('doodleVim.extend.misc').toggle_whichkey()")
-        :with_noremap()
-        :with_silent()
-        :with_label("Show Keymaps"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Show Keymaps"),
   },
   v = {
     ["<C-_>"] = map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
-        :with_noremap()
-        :with_label("Show Keymaps"),
+    :with_noremap()
+    :with_label("Show Keymaps"),
   },
   i = {
     ["<C-_>"] = map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
-        :with_noremap()
-        :with_label("Show Keymaps"),
+    :with_noremap()
+    :with_label("Show Keymaps"),
   },
 }
 
@@ -394,17 +393,17 @@ map.Hydra = {
     ["<leader>h"] = {
       name = "Hydra Tools",
       g = map_cr('lua require("doodleVim.extend.hydra").run("gitsigns")')
-          :with_noremap()
-          :with_silent()
-          :with_label("Start Gitsigns"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Start Gitsigns"),
       v = map_cr('lua require("doodleVim.extend.hydra").run("venn")')
-          :with_noremap()
-          :with_silent()
-          :with_label("Start Draw Ascii Diagram"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Start Draw Ascii Diagram"),
       t = map_cr('lua require("doodleVim.extend.hydra").run("telescope")')
-          :with_noremap()
-          :with_silent()
-          :with_label("Start Telescope"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Start Telescope"),
     },
   },
 }
@@ -413,21 +412,21 @@ map.Default = {
   n = {
     ["Y"] = map_cmd("y$"):with_label("Copy To End Of Line"),
     ["<C-q>"] = map_cr('lua require("doodleVim.extend.misc").safe_exit()')
-        :with_noremap()
-        :with_silent()
-        :with_label("Save Session And Safe Exit"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Save Session And Safe Exit"),
     ["<C-s>"] = map_cr('silent! lua require("doodleVim.extend.misc").safe_save()')
-        :with_noremap()
-        :with_silent()
-        :with_label("Save Session"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Save Session"),
     ["<C-d>"] = map_cr("lua require('neoscroll').scroll(vim.wo.scroll, true, 150)")
-        :with_noremap()
-        :with_silent()
-        :with_label("Smooth Scroll Down"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Smooth Scroll Down"),
     ["<C-u>"] = map_cr("lua require('neoscroll').scroll(-vim.wo.scroll, true, 150)")
-        :with_noremap()
-        :with_silent()
-        :with_label("Smooth Scroll Up"),
+    :with_noremap()
+    :with_silent()
+    :with_label("Smooth Scroll Up"),
     ["<M-n>"] = map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage"),
     -- ["x"] = map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"),
     -- ["c"] = map_cmd('"_c'):with_noremap():with_label("Change Without Copy"),
@@ -495,13 +494,13 @@ map.codewindow = {
     ["<leader>w"] = {
       name = "Code Window",
       w = map_cr('lua require("codewindow").toggle_minimap()')
-          :with_noremap()
-          :with_silent()
-          :with_label("Toggle Code Window"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Toggle Code Window"),
       e = map_cr('lua require("codewindow").toggle_focus()')
-          :with_noremap()
-          :with_silent()
-          :with_label("Toggle Code Focus"),
+      :with_noremap()
+      :with_silent()
+      :with_label("Toggle Code Focus"),
     },
   },
 }
