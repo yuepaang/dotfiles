@@ -88,7 +88,6 @@ function config.mason()
         apply_language_filter = "<C-f>",
       },
     },
-
     -- The directory in which to install packages.
     install_root_dir = require("mason-core.path").concat({ vim.fn.stdpath("data"), "mason" }),
     PATH = "prepend",
@@ -105,7 +104,6 @@ function config.mason()
     -- Limit for the maximum amount of packages to be installed at the same time. Once this limit is reached, any further
     -- packages that are requested to be installed will be put in a queue.
     max_concurrent_installers = 4,
-
     github = {
       -- The template URL to use when downloading assets from GitHub.
       -- The placeholders are the following (in order):
@@ -167,7 +165,7 @@ function config.gotools()
         table.insert(indexed_items, entry)
         widths.idx = math.max(widths.idx, require("plenary.strings").strdisplaywidth(entry.idx))
         widths.command_title =
-          math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
+            math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
       end
       return indexed_items, widths
     end
@@ -184,7 +182,7 @@ function config.gotools()
     local make_display_factory = function(displayer)
       return function(e)
         return displayer({
-          { e.value.idx .. ":", "TelescopePromptPrefix" },
+          { e.value.idx .. ":",   "TelescopePromptPrefix" },
           { e.value.command_title },
         })
       end
@@ -235,6 +233,7 @@ function config.null_ls()
     on_exit = nil,
     sources = {
       null_ls.builtins.code_actions.gitsigns,
+      null_ls.builtins.diagnostics.solhint,
       -- null_ls.builtins.formatting.stylua,
       require("gotools").code_actions.gotests,
       require("gotools").code_actions.gomodifytags,
