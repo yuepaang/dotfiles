@@ -14,7 +14,6 @@ gruvbox.overrides = {
   RenamerBorder = { link = "GruvboxBlue" },
   RenamerTitle = { link = "Title" },
   Pmenu = { link = "Normal" },
-
   -- Telescope
   TelescopeNormal = { link = "GruvboxBlue" },
   TelescopeSelection = { link = "GruvboxYellowBold" },
@@ -27,7 +26,6 @@ gruvbox.overrides = {
   TelescopeMatching = { link = "GruvboxRedBold" },
   TelescopePromptPrefix = { link = "GruvboxRed" },
   TelescopePrompt = { link = "TelescopeNormal" },
-
   -- NvimTree
   NvimTreeOpenedFile = { fg = "#b8bb26", bold = true },
   -- Diagnostic
@@ -58,7 +56,7 @@ gruvbox.dump = function()
     return
   end
   for group, hl in pairs(groups) do
-    local line = "api.nvim_set_hl(0,'" .. group .. "', " .. vim.inspect(hl) .. ")\n"
+    local line = "api.nvim_set_hl(0, '" .. group .. "', " .. vim.inspect(hl, { newline = "", indent = " " }) .. ")\n"
     if file ~= nil then
       file:write(line)
     else
