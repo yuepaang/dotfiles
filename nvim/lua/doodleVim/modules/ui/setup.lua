@@ -34,10 +34,10 @@ function ui.treesitter(plugin)
     local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
     parser_configs.org = {
       install_info = {
-        url = 'https://github.com/milisims/tree-sitter-org',
-          revision = "081179c52b3e8175af62b9b91dc099d010c38770",
-          files = { 'src/parser.c', 'src/scanner.cc' },
-        },
+        url = "https://github.com/milisims/tree-sitter-org",
+        revision = "081179c52b3e8175af62b9b91dc099d010c38770",
+        files = { "src/parser.c", "src/scanner.cc" },
+      },
     }
 
     parser_configs.norg_meta = {
@@ -72,7 +72,7 @@ function ui.barbar(plugin)
     animation = true,
 
     -- Enable/disable auto-hiding the tab bar when there is a single buffer
-    auto_hide = true,
+    auto_hide = false,
 
     -- Enable/disable current/total tabpages indicator (top right corner)
     tabpages = true,

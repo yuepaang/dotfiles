@@ -21,43 +21,42 @@ function autocmd.load_autocmds()
           pattern = "*.sol",
           command = "setf solidity",
           desc = "Set Solidity FileType",
-        }
-
+        },
       },
       {
         event = "FileType",
         opts = {
           pattern = "Outline",
           command = "setlocal signcolumn=no",
-        }
+        },
       },
       {
         event = "FileType",
         opts = {
           pattern = "python",
           command = "setlocal colorcolumn=80",
-        }
+        },
       },
       {
         event = "FileType",
         opts = {
           pattern = { "qf", "help", "man", "lspinfo" },
           command = "nnoremap <silent> <buffer> q :close<CR>",
-        }
+        },
       },
       {
         event = "FileType",
         opts = {
           pattern = { "markdown", "gitcommit" },
           command = "setlocal wrap",
-        }
+        },
       },
       {
         event = "FileType",
         opts = {
           pattern = { "markdown", "gitcommit" },
           command = "setlocal spell",
-        }
+        },
       },
     },
 
@@ -67,18 +66,17 @@ function autocmd.load_autocmds()
         opts = {
           pattern = "*",
           callback = function()
-            vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 200 })
+            vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
           end,
-        }
-
+        },
       },
       {
         event = "VimResized",
         opts = {
           pattern = "*",
-          command = "tabdo wincmd ="
-        }
-      }
+          command = "tabdo wincmd =",
+        },
+      },
     },
 
     _lazy = {
@@ -88,22 +86,21 @@ function autocmd.load_autocmds()
           pattern = { "LazySync", "LazyUpdate" },
           once = true,
           callback = function()
-            require('doodleVim.extend.lazy').PostInstall()
+            require("doodleVim.extend.lazy").PostInstall()
           end,
-        }
-
+        },
       },
     },
 
     _defer_start = {
       {
-        event = "BufWinEnter",
+        event = "VimEnter",
         opts = {
           pattern = "*",
           callback = function()
-            require('doodleVim.utils.defer').defer_start(150)
-          end
-        }
+            require("doodleVim.utils.defer").defer_start(150)
+          end,
+        },
       },
     },
   }

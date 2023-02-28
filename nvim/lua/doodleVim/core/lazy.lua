@@ -1,9 +1,9 @@
 local fn, uv, api = vim.fn, vim.loop, vim.api
-local vim_path = require('doodleVim.core.global').vim_path
-local data_dir = require('doodleVim.core.global').data_dir
-local is_mac = require('doodleVim.core.global').is_mac
+local vim_path = require("doodleVim.core.global").vim_path
+local data_dir = require("doodleVim.core.global").data_dir
+local is_mac = require("doodleVim.core.global").is_mac
 -- local doodleVim_dir = vim_path .. '/lua/doodleVim'
-local modules_dir = vim_path .. '/lua/doodleVim/modules'
+local modules_dir = vim_path .. "/lua/doodleVim/modules"
 -- local packer_compiled = data_dir .. 'packer_compiled.vim'
 -- local compile_to_lua = vim_path .. '/lua/doodleVim/compiled.lua'
 -- local utils = require("doodleVim.utils.utils")
@@ -18,7 +18,7 @@ local plugins = setmetatable({}, {
       Lazy:load_packer()
     end
     return lazy[key]
-  end
+  end,
 })
 
 function Lazy:load_plugins()
@@ -26,7 +26,7 @@ function Lazy:load_plugins()
 
   local get_plugins_list = function()
     local list = {}
-    local tmp = vim.split(fn.globpath(modules_dir, '*/plugins.lua'), '\n')
+    local tmp = vim.split(fn.globpath(modules_dir, "*/plugins.lua"), "\n")
     for _, f in ipairs(tmp) do
       list[#list + 1] = f:sub(#modules_dir - 16, -1)
     end
@@ -37,20 +37,20 @@ function Lazy:load_plugins()
   for _, m in ipairs(plugins_file) do
     local repos = require(m:sub(0, #m - 4))
     for repo, conf in pairs(repos) do
-      self.repos[#self.repos + 1] = vim.tbl_extend('force', { repo }, conf)
+      self.repos[#self.repos + 1] = vim.tbl_extend("force", { repo }, conf)
     end
   end
 end
 
 function Lazy:load_lazy()
   if not lazy then
-    api.nvim_command('packadd lazy.nvim')
-    lazy = require('lazy')
+    api.nvim_command("packadd lazy.nvim")
+    lazy = require("lazy")
   end
 
   self:load_plugins()
   lazy.setup(self.repos, {
-    root = data_dir .. '/site/pack/lazy/opt',
+    root = data_dir .. "/site/pack/lazy/opt",
     lockfile = data_dir .. "/lazy-lock.json",
     concurrency = 20,
     git = {
@@ -72,7 +72,6 @@ function Lazy:load_lazy()
         --  * VimEnter: not useful to cache anything else beyond startup
         --  * BufReadPre: this will be triggered early when opening a file from the command line directly
         disable_events = { "VimEnter", "BufReadPre" },
-        -- disable_events = {},
         ttl = 3600 * 24 * 5, -- keep unused modules for up to 5 days
       },
       reset_packpath = true, -- reset the package path to improve startup time
@@ -109,12 +108,12 @@ function Lazy:load_lazy()
           "tutor",
         },
       },
-    }
+    },
   })
 end
 
 function Lazy:init_ensure_plugins()
-  local lazy_path = data_dir .. '/site/pack/lazy/opt/lazy.nvim'
+  local lazy_path = data_dir .. "/site/pack/lazy/opt/lazy.nvim"
   if not vim.loop.fs_stat(lazy_path) then
     vim.fn.system({
       "git",

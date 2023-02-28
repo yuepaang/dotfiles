@@ -4,14 +4,14 @@ local setup = require("doodleVim.modules.lsp.setup")
 
 lsp["neovim/nvim-lspconfig"] = {
   lazy = true,
-  event = "BufReadPost",
+  event = "User DeferStartWithFile",
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "tamago324/nlsp-settings.nvim",
     "mortepau/codicons.nvim",
     "j-hui/fidget.nvim",
-    'utilyre/barbecue.nvim',
+    "utilyre/barbecue.nvim",
     {
       "hrsh7th/cmp-nvim-lsp",
       cond = function()
@@ -41,7 +41,7 @@ lsp["williamboman/mason.nvim"] = {
 
 lsp["jose-elias-alvarez/null-ls.nvim"] = {
   lazy = true,
-  event = "BufReadPost",
+  event = "User DeferStartWithFile",
   dependencies = {
     "doodleEsc/gotools.nvim",
     "williamboman/mason.nvim",
@@ -80,7 +80,7 @@ lsp["ray-x/lsp_signature.nvim"] = {
   init = setup.lsp_signature,
 }
 
-lsp['utilyre/barbecue.nvim'] = {
+lsp["utilyre/barbecue.nvim"] = {
   lazy = true,
   version = "*",
   enabled = false,
@@ -88,7 +88,7 @@ lsp['utilyre/barbecue.nvim'] = {
     "SmiteshP/nvim-navic",
     "nvim-tree/nvim-web-devicons", -- optional dependency
   },
-  config = conf.barbecue
+  config = conf.barbecue,
 }
 
 return lsp
