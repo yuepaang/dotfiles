@@ -1,12 +1,7 @@
-local fn, uv, api = vim.fn, vim.loop, vim.api
+local fn, api = vim.fn, vim.api
 local vim_path = require("doodleVim.core.global").vim_path
 local data_dir = require("doodleVim.core.global").data_dir
-local is_mac = require("doodleVim.core.global").is_mac
--- local doodleVim_dir = vim_path .. '/lua/doodleVim'
 local modules_dir = vim_path .. "/lua/doodleVim/modules"
--- local packer_compiled = data_dir .. 'packer_compiled.vim'
--- local compile_to_lua = vim_path .. '/lua/doodleVim/compiled.lua'
--- local utils = require("doodleVim.utils.utils")
 local lazy = nil
 
 local Lazy = {}
@@ -42,7 +37,8 @@ function Lazy:load_plugins()
   end
 end
 
-function Lazy:load_lazy()
+function Lazy:load_lazy(install)
+  local should_install = install or false
   if not lazy then
     api.nvim_command("packadd lazy.nvim")
     lazy = require("lazy")
@@ -81,39 +77,43 @@ function Lazy:load_lazy()
         paths = {}, -- add any custom paths here that you want to indluce in the rtp
         ---@type string[] list any plugins you want to disable here
         disabled_plugins = {
-          "gzip",
-          "tar",
-          "tarPlugin",
-          "zip",
-          "zipPlugin",
-          "getscript",
-          "getscriptPlugin",
-          "vimball",
-          "vimballPlugin",
-          "matchit",
-          "matchparen",
-          "2html_plugin",
-          "logiPat",
-          "rrhelper",
-          "netrw",
-          "netrwPlugin",
-          "netrwSettings",
-          "netrwFileHandlers",
-          "tutor_mode_plugin",
-          "remote_plugins",
-          "spellfile_plugin",
-          "shada_plugin",
-          "tohtml",
-          "spellfile",
-          "tutor",
+          -- "gzip",
+          -- "tar",
+          -- "tarPlugin",
+          -- "zip",
+          -- "zipPlugin",
+          -- "getscript",
+          -- "getscriptPlugin",
+          -- "vimball",
+          -- "vimballPlugin",
+          -- "matchit",
+          -- "matchparen",
+          -- "2html_plugin",
+          -- "logiPat",
+          -- "rrhelper",
+          -- "netrw",
+          -- "netrwPlugin",
+          -- "netrwSettings",
+          -- "netrwFileHandlers",
+          -- "tutor_mode_plugin",
+          -- "remote_plugins",
+          -- "spellfile_plugin",
+          -- "shada_plugin",
+          -- "tohtml",
+          -- "spellfile",
+          -- "tutor",
         },
       },
     },
   })
+  if should_install then
+    lazy.install()
+  end
 end
 
 function Lazy:init_ensure_plugins()
   local lazy_path = data_dir .. "/site/pack/lazy/opt/lazy.nvim"
+  local should_install = false
   if not vim.loop.fs_stat(lazy_path) then
     vim.fn.system({
       "git",
@@ -123,11 +123,10 @@ function Lazy:init_ensure_plugins()
       "https://github.com/folke/lazy.nvim.git",
       lazy_path,
     })
-    self:load_lazy()
-    lazy.install()
+    should_install = true
   end
+  self:load_lazy(should_install)
   vim.opt.rtp:prepend(lazy_path)
-  self:load_lazy()
 end
 
 function plugins.ensure_plugins()

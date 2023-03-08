@@ -66,7 +66,7 @@ local set_leader_map = function()
 end
 
 local set_colorscheme = function()
-  vim.cmd([[colorscheme gruvbox]])
+  vim.cmd.colorscheme("gruvbox")
 end
 
 local setup_copilot = function()
@@ -81,10 +81,10 @@ end
 local function load_nvim_config()
   disable_distribution_plugins()
   createdir()
+  options.load_options()
   set_leader_map()
   set_colorscheme()
 
-  options.load_options()
   event.load_autocmds()
   command.load_user_command()
   lazy.ensure_plugins()

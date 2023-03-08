@@ -59,7 +59,6 @@ function autocmd.load_autocmds()
         },
       },
     },
-
     _general_settings = {
       {
         event = "TextYankPost",
@@ -78,7 +77,6 @@ function autocmd.load_autocmds()
         },
       },
     },
-
     _lazy = {
       {
         event = "User",
@@ -91,14 +89,13 @@ function autocmd.load_autocmds()
         },
       },
     },
-
     _defer_start = {
       {
         event = "VimEnter",
         opts = {
           pattern = "*",
           callback = function()
-            require("doodleVim.utils.defer").defer_start(150)
+            require("doodleVim.utils.defer").emit_user_event(150)
           end,
         },
       },
