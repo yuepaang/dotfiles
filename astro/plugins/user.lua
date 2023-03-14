@@ -17,4 +17,8 @@ return {
 		"github/copilot.vim",
 		event = "VimEnter",
 	},
+	{
+		"alpertuna/vim-header",
+		event = "VimEnter",
+	},
 }

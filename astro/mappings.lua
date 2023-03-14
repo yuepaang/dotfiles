@@ -9,6 +9,7 @@ local utils = require("user.utils")
 local mappings = {
 	-- first key is the mode
 	n = {
+		["<F4>"] = { ":AddHeader<cr>" },
 		-- better buffer navigation
 		["]b"] = false,
 		["[b"] = false,
