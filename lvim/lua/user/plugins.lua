@@ -3,6 +3,7 @@ lvim.plugins = {
   "wakatime/vim-wakatime",
   "alpertuna/vim-header",
   "github/copilot.vim",
+  { "catppuccin/nvim", name = "catppuccin" },
 
   -- Original plugins
   "ellisonleao/gruvbox.nvim",
