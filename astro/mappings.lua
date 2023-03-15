@@ -10,6 +10,18 @@ local mappings = {
 	-- first key is the mode
 	n = {
 		["<F4>"] = { ":AddHeader<cr>" },
+		["Q"] = {
+			function()
+				require("astronvim.utils.buffer").close()
+			end,
+			desc = "Close buffer",
+		},
+		["<leader>c"] = {
+			function()
+				require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1)
+			end,
+			desc = "Comment line",
+		},
 		-- better buffer navigation
 		["]b"] = false,
 		["[b"] = false,
