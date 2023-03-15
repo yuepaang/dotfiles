@@ -1,5 +1,5 @@
 local utils = require("user.utils")
--- local astro_utils = require "astronvim.utils"
+local astro_utils = require("astronvim.utils")
 
 -- Mapping data with "desc" stored directly by vim.keymap.set().
 --
