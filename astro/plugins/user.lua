@@ -10,10 +10,6 @@ return {
 	--   end,
 	-- },
 	{
-		"wakatime/vim-wakatime",
-		event = "VimEnter",
-	},
-	{
 		"github/copilot.vim",
 		event = "VimEnter",
 	},
