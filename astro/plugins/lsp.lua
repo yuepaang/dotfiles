@@ -1,12 +1,4 @@
 return {
-	{ "lvimuser/lsp-inlayhints.nvim", config = true },
-	-- {
-	-- 	"Maan2003/lsp_lines.nvim",
-	-- 	event = "User AstroFile",
-	-- 	config = function()
-	-- 		require("lsp_lines").setup()
-	-- 	end,
-	-- },
 	{
 		"simrat39/rust-tools.nvim",
 		dependencies = { "williamboman/mason-lspconfig.nvim" },
@@ -28,6 +20,17 @@ return {
 					gotests = "~/go/bin/gotests", -- also you can set custom command path
 					impl = "impl",
 					iferr = "iferr",
+				},
+			})
+		end,
+	},
+	{
+		"saecki/crates.nvim",
+		config = function()
+			require("crates").setup({
+				null_ls = {
+					enabled = true,
+					name = "crates.nvim",
 				},
 			})
 		end,

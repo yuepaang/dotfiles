@@ -83,6 +83,30 @@ local mappings = {
 			end,
 			desc = "File",
 		},
+		-- gopher
+		["<leader>Gi"] = { "<cmd>GoInstallDeps<Cr>" },
+		["<leader>Gf"] = { "<cmd>GoMod tidy<cr>" },
+		["<leader>Ga"] = { "<cmd>GoTestAdd<Cr>" },
+		["<leader>GA"] = { "<cmd>GoTestsAll<Cr>" },
+		["<leader>Ge"] = { "<cmd>GoTestsExp<Cr>" },
+		["<leader>Gg"] = { "<cmd>GoGenerate<Cr>" },
+		["<leader>GG"] = { "<cmd>GoGenerate %<Cr>" },
+		["<leader>Gc"] = { "<cmd>GoCmt<Cr>" },
+		-- ["<leader>Gt"] = { "<cmd>lua require('dap-go').debug_test()<cr>"},
+
+		-- rust
+		-- ["<leader>Rr"] = { "<cmd>RustRunnables<Cr>" },
+		-- ["<leader>Rt"] = { "<cmd>lua _CARGO_TEST()<cr>" },
+		-- ["<leader>Rm"] = { "<cmd>RustExpandMacro<Cr>" },
+		-- ["<leader>Rc"] = { "<cmd>RustOpenCargo<Cr>" },
+		-- ["<leader>RD"] = { "<cmd>RustOpenExternalDocs<Cr>" },
+		-- ["<leader>Rp"] = { "<cmd>RustParentModule<Cr>" },
+		-- ["<leader>Rd"] = { "<cmd>RustDebuggables<Cr>" },
+		-- ["<leader>Rv"] = { "<cmd>RustViewCrateGraph<Cr>" },
+		-- ["<leader>RR"] = {
+		-- 	"<cmd>lua require('rust-tools/workspace_refresh')._reload_workspace_from_cargo_toml()<Cr>",
+		-- },
+		-- ["<leader>Ro"] = { "<cmd>RustOpenExternalDocs<Cr>" },
 	},
 	i = {
 		-- type template string
@@ -124,9 +148,9 @@ local mappings = {
 for _, char in ipairs({ "_", ".", ":", ",", ";", "|", "/", "\\", "*", "+", "%", "`", "?" }) do
 	for _, mode in ipairs({ "x", "o" }) do
 		mappings[mode]["i" .. char] =
-			{ string.format(":<C-u>silent! normal! f%sF%slvt%s<CR>", char, char, char), desc = "between " .. char }
+		{ string.format(":<C-u>silent! normal! f%sF%slvt%s<CR>", char, char, char), desc = "between " .. char }
 		mappings[mode]["a" .. char] =
-			{ string.format(":<C-u>silent! normal! f%sF%svf%s<CR>", char, char, char), desc = "around " .. char }
+		{ string.format(":<C-u>silent! normal! f%sF%svf%s<CR>", char, char, char), desc = "around " .. char }
 	end
 end
 

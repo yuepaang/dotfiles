@@ -47,6 +47,9 @@ return {
 						null_ls.builtins.formatting.prettierd.with({ extra_filetypes = { "markdown", "rmd", "qmd" } })
 					)
 				end,
+				shfmt = function()
+					null_ls.register(null_ls.builtins.formatting.shfmt)
+				end,
 			})
 		end,
 	},
