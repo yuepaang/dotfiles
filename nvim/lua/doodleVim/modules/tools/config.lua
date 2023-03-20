@@ -931,7 +931,8 @@ function config.dapui()
         step_out = codicons.get("debug-step-out"),
         step_back = codicons.get("debug-step-back"),
         run_last = codicons.get("debug-rerun"),
-        terminate = codicons.get("debug-disconnect"),
+        terminate = codicons.get("debug-stop"),
+        disconnect = codicons.get("debug-disconnect"),
       },
     },
     render = {
