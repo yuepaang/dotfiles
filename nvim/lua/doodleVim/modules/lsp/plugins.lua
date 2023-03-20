@@ -19,12 +19,29 @@ lsp["neovim/nvim-lspconfig"] = {
       end,
     },
   },
+  opts = {
+    servers = {
+      jdtls = {
+        disabled = true,
+      },
+    },
+  },
   config = conf.lspconfig,
 }
 
 lsp["j-hui/fidget.nvim"] = {
   lazy = true,
   config = conf.fidget,
+}
+
+lsp["mfussenegger/nvim-jdtls"] = {
+  lazy = true,
+  dependencies = {
+    "mfussenegger/nvim-dap",
+    "williamboman/mason.nvim",
+  },
+  ft = "java",
+  config = conf.jdtls,
 }
 
 lsp["tamago324/nlsp-settings.nvim"] = {

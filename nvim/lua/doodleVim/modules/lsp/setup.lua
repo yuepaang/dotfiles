@@ -16,6 +16,8 @@ function lsp.mason(plugin)
       "ruff",
       "solhint",
       "rust-analyzer",
+      "jdtls",
+      "java-debug-adapter",
     }
     local register = require("mason-registry")
     local bins = ""
@@ -26,6 +28,27 @@ function lsp.mason(plugin)
     end
     if #bins > 0 then
       vim.cmd("MasonInstall" .. bins)
+    end
+
+    local trim = require("doodleVim.utils.utils").trim
+    local jdtls_path = require("mason-core.path").package_prefix("jdtls")
+    local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
+
+    -- check lombok and install
+    if not vim.loop.fs_stat(lombok_jar) then
+      vim.schedule(function()
+        vim.fn.system({
+          "wget",
+          "https://projectlombok.org/downloads/lombok.jar",
+          "-O",
+          lombok_jar,
+        })
+        vim.fn.system({
+          "chomd",
+          "755",
+          lombok_jar,
+        })
+      end)
     end
   end)
 end
@@ -40,10 +63,6 @@ function lsp.lsp_signature(plugin)
       },
     }, bufnr)
   end)
-end
-
-function lsp.nvim_lspconfig(plugin)
-  -- require("doodleVim.utils.defer").defer_load("", )
 end
 
 return lsp
