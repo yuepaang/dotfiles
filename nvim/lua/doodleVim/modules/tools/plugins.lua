@@ -165,10 +165,4 @@ tools["nvim-orgmode/orgmode"] = {
   config = conf.orgmode,
 }
 
-tools["eandrju/cellular-automaton.nvim"] = {
-  lazy = true,
-  cmd = "CellularAutomaton",
-  config = conf.cellular,
-}
-
 return tools
