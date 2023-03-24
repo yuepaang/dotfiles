@@ -135,7 +135,7 @@ M.config = function()
       return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
 
-    lvim.builtin.cmp.mapping["<c-h>"] = cmp.mapping(function()
+    lvim.builtin.cmp.mapping["<c-e>"] = cmp.mapping(function()
       vim.api.nvim_feedkeys(vim.fn["copilot#Accept"](t "<Tab>"), "n", true)
     end)
     lvim.keys.insert_mode["<M-]>"] = { "<Plug>(copilot-next)", { silent = true } }

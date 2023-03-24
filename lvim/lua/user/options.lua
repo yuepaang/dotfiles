@@ -20,37 +20,6 @@ lvim.builtin.breadcrumbs.active = true
 -- lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.dap.active = true
 lvim.keys.term_mode = { ["<C-l>"] = false }
--- lvim.builtin.cmp.cmdline.enable = false
--- lvim.builtin.cmp.window.documentation = false
--- lvim.builtin.cmp.window.documentation = {
---   border = "rounded",
---   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
--- }
--- lvim.builtin.cmp.window.completion = {
---   border = "rounded",
---   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
--- }
--- lvim.builtin.cmp.formatting.source_names = {
---   nvim_lsp = "",
---   emoji = "",
---   path = "",
---   calc = "",
---   cmp_tabnine = "",
---   vsnip = "",
---   luasnip = "",
---   buffer = "",
---   tmux = "",
---   copilot = "",
---   treesitter = "",
--- }
-
--- lvim.builtin.cmp.formatting = {
---   format = require("tailwindcss-colorizer-cmp").formatter,
--- }
--- lvim.builtin.autopairs.active = false
--- vim.g.netrw_browse_split = 0
--- vim.g.netrw_banner = 0
--- vim.g.netrw_winsize = 25
 vim.opt.showtabline = 0
 
 local options = {
@@ -95,11 +64,6 @@ local options = {
   -- colorcolumn = "80",
   -- colorcolumn = "120",
 }
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- vim.opt.fillchars.eob = " "
--- vim.opt.fillchars = vim.opt.fillchars + "vertleft: "
--- vim.opt.fillchars = vim.opt.fillchars + "vertright: "
 vim.opt.fillchars = vim.opt.fillchars + "eob: "
 vim.opt.fillchars:append {
   stl = " ",
@@ -131,9 +95,9 @@ lvim.builtin.nvimtree.setup.view.mappings.list = {
 
 vim.g.header_field_author = "Yue Peng"
 vim.g.header_field_author_email = "yuepaang@gmail.com"
-vim.cmd [[
-  imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
-  let g:copilot_no_tab_map = v:true
-  let g:copilot_assume_mapped = v:true
-  let g:copilot_tab_fallback = ""
-]]
+-- vim.cmd [[
+--   imap <silent><script><expr> <C-e> copilot#Accept("\<CR>")
+--   let g:copilot_no_tab_map = v:true
+--   let g:copilot_assume_mapped = v:true
+--   let g:copilot_tab_fallback = ""
+-- ]]
