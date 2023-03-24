@@ -2,8 +2,62 @@
 lvim.plugins = {
   "wakatime/vim-wakatime",
   "alpertuna/vim-header",
-  "github/copilot.vim",
-  { "catppuccin/nvim", name = "catppuccin" },
+  -- "github/copilot.vim",
+  {
+      "github/copilot.vim",
+      config = function()
+        require("user.copilot").config()
+      end,
+      enabled = lvim.builtin.sell_your_soul_to_devil.active or lvim.builtin.sell_your_soul_to_devil.prada,
+    },
+    {
+      "zbirenbaum/copilot.lua",
+      dependencies = { "zbirenbaum/copilot-cmp", "nvim-cmp" },
+      config = function()
+        local cmp_source = { name = "copilot", group_index = 2 }
+        table.insert(lvim.builtin.cmp.sources, cmp_source)
+        vim.defer_fn(function()
+          require("copilot").setup()
+        end, 100)
+      end,
+      enabled = lvim.builtin.sell_your_soul_to_devil.prada,
+    },
+  {
+      "rose-pine/neovim",
+      name = "rose-pine",
+      config = function()
+        require("user.theme").rose_pine()
+        lvim.colorscheme = "rose-pine"
+      end,
+      cond = function()
+        local _time = os.date "*t"
+        return (_time.hour >= 1 and _time.hour < 9) and lvim.builtin.time_based_themes
+        -- return false
+      end,
+    },
+    {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      config = function()
+        require("user.theme").catppuccin()
+        local _time = os.date "*t"
+        if (_time.hour >= 17 and _time.hour < 21) and lvim.builtin.time_based_themes then
+          lvim.colorscheme = "catppuccin-mocha"
+        end
+      end,
+    },
+    {
+      "rebelot/kanagawa.nvim",
+      config = function()
+        require("user.theme").kanagawa()
+        lvim.colorscheme = "kanagawa"
+      end,
+      cond = function()
+        local _time = os.date "*t"
+        return ((_time.hour >= 21 and _time.hour < 24) or (_time.hour >= 0 and _time.hour < 1))
+          and lvim.builtin.time_based_themes
+      end,
+    },
 
   -- Original plugins
   "ellisonleao/gruvbox.nvim",
