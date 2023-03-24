@@ -76,7 +76,7 @@ lvim.plugins = {
   "christianchiarulli/harpoon",
   "MattesGroeger/vim-bookmarks",
   "NvChad/nvim-colorizer.lua",
-  "ghillb/cybu.nvim",
+  -- "ghillb/cybu.nvim",
   "moll/vim-bbye",
   "folke/todo-comments.nvim",
   "windwp/nvim-spectre",
