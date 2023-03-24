@@ -1,6 +1,8 @@
 -- lvim.colorscheme = "darkplus"
 -- lvim.colorscheme = "tokyonight"
-lvim.colorscheme = "catppuccin-frappe"
+-- lvim.colorscheme = "catppuccin-frappe"
+lvim.colorscheme = "tokyonight" -- set to a custom theme
+lvim.builtin.time_based_themes = true -- set false to use your own configured theme
 lvim.log.level = "warn"
 lvim.builtin.alpha.active = true
 lvim.lsp.diagnostics.float.focusable = true
