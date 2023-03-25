@@ -18,6 +18,8 @@ function lsp.mason(plugin)
       "rust-analyzer",
       "jdtls",
       "java-debug-adapter",
+      'java-test',
+      'xmlformatter'
     }
     local register = require("mason-registry")
     local bins = ""
