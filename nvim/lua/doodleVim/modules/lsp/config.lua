@@ -650,6 +650,7 @@ function config.jdtls(plugin, opts)
       bundles = bundles,
     },
     on_attach = function(client, bufnr)
+      require'jdtls.setup'.add_commands()
       require("jdtls").setup_dap({
         hotcodereplace = "auto",
       })
