@@ -33,7 +33,25 @@ reload "user.whichkey"
 lvim.builtin.borderless_cmp = false
 lvim.builtin.fancy_wild_menu = { active = false } -- enable/disable cmp-cmdline
 lvim.builtin.sell_your_soul_to_devil = { active = true, prada = false } -- if you want microsoft to abuse your soul
+lvim.builtin.refactoring = { active = false }
 
 -- Override Lunarvim defaults
 -- =========================================
 require("user.builtin").config()
+
+-- Language Specific
+-- =========================================
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
+  "clangd",
+  "dockerls",
+  "gopls",
+  "golangci_lint_ls",
+  "jdtls",
+  "pyright",
+  "rust_analyzer",
+  "taplo",
+  "texlab",
+  "tsserver",
+  "yamlls",
+})
+require("user.null_ls").config()
