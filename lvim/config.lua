@@ -1,4 +1,4 @@
-- Neovim
+-- Neovim
 -- =========================================
 lvim.leader = " "
 lvim.colorscheme = "tokyonight" -- set to a custom theme
