@@ -1,5 +1,6 @@
 local tools = {}
 local conf = require("doodleVim.modules.tools.config")
+local setup = require("doodleVim.modules.tools.setup")
 
 tools["nvim-telescope/telescope.nvim"] = {
   lazy = true,
@@ -117,6 +118,7 @@ tools["sindrets/diffview.nvim"] = {
 
 tools["mfussenegger/nvim-dap"] = {
   lazy = true,
+  event = { "User StartDebug" },
   dependencies = {
     "williamboman/mason.nvim",
     "rcarriga/nvim-dap-ui",
@@ -132,9 +134,21 @@ tools["rcarriga/nvim-dap-ui"] = {
   config = conf.dapui,
 }
 
+tools["mfussenegger/nvim-dap-python"] = {
+  lazy = true,
+  init = setup.dap_python,
+  config = conf.dap_python,
+}
+
+tools["leoluz/nvim-dap-go"] = {
+  lazy = true,
+  init = setup.dap_go,
+  config = conf.dap_go,
+}
+
 tools["Weissle/persistent-breakpoints.nvim"] = {
   lazy = true,
-  event = "User DeferStartWithFile",
+  init = setup.persistent_breakpoints,
   config = conf.breakpoints,
 }
 

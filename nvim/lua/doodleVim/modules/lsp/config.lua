@@ -1,4 +1,5 @@
 local config = {}
+local api = vim.api
 local vim_path = require("doodleVim.core.global").vim_path
 
 function config.lspconfig(plugin, opts)
@@ -175,7 +176,7 @@ function config.gotools()
         table.insert(indexed_items, entry)
         widths.idx = math.max(widths.idx, require("plenary.strings").strdisplaywidth(entry.idx))
         widths.command_title =
-            math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
+          math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
       end
       return indexed_items, widths
     end
@@ -184,7 +185,7 @@ function config.gotools()
       return require("telescope.pickers.entry_display").create({
         separator = " ",
         items = {
-          { width = widths.idx + 1 },           -- +1 for ":" suffix
+          { width = widths.idx + 1 }, -- +1 for ":" suffix
           { width = widths.command_title },
         },
       })
@@ -192,7 +193,7 @@ function config.gotools()
     local make_display_factory = function(displayer)
       return function(e)
         return displayer({
-          { e.value.idx .. ":",   "TelescopePromptPrefix" },
+          { e.value.idx .. ":", "TelescopePromptPrefix" },
           { e.value.command_title },
         })
       end
@@ -250,7 +251,7 @@ function config.null_ls()
       null_ls.builtins.code_actions.gitsigns,
       null_ls.builtins.diagnostics.solhint,
       null_ls.builtins.formatting.xmlformat.with({
-        extra_args = { "--indent", "4" }
+        extra_args = { "--indent", "4" },
       }),
     },
     update_in_insert = false,
@@ -318,38 +319,37 @@ end
 function config.fidget(plugin, opts)
   require("fidget").setup({
     text = {
-      spinner = "pipe",              -- animation shown when tasks are ongoing
-      done = "󰞑 ",                -- character shown when all tasks are complete
-      commenced = "Started",         -- message shown when task starts
-      completed = "Completed",       -- message shown when task completes
+      spinner = "pipe", -- animation shown when tasks are ongoing
+      done = "󰞑 ", -- character shown when all tasks are complete
+      commenced = "Started", -- message shown when task starts
+      completed = "Completed", -- message shown when task completes
     },
     align = {
-      bottom = true,       -- align fidgets along bottom edge of buffer
-      right = true,        -- align fidgets along right edge of buffer
+      bottom = true, -- align fidgets along bottom edge of buffer
+      right = true, -- align fidgets along right edge of buffer
     },
     timer = {
-      spinner_rate = 125,        -- frame rate of spinner animation, in ms
-      fidget_decay = 2000,       -- how long to keep around empty fidget, in ms
-      task_decay = 1000,         -- how long to keep around completed task, in ms
+      spinner_rate = 125, -- frame rate of spinner animation, in ms
+      fidget_decay = 2000, -- how long to keep around empty fidget, in ms
+      task_decay = 1000, -- how long to keep around completed task, in ms
     },
     window = {
-      relative = "win",       -- where to anchor, either "win" or "editor"
-      blend = 100,            -- &winblend for the window
-      zindex = nil,           -- the zindex value for the window
-      border = "none",        -- style of border for the fidget window
+      relative = "win", -- where to anchor, either "win" or "editor"
+      blend = 100, -- &winblend for the window
+      zindex = nil, -- the zindex value for the window
+      border = "none", -- style of border for the fidget window
     },
     fmt = {
-      leftpad = true,             -- right-justify text in fidget box
-      stack_upwards = true,       -- list of tasks grows upwards
-      max_width = 0,              -- maximum width of the fidget box
+      leftpad = true, -- right-justify text in fidget box
+      stack_upwards = true, -- list of tasks grows upwards
+      max_width = 0, -- maximum width of the fidget box
       -- function to format fidget title
       fidget = function(fidget_name, spinner)
         return string.format("%s %s", spinner, fidget_name)
       end,
       -- function to format each task line
       task = function(task_name, message, percentage)
-        return string.format("%s%s [%s]", message, percentage and string.format(" (%s%%)", percentage) or "",
-          task_name)
+        return string.format("%s%s [%s]", message, percentage and string.format(" (%s%%)", percentage) or "", task_name)
       end,
     },
   })
@@ -583,88 +583,30 @@ function config.barbecue(plugin, opts)
 end
 
 function config.jdtls(plugin, opts)
-  local trim = require("doodleVim.utils.utils").trim
-
-  -- get current system
-  local os_name = vim.loop.os_uname().sysname
-  local system = os_name == "Linux" and "linux" or os_name == "Windows" and "win" or "mac"
-
-  -- get jdtls and config jar path
-  local jdtls_path = require("mason-core.path").package_prefix("jdtls")
-
-  local jdtls_jar_path = trim(vim.fn.system({
-    "find", jdtls_path .. "/plugins", "-name", "org.eclipse.equinox.launcher_*.jar"
-  }))
-  local config_path = jdtls_path .. "/config_" .. system
-
-  -- get bundles
-  local java_debug_path = require("mason-core.path").package_prefix("java-debug-adapter")
-  local java_test_path = require("mason-core.path").package_prefix("java-test")
-
-  local java_debug_jar_path = trim(vim.fn.system({
-    "find",
-    java_debug_path .. "/extension/server",
-    "-name",
-    "com.microsoft.java.debug.plugin-*.jar",
-  }))
-
-  local bundles = {
-    vim.fn.glob(java_debug_jar_path, 1),
-  }
-  vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/extension/server/*.jar", 1), "\n"))
-
-  -- get project workspace
-  local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-  local workspace = vim.env.HOME .. "/.cache/jdtls/workspace/" .. project_name
-
-  -- get lombok path
-  local lombok_jar = jdtls_path .. "/plugins/" .. "lombok.jar"
-  local javaagent = "-javaagent:" .. lombok_jar
-  local Xbootclasspath = "-Xbootclasspath/a:" .. lombok_jar
-
-  local conf = {
-    cmd = {
-      "java",
-      "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-      "-Dosgi.bundles.defaultStartLevel=4",
-      "-Declipse.product=org.eclipse.jdt.ls.core.product",
-      "-Dlog.protocol=true",
-      "-Dlog.level=ALL",
-      "-Xms1g",
-      "--add-modules=ALL-SYSTEM",
-      "--add-opens",
-      "java.base/java.util=ALL-UNNAMED",
-      "--add-opens",
-      "java.base/java.lang=ALL-UNNAMED",
-      javaagent,
-      Xbootclasspath,
-      "-jar",
-      jdtls_jar_path,
-      "-configuration",
-      config_path,
-      "-data",
-      workspace,
-    },
-    root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
-    init_options = {
-      bundles = bundles,
-    },
-    on_attach = function(client, bufnr)
-      require'jdtls.setup'.add_commands()
-      require("jdtls").setup_dap({
-        hotcodereplace = "auto",
-      })
-      require("jdtls.dap").setup_dap_main_class_configs({
-        on_ready = function()
-          local dap = require("dap")
-          for _, java_config in pairs(dap.configurations.java) do
-            java_config.console = "internalConsole"
-          end
-        end,
-      })
+  local group = api.nvim_create_augroup("jdtls_lsp", { clear = true })
+  api.nvim_create_autocmd("FileType", {
+    group = group,
+    pattern = "java",
+    callback = function()
+      require("doodleVim.modules.lsp.jdtls").setup()
     end,
-  }
-  require("jdtls").start_or_attach(conf)
+    desc = "Setup jdtls lsp in every java file",
+  })
+
+  require("doodleVim.extend.debug").register_test_fn_debug("java", function()
+    vim.ui.select({ "Nearest", "Class" }, {
+      prompt = "Select Test Type",
+      format_item = function(item)
+        return " " .. item
+      end,
+    }, function(choice)
+      if choice == "Nearest" then
+        require("jdtls").test_nearest_method()
+      elseif choice == "Class" then
+        require("jdtls").test_class()
+      end
+    end)
+  end)
 end
 
 return config
