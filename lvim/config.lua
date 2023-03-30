@@ -67,26 +67,26 @@ lvim.builtin.breadcrumbs.active = false
 lvim.builtin.illuminate.active = false
 lvim.builtin.indentlines.active = true
 lvim.builtin.noice = { active = false } -- enables noice.nvim and inc-rename.nvim
-lvim.builtin.go_programming = { active = false } -- gopher.nvim + nvim-dap-go
-lvim.builtin.python_programming = { active = false } -- swenv.nvim + nvim-dap-python + requirements.txt.vim
+lvim.builtin.go_programming = { active = true } -- gopher.nvim + nvim-dap-go
+lvim.builtin.python_programming = { active = true } -- swenv.nvim + nvim-dap-python + requirements.txt.vim
 lvim.builtin.web_programming = { active = false } -- typescript.nvim + package-info.nvim
-lvim.builtin.rust_programming = { active = false } -- rust_tools.nvim + crates.nvim
+lvim.builtin.rust_programming = { active = true } -- rust_tools.nvim + crates.nvim
 lvim.builtin.cpp_programming = { active = false } -- clangd_extensions.nvim + make-tools.nvim
-lvim.builtin.cmp.cmdline.enable = false
+lvim.builtin.cmp.cmdline.enable = true
 lvim.builtin.borderless_cmp = false
 lvim.builtin.colored_args = false -- if true then sets up hlargs.nvim
 lvim.builtin.bigfile.active = true
-lvim.builtin.inlay_hints = { active = false } -- enable/disable inlay hints
+lvim.builtin.inlay_hints = { active = true } -- enable/disable inlay hints
 -- WARN: mind plugin is deprecated ( use with caution )
 lvim.builtin.mind = { active = false, root_path = "~/.mind" } -- enable/disable mind.nvim
 
 -- Custom User Config
 -- =========================================
-local user = vim.env.USER
-if user and user == "abz" then
-  lvim.reload_config_on_save = true
-  require("user.custom_user").config()
-end
+-- local user = vim.env.USER
+-- if user and user == "abz" then
+--   lvim.reload_config_on_save = true
+--   require("user.custom_user").config()
+-- end
 
 -- Additional Actions Based on Custom User Config
 -- =========================================
@@ -101,12 +101,12 @@ if lvim.builtin.breadcrumbs.active and lvim.builtin.noice.active then
   table.insert(lvim.builtin.breadcrumbs.winbar_filetype_exclude, "vim")
 end
 lvim.builtin.nvimtree.active = lvim.builtin.tree_provider == "nvimtree"
-lvim.builtin.latex = {
-  view_method = "skim", -- change to zathura if you are on linux
-  preview_exec = "/Applications/Skim.app/Contents/SharedSupport/displayline", -- change this to zathura as well
-  rtl_support = true, -- if you want to use xelatex, it's a bit slower but works very well for RTL langs
-  active = false, -- set to true to enable
-}
+-- lvim.builtin.latex = {
+--   view_method = "skim", -- change to zathura if you are on linux
+--   preview_exec = "/Applications/Skim.app/Contents/SharedSupport/displayline", -- change this to zathura as well
+--   rtl_support = true, -- if you want to use xelatex, it's a bit slower but works very well for RTL langs
+--   active = false, -- set to true to enable
+-- }
 if lvim.builtin.cursorline.active then
   lvim.lsp.document_highlight = false
 end

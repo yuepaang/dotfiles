@@ -10,17 +10,17 @@ M.config = function()
   if not status_ok then
     return
   end
-  local vale_config = vim.env.HOME .. "/.vale.ini"
-  local semgrep_rule_folder = vim.env.HOME .. "/.config/semgrep/semgrep-rules/"
-  local use_semgrep = false
-  if vim.fn.filereadable(semgrep_rule_folder .. "template.yaml") then
-    use_semgrep = true
-  end
-  local revive_conf = vim.fn.findfile(os.getenv "HOME" .. "/.config/revive.toml")
-  local revive_args = { "-formatter", "json", "./..." }
-  if revive_conf then
-    revive_args = { "-formatter", "json", "-config", revive_conf, "./..." }
-  end
+  -- local vale_config = vim.env.HOME .. "/.vale.ini"
+  -- local semgrep_rule_folder = vim.env.HOME .. "/.config/semgrep/semgrep-rules/"
+  -- local use_semgrep = false
+  -- if vim.fn.filereadable(semgrep_rule_folder .. "template.yaml") then
+  --   use_semgrep = true
+  -- end
+  -- local revive_conf = vim.fn.findfile(os.getenv "HOME" .. "/.config/revive.toml")
+  -- local revive_args = { "-formatter", "json", "./..." }
+  -- if revive_conf then
+  --   revive_args = { "-formatter", "json", "-config", revive_conf, "./..." }
+  -- end
 
   local custom_go_actions = require "user.null_ls.go"
   local custom_md_hover = require "user.null_ls.markdown"
@@ -71,12 +71,12 @@ M.config = function()
       end,
       prefer_local = "node_modules/.bin",
     },
-    nls.builtins.diagnostics.semgrep.with {
-      condition = function(utils)
-        return utils.root_has_file ".semgrepignore" and use_semgrep
-      end,
-      extra_args = { "--metrics", "off", "--exclude", "vendor", "--config", semgrep_rule_folder },
-    },
+    -- nls.builtins.diagnostics.semgrep.with {
+    --   condition = function(utils)
+    --     return utils.root_has_file ".semgrepignore" and use_semgrep
+    --   end,
+    --   extra_args = { "--metrics", "off", "--exclude", "vendor", "--config", semgrep_rule_folder },
+    -- },
     nls.builtins.diagnostics.shellcheck,
     nls.builtins.diagnostics.luacheck,
     nls.builtins.diagnostics.vint,
@@ -88,22 +88,22 @@ M.config = function()
       filetypes = { "markdown" },
       extra_args = { "-r", "~MD013" },
     },
-    nls.builtins.diagnostics.vale.with {
-      filetypes = { "markdown" },
-      extra_args = { "--config", vale_config },
-    },
-    nls.builtins.diagnostics.revive.with {
-      condition = function(utils)
-        return utils.root_has_file "revive.toml" or revive_conf
-      end,
-      args = revive_args,
-      diagnostics_postprocess = function(d)
-        d.severity = vim.diagnostic.severity.INFO
-        d.end_col = d.col
-        d.end_row = d.row
-        d.end_lnum = d.lnum
-      end,
-    },
+    -- nls.builtins.diagnostics.vale.with {
+    --   filetypes = { "markdown" },
+    --   extra_args = { "--config", vale_config },
+    -- },
+    -- nls.builtins.diagnostics.revive.with {
+    --   condition = function(utils)
+    --     return utils.root_has_file "revive.toml" or revive_conf
+    --   end,
+    --   args = revive_args,
+    --   diagnostics_postprocess = function(d)
+    --     d.severity = vim.diagnostic.severity.INFO
+    --     d.end_col = d.col
+    --     d.end_row = d.row
+    --     d.end_lnum = d.lnum
+    --   end,
+    -- },
     nls.builtins.code_actions.shellcheck,
     -- WARN: broken on neovim-head because of `nvim.treesitter.get_node_at_pos` being deprecated
     -- nls.builtins.code_actions.gomodifytags,
