@@ -21,7 +21,7 @@ lvim.builtin.tabnine = { active = true } -- change to false if you don't like ta
 lvim.builtin.persistence = { active = true } -- change to false if you don't want persistence
 lvim.builtin.presence = { active = false } -- change to true if you want discord presence
 lvim.builtin.orgmode = { active = false } -- change to true if you want orgmode.nvim
-lvim.builtin.dap.active = false -- change this to enable/disable debugging
+lvim.builtin.dap.active = true -- change this to enable/disable debugging
 lvim.builtin.fancy_statusline = { active = true } -- enable/disable fancy statusline
 lvim.builtin.fancy_wild_menu = { active = false } -- enable/disable cmp-cmdline
 lvim.builtin.fancy_diff = { active = false } -- enable/disable fancier git diff
@@ -82,11 +82,11 @@ lvim.builtin.mind = { active = false, root_path = "~/.mind" } -- enable/disable 
 
 -- Custom User Config
 -- =========================================
--- local user = vim.env.USER
--- if user and user == "abz" then
---   lvim.reload_config_on_save = true
---   require("user.custom_user").config()
--- end
+local user = vim.env.USER
+if user and user == "abz" then
+  lvim.reload_config_on_save = true
+  require("user.custom_user").config()
+end
 
 -- Additional Actions Based on Custom User Config
 -- =========================================

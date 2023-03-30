@@ -270,18 +270,18 @@ M.config = function()
       event = { "BufReadPre", "BufNew" },
       enabled = lvim.builtin.web_programming.active,
     },
-    {
-      "lervag/vimtex",
-      init = function()
-        require("user.tex").init()
-      end,
-      config = function()
-        vim.cmd "call vimtex#init()"
-      end,
-      ft = "tex",
-      event = "VeryLazy",
-      enabled = lvim.builtin.latex.active,
-    },
+    -- {
+    --   "lervag/vimtex",
+    --   init = function()
+    --     require("user.tex").init()
+    --   end,
+    --   config = function()
+    --     vim.cmd "call vimtex#init()"
+    --   end,
+    --   ft = "tex",
+    --   event = "VeryLazy",
+    --   enabled = lvim.builtin.latex.active,
+    -- },
     {
       "nvim-neotest/neotest",
       config = function()
