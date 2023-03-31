@@ -23,7 +23,7 @@ lvim.builtin.presence = { active = false } -- change to true if you want discord
 lvim.builtin.orgmode = { active = false } -- change to true if you want orgmode.nvim
 lvim.builtin.dap.active = true -- change this to enable/disable debugging
 lvim.builtin.fancy_statusline = { active = true } -- enable/disable fancy statusline
-lvim.builtin.fancy_wild_menu = { active = false } -- enable/disable cmp-cmdline
+lvim.builtin.fancy_wild_menu = { active = true } -- enable/disable cmp-cmdline
 lvim.builtin.fancy_diff = { active = false } -- enable/disable fancier git diff
 lvim.builtin.lua_dev = { active = true } -- change this to enable/disable folke/lua_dev
 lvim.builtin.test_runner = { active = true, runner = "ultest" } -- change this to enable/disable ultest or neotest
@@ -76,17 +76,17 @@ lvim.builtin.cmp.cmdline.enable = true
 lvim.builtin.borderless_cmp = false
 lvim.builtin.colored_args = false -- if true then sets up hlargs.nvim
 lvim.builtin.bigfile.active = true
-lvim.builtin.inlay_hints = { active = true } -- enable/disable inlay hints
+lvim.builtin.inlay_hints = { active = false } -- enable/disable inlay hints
 -- WARN: mind plugin is deprecated ( use with caution )
 lvim.builtin.mind = { active = false, root_path = "~/.mind" } -- enable/disable mind.nvim
 
 -- Custom User Config
 -- =========================================
-local user = vim.env.USER
-if user and user == "abz" then
-  lvim.reload_config_on_save = true
-  require("user.custom_user").config()
-end
+-- local user = vim.env.USER
+-- if user and user == "abz" then
+--   lvim.reload_config_on_save = true
+--   require("user.custom_user").config()
+-- end
 
 -- Additional Actions Based on Custom User Config
 -- =========================================
