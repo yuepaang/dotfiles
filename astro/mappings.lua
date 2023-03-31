@@ -9,7 +9,6 @@ local astro_utils = require("astronvim.utils")
 local mappings = {
 	-- first key is the mode
 	n = {
-		["<F4>"] = { ":AddHeader<cr>" },
 		["Q"] = {
 			function()
 				require("astronvim.utils.buffer").close()
@@ -83,6 +82,7 @@ local mappings = {
 			end,
 			desc = "File",
 		},
+		["<leader>ah"] = { "<cmd>AddHeader<Cr>" },
 		-- gopher
 		["<leader>Gi"] = { "<cmd>GoInstallDeps<Cr>" },
 		["<leader>Gf"] = { "<cmd>GoMod tidy<cr>" },
@@ -95,18 +95,18 @@ local mappings = {
 		-- ["<leader>Gt"] = { "<cmd>lua require('dap-go').debug_test()<cr>"},
 
 		-- rust
-		-- ["<leader>Rr"] = { "<cmd>RustRunnables<Cr>" },
-		-- ["<leader>Rt"] = { "<cmd>lua _CARGO_TEST()<cr>" },
-		-- ["<leader>Rm"] = { "<cmd>RustExpandMacro<Cr>" },
-		-- ["<leader>Rc"] = { "<cmd>RustOpenCargo<Cr>" },
-		-- ["<leader>RD"] = { "<cmd>RustOpenExternalDocs<Cr>" },
-		-- ["<leader>Rp"] = { "<cmd>RustParentModule<Cr>" },
-		-- ["<leader>Rd"] = { "<cmd>RustDebuggables<Cr>" },
-		-- ["<leader>Rv"] = { "<cmd>RustViewCrateGraph<Cr>" },
-		-- ["<leader>RR"] = {
-		-- 	"<cmd>lua require('rust-tools/workspace_refresh')._reload_workspace_from_cargo_toml()<Cr>",
-		-- },
-		-- ["<leader>Ro"] = { "<cmd>RustOpenExternalDocs<Cr>" },
+		["<leader>Rr"] = { "<cmd>RustRunnables<Cr>" },
+		["<leader>Rt"] = { "<cmd>lua _CARGO_TEST()<cr>" },
+		["<leader>Rm"] = { "<cmd>RustExpandMacro<Cr>" },
+		["<leader>Rc"] = { "<cmd>RustOpenCargo<Cr>" },
+		["<leader>RD"] = { "<cmd>RustOpenExternalDocs<Cr>" },
+		["<leader>Rp"] = { "<cmd>RustParentModule<Cr>" },
+		["<leader>Rd"] = { "<cmd>RustDebuggables<Cr>" },
+		["<leader>Rv"] = { "<cmd>RustViewCrateGraph<Cr>" },
+		["<leader>RR"] = {
+			"<cmd>lua require('rust-tools/workspace_refresh')._reload_workspace_from_cargo_toml()<Cr>",
+		},
+		["<leader>Ro"] = { "<cmd>RustOpenExternalDocs<Cr>" },
 	},
 	i = {
 		-- type template string
