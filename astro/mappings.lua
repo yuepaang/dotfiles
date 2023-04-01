@@ -83,6 +83,13 @@ local mappings = {
 			desc = "File",
 		},
 		["<leader>ah"] = { "<cmd>AddHeader<Cr>" },
+
+		-- telescope plugin mappings
+		["<leader>fB"] = { "<cmd>Telescope bibtex<cr>", desc = "Find BibTeX" },
+		["<leader>fe"] = { "<cmd>Telescope file_browser<cr>", desc = "File explorer" },
+		["<leader>fp"] = { function() require("telescope").extensions.projects.projects {} end, desc = "Find projects" },
+		["<leader>fT"] = { "<cmd>TodoTelescope<cr>", desc = "Find TODOs" },
+
 		-- gopher
 		["<leader>Gi"] = { "<cmd>GoInstallDeps<Cr>" },
 		["<leader>Gf"] = { "<cmd>GoMod tidy<cr>" },
@@ -107,6 +114,13 @@ local mappings = {
 			"<cmd>lua require('rust-tools/workspace_refresh')._reload_workspace_from_cargo_toml()<Cr>",
 		},
 		["<leader>Ro"] = { "<cmd>RustOpenExternalDocs<Cr>" },
+
+		["<leader>x"] = { desc = "Trouble" },
+		["<leader>xx"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+		["<leader>xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+		["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+		["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+		["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" },
 	},
 	i = {
 		-- type template string

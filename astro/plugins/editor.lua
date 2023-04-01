@@ -75,6 +75,12 @@ return {
 		end,
 	},
 	{
+    "folke/todo-comments.nvim",
+		event = "User AstroFile",
+		cmd = { "TodoTrouble", "TodoTelescope", "TodoLocList", "TodoQuickFix" },
+		opts = {},
+	},
+	{
 		"folke/trouble.nvim",
 		cmd = { "TroubleToggle", "Trouble" },
 		opts = {
