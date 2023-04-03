@@ -3,6 +3,16 @@ local M = {}
 local create_aucmd = vim.api.nvim_create_autocmd
 
 M.config = function()
+  -- go to last loc when opening a buffer
+  vim.api.nvim_create_autocmd(
+    "BufReadPost",
+    { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
+  )
+  -- create directories when needed, when saving a file
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("auto_create_dir", { clear = true }),
+    command = [[call mkdir(expand('<afile>:p:h'), 'p')]],
+  })
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
     callback = function()
