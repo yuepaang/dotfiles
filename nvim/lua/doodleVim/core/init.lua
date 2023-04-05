@@ -65,9 +65,9 @@ local set_leader_map = function()
   vim.api.nvim_set_keymap("v", "<C-c>", "<esc>", { noremap = true })
 end
 
--- local set_colorscheme = function()
---   vim.cmd.colorscheme("gruvbox")
--- end
+local set_colorscheme = function()
+  vim.cmd.colorscheme("gruvbox")
+end
 
 local setup_copilot = function()
   vim.cmd([[
@@ -83,7 +83,7 @@ local function load_nvim_config()
   createdir()
   options.load_options()
   set_leader_map()
-  -- set_colorscheme()
+  set_colorscheme()
 
   event.load_autocmds()
   command.load_user_command()
