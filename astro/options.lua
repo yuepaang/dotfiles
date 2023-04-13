@@ -15,6 +15,9 @@ return {
 		list = true, -- show whitespace characters
 		-- listchars = { tab = " ", extends = "⟩", precedes = "⟨", trail = "·", eol = "﬋" },
 		showbreak = "﬌ ",
+    showtabline = 1,
+    spellfile = vim.fn.expand "~/dotfiles/astro/spell/en.utf-8.add",
+    swapfile = false,
 	},
 	g = {
 		mapleader = " ", -- sets vim.g.mapleader
