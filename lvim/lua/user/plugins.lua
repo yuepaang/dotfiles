@@ -547,11 +547,6 @@ M.config = function()
       enabled = lvim.builtin.cpp_programming.active,
     },
     {
-      "editorconfig/editorconfig-vim",
-      event = "BufRead",
-      enabled = lvim.builtin.editorconfig.active,
-    },
-    {
       "saecki/crates.nvim",
       event = { "BufRead Cargo.toml" },
       dependencies = { { "nvim-lua/plenary.nvim" } },
