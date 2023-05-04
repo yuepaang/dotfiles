@@ -1,14 +1,27 @@
 local M = {}
 local kind = require "user.lsp_kind"
+local cmp_ok, cmp = pcall(require, "cmp")
+if not cmp_ok or cmp == nil then
+  cmp = {
+    mapping = function(...) end,
+    setup = {
+      filetype = function(...) end,
+      cmdline = function(...) end,
+    },
+    config = {
+      sources = function(...) end,
+    },
+  }
+end
 
 M.default_diagnostic_config = {
   signs = {
     active = true,
     values = {
       { name = "DiagnosticSignError", text = kind.icons.error },
-      { name = "DiagnosticSignWarn",  text = kind.icons.warn },
-      { name = "DiagnosticSignInfo",  text = kind.icons.info },
-      { name = "DiagnosticSignHint",  text = kind.icons.hint },
+      { name = "DiagnosticSignWarn", text = kind.icons.warn },
+      { name = "DiagnosticSignInfo", text = kind.icons.info },
+      { name = "DiagnosticSignHint", text = kind.icons.hint },
     },
   },
   virtual_text = false,
@@ -64,6 +77,32 @@ M.config = function()
 
   -- CMP
   -- =========================================
+  local comparators = {
+    cmp.config.compare.offset,
+    cmp.config.compare.exact,
+    cmp.config.compare.score,
+    cmp.config.compare.recently_used,
+    cmp.config.compare.locality,
+    cmp.config.compare.kind,
+    cmp.config.compare.length,
+    cmp.config.compare.order,
+  }
+  if lvim.builtin.cpp_programming.active then
+    comparators = {
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.recently_used,
+      require "clangd_extensions.cmp_scores",
+      cmp.config.compare.locality,
+      cmp.config.compare.kind,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    }
+  end
+  lvim.builtin.cmp.sorting = {
+    priority_weight = 2,
+    comparators = comparators,
+  }
   lvim.builtin.cmp.sources = {
     {
       name = "nvim_lsp",
@@ -150,7 +189,7 @@ M.config = function()
         return vim_item
       end
       vim_item.kind =
-          string.format("%s %s", kind.cmp_kind[vim_item.kind] or " ", cmp_sources[entry.source.name] or vim_item.kind)
+        string.format("%s %s", kind.cmp_kind[vim_item.kind] or " ", cmp_sources[entry.source.name] or vim_item.kind)
 
       return vim_item
     end
@@ -168,23 +207,6 @@ M.config = function()
 
         return vim_item
       end,
-    }
-  end
-  local cmp_ok, cmp = pcall(require, "cmp")
-  if not cmp_ok or cmp == nil then
-    cmp = {
-      mapping = function(...)
-      end,
-      setup = {
-        filetype = function(...)
-        end,
-        cmdline = function(...)
-        end,
-      },
-      config = {
-        sources = function(...)
-        end,
-      },
     }
   end
   if lvim.builtin.fancy_wild_menu.active then
@@ -428,13 +450,12 @@ M.config = function()
   -- =========================================
   lvim.builtin.treesitter.context_commentstring.enable = true
   local languages = vim.tbl_flatten {
-    { "bash",       "c",               "c_sharp", "cmake",  "comment", "cpp",    "css",        "d",    "dart" },
-    { "dockerfile", "elixir",          "elm",     "erlang", "fennel",  "fish",   "go",         "gomod" },
-    { "gomod",      "graphql",         "hcl",     "help",   "html",    "java",   "javascript", "jsdoc" },
-    { "json",       "jsonc",           "julia",   "kotlin", "latex",   "ledger", "lua",        "make" },
-    { "markdown",   "markdown_inline", "nix",     "ocaml",  "perl",    "php",    "python" },
-    { "query", "r", "regex", "rego", "ruby", "rust", "scala", "scss", "solidity",
-      "swift" },
+    { "bash", "c", "c_sharp", "cmake", "comment", "cpp", "css", "d", "dart" },
+    { "dockerfile", "elixir", "elm", "erlang", "fennel", "fish", "go", "gomod" },
+    { "gomod", "graphql", "hcl", "help", "html", "java", "javascript", "jsdoc" },
+    { "json", "jsonc", "julia", "kotlin", "latex", "ledger", "lua", "make" },
+    { "markdown", "markdown_inline", "nix", "ocaml", "perl", "php", "python" },
+    { "query", "r", "regex", "rego", "ruby", "rust", "scala", "scss", "solidity", "swift" },
     { "swift", "teal", "toml", "tsx", "typescript", "vim", "vue", "yaml", "zig" },
   }
   lvim.builtin.treesitter.ensure_installed = languages
@@ -675,7 +696,7 @@ M.config = function()
   lvim.builtin.which_key.setup.icons = {
     breadcrumb = "/", -- symbol used in the command line area that shows your active key combo
     separator = "·", -- symbol used between a key and it's label
-    group = "",       -- symbol prepended to a group
+    group = "", -- symbol prepended to a group
   }
   lvim.builtin.which_key.setup.ignore_missing = true
 
@@ -696,7 +717,6 @@ end
 
 function M.tab(fallback)
   local methods = require("lvim.core.cmp").methods
-  local cmp = require "cmp"
   local luasnip = require "luasnip"
   local copilot_keys = vim.fn["copilot#Accept"]()
   if cmp.visible() then
@@ -721,7 +741,6 @@ end
 function M.shift_tab(fallback)
   local methods = require("lvim.core.cmp").methods
   local luasnip = require "luasnip"
-  local cmp = require "cmp"
   if cmp.visible() then
     cmp.select_prev_item()
   elseif vim.api.nvim_get_mode().mode == "c" then
