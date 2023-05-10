@@ -39,11 +39,33 @@ return {
 			mapping = {
 				["<C-n>"] = next_item,
 				["<C-j>"] = next_item,
+				-- ["<Tab>"] = cmp.mapping(function(fallback)
+				-- 	if luasnip.jumpable(1) then
+				-- 		luasnip.jump(1)
+				-- 	else
+				-- 		fallback()
+				-- 	end
+				-- end, { "i", "s" }),
 				["<Tab>"] = cmp.mapping(function(fallback)
-					if luasnip.jumpable(1) then
-						luasnip.jump(1)
-					else
+					local methods = cmp.methods
+					-- local luasnip = require("luasnip")
+					local copilot_keys = vim.fn["copilot#Accept"]()
+					if cmp.visible() then
+						cmp.select_next_item()
+					elseif vim.api.nvim_get_mode().mode == "c" then
 						fallback()
+					elseif luasnip.expand_or_locally_jumpable() then
+						luasnip.expand_or_jump()
+					elseif copilot_keys ~= "" then -- prioritise copilot over snippets
+						-- Copilot keys do not need to be wrapped in termcodes
+						vim.api.nvim_feedkeys(copilot_keys, "i", true)
+					elseif methods.jumpable(1) then
+						luasnip.jump(1)
+					elseif methods.has_words_before() then
+						-- cmp.complete()
+						fallback()
+					else
+						methods.feedkeys("<Plug>(Tabout)", "")
 					end
 				end, { "i", "s" }),
 				["<S-Tab>"] = cmp.mapping(function(fallback)
