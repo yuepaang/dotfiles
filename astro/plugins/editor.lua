@@ -58,9 +58,7 @@ return {
 				mode = { "n", "v" },
 			},
 		},
-		config = function(_, opts)
-			require("mini.move").setup(opts)
-		end,
+		opts = {},
 	},
 	{
 		"arsham/indent-tools.nvim",
