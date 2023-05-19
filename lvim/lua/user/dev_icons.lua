@@ -23,7 +23,7 @@ M.set_icon = function()
       name = "Terraform",
     },
     mod = {
-      icon = "ﳑ",
+      icon = "",
       color = "#6a9fb5",
       name = "Mod",
     },
@@ -76,7 +76,7 @@ M.set_icon = function()
 end
 
 M.use_my_icons = function()
-  for _, sign in ipairs(require('user.builtin').default_diagnostic_config.signs.values) do
+  for _, sign in ipairs(require("user.builtin").default_diagnostic_config.signs.values) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
   end
   if lvim.builtin.tree_provider == "nvimtree" then
