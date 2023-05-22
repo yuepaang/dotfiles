@@ -1,7 +1,13 @@
 local get_icon = require("astronvim.utils").get_icon
 return {
-	-- { "goolord/alpha-nvim", enabled = false },
-	-- { "max397574/better-escape.nvim", enabled = false },
+	{ "goolord/alpha-nvim", enabled = false },
+	{ "max397574/better-escape.nvim", enabled = false },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		opts = function(_, opts)
+			opts.filetype_exclude = require("astronvim.utils").list_insert_unique(opts.filetype_exclude, "julia")
+		end,
+	},
 	{
 		"akinsho/toggleterm.nvim",
 		opts = {

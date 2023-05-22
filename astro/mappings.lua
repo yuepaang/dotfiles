@@ -149,7 +149,7 @@ local mappings = {
 		},
 
 		-- gopher
-		["<leader>Gi"] = { "<cmd>GoInstallDeps<Cr>" },
+		["<leader>Gd"] = { "<cmd>GoInstallDeps<Cr>" },
 		["<leader>Gf"] = { "<cmd>GoMod tidy<cr>" },
 		["<leader>Ga"] = { "<cmd>GoTestAdd<Cr>" },
 		["<leader>GA"] = { "<cmd>GoTestsAll<Cr>" },
