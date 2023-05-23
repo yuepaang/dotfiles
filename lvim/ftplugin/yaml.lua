@@ -1,28 +1,14 @@
-local opts = {
-  settings = {
-    yaml = {
-      hover = true,
-      completion = true,
-      validate = true,
-      schemaStore = {
-        enable = true,
-        url = "https://www.schemastore.org/api/json/catalog.json",
-      },
-      schemas = {
-        kubernetes = {
-          "daemon.{yml,yaml}",
-          "manager.{yml,yaml}",
-          "restapi.{yml,yaml}",
-          "kubectl-edit*.yaml",
-        },
-        ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master/configmap.json"] = "*onfigma*.{yml,yaml}",
-        ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master/deployment.json"] = "*eployment*.{yml,yaml}",
-        ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master/service.json"] = "*ervic*.{yml,yaml}",
-        ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master/ingress.json"] = "*ngres*.{yml,yaml}",
-        ["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master/secret.json"] = "*ecre*.{yml,yaml}",
-      },
-    },
-  },
-}
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "yamlls" })
 
-require("lvim.lsp.manager").setup("yamlls", opts)
+-- print(vim.api.nvim_buf_get_name(0))
+local path = vim.api.nvim_buf_get_name(0)
+local parts = vim.split(path, "/")
+local filename = parts[#parts]
+-- print(filename)
+
+-- check if ansidble is in file extension
+if string.find(filename, "ansible") then
+  require("lvim.lsp.manager").setup("ansiblels", {})
+else
+  require("lvim.lsp.manager").setup("yamlls", {})
+end
