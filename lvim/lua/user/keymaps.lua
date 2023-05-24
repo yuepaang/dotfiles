@@ -119,4 +119,12 @@ M.show_documentation = function()
 end
 vim.api.nvim_set_keymap("n", "K", ":lua require('user.keymaps').show_documentation()<CR>", opts)
 
+lvim.keys.normal_mode["<S-l>"] = "<Cmd>BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = "<Cmd>BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["[b"] = "<Cmd>BufferLineMoveNext<CR>"
+lvim.keys.normal_mode["]b"] = "<Cmd>BufferLineMovePrev<CR>"
+lvim.keys.normal_mode["<C-s>"] = "<ESC>:w<CR>"
+
+lvim.keys.insert_mode["jk"] = "<ESC>:w<CR>"
+
 return M
