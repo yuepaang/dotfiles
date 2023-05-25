@@ -163,7 +163,8 @@ lvim.builtin.which_key.mappings[";"] = nil
 -- lvim.builtin.which_key.mappings["c"] = nil
 lvim.builtin.which_key.mappings["L"] = nil
 lvim.builtin.which_key.mappings["s"] = nil
-lvim.builtin.which_key.mappings["w"] = nil
+-- lvim.builtin.which_key.mappings["w"] = nil
+lvim.builtin.which_key.mappings["w"] = { "<cmd>w!<CR>", "Save" }
 
 local m_opts = {
   mode = "n", -- NORMAL mode
