@@ -9,6 +9,12 @@ return {
 		end,
 	},
 	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			{ "theHamsta/nvim-dap-virtual-text", config = true },
+		},
+	},
+	{
 		"akinsho/toggleterm.nvim",
 		opts = {
 			terminal_mappings = false,
