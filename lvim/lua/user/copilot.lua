@@ -23,6 +23,17 @@ copilot.setup {
       dismiss = "<c-e>",
     },
   },
+  filetypes = {
+    yaml = false,
+    markdown = true,
+    help = false,
+    gitcommit = false,
+    gitrebase = false,
+    hgcommit = false,
+    svn = false,
+    cvs = false,
+    ["."] = true,
+  },
 }
 
 local opts = { noremap = true, silent = true }
