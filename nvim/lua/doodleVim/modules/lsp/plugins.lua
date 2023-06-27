@@ -10,7 +10,6 @@ lsp["neovim/nvim-lspconfig"] = {
     "williamboman/mason-lspconfig.nvim",
     "tamago324/nlsp-settings.nvim",
     "mortepau/codicons.nvim",
-    "j-hui/fidget.nvim",
     "utilyre/barbecue.nvim",
     {
       "hrsh7th/cmp-nvim-lsp",
@@ -27,11 +26,6 @@ lsp["neovim/nvim-lspconfig"] = {
     },
   },
   config = conf.lspconfig,
-}
-
-lsp["j-hui/fidget.nvim"] = {
-  lazy = true,
-  config = conf.fidget,
 }
 
 lsp["mfussenegger/nvim-jdtls"] = {

@@ -10,7 +10,13 @@ function config.lspconfig(plugin, opts)
   handler.lsp_highlight_document()
 
   local servers = opts.servers or {}
-  local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = vim.tbl_deep_extend(
+    "force",
+    {},
+    vim.lsp.protocol.make_client_capabilities(),
+    require("cmp_nvim_lsp").default_capabilities(),
+    opts.capabilities or {}
+  )
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.offsetEncoding = { "utf-16" }
 
@@ -254,6 +260,7 @@ function config.null_ls()
       null_ls.builtins.formatting.xmlformat.with({
         extra_args = { "--indent", "4" },
       }),
+      null_ls.builtins.formatting.stylua,
     },
     update_in_insert = false,
   })
@@ -316,45 +323,6 @@ function config.lightbulb()
       pattern = { "*" },
       -- see :help autocmd-events
       events = { "CursorHold", "CursorHoldI" },
-    },
-  })
-end
-
-function config.fidget(plugin, opts)
-  require("fidget").setup({
-    text = {
-      spinner = "pipe", -- animation shown when tasks are ongoing
-      done = "󰞑 ", -- character shown when all tasks are complete
-      commenced = "Started", -- message shown when task starts
-      completed = "Completed", -- message shown when task completes
-    },
-    align = {
-      bottom = true, -- align fidgets along bottom edge of buffer
-      right = true, -- align fidgets along right edge of buffer
-    },
-    timer = {
-      spinner_rate = 125, -- frame rate of spinner animation, in ms
-      fidget_decay = 2000, -- how long to keep around empty fidget, in ms
-      task_decay = 1000, -- how long to keep around completed task, in ms
-    },
-    window = {
-      relative = "win", -- where to anchor, either "win" or "editor"
-      blend = 100, -- &winblend for the window
-      zindex = nil, -- the zindex value for the window
-      border = "none", -- style of border for the fidget window
-    },
-    fmt = {
-      leftpad = true, -- right-justify text in fidget box
-      stack_upwards = true, -- list of tasks grows upwards
-      max_width = 0, -- maximum width of the fidget box
-      -- function to format fidget title
-      fidget = function(fidget_name, spinner)
-        return string.format("%s %s", spinner, fidget_name)
-      end,
-      -- function to format each task line
-      task = function(task_name, message, percentage)
-        return string.format("%s%s [%s]", message, percentage and string.format(" (%s%%)", percentage) or "", task_name)
-      end,
     },
   })
 end
@@ -678,22 +646,6 @@ function config.jdtls(plugin, opts)
       end
     end)
   end)
-end
-
-function config.lsp_lens(plugin, opts)
-  require("lsp-lens").setup({
-    enable = true,
-    include_declaration = false, -- Reference include declaration
-    sections = {
-      -- Enable / Disable specific request
-      definition = false,
-      references = true,
-      implementation = true,
-    },
-    ignore_filetype = {
-      "prisma",
-    },
-  })
 end
 
 return config
