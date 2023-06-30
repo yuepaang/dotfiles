@@ -93,12 +93,14 @@ gruvbox.overrides = {
   -- LspLens
   LspLens = { link = "Comment" },
   IndentLine = { link = "Comment" },
+  -- NvimCmp
+  CmpGhostText = { link = "Comment" },
 }
 
 gruvbox.dump = function()
   require("gruvbox").setup({
-    overrides = require("doodleVim.Extend.gruvbox").overrides,
-    palette_overrides = require("doodleVim.Extend.gruvbox").palette_overrides,
+    overrides = require("doodleVim.extend.gruvbox").overrides,
+    palette_overrides = require("doodleVim.extend.gruvbox").palette_overrides,
   })
   local groups = require("gruvbox.groups").setup()
   local color_file_path = colors_path .. "/gruvbox.lua"

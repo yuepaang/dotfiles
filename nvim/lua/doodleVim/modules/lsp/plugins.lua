@@ -107,4 +107,8 @@ lsp["utilyre/barbecue.nvim"] = {
   config = conf.barbecue,
 }
 
+-- lsp["LunarVim/bigfile.nvim"] = {
+--
+-- }
+
 return lsp

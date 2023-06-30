@@ -180,6 +180,11 @@ function config.nvim_cmp(plugin, opts)
     view = {
       entries = { name = "custom", selection_order = "top_down" },
     },
+    experimental = {
+      ghost_text = {
+        hl_group = "CmpGhostText",
+      },
+    },
     formatting = {
       fields = {
         cmp.ItemField.Abbr,

@@ -165,7 +165,7 @@ tools["kevinhwang91/promise-async"] = {
 
 tools["kevinhwang91/nvim-ufo"] = {
   lazy = true,
-  event = "User DeferStartWithFile",
+  event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     "kevinhwang91/promise-async",
@@ -175,7 +175,7 @@ tools["kevinhwang91/nvim-ufo"] = {
 
 tools["nvim-orgmode/orgmode"] = {
   lazy = true,
-  event = "User DeferStartWithFile",
+  event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
   config = conf.orgmode,
 }
 
