@@ -2,6 +2,7 @@ local get_icon = require("astronvim.utils").get_icon
 return {
 	{ "goolord/alpha-nvim", enabled = false },
 	{ "max397574/better-escape.nvim", enabled = false },
+	{ "wakatime/vim-wakatime" },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		opts = function(_, opts)
