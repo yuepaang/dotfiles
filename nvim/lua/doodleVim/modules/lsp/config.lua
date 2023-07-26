@@ -268,16 +268,15 @@ end
 
 function config.lightbulb()
   local codicons = require("codicons")
-  vim.fn.sign_define("LightBulbSign", {
-    text = codicons.get("lightbulb"),
-    texthl = "GruvboxYellowSign",
-  })
+
+  vim.fn.sign_define("LightBulbSign", { text = codicons.get("lightbulb"), texthl = "GruvboxYellowSign" })
 
   -- Showing defaults
   require("nvim-lightbulb").setup({
-    -- LSP client names to ignore
-    -- Example: {"sumneko_lua", "null-ls"}
-    ignore = { "null-ls" },
+    ignore = {
+      clients = { "null-ls" },
+      ft = {},
+    },
     sign = {
       enabled = true,
       -- Priority of the gutter sign
