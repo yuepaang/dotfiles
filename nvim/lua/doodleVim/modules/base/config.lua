@@ -170,7 +170,7 @@ function config.dressing(plugin, opts)
       start_in_insert = true,
 
       -- These are passed to nvim_open_win
-      anchor = "SW",
+      -- anchor = "SW",
       border = "rounded",
       -- 'editor' and 'win' will default to being centered
       relative = "cursor",
@@ -208,6 +208,7 @@ function config.dressing(plugin, opts)
       override = function(conf)
         -- This is the config that will be passed to nvim_open_win.
         -- Change values here to customize the layout
+        conf.anchor = "SW"
         return conf
       end,
 
@@ -269,7 +270,7 @@ function config.dressing(plugin, opts)
       -- Options for built-in selector
       builtin = {
         -- These are passed to nvim_open_win
-        anchor = "NW",
+        -- anchor = "NW",
         border = "rounded",
         -- 'editor' and 'win' will default to being centered
         relative = "editor",
@@ -300,6 +301,7 @@ function config.dressing(plugin, opts)
         override = function(conf)
           -- This is the config that will be passed to nvim_open_win.
           -- Change values here to customize the layout
+          conf.anchor = "NW"
           return conf
         end,
       },
