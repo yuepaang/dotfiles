@@ -99,53 +99,53 @@ function config.telescope()
         -- the default case_mode is "smart_case"
       },
       -- ["ui-select"] = {
-      --   require("telescope.themes").get_dropdown({
-      --     initial_mode = "normal",
-      --   }),
-      --   specific_opts = {
-      --     -- for gotools.nvim
-      --     ["gotools"] = {
-      --       make_indexed = function(items)
-      --         local indexed_items = {}
-      --         local widths = {
-      --           idx = 0,
-      --           command_title = 0,
-      --         }
-      --         for idx, item in ipairs(items) do
-      --           local entry = {
-      --             idx = idx,
-      --             command_title = item,
-      --             text = item,
-      --           }
-      --           table.insert(indexed_items, entry)
-      --           widths.idx = math.max(widths.idx, require("plenary.strings").strdisplaywidth(entry.idx))
-      --           widths.command_title =
-      --             math.max(widths.command_title, require("plenary.strings").strdisplaywidth(entry.command_title))
-      --         end
-      --         return indexed_items, widths
-      --       end,
-      --       make_displayer = function(widths)
-      --         return require("telescope.pickers.entry_display").create({
-      --           separator = " ",
-      --           items = {
-      --             { width = widths.idx + 1 }, -- +1 for ":" suffix
-      --             { width = widths.command_title },
-      --           },
-      --         })
-      --       end,
-      --       make_display = function(displayer)
-      --         return function(e)
-      --           return displayer({
-      --             { e.value.idx .. ":", "TelescopePromptPrefix" },
-      --             { e.value.command_title },
-      --           })
-      --         end
-      --       end,
-      --       make_ordinal = function(e)
-      --         return e.idx .. e.command_title
-      --       end,
-      --     },
-      --   },
+      --     require("telescope.themes").get_dropdown({
+      --         initial_mode = "normal",
+      --     }),
+      --     specific_opts = {
+      --         -- for gotools.nvim
+      --         ["gotools"] = {
+      --             make_indexed = function(items)
+      --                 local indexed_items = {}
+      --                 local widths = {
+      --                     idx = 0,
+      --                     command_title = 0,
+      --                 }
+      --                 for idx, item in ipairs(items) do
+      --                     local entry = {
+      --                         idx = idx,
+      --                         command_title = item,
+      --                         text = item,
+      --                     }
+      --                     table.insert(indexed_items, entry)
+      --                     widths.idx = math.max(widths.idx, require "plenary.strings".strdisplaywidth(entry.idx))
+      --                     widths.command_title = math.max(widths.command_title,
+      --                         require "plenary.strings".strdisplaywidth(entry.command_title))
+      --                 end
+      --                 return indexed_items, widths
+      --             end,
+      --             make_displayer = function(widths)
+      --                 return require "telescope.pickers.entry_display".create {
+      --                     separator = " ",
+      --                     items = {
+      --                         { width = widths.idx + 1 }, -- +1 for ":" suffix
+      --                         { width = widths.command_title },
+      --                     },
+      --                 }
+      --             end,
+      --             make_display = function(displayer)
+      --                 return function(e)
+      --                     return displayer {
+      --                         { e.value.idx .. ":", "TelescopePromptPrefix" },
+      --                         { e.value.command_title },
+      --                     }
+      --                 end
+      --             end,
+      --             make_ordinal = function(e)
+      --                 return e.idx .. e.command_title
+      --             end,
+      --         },
+      --     }
       -- },
     },
     pickers = {
@@ -207,11 +207,79 @@ function config.nvim_tree()
         },
       },
     },
+    -- renderer = {
+    --     add_trailing = false,
+    --     group_empty = false,
+    --     highlight_git = false,
+    --     full_name = false,
+    --     highlight_opened_files = "none",
+    --     highlight_modified = "none",
+    --     root_folder_label = ":~:s?$?/..?",
+    --     indent_width = 2,
+    --     indent_markers = {
+    --         enable = false,
+    --         inline_arrows = true,
+    --         icons = {
+    --             corner = "└",
+    --             edge = "│",
+    --             item = "│",
+    --             bottom = "─",
+    --             none = " ",
+    --         },
+    --     },
+    --     icons = {
+    --         webdev_colors = true,
+    --         git_placement = "before",
+    --         modified_placement = "after",
+    --         padding = " ",
+    --         symlink_arrow = " ➛ ",
+    --         show = {
+    --             file = true,
+    --             folder = true,
+    --             folder_arrow = true,
+    --             git = true,
+    --             modified = true,
+    --         },
+    --         glyphs = {
+    --             default = "",
+    --             symlink = "",
+    --             bookmark = "󰆤",
+    --             modified = "●",
+    --             folder = {
+    --                 arrow_closed = "",
+    --                 arrow_open = "",
+    --                 default = "",
+    --                 open = "",
+    --                 empty = "",
+    --                 empty_open = "",
+    --                 symlink = "",
+    --                 symlink_open = "",
+    --             },
+    --             git = {
+    --                 unstaged = "✗",
+    --                 staged = "✓",
+    --                 unmerged = "",
+    --                 renamed = "➜",
+    --                 untracked = "★",
+    --                 deleted = "",
+    --                 ignored = "◌",
+    --             },
+    --         },
+    --     },
+    --     special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+    --     symlink_destination = true,
+    -- },
+
     renderer = {
       full_name = false,
-      highlight_modified = "all",
+      highlight_modified = "none",
       root_folder_label = ":~:s?$?/..?",
       indent_width = 2,
+      add_trailing = false,
+      group_empty = false,
+      highlight_git = true,
+      highlight_opened_files = "all",
+      root_folder_modifier = ":~",
       indent_markers = {
         enable = true,
         inline_arrows = true,
@@ -223,11 +291,6 @@ function config.nvim_tree()
           none = " ",
         },
       },
-      add_trailing = false,
-      group_empty = false,
-      highlight_git = true,
-      highlight_opened_files = "all",
-      root_folder_modifier = ":~",
       icons = {
         webdev_colors = true,
         git_placement = "signcolumn",
@@ -279,7 +342,6 @@ function config.nvim_tree()
       update_cwd = true,
       ignore_list = {},
     },
-    -- ignore_ft_on_setup = {},
     system_open = {
       cmd = "",
       args = {},
@@ -999,7 +1061,7 @@ function config.dap()
   )
   vim.fn.sign_define(
     "DapStopped",
-    { text = codicons.get("debug-stop"), texthl = "GruvboxYellowSign", linehl = "", numhl = "" }
+    { text = codicons.get("debug-continue"), texthl = "GruvboxYellowSign", linehl = "", numhl = "" }
   )
 
   -- setup dapui
@@ -1133,7 +1195,6 @@ function config.dap_go(plugin, opts)
   for _, goconfig in pairs(require("dap").configurations.go) do
     goconfig.console = "internalConsole"
   end
-
   require("doodleVim.extend.debug").register_test_fn_debug("go", function()
     vim.ui.select({ "Nearest", "Recent" }, {
       prompt = "Select Test Type",
@@ -1148,6 +1209,24 @@ function config.dap_go(plugin, opts)
       end
     end)
   end)
+end
+
+function config.bigfile(plugin, opts)
+  -- default config
+  require("bigfile").setup({
+    filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
+    pattern = { "*" }, -- autocmd pattern or function see <### Overriding the detection of big files>
+    features = { -- features to disable
+      "indent_blankline",
+      "illuminate",
+      "lsp",
+      "treesitter",
+      "syntax",
+      "matchparen",
+      "vimopts",
+      "filetype",
+    },
+  })
 end
 
 return config
