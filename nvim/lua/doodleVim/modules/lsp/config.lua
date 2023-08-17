@@ -17,13 +17,6 @@ function config.lspconfig(plugin, opts)
     require("cmp_nvim_lsp").default_capabilities(),
     opts.capabilities or {}
   )
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.offsetEncoding = { "utf-16" }
-
-  capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true,
-  }
 
   local function setup(server)
     local server_opts = vim.tbl_deep_extend("force", {
@@ -33,6 +26,7 @@ function config.lspconfig(plugin, opts)
     if server_opts.disabled then
       return
     end
+
     if opts.setup then
       if opts.setup[server] then
         if opts.setup[server](server, server_opts) then
@@ -62,9 +56,7 @@ function config.lspconfig(plugin, opts)
       end
     end
   end
-  require("mason-lspconfig").setup({
-    ensure_installed = ensure_installed,
-  })
+  require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
   require("mason-lspconfig").setup_handlers({ setup })
 end
 
@@ -127,7 +119,9 @@ function config.mason()
       -- 3. The asset name (e.g. "rust-analyzer-v0.3.0-x86_64-unknown-linux-gnu.tar.gz")
       download_url_template = "https://github.com/%s/releases/download/%s/%s",
     },
-    providers = { "mason.providers.registry-api" },
+    providers = {
+      "mason.providers.registry-api",
+    },
   })
 end
 
@@ -192,18 +186,17 @@ function config.gotools()
       return require("telescope.pickers.entry_display").create({
         separator = " ",
         items = {
-          {
-            width = widths.idx + 1,
-          }, -- +1 for ":" suffix
-          {
-            width = widths.command_title,
-          },
+          { width = widths.idx + 1 }, -- +1 for ":" suffix
+          { width = widths.command_title },
         },
       })
     end
     local make_display_factory = function(displayer)
       return function(e)
-        return displayer({ { e.value.idx .. ":", "TelescopePromptPrefix" }, { e.value.command_title } })
+        return displayer({
+          { e.value.idx .. ":", "TelescopePromptPrefix" },
+          { e.value.command_title },
+        })
       end
     end
 
@@ -251,7 +244,7 @@ function config.null_ls()
     --     new_client.offset_encoding = 'utf-32'
     -- end,
     on_exit = nil,
-    sources = { -- null_ls.builtins.formatting.stylua,
+    sources = {
       require("gotools").code_actions.gotests,
       require("gotools").code_actions.gomodifytags,
       require("gotools").code_actions.impl,
@@ -458,107 +451,42 @@ function config.barbecue(plugin, opts)
       -- this highlight is used to override other highlights
       -- you can take advantage of its `bg` and set a background throughout your winbar
       -- (e.g. basename will look like this: { fg = "#c0caf5", bold = true })
-      normal = {
-        fg = "#bdae93",
-        bg = "#32302f",
-      },
+      normal = { fg = "#bdae93", bg = "#32302f" },
       -- these highlights correspond to symbols table from config
-      ellipsis = {
-        fg = "#bdae93",
-      },
-      separator = {
-        fg = "#737aa2",
-      },
-      modified = {
-        fg = "#fb4934",
-      },
+      ellipsis = { fg = "#bdae93" },
+      separator = { fg = "#737aa2" },
+      modified = { fg = "#fb4934" },
       -- these highlights represent the _text_ of three main parts of barbecue
-      dirname = {
-        fg = "#83a598",
-      },
-      basename = {
-        bold = true,
-      },
+      dirname = { fg = "#83a598" },
+      basename = { bold = true },
       context = {},
       -- these highlights are used for context/navic icons
-      context_module = {
-        fg = "#fe8019",
-      },
-      context_field = {
-        fg = "#d3869b",
-      },
-      context_file = {
-        fg = "#83a598",
-      },
-      context_boolean = {
-        fg = "#fe8019",
-      },
-      context_string = {
-        fg = "#b8bb26",
-      },
-      context_operator = {
-        fg = "#fb4934",
-      },
-      context_null = {
-        fg = "#fe8019",
-      },
-      context_event = {
-        fg = "#fabd2f",
-      },
-      context_namespace = {
-        fg = "#83a598",
-      },
-      context_class = {
-        fg = "#fabd2f",
-      },
-      context_method = {
-        fg = "#83a598",
-      },
-      context_property = {
-        fg = "#8ec07c",
-      },
-      context_constructor = {
-        fg = "#83a598",
-      },
-      context_enum = {
-        fg = "#d3869b",
-      },
-      context_interface = {
-        fg = "#b8bb26",
-      },
-      context_package = {
-        fg = "#8ec07c",
-      },
-      context_constant = {
-        fg = "#fe8019",
-      },
-      context_object = {
-        fg = "#fe8019",
-      },
-      context_key = {
-        fg = "#8ec07c",
-      },
-      context_enum_member = {
-        fg = "#fabd2f",
-      },
-      context_struct = {
-        fg = "#d3869b",
-      },
-      context_array = {
-        fg = "#fe8019",
-      },
-      context_type_parameter = {
-        fg = "#fb4934",
-      },
-      context_function = {
-        fg = "#83a598",
-      },
-      context_variable = {
-        fg = "#d3869b",
-      },
-      context_number = {
-        fg = "#fe8019",
-      },
+      context_module = { fg = "#fe8019" },
+      context_field = { fg = "#d3869b" },
+      context_file = { fg = "#83a598" },
+      context_boolean = { fg = "#fe8019" },
+      context_string = { fg = "#b8bb26" },
+      context_operator = { fg = "#fb4934" },
+      context_null = { fg = "#fe8019" },
+      context_event = { fg = "#fabd2f" },
+      context_namespace = { fg = "#83a598" },
+      context_class = { fg = "#fabd2f" },
+      context_method = { fg = "#83a598" },
+      context_property = { fg = "#8ec07c" },
+      context_constructor = { fg = "#83a598" },
+      context_enum = { fg = "#d3869b" },
+      context_interface = { fg = "#b8bb26" },
+      context_package = { fg = "#8ec07c" },
+      context_constant = { fg = "#fe8019" },
+      context_object = { fg = "#fe8019" },
+      context_key = { fg = "#8ec07c" },
+      context_enum_member = { fg = "#fabd2f" },
+      context_struct = { fg = "#d3869b" },
+      context_array = { fg = "#fe8019" },
+      context_type_parameter = { fg = "#fb4934" },
+      context_function = { fg = "#83a598" },
+      context_variable = { fg = "#d3869b" },
+      context_number = { fg = "#fe8019" },
     },
     ---Whether context text should follow its icon's color.
     ---
@@ -619,9 +547,7 @@ function config.barbecue(plugin, opts)
 end
 
 function config.jdtls(plugin, opts)
-  local group = api.nvim_create_augroup("jdtls_lsp", {
-    clear = true,
-  })
+  local group = api.nvim_create_augroup("jdtls_lsp", { clear = true })
   api.nvim_create_autocmd("FileType", {
     group = group,
     pattern = "java",

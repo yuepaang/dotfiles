@@ -66,7 +66,6 @@ local dap_hydra_factory = function()
         border = "rounded",
       },
     },
-    body = "",
     mode = "n",
     heads = {
       { "<F5>", cmd("DapContinue"), { silent = true } },
@@ -84,7 +83,7 @@ end
 
 local gitsign_hydra_factory = function()
   local hint = [[
-  ╱▔▔▔▔▔▔▔╲┏━╮╭━┓ _p_: preview hunk  _d_: show deleted
+ ╱▔▔▔▔▔▔▔╲┏━╮╭━┓ _p_: preview hunk  _d_: show deleted
 ▕ ╭╮     ▕╰━╮╭━╯ _J_: next hunk     _b_: blame line
 ▕━━━╯     ╲━╯┃   _K_: prev hunk     _B_: blame show full
  ╲▂▂▂▂▂▂▂▂▂▂▂╯   _s_: stage hunk    _u_: undo last stage
@@ -153,7 +152,11 @@ local gitsign_hydra_factory = function()
       { "u", gitsigns.undo_stage_hunk, { desc = "undo last stage" } },
       { "S", gitsigns.stage_buffer, { desc = "stage buffer" } },
       { "p", gitsigns.preview_hunk, { desc = "preview hunk" } },
-      { "d", gitsigns.toggle_deleted, { nowait = true, desc = "toggle deleted" } },
+      {
+        "d",
+        gitsigns.toggle_deleted,
+        { nowait = true, desc = "toggle deleted" },
+      },
       { "b", gitsigns.blame_line, { desc = "blame" } },
       {
         "B",
@@ -164,7 +167,11 @@ local gitsign_hydra_factory = function()
       },
       { "/", gitsigns.show, { exit = true, desc = "show base file" } },
       { "<Enter>", "<Cmd>Lazygit<CR>", { exit = true, desc = "Lazygit" } },
-      { "<Esc>", nil, { exit = true, nowait = true, desc = "exit" } },
+      {
+        "<Esc>",
+        nil,
+        { exit = true, nowait = true, desc = "exit" },
+      },
     },
   })
   return gitsigns_hydra
@@ -172,7 +179,7 @@ end
 
 local telescope_hydra_factory = function()
   local hint = [[
-    ┏━╮╭━┓         _f_: files         _m_: marks
+  ┏━╮╭━┓         _f_: files         _m_: marks
   ┃┏┗┛┓┃         _r_: recent files  _g_: live grep
   ╰┓▋▋┏╯         _p_: projects      _/_: search in file
  ╭━┻╮ ┗━━━━━╮╭╮
@@ -254,10 +261,14 @@ local neorg_hydra_factory = function()
       { "I", cmd("Neorg keybind norg core.norg.qol.todo_items.todo.task_important") },
       { "H", cmd("Neorg keybind norg core.norg.qol.todo_items.todo.task_on_hold") },
       { "<C-Space>", cmd("Neorg keybind norg core.norg.qol.todo_items.todo.task_cycle") },
-      { "<Enter>", cmd("Neorg"), {
-        exit = true,
-        desc = "list all modules",
-      } },
+      {
+        "<Enter>",
+        cmd("Neorg"),
+        {
+          exit = true,
+          desc = "list all modules",
+        },
+      },
       {
         "<Esc>",
         cmd("write"),
@@ -267,11 +278,15 @@ local neorg_hydra_factory = function()
           desc = "exit without return",
         },
       },
-      { "q", cmd("write|Neorg return"), {
-        exit = true,
-        nowait = true,
-        desc = "exit",
-      } },
+      {
+        "q",
+        cmd("write|Neorg return"),
+        {
+          exit = true,
+          nowait = true,
+          desc = "exit",
+        },
+      },
     },
   })
 
