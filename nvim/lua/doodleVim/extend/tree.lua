@@ -1,5 +1,29 @@
 local tree = {}
 
+local SORT_METHODS = {
+  "name",
+  "case_sensitive",
+  "modification_time",
+  "extension",
+}
+local sort_current = 1
+
+local cycle_sort = function()
+  if sort_current >= #SORT_METHODS then
+    sort_current = 1
+  else
+    sort_current = sort_current + 1
+  end
+  local api = require("nvim-tree.api")
+  api.tree.reload()
+end
+
+local resize = function(delta)
+  return function()
+    vim.cmd("tabdo NvimTreeResize " .. delta)
+  end
+end
+
 tree.toggle = function()
   if vim.bo.filetype == "alpha" then
     return
@@ -12,14 +36,39 @@ tree.find_file = function()
   if vim.bo.filetype == "alpha" then
     return
   end
-  local view = require("nvim-tree.view")
   local api = require("nvim-tree.api")
-  if view.is_visible() then
+  if api.tree.is_visible() then
     api.tree.find_file(vim.fn.expand("%:p"))
   else
     api.tree.toggle(true, false)
   end
   api.tree.focus()
+end
+
+tree.find_directory_and_focus = function()
+  local actions = require("telescope.actions")
+  local action_state = require("telescope.actions.state")
+
+  local function open_nvim_tree(prompt_bufnr, _)
+    actions.select_default:replace(function()
+      local api = require("nvim-tree.api")
+
+      actions.close(prompt_bufnr)
+      local selection = action_state.get_selected_entry()
+      api.tree.open()
+      api.tree.find_file(selection.cwd .. "/" .. selection.value)
+    end)
+    return true
+  end
+
+  require("telescope.builtin").find_files({
+    find_command = { "fd", "--type", "directory", "--hidden", "--exclude", ".git/*" },
+    attach_mappings = open_nvim_tree,
+  })
+end
+
+tree.get_sort_by = function()
+  return SORT_METHODS[sort_current]
 end
 
 tree.on_attach = function(bufnr)
@@ -82,6 +131,9 @@ tree.on_attach = function(bufnr)
   vim.keymap.set("n", "Y", api.fs.copy.relative_path, opts("Copy Relative Path"))
   vim.keymap.set("n", "<2-LeftMouse>", api.node.open.edit, opts("Open"))
   vim.keymap.set("n", "<2-RightMouse>", api.tree.change_root_to_node, opts("CD"))
+  vim.keymap.set("n", "T", cycle_sort, opts("Cycle Sort"))
+  vim.keymap.set("n", "<Tab>", resize("+5"), opts("resize +5"))
+  vim.keymap.set("n", "<S-Tab>", resize("-5"), opts("resize -5"))
 end
 
 return tree

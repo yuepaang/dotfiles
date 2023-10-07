@@ -4,12 +4,35 @@ function config.telescope()
   local actions = require("telescope.actions")
   local actions_layout = require("telescope.actions.layout")
 
+  -- disable binary preview
+  local previewers = require("telescope.previewers")
+  local Job = require("plenary.job")
+  local new_maker = function(filepath, bufnr, opts)
+    filepath = vim.fn.expand(filepath)
+    Job:new({
+      command = "file",
+      args = { "--mime-type", "-b", filepath },
+      on_exit = function(j)
+        local mime_type = vim.split(j:result()[1], "/")[1]
+        if mime_type == "text" then
+          previewers.buffer_previewer_maker(filepath, bufnr, opts)
+        else
+          -- maybe we want to write something to the buffer here
+          vim.schedule(function()
+            vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY" })
+          end)
+        end
+      end,
+    }):sync()
+  end
+
   require("telescope").setup({
     defaults = {
       initial_mode = "insert",
       wrap_results = false,
       prompt_prefix = "",
       -- selection_caret = codicons.get("telescope") .. " ",
+      buffer_previewer_maker = new_maker,
       selection_caret = "" .. " ",
       sorting_strategy = "ascending",
       scroll_strategy = "cycle",
@@ -48,6 +71,7 @@ function config.telescope()
       },
       preview = {
         hide_on_startup = false,
+        filesize_limit = 0.2, -- MB
       },
       default_mappings = {
         i = {
@@ -166,6 +190,8 @@ end
 function config.nvim_tree()
   local codicons = require("codicons")
   local on_attach = require("doodleVim.extend.tree").on_attach
+  local sort_by = require("doodleVim.extend.tree").get_sort_by
+
   require("nvim-tree").setup({
     -- BEGIN_DEFAULT_OPTS
     auto_reload_on_write = true,
@@ -173,7 +199,7 @@ function config.nvim_tree()
     hijack_cursor = true,
     hijack_netrw = true,
     hijack_unnamed_buffer_when_opening = false,
-    sort_by = "name",
+    sort_by = sort_by,
     root_dirs = {},
     prefer_startup_root = false,
     sync_root_with_cwd = true,
@@ -217,6 +243,11 @@ function config.nvim_tree()
       highlight_git = true,
       highlight_opened_files = "all",
       root_folder_modifier = ":~",
+      highlight_diagnostics = false,
+      highlight_bookmarks = "none",
+      highlight_clipboard = "name",
+      special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+      symlink_destination = true,
       indent_markers = {
         enable = true,
         inline_arrows = true,
@@ -267,8 +298,6 @@ function config.nvim_tree()
           },
         },
       },
-      special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
-      symlink_destination = true,
     },
     hijack_directories = {
       enable = true,

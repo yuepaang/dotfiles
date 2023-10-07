@@ -18,4 +18,8 @@ M.PostInstall = function()
   vim.api.nvim_exec_autocmds("User", { pattern = "BinInstallDone", modeline = false })
 end
 
+M.loaded = function(plugin)
+  return require("lazy.core.config").plugins[plugin]._.loaded
+end
+
 return M

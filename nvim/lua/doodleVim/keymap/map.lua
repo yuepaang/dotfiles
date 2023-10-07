@@ -39,11 +39,11 @@ map.Lsp = {
         :with_label("Code Action"),
       n = map_cr("lua require('rename').rename({prompt='Rename'})"):with_noremap():with_silent():with_label("Rename"),
     },
-    ["<C-n>"] = map_cr("lua vim.diagnostic.goto_next()")
+    ["<C-]>"] = map_cr("lua vim.diagnostic.goto_next()")
       :with_noremap()
       :with_silent()
       :with_label("Go To Next Diagnostic"),
-    ["<C-p>"] = map_cr("lua vim.diagnostic.goto_prev()")
+    ["<C-[>"] = map_cr("lua vim.diagnostic.goto_prev()")
       :with_noremap()
       :with_silent()
       :with_label("Go To Previous Diagnostic"),
@@ -415,17 +415,17 @@ map.WhichKey = {
     ["<C-_>"] = map_cr("lua require('doodleVim.extend.misc').toggle_whichkey()")
       :with_noremap()
       :with_silent()
-      :with_label("Show Keymaps"),
+      :with_label("Show Keymaps, Press Ctrl+/"),
   },
   v = {
     ["<C-_>"] = map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
       :with_noremap()
-      :with_label("Show Keymaps"),
+      :with_label("Show Keymaps, Press Ctrl+/"),
   },
   i = {
     ["<C-_>"] = map_cmd("<Cmd>lua require('doodleVim.extend.misc').toggle_whichkey()<CR>")
       :with_noremap()
-      :with_label("Show Keymaps"),
+      :with_label("Show Keymaps, Press Ctrl+/"),
   },
 }
 
@@ -473,7 +473,7 @@ map.Default = {
     -- ["x"] = map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"),
     -- ["c"] = map_cmd('"_c'):with_noremap():with_label("Change Without Copy"),
     -- ["d"] = map_cmd('""d'):with_noremap():with_label("Delete Without Copy"),
-    -- ["P"] = map_cmd('""p'):with_noremap():with_label("Paste Content In Register \""),
+    -- ["P"] = map_cmd('""p'):with_noremap():with_label('Paste Content In Register "'),
   },
   i = {
     -- ["<C-b>"] = { "<Left>", "Move Cursor To Previous", noremap = true, silent = true },
@@ -526,7 +526,7 @@ map.Default = {
     -- ["x"] = { '"_x', "Delete Without Copy", noremap = true },
     -- ["c"] = { '"_c', "Cut Without Copy", noremap = true },
     -- ["d"] = { '""d', "Delete Without Copy", noremap = true },
-    -- ["P"] = { '""p', "Paste Content In Register \"", noremap = true },
+    -- ["P"] = { '""p', 'Paste Content In Register "', noremap = true },
   },
 }
 
