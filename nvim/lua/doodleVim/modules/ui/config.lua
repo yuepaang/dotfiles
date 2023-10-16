@@ -167,8 +167,10 @@ function config.gitsigns()
 end
 
 function config.blankline()
-  require("indent_blankline").setup({
-    show_end_of_line = true,
+  require("ibl").setup({
+    scope = {
+      enabled = false,
+    },
   })
 end
 
