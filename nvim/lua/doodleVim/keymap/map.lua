@@ -39,11 +39,11 @@ map.Lsp = {
         :with_label("Code Action"),
       n = map_cr("lua require('rename').rename({prompt='Rename'})"):with_noremap():with_silent():with_label("Rename"),
     },
-    ["<C-]>"] = map_cr("lua vim.diagnostic.goto_next()")
+    ["<M-j>"] = map_cr("lua vim.diagnostic.goto_next()")
       :with_noremap()
       :with_silent()
       :with_label("Go To Next Diagnostic"),
-    ["<C-[>"] = map_cr("lua vim.diagnostic.goto_prev()")
+    ["<M-k>"] = map_cr("lua vim.diagnostic.goto_prev()")
       :with_noremap()
       :with_silent()
       :with_label("Go To Previous Diagnostic"),
@@ -144,15 +144,15 @@ map.MarkdownPreview = {
 map.Floaterm = {
   n = {
     ["<C-Space>"] = map_cr("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm"),
-    ["<M-j>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
-    ["<M-k>"] = map_cr("FloatermNew --cwd=<buffer>")
+    ["<M-n>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
+    ["<M-m>"] = map_cr("FloatermNew --cwd=<buffer>")
       :with_noremap()
       :with_silent()
       :with_label("Open Floaterm In Current Buffer Dir"),
   },
   v = {
-    ["<M-j>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
-    ["<M-k>"] = map_cr("FloatermNew --cwd=<buffer>")
+    ["<M-n>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
+    ["<M-m>"] = map_cr("FloatermNew --cwd=<buffer>")
       :with_noremap()
       :with_silent()
       :with_label("Open Floaterm In Current Buffer Dir"),
@@ -176,7 +176,7 @@ map.Floaterm = {
       noremap = true,
       silent = true,
     },
-    ["<C-k>"] = {
+    ["<M-x>"] = {
       vim.api.nvim_replace_termcodes(
         '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>',
         true,
@@ -187,7 +187,7 @@ map.Floaterm = {
       noremap = true,
       silent = true,
     },
-    ["<C-j>"] = {
+    ["<M-q>"] = {
       vim.api.nvim_replace_termcodes(
         '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>',
         true,
@@ -198,13 +198,13 @@ map.Floaterm = {
       noremap = true,
       silent = true,
     },
-    ["<M-j>"] = {
+    ["<M-n>"] = {
       vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
       "Floaterm In Project Root Dir",
       noremap = true,
       silent = true,
     },
-    ["<M-k>"] = {
+    ["<M-m>"] = {
       vim.api.nvim_replace_termcodes(
         '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").new()<CR>',
         true,
@@ -251,16 +251,51 @@ map.Telescope = {
   n = {
     ["<leader>f"] = {
       name = "Telescope Search",
-      f = map_cr("Telescope find_files"):with_noremap():with_silent():with_label("Find Files"),
-      g = map_cr("Telescope live_grep"):with_noremap():with_silent():with_label("Live Grep"),
-      s = map_cr("Telescope file_browser"):with_noremap():with_silent():with_label("File Browser"),
-      p = map_cr("Telescope projects"):with_noremap():with_silent():with_label("Find Projects"),
-      t = map_cr("Telescope todo-comments todo"):with_noremap():with_silent():with_label("Find Todos"),
-      r = map_cr("Telescope oldfiles"):with_noremap():with_silent():with_label("Find Recent Files"),
-      c = map_cr("Telescope command_history"):with_noremap():with_silent():with_label("Find Command History"),
-      b = map_cr("Telescope buffers"):with_noremap():with_silent():with_label("Buffers Navigation"),
-      m = map_cr("Telescope marks"):with_noremap():with_silent():with_label("Find Marks"),
+      f = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope find_files")')
+        :with_noremap()
+        :with_silent()
+        :with_label("Find Files"),
+      g = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope live_grep")')
+        :with_noremap()
+        :with_silent()
+        :with_label("Live Grep"),
+      s = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope file_browser")')
+        :with_noremap()
+        :with_silent()
+        :with_label("File Browser"),
+      p = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope projects")')
+        :with_noremap()
+        :with_silent()
+        :with_label("Find Projects"),
+      t = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope todo-comments todo")')
+        :with_noremap()
+        :with_silent()
+        :with_label("Find Todos"),
+      r = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope oldfiles")')
+        :with_noremap()
+        :with_silent()
+        :with_label("Find Recent Files"),
+      c = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope command_history")')
+        :with_noremap()
+        :with_silent()
+        :with_label("Find Command History"),
+      b = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope buffers")')
+        :with_noremap()
+        :with_silent()
+        :with_label("Buffers Navigation"),
+      m = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope marks")')
+        :with_noremap()
+        :with_silent()
+        :with_label("Find Marks"),
+      d = map_cr('lua require("doodleVim.extend.tree").find_directory_and_focus()')
+        :with_noremap()
+        :with_silent()
+        :with_label("Find Directory And Focus"),
     },
+    ["<C-t>"] = map_cr('lua require("doodleVim.extend.telescope").enhanced("Telescope resume")')
+      :with_noremap()
+      :with_silent()
+      :with_label("Resume Telescope"),
   },
 }
 
@@ -469,7 +504,7 @@ map.Default = {
       :with_noremap()
       :with_silent()
       :with_label("Smooth Scroll Up"),
-    ["<M-n>"] = map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage"),
+    -- ["<M-n>"] = map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage"),
     -- ["x"] = map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"),
     -- ["c"] = map_cmd('"_c'):with_noremap():with_label("Change Without Copy"),
     -- ["d"] = map_cmd('""d'):with_noremap():with_label("Delete Without Copy"),

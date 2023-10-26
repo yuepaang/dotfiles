@@ -9,6 +9,7 @@ function config.nvim_cmp(plugin, opts)
   })
 
   local cmp = require("cmp")
+  local lspkind = require("lspkind")
   local under_comparator = require("cmp-under-comparator").under
   local WIDE_HEIGHT = 40
 
@@ -70,13 +71,14 @@ function config.nvim_cmp(plugin, opts)
       { name = "luasnip" },
       { name = "buffer" },
       { name = "async_path" },
-      { name = "orgmode" },
       {
         name = "look",
-        keyword_length = 3,
+        keyword_length = 2,
         option = { convert_case = true, loud = true },
       },
-      -- { name = "cmp_tabnine" },
+      { name = "buffer" },
+      { name = "async_path" },
+      { name = "orgmode" },
     }, {}),
     mapping = {
       ["<CR>"] = {
@@ -86,21 +88,21 @@ function config.nvim_cmp(plugin, opts)
         if cmp.visible() then
           cmp.abort()
         else
-          cmp.complete()
+          fallback()
         end
       end),
       ["<C-p>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         else
-          fallback()
+          cmp.complete()
         end
       end, { "i", "s" }),
       ["<C-n>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         else
-          fallback()
+          cmp.complete()
         end
       end, { "i", "s" }),
       -- when menu is visible, navigate to next item
@@ -149,7 +151,7 @@ function config.nvim_cmp(plugin, opts)
             count = 6,
           })
         else
-          fallback()
+          cmp.complete()
         end
       end, { "i", "s" }),
       ["<C-u>"] = cmp.mapping(function(fallback)
@@ -159,7 +161,7 @@ function config.nvim_cmp(plugin, opts)
             count = 6,
           })
         else
-          fallback()
+          cmp.complete()
         end
       end, { "i", "s" }),
       ["<M-n>"] = cmp.mapping(function(fallback)
@@ -185,43 +187,28 @@ function config.nvim_cmp(plugin, opts)
         hl_group = "CmpGhostText",
       },
     },
-    formatting = {
-      fields = {
-        cmp.ItemField.Abbr,
-        cmp.ItemField.Kind,
-        cmp.ItemField.Menu,
-      },
-      format = function(entry, vim_item)
+    format = lspkind.cmp_format({
+      mode = "symbol_text",
+      maxwidth = 50,
+      ellipsis_char = "...",
+      symbol_map = {},
+      before = function(entry, vim_item)
         local word = vim_item.abbr
-
         if string.sub(word, -1, -1) == "~" then
           word = string.sub(word, 0, -2)
         end
-
-        local width = #word
-        if width >= math.ceil(vim.o.columns / 4) then
-          width = math.ceil(width / 4)
-          local offset = width - #word
-          word = string.sub(word, 0, offset)
-        end
         vim_item.abbr = word
-
-        local cmd = require("cmp")
-        vim_item.kind = vim.lsp.protocol.CompletionItemKind[cmp.lsp.CompletionItemKind[vim_item.kind]]
-
         vim_item.menu = ({
           nvim_lsp = "[LSP]",
           buffer = "[BUF]",
-          -- cmp_tabnine = "[TAB]",
           luasnip = "[SNP]",
           path = "[PATH]",
           look = "[LOOK]",
           treesitter = "[TS]",
         })[entry.source.name]
-
         return vim_item
       end,
-    },
+    }),
   })
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -275,6 +262,10 @@ end
 
 function config.neogen()
   require("neogen").setup({ snippet_engine = "luasnip" })
+end
+
+function config.codeium()
+  require("codeium").setup({})
 end
 
 return config

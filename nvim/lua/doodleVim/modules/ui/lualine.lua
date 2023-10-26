@@ -3,17 +3,17 @@ local lualine = require("lualine")
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  bg       = '#202328',
-  fg       = '#bbc2cf',
-  yellow   = '#fabd2f',
-  cyan     = '#008080',
-  darkblue = '#081633',
-  green    = '#b8bb26',
-  orange   = '#FE8019',
-  violet   = '#a9a1e1',
-  magenta  = '#d3869b',
-  blue     = '#83a598',
-  red      = '#fb4934',
+    bg       = '#202328',
+    fg       = '#bbc2cf',
+    yellow   = '#fabd2f',
+    cyan     = '#008080',
+    darkblue = '#081633',
+    green    = '#b8bb26',
+    orange   = '#FE8019',
+    violet   = '#a9a1e1',
+    magenta  = '#d3869b',
+    blue     = '#83a598',
+    red      = '#fb4934',
 }
 
 local conditions = {
@@ -171,7 +171,7 @@ ins_c({
 ins_c({
   "diagnostics",
   sources = { "nvim_lsp" },
-  symbols = { error = " ", warn = " ", info = " " },
+  symbols = { error = " ", warn = " ", info = " " },
   diagnostics_color = {
     color_error = { fg = colors.red },
     color_warn = { fg = colors.yellow },
@@ -222,7 +222,7 @@ ins_x({
 
 ins_x({
   "branch",
-  icon = "",
+  icon = " ",
   color = { fg = colors.violet, gui = "bold" },
   padding = { left = 1, right = 0 },
 })
@@ -230,7 +230,8 @@ ins_x({
 ins_x({
   "diff",
   -- Is it me or the symbol for modified us really weird
-  symbols = { added = " ", modified = "柳", removed = " " },
+  symbols = { error = " ", warn = " ", info = " " },
+
   diff_color = {
     added = { fg = colors.green },
     modified = { fg = colors.orange },

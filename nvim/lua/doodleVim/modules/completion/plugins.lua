@@ -19,7 +19,7 @@ completion["hrsh7th/nvim-cmp"] = {
     "hrsh7th/cmp-buffer",
     "saadparwaiz1/cmp_luasnip",
     "FelipeLema/cmp-async-path",
-    "octaltree/cmp-look",
+    "doodleEsc/cmp-look",
     "hrsh7th/cmp-cmdline",
     "ray-x/cmp-treesitter",
     "lukas-reineke/cmp-under-comparator",
@@ -28,6 +28,7 @@ completion["hrsh7th/nvim-cmp"] = {
     "danymat/neogen",
     "L3MON4D3/LuaSnip",
     "mortepau/codicons.nvim",
+    "onsails/lspkind.nvim",
   },
   config = conf.nvim_cmp,
 }
