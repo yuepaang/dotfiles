@@ -9,6 +9,10 @@ local UserDefinedEvent = {
       api.nvim_exec_autocmds("User", { pattern = "DeferStartWithFile", modeline = false })
     end
   end,
+  -- function()
+  --   pcall(require, "lspconfig")
+  --   vim.cmd("LspStart")
+  -- end,
 }
 
 local function create_augroups(definitions)
@@ -152,29 +156,39 @@ function autocmd.load_autocmds()
       },
     },
 
-    _defer_start = {
+    _after_vim_start = {
       {
-        event = "VimEnter",
+        event = "UIEnter",
         opts = {
           pattern = "*",
           callback = function()
-            require("doodleVim.utils.defer").defer_emit_user_event(150, UserDefinedEvent)
+            require("doodleVim.extend.lazy").defer_emit_user_event(100, UserDefinedEvent)
           end,
         },
       },
     },
-
-    _file_opened = {
+    _defer_start = {
       {
-        event = { "BufRead", "BufReadPost", "BufWinEnter", "BufNewFile" },
+        event = "User",
         opts = {
-          pattern = "*",
-          nested = true,
-          callback = function(args)
-            local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
-            if not (vim.fn.expand("%") == "" or buftype == "nofile") then
-              api.nvim_exec_autocmds("User", { pattern = "FileOpened", modeline = false })
-            end
+          pattern = "DeferStart",
+          callback = function()
+            -- require("doodleVim.extend.lazy").PostInstall()
+            -- vim.notify("User DeferStart Event")
+            require("doodleVim.extend.lazy").start_event_handlers("DeferStart")
+          end,
+        },
+      },
+    },
+    _defer_start_with_file = {
+      {
+        event = "User",
+        opts = {
+          pattern = "DeferStartWithFile",
+          callback = function()
+            -- require("doodleVim.extend.lazy").PostInstall()
+            -- vim.notify("User DeferStartWithFile Event")
+            require("doodleVim.extend.lazy").start_event_handlers("DeferStartWithFile")
           end,
         },
       },

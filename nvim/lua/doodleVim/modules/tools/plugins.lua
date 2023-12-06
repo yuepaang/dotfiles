@@ -1,6 +1,7 @@
 local tools = {}
 local conf = require("doodleVim.modules.tools.config")
 local setup = require("doodleVim.modules.tools.setup")
+local lazy = require("doodleVim.extend.lazy")
 
 tools["nvim-telescope/telescope.nvim"] = {
   lazy = true,
@@ -19,24 +20,16 @@ tools["nvim-telescope/telescope.nvim"] = {
 
 tools["AckslD/nvim-neoclip.lua"] = {
   lazy = true,
-  dependencies = { "kkharji/sqlite.lua" },
+  dependencies = { "kkharji/sqlite.lua", lazy = true },
   config = conf.neoclip,
-}
-
-tools["kkharji/sqlite.lua"] = {
-  lazy = true,
 }
 
 tools["doodleEsc/project.nvim"] = {
   lazy = true,
-  event = "User DeferStart",
-  dependencies = { "rmagatti/auto-session" },
+  -- event = "User DeferStart",
+  init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "project.nvim", "project_nvim"),
+  dependencies = { "rmagatti/auto-session", lazy = true, config = conf.autosession },
   config = conf.project,
-}
-
-tools["rmagatti/auto-session"] = {
-  lazy = true,
-  config = conf.autosession,
 }
 
 tools["kyazdani42/nvim-tree.lua"] = {
@@ -60,6 +53,9 @@ tools["iamcco/markdown-preview.nvim"] = {
 
 tools["simrat39/symbols-outline.nvim"] = {
   lazy = true,
+  dependencies = {
+    "mortepau/codicons.nvim",
+  },
   config = conf.symbols_outline,
 }
 
@@ -76,39 +72,29 @@ tools["voldikss/vim-floaterm"] = {
 tools["anuvyklack/hydra.nvim"] = {
   lazy = true,
   dependencies = {
-    "jbyuki/venn.nvim",
     "nvim-telescope/telescope.nvim",
     "lewis6991/gitsigns.nvim",
+    { "jbyuki/venn.nvim", lazy = true },
   },
   config = conf.hydra,
 }
 
-tools["jbyuki/venn.nvim"] = {
-  lazy = true,
-}
-
 tools["towolf/vim-helm"] = {
+  lazy = true,
   ft = "yaml",
 }
 
 tools["folke/which-key.nvim"] = {
   lazy = true,
-  event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+  init = lazy.register_defer_load_helper("DeferStart", 80, "which-key.nvim", "which-key"),
   config = conf.which_key,
 }
 
 tools["aserowy/tmux.nvim"] = {
   lazy = true,
-  event = "User DeferStart",
+  init = lazy.register_defer_load_helper("DeferStart", 80, "tmux.nvim", "tmux"),
   config = conf.tmux,
 }
-
--- tools['nvim-neorg/neorg'] = {
---     lazy = true,
---     cmd = "Neorg",
---     ft = "norg",
---     config = conf.neorg
--- }
 
 tools["sindrets/diffview.nvim"] = {
   lazy = true,
@@ -123,37 +109,56 @@ tools["mfussenegger/nvim-dap"] = {
   lazy = true,
   event = { "User StartDebug" },
   dependencies = {
-    "rcarriga/nvim-dap-ui",
     "mortepau/codicons.nvim",
-    -- { "mfussenegger/nvim-dap-python", lazy = true, ft = "python" },
-    -- { "leoluz/nvim-dap-go",           lazy = true, ft = "go" },
+    {
+      "rcarriga/nvim-dap-ui",
+      lazy = true,
+      init = function(plugin)
+        vim.g.dapui_setup = false
+      end,
+    },
+    {
+      "mfussenegger/nvim-dap-python",
+      lazy = true,
+      -- ft = "python",
+      init = setup.dap_python,
+      config = conf.dap_python,
+    },
+    {
+      "leoluz/nvim-dap-go",
+      lazy = true,
+      -- ft = "go",
+      init = setup.dap_go,
+      config = conf.dap_go,
+    },
   },
   config = conf.dap,
 }
 
-tools["rcarriga/nvim-dap-ui"] = {
-  lazy = true,
-  config = conf.dapui,
-}
+-- tools["rcarriga/nvim-dap-ui"] = {
+-- 	lazy = true,
+-- 	init = function(plugin)
+-- 		vim.g.dapui_setup = false
+-- 	end,
+-- }
 
-tools["mfussenegger/nvim-dap-python"] = {
-  lazy = true,
-  init = setup.dap_python,
-  ft = "python",
-  config = conf.dap_python,
-}
+-- tools["mfussenegger/nvim-dap-python"] = {
+-- 	lazy = true,
+-- 	init = setup.dap_python,
+-- 	ft = "python",
+-- 	config = conf.dap_python,
+-- }
 
-tools["leoluz/nvim-dap-go"] = {
-  lazy = true,
-  init = setup.dap_go,
-  ft = "go",
-  config = conf.dap_go,
-}
+-- tools["leoluz/nvim-dap-go"] = {
+-- 	lazy = true,
+-- 	init = setup.dap_go,
+-- 	ft = "go",
+-- 	config = conf.dap_go,
+-- }
 
 tools["Weissle/persistent-breakpoints.nvim"] = {
   lazy = true,
-  -- event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
-  event = { "BufAdd", "BufNewFile" },
+  event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
   init = setup.persistent_breakpoints,
   config = conf.breakpoints,
 }
@@ -165,30 +170,47 @@ tools["dstein64/vim-startuptime"] = {
   end,
 }
 
-tools["kevinhwang91/promise-async"] = {
-  lazy = true,
-}
-
 tools["kevinhwang91/nvim-ufo"] = {
-  lazy = true,
-  event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+  azy = true,
+  init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "nvim-ufo", "ufo"),
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
-    "kevinhwang91/promise-async",
+    { "kevinhwang91/promise-async", lazy = true },
   },
   config = conf.nvim_ufo,
 }
 
-tools["nvim-orgmode/orgmode"] = {
-  lazy = true,
-  event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
-  config = conf.orgmode,
-}
+-- tools["nvim-orgmode/orgmode"] = {
+-- 	lazy = true,
+-- 	event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
+-- 	config = conf.orgmode,
+-- }
 
 tools["LunarVim/bigfile.nvim"] = {
   -- lazy = true,
   -- event = { "User DeferStartWithFile", "BufAdd", "BufNewFile" },
   config = conf.bigfile,
+}
+
+tools["Bryley/neoai.nvim"] = {
+  lazy = true,
+  cmd = {
+    "NeoAI",
+    "NeoAIOpen",
+    "NeoAIClose",
+    "NeoAIToggle",
+    "NeoAIContext",
+    "NeoAIContextOpen",
+    "NeoAIContextClose",
+    "NeoAIInject",
+    "NeoAIInjectCode",
+    "NeoAIInjectContext",
+    "NeoAIInjectContextCode",
+  },
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+  },
+  config = conf.neoai,
 }
 
 return tools
