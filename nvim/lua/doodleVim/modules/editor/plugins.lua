@@ -5,6 +5,12 @@ local lazy = require("doodleVim.extend.lazy")
 editor["numToStr/Comment.nvim"] = {
   lazy = true,
   config = conf.comment,
+  dependencies = {
+    {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      event = "VeryLazy",
+    },
+  },
 }
 
 editor["phaazon/hop.nvim"] = {

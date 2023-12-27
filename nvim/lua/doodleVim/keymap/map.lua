@@ -143,7 +143,7 @@ map.MarkdownPreview = {
 
 map.Floaterm = {
   n = {
-    ["<C-Space>"] = map_cr("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm"),
+    ["<leader>tf"] = map_cr("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm"),
     ["<M-n>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
     ["<M-m>"] = map_cr("FloatermNew --cwd=<buffer>")
       :with_noremap()
@@ -158,7 +158,7 @@ map.Floaterm = {
       :with_label("Open Floaterm In Current Buffer Dir"),
   },
   t = {
-    ["<C-Space>"] = {
+    ["<leader>tf"] = {
       vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
       "Toggle Terminal",
       noremap = true,

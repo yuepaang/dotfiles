@@ -1,9 +1,5 @@
 local config = {}
 
-function config.color(plugin, opts)
-  require("colorizer").setup()
-end
-
 function config.treesitter(plugin, opts)
   require("nvim-treesitter.configs").setup({
     sync_install = true,
