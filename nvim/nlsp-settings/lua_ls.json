@@ -1,3 +1,6 @@
 {
-  "Lua.format.enable": true
+  "Lua.format.enable": true,
+  "Lua.diagnostics.globals": ["vim", "spec"],
+  "Lua.runtime.version": "LuaJIT",
+  "Lua.runtime.special.spec": "require"
 }
