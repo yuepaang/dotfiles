@@ -63,4 +63,8 @@ ui["folke/todo-comments.nvim"] = {
   config = conf.todo,
 }
 
+ui["j-hui/fidget.nvim"] = {
+  config = conf.fidget,
+}
+
 return ui

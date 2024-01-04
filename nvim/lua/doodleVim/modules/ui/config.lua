@@ -75,6 +75,7 @@ function config.todo()
         color = "hint",
         alt = { "INFO" },
       },
+      TEST = { icon = "󰙨 ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
     },
     gui_style = {
       fg = "NONE", -- The gui style to use for the fg highlight group.
@@ -92,6 +93,7 @@ function config.todo()
       before = "", -- "fg" or "bg" or empty
       keyword = "bg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
       after = "fg", -- "fg" or "bg" or empty
+      -- pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
       pattern = [[.*<(KEYWORDS)\v(\s?\(.*\)|:)+]], -- pattern or table of patterns, used for highlightng (vim regex)
       comments_only = true, -- uses treesitter to match keywords in comments only
       max_line_len = 400, -- ignore lines longer than this
@@ -112,6 +114,7 @@ function config.todo()
       args = { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column" },
       -- regex that will be used to match keywords.
       -- don't replace the (KEYWORDS) placeholder
+      -- pattern = [[\b(KEYWORDS):]], -- ripgrep regex
       pattern = [[\b(KEYWORDS)(\s?\(.*\)|:)+]], -- ripgrep regex
     },
   })
@@ -300,6 +303,31 @@ function config.barbar(plugin, opts)
     -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
     -- where X is the buffer number. But only a static string is accepted here.
     no_name_title = nil,
+  })
+end
+
+function config.fidget()
+  require("fidget").setup({
+    integration = {
+      ["nvim-tree"] = {
+        enable = true,
+      },
+    },
+
+    notification = {
+      window = {
+        normal_hl = "CursorLineNr", -- Base highlight group in the notification window
+        winblend = 100, -- Background color opacity in the notification window
+        border = "none", -- Border around the notification window
+        zindex = 45, -- Stacking priority of the notification window
+        max_width = 0, -- Maximum width of the notification window
+        max_height = 0, -- Maximum height of the notification window
+        x_padding = 1, -- Padding from right edge of window boundary
+        y_padding = 0, -- Padding from bottom edge of window boundary
+        align = "bottom", -- How to align the notification window
+        relative = "editor", -- What the notification window position is relative to
+      },
+    },
   })
 end
 
