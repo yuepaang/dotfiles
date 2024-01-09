@@ -1,26 +1,34 @@
 {
-  "go.autocompleteUnimportedPackages": true,
-  "go.enableCodeLens": {
-    "references": true,
-    "runtest": true
-  },
-  "gopls": {
-    "build.env": {
-      "GOFLAGS": "-tags=linux"
+    "go.autocompleteUnimportedPackages": true,
+    "go.enableCodeLens": {
+        "references": true,
+        "runtest": true
     },
-    "ui.codelenses": {
-      "gc_details": true,
-      "generate": true,
-      "regenerate_cgo": true,
-      "test": true,
-      "tidy": true,
-      "upgrade_dependency": true,
-      "vendor": true
-    },
-    "ui.completion.usePlaceholders": true,
-    "ui.diagnostic.analyses": {
-      "nilness": true,
-      "shadow": true
+    "gopls": {
+        "build.env": {
+            "GOFLAGS": "-tags=linux"
+        },
+        "ui.codelenses": {
+            "gc_details": true,
+            "generate": true,
+            "regenerate_cgo": true,
+            "test": true,
+            "tidy": true,
+            "upgrade_dependency": true,
+            "vendor": true
+        },
+        "ui.completion.usePlaceholders": true,
+        "ui.diagnostic.analyses": {
+            "nilness": true,
+            "shadow": true
+        },
+        "hints": {
+            "assignVariableTypes": true,
+            "compositeLiteralFields": true,
+            "constantValues": true,
+            "functionTypeParameters": true,
+            "parameterNames": true,
+            "rangeVariableTypes": true
+        }
     }
-  }
 }

@@ -1,15 +1,5 @@
 local config = {}
-local api = vim.api
 local vim_path = require("doodleVim.core.global").vim_path
-
-local function extend_or_override(config, custom, ...)
-  if type(custom) == "function" then
-    config = custom(config, ...) or config
-  elseif custom then
-    config = vim.tbl_deep_extend("force", config, custom) --[[@as table]]
-  end
-  return config
-end
 
 function config.lspconfig(plugin, opts)
   local handler = require("doodleVim.modules.lsp.handler")
@@ -248,10 +238,6 @@ function config.null_ls()
       use_console = "async",
     },
     on_attach = nil,
-    -- on_init = function(new_client, _)
-    --     print(vim.inspect(new_client))
-    --     new_client.offset_encoding = 'utf-32'
-    -- end,
     on_exit = nil,
     sources = {
       require("gotools").code_actions.gotests,
@@ -272,63 +258,6 @@ function config.lightbulb()
   local codicons = require("codicons")
 
   vim.fn.sign_define("LightBulbSign", { text = codicons.get("lightbulb"), texthl = "GruvboxYellowSign" })
-
-  -- -- Showing defaults
-  -- require("nvim-lightbulb").setup({
-  --     ignore = {
-  --         clients = { "null-ls" },
-  --         ft = {
-  --             "NvimTree",
-  --         },
-  --     },
-  --     sign = {
-  --         enabled = true,
-  --         -- Priority of the gutter sign
-  --         priority = 10,
-  --     },
-  --     float = {
-  --         enabled = false,
-  --         -- Text to show in the popup float
-  --         text = "💡",
-  --         -- Available keys for window options:
-  --         -- - height     of floating window
-  --         -- - width      of floating window
-  --         -- - wrap_at    character to wrap at for computing height
-  --         -- - max_width  maximal width of floating window
-  --         -- - max_height maximal height of floating window
-  --         -- - pad_left   number of columns to pad contents at left
-  --         -- - pad_right  number of columns to pad contents at right
-  --         -- - pad_top    number of lines to pad contents at top
-  --         -- - pad_bottom number of lines to pad contents at bottom
-  --         -- - offset_x   x-axis offset of the floating window
-  --         -- - offset_y   y-axis offset of the floating window
-  --         -- - anchor     corner of float to place at the cursor (NW, NE, SW, SE)
-  --         -- - winblend   transparency of the window (0-100)
-  --         win_opts = {},
-  --     },
-  --     virtual_text = {
-  --         enabled = false,
-  --         -- Text to show at virtual text
-  --         text = "💡",
-  --         -- highlight mode to use for virtual text (replace, combine, blend), see :help nvim_buf_set_extmark() for reference
-  --         hl_mode = "replace",
-  --     },
-  --     status_text = {
-  --         enabled = false,
-  --         -- Text to provide when code actions are available
-  --         text = "💡",
-  --         -- Text to provide when no actions are available
-  --         text_unavailable = "",
-  --     },
-  --     autocmd = {
-  --         enabled = true,
-  --         updatetime = 200,
-  --         -- see :help autocmd-pattern
-  --         pattern = { "*" },
-  --         -- see :help autocmd-events
-  --         events = { "CursorHold", "CursorHoldI" },
-  --     },
-  -- })
 
   require("nvim-lightbulb").setup({
     -- Priority of the lightbulb for all handlers except float.
@@ -548,45 +477,6 @@ function config.barbecue(plugin, opts)
     ---
     ---@type barbecue.Config.theme
 
-    --         return {
-    --   dark0_hard = "#1d2021",
-    --   dark0 = "#282828",
-    --   dark0_soft = "#32302f",
-    --   dark1 = "#3c3836",
-    --   dark2 = "#504945",
-    --   dark3 = "#665c54",
-    --   dark4 = "#7c6f64",
-    --   light0_hard = "#f9f5d7",
-    --   light0 = "#fbf1c7",
-    --   light0_soft = "#f2e5bc",
-    --   light1 = "#ebdbb2",
-    --   light2 = "#d5c4a1",
-    --   light3 = "#bdae93",
-    --   light4 = "#a89984",
-    --   bright_red = "#fb4934",
-    --   bright_green = "#b8bb26",
-    --   bright_yellow = "#fabd2f",
-    --   bright_blue = "#83a598",
-    --   bright_purple = "#d3869b",
-    --   bright_aqua = "#8ec07c",
-    --   bright_orange = "#fe8019",
-    --   neutral_red = "#cc241d",
-    --   neutral_green = "#98971a",
-    --   neutral_yellow = "#d79921",
-    --   neutral_blue = "#458588",
-    --   neutral_purple = "#b16286",
-    --   neutral_aqua = "#689d6a",
-    --   neutral_orange = "#d65d0e",
-    --   faded_red = "#9d0006",
-    --   faded_green = "#79740e",
-    --   faded_yellow = "#b57614",
-    --   faded_blue = "#076678",
-    --   faded_purple = "#8f3f71",
-    --   faded_aqua = "#427b58",
-    --   faded_orange = "#af3a03",
-    --   gray = "#928374",
-    -- }
-
     theme = {
       -- this highlight is used to override other highlights
       -- you can take advantage of its `bg` and set a background throughout your winbar
@@ -685,33 +575,6 @@ function config.barbecue(plugin, opts)
     },
   })
 end
-
--- function config.jdtls(plugin, opts)
---   local group = api.nvim_create_augroup("jdtls_lsp", { clear = true })
---   api.nvim_create_autocmd("FileType", {
---     group = group,
---     pattern = "java",
---     callback = function()
---       require("doodleVim.modules.lsp.jdtls").setup()
---     end,
---     desc = "Setup jdtls lsp in every java file",
---   })
-
---   require("doodleVim.extend.debug").register_test_fn_debug("java", function()
---     vim.ui.select({ "Nearest", "Class" }, {
---       prompt = "Select Test Type",
---       format_item = function(item)
---         return " " .. item
---       end,
---     }, function(choice)
---       if choice == "Nearest" then
---         require("jdtls").test_nearest_method()
---       elseif choice == "Class" then
---         require("jdtls").test_class()
---       end
---     end)
---   end)
--- end
 
 function config.jdtls(plugin, options)
   local function attach_jdtls()
