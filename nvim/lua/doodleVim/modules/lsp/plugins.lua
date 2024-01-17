@@ -25,6 +25,9 @@ lsp["neovim/nvim-lspconfig"] = {
       jdtls = {
         disabled = true,
       },
+      rust_analyzer = {
+        disabled = true,
+      },
     },
   },
   config = conf.lspconfig,
@@ -92,6 +95,11 @@ lsp["kosayoda/nvim-lightbulb"] = {
 lsp["ray-x/lsp_signature.nvim"] = {
   lazy = true,
   init = setup.lsp_signature,
+}
+
+lsp["mrcjkb/rustaceanvim"] = {
+  version = "^3", -- Recommended
+  ft = { "rust" },
 }
 
 return lsp

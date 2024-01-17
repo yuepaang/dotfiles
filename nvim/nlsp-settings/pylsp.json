@@ -1,15 +1,13 @@
 {
+    "pylsp.plugins.black.enabled": true,
     "pylsp.plugins.ruff.enabled": true,
-    "pylsp.plugins.ruff.format": {
-        "I"
-    },
     "pylsp.plugins.rope_completion.enabled": true,
     "pylsp.plugins.rope_completion.eager": true,
     "pylsp.plugins.rope_autoimport.enabled": true,
-    "pylsp.plugins.black.enabled": false,
     "pylsp.plugins.yapf.enabled": false,
     "pylsp.plugins.pyflakes.enabled": false,
     "pylsp.plugins.pycodestyle.enabled": false,
     "pylsp.plugins.mccabe.enabled": false,
-    "pylsp.plugins.flake8.enabled": false
+    "pylsp.plugins.flake8.enabled": false,
+    "pylsp.plugins.isort.enabled": true,
 }
