@@ -100,6 +100,7 @@ lsp["ray-x/lsp_signature.nvim"] = {
 lsp["mrcjkb/rustaceanvim"] = {
   version = "^3", -- Recommended
   ft = { "rust" },
+  config = conf.rustaceanvim,
 }
 
 return lsp

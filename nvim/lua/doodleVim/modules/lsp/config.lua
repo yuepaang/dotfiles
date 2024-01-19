@@ -590,4 +590,95 @@ function config.jdtls(plugin, options)
   attach_jdtls()
 end
 
+function config.rustaceanvim()
+  local lspconfig = require("lspconfig")
+  local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  if status_ok then
+    return cmp_nvim_lsp.default_capabilities()
+  end
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "detail",
+      "additionalTextEdits",
+    },
+  }
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+
+  vim.g.rustaceanvim = {
+    tools = {},
+    server = {
+      on_attach = function(client, bufnr)
+        lspconfig.on_attach(client, bufnr)
+      end,
+      capabilities = capabilities,
+      settings = {
+        ["rust-analyzer"] = {
+          inlayHints = {
+            chainingHints = {
+              bindingModeHints = {
+                enable = true,
+              },
+              chainingHints = {
+                enable = true,
+              },
+              closingBraceHints = {
+                enable = true,
+                minLines = 25,
+              },
+              closureCaptureHints = {
+                enable = true,
+              },
+              closureReturnTypeHints = {
+                enable = "always", -- "never"
+              },
+              closureStyle = "impl_fn",
+              discriminantHints = {
+                enable = "always", -- "never"
+              },
+              expressionAdjustmentHints = {
+                hideOutsideUnsafe = false,
+                mode = "prefix",
+              },
+              implicitDrops = {
+                enable = true,
+              },
+              lifetimeElisionHints = {
+                enable = "always", -- "never"
+                useParameterNames = true,
+              },
+              maxLength = 25,
+              parameterHints = {
+                enable = true,
+              },
+              rangeExclusiveHints = {
+                enable = true,
+              },
+              renderColons = {
+                enable = true,
+              },
+              typeHints = {
+                enable = true,
+                hideClosureInitialization = false,
+                hideNamedConstructor = false,
+              },
+            },
+          },
+          lens = {
+            enable = true,
+          },
+        },
+      },
+    },
+    -- DAP configuration
+    -- dap = {},
+  }
+end
+
 return config
