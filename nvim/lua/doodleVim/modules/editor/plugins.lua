@@ -48,9 +48,4 @@ editor["gorbit99/codewindow.nvim"] = {
   config = conf.codewindow,
 }
 
-editor["famiu/bufdelete.nvim"] = {
-  event = "VeryLazy",
-  config = conf.bufdelete,
-}
-
 return editor

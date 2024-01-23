@@ -411,11 +411,10 @@ map.Bufferline = {
       :with_silent()
       :with_label("Next Buffer"),
 
-    -- use bufdelete
-    -- ["<S-q>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_buffer_close()")
-    --   :with_noremap()
-    --   :with_silent()
-    --   :with_label("Close Current Buffer"),
+    ["<S-q>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_buffer_close()")
+      :with_noremap()
+      :with_silent()
+      :with_label("Close Current Buffer"),
 
     ["<M-s>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferOrderByDirectory')")
       :with_noremap()
