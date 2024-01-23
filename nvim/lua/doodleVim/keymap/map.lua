@@ -410,10 +410,13 @@ map.Bufferline = {
       :with_noremap()
       :with_silent()
       :with_label("Next Buffer"),
-    ["<S-q>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_buffer_close()")
-      :with_noremap()
-      :with_silent()
-      :with_label("Close Current Buffer"),
+
+    -- use bufdelete
+    -- ["<S-q>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_buffer_close()")
+    --   :with_noremap()
+    --   :with_silent()
+    --   :with_label("Close Current Buffer"),
+
     ["<M-s>"] = map_cr("lua require('doodleVim.extend.tab').enhanced_bufferline('BufferOrderByDirectory')")
       :with_noremap()
       :with_silent()
@@ -504,6 +507,11 @@ map.Default = {
       :with_noremap()
       :with_silent()
       :with_label("Smooth Scroll Up"),
+
+    ["<leader>/"] = map_cr('lua require("Comment.api").toggle.linewise.current()')
+      :with_noremap()
+      :with_silent()
+      :with_label("Comment"),
     -- ["<M-n>"] = map_cr("tabnext"):with_noremap():with_silent():with_label("Next Tabpage"),
     -- ["x"] = map_cmd('"_x'):with_noremap():with_label("Delete Without Copy"),
     -- ["c"] = map_cmd('"_c'):with_noremap():with_label("Change Without Copy"),

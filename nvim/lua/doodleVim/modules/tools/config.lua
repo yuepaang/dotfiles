@@ -52,6 +52,7 @@ function config.telescope()
         "--column",
         "--smart-case",
         "--trim", -- add this value
+        "--glob=!.git/",
       },
       layout_strategy = "flex",
       layout_config = {
