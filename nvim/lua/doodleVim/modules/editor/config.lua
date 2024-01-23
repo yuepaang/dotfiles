@@ -71,20 +71,37 @@ function config.hop()
 end
 
 function config.nvim_surround()
+  -- require("nvim-surround").setup({
+  --   keymaps = {
+  --     insert = "<C-y>s",
+  --     insert_line = "<C-y>l",
+  --     normal = "ys",
+  --     normal_cur = "yss",
+  --     normal_line = "yl",
+  --     normal_cur_line = "yll",
+  --     visual = "s",
+  --     visual_line = "gl",
+  --     delete = "ds",
+  --     change = "cs",
+  --   },
+  -- })
+
   require("nvim-surround").setup({
-    keymaps = {
-      insert = "<C-y>s",
-      insert_line = "<C-y>l",
-      normal = "ys",
-      normal_cur = "yss",
-      normal_line = "yl",
-      normal_cur_line = "yll",
+    keymaps = { -- vim-surround style keymaps
+      insert = "<C-g>s",
+      insert_line = "<C-g>S",
+      normal = "s",
+      normal_cur = "ss",
+      normal_line = "S",
+      normal_cur_line = "SS",
       visual = "s",
-      visual_line = "gl",
+      visual_line = "gS",
       delete = "ds",
       change = "cs",
     },
   })
+
+  vim.cmd([[nmap <leader>' siw']])
 end
 
 function config.codewindow(plugin)
@@ -113,6 +130,11 @@ function config.bufdelete()
   local opts = { noremap = true, silent = true }
   -- keymap("n", "Q", "<cmd>Bdelete!<CR>", opts)
   keymap("n", "Q", ":lua require('bufdelete').bufdelete(0, false)<cr>", opts)
+end
+
+function config.matchup()
+  vim.g.matchup_matchparen_offscreen = { method = nil }
+  vim.g.matchup_matchpref = { html = { nolists = 1 } }
 end
 
 return config

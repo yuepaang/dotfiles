@@ -20,6 +20,7 @@ editor["phaazon/hop.nvim"] = {
 
 editor["andymass/vim-matchup"] = {
   lazy = true,
+  config = conf.matchup,
   init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "vim-matchup", "match-up"),
   dependencies = { "nvim-treesitter/nvim-treesitter" },
 }
