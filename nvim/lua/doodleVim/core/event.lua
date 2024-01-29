@@ -133,6 +133,16 @@ function autocmd.load_autocmds()
           desc = "Set Solidity FileType",
         },
       },
+      {
+        event = "BufWinEnter",
+        opts = {
+          pattern = { "*" },
+          callback = function()
+            local dirname = vim.fn.getcwd():match("([^/]+)$")
+            vim.opt.titlestring = dirname
+          end,
+        },
+      },
     },
 
     _lazy = {
