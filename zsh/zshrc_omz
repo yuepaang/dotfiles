@@ -24,8 +24,7 @@ export LC_ALL=en_US.UTF-8
 
 source "/usr/local/share/autojump/autojump.zsh"
 
-# alias vim="nvim"
-alias vim="lvim"
+alias vim="nvim"
 
 
 ## ZSH options
