@@ -50,6 +50,7 @@ style = "bold green"
 
 # Prompt: param 2 └─
 [character]
+success_symbol = "[﬌](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
 error_symbol = "[✖](bold red) "
 
 [memory_usage]
@@ -84,14 +85,26 @@ deleted = "🗑️  ×${count}"
 style = "bright-white"
 format = "$all_status$ahead_behind"
 
+[docker_context]
+symbol = " "
+format = "via [$symbol$context]($style) "
+style = "blue bold"
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+detect_folders = []
+disabled = false
 
 [python]
 format = "[$symbol$version]($style) "
 style = "bold green"
 
 [rust]
+symbol = " "
 format = "[$symbol$version]($style) "
 style = "bold green"
+
+[golang]
+symbol = " "
 
 [time]
 time_format = "%T"
