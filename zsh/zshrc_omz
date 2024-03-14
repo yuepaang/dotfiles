@@ -190,18 +190,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # }}}
 
 
-# function autoproxy() {
-#     emulate -L zsh -o extended_glob
-#     local scutil_output=$(scutil --proxy)
-#     # 先按行分割为数组，然后利用 `(M)` + `:#` 取出数组中匹配 ` [A-Za-z]# : [^ ]#}` 的元素
-#     # （此处使用了 extended glob，不用也行，不过没这么直观……)
-#     # 再 `/:` 去掉每个元素中的冒号，最后 `=` 对结果进行 shell word split 并存到关联数组里
-#     local -A info=(${=${(M)${(f)scutil_output}:# [A-Za-z]# : [^ ]#}/:})
-#     if (( $info[HTTPEnable] )); then
-#         export http_proxy=http://$info[HTTPProxy]:$info[HTTPPort]
-#     fi
-# }
-
 export http_proxy=`scutil --proxy | awk '\
 /HTTPEnable/ { enabled = $3; } \
 /HTTPProxy/ { server = $3; } \

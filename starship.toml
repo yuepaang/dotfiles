@@ -7,24 +7,21 @@ disabled = true
 
 # First param ─┌
 [username]
-format = "[$user]($style)@"
 style_user = "bold dimmed blue"
-style_root = "bold red"
-show_always = true
+show_always = false
 
 # Second param
 [hostname]
-format = "[$hostname]($style) in "
-style = "bold dimmed blue"
-# trim_at = "-"
 ssh_only = false
-disabled = false
+format = "<[$hostname]($style)>"
+trim_at = "-"
+style = "bold dimmed white"
+disabled = true
 
 # Third param …
 [directory]
-truncation_length = 10
-truncate_to_repo = true
-style = "bold italic #87A752"
+truncation_length = 5
+format = "[$path]($style)[$lock_symbol]($lock_style) "
 
 # Last param in the first line/row
 [cmd_duration]
@@ -35,9 +32,9 @@ format = "took [$duration]($style)"
 #
 # Somethere at the beginning
 [battery]
-full_symbol = " "
-charging_symbol = " "
-discharging_symbol = " "
+full_symbol = "🔋"
+charging_symbol = "🔌"
+discharging_symbol = "⚡"
 
 [[battery.display]]  # "bold red" style when capacity is between 0% and 10%
 threshold = 30
@@ -53,14 +50,51 @@ style = "bold green"
 
 # Prompt: param 2 └─
 [character]
-success_symbol = "[](bold green)"
-error_symbol = "[](bold red)"
-vicmd_symbol = "[](bold green)"
-
+error_symbol = "[✖](bold red) "
 
 [memory_usage]
-symbol = " "
 format = "$symbol[${ram}( | ${swap})]($style) "
-threshold = 30
-style = "bold dimmed blue"
+threshold = 70
+style = "bold dimmed white"
+disabled = false
+
+[git_branch]
+format = " [$symbol$branch]($style) "
+symbol = "🍣 "
+style = "bold yellow"
+
+[git_commit]
+commit_hash_length = 8
+style = "bold white"
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+
+[git_status]
+conflicted = "⚔️ "
+ahead = "🏎️ 💨 ×${count}"
+behind = "🐢 ×${count}"
+diverged = "🔱 🏎️ 💨 ×${ahead_count} 🐢 ×${behind_count}"
+untracked = "🛤️  ×${count}"
+stashed = "📦 "
+modified = "📝 ×${count}"
+staged = "🗃️  ×${count}"
+renamed = "📛 ×${count}"
+deleted = "🗑️  ×${count}"
+style = "bright-white"
+format = "$all_status$ahead_behind"
+
+
+[python]
+format = "[$symbol$version]($style) "
+style = "bold green"
+
+[rust]
+format = "[$symbol$version]($style) "
+style = "bold green"
+
+[time]
+time_format = "%T"
+format = "🕙 $time($style) "
+style = "bright-white"
 disabled = false
