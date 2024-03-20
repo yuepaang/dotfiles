@@ -129,6 +129,10 @@ tools["mfussenegger/nvim-dap"] = {
       init = setup.dap_go,
       config = conf.dap_go,
     },
+    {
+      "nvim-neotest/nvim-nio",
+      lazy = true,
+    },
   },
   config = conf.dap,
 }
