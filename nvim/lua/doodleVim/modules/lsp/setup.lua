@@ -12,6 +12,7 @@ function lsp.mason(plugin)
     local binaries = {
       "gopls",
       "rust-analyzer",
+      "taplo",
       "json-lsp",
       "lua-language-server",
       "python-lsp-server",

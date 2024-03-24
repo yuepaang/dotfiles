@@ -5,12 +5,12 @@ misc.which_key_loaded = false
 
 misc.safe_exit = function()
   -- close floaterm
-  if require("lazy.core.config").plugins["vim-floaterm"]._.loaded then
-    local floatermBufnr = vim.call("floaterm#buflist#gather")
-    if #floatermBufnr ~= 0 then
-      vim.cmd([[FloatermKill]])
-    end
-  end
+  -- if require("lazy.core.config").plugins["vim-floaterm"]._.loaded then
+  --   local floatermBufnr = vim.call("floaterm#buflist#gather")
+  --   if #floatermBufnr ~= 0 then
+  --     vim.cmd([[FloatermKill]])
+  --   end
+  -- end
 
   -- close nvim-tree
   if require("lazy.core.config").plugins["nvim-tree.lua"]._.loaded then

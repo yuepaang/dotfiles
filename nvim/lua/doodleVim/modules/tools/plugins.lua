@@ -57,15 +57,15 @@ tools["simrat39/symbols-outline.nvim"] = {
   config = conf.symbols_outline,
 }
 
-tools["voldikss/vim-floaterm"] = {
-  cmd = {
-    "FloatermNew",
-    "FloatermToggle",
-  },
-  init = function()
-    require("doodleVim.modules.tools.config").floaterm()
-  end,
-}
+-- tools["voldikss/vim-floaterm"] = {
+--   cmd = {
+--     "FloatermNew",
+--     "FloatermToggle",
+--   },
+--   init = function()
+--     require("doodleVim.modules.tools.config").floaterm()
+--   end,
+-- }
 
 tools["anuvyklack/hydra.nvim"] = {
   lazy = true,

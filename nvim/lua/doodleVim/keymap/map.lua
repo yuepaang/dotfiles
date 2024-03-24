@@ -141,82 +141,82 @@ map.MarkdownPreview = {
   },
 }
 
-map.Floaterm = {
-  n = {
-    ["<leader>tf"] = map_cr("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm"),
-    ["<M-n>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
-    ["<M-m>"] = map_cr("FloatermNew --cwd=<buffer>")
-      :with_noremap()
-      :with_silent()
-      :with_label("Open Floaterm In Current Buffer Dir"),
-  },
-  v = {
-    ["<M-n>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
-    ["<M-m>"] = map_cr("FloatermNew --cwd=<buffer>")
-      :with_noremap()
-      :with_silent()
-      :with_label("Open Floaterm In Current Buffer Dir"),
-  },
-  t = {
-    ["<leader>tf"] = {
-      vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
-      "Toggle Terminal",
-      noremap = true,
-      silent = true,
-    },
-    ["<C-h>"] = {
-      vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermPrev<CR>", true, true, true),
-      "Go To Next Terminal",
-      noremap = true,
-      silent = true,
-    },
-    ["<C-l>"] = {
-      vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNext<CR>", true, true, true),
-      "Go To Previous Terminal",
-      noremap = true,
-      silent = true,
-    },
-    ["<M-x>"] = {
-      vim.api.nvim_replace_termcodes(
-        '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>',
-        true,
-        true,
-        true
-      ),
-      "Kill Current Terminal",
-      noremap = true,
-      silent = true,
-    },
-    ["<M-q>"] = {
-      vim.api.nvim_replace_termcodes(
-        '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>',
-        true,
-        true,
-        true
-      ),
-      "Kill All Terminal",
-      noremap = true,
-      silent = true,
-    },
-    ["<M-n>"] = {
-      vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
-      "Floaterm In Project Root Dir",
-      noremap = true,
-      silent = true,
-    },
-    ["<M-m>"] = {
-      vim.api.nvim_replace_termcodes(
-        '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").new()<CR>',
-        true,
-        true,
-        true
-      ),
-      "Floaterm In Current Buffer Dir",
-      noremap = true,
-      silent = true,
-    },
-  },
-}
+-- map.Floaterm = {
+--   n = {
+--     ["<leader>tf"] = map_cr("FloatermToggle"):with_noremap():with_silent():with_label("Toggle Floaterm"),
+--     ["<M-n>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
+--     ["<M-m>"] = map_cr("FloatermNew --cwd=<buffer>")
+--       :with_noremap()
+--       :with_silent()
+--       :with_label("Open Floaterm In Current Buffer Dir"),
+--   },
+--   v = {
+--     ["<M-n>"] = map_cr("FloatermNew"):with_noremap():with_silent():with_label("Open Floaterm In Project Root Dir"),
+--     ["<M-m>"] = map_cr("FloatermNew --cwd=<buffer>")
+--       :with_noremap()
+--       :with_silent()
+--       :with_label("Open Floaterm In Current Buffer Dir"),
+--   },
+--   t = {
+--     ["<leader>tf"] = {
+--       vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermToggle<CR>", true, true, true),
+--       "Toggle Terminal",
+--       noremap = true,
+--       silent = true,
+--     },
+--     ["<C-h>"] = {
+--       vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermPrev<CR>", true, true, true),
+--       "Go To Next Terminal",
+--       noremap = true,
+--       silent = true,
+--     },
+--     ["<C-l>"] = {
+--       vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNext<CR>", true, true, true),
+--       "Go To Previous Terminal",
+--       noremap = true,
+--       silent = true,
+--     },
+--     ["<M-x>"] = {
+--       vim.api.nvim_replace_termcodes(
+--         '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill()<CR>',
+--         true,
+--         true,
+--         true
+--       ),
+--       "Kill Current Terminal",
+--       noremap = true,
+--       silent = true,
+--     },
+--     ["<M-q>"] = {
+--       vim.api.nvim_replace_termcodes(
+--         '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").kill(true)<CR>',
+--         true,
+--         true,
+--         true
+--       ),
+--       "Kill All Terminal",
+--       noremap = true,
+--       silent = true,
+--     },
+--     ["<M-n>"] = {
+--       vim.api.nvim_replace_termcodes("<C-\\><C-N>:FloatermNew<CR>", true, true, true),
+--       "Floaterm In Project Root Dir",
+--       noremap = true,
+--       silent = true,
+--     },
+--     ["<M-m>"] = {
+--       vim.api.nvim_replace_termcodes(
+--         '<C-\\><C-N>:lua require("doodleVim.extend.floaterm").new()<CR>',
+--         true,
+--         true,
+--         true
+--       ),
+--       "Floaterm In Current Buffer Dir",
+--       noremap = true,
+--       silent = true,
+--     },
+--   },
+-- }
 
 map.Comment = {
   n = {
