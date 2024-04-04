@@ -118,19 +118,20 @@ M.load_options = function()
     concealcursor = "niv",
   }
 
-  vim.g.clipboard = {
-    name = "myProvider",
-    copy = {
-      ["+"] = "clipboard-provider copy",
-      ["*"] = "clipboard-provider copy",
-    },
-    paste = {
-      ["+"] = "clipboard-provider paste",
-      ["*"] = "clipboard-provider paste",
-    },
-    cache_enabled = 1,
-  }
+  -- vim.g.clipboard = {
+  --   name = "myProvider",
+  --   copy = {
+  --     ["+"] = "clipboard-provider copy",
+  --     ["*"] = "clipboard-provider copy",
+  --   },
+  --   paste = {
+  --     ["+"] = "clipboard-provider paste",
+  --     ["*"] = "clipboard-provider paste",
+  --   },
+  --   cache_enabled = 1,
+  -- }
 
+  vim.g.python3_host_prog = "$HOME/.pyenv/shims/python3"
   vim.g.python_host_skip_check = 1
   vim.g.python3_host_skip_check = 1
 

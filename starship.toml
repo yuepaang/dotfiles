@@ -50,8 +50,8 @@ style = "bold green"
 
 # Prompt: param 2 └─
 [character]
-success_symbol = "[﬌](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
-error_symbol = "[✖](bold red) "
+success_symbol = '[➜](bold green) '
+error_symbol = '[✗](bold red) '
 
 [memory_usage]
 format = "$symbol[${ram}( | ${swap})]($style) "
@@ -107,7 +107,7 @@ style = "bold green"
 symbol = " "
 
 [time]
-time_format = "%T"
-format = "🕙 $time($style) "
+time_format = '%T'
+format = '🕙[\[ $time \]]($style) '
 style = "bright-white"
 disabled = false
