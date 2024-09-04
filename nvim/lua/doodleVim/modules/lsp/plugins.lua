@@ -4,103 +4,101 @@ local setup = require("doodleVim.modules.lsp.setup")
 local lazy = require("doodleVim.extend.lazy")
 
 lsp["neovim/nvim-lspconfig"] = {
-  lazy = true,
-  init = lazy.register_defer_load_helper("DeferStartWithFile", 99, "nvim-lspconfig", function()
-    local ok, _ = pcall(require, "lspconfig")
-    if not ok then
-      vim.notify("nvim-lspconfig load failed", vim.log.levels.ERROR)
-      return
-    end
-    vim.cmd("LspStart")
-  end),
-  dependencies = {
-    "williamboman/mason-lspconfig.nvim",
-    "mortepau/codicons.nvim",
-    "utilyre/barbecue.nvim",
-    { "hrsh7th/cmp-nvim-lsp", lazy = true },
-    { "tamago324/nlsp-settings.nvim", config = conf.nlsp_settings, lazy = true },
-  },
-  opts = {
-    servers = {
-      jdtls = {
-        disabled = true,
-      },
-      rust_analyzer = {
-        disabled = true,
-      },
+    lazy = true,
+    init = lazy.register_defer_load_helper("DeferStartWithFile", 99, "nvim-lspconfig", function()
+        local ok, _ = pcall(require, "lspconfig")
+        if not ok then
+            vim.notify("nvim-lspconfig load failed", vim.log.levels.ERROR)
+            return
+        end
+        vim.cmd("LspStart")
+    end),
+    dependencies = {
+        "williamboman/mason-lspconfig.nvim",
+        "mortepau/codicons.nvim",
+        "utilyre/barbecue.nvim",
+        { "hrsh7th/cmp-nvim-lsp",         lazy = true },
+        { "tamago324/nlsp-settings.nvim", config = conf.nlsp_settings, lazy = true },
     },
-  },
-  config = conf.lspconfig,
+    opts = {
+        servers = {
+            jdtls = {
+                disabled = true,
+            },
+            rust_analyzer = {
+                disabled = true,
+            },
+        },
+    },
+    config = conf.lspconfig,
 }
 
 lsp["utilyre/barbecue.nvim"] = {
-  lazy = true,
-  event = { "BufReadPost" },
-  config = conf.barbecue,
-  dependencies = {
-    "SmiteshP/nvim-navic",
-    "nvim-tree/nvim-web-devicons",
-  },
+    lazy = true,
+    event = { "BufReadPost" },
+    config = conf.barbecue,
+    dependencies = {
+        "SmiteshP/nvim-navic",
+        "nvim-tree/nvim-web-devicons",
+    },
 }
 
 lsp["mfussenegger/nvim-jdtls"] = {
-  lazy = true,
-  init = lazy.register_defer_load_helper("DeferStartWithFile", 98, "nvim-jdtls", function()
-    if vim.bo.filetype == "java" then
-      local ok, _ = pcall(require, "jdtls")
-      if not ok then
-        vim.notify("nvim-jdtls load failed", vim.log.levels.ERROR)
-        return
-      end
-    end
-  end),
-  config = conf.jdtls,
+    lazy = true,
+    init = lazy.register_defer_load_helper("DeferStartWithFile", 98, "nvim-jdtls", function()
+        if vim.bo.filetype == "java" then
+            local ok, _ = pcall(require, "jdtls")
+            if not ok then
+                vim.notify("nvim-jdtls load failed", vim.log.levels.ERROR)
+                return
+            end
+        end
+    end),
+    config = conf.jdtls,
 }
 
 lsp["williamboman/mason.nvim"] = {
-  lazy = true,
-  init = setup.mason,
-  config = conf.mason,
+    lazy = true,
+    init = setup.mason,
+    dependencies = {
+        "stevearc/dressing.nvim",
+    },
+    config = conf.mason,
 }
 
 lsp["nvimtools/none-ls.nvim"] = {
-  lazy = true,
-  -- init = setup.null_ls,
-  init = lazy.register_defer_load_helper("DeferStartWithFile", 98, "none-ls.nvim", "null-ls"),
-  dependencies = {
-    "stevearc/dressing.nvim",
-    "doodleEsc/gotools.nvim",
-  },
-  config = conf.null_ls,
+    lazy = true,
+    init = lazy.register_defer_load_helper("DeferStart", 99, "none-ls.nvim", "null-ls"),
+    config = conf.null_ls,
 }
 
 lsp["doodleEsc/rename.nvim"] = {
-  lazy = true,
-  init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "rename.nvim", "rename"),
-  dependencies = {
-    "neovim/nvim-lspconfig",
-    "stevearc/dressing.nvim",
-  },
+    lazy = true,
+    init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "rename.nvim", "rename"),
+    dependencies = {
+        "neovim/nvim-lspconfig",
+        "stevearc/dressing.nvim",
+    },
 }
 
 lsp["kosayoda/nvim-lightbulb"] = {
-  lazy = true,
-  init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "nvim-lightbulb", "nvim-lightbulb"),
-  dependencies = {
-    "mortepau/codicons.nvim",
-  },
-  config = conf.lightbulb,
+    lazy = true,
+    init = lazy.register_defer_load_helper("DeferStartWithFile", 80, "nvim-lightbulb", "nvim-lightbulb"),
+    dependencies = {
+        "mortepau/codicons.nvim",
+    },
+    config = conf.lightbulb,
 }
 
 lsp["ray-x/lsp_signature.nvim"] = {
-  lazy = true,
-  init = setup.lsp_signature,
+    lazy = true,
+    init = setup.lsp_signature,
 }
 
 lsp["mrcjkb/rustaceanvim"] = {
-  version = "^3", -- Recommended
-  ft = { "rust" },
-  config = conf.rustaceanvim,
+    version = "^3", -- Recommended
+    ft = { "rust" },
+    config = conf.rustaceanvim,
 }
 
 return lsp
