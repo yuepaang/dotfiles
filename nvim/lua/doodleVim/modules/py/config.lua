@@ -6,12 +6,7 @@ function config.header()
 end
 
 function config.crates()
-  require("crates").setup({
-    null_ls = {
-      enabled = true,
-      name = "crates.nvim",
-    },
-  })
+  require("crates").setup({})
 end
 
 function config.toggleterm()

@@ -66,13 +66,16 @@ lsp["williamboman/mason.nvim"] = {
     config = conf.mason,
 }
 
-lsp["nvimtools/none-ls.nvim"] = {
-    dependencies = {
-      "nvimtools/none-ls-extras.nvim",
-    },
+lsp["stevearc/conform.nvim"] = {
     lazy = true,
-    init = lazy.register_defer_load_helper("DeferStart", 99, "none-ls.nvim", "null-ls"),
-    config = conf.null_ls,
+    init = lazy.register_defer_load_helper("DeferStart", 99, "conform.nvim", "conform"),
+    config = conf.conform,
+}
+
+lsp["mfussenegger/nvim-lint"] = {
+    lazy = true,
+    init = lazy.register_defer_load_helper("DeferStartWithFile", 99, "nvim-lint", "lint"),
+    config = conf.nvim_lint,
 }
 
 lsp["doodleEsc/rename.nvim"] = {

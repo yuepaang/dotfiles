@@ -110,9 +110,11 @@ end
 
 function lsp.format(opts)
   opts = opts or {}
-  local ok, _ = pcall(vim.lsp.buf.format, opts)
-  if not ok then
-    vim.notify("Failed Calling LSP Format")
+  local ok, conform = pcall(require, "conform")
+  if ok then
+    conform.format(vim.tbl_extend("force", { lsp_fallback = true }, opts))
+  else
+    pcall(vim.lsp.buf.format, opts)
   end
 end
 

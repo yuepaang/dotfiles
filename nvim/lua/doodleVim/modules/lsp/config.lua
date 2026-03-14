@@ -5,7 +5,6 @@ function config.lspconfig(plugin, opts)
     local handler = require("doodleVim.modules.lsp.handler")
     handler.lsp_hover()
     handler.lsp_diagnostic()
-    handler.null_ls_depress()
     handler.lsp_highlight_document()
 
     local servers = opts.servers or {}
@@ -222,34 +221,34 @@ function config.gotools()
     end
 end
 
-function config.null_ls()
-    local null_ls = require("null-ls")
+function config.conform()
+    require("conform").setup({
+        formatters_by_ft = {
+            lua = { "stylua" },
+            javascript = { "prettier" },
+            typescript = { "prettier" },
+            javascriptreact = { "prettier" },
+            typescriptreact = { "prettier" },
+            css = { "prettier" },
+            html = { "prettier" },
+            json = { "prettier" },
+            yaml = { "prettier" },
+            markdown = { "prettier" },
+        },
+        format_on_save = false,
+    })
+end
 
-    null_ls.setup({
-        cmd = { "nvim" },
-        debounce = 250,
-        debug = false,
-        default_timeout = 5000,
-        diagnostics_format = "#{m}",
-        fallback_severity = vim.diagnostic.severity.ERROR,
-        log = {
-            enable = true,
-            level = "warn",
-            use_console = "async",
-        },
-        on_attach = nil,
-        on_exit = nil,
-        sources = {
-            null_ls.builtins.code_actions.gitsigns,
-            null_ls.builtins.code_actions.gomodifytags,
-            null_ls.builtins.code_actions.impl,
-            null_ls.builtins.formatting.stylua,
-            null_ls.builtins.formatting.prettier,
-            null_ls.builtins.completion.spell,
-            -- null_ls.builtins.formatting.codespell,
-            -- null_ls.builtins.diagnostics.spectral,
-        },
-        update_in_insert = false,
+function config.nvim_lint()
+    local lint = require("lint")
+    lint.linters_by_ft = {
+        yaml = { "spectral" },
+        json = { "spectral" },
+    }
+    vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
+        callback = function()
+            lint.try_lint()
+        end,
     })
 end
 
@@ -376,8 +375,7 @@ function config.lightbulb()
         -- Scenarios to not show a lightbulb.
         ignore = {
             -- LSP client names to ignore.
-            -- Example: {"null-ls", "lua_ls"}
-            clients = { "null-ls" },
+            clients = {},
             -- Filetypes to ignore.
             -- Example: {"neo-tree", "lua"}
             ft = { "NvimTree" },

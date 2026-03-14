@@ -26,7 +26,7 @@ end
 
 misc.safe_save = function()
     vim.cmd([[write]])
-    require("auto-session").SaveSession()
+    require("auto-session").save_session()
     vim.notify("Current Session Saved")
 end
 

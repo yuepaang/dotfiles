@@ -67,19 +67,4 @@ M.lsp_diagnostic = function()
   })
 end
 
-M.null_ls_depress = function()
-  -- from null-ls to other lsp clients
-  -- @see https://github.com/jose-elias-alvarez/null-ls.nvim/issues/197#issuecomment-922792992
-  local default_exe_handler = vim.lsp.handlers["workspace/executeCommand"]
-  vim.lsp.handlers["workspace/executeCommand"] = function(err, result, ctx, config)
-    -- supress NULL_LS error msg
-    --
-    local prefix = "NULL_LS"
-    if err and ctx.params.command:sub(1, #prefix) == prefix then
-      return
-    end
-    return default_exe_handler(err, result, ctx, config)
-  end
-end
-
 return M
