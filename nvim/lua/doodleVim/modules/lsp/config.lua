@@ -247,7 +247,7 @@ function config.null_ls()
             null_ls.builtins.formatting.prettier,
             null_ls.builtins.completion.spell,
             -- null_ls.builtins.formatting.codespell,
-            null_ls.builtins.diagnostics.spectral,
+            -- null_ls.builtins.diagnostics.spectral,
         },
         update_in_insert = false,
     })

@@ -67,6 +67,9 @@ lsp["williamboman/mason.nvim"] = {
 }
 
 lsp["nvimtools/none-ls.nvim"] = {
+    dependencies = {
+      "nvimtools/none-ls-extras.nvim",
+    },
     lazy = true,
     init = lazy.register_defer_load_helper("DeferStart", 99, "none-ls.nvim", "null-ls"),
     config = conf.null_ls,

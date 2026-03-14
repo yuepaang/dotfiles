@@ -23,7 +23,6 @@ function lsp.mason(plugin)
       "clangd",
       "debugpy",
       "ruff",
-      "solhint",
       "jdtls",
       "java-debug-adapter",
       "java-test",

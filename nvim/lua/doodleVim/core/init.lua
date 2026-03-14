@@ -79,15 +79,14 @@ local setup_copilot = function()
 end
 
 local function load_nvim_config()
-  disable_distribution_plugins()
   createdir()
+  lazy.ensure_lazy_installed()
   options.load_options()
   set_leader_map()
   set_colorscheme()
-
   event.load_autocmds()
+  lazy.setup_lazy()
   command.load_user_command()
-  lazy.ensure_plugins()
 
   setup_copilot()
 end
