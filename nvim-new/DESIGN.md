@@ -17,11 +17,11 @@ A lean, fast Neovim configuration for Go, Rust, Python, and Docker development �
 
 ## Plugin Count
 
-**19 plugins** (down from 58 in the old config)
+**21 plugins** (down from 58 in the old config)
 
 | Category | Plugins |
 |---|---|
-| UI | catppuccin, lualine, snacks.nvim |
+| UI | catppuccin, lualine, bufferline.nvim, render-markdown.nvim, snacks.nvim |
 | LSP | nvim-lspconfig + mason + mason-lspconfig, rustaceanvim |
 | Completion | blink.cmp + friendly-snippets |
 | Formatting | conform.nvim (stylua, prettier, gofmt, rustfmt, ruff_format) |
@@ -37,7 +37,7 @@ A lean, fast Neovim configuration for Go, Rust, Python, and Docker development �
 |---|---|
 | Comment.nvim | Neovim 0.10+ native `gc`/`gcc` |
 | nvim-cmp + 8 sources | Replaced by blink.cmp (single plugin) |
-| barbar (tabline) | Buffers via telescope `<leader>fb`, snacks bufdelete |
+| barbar (tabline) | Replaced by bufferline.nvim (lighter, Catppuccin-integrated) |
 | alpha-nvim (dashboard) | auto-session restores last session |
 | nvim-notify | snacks.nvim notifier |
 | indent-blankline | snacks.nvim indent |
@@ -88,6 +88,8 @@ nvim-new/
 │       ├── todo-comments.lua         # Highlight & search TODOs
 │       ├── treesitter.lua            # Syntax highlighting + textobjects
 │       ├── wakatime.lua              # Time tracking
+│       ├── bufferline.lua             # Buffer tab bar (visual buffer management)
+│       ├── render-markdown.lua       # In-buffer markdown rendering
 │       └── which-key.lua             # Keybinding hints popup
 ```
 
@@ -168,6 +170,8 @@ nvim-new/
 | `<S-l>` | Next buffer |
 | `<leader>bd` | Delete buffer |
 | `<leader>bo` | Delete other buffers |
+| `<leader>bp` | Pin/unpin buffer |
+| `<leader>bP` | Close unpinned buffers |
 
 ### Session (`<leader>q`)
 

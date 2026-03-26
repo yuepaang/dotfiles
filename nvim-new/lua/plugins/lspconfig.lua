@@ -75,47 +75,28 @@ return {
         end,
       })
 
-      -- Server configs using vim.lsp.config (Neovim 0.11+)
+      -- Server list (configs live in lsp/*.lua files)
       local servers = {
-        gopls = {
-          settings = {
-            gopls = {
-              analyses = { unusedparams = true, shadow = true },
-              staticcheck = true,
-              gofumpt = true,
-            },
-          },
-        },
-        pyright = {},
-        ruff = {},
-        lua_ls = {
-          settings = {
-            Lua = {
-              workspace = { checkThirdParty = false },
-              telemetry = { enable = false },
-              diagnostics = { globals = { "vim", "Snacks" } },
-            },
-          },
-        },
-        dockerls = {},
-        docker_compose_language_service = {},
-        jsonls = {},
-        yamlls = {},
-        taplo = {},
+        "gopls",
+        "pyright",
+        "ruff",
+        "lua_ls",
+        "dockerls",
+        "docker_compose_language_service",
+        "jsonls",
+        "yamlls",
+        "taplo",
       }
 
-      -- Apply shared capabilities and configure each server
-      for server, config in pairs(servers) do
-        config.capabilities = capabilities
-        vim.lsp.config(server, config)
-      end
+      -- Apply shared capabilities to all servers
+      vim.lsp.config("*", { capabilities = capabilities })
 
       -- Enable all servers
-      vim.lsp.enable(vim.tbl_keys(servers))
+      vim.lsp.enable(servers)
 
       -- Mason ensures servers are installed
       require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(servers),
+        ensure_installed = servers,
         automatic_installation = true,
       })
     end,
