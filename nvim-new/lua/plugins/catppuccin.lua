@@ -13,6 +13,7 @@ return {
       nvimtree = true,
       telescope = { enabled = true },
       treesitter = true,
+      bufferline = true,
       which_key = true,
       native_lsp = {
         enabled = true,
