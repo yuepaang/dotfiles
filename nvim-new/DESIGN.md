@@ -12,12 +12,12 @@ A lean, fast Neovim configuration for Go, Rust, Python, and Docker development �
 - **Package manager:** lazy.nvim with lazy-loading by default
 - **Colorscheme:** Catppuccin Mocha
 - **Completion:** blink.cmp (replaces nvim-cmp + 8 source plugins)
-- **Multi-purpose:** snacks.nvim (notifier, indent guides, bigfile, statuscolumn, bufdelete)
+- **Multi-purpose:** snacks.nvim (picker, notifier, indent guides, input, terminal, bigfile, statuscolumn, bufdelete)
 - **Built-ins used:** native commenting (`gc`/`gcc`), native smooth scroll, native snippets via blink.cmp, treesitter folding
 
 ## Plugin Count
 
-**21 plugins** (down from 58 in the old config)
+**19 plugins** (down from 58 in the old config)
 
 | Category | Plugins |
 |---|---|
@@ -27,8 +27,9 @@ A lean, fast Neovim configuration for Go, Rust, Python, and Docker development �
 | Formatting | conform.nvim (stylua, prettier, gofmt, rustfmt, ruff_format) |
 | Linting | nvim-lint (yamllint, hadolint) |
 | Treesitter | nvim-treesitter + textobjects |
+| Diagnostics | trouble.nvim |
 | Editor | flash.nvim, nvim-surround, nvim-autopairs |
-| Tools | telescope + fzf-native, nvim-tree, auto-session |
+| Tools | nvim-tree, auto-session |
 | Misc | which-key, todo-comments, gitsigns, wakatime |
 
 ## Dropped from Old Config
@@ -57,6 +58,7 @@ A lean, fast Neovim configuration for Go, Rust, Python, and Docker development �
 | barbecue + navic | Dropped — minimal config |
 | vim-header | Dropped — minimal config |
 | im-select | Dropped — minimal config |
+| telescope + fzf-native + plenary | Replaced by snacks.nvim picker |
 
 ## File Structure
 
@@ -82,10 +84,10 @@ nvim-new/
 │       ├── lualine.lua               # Statusline
 │       ├── nvim-tree.lua             # File explorer sidebar
 │       ├── rustaceanvim.lua          # Rust LSP (rust-analyzer + clippy)
-│       ├── snacks.lua                # Multi-purpose (notifier, indent, bigfile, etc.)
+│       ├── snacks.lua                # Multi-purpose (picker, notifier, indent, input, terminal, bigfile, etc.)
 │       ├── surround.lua              # Surround text objects
-│       ├── telescope.lua             # Fuzzy finder + fzf-native
 │       ├── todo-comments.lua         # Highlight & search TODOs
+│       ├── trouble.lua               # Diagnostics, references, TODOs panel
 │       ├── treesitter.lua            # Syntax highlighting + textobjects
 │       ├── wakatime.lua              # Time tracking
 │       ├── bufferline.lua             # Buffer tab bar (visual buffer management)
@@ -181,6 +183,18 @@ nvim-new/
 | `<leader>qr` | Restore session |
 | `<leader>qd` | Delete session |
 | `<leader>qf` | Search sessions |
+
+### Trouble (`<leader>x`)
+
+| Key | Action |
+|---|---|
+| `<leader>xx` | All diagnostics |
+| `<leader>xX` | Buffer diagnostics |
+| `<leader>xs` | Symbols |
+| `<leader>xr` | LSP references |
+| `<leader>xl` | Location list |
+| `<leader>xq` | Quickfix list |
+| `<leader>xt` | TODOs |
 
 ### Navigation
 

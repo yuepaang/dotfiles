@@ -6,6 +6,6 @@ return {
   keys = {
     { "]t", function() require("todo-comments").jump_next() end, desc = "Next TODO" },
     { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous TODO" },
-    { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Find TODOs" },
+    -- <leader>ft is mapped in snacks.lua via Snacks.picker.todo_comments()
   },
 }
