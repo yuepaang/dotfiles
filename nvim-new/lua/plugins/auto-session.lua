@@ -11,6 +11,6 @@ return {
     { "<leader>qs", "<cmd>SessionSave<cr>", desc = "Save session" },
     { "<leader>qr", "<cmd>SessionRestore<cr>", desc = "Restore session" },
     { "<leader>qd", "<cmd>SessionDelete<cr>", desc = "Delete session" },
-    { "<leader>qf", "<cmd>SessionSearch<cr>", desc = "Search sessions" },
+    { "<leader>qf", "<cmd>AutoSession search<cr>", desc = "Search sessions" },
   },
 }
