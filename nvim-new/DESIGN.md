@@ -5,24 +5,22 @@
 
 ## Goal
 
-A lean, fast Neovim configuration for Go, Rust, Python, and Docker development — using fewer, more powerful plugins and leveraging Neovim 0.10+ built-ins.
+A lean, fast Neovim configuration for Go, Rust, Python, and Docker development — using native LSP configuration and the Tree-sitter API in Neovim 0.12+.
 
 ## Architecture
 
 - **Package manager:** lazy.nvim with lazy-loading by default
-- **Colorscheme:** Catppuccin Mocha
+- **Colorscheme:** Catppuccin Latte with the active PowerShell profile's custom Dracula Light palette
 - **Completion:** blink.cmp (replaces nvim-cmp + 8 source plugins)
 - **Multi-purpose:** snacks.nvim (picker, notifier, indent guides, input, terminal, bigfile, statuscolumn, bufdelete)
 - **Built-ins used:** native commenting (`gc`/`gcc`), native smooth scroll, native snippets via blink.cmp, treesitter folding
 
-## Plugin Count
-
-**19 plugins** (down from 58 in the old config)
+## Plugins
 
 | Category | Plugins |
 |---|---|
 | UI | catppuccin, lualine, bufferline.nvim, render-markdown.nvim, snacks.nvim |
-| LSP | nvim-lspconfig + mason + mason-lspconfig, rustaceanvim |
+| LSP | native LSP + mason + mason-lspconfig, rustaceanvim |
 | Completion | blink.cmp + friendly-snippets |
 | Formatting | conform.nvim (stylua, prettier, gofmt, rustfmt, ruff_format) |
 | Linting | nvim-lint (yamllint, hadolint) |
@@ -53,7 +51,6 @@ A lean, fast Neovim configuration for Go, Rust, Python, and Docker development �
 | neoai.nvim | Dropped per user request |
 | Games (5 plugins) | Dropped per user request |
 | Java LSP (jdtls) | Dropped — no longer used |
-| C/C++ (clangd) | Dropped — no longer used |
 | codewindow (minimap) | Dropped — minimal config |
 | barbecue + navic | Dropped — minimal config |
 | vim-header | Dropped — minimal config |
@@ -75,7 +72,7 @@ nvim-new/
 │       ├── auto-session.lua          # Session persistence & restore
 │       ├── autopairs.lua             # Auto-close brackets
 │       ├── blink-cmp.lua             # Completion engine (LSP, path, snippets, buffer)
-│       ├── catppuccin.lua            # Colorscheme (mocha flavour)
+│       ├── catppuccin.lua            # Colorscheme (PowerShell palette)
 │       ├── conform.lua               # Formatting (format-on-save)
 │       ├── flash.lua                 # Quick navigation (s/S to jump)
 │       ├── gitsigns.lua              # Git signs + hunk operations
@@ -95,7 +92,51 @@ nvim-new/
 │       └── which-key.lua             # Keybinding hints popup
 ```
 
+## Terminal split workflow
+
+Open the same Markdown file the agent is editing in the other terminal pane.
+Normal mode renders headings, lists and code blocks inline. Insert mode shows
+the source. Press `<Space>um` to toggle rendering for the current buffer.
+Long lines wrap at word boundaries. A visible Markdown buffer checks the file
+once per second while idle, including when the terminal is unfocused. A buffer
+with unsaved changes keeps the local text.
+
+The picker stacks its preview below its results at widths under 120 columns.
+The status line drops branch, diff and progress below 100 columns. The theme
+copies the PowerShell profile colors into Neovim, including its embedded terminal.
+
+Neovim ships the Markdown and inline Markdown parsers. Add parsers for other
+languages as needed, for example with `:TSInstall python go typescript tsx`.
+Building additional parsers requires the Tree-sitter CLI and a C compiler.
+
+### Math in Markdown
+
+Use `$\alpha + \beta$` for inline math. Put `$$` on separate lines for a
+display equation, for example:
+
+```markdown
+$$
+\frac{a+b}{c+d}
+$$
+```
+
+Normal mode shows the numerator above the denominator. Matrices and sums
+also use multiple terminal rows. Insert mode or `<Space>um` reveals the TeX,
+including any macros the converter cannot render. Code spans and plain-text
+code fences can contain literal examples.
+
+On a new machine, install the parser with `:TSInstall latex` and put
+`utftex` on Neovim's PATH. Run `:checkhealth render-markdown` to check both.
+On macOS, Homebrew provides `brew install utftex`. This Windows x64 setup
+uses utftex 1.31 built from [libtexprintf](https://github.com/bartp5/libtexprintf/tree/v1.31).
+Ordinary Markdown preview also works without the math tools.
+
 ## LSP Servers
+
+Installed servers on PATH or in Mason activate for matching source files.
+Use `:LspInstall ts_ls` for TypeScript, or run `:LspInstall` in a source buffer
+to choose a server. Use `:checkhealth vim.lsp` to inspect the active client.
+Rust uses rust-analyzer through rustaceanvim.
 
 | Server | Language |
 |---|---|
@@ -109,6 +150,10 @@ nvim-new/
 | jsonls | JSON |
 | yamlls | YAML |
 | taplo | TOML |
+| ts_ls | TypeScript, JavaScript, TSX, JSX |
+| bashls | Shell |
+| clangd | C, C++, Objective-C, CUDA |
+| html / cssls | HTML, CSS, SCSS, Less |
 
 ## Keybinding Reference
 

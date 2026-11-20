@@ -60,3 +60,51 @@ autocmd({ "BufRead", "BufNewFile" }, {
     vim.diagnostic.enable(false, { bufnr = event.buf })
   end,
 })
+
+-- Check visible Markdown even when the terminal pane never regains focus.
+local markdown_refresh = augroup("markdown-refresh", { clear = true })
+local timer = vim.uv.new_timer()
+local function refresh_markdown()
+  if vim.fn.mode():match("^[icR!]") or vim.fn.getcmdwintype() ~= "" then
+    return
+  end
+  local seen = {}
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if not seen[buf] and vim.bo[buf].filetype == "markdown" then
+      seen[buf] = true
+      if vim.bo[buf].buftype == "" and not vim.bo[buf].modified
+          and vim.api.nvim_buf_get_name(buf) ~= "" then
+        vim.api.nvim_buf_call(buf, function()
+          vim.cmd("checktime " .. buf)
+        end)
+      end
+    end
+  end
+end
+local function update_markdown_timer()
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    if vim.bo[vim.api.nvim_win_get_buf(win)].filetype == "markdown" then
+      if not timer:is_active() then
+        timer:start(1000, 1000, vim.schedule_wrap(refresh_markdown))
+      end
+      return
+    end
+  end
+  timer:stop()
+end
+autocmd({ "BufWinEnter", "BufWinLeave", "WinClosed", "FileType", "TabEnter" }, {
+  group = markdown_refresh,
+  callback = function() vim.schedule(update_markdown_timer) end,
+})
+autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  group = markdown_refresh,
+  callback = refresh_markdown,
+})
+autocmd("VimLeavePre", {
+  group = markdown_refresh,
+  callback = function()
+    timer:stop()
+    timer:close()
+  end,
+})

@@ -1,8 +1,12 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-  ft = { "markdown" },
   opts = {
+    anti_conceal = { enabled = false },
+    latex = {
+      converter = "utftex",
+      position = "replace",
+    },
     heading = {
       icons = { "# ", "## ", "### ", "#### ", "##### ", "###### " },
     },

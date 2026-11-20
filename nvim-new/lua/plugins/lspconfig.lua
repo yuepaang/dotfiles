@@ -1,25 +1,36 @@
+local servers = {
+  "gopls",
+  "pyright",
+  "ruff",
+  "lua_ls",
+  "dockerls",
+  "docker_compose_language_service",
+  "jsonls",
+  "yamlls",
+  "taplo",
+  "ts_ls",
+  "bashls",
+  "clangd",
+  "html",
+  "cssls",
+}
+
 return {
   {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    opts = {
-      ui = { border = "rounded" },
-    },
-  },
-
-  {
-    "williamboman/mason-lspconfig.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "mason.nvim",
-      "saghen/blink.cmp",
+    "mason-org/mason.nvim",
+    cmd = { "Mason", "MasonInstall", "MasonUpdate", "MasonUninstall" },
+    ft = {
+      "go", "gomod", "gowork", "gotmpl", "python", "lua", "dockerfile", "json", "jsonc",
+      "yaml", "yaml.docker-compose", "toml", "javascript", "javascriptreact", "typescript",
+      "typescriptreact", "rust", "sh", "bash", "c", "cpp", "objc", "objcpp", "cuda", "html", "css", "scss", "less",
     },
     config = function()
+      require("mason").setup({ ui = { border = "rounded" } })
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       -- Diagnostics
       vim.diagnostic.config({
-        virtual_text = { spacing = 4, prefix = "●" },
+        virtual_text = { spacing = 2, prefix = "●" },
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = " ",
@@ -54,7 +65,7 @@ return {
           map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
           map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
           map("n", "<leader>cf", function()
-            require("conform").format({ async = true, lsp_fallback = true })
+            require("conform").format({ async = true, lsp_format = "fallback" })
           end, "Format")
 
           -- Document highlight
@@ -75,30 +86,19 @@ return {
         end,
       })
 
-      -- Server list (configs live in lsp/*.lua files)
-      local servers = {
-        "gopls",
-        "pyright",
-        "ruff",
-        "lua_ls",
-        "dockerls",
-        "docker_compose_language_service",
-        "jsonls",
-        "yamlls",
-        "taplo",
-      }
-
-      -- Apply shared capabilities to all servers
       vim.lsp.config("*", { capabilities = capabilities })
-
-      -- Enable all servers
-      vim.lsp.enable(servers)
-
-      -- Mason ensures servers are installed
-      require("mason-lspconfig").setup({
-        ensure_installed = servers,
-        automatic_installation = true,
-      })
+      for _, server in ipairs(servers) do
+        local config = vim.lsp.config[server]
+        if vim.fn.executable(config.cmd[1]) == 1 then
+          vim.lsp.enable(server)
+        end
+      end
     end,
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    cmd = { "LspInstall", "LspUninstall" },
+    dependencies = { "mason.nvim" },
+    opts = { automatic_enable = servers },
   },
 }

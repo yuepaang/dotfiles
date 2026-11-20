@@ -23,21 +23,10 @@ return {
         },
       },
       layout = {
-        layout = {
-          backdrop = false,
-          row = 1,
-          width = 0.8,
-          min_width = 80,
-          height = 0.8,
-          border = "rounded",
-          box = "vertical",
-          { win = "input", height = 1, border = "bottom" },
-          {
-            box = "horizontal",
-            { win = "list", border = "none" },
-            { win = "preview", width = 0.55, border = "left" },
-          },
-        },
+        preset = function()
+          return vim.o.columns >= 120 and "default" or "vertical"
+        end,
+        layout = { width = 0.95, min_width = 0, height = 0.85 },
       },
     },
     statuscolumn = { enabled = true },
