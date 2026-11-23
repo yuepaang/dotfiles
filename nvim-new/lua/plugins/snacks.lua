@@ -51,6 +51,8 @@ return {
     -- Notifications
     { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss notifications" },
     -- Git
+    { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git diff hunks" },
+    { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git history for current file" },
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit log" },
     -- Word references

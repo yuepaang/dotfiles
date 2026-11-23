@@ -28,7 +28,7 @@ A lean, fast Neovim configuration for Go, Rust, Python, and Docker development �
 | Diagnostics | trouble.nvim |
 | Editor | flash.nvim, nvim-surround, nvim-autopairs |
 | Tools | nvim-tree, auto-session |
-| Misc | which-key, todo-comments, gitsigns, wakatime |
+| Misc | which-key, todo-comments, gitsigns |
 
 ## Dropped from Old Config
 
@@ -86,7 +86,6 @@ nvim-new/
 │       ├── todo-comments.lua         # Highlight & search TODOs
 │       ├── trouble.lua               # Diagnostics, references, TODOs panel
 │       ├── treesitter.lua            # Syntax highlighting + textobjects
-│       ├── wakatime.lua              # Time tracking
 │       ├── bufferline.lua             # Buffer tab bar (visual buffer management)
 │       ├── render-markdown.lua       # In-buffer markdown rendering
 │       └── which-key.lua             # Keybinding hints popup
@@ -198,6 +197,8 @@ Rust uses rust-analyzer through rustaceanvim.
 | Key | Action |
 |---|---|
 | `<leader>gg` | Lazygit |
+| `<leader>gd` | Browse Git diff hunks across files |
+| `<leader>gf` | Browse Git history for the current file |
 | `<leader>gl` | Lazygit log |
 | `<leader>ghs` | Stage hunk |
 | `<leader>ghr` | Reset hunk |

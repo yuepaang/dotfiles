@@ -15,7 +15,7 @@
   "nvim-lint": { "branch": "master", "commit": "6bf29b9dbdad60b38b489b23309c22ba6d4c915a" },
   "nvim-surround": { "branch": "main", "commit": "1098d7b3c34adcfa7feb3289ee434529abd4afd1" },
   "nvim-tree.lua": { "branch": "master", "commit": "6e539e91302d2e201b078a45d214177140134523" },
-  "nvim-treesitter": { "branch": "main", "commit": "37e52c733ada9d8d544d53a763140ef1ba404353" },
+  "nvim-treesitter": { "branch": "main", "commit": "52773f0d13a0c11d0c3ef33c14ab6ecc1c17148b" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "5c7b0263797dfd1bd6202f2b219f3b53a80b2187" },
   "nvim-web-devicons": { "branch": "master", "commit": "0dc0cfb0c6858041174a53c7aa4adaf65e994b3c" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
@@ -24,6 +24,5 @@
   "snacks.nvim": { "branch": "main", "commit": "882c996cf28183f4d63640de0b4c02ec886d01f2" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "trouble.nvim": { "branch": "main", "commit": "bd67efe408d4816e25e8491cc5ad4088e708a69a" },
-  "vim-wakatime": { "branch": "master", "commit": "98cb7a8a09f8a0cb225b5955bf491ffb9860569f" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }
